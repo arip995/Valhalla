@@ -31,7 +31,6 @@ import { Button, ButtonProps, rem, useMantineTheme } from "@mantine/core";
 
 export function GoogleButton(props) {
   const theme = useMantineTheme();
-  console.log(props.typeOfLogin);
   return (
     <Button
       onClick={() => props.toggleTypeOfLogin()}

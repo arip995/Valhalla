@@ -1,9 +1,12 @@
 .signup-container {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding-top: 150px;
+  @media only screen and (max-width: 767px){
+    padding-top: 75px;
+  }
 
   &.signup-container-animation {
     background: linear-gradient(279deg, #0d7dd8, #72dfe5, #4368c9);
