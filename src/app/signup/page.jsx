@@ -1,7 +1,7 @@
-import SignupOne from '@/src/Components/Auth/SignupOne';
+import Auth from '@/src/Components/Auth/Auth';
 
 const page = () => {
-  return <SignupOne />;
+  return <Auth tabName="register" />;
 };
 
 export default page;

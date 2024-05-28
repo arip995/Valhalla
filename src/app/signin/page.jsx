@@ -1,7 +1,8 @@
-import React from "react";
+import Auth from '@/src/Components/Auth/Auth';
+import React from 'react';
 
 const page = () => {
-  return <div>Signin</div>;
+  return <Auth tabName="login" />;
 };
 
 export default page;

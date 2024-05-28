@@ -1,0 +1,60 @@
+.signup-container {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding-top: 150px;
+  @media only screen and (max-width: 767px) {
+    padding-top: 75px;
+  }
+
+  &.signup-container-animation {
+    /* background-color: var(--mantine-color-gray-1); */
+    background: linear-gradient(
+      279deg,
+      #0d7dd8,
+      #72dfe5,
+      #4368c9
+    );
+    background-size: 180% 180%;
+    animation: gradient-animation 21s ease infinite;
+    @keyframes gradient-animation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  }
+  .mantine-TextInput-input {
+    margin-top: 8px;
+  }
+
+  .edit-icon {
+    color: var(--mantine-color-gray-4);
+  }
+
+  .icon-auth {
+    color: var(--mantine-color-blue-9);
+  }
+  .icon {
+    cursor: pointer;
+  }
+
+  .signupPaper {
+    width: 90%;
+    @media (min-width: em(767px)) {
+      width: 50%;
+    }
+  }
+
+  .auth-title {
+    font-family: Greycliff CF, var(--mantine-font-family);
+    font-weight: 900;
+    font-size: 30px;
+  }
+}
