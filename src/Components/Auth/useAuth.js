@@ -51,6 +51,16 @@ const useAuth = ({ tabName }) => {
           : null,
     },
   });
+  const onboardForm = useForm({
+    initialValue: { name: '', userName: '' },
+    validateInputOnChange: true,
+    validate: {
+      name: value =>
+        !value ? 'Please enter a name' : null,
+      username: value =>
+        !value ? 'Please enter a username' : null,
+    },
+  });
 
   const handleSubmit = () => {
     if (!showOtp) {
@@ -62,6 +72,8 @@ const useAuth = ({ tabName }) => {
       verifyOtp();
     }
   };
+
+  const handleOnboard = () => {};
 
   const sendOtp = async () => {
     try {
@@ -104,10 +116,18 @@ const useAuth = ({ tabName }) => {
           },
         }
       );
-      if (data?.data?.user) {
-        localStorage.setItem('user', data?.data?.user);
+      if (data?.data?.data?.user) {
+        localStorage.setItem(
+          'user',
+          JSON.stringify(data.data.data.user)
+        );
       }
       toast.success('Signed in successfully');
+      if (loginOrRegister === 'register') {
+        setStep(2);
+      } else {
+        // router.push('/creator');
+      }
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -125,6 +145,8 @@ const useAuth = ({ tabName }) => {
     otpForm,
     handleSubmit,
     authForm,
+    onboardForm,
+    handleOnboard,
   };
 };
 

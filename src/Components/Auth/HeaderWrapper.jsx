@@ -7,13 +7,14 @@ const HeaderWrapper = ({ titleOne, titleTwo }) => {
         <Title
           ta="center"
           size="xl"
+          mb={15}
           className={'auth-title'}
         >
           {titleOne}
         </Title>
       )}
       {!!titleTwo && (
-        <Text size="sm" ta="center" mt={5} mb={40}>
+        <Text size="sm" ta="center" mb={40}>
           {titleTwo}
         </Text>
       )}
