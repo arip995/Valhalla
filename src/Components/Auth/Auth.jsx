@@ -19,8 +19,6 @@ const Auth = props => {
     otpForm,
     handleSubmit,
     authForm,
-    onboardForm,
-    handleOnboard,
   } = useAuth({ tabName: props.tabName });
 
   return (
@@ -45,10 +43,7 @@ const Auth = props => {
               authForm={authForm}
             />
           ) : (
-            <StepTwoAuth
-              onboardForm={onboardForm}
-              handleOnboard={handleOnboard}
-            />
+            <StepTwoAuth />
           )}
         </div>
       </div>

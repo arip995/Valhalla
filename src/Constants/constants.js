@@ -32,28 +32,12 @@ export const Categories = [
     label: 'Fitness',
   },
   {
-    value: 'Business',
-    label: 'Business',
-  },
-  {
     value: 'Photography',
     label: 'Photography',
   },
   {
-    value: 'News and Politics',
-    label: 'News and Politics',
-  },
-  {
     value: 'Astrology',
     label: 'Astrology',
-  },
-  {
-    value: 'Art & Crafts',
-    label: 'Art & Crafts',
-  },
-  {
-    value: 'Fitness & wellness',
-    label: 'Fitness & wellness',
   },
   {
     value: 'Lifestyle',
@@ -62,18 +46,6 @@ export const Categories = [
   {
     value: 'Comedy',
     label: 'Comedy',
-  },
-  {
-    value: 'Fiction & Fantasy',
-    label: 'Fiction & Fantasy',
-  },
-  {
-    value: 'History & Culture',
-    label: 'History & Culture',
-  },
-  {
-    value: 'Theatre',
-    label: 'Theatre',
   },
   {
     value: 'Environment',
@@ -88,20 +60,8 @@ export const Categories = [
     label: 'Beauty and Makeup',
   },
   {
-    value: 'Cartoons',
-    label: 'Cartoons',
-  },
-  {
     value: 'Crypto',
     label: 'Crypto',
-  },
-  {
-    value: 'Dance',
-    label: 'Dance',
-  },
-  {
-    value: 'Design',
-    label: 'Design',
   },
   {
     value: 'Gaming',
@@ -116,14 +76,6 @@ export const Categories = [
     label: 'Fashion & Lifestyle',
   },
   {
-    value: 'Hobbies',
-    label: 'Hobbies',
-  },
-  {
-    value: 'Mentorship',
-    label: 'Mentorship',
-  },
-  {
     value: 'Motivation',
     label: 'Motivation',
   },
@@ -134,18 +86,6 @@ export const Categories = [
   {
     value: 'Music',
     label: 'Music',
-  },
-  {
-    value: 'Non-profit',
-    label: 'Non-profit',
-  },
-  {
-    value: 'Pets & Animals',
-    label: 'Pets & Animals',
-  },
-  {
-    value: 'Religion',
-    label: 'Religion',
   },
   {
     value: 'Spirituality',

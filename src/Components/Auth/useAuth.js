@@ -2,8 +2,10 @@ import { validateEmail } from '@/src/Utils/Regex';
 import { useForm } from '@mantine/form';
 import { useToggle } from '@mantine/hooks';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import axiosInstance from '@/src/Utils/AxiosInstance';
 
 const useAuth = ({ tabName }) => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -11,7 +13,8 @@ const useAuth = ({ tabName }) => {
     tabName === 'login'
       ? ['login', 'register']
       : ['register', 'login'];
-  const [step, setStep] = useState(user?._id ? 2 : 1);
+  const router = useRouter();
+  const [step, setStep] = useState(1);
   const [loginOrRegister, toggleLoginOrRegister] =
     useToggle(typeArray);
   const [emailOrPhoneNumber, toggleEmailOrPhoneNumber] =
@@ -51,20 +54,9 @@ const useAuth = ({ tabName }) => {
           : null,
     },
   });
-  const onboardForm = useForm({
-    initialValue: { name: '', userName: '' },
-    validateInputOnChange: true,
-    validate: {
-      name: value =>
-        !value ? 'Please enter a name' : null,
-      username: value =>
-        !value ? 'Please enter a username' : null,
-    },
-  });
 
   const handleSubmit = () => {
     if (!showOtp) {
-      toggleShowOtp();
       setIsClickedAtleastOnce(false);
       sendOtp();
       return;
@@ -73,47 +65,45 @@ const useAuth = ({ tabName }) => {
     }
   };
 
-  const handleOnboard = () => {};
-
   const sendOtp = async () => {
     try {
-      const data = await axios.get(
+      const data = await axios.post(
         'http://localhost:6969/api/v1/auth/send_otp',
         {
-          params: {
-            [emailOrPhoneNumber === 'email'
-              ? 'email'
-              : 'phoneNumber']:
-              emailOrPhoneNumber === 'email'
-                ? authForm.values.email
-                : authForm.values.phoneNumber,
-            isSignUp:
-              loginOrRegister === 'register' ? true : false,
-          },
+          [emailOrPhoneNumber === 'email'
+            ? 'email'
+            : 'phoneNumber']:
+            emailOrPhoneNumber === 'email'
+              ? authForm.values.email
+              : authForm.values.phoneNumber,
+          isSignUp:
+            loginOrRegister === 'register' ? true : false,
         }
       );
+      toggleShowOtp();
       toast.success('Otp sent successfully!');
     } catch (error) {
-      toggleShowOtp();
       toast.error(error.response.data.message);
     }
   };
 
   const verifyOtp = async () => {
     try {
-      const data = await axios.get(
+      const data = await axios.post(
         'http://localhost:6969/api/v1/auth/verify_otp',
         {
+          [emailOrPhoneNumber === 'email'
+            ? 'email'
+            : 'phoneNumber']:
+            emailOrPhoneNumber === 'email'
+              ? authForm.values.email
+              : authForm.values.phoneNumber,
+          otp: otpForm.values.otp,
+          isSignUp:
+            loginOrRegister === 'register' ? true : false,
+        },
+        {
           withCredentials: true,
-          params: {
-            [emailOrPhoneNumber === 'email'
-              ? 'email'
-              : 'phoneNumber']:
-              emailOrPhoneNumber === 'email'
-                ? authForm.values.email
-                : authForm.values.phoneNumber,
-            otp: otpForm.values.otp,
-          },
         }
       );
       if (data?.data?.data?.user) {
@@ -123,15 +113,25 @@ const useAuth = ({ tabName }) => {
         );
       }
       toast.success('Signed in successfully');
-      if (loginOrRegister === 'register') {
-        setStep(2);
+      if (data?.data?.data?.user.currentUsername) {
+        setTimeout(() => {
+          router.push('/creator');
+        }, 3000);
       } else {
-        // router.push('/creator');
+        setStep(2);
       }
     } catch (error) {
       toast.error(error.response.data.message);
     }
   };
+
+  useEffect(() => {
+    if (user?.currentUsername) {
+      router.push('/creator');
+    } else if (user?._id) {
+      setStep(2);
+    }
+  }, [router?.isReady]);
 
   return {
     step,
@@ -145,8 +145,6 @@ const useAuth = ({ tabName }) => {
     otpForm,
     handleSubmit,
     authForm,
-    onboardForm,
-    handleOnboard,
   };
 };
 

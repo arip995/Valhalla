@@ -26,3 +26,9 @@ export const validatePhoneNumber = phoneNumber => {
 
   return false;
 };
+
+export const restrictedChars = /[^a-zA-Z0-9]/;
+
+export const checkRestrictedChars = val => {
+  return !restrictedChars.test(val);
+};

@@ -7,6 +7,7 @@ const axiosInstance = axios.create({
 
 const sendCookieInterceptor = config => {
   const cookieValue = getCookie('authorization');
+
   if (cookieValue && config.sendCookie) {
     config.headers = {
       ...config.headers,
