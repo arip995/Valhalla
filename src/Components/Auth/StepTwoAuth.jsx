@@ -58,7 +58,7 @@ const StepTwoAuth = () => {
           { sendCookie: true }
         );
         setLoading(false);
-      } catch (error) {
+      } catch (err) {
         error.username = 'Username taken';
         setLoading(false);
       }
