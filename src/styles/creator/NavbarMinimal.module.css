@@ -48,12 +48,8 @@
     );
   }
 }
-.create {
-  /* margin: 0px 8px; */
-}
 
 .text {
-  /* color: var(--mantine-color-dark-9); */
   font-weight: 400;
   font-size: small;
 }

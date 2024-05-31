@@ -1,38 +1,41 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import HeaderWrapper from './HeaderWrapper';
-import PaperWrapper from './PaperWrapper';
+import {
+  Categories,
+  UserTypes,
+} from '@/src/Constants/constants';
+import axiosInstance from '@/src/Utils/AxiosInstance';
+import { checkRestrictedChars } from '@/src/Utils/Regex';
 import {
   Button,
   Collapse,
   Divider,
   Flex,
-  Group,
   Loader,
   Radio,
   Stack,
   Text,
   TextInput,
 } from '@mantine/core';
-import {
-  Categories,
-  UserTypes,
-} from '@/src/Constants/constants';
-import axiosInstance from '@/src/Utils/AxiosInstance';
-import {
-  useDebouncedCallback,
-  useDebouncedState,
-} from '@mantine/hooks';
-import axios from 'axios';
-import { checkRestrictedChars } from '@/src/Utils/Regex';
+import { useDebouncedCallback } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import HeaderWrapper from './HeaderWrapper';
+import PaperWrapper from './PaperWrapper';
 
 const UserTypeCards = UserTypes.map(item => (
-  <Radio value={item.value} label={item.value} />
+  <Radio
+    value={item.value}
+    label={item.value}
+    key={item.value}
+  />
 ));
 const CategoryCards = Categories.map(item => (
-  <Radio value={item.value} label={item.value} />
+  <Radio
+    value={item.value}
+    label={item.value}
+    key={item.value}
+  />
 ));
 
 const StepTwoAuth = () => {
