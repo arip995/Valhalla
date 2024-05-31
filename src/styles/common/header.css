@@ -1,0 +1,30 @@
+.apps-header-container {
+  width: 100%;
+  padding: 11px;
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+  .apps-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .apps-header-title {
+    font-family: Greycliff CF, var(--mantine-font-family);
+    font-weight: 600;
+    font-size: large;
+    @media (max-width: em(767px)) {
+      font-weight: 500;
+      font-size: medium;
+    }
+  }
+  .create-button {
+    @media (max-width: em(767px)) {
+      padding: 5px;
+      .mantine-Button-label {
+        display: none;
+      }
+      .mantine-Button-section {
+        margin-inline-end: 0px;
+      }
+    }
+  }
+}

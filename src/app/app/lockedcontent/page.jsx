@@ -1,10 +1,10 @@
-import Creator from '@/src/Components/Creator/Creator';
 import NavbarLayout from '@/src/Components/NavbarLayout/NavbarLayout';
+import LockedContent from '@/src/Components/LockedContent/LockedContent';
 
 const Page = ({ data }) => {
   return (
-    <NavbarLayout activeTab="premiumContent">
-      <Creator {...data} />
+    <NavbarLayout activeTab="lockedcontent">
+      <LockedContent {...data} />
     </NavbarLayout>
   );
 };

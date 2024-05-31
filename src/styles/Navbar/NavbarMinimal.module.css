@@ -59,8 +59,19 @@
   font-weight: 900;
   font-size: large;
   border-bottom: 1px solid var(--mantine-color-gray-3);
+  @media (max-width: em(767px)) {
+    display: none;
+  }
 }
 
 .footer {
   border-top: 1px solid var(--mantine-color-gray-3);
+}
+
+.header {
+  background: var(--mantine-color-gray-9);
+  color: var(--mantine-color-white);
+  font-family: Greycliff CF, var(--mantine-font-family);
+  font-weight: 900;
+  font-size: large;
 }

@@ -24,7 +24,7 @@ import {
   IconWallet,
 } from '@tabler/icons-react';
 import { useState } from 'react';
-import classes from '../../styles/creator/NavbarMinimal.module.css';
+import classes from '../../styles/Navbar/NavbarMinimal.module.css';
 import { useRouter } from 'next/navigation';
 
 function NavbarLink({
@@ -109,10 +109,10 @@ export function NavbarLayout({ activeTab, children }) {
     },
     {
       icon: IconLockDollar,
-      label: 'Premium Content',
-      value: 'premiumContent',
+      label: 'Locked Content',
+      value: 'lockedcontent',
       onClick: () => {
-        router.push('/app/premiumcontent');
+        router.push('/app/lockedcontent');
       },
     },
     // {
@@ -128,7 +128,7 @@ export function NavbarLayout({ activeTab, children }) {
     //   label: 'Payment Page',
     //   value: 'paymentPage',
     //   onClick: () => {
-    //     router.push('/app/paymentPage');
+    //     router.push('/app/paymentpage');
     //   },
     // },
     // {
@@ -166,28 +166,29 @@ export function NavbarLayout({ activeTab, children }) {
 
   return (
     <AppShell
-      header={{ height: { base: 40, xs: 0 } }}
+      header={{ height: { base: 60, xs: 0 } }}
       navbar={{
         width: { base: '100%', xs: 200 },
         breakpoint: 'xs',
         collapsed: { mobile: !opened },
       }}
       transitionDuration={1000}
-      // padding="xs"
     >
-      <AppShell.Header>
+      <AppShell.Header className={classes.header}>
         <Group h="100%" px="xs">
           <Burger
+            color="white"
             opened={opened}
             onClick={toggle}
             hiddenFrom="xs"
             size="sm"
           />
+          Nexify
         </Group>
       </AppShell.Header>
       <AppShell.Navbar>
         <AppShell.Section
-          py={8}
+          py={12}
           pl={16}
           className={classes.company}
         >
@@ -213,9 +214,11 @@ export function NavbarLayout({ activeTab, children }) {
         </AppShell.Section>
       </AppShell.Navbar>
       <AppShell.Main
-        style={{
-          backgroundColor: theme.colors.gray[1],
-        }}
+        style={
+          {
+            // backgroundColor: theme.colors.gray[1],
+          }
+        }
       >
         {children}
       </AppShell.Main>

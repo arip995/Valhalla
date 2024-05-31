@@ -101,6 +101,34 @@ export const Categories = [
   },
 ];
 
+export const CategoriesList = [
+  'Finance',
+  'Education',
+  'Food',
+  'Jobs',
+  'Entertainment',
+  'Travel',
+  'Marketing',
+  'Fitness',
+  'Photography',
+  'Astrology',
+  'Lifestyle',
+  'Comedy',
+  'Environment',
+  'Relationships',
+  'Beauty and Makeup',
+  'Crypto',
+  'Gaming',
+  'Health',
+  'Fashion & Lifestyle',
+  'Motivation',
+  'Parenting',
+  'Music',
+  'Spirituality',
+  'Startups',
+  'Technology',
+];
+
 export const UserTypes = [
   {
     label: 'Social Media Creator',
