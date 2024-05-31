@@ -49,7 +49,12 @@ const StepTwoAuth = () => {
 
   const validateUsername = useDebouncedCallback(
     async () => {
-      const error = { ...errors };
+      let error = { ...errors };
+      if (!username) {
+        error.username = 'usernameis reuired';
+        setErrors(_ => error);
+        return;
+      }
       delete error.user;
       setLoading(true);
       try {
@@ -58,6 +63,7 @@ const StepTwoAuth = () => {
           { username: username },
           { sendCookie: true }
         );
+        delete error.username;
         setLoading(false);
       } catch (err) {
         error.username = 'Username taken';

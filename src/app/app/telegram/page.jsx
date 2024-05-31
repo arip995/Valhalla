@@ -3,7 +3,7 @@ import NavbarLayout from '@/src/Components/NavbarLayout/NavbarLayout';
 
 const Page = ({ data }) => {
   return (
-    <NavbarLayout>
+    <NavbarLayout activeTab="telegram">
       <Creator {...data} />
     </NavbarLayout>
   );
