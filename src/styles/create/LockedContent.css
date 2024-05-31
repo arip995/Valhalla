@@ -47,8 +47,8 @@
   }
   .auth-title {
     font-family: Greycliff CF, var(--mantine-font-family);
-    font-weight: 900;
-    font-size: 30px;
+    font-weight: 700;
+    font-size: 25px;
   }
 
   .lc-create-from-wrapper {
