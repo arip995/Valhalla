@@ -1,14 +1,15 @@
 import { validateEmail } from '@/src/Utils/Regex';
+import useIsBrowser from '@/src/Utils/useIsBrowser';
 import { useForm } from '@mantine/form';
 import { useToggle } from '@mantine/hooks';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
-import axiosInstance from '@/src/Utils/AxiosInstance';
 
 const useAuth = ({ tabName }) => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const isBrowser = useIsBrowser();
+  const [user, setUser] = useState();
   const typeArray =
     tabName === 'login'
       ? ['login', 'register']
@@ -132,6 +133,12 @@ const useAuth = ({ tabName }) => {
       setStep(2);
     }
   }, [router?.isReady]);
+
+  useEffect(() => {
+    if (isBrowser) {
+      setUser(JSON.parse(localStorage.getItem('user')));
+    }
+  }, [isBrowser]);
 
   return {
     step,
