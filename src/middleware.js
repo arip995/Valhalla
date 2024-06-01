@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export function middleware(req) {
   const accessToken =
-    getCookie('accessToken', { req }) || '';
+    getCookie('accesstoken', { req }) || '';
   if (!accessToken) {
     return NextResponse.redirect(
       new URL('/signin', req.url)
@@ -12,5 +12,15 @@ export function middleware(req) {
 }
 
 export const config = {
-  matcher: ['/creator'],
+  matcher: [
+    '/creator',
+    '/creator/account',
+    '/creator/transaction',
+    '/creator/billing',
+    '/creator/account',
+    '/app/lockedcontent',
+    '/app/telegram',
+    '/create/telegram',
+    '/create/lockedcontent',
+  ],
 };

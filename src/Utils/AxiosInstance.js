@@ -6,9 +6,10 @@ const axiosInstance = axios.create({
 });
 
 const sendCookieInterceptor = config => {
-  const cookieValue = getCookie('accessToken');
+  const cookieValue = getCookie('accesstoken');
 
-  if (cookieValue && config.sendCookie) {
+  // if (cookieValue && config.sendCookie) {
+  if (cookieValue) {
     config.headers = {
       ...config.headers,
       accesstoken: `Bearer ${cookieValue}`,

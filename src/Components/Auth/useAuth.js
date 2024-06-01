@@ -1,4 +1,5 @@
 import { validateEmail } from '@/src/Utils/Regex';
+import useGetCurrentUser from '@/src/Utils/useGetCurrentUser';
 import useIsBrowser from '@/src/Utils/useIsBrowser';
 import { useForm } from '@mantine/form';
 import { useToggle } from '@mantine/hooks';
@@ -9,7 +10,7 @@ import toast from 'react-hot-toast';
 
 const useAuth = ({ tabName }) => {
   const isBrowser = useIsBrowser();
-  const [user, setUser] = useState();
+  const user = useGetCurrentUser();
   const typeArray =
     tabName === 'login'
       ? ['login', 'register']
@@ -133,12 +134,6 @@ const useAuth = ({ tabName }) => {
       setStep(2);
     }
   }, [router?.isReady]);
-
-  useEffect(() => {
-    if (isBrowser) {
-      setUser(JSON.parse(localStorage.getItem('user')));
-    }
-  }, [isBrowser]);
 
   return {
     step,

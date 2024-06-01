@@ -1,5 +1,5 @@
 import NavbarLayout from '@/src/Components/NavbarLayout/NavbarLayout';
-import LockedContent from '@/src/Components/LockedContent/LockedContent';
+import LockedContent from '@/src/Components/Apps/LockedContent/LockedContent';
 
 const Page = ({ data }) => {
   return (

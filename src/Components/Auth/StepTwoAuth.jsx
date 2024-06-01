@@ -102,7 +102,7 @@ const StepTwoAuth = () => {
         'user',
         JSON.stringify(data.data.data.user)
       );
-      router.push('/creator');
+      router.push('/creator/home');
     } catch (error) {
       toast.error(error.response.data.message);
     }

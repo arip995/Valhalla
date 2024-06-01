@@ -4,14 +4,17 @@ import React from 'react';
 import { Button } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 
-const Header = ({ path = '/create/lockedcontent' }) => {
+const Header = ({
+  title,
+  path = '/create/lockedcontent',
+}) => {
   const router = useRouter();
 
   return (
     <div className="apps-header-container">
       <div className="apps-header">
         <div className="apps-header-title">
-          Premium Content
+          {title || 'Premium Content'}
         </div>
         <Button
           leftSection={<IconPlus size={20} />}
@@ -21,7 +24,7 @@ const Header = ({ path = '/create/lockedcontent' }) => {
           className="create-button"
           onClick={() => router.push(path)}
         >
-          Create Locked Content
+          Create {title || 'Locked Content'}
         </Button>
       </div>
     </div>

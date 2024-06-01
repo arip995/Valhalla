@@ -1,10 +1,10 @@
-import Creator from '@/src/Components/Creator/Creator';
+import Telegram from '@/src/Components/Apps/Telegram/Telegram';
 import NavbarLayout from '@/src/Components/NavbarLayout/NavbarLayout';
 
 const Page = ({ data }) => {
   return (
     <NavbarLayout activeTab="telegram">
-      <Creator {...data} />
+      <Telegram {...data} />
     </NavbarLayout>
   );
 };
