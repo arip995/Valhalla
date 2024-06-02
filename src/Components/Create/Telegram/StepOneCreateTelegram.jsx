@@ -46,6 +46,7 @@ const StepOneCreateTelegram = ({
               {user?.telegramIntegrations.map(item => {
                 return (
                   <div
+                    key={item.phoneNumber}
                     onClick={value => {
                       stepOneForm.setFieldValue(
                         'selectedNumber',

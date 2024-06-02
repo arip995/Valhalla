@@ -16,7 +16,10 @@ const ListFiles = ({ files, onDelete = () => {} }) => {
             : false;
 
         return (
-          <div className="list-files-content-container">
+          <div
+            className="list-files-content-container"
+            key={item.name}
+          >
             <div className="list-files-image-container">
               {isImage ? (
                 <img
