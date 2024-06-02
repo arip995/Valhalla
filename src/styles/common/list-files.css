@@ -23,6 +23,7 @@
   }
   .list-files-text {
     color: var(--mantine-color-gray-7);
+    text-align: right;
     font-size: small;
   }
   .list-files-delete {

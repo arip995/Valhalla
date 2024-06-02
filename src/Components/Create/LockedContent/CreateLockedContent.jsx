@@ -54,9 +54,9 @@ const CreateLockedContent = ({ data }) => {
                 )}
               />
               <Select
+                checkIconPosition="right"
                 label="Category"
                 placeholder="Select Category"
-                withCheckIcon={false}
                 data={CategoriesList}
                 {...createLockedContentForm.getInputProps(
                   'category'

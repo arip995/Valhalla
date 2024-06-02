@@ -9,13 +9,13 @@ import {
   rem,
 } from '@mantine/core';
 import React from 'react';
-import '../../../styles/create/Telegram.css';
 import { IconEdit } from '@tabler/icons-react';
 
 const StepOneCreateTelegram = ({
   stepOneForm,
   user,
   onStepOneSubmit,
+  onConnectExisting,
 }) => {
   return (
     <div className="ctg-s1-container">
@@ -45,12 +45,19 @@ const StepOneCreateTelegram = ({
             >
               {user?.telegramIntegrations.map(item => {
                 return (
-                  <>
+                  <div
+                    onClick={value => {
+                      stepOneForm.setFieldValue(
+                        'selectedNumber',
+                        item.phoneNumber
+                      );
+                    }}
+                  >
                     <Radio
                       value={item.phoneNumber}
                       label={item.phoneNumber}
                     />
-                  </>
+                  </div>
                 );
               })}
             </Radio.Group>
@@ -58,7 +65,8 @@ const StepOneCreateTelegram = ({
             <>
               <Flex gap={'xs'} align="center">
                 <Text size="sm" ta="center" c={'dimmed'}>
-                  {stepOneForm.values.phoneNumber}
+                  {stepOneForm.values.phoneNumber ||
+                    stepOneForm.values.selectedNumber}
                 </Text>
                 <IconEdit
                   onClick={() =>
@@ -104,7 +112,7 @@ const StepOneCreateTelegram = ({
               color="black"
               fullWidth
               onClick={() => {
-                stepOneForm.setFieldValue('isOtpScreen', 0);
+                onConnectExisting();
               }}
             >
               Connect with existing

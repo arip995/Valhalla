@@ -1,36 +1,25 @@
 'use client';
 
-import React from 'react';
+import { Toaster } from 'react-hot-toast';
 import '../../../styles/create/LockedContent.css';
+import '../../../styles/create/Telegram.css';
+import HeaderWrapper from '../../Auth/HeaderWrapper';
 import PaperWrapper from '../../Auth/PaperWrapper';
 import useCreateTelegram from './useCreateTelegram';
-import {
-  Button,
-  FileButton,
-  Flex,
-  NumberInput,
-  Select,
-  TextInput,
-  Textarea,
-} from '@mantine/core';
-import {
-  IconCurrencyRupee,
-  IconUpload,
-} from '@tabler/icons-react';
-import HeaderWrapper from '../../Auth/HeaderWrapper';
-import { CategoriesList } from '@/src/Constants/constants';
-import toast, { Toaster } from 'react-hot-toast';
-import ListFiles from '../../Common/ListFiles/ListFiles';
-import { Radio, Group, Text } from '@mantine/core';
+
 import StepOneCreateTelegram from './StepOneCreateTelegram';
-import StepTwoCreateTelegram from './StepTwoCreateTelegram';
 import StepThreeCreateTelegram from './StepThreeCreateTelegram';
+import StepTwoCreateTelegram from './StepTwoCreateTelegram';
 
 const CreateTelegram = ({ data }) => {
   const {
     createTelegramForm,
-    stepOneForm,
     onStepOneSubmit,
+    onStepTwoSubmit,
+    stepOneForm,
+    stepTwoForm,
+    onConnectExisting,
+    existingGroups,
     step,
     user,
   } = useCreateTelegram(data);
@@ -46,10 +35,15 @@ const CreateTelegram = ({ data }) => {
               <StepOneCreateTelegram
                 stepOneForm={stepOneForm}
                 onStepOneSubmit={onStepOneSubmit}
+                onConnectExisting={onConnectExisting}
                 user={user}
               />
             ) : step === 2 ? (
-              <StepTwoCreateTelegram />
+              <StepTwoCreateTelegram
+                stepTwoForm={stepTwoForm}
+                onStepTwoSubmit={onStepTwoSubmit}
+                existingGroups={existingGroups}
+              />
             ) : (
               <StepThreeCreateTelegram />
             )}

@@ -1,6 +1,6 @@
 .ctg-s1-container {
   width: 100%;
-  min-height: 40vh;
+  min-height: 30vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +15,6 @@
   .ctg-s1-input {
     width: -webkit-fill-available;
   }
-
   .ctg-si-radio-group {
     width: -webkit-fill-available;
     display: flex;
@@ -26,12 +25,36 @@
       border-radius: 4px;
       border: 1px solid var(--mantine-color-gray-3);
       margin-top: 6px;
+    }
+    .mantine-Radio-labelWrapper {
+      width: -webkit-fill-available;
       &:hover {
-        cursor: pointer;
+        cursor: pointer !important;
       }
     }
     .mantine-RadioGroup-label {
       margin-bottom: 2px;
     }
+  }
+}
+
+.ctg-s2-container {
+  width: 100%;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  .ctg-s2-radio-group {
+    .mantine-Radio-root {
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid var(--mantine-color-gray-3);
+    }
+  }
+  .ctg-s2 {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 }
