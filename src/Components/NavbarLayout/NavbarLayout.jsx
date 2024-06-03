@@ -25,7 +25,7 @@ import {
 } from '@tabler/icons-react';
 import { useState } from 'react';
 import classes from '../../styles/Navbar/NavbarMinimal.module.css';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 function NavbarLink({
   Icon,
@@ -64,12 +64,14 @@ export function NavbarLayout({ activeTab, children }) {
   const [opened, { toggle }] = useDisclosure(false);
   const [active, setActive] = useState(activeTab || 'home');
   const theme = useMantineTheme();
+  const pathName = usePathname();
 
   const mockdata = [
     {
       icon: IconHome2,
       label: 'Home',
       value: 'home',
+      path: '/creator/home',
       onClick: () => {
         router.push('/creator/home');
       },
@@ -78,6 +80,7 @@ export function NavbarLayout({ activeTab, children }) {
       icon: IconCreditCardPay,
       label: 'Transactions',
       value: 'transaction',
+      path: '/creator/transaction',
       onClick: () => {
         router.push('/creator/transaction');
       },
@@ -86,6 +89,7 @@ export function NavbarLayout({ activeTab, children }) {
       icon: IconWallet,
       label: 'Billing',
       value: 'billing',
+      path: '/creator/billing',
       onClick: () => {
         router.push('/creator/billing');
       },
@@ -94,6 +98,7 @@ export function NavbarLayout({ activeTab, children }) {
       icon: IconUser,
       label: 'Account',
       value: 'account',
+      path: '/creator/account',
       onClick: () => {
         router.push('/creator/account');
       },
@@ -103,6 +108,7 @@ export function NavbarLayout({ activeTab, children }) {
       icon: IconBrandTelegram,
       label: 'Telegram',
       value: 'telegram',
+      path: '/app/telegram',
       onClick: () => {
         router.push('/app/telegram');
       },
@@ -111,6 +117,7 @@ export function NavbarLayout({ activeTab, children }) {
       icon: IconLockDollar,
       label: 'Locked Content',
       value: 'lockedcontent',
+      path: '/app/lockedcontent',
       onClick: () => {
         router.push('/app/lockedcontent');
       },
@@ -119,6 +126,7 @@ export function NavbarLayout({ activeTab, children }) {
     //   icon: IconBrandDiscord,
     //   label: 'Discord',
     //   value: 'discord',
+    //   path: '/app/discord',
     //   onClick: () => {
     //     router.push('/app/discord');
     //   },
@@ -127,6 +135,7 @@ export function NavbarLayout({ activeTab, children }) {
     //   icon: IconCash,
     //   label: 'Payment Page',
     //   value: 'paymentPage',
+    //   path: '/app/paymentpage',
     //   onClick: () => {
     //     router.push('/app/paymentpage');
     //   },
@@ -135,6 +144,7 @@ export function NavbarLayout({ activeTab, children }) {
     //   icon: IconCalendarEvent,
     //   label: 'Webinar',
     //   value: 'webinar',
+    //   path: '/app/webinar',
     //   onClick: () => {
     //     router.push('/app/webinar');
     //   },
@@ -143,6 +153,7 @@ export function NavbarLayout({ activeTab, children }) {
     //   icon: IconCertificate,
     //   label: 'Courses',
     //   value: 'courses',
+    //   path: '/app/courses',
     //   onClick: () => {
     //     router.push('/app/courses');
     //   },
@@ -158,7 +169,7 @@ export function NavbarLayout({ activeTab, children }) {
         Icon={Icon}
         label={label}
         key={link.label}
-        active={link.value === activeTab}
+        active={link.path === pathName}
         onClick={() => link.onClick()}
       />
     );
