@@ -14,13 +14,13 @@ export function middleware(req) {
 export const config = {
   matcher: [
     '/creator',
-    '/creator/account',
-    '/creator/transaction',
-    '/creator/billing',
-    '/creator/account',
-    '/app/lockedcontent',
-    '/app/telegram',
-    '/create/telegram',
-    '/create/lockedcontent',
+    // '/creator/account',
+    // '/creator/transaction',
+    // '/creator/billing',
+    // '/creator/account',
+    // '/app/lockedcontent',
+    // '/app/telegram',
+    // '/create/telegram',
+    // '/create/lockedcontent',
   ],
 };
