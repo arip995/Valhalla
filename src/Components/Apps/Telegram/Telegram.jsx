@@ -6,7 +6,7 @@ import Header from '../../Common/Header/Header';
 const Telegram = () => {
   return (
     <div style={{ transform: 'inherit' }}>
-      <Header title="telegram" path="/create/telegram" />
+      <Header title="Telegram" path="/create/telegram" />
     </div>
   );
 };

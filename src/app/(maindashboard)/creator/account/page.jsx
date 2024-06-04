@@ -1,7 +1,7 @@
-import Creator from '@/src/Components/Creator/Creator';
+import Account from '@/src/Components/Creator/Account/Account';
 
 const Page = ({ data }) => {
-  return <Creator {...data} />;
+  return <Account {...data} />;
 };
 
 export default Page;

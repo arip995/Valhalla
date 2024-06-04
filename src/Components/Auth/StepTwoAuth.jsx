@@ -20,6 +20,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import HeaderWrapper from './HeaderWrapper';
 import PaperWrapper from './PaperWrapper';
+import { setCurrentUser } from '@/src/Utils/User';
 
 const UserTypeCards = UserTypes.map(item => (
   <Radio
@@ -97,11 +98,7 @@ const StepTwoAuth = () => {
         payload,
         { sendCookie: true }
       );
-      localStorage.removeItem('user');
-      localStorage.setItem(
-        'user',
-        JSON.stringify(data.data.data.user)
-      );
+      setCurrentUser(data.data.data.user);
       router.push('/creator/home');
     } catch (error) {
       toast.error(error.response.data.message);

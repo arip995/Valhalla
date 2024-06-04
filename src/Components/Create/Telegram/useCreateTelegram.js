@@ -9,7 +9,7 @@ const useCreateLockedContent = () => {
   const [step, setStep] = useState(1);
   const [existingGroups, setExistingGroups] =
     useState(false);
-  const user = useGetCurrentUser();
+  const { user } = useGetCurrentUser();
 
   const stepOneForm = useForm({
     initialValues: {

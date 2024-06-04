@@ -1,0 +1,10 @@
+.account-container {
+  width: 100%;
+  .account-form-container {
+    max-width: 500px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}

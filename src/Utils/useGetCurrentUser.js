@@ -3,15 +3,20 @@ import useIsBrowser from './useIsBrowser';
 const useGetCurrentUser = () => {
   const [user, setUser] = useState();
   const isBrowser = useIsBrowser();
+
+  const fetchUserData = () => {
+    setUser(
+      JSON.parse(localStorage.getItem('user') || '{}')
+    );
+  };
+
   useEffect(() => {
     if (isBrowser) {
-      setUser(
-        JSON.parse(localStorage.getItem('user') || '{}')
-      );
+      fetchUserData();
     }
   }, [isBrowser]);
 
-  return user;
+  return { user, fetchUserData };
 };
 
 export default useGetCurrentUser;

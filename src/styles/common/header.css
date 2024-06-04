@@ -7,6 +7,9 @@
     justify-content: space-between;
     align-items: center;
   }
+  .apps-header-center {
+    justify-content: space-between;
+  }
   .apps-header-title {
     font-family: Greycliff CF, var(--mantine-font-family);
     font-weight: 600;
