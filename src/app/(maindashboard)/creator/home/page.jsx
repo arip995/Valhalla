@@ -1,7 +1,5 @@
-import Creator from '@/src/Components/Creator/Creator';
-
 const Page = ({ data }) => {
-  return <Creator {...data} />;
+  return <div className=""></div>;
 };
 
 export default Page;
