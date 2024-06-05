@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useAccount = () => {
-  const { user } = useGetCurrentUser();
+  const { user, fetchUserData } = useGetCurrentUser();
   const [loading, setLoading] = useState({
     showUpdatePersonalInfoButton: false,
   });
@@ -22,7 +22,6 @@ const useAccount = () => {
     validateInputOnChange: true,
     validate: {},
   });
-
   const onPersonalInfoSubmit = async () => {
     try {
       const payload = {
@@ -39,6 +38,14 @@ const useAccount = () => {
     } catch (error) {
       console.log(error);
       toast.error('An error occured at our side');
+    } finally {
+      fetchUserData();
+      setLoading(prev => {
+        return {
+          ...prev,
+          showUpdatePersonalInfoButton: false,
+        };
+      });
     }
   };
 
@@ -76,7 +83,7 @@ const useAccount = () => {
         initialLastName: user.lastName,
       });
     }
-  }, user);
+  }, [user]);
 
   return {
     user,

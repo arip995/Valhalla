@@ -4,6 +4,7 @@ import Header from '../../Common/Header/Header';
 import useCreator from './useAccount';
 import '../../../styles/creator/account.css';
 import {
+  Avatar,
   Button,
   Collapse,
   Fieldset,
@@ -14,6 +15,10 @@ import {
 import { checkRestrictedChars } from '@/src/Utils/Regex';
 import useUsername from './useUsername.js';
 import { Toaster } from 'react-hot-toast';
+import useContactSupportDetails from './useContactSupportDetails';
+import { IconEdit } from '@tabler/icons-react';
+import useAccount from './useAccount';
+import ContactInfo from './ContactInfo';
 
 const Account = () => {
   const {
@@ -21,7 +26,7 @@ const Account = () => {
     personInfoForm,
     onPersonalInfoSubmit,
     loading,
-  } = useCreator();
+  } = useAccount();
 
   const {
     username,
@@ -37,6 +42,20 @@ const Account = () => {
       <div className="account-container">
         <Header title="Account Details" />
         <div className="account-form-container">
+          <div className="account-profile-photo-container">
+            <Avatar size="lg" color="blue">
+              {personInfoForm.values.firstName?.[0].toUpperCase()}
+              {personInfoForm.values.lastName?.[0].toUpperCase()}
+            </Avatar>
+            <Button
+              variant="outline"
+              color="gray"
+              size="xs"
+              radius="xl"
+            >
+              Change
+            </Button>
+          </div>
           <Fieldset
             legend="Personal information"
             variant="filled"
@@ -64,6 +83,7 @@ const Account = () => {
                 in={loading.showUpdatePersonalInfoButton}
               >
                 <Button
+                  type="submit"
                   mt="md"
                   radius="xl"
                   variant="filled"
@@ -97,22 +117,13 @@ const Account = () => {
               <Button
                 mt="md"
                 radius="xl"
-                variant="filled"
                 onClick={onUpdateUsername}
-                // fullWidth
               >
                 Update
               </Button>
             </Collapse>
           </Fieldset>
-          <Fieldset
-            legend="Contact information"
-            variant="filled"
-          ></Fieldset>
-          <Fieldset
-            legend="Support information"
-            variant="filled"
-          ></Fieldset>
+          <ContactInfo />
         </div>
       </div>
       <Toaster />

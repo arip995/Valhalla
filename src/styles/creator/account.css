@@ -7,4 +7,14 @@
     flex-direction: column;
     gap: 24px;
   }
+  .acount-edit-icon {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .account-profile-photo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 }

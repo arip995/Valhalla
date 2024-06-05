@@ -117,7 +117,7 @@ const useAuth = ({ tabName }) => {
       toast.success('Signed in successfully');
       if (data?.data?.data?.user.currentUsername) {
         setTimeout(() => {
-          router.push('/creator');
+          router.push('/creator/home');
         }, 3000);
       } else {
         setStep(2);
@@ -129,7 +129,7 @@ const useAuth = ({ tabName }) => {
 
   useEffect(() => {
     if (user?.currentUsername) {
-      router.push('/creator');
+      router.push('/creator/home');
     } else if (user?._id) {
       setStep(2);
     }
