@@ -9,6 +9,8 @@ const useCreateLockedContent = () => {
   const [step, setStep] = useState(1);
   const [existingGroups, setExistingGroups] =
     useState(false);
+  const [isSendingOldNumberOtp, setIsSendingOldNumberOtp] =
+    useState(false);
   const { user } = useGetCurrentUser();
 
   const stepOneForm = useForm({
@@ -191,8 +193,10 @@ const useCreateLockedContent = () => {
         setStep(2);
       }
     } catch (error) {
-      stepOneForm.setFieldValue('isOtpScreen', -1);
-      toast.error('Please try again');
+      setIsSendingOldNumberOtp(true);
+      await sendOtp(stepOneForm.values.selectedNumber);
+      // stepOneForm.setFieldValue('isOtpScreen', 1);
+      // toast.success('Otp sent successfully');
     }
   };
 
@@ -204,7 +208,9 @@ const useCreateLockedContent = () => {
       stepOneForm.setFieldValue('isOtpScreen', -2);
       await verifyOtp(
         stepOneForm.values.otp,
-        `91${stepOneForm.values.phoneNumber}`,
+        isSendingOldNumberOtp
+          ? stepOneForm.values.selectedNumber
+          : `91${stepOneForm.values.phoneNumber}`,
         stepOneForm.values.sessionString
       );
     } else if (stepOneForm.values.isOtpScreen === -1) {
@@ -214,6 +220,11 @@ const useCreateLockedContent = () => {
 
   const onStepTwoSubmit = async () => {};
 
+  useEffect(() => {
+    if (stepOneForm?.values?.isOtpScreen === 0) {
+      setIsSendingOldNumberOtp(false);
+    }
+  }, [stepOneForm?.values?.isOtpScreen]);
   useEffect(() => {
     if (user) {
       if (!user.telegramIntegrations?.length) {

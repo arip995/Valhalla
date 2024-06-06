@@ -8,6 +8,7 @@ import {
   Button,
   Collapse,
   Fieldset,
+  FileButton,
   Loader,
   Text,
   TextInput,
@@ -16,7 +17,7 @@ import { checkRestrictedChars } from '@/src/Utils/Regex';
 import useUsername from './useUsername.js';
 import { Toaster } from 'react-hot-toast';
 import useContactSupportDetails from './useContactSupportDetails';
-import { IconEdit } from '@tabler/icons-react';
+import { IconEdit, IconUpload } from '@tabler/icons-react';
 import useAccount from './useAccount';
 import ContactInfo from './ContactInfo';
 
@@ -26,6 +27,7 @@ const Account = () => {
     personInfoForm,
     onPersonalInfoSubmit,
     loading,
+    handleFileChange,
   } = useAccount();
 
   const {
@@ -47,14 +49,22 @@ const Account = () => {
               {personInfoForm.values.firstName?.[0].toUpperCase()}
               {personInfoForm.values.lastName?.[0].toUpperCase()}
             </Avatar>
-            <Button
-              variant="outline"
-              color="gray"
-              size="xs"
-              radius="xl"
+            <FileButton
+              onChange={handleFileChange}
+              accept="image/png,image/jpeg,image/svg,image/jpg,application/pdf,application/docx,application/docs,application/xlxs"
             >
-              Change
-            </Button>
+              {props => (
+                <Button
+                  variant="outline"
+                  color="gray"
+                  size="xs"
+                  radius="xl"
+                  {...props}
+                >
+                  Upload image
+                </Button>
+              )}
+            </FileButton>
           </div>
           <Fieldset
             legend="Personal information"

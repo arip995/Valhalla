@@ -1,10 +1,13 @@
 import NavbarLayout from '@/src/Components/NavbarLayout/NavbarLayout';
+import { Loader } from '@mantine/core';
 import React from 'react';
 
 const loading = () => {
   return (
     <NavbarLayout>
-      <h1>Loading ...</h1>
+      <div className="h-svh w-full flex items-center justify-center">
+        <Loader color="blue" />
+      </div>
     </NavbarLayout>
   );
 };

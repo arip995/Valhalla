@@ -27,7 +27,7 @@ const StepTwoCreateTelegram = ({
           name="favoriteFramework"
           withAsterisk
         >
-          <Flex mt="xs" gap={'sm'}>
+          <Flex gap={'sm'}>
             <div
               onClick={() => {
                 stepTwoForm.setFieldValue(

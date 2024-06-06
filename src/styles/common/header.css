@@ -2,6 +2,7 @@
   width: 100%;
   padding: 11px;
   border-bottom: 1px solid var(--mantine-color-gray-3);
+  height: 52px;
   .apps-header {
     display: flex;
     justify-content: space-between;

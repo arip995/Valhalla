@@ -3,6 +3,7 @@ import { setCurrentUser } from '@/src/Utils/User';
 import useGetCurrentUser from '@/src/Utils/useGetCurrentUser';
 import { useForm } from '@mantine/form';
 import { useDebouncedCallback } from '@mantine/hooks';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -11,6 +12,8 @@ const useAccount = () => {
   const [loading, setLoading] = useState({
     showUpdatePersonalInfoButton: false,
   });
+  const [image, setImage] = useState({});
+
   const personInfoForm = useForm({
     initialValues: {
       initialFirstName: user?.firstName,
@@ -47,6 +50,49 @@ const useAccount = () => {
         };
       });
     }
+  };
+
+  const handleFileChange = file => {
+    const fileType = file.type;
+    const fileSize = file.size;
+
+    if (
+      fileType.startsWith('image/') ||
+      fileType.startsWith('application/')
+    ) {
+      if (fileSize <= 10 * 1024 * 1024) {
+        convertFileToBase64(file);
+      } else {
+        toast.error('File size exceeds 10MB');
+      }
+    } else {
+      toast.error('Only images and documents are allowed');
+    }
+  };
+
+  const convertFileToBase64 = file => {
+    const reader = new FileReader();
+    let pushObject = {};
+    reader.onload = event => {
+      const base64String = reader.result;
+      pushObject = {
+        base64: base64String,
+        type: file.type,
+        name: file.name,
+        showImage: URL.createObjectURL(file),
+      };
+      setImage(pushObject);
+    };
+    reader.readAsDataURL(file);
+    // console.log(pushObject);
+    // setTimeout(() => {
+    //   try {
+    //     axios.post(
+    //       'http://localhost:6969/api/v1/image/save_image',
+    //       { file: pushObject }
+    //     );
+    //   } catch (error) {}
+    // }, 1000);
   };
 
   useEffect(() => {
@@ -90,6 +136,7 @@ const useAccount = () => {
     personInfoForm,
     onPersonalInfoSubmit,
     loading,
+    handleFileChange,
   };
 };
 

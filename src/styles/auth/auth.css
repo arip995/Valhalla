@@ -10,15 +10,15 @@
 
   &.signup-container-animation {
     /* background-color: var(--mantine-color-gray-1); */
-    background: linear-gradient(
+    /* background: linear-gradient(
       279deg,
       #0d7dd8,
       #72dfe5,
       #4368c9
-    );
-    background-size: 180% 180%;
-    animation: gradient-animation 21s ease infinite;
-    @keyframes gradient-animation {
+    ); */
+    /* background-size: 180% 180%;
+    animation: gradient-animation 21s ease infinite; */
+    /* @keyframes gradient-animation {
       0% {
         background-position: 0% 50%;
       }
@@ -28,7 +28,17 @@
       100% {
         background-position: 0% 50%;
       }
-    }
+    } */
+    background-image: linear-gradient(
+        0deg,
+        hsla(0, 0%, 100%, 0.92),
+        hsla(0, 0%, 100%, 0.92)
+      ),
+      url(https://assets.gumlet.io/public/img/login-bg-pattern.png);
+    height: 300px;
+    background-position: center;
+    background-size: 200px;
+    background-repeat: repeat;
   }
   .edit-icon {
     color: var(--mantine-color-gray-4);

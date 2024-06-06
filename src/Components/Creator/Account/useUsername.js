@@ -1,6 +1,7 @@
 import axiosInstance from '@/src/Utils/AxiosInstance';
 import { setCurrentUser } from '@/src/Utils/User';
 import useGetCurrentUser from '@/src/Utils/useGetCurrentUser';
+import { useDebouncedCallback } from '@mantine/hooks';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -17,22 +18,25 @@ const useUsername = () => {
     setShowUpdateUsernameButton,
   ] = useState(false);
 
-  const validateUsername = async () => {
-    try {
-      setLoadingUsername(true);
-      const data = await axiosInstance.post(
-        'http://localhost:6969/api/v1/user/check_existing_username',
-        { username: username }
-      );
-      setError('');
-      setShowUpdateUsernameButton(true);
-      setLoadingUsername(false);
-    } catch (err) {
-      setShowUpdateUsernameButton(false);
-      setLoadingUsername(false);
-      setError('Already taken');
-    }
-  };
+  const validateUsername = useDebouncedCallback(
+    async () => {
+      try {
+        setLoadingUsername(true);
+        const data = await axiosInstance.post(
+          'http://localhost:6969/api/v1/user/check_existing_username',
+          { username: username }
+        );
+        setError('');
+        setShowUpdateUsernameButton(true);
+        setLoadingUsername(false);
+      } catch (err) {
+        setShowUpdateUsernameButton(false);
+        setLoadingUsername(false);
+        setError('Already taken');
+      }
+    },
+    300
+  );
 
   const onUpdateUsername = async () => {
     try {
@@ -55,6 +59,10 @@ const useUsername = () => {
   };
 
   useEffect(() => {
+    if (!username) {
+      setShowUpdateUsernameButton(false);
+      return;
+    }
     if (username === initialUsername) {
       setShowUpdateUsernameButton(false);
       setShowUpdateUsernameButton(false);
