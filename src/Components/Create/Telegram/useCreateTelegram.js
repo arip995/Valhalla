@@ -108,7 +108,7 @@ const useCreateLockedContent = () => {
   const sendOtp = async phoneNumber => {
     try {
       const data = await axiosInstance.post(
-        'http://localhost:6969/api/v1/telegram/send_auth',
+        `${process.env.NEXT_PUBLIC_BASE_URL}/telegram/send_auth`,
         {
           phoneNumber,
         }
@@ -137,7 +137,7 @@ const useCreateLockedContent = () => {
   ) => {
     try {
       const data = await axiosInstance.post(
-        'http://localhost:6969/api/v1/telegram/verify_otp',
+        `${process.env.NEXT_PUBLIC_BASE_URL}/telegram/verify_otp`,
         {
           phoneNumber,
           phoneCode,
@@ -157,7 +157,7 @@ const useCreateLockedContent = () => {
 
   const getExistingGroups = async phoneNumber => {
     const existingGroups = await axiosInstance.post(
-      'http://localhost:6969/api/v1/telegram/get_existing_groups',
+      `${process.env.NEXT_PUBLIC_BASE_URL}/telegram/get_existing_groups`,
       {
         phoneNumber: `${phoneNumber}`,
       }
@@ -179,7 +179,7 @@ const useCreateLockedContent = () => {
     stepOneForm.setFieldValue('isOtpScreen', -2);
     try {
       const data = await axiosInstance.post(
-        'http://localhost:6969/api/v1/telegram/validate_session',
+        `${process.env.NEXT_PUBLIC_BASE_URL}/telegram/validate_session`,
         {
           phoneNumber: `${stepOneForm.values.selectedNumber}`,
         }

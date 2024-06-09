@@ -70,7 +70,7 @@ const useAuth = ({ tabName }) => {
   const sendOtp = async () => {
     try {
       const data = await axios.post(
-        'http://localhost:6969/api/v1/auth/send_otp',
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/send_otp`,
         {
           [emailOrPhoneNumber === 'email'
             ? 'email'
@@ -92,7 +92,7 @@ const useAuth = ({ tabName }) => {
   const verifyOtp = async () => {
     try {
       const data = await axios.post(
-        'http://localhost:6969/api/v1/auth/verify_otp',
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/verify_otp`,
         {
           [emailOrPhoneNumber === 'email'
             ? 'email'

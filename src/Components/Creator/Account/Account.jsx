@@ -1,9 +1,8 @@
 'use client';
 
-import Header from '../../Common/Header/Header';
-import useCreator from './useAccount';
-import '../../../styles/creator/account.css';
+import { checkRestrictedChars } from '@/src/Utils/Regex';
 import {
+  ActionIcon,
   Avatar,
   Button,
   Collapse,
@@ -13,13 +12,13 @@ import {
   Text,
   TextInput,
 } from '@mantine/core';
-import { checkRestrictedChars } from '@/src/Utils/Regex';
-import useUsername from './useUsername.js';
 import { Toaster } from 'react-hot-toast';
-import useContactSupportDetails from './useContactSupportDetails';
-import { IconEdit, IconUpload } from '@tabler/icons-react';
-import useAccount from './useAccount';
+import '../../../styles/creator/account.css';
+import Header from '../../Common/Header/Header';
 import ContactInfo from './ContactInfo';
+import useAccount from './useAccount';
+import useUsername from './useUsername.js';
+import { IconX } from '@tabler/icons-react';
 
 const Account = () => {
   const {
@@ -28,6 +27,7 @@ const Account = () => {
     onPersonalInfoSubmit,
     loading,
     handleFileChange,
+    onRemoveImage,
   } = useAccount();
 
   const {
@@ -45,10 +45,18 @@ const Account = () => {
         <Header title="Account Details" />
         <div className="account-form-container">
           <div className="account-profile-photo-container">
-            <Avatar size="lg" color="blue">
-              {personInfoForm.values.firstName?.[0].toUpperCase()}
-              {personInfoForm.values.lastName?.[0].toUpperCase()}
-            </Avatar>
+            {user?.profilePic ? (
+              <Avatar
+                src={user?.profilePic}
+                size="lg"
+              ></Avatar>
+            ) : (
+              <Avatar size="lg" color="blue">
+                {personInfoForm.values.firstName?.[0].toUpperCase()}
+                {personInfoForm.values.lastName?.[0].toUpperCase()}
+              </Avatar>
+            )}
+
             <FileButton
               onChange={handleFileChange}
               accept="image/png,image/jpeg,image/svg,image/jpg,application/pdf,application/docx,application/docs,application/xlxs"
@@ -61,10 +69,25 @@ const Account = () => {
                   radius="xl"
                   {...props}
                 >
-                  Upload image
+                  {user?.profilePic ? 'Change' : 'Upload'}
                 </Button>
               )}
             </FileButton>
+            {user?.profilePic ? (
+              <ActionIcon
+                variant="outline"
+                color="gray"
+                size="md"
+                radius="xl"
+                onClick={onRemoveImage}
+              >
+                <IconX
+                  style={{ width: '70%', height: '70%' }}
+                  stroke={1.5}
+                  color="gray"
+                />
+              </ActionIcon>
+            ) : null}
           </div>
           <Fieldset
             legend="Personal information"

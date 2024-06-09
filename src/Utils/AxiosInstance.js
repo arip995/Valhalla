@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:6969/api/v1', // Replace with your API base URL
+  baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}`, // Replace with your API base URL
 });
 
 const sendCookieInterceptor = config => {

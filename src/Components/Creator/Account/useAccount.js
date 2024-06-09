@@ -2,9 +2,8 @@ import axiosInstance from '@/src/Utils/AxiosInstance';
 import { setCurrentUser } from '@/src/Utils/User';
 import useGetCurrentUser from '@/src/Utils/useGetCurrentUser';
 import { useForm } from '@mantine/form';
-import { useDebouncedCallback } from '@mantine/hooks';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useAccount = () => {
@@ -12,8 +11,6 @@ const useAccount = () => {
   const [loading, setLoading] = useState({
     showUpdatePersonalInfoButton: false,
   });
-  const [image, setImage] = useState({});
-
   const personInfoForm = useForm({
     initialValues: {
       initialFirstName: user?.firstName,
@@ -51,6 +48,45 @@ const useAccount = () => {
       });
     }
   };
+  const onUpload = async payload => {
+    try {
+      const data = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/image/save_image`,
+        { file: payload }
+      );
+      const payloadForUserUpdate = {
+        type: 'profilePic',
+        profilePic: data.data.data.url,
+      };
+      const userData = await axiosInstance.post(
+        'user/update_user_data',
+        payloadForUserUpdate
+      );
+      setCurrentUser(userData.data.data.user);
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message || '');
+    } finally {
+      fetchUserData();
+    }
+  };
+  const onRemoveImage = async () => {
+    try {
+      const payloadForUserUpdate = {
+        type: 'profilePic',
+        profilePic: '',
+      };
+      const userData = await axiosInstance.post(
+        'user/update_user_data',
+        payloadForUserUpdate
+      );
+      setCurrentUser(userData.data.data.user);
+    } catch (error) {
+      toast.error(error?.response?.data?.message || '');
+    } finally {
+      fetchUserData();
+    }
+  };
 
   const handleFileChange = file => {
     const fileType = file.type;
@@ -70,7 +106,7 @@ const useAccount = () => {
     }
   };
 
-  const convertFileToBase64 = file => {
+  const convertFileToBase64 = async file => {
     const reader = new FileReader();
     let pushObject = {};
     reader.onload = event => {
@@ -81,18 +117,9 @@ const useAccount = () => {
         name: file.name,
         showImage: URL.createObjectURL(file),
       };
-      setImage(pushObject);
+      onUpload(pushObject);
     };
     reader.readAsDataURL(file);
-    // console.log(pushObject);
-    // setTimeout(() => {
-    //   try {
-    //     axios.post(
-    //       'http://localhost:6969/api/v1/image/save_image',
-    //       { file: pushObject }
-    //     );
-    //   } catch (error) {}
-    // }, 1000);
   };
 
   useEffect(() => {
@@ -137,6 +164,7 @@ const useAccount = () => {
     onPersonalInfoSubmit,
     loading,
     handleFileChange,
+    onRemoveImage,
   };
 };
 

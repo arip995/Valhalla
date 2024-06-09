@@ -60,7 +60,7 @@ const StepTwoAuth = () => {
       setLoading(true);
       try {
         const data = await axiosInstance.post(
-          'http://localhost:6969/api/v1/user/check_existing_username',
+          `${process.env.NEXT_PUBLIC_BASE_URL}/user/check_existing_username`,
           { username: username },
           { sendCookie: true }
         );

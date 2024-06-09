@@ -58,7 +58,7 @@ const useContactSupportDetails = () => {
     }
     try {
       const data = await axios.post(
-        'http://localhost:6969/api/v1/auth/send_otp',
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/send_otp`,
         {
           email:
             editEntity === 'email' ? email : supportEmail,
@@ -94,7 +94,7 @@ const useContactSupportDetails = () => {
         otp: otp,
       };
       const data = await axiosInstance.post(
-        'http://localhost:6969/api/v1/auth/update_verify_otp',
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/update_verify_otp`,
         payload
       );
       setCurrentUser(data.data.data);
