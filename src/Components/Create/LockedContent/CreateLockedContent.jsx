@@ -28,6 +28,7 @@ const CreateLockedContent = ({ data }) => {
     onCreate,
     handleFileChange,
     onFileDelete,
+    setIsSaveClickedAtleastOnce,
   } = useCreateLockedContent(data);
 
   return (
@@ -122,10 +123,7 @@ const CreateLockedContent = ({ data }) => {
                 color="black"
                 radius="md"
                 onClick={() =>
-                  createLockedContentForm.setFieldValue(
-                    'isClickedAtleastOnce',
-                    true
-                  )
+                  setIsSaveClickedAtleastOnce(true)
                 }
               >
                 Publish

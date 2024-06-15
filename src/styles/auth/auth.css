@@ -15,10 +15,10 @@
       #0d7dd8,
       #72dfe5,
       #4368c9
-    ); */
-    /* background-size: 180% 180%;
-    animation: gradient-animation 21s ease infinite; */
-    /* @keyframes gradient-animation {
+    );
+    background-size: 180% 180%;
+    animation: gradient-animation 21s ease infinite;
+    @keyframes gradient-animation {
       0% {
         background-position: 0% 50%;
       }
@@ -50,7 +50,7 @@
     cursor: pointer;
   }
   .signupPaper {
-    max-width: 500px;
+    max-width: 600px;
     width: 90%;
     @media (min-width: em(767px)) {
       width: 50%;

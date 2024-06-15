@@ -40,6 +40,7 @@
     cursor: pointer;
   }
   .signupPaper {
+    max-width: 600px;
     width: 90%;
     @media (min-width: em(767px)) {
       width: 50%;

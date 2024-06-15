@@ -1,0 +1,93 @@
+.vlc-container {
+  width: 100%;
+  height: 100%;
+  /* height: 100svh; */
+  /* height: 100dvh; */
+  overflow-y: auto;
+
+  .vlc-view-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .vlc-view-container {
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    margin-top: 50px;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: start;
+    @media (max-width: em(767px)) {
+      margin-top: 0px;
+    }
+  }
+  .vlc-view-product-title {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 23px;
+    color: #000000;
+  }
+  .vlc-view-product-container {
+    width: 100%;
+    height: 200px;
+    overflow-y: auto;
+  }
+  .vlc-view-product-locked-state {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: linear-gradient(
+      279deg,
+      #324fe0,
+      #72a4e5,
+      #2b4a97
+    );
+    background-size: 180% 180%;
+    animation: gradient-animation 21s ease infinite;
+    @keyframes gradient-animation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  }
+  .vlc-view-product-locked-state-image {
+    height: 100px;
+    width: 100px;
+    animation: pulse 2s infinite ease-in-out;
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.075);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  }
+  .vlc-view-product-locked-state-text {
+    font-weight: 500;
+  }
+
+  .vlc-view-product-button {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}

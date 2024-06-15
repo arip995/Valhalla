@@ -11,6 +11,7 @@ const useAccount = () => {
   const [loading, setLoading] = useState({
     showUpdatePersonalInfoButton: false,
   });
+
   const personInfoForm = useForm({
     initialValues: {
       initialFirstName: user?.firstName,
@@ -50,9 +51,9 @@ const useAccount = () => {
   };
   const onUpload = async payload => {
     try {
-      const data = await axios.post(
+      const data = await axiosInstance.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/image/save_image`,
-        { file: payload }
+        { file: { ...payload } }
       );
       const payloadForUserUpdate = {
         type: 'profilePic',
@@ -87,25 +88,20 @@ const useAccount = () => {
       fetchUserData();
     }
   };
-
   const handleFileChange = file => {
     const fileType = file.type;
     const fileSize = file.size;
 
-    if (
-      fileType.startsWith('image/') ||
-      fileType.startsWith('application/')
-    ) {
+    if (fileType.startsWith('image/')) {
       if (fileSize <= 10 * 1024 * 1024) {
         convertFileToBase64(file);
       } else {
         toast.error('File size exceeds 10MB');
       }
     } else {
-      toast.error('Only images and documents are allowed');
+      toast.error('Only images allowed');
     }
   };
-
   const convertFileToBase64 = async file => {
     const reader = new FileReader();
     let pushObject = {};

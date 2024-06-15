@@ -1,0 +1,21 @@
+.vph-avatar-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  .vph-creator-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .vph-creator-details-heading {
+    font-size: 0.9rem;
+  }
+  .vph-creator-details-name {
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  .vph-creator-details-username {
+    /* font-weight: 500; */
+    font-size: 0.9rem;
+  }
+}

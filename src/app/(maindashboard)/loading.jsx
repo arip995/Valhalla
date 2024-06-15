@@ -4,11 +4,12 @@ import React from 'react';
 
 const loading = () => {
   return (
-    <NavbarLayout>
-      <div className="h-svh w-full flex items-center justify-center">
+    <>
+      <div className="h-svh w-full fixed flex items-center justify-center">
         <Loader color="blue" />
       </div>
-    </NavbarLayout>
+      <NavbarLayout></NavbarLayout>
+    </>
   );
 };
 

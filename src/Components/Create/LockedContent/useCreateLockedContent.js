@@ -1,8 +1,15 @@
+import axiosInstance from '@/src/Utils/AxiosInstance';
 import { useForm } from '@mantine/form';
+import { randomId } from '@mantine/hooks';
 import axios from 'axios';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useCreateLockedContent = () => {
+  const [
+    isSaveClickedAtleastOnce,
+    setIsSaveClickedAtleastOnce,
+  ] = useState(false);
   const createLockedContentForm = useForm({
     initialValues: {
       title: '',
@@ -10,46 +17,96 @@ const useCreateLockedContent = () => {
       category: '',
       price: '',
       files: [],
-      isSaveClickedAtleastOnce: false,
     },
     validateInputOnChange: true,
     validate: {
       title: value =>
         !value
-          ? createLockedContentForm.getValues()
-              .isClickedAtleastOnce && 'Title is required'
+          ? isSaveClickedAtleastOnce && 'Title is required'
           : null,
       message: value =>
         !value
-          ? createLockedContentForm.getValues()
-              .isClickedAtleastOnce && 'Message is required'
+          ? isSaveClickedAtleastOnce &&
+            'Message is required'
           : null,
       category: value =>
         !value
-          ? createLockedContentForm.getValues()
-              .isClickedAtleastOnce &&
+          ? isSaveClickedAtleastOnce &&
             'Category is required'
           : null,
       price: value =>
         !value
-          ? createLockedContentForm.getValues()
-              .isClickedAtleastOnce && 'Price is reqiuired'
+          ? isSaveClickedAtleastOnce && 'Price is reqiuired'
           : value < 20
-          ? createLockedContentForm.getValues()
-              .isClickedAtleastOnce &&
+          ? isSaveClickedAtleastOnce &&
             'Price must be more than 20'
           : null,
     },
   });
 
-  const onCreate = () => {
-    console.log('panda');
+  const onCreate = async () => {
+    const data = await axiosInstance.post(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/premiumcontent/create`,
+      {
+        contentDetails: {
+          ...createLockedContentForm.values,
+        },
+      }
+    );
+    console.log(data);
   };
 
-  const handleFileChange = file => {
+  const addLoadingImage = () => {
+    const pushObject = [
+      ...(createLockedContentForm.getValues().files || []),
+      {
+        id: randomId(),
+        loading: true,
+      },
+    ];
+    createLockedContentForm.setFieldValue(
+      'files',
+      pushObject
+    );
+  };
+
+  const onUpload = async payload => {
+    try {
+      const data = await axiosInstance.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/image/save_image`,
+        { file: { ...payload } }
+      );
+      const files =
+        createLockedContentForm.getValues().files || [];
+
+      const indexToRemove = files.findIndex(
+        file => file.loading === true
+      );
+      if (indexToRemove !== -1) {
+        files.splice(indexToRemove, 1);
+      }
+
+      const addUrltoObject = [
+        ...(files || []),
+        {
+          type: payload.type,
+          url: data.data.data.url,
+          name: payload.name,
+        },
+      ];
+      createLockedContentForm.setFieldValue(
+        'files',
+        addUrltoObject
+      );
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message || '');
+    }
+  };
+
+  const handleFileChange = async file => {
     const fileType = file.type;
     const fileSize = file.size;
-
     if (
       createLockedContentForm.getValues().files.length === 3
     ) {
@@ -57,6 +114,7 @@ const useCreateLockedContent = () => {
       return;
     }
 
+    addLoadingImage();
     if (
       fileType.startsWith('image/') ||
       fileType.startsWith('application/')
@@ -71,32 +129,24 @@ const useCreateLockedContent = () => {
     }
   };
 
-  const convertFileToBase64 = file => {
+  const convertFileToBase64 = async file => {
     const reader = new FileReader();
-    reader.onload = event => {
+    reader.onload = async event => {
       const base64String = reader.result;
-      const pushObject = [
-        ...(createLockedContentForm.getValues().files ||
-          []),
-        {
-          base: base64String,
-          type: file.type,
-          name: file.name,
-          showImage: URL.createObjectURL(file),
-        },
-      ];
-      createLockedContentForm.setFieldValue(
-        'files',
-        pushObject
-      );
+      await onUpload({
+        base64: base64String,
+        type: file.type,
+        name: file.name,
+        showImage: URL.createObjectURL(file),
+      });
     };
     reader.readAsDataURL(file);
   };
 
-  const onFileDelete = name => {
+  const onFileDelete = url => {
     const filteredFiles = createLockedContentForm
       .getValues()
-      .files.filter(item => item.name !== name);
+      .files.filter(item => item.url !== url);
 
     createLockedContentForm.setFieldValue(
       'files',
@@ -110,6 +160,8 @@ const useCreateLockedContent = () => {
     handleFileChange,
     convertFileToBase64,
     onFileDelete,
+    isSaveClickedAtleastOnce,
+    setIsSaveClickedAtleastOnce,
   };
 };
 
