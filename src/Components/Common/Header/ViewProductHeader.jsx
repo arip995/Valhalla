@@ -7,26 +7,30 @@ const ViewProductHeader = ({
   firstName,
   lastName,
   username,
+  title,
 }) => {
   return (
-    <div className="vph-avatar-container">
-      <Avatar size="xl" color="blue" src={profilePic}>
-        {firstName?.[0].toUpperCase()}
-        {lastName?.[0].toUpperCase()}
-      </Avatar>
-      <div className="vph-creator-details-container">
-        <div className="vph-creator-details-heading">
-          Created by
-        </div>
-        <div className="vph-creator-details-name">
-          {firstName?.toUpperCase()}{' '}
-          {lastName?.toUpperCase()}
-        </div>
-        <div className="vph-creator-details-username">
-          @{username}
+    <>
+      <div className="vph-avatar-container">
+        <Avatar size="xl" color="blue" src={profilePic}>
+          {firstName?.[0].toUpperCase()}
+          {lastName?.[0].toUpperCase()}
+        </Avatar>
+        <div className="vph-creator-details-container">
+          <div className="vph-creator-details-heading">
+            Created by
+          </div>
+          <div className="vph-creator-details-name">
+            {firstName?.toUpperCase()}{' '}
+            {lastName?.toUpperCase()}
+          </div>
+          <div className="vph-creator-details-username">
+            @{username}
+          </div>
         </div>
       </div>
-    </div>
+      <div className="vlc-view-product-title">{title}</div>
+    </>
   );
 };
 
