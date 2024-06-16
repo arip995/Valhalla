@@ -9,9 +9,10 @@ export async function GET(req, res) {
   console.log('object', path);
 
   if (!path) {
-    return res
-      .status(400)
-      .json({ error: 'Path is required' });
+    return NextResponse.json(
+      { error: 'Path is required' },
+      { status: 400 }
+    );
   }
 
   try {
