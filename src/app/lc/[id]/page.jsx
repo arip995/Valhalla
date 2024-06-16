@@ -4,7 +4,9 @@ async function getData(id) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/premiumcontent/get/${id}`,
     {
-      cache: 'force-cache',
+      next: {
+        revalidate: 3600,
+      },
     }
   );
   return await res.json();

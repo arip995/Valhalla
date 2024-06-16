@@ -1,6 +1,7 @@
 import { Avatar } from '@mantine/core';
 import React from 'react';
 import '../../../styles/common/view-product-header.css';
+import Image from 'next/image';
 
 const ViewProductHeader = ({
   profilePic,
@@ -12,6 +13,22 @@ const ViewProductHeader = ({
   return (
     <>
       <div className="vph-avatar-container">
+        {/* <div
+          className=""
+          style={{
+            width: '84px',
+            height: '84px',
+            overflow: 'hidden',
+            borderRadius: '100%',
+          }}
+        >
+          <Image
+            src={profilePic}
+            width={500}
+            height={600}
+            quality={100}
+          />
+        </div> */}
         <Avatar size="xl" color="blue" src={profilePic}>
           {firstName?.[0].toUpperCase()}
           {lastName?.[0].toUpperCase()}

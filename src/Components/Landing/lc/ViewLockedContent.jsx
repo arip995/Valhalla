@@ -2,18 +2,10 @@ import { Loader } from '@mantine/core';
 import '../../../styles/view/locked-content.css';
 import LockedContent from './LockedContent';
 
-const ViewLockedContent = ({ data }) => {
-  //   console.log(data);
-
+const ViewLockedContent = async ({ data, id }) => {
   return (
-    <div className="vlc-container">
+    <div className="vlc-container" suppressHydrationWarning>
       <LockedContent data={data} />
-      {/* {data ? (
-      ) : (
-        <div className="h-svh w-svh flex items-center justify-center">
-          <Loader color="blue" size={'sm'} />
-        </div>
-      )} */}
     </div>
   );
 };
