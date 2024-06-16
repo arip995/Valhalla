@@ -45,17 +45,10 @@ const Account = () => {
         <Header title="Account Details" />
         <div className="account-form-container">
           <div className="account-profile-photo-container">
-            {user?.profilePic ? (
-              <Avatar
-                src={user?.profilePic}
-                size="lg"
-              ></Avatar>
-            ) : (
-              <Avatar size="lg" color="blue">
-                {personInfoForm.values.firstName?.[0].toUpperCase()}
-                {personInfoForm.values.lastName?.[0].toUpperCase()}
-              </Avatar>
-            )}
+            <Avatar src={user?.profilePic} size="lg">
+              {personInfoForm.values.firstName?.[0].toUpperCase()}
+              {personInfoForm.values.lastName?.[0].toUpperCase()}
+            </Avatar>
 
             <FileButton
               onChange={handleFileChange}

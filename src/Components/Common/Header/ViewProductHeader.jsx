@@ -10,14 +10,10 @@ const ViewProductHeader = ({
 }) => {
   return (
     <div className="vph-avatar-container">
-      {profilePic ? (
-        <Avatar src={profilePic} size="xl"></Avatar>
-      ) : (
-        <Avatar size="xl" color="blue">
-          {firstName?.toUpperCase()}
-          {lastName?.toUpperCase()}
-        </Avatar>
-      )}
+      <Avatar size="xl" color="blue" src={profilePic}>
+        {firstName?.[0].toUpperCase()}
+        {lastName?.[0].toUpperCase()}
+      </Avatar>
       <div className="vph-creator-details-container">
         <div className="vph-creator-details-heading">
           Created by

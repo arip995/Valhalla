@@ -56,18 +56,33 @@ const useContactSupportDetails = () => {
         return;
       }
     }
+    let payload = {};
+    if (editEntity === 'email') {
+      payload = {
+        email,
+        isSignUp: true,
+      };
+    } else if (editEntity === 'supportEmail') {
+      payload = {
+        email: supportEmail,
+        isSignUp: true,
+      };
+    } else if (editEntity === 'phoneNumber') {
+      payload = {
+        phoneNumber,
+        isSignUp: true,
+      };
+    } else if (editEntity === 'supportPhoneNumber') {
+      payload = {
+        phoneNumber: supportPhoneNumber,
+        isSignUp: true,
+      };
+    }
+
     try {
-      const data = await axios.post(
+      await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/send_otp`,
-        {
-          email:
-            editEntity === 'email' ? email : supportEmail,
-          phoneNumber:
-            editEntity === 'phoneNumber'
-              ? phoneNumber
-              : supportPhoneNumber,
-          isSignUp: true,
-        }
+        payload
       );
       toast.success('Otp sent successfully');
       setIsOtpScreen(true);

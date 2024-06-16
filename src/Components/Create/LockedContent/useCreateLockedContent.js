@@ -4,8 +4,10 @@ import { randomId } from '@mantine/hooks';
 import axios from 'axios';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 const useCreateLockedContent = () => {
+  const router = useRouter();
   const [
     isSaveClickedAtleastOnce,
     setIsSaveClickedAtleastOnce,
@@ -53,6 +55,7 @@ const useCreateLockedContent = () => {
         },
       }
     );
+    router.push(`/lc/${data.data.data._id}`);
     console.log(data);
   };
 
