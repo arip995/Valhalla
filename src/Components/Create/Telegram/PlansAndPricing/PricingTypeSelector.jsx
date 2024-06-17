@@ -25,7 +25,7 @@ const PricingTypeSelector = ({
         >
           <div className="price-type-info">
             <div className="price-type__heading">
-              Fixed price
+              Lifetime
             </div>
             <div>Charge a one-time fixed fee</div>
           </div>
