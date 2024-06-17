@@ -206,7 +206,9 @@ function PlanEditCard({
           type="text"
           value={planTitle}
           rightSection={
-            <div>{`${planTitle?.length || 0}/${75}`}</div>
+            <div className="text-xs">{`${
+              planTitle?.length || 0
+            }/${75}`}</div>
           }
           onChange={e => {
             const value = e?.target?.value?.trimStart();

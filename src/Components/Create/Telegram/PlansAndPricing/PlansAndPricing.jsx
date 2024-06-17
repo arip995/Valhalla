@@ -1,13 +1,12 @@
-import { Button, Input, rem } from '@mantine/core';
-import { randomId, useId } from '@mantine/hooks';
-import { IconInfoCircle } from '@tabler/icons-react';
+import { compact } from '@/src/Utils/Common';
+import { Button, Text } from '@mantine/core';
+import { randomId } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import '../../../../styles/common/plan-and-pricing.css';
 import { periodTypeOptions } from '../useCreateTelegram';
 import PlanCard from './PlanCard';
 import PlanEditCard from './PlanEditCard';
-import { compact } from '@/src/Utils/Common';
 
 const PlansAndPricing = ({ stepThreeForm }) => {
   const [plans, setPlans] = useState(
@@ -190,11 +189,7 @@ const PlansAndPricing = ({ stepThreeForm }) => {
         {plans.map((plan, index) => {
           if (plan.editing) {
             return (
-              <Input.Wrapper
-                error={
-                  stepThreeForm.errors?.subscriptionPlans
-                }
-              >
+              <div className="flex flex-col gap-1">
                 <PlanEditCard
                   key={plan.id}
                   originalState={plan}
@@ -207,7 +202,12 @@ const PlansAndPricing = ({ stepThreeForm }) => {
                   deletePlan={deletePlan}
                   onCancel={onCancel}
                 />
-              </Input.Wrapper>
+                {stepThreeForm.errors.subscriptionPlans ? (
+                  <Text c="red" size="xs">
+                    {stepThreeForm.errors.subscriptionPlans}
+                  </Text>
+                ) : null}
+              </div>
             );
           } else {
             return (
