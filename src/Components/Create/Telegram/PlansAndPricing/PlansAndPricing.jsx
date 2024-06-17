@@ -1,5 +1,5 @@
 import { compact } from '@/src/Utils/Common';
-import { Button, Text } from '@mantine/core';
+import { Button, Input } from '@mantine/core';
 import { randomId } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
@@ -189,7 +189,12 @@ const PlansAndPricing = ({ stepThreeForm }) => {
         {plans.map((plan, index) => {
           if (plan.editing) {
             return (
-              <div className="flex flex-col gap-1">
+              <Input.Wrapper
+                key={plan.id}
+                error={
+                  stepThreeForm.errors?.subscriptionPlans
+                }
+              >
                 <PlanEditCard
                   key={plan.id}
                   originalState={plan}
@@ -202,12 +207,7 @@ const PlansAndPricing = ({ stepThreeForm }) => {
                   deletePlan={deletePlan}
                   onCancel={onCancel}
                 />
-                {stepThreeForm.errors.subscriptionPlans ? (
-                  <Text c="red" size="xs">
-                    {stepThreeForm.errors.subscriptionPlans}
-                  </Text>
-                ) : null}
-              </div>
+              </Input.Wrapper>
             );
           } else {
             return (
