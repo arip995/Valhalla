@@ -69,6 +69,9 @@ const CreateLockedContent = ({ data }) => {
                 value={
                   createLockedContentForm.values.message
                 }
+                minRows={4}
+                maxRows={10}
+                autosize
                 radius="md"
                 {...createLockedContentForm.getInputProps(
                   'message'

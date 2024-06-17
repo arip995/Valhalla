@@ -226,7 +226,7 @@ const PlansAndPricing = ({ stepThreeForm }) => {
           variant="outline"
           onClick={addNewPlan}
           color="blue"
-          size="md"
+          radius="md"
         >
           + Add another plan
         </Button>
@@ -239,9 +239,9 @@ const PlansAndPricing = ({ stepThreeForm }) => {
           }
           fullWidth
           color="black"
-          size="md"
+          radius="md"
         >
-          Publish telegram page
+          Publish
         </Button>
       </div>
       <Toaster />
