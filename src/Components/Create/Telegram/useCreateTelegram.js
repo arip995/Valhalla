@@ -5,6 +5,27 @@ import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
+export const periodTypeOptions = [
+  { label: 'Days', value: 'Daily', days: 1 },
+  { label: 'Weeks', value: 'Weekly', days: 7 },
+  { label: 'Months', value: 'Monthly', days: 30 },
+  { label: 'Years', value: 'Yearly', days: 365 },
+  { label: 'Lifetime', value: 'Lifetime', days: 36500 },
+];
+
+export const PriceTypes = [
+  {
+    heading: 'Fixed Price',
+    text: 'Charge a one-time fixed pay',
+    value: 'Lifetime',
+  },
+  {
+    heading: 'Subscription',
+    text: 'Charge weekly, monthly, annually',
+    value: 'Subscription',
+  },
+];
+
 const useCreateLockedContent = () => {
   const [step, setStep] = useState(1);
   const [existingGroups, setExistingGroups] =
@@ -45,7 +66,8 @@ const useCreateLockedContent = () => {
     initialValues: {
       channelName: '',
       groupId: '',
-      isNewChannel: 'new',
+      isOldOrNewChannel: 'new',
+      superGroup: false,
       isSaveClickedAtleastOnce: false,
     },
     validateInputOnChange: true,
@@ -53,16 +75,62 @@ const useCreateLockedContent = () => {
     validate: {
       channelName: value =>
         !value &&
-        stepTwoForm.values.isNewChannel === 'new' &&
+        stepTwoForm.values.isOldOrNewChannel === 'new' &&
         stepTwoForm.values.isSaveClickedAtleastOnce
           ? 'Enter a channel name'
           : null,
       groupId: value =>
         !value &&
-        stepTwoForm.values.isNewChannel === 'old' &&
+        stepTwoForm.values.isOldOrNewChannel === 'old' &&
         stepTwoForm.values.isSaveClickedAtleastOnce
           ? 'Select a channel'
           : null,
+    },
+  });
+
+  const stepThreeForm = useForm({
+    initialValues: {
+      title: '',
+      description: '',
+      subscriptionPlans: [],
+      isSaveClickedAtleastOnce: false,
+      genre: '',
+    },
+    validateInputOnChange: true,
+    validate: {
+      title: (value, values) => {
+        return values?.isSaveClickedAtleastOnce && !value
+          ? 'Title is required'
+          : null;
+      },
+      subscriptionPlans: (value, values) => {
+        if (!values?.isSaveClickedAtleastOnce) return null;
+        if (value?.length) {
+          for (let plan of value) {
+            if (plan.editing) {
+              return 'You have unsaved plans, please save your changes';
+            } else if (!plan.subscriptionCost) {
+              return 'Please provide a cost for your plan';
+            } else if (!plan.subscriptionPeriodLabel) {
+              return 'Please provide a subscription type';
+            } else if (
+              !plan.subscriptionPeriodValue ||
+              !plan.subscriptionPeriodLabel
+            ) {
+              return 'Please provide a subscription period';
+            } else if (!plan.planTitle) {
+              return 'Please provide a title for your plan';
+            }
+          }
+        } else {
+          return 'Please add a plan';
+        }
+      },
+      genre: (value, values) => {
+        return values?.isSaveClickedAtleastOnce && !value
+          ? 'Category is required'
+          : null;
+      },
     },
   });
 
@@ -104,6 +172,32 @@ const useCreateLockedContent = () => {
           : null,
     },
   });
+
+  const formatPlans = (plans = []) => {
+    const formattedPlans = [];
+
+    plans.forEach(val => {
+      const selectedPeriod = periodTypeOptions.find(
+        per => per.label == val.subscriptionPeriodLabel
+      );
+      const days =
+        Number(selectedPeriod?.days || 0) *
+        Number(val.subscriptionPeriodValue);
+
+      const subscriptionPeriod = val?.planTitle;
+      const cost = val?.subscriptionCost;
+      if (days && subscriptionPeriod && cost)
+        formattedPlans.push({
+          days,
+          subscriptionPeriod,
+          cost,
+          periodQuantity: val.subscriptionPeriodValue,
+          planType: selectedPeriod.value,
+        });
+    });
+
+    return formattedPlans;
+  };
 
   const sendOtp = async phoneNumber => {
     try {
@@ -218,7 +312,26 @@ const useCreateLockedContent = () => {
     }
   };
 
-  const onStepTwoSubmit = async () => {};
+  const onStepTwoSubmit = async () => {
+    setStep(3);
+  };
+  const onStepThreeSubmit = async () => {
+    const payload = {
+      groupName: stepTwoForm.values?.channelName,
+      groupDescription:
+        stepThreeForm.values?.description || '',
+      phoneNumber: stepOneForm.values.phoneNumber
+        ? `91${stepOneForm.values.phoneNumber}`
+        : stepOneForm.values?.selectedNumber,
+      subscriptionPlans: formatPlans(
+        stepThreeForm.values?.subscriptionPlans
+      ),
+      groupId: stepTwoForm.values?.groupId,
+      superGroup: stepTwoForm.values?.superGroup,
+      genre: stepThreeForm.values?.genre,
+      title: stepThreeForm.values?.title,
+    };
+  };
 
   useEffect(() => {
     if (stepOneForm?.values?.isOtpScreen === 0) {
@@ -239,12 +352,14 @@ const useCreateLockedContent = () => {
     step,
     user,
     createTelegramForm,
+    existingGroups,
+    onConnectExisting,
     stepOneForm,
     stepTwoForm,
-    existingGroups,
+    stepThreeForm,
     onStepOneSubmit,
-    onConnectExisting,
     onStepTwoSubmit,
+    onStepThreeSubmit,
   };
 };
 

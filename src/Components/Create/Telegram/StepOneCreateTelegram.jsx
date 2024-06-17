@@ -31,7 +31,7 @@ const StepOneCreateTelegram = ({
           {user?.telegramIntegrations?.length &&
           stepOneForm.values.isOtpScreen === -1 ? (
             <Radio.Group
-              className="ctg-si-radio-group"
+              className="ctg-s1-radio-group"
               value={stepOneForm.values.selectedNumber}
               onChange={value => {
                 stepOneForm.setFieldValue(

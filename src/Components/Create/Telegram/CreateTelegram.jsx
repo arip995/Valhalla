@@ -14,10 +14,12 @@ import StepTwoCreateTelegram from './StepTwoCreateTelegram';
 const CreateTelegram = ({ data }) => {
   const {
     createTelegramForm,
-    onStepOneSubmit,
-    onStepTwoSubmit,
     stepOneForm,
     stepTwoForm,
+    stepThreeForm,
+    onStepOneSubmit,
+    onStepTwoSubmit,
+    onStepThreeSubmit,
     onConnectExisting,
     existingGroups,
     step,
@@ -45,7 +47,10 @@ const CreateTelegram = ({ data }) => {
                 existingGroups={existingGroups}
               />
             ) : (
-              <StepThreeCreateTelegram />
+              <StepThreeCreateTelegram
+                stepThreeForm={stepThreeForm}
+                onStepThreeSubmit={onStepThreeSubmit}
+              />
             )}
           </PaperWrapper>
         </div>

@@ -1,0 +1,144 @@
+.nexify-custom-plans-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  .nexify-custom-plans-about-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .nexify-custom-plans-about-container
+    .nexify-custom-plans-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: -10px;
+  }
+  .nexify-custom-plans-about-container
+    .nexify-custom-plans-about-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #fffaeb;
+    border-radius: 5px;
+    padding: 10px 16px;
+  }
+  .nexify-custom-plans-about-info
+    .nexify-custom-plans-about-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+  .nexify-custom-plans-about-info
+    .nexify-custom-plans-about-description {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+  }
+  .nexify-plan-edit-card-subsctiption-option {
+    width: 100%;
+  }
+  .nexify-plan-edit-card {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #dadada;
+    border-radius: 10px;
+    transition: transform 0.05s ease-in-out;
+  }
+  .nexify-plan-edit-card .nexify-plan-edit-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 20px 16px;
+  }
+  .nexify-plan-edit-card .nexify-plan-edit-info-text {
+    font-style: normal;
+    font-weight: 400;
+    font-size: remCal(14);
+    line-height: remCal(19);
+    color: rgba(18, 18, 18, 0.7);
+  }
+  .nexify-plan-edit-card-flex-one {
+    flex: 1;
+  }
+  .nexify-savedPlan {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 16px;
+    width: 100%;
+    min-height: 80px;
+    border: 1px solid rgba(15, 15, 15, 0.15);
+    border-radius: 8px;
+    transition: transform 0.05s ease-out;
+  }
+  .nexify-savedPlan-title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .nexify-savedPlan-planCost {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #999;
+  }
+  .price-type-card {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    height: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(15, 15, 15, 0.15);
+    cursor: pointer;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(15, 15, 15, 0.75);
+  }
+  .price-type-card .price-type__heading {
+    font-size: 15px;
+    font-weight: 600;
+    color: black;
+  }
+  .price-type-card-active {
+    pointer-events: none;
+    border: 1.5px solid rgb(93, 148, 243);
+  }
+  .price-type-card .price-type-indicator {
+    border-radius: 50%;
+    min-width: 24px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(15, 15, 15, 0.15);
+    position: relative;
+  }
+  .price-type-card.price-type-card-active
+    .price-type-indicator {
+    display: flex;
+    background-color: rgb(93, 148, 243);
+    border-color: rgb(93, 148, 243);
+    justify-content: center;
+    align-items: center;
+  }
+  .price-type-indicator__icon {
+    display: block;
+    position: absolute;
+    width: 12px;
+    height: 8px;
+    top: calc(50%);
+    left: calc(50%);
+  }
+  .mantine-Input-section {
+    background-color: #ffffff;
+    z-index: 2000;
+    padding: 0px 25px;
+  }
+}

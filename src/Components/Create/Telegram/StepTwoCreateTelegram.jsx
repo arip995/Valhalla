@@ -17,10 +17,10 @@ const StepTwoCreateTelegram = ({
       <div className="ctg-s2-radio-container">
         <Radio.Group
           className="ctg-s2-radio-group"
-          value={stepTwoForm.values.isNewChannel}
+          value={stepTwoForm.values.isOldOrNewChannel}
           onChange={value => {
             stepTwoForm.setFieldValue(
-              'isNewChannel',
+              'isOldOrNewChannel',
               value
             );
           }}
@@ -31,7 +31,7 @@ const StepTwoCreateTelegram = ({
             <div
               onClick={() => {
                 stepTwoForm.setFieldValue(
-                  'isNewChannel',
+                  'isOldOrNewChannel',
                   'new'
                 );
               }}
@@ -47,7 +47,7 @@ const StepTwoCreateTelegram = ({
             <div
               onClick={() => {
                 stepTwoForm.setFieldValue(
-                  'isNewChannel',
+                  'isOldOrNewChannel',
                   'old'
                 );
               }}
@@ -66,7 +66,8 @@ const StepTwoCreateTelegram = ({
           className="ctg-s2"
           onSubmit={stepTwoForm.onSubmit(onStepTwoSubmit)}
         >
-          {stepTwoForm.values.isNewChannel === 'new' ? (
+          {stepTwoForm.values.isOldOrNewChannel ===
+          'new' ? (
             <>
               <TextInput
                 className="ctg-s1-input"
@@ -86,10 +87,13 @@ const StepTwoCreateTelegram = ({
                 placeholder="Select Channel"
                 checkIconPosition="right"
                 data={existingGroups}
-                onChange={val => {
-                  stepTwoForm.setFieldValue('groupId', val);
-                }}
                 {...stepTwoForm.getInputProps('groupId')}
+                onChange={(val, values) => {
+                  stepTwoForm.setValues({
+                    groupId: val,
+                    superGroup: values.superGroup,
+                  });
+                }}
               />
             </>
           )}

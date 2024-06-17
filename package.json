@@ -21,6 +21,7 @@
     "@tiptap/react": "^2.3.0",
     "@tiptap/starter-kit": "^2.3.0",
     "axios": "^1.7.2",
+    "classnames": "^2.5.1",
     "cookies-next": "^4.2.1",
     "dayjs": "^1.11.10",
     "embla-carousel-react": "^8.0.2",
