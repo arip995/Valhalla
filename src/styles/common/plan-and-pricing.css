@@ -137,7 +137,6 @@
     left: calc(50%);
   }
   .mantine-Input-section {
-    background-color: #ffffff;
     z-index: 2000;
     padding: 0px 25px;
   }

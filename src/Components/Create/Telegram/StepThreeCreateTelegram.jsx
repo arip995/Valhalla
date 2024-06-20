@@ -1,4 +1,5 @@
 import {
+  Button,
   Input,
   Select,
   TextInput,
@@ -11,6 +12,7 @@ import { CategoriesList } from '@/src/Constants/constants';
 const StepThreeCreateTelegram = ({
   stepThreeForm,
   onStepThreeSubmit,
+  loading,
 }) => {
   return (
     <div className="ctg-s3-container">
@@ -44,6 +46,20 @@ const StepThreeCreateTelegram = ({
         />
         {/* <Input.Wrapper> */}
         <PlansAndPricing stepThreeForm={stepThreeForm} />
+        <Button
+          type="submit"
+          loading={loading}
+          onClick={() =>
+            stepThreeForm.setValues({
+              isSaveClickedAtleastOnce: true,
+            })
+          }
+          fullWidth
+          color="black"
+          radius="md"
+        >
+          Publish
+        </Button>
         {/* </Input.Wrapper> */}
       </form>
     </div>

@@ -2,6 +2,7 @@ import axiosInstance from '@/src/Utils/AxiosInstance';
 import { setCurrentUser } from '@/src/Utils/User';
 import useGetCurrentUser from '@/src/Utils/useGetCurrentUser';
 import { useForm } from '@mantine/form';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -32,7 +33,9 @@ const useCreateLockedContent = () => {
     useState(false);
   const [isSendingOldNumberOtp, setIsSendingOldNumberOtp] =
     useState(false);
+  const [loading, setLoading] = useState(false);
   const { user } = useGetCurrentUser();
+  const router = useRouter();
 
   const stepOneForm = useForm({
     initialValues: {
@@ -316,6 +319,7 @@ const useCreateLockedContent = () => {
     setStep(3);
   };
   const onStepThreeSubmit = async () => {
+    setLoading(true);
     const payload = {
       groupName: stepTwoForm.values?.channelName,
       groupDescription:
@@ -331,6 +335,17 @@ const useCreateLockedContent = () => {
       genre: stepThreeForm.values?.genre,
       title: stepThreeForm.values?.title,
     };
+    try {
+      const data = await axiosInstance.post(
+        '/telegram/create_new',
+        payload
+      );
+      console.log(data.data);
+      router.push(`/tg/${data.data?.data?.channelId}`);
+    } catch (error) {
+      setLoading(false);
+      toast.error(error?.response?.data?.message);
+    }
   };
 
   useEffect(() => {
@@ -360,6 +375,7 @@ const useCreateLockedContent = () => {
     onStepOneSubmit,
     onStepTwoSubmit,
     onStepThreeSubmit,
+    loading,
   };
 };
 

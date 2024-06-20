@@ -24,6 +24,7 @@ const CreateTelegram = ({ data }) => {
     existingGroups,
     step,
     user,
+    loading,
   } = useCreateTelegram(data);
   return (
     <>
@@ -50,6 +51,7 @@ const CreateTelegram = ({ data }) => {
               <StepThreeCreateTelegram
                 stepThreeForm={stepThreeForm}
                 onStepThreeSubmit={onStepThreeSubmit}
+                loading={loading}
               />
             )}
           </PaperWrapper>

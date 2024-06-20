@@ -136,11 +136,11 @@ function PlanEditCard({
                 }}
               />
               <Select
-                className={'nexify-plan-edit-card-flex-one'}
+                // className={'nexify-plan-edit-card-flex-one'}
                 checkIconPosition="right"
                 data={periodTypeOptions}
                 defaultSearchValue={periodLabel}
-                style={{ flex: 1 }}
+                // style={{ flex: 1 }}
                 placeholder="Select time period"
                 onChange={value => {
                   setPeriodLabel(value);

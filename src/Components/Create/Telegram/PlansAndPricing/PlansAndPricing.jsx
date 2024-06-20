@@ -230,19 +230,6 @@ const PlansAndPricing = ({ stepThreeForm }) => {
         >
           + Add another plan
         </Button>
-        <Button
-          type="submit"
-          onClick={() =>
-            stepThreeForm.setValues({
-              isSaveClickedAtleastOnce: true,
-            })
-          }
-          fullWidth
-          color="black"
-          radius="md"
-        >
-          Publish
-        </Button>
       </div>
       <Toaster />
     </>
