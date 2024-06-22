@@ -53,7 +53,7 @@ const useAccount = () => {
     try {
       const data = await axiosInstance.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/image/save_image`,
-        { file: { ...payload } }
+        { file: { ...payload, quality: 50 } }
       );
       const payloadForUserUpdate = {
         type: 'profilePic',
@@ -93,7 +93,7 @@ const useAccount = () => {
     const fileSize = file.size;
 
     if (fileType.startsWith('image/')) {
-      if (fileSize <= 10 * 1024 * 1024) {
+      if (fileSize <= 100 * 1024 * 1024) {
         convertFileToBase64(file);
       } else {
         toast.error('File size exceeds 10MB');

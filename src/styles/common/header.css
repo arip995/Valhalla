@@ -3,6 +3,13 @@
   padding: 11px;
   border-bottom: 1px solid var(--mantine-color-gray-3);
   height: 52px;
+  background-color: white;
+  z-index: 95;
+  position: sticky;
+  top: 0;
+  @media (max-width: em(575px)) {
+    top: 59px;
+  }
   .apps-header {
     display: flex;
     justify-content: space-between;

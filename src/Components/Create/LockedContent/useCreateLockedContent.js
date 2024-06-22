@@ -12,6 +12,7 @@ const useCreateLockedContent = () => {
     isSaveClickedAtleastOnce,
     setIsSaveClickedAtleastOnce,
   ] = useState(false);
+  const [loading, setLoading] = useState(false);
   const createLockedContentForm = useForm({
     initialValues: {
       title: '',
@@ -47,16 +48,21 @@ const useCreateLockedContent = () => {
   });
 
   const onCreate = async () => {
-    const data = await axiosInstance.post(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/premiumcontent/create`,
-      {
-        contentDetails: {
-          ...createLockedContentForm.values,
-        },
-      }
-    );
-    router.push(`/lc/${data.data.data._id}`);
-    console.log(data);
+    setLoading(true);
+    try {
+      const data = await axiosInstance.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/premiumcontent/create`,
+        {
+          contentDetails: {
+            ...createLockedContentForm.values,
+          },
+        }
+      );
+      router.push(`/lc/${data.data.data._id}`);
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.response?.data?.message);
+    }
   };
 
   const addLoadingImage = () => {
@@ -111,9 +117,9 @@ const useCreateLockedContent = () => {
     const fileType = file.type;
     const fileSize = file.size;
     if (
-      createLockedContentForm.getValues().files.length === 3
+      createLockedContentForm.getValues().files.length === 5
     ) {
-      toast.error('Max upload 3 files');
+      toast.error('Max upload 5 files');
       return;
     }
 
@@ -165,6 +171,7 @@ const useCreateLockedContent = () => {
     onFileDelete,
     isSaveClickedAtleastOnce,
     setIsSaveClickedAtleastOnce,
+    loading,
   };
 };
 

@@ -29,6 +29,7 @@ const CreateLockedContent = ({ data }) => {
     handleFileChange,
     onFileDelete,
     setIsSaveClickedAtleastOnce,
+    loading,
   } = useCreateLockedContent(data);
 
   return (
@@ -93,7 +94,7 @@ const CreateLockedContent = ({ data }) => {
                     }
                     {...props}
                   >
-                    Upload image
+                    Upload files
                   </Button>
                 )}
               </FileButton>
@@ -122,6 +123,7 @@ const CreateLockedContent = ({ data }) => {
               />
               <Button
                 fullWidth
+                loading={loading}
                 type="submit"
                 color="black"
                 radius="md"

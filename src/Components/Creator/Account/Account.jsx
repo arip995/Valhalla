@@ -19,6 +19,7 @@ import ContactInfo from './ContactInfo';
 import useAccount from './useAccount';
 import useUsername from './useUsername.js';
 import { IconX } from '@tabler/icons-react';
+import Image from 'next/image';
 
 const Account = () => {
   const {
@@ -45,10 +46,20 @@ const Account = () => {
         <Header title="Account Details" />
         <div className="account-form-container">
           <div className="account-profile-photo-container">
-            <Avatar src={user?.profilePic} size="lg">
-              {personInfoForm.values.firstName?.[0].toUpperCase()}
-              {personInfoForm.values.lastName?.[0].toUpperCase()}
-            </Avatar>
+            {user?.profilePic ? (
+              <Image
+                className="w-[56px] h-[56px] overflow-hidden rounded-full"
+                src={user.profilePic}
+                width={56}
+                height={56}
+                quality={100}
+              />
+            ) : (
+              <Avatar size="lg">
+                {personInfoForm.values.firstName?.[0].toUpperCase()}
+                {personInfoForm.values.lastName?.[0].toUpperCase()}
+              </Avatar>
+            )}
 
             <FileButton
               onChange={handleFileChange}

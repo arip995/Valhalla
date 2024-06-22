@@ -48,6 +48,9 @@
       padding: 8px;
       border-radius: 4px;
       border: 1px solid var(--mantine-color-gray-3);
+      @media (max-width: em(576px)) {
+        height: 88px;
+      }
     }
   }
   .ctg-s2 {

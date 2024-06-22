@@ -13,26 +13,17 @@ const ViewProductHeader = ({
   return (
     <>
       <div className="vph-avatar-container">
-        {/* <div
-          className=""
-          style={{
-            width: '84px',
-            height: '84px',
-            overflow: 'hidden',
-            borderRadius: '100%',
-          }}
-        >
-          <Image
-            src={profilePic}
-            width={500}
-            height={600}
-            quality={100}
-          />
-        </div> */}
-        <Avatar size="xl" color="blue" src={profilePic}>
+        <Image
+          className="w-[84px] h-[84px] overflow-hidden rounded-full"
+          src={profilePic}
+          width={84}
+          height={84}
+          quality={100}
+        />
+        {/* <Avatar size="xl" color="blue" src={profilePic}>
           {firstName?.[0].toUpperCase()}
           {lastName?.[0].toUpperCase()}
-        </Avatar>
+        </Avatar> */}
         <div className="vph-creator-details-container">
           <div className="vph-creator-details-heading">
             Created by
