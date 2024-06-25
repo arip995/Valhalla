@@ -25,9 +25,9 @@ const VisualFeatures = () => {
             Mailgo
           </h2>
           <p className="mt-3">
-            With Mailgo's powerful features, you can easily
+            {`With Mailgo's powerful features, you can easily
             create and send beautiful emails that will
-            engage your customers and drive more sales.
+            engage your customers and drive more sales.`}
           </p>
         </div>
         <div className="mt-12">
