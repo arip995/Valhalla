@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import MailImage from '../../../../../../public/images/main/mailgo.svg';
+import MailImage from '../../../../../../public/images/main/mailgo.png';
 
 const Brand = ({ ...props }) => (
   <Image
