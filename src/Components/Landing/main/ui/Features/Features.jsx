@@ -215,11 +215,11 @@ const Features = () => {
               integrated solutions
             </h2>
             <p className="mt-3">
-              Turn your content into cash with our seamless,
+              {` Turn your content into cash with our seamless,
               integrated solution. Whether you're creating
               courses or managing webinars, our platform
               provides everything you need to monetize your
-              work efficiently.
+              work efficiently.`}
             </p>
           </div>
         </LayoutEffect>
