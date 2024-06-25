@@ -1,4 +1,4 @@
-import LockedContent from '@/src/Components/Apps/LockedContent/LockedContent';
+import LockedContent from '@/Components/Apps/LockedContent/LockedContent';
 
 const Page = ({ data }) => {
   return <LockedContent {...data} />;

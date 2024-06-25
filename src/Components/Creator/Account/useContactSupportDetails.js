@@ -1,7 +1,7 @@
-import axiosInstance from '@/src/Utils/AxiosInstance';
-import { validateEmail } from '@/src/Utils/Regex';
-import { setCurrentUser } from '@/src/Utils/User';
-import useGetCurrentUser from '@/src/Utils/useGetCurrentUser';
+import axiosInstance from '@/Utils/AxiosInstance';
+import { validateEmail } from '@/Utils/Regex';
+import { setCurrentUser } from '@/Utils/User';
+import useGetCurrentUser from '@/Utils/useGetCurrentUser';
 import { useDisclosure } from '@mantine/hooks';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';

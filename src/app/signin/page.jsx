@@ -1,4 +1,4 @@
-import Auth from '@/src/Components/Auth/Auth';
+import Auth from '@/Components/Auth/Auth';
 import React from 'react';
 
 const page = () => {

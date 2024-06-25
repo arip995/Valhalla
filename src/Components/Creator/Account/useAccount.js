@@ -1,6 +1,6 @@
-import axiosInstance from '@/src/Utils/AxiosInstance';
-import { setCurrentUser } from '@/src/Utils/User';
-import useGetCurrentUser from '@/src/Utils/useGetCurrentUser';
+import axiosInstance from '@/Utils/AxiosInstance';
+import { setCurrentUser } from '@/Utils/User';
+import useGetCurrentUser from '@/Utils/useGetCurrentUser';
 import { useForm } from '@mantine/form';
 import axios from 'axios';
 import { useEffect, useState } from 'react';

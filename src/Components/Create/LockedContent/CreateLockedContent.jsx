@@ -18,7 +18,7 @@ import {
   IconUpload,
 } from '@tabler/icons-react';
 import HeaderWrapper from '../../Auth/HeaderWrapper';
-import { CategoriesList } from '@/src/Constants/constants';
+import { CategoriesList } from '@/Constants/constants';
 import toast, { Toaster } from 'react-hot-toast';
 import ListFiles from '../../Common/ListFiles/ListFiles';
 
@@ -89,7 +89,7 @@ const CreateLockedContent = ({ data }) => {
                     leftSection={
                       <IconUpload
                         size={20}
-                        color="#228be6"
+                        color="#7950f2"
                       />
                     }
                     {...props}

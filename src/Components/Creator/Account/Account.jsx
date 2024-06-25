@@ -1,6 +1,6 @@
 'use client';
 
-import { checkRestrictedChars } from '@/src/Utils/Regex';
+import { checkRestrictedChars } from '@/Utils/Regex';
 import {
   ActionIcon,
   Avatar,

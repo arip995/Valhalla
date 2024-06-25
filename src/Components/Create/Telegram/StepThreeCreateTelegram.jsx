@@ -7,7 +7,7 @@ import {
 } from '@mantine/core';
 import React from 'react';
 import PlansAndPricing from './PlansAndPricing/PlansAndPricing';
-import { CategoriesList } from '@/src/Constants/constants';
+import { CategoriesList } from '@/Constants/constants';
 
 const StepThreeCreateTelegram = ({
   stepThreeForm,

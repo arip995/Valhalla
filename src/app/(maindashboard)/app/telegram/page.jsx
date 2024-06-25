@@ -1,4 +1,4 @@
-import Telegram from '@/src/Components/Apps/Telegram/Telegram';
+import Telegram from '@/Components/Apps/Telegram/Telegram';
 
 const Page = ({ data }) => {
   return <Telegram {...data} />;

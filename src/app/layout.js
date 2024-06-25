@@ -13,6 +13,8 @@ const theme = createTheme({
   /** Your theme override here */
   colorSchemeManager: 'light',
   forceColorScheme: 'light',
+  fontFamily: 'Open Sans, sans-serif',
+  primaryColor: 'violet',
 });
 
 export const metadata = {
@@ -26,7 +28,7 @@ export default function RootLayout({ children }) {
       <head></head>
       <body>
         <ColorSchemeScript forceColorScheme="light" />
-        <MantineProvider theme={{ colorScheme: 'light' }}>
+        <MantineProvider theme={theme}>
           <Notifications position="top-right" />
 
           {children}

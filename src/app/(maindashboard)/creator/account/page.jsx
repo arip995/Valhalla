@@ -1,4 +1,4 @@
-import Account from '@/src/Components/Creator/Account/Account';
+import Account from '@/Components/Creator/Account/Account';
 
 const Page = ({ data }) => {
   return <Account {...data} />;

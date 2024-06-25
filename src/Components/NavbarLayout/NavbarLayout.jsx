@@ -4,6 +4,7 @@ import {
   Burger,
   Divider,
   Group,
+  NavLink,
   ScrollArea,
   UnstyledButton,
   rem,
@@ -45,7 +46,19 @@ function NavbarLink({
           my="sm"
         />
       ) : (
-        <UnstyledButton
+        <>
+          <NavLink
+            onClick={onClick}
+            label={label}
+            leftSection={
+              <Icon
+                style={{ width: rem(15), height: rem(15) }}
+                stroke={1.5}
+              />
+            }
+            active={active}
+          />
+          {/* <UnstyledButton
           onClick={onClick}
           className={classes.link}
           data-active={active || undefined}
@@ -55,7 +68,8 @@ function NavbarLink({
             stroke={1.5}
           />
           <span className={classes.text}>{label}</span>
-        </UnstyledButton>
+        </UnstyledButton> */}
+        </>
       )}
     </>
   );
@@ -232,7 +246,9 @@ export function NavbarLayout({ activeTab, children }) {
           Nexify
         </AppShell.Section>
         <AppShell.Section grow p={8} component={ScrollArea}>
-          {links}
+          <div className=" flex flex-col gap-2">
+            {links}
+          </div>
         </AppShell.Section>
         <AppShell.Section
           pl={16}

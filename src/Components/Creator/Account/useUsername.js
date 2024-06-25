@@ -1,6 +1,6 @@
-import axiosInstance from '@/src/Utils/AxiosInstance';
-import { setCurrentUser } from '@/src/Utils/User';
-import useGetCurrentUser from '@/src/Utils/useGetCurrentUser';
+import axiosInstance from '@/Utils/AxiosInstance';
+import { setCurrentUser } from '@/Utils/User';
+import useGetCurrentUser from '@/Utils/useGetCurrentUser';
 import { useDebouncedCallback } from '@mantine/hooks';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';

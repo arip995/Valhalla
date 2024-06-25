@@ -1,4 +1,4 @@
-import ViewTelegram from '@/src/Components/Landing/tg/ViewTelegram';
+import ViewTelegram from '@/Components/Landing/tg/ViewTelegram';
 
 // async function getData(id) {
 //   const res = await fetch(

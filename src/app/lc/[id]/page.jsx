@@ -1,4 +1,4 @@
-import ViewLockedContent from '@/src/Components/Landing/lc/ViewLockedContent';
+import ViewLockedContent from '@/Components/Landing/lc/ViewLockedContent';
 
 async function getData(id) {
   const res = await fetch(

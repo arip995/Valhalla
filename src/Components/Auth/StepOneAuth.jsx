@@ -1,4 +1,4 @@
-import Timer from '@/src/Common/Timer.jsx';
+import Timer from '@/Common/Timer.jsx';
 import {
   Anchor,
   Button,

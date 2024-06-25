@@ -1,6 +1,6 @@
-import { validateEmail } from '@/src/Utils/Regex';
-import useGetCurrentUser from '@/src/Utils/useGetCurrentUser';
-import useIsBrowser from '@/src/Utils/useIsBrowser';
+import { validateEmail } from '@/Utils/Regex';
+import useGetCurrentUser from '@/Utils/useGetCurrentUser';
+import useIsBrowser from '@/Utils/useIsBrowser';
 import { useForm } from '@mantine/form';
 import { useToggle } from '@mantine/hooks';
 import axios from 'axios';

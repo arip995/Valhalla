@@ -1,5 +1,5 @@
 'use client';
-import useGetCurrentUser from '@/src/Utils/useGetCurrentUser';
+import useGetCurrentUser from '@/Utils/useGetCurrentUser';
 import { Button } from '@mantine/core';
 import React, { useState } from 'react';
 import lockImage from '../../../../public/images/locked-content/lock.png';

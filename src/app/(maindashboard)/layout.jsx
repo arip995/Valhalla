@@ -1,4 +1,4 @@
-import NavbarLayout from '@/src/Components/NavbarLayout/NavbarLayout';
+import NavbarLayout from '@/Components/NavbarLayout/NavbarLayout';
 import React from 'react';
 
 const layout = ({ children }) => {

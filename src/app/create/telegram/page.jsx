@@ -1,4 +1,4 @@
-import CreateTelegram from '@/src/Components/Create/Telegram/CreateTelegram';
+import CreateTelegram from '@/Components/Create/Telegram/CreateTelegram';
 import React from 'react';
 
 export const generateMetadata = ({ params }) => {

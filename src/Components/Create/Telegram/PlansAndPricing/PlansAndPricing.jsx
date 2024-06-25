@@ -1,4 +1,4 @@
-import { compact } from '@/src/Utils/Common';
+import { compact } from '@/Utils/Common';
 import { Button, Input } from '@mantine/core';
 import { randomId } from '@mantine/hooks';
 import { useEffect, useState } from 'react';

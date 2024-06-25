@@ -1,4 +1,4 @@
-import CreateLockedContent from '@/src/Components/Create/LockedContent/CreateLockedContent';
+import CreateLockedContent from '@/Components/Create/LockedContent/CreateLockedContent';
 import React from 'react';
 
 const page = () => {

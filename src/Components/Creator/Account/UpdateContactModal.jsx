@@ -1,4 +1,4 @@
-import { validateEmail } from '@/src/Utils/Regex';
+import { validateEmail } from '@/Utils/Regex';
 import {
   Button,
   Flex,

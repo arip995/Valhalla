@@ -1,9 +1,9 @@
 import {
   Categories,
   UserTypes,
-} from '@/src/Constants/constants';
-import axiosInstance from '@/src/Utils/AxiosInstance';
-import { checkRestrictedChars } from '@/src/Utils/Regex';
+} from '@/Constants/constants';
+import axiosInstance from '@/Utils/AxiosInstance';
+import { checkRestrictedChars } from '@/Utils/Regex';
 import {
   Button,
   CheckIcon,
@@ -21,10 +21,11 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import HeaderWrapper from './HeaderWrapper';
 import PaperWrapper from './PaperWrapper';
-import { setCurrentUser } from '@/src/Utils/User';
+import { setCurrentUser } from '@/Utils/User';
 
 const UserTypeCards = UserTypes.map(item => (
   <Radio
+    icon={CheckIcon}
     value={item.value}
     label={item.value}
     key={item.value}

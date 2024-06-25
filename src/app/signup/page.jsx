@@ -1,4 +1,4 @@
-import Auth from '@/src/Components/Auth/Auth';
+import Auth from '@/Components/Auth/Auth';
 
 const page = () => {
   return <Auth tabName="register" />;
