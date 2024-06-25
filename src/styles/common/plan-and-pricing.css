@@ -50,7 +50,7 @@
   .nexify-plan-edit-card .nexify-plan-edit-card-content {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
     padding: 20px 16px;
   }
   .nexify-plan-edit-card .nexify-plan-edit-info-text {
@@ -136,8 +136,11 @@
     top: calc(50%);
     left: calc(50%);
   }
-  .mantine-Input-section {
-    z-index: 2000;
-    padding: 0px 25px;
+  .nexify-plan-edit-card-name-input {
+    .mantine-Input-section {
+      z-index: 2000;
+      padding: 0px 25px;
+      background-color: #ffffff;
+    }
   }
 }

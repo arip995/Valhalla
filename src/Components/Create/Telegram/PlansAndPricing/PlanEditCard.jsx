@@ -136,7 +136,7 @@ function PlanEditCard({
                 }}
               />
               <Select
-                // className={'nexify-plan-edit-card-flex-one'}
+                className={'nexify-plan-edit-card-flex-one'}
                 checkIconPosition="right"
                 data={periodTypeOptions}
                 defaultSearchValue={periodLabel}
@@ -203,6 +203,7 @@ function PlanEditCard({
         ) : null}
         <TextInput
           label="Plan Name"
+          className="nexify-plan-edit-card-name-input"
           type="text"
           value={planTitle}
           rightSection={

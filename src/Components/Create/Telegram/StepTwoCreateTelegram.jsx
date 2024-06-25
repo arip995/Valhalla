@@ -2,11 +2,14 @@ import {
   Button,
   CheckIcon,
   Flex,
+  Group,
   Radio,
   Select,
+  Text,
   TextInput,
 } from '@mantine/core';
 import React from 'react';
+import classes from '../../../styles/common/RadioCard.module.css';
 
 const StepTwoCreateTelegram = ({
   stepTwoForm,
@@ -17,7 +20,6 @@ const StepTwoCreateTelegram = ({
     <div className="ctg-s2-container">
       <div className="ctg-s2-radio-container">
         <Radio.Group
-          className="ctg-s2-radio-group"
           value={stepTwoForm.values.isOldOrNewChannel}
           onChange={value => {
             stepTwoForm.setFieldValue(
@@ -25,44 +27,44 @@ const StepTwoCreateTelegram = ({
               value
             );
           }}
-          name="favoriteFramework"
-          withAsterisk
         >
           <Flex gap={'sm'}>
-            <div
-              onClick={() => {
-                stepTwoForm.setFieldValue(
-                  'isOldOrNewChannel',
-                  'new'
-                );
-              }}
+            <Radio.Card
+              className={classes.root}
+              radius="md"
+              value={'old'}
+              key={'old'}
             >
-              <Radio
-                icon={CheckIcon}
-                value={'new'}
-                label={'Create New'}
-                description={
-                  'Create an new telegram channel.'
-                }
-              />
-            </div>
-            <div
-              onClick={() => {
-                stepTwoForm.setFieldValue(
-                  'isOldOrNewChannel',
-                  'old'
-                );
-              }}
+              <Group wrap="nowrap" align="flex-start">
+                <Radio.Indicator icon={CheckIcon} />
+                <div className="flex flex-col gap-2">
+                  <Text className={classes.label}>
+                    Existing Channel
+                  </Text>
+                  <Text className={classes.description}>
+                    Connect with existing telegram channel.
+                  </Text>
+                </div>
+              </Group>
+            </Radio.Card>
+            <Radio.Card
+              className={classes.root}
+              radius="md"
+              value={'new'}
+              key={'new'}
             >
-              <Radio
-                icon={CheckIcon}
-                value={'old'}
-                label={'Existing Channel'}
-                description={
-                  'Connect with existing telegram channel.'
-                }
-              />
-            </div>
+              <Group wrap="nowrap" align="flex-start">
+                <Radio.Indicator icon={CheckIcon} />
+                <div className="flex flex-col gap-2">
+                  <Text className={classes.label}>
+                    Create New
+                  </Text>
+                  <Text className={classes.description}>
+                    Create an new telegram channel.
+                  </Text>
+                </div>
+              </Group>
+            </Radio.Card>
           </Flex>
         </Radio.Group>
         <form
