@@ -78,6 +78,7 @@ export function NavbarLayout({ activeTab, children }) {
       path: '/creator/home',
       onClick: () => {
         toggle();
+        setActive('home');
         router.push('/creator/home');
       },
     },
@@ -88,6 +89,7 @@ export function NavbarLayout({ activeTab, children }) {
       path: '/creator/transaction',
       onClick: () => {
         toggle();
+        setActive('transaction');
         router.push('/creator/transaction');
       },
     },
@@ -98,6 +100,7 @@ export function NavbarLayout({ activeTab, children }) {
       path: '/creator/billing',
       onClick: () => {
         toggle();
+        setActive('billing');
         router.push('/creator/billing');
       },
     },
@@ -108,6 +111,7 @@ export function NavbarLayout({ activeTab, children }) {
       path: '/creator/account',
       onClick: () => {
         toggle();
+        setActive('account');
         router.push('/creator/account');
       },
     },
@@ -119,6 +123,7 @@ export function NavbarLayout({ activeTab, children }) {
       path: '/app/lockedcontent',
       onClick: () => {
         toggle();
+        setActive('lockedcontent');
         router.push('/app/lockedcontent');
       },
     },
@@ -129,6 +134,7 @@ export function NavbarLayout({ activeTab, children }) {
       path: '/app/telegram',
       onClick: () => {
         toggle();
+        setActive('telegram');
         router.push('/app/telegram');
       },
     },

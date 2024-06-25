@@ -13,15 +13,29 @@ const Features = () => {
           stroke="currentColor"
           className="w-6 h-6"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
-          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"
+          >
+            <path
+              stroke="none"
+              d="M0 0h24v24H0z"
+              fill="none"
+            />
+            <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
+          </svg>
         </svg>
       ),
-      title: 'Automated Personalization',
-      desc: 'Our AI-based email marketing platform enables you to create highly targeted email campaigns',
+      title: 'Telegram Community',
+      desc: 'Transform your Telegram community into a thriving hub with our effortless management solutions!',
     },
     {
       icon: (
@@ -33,15 +47,34 @@ const Features = () => {
           stroke="currentColor"
           className="w-6 h-6"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-credit-card-pay"
+          >
+            <path
+              stroke="none"
+              d="M0 0h24v24H0z"
+              fill="none"
+            />
+            <path d="M12 19h-6a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v4.5" />
+            <path d="M3 10h18" />
+            <path d="M16 19h6" />
+            <path d="M19 16l3 3l-3 3" />
+            <path d="M7.005 15h.005" />
+            <path d="M11 15h2" />
+          </svg>
         </svg>
       ),
-      title: 'AI-Powered Content Optimization',
-      desc: 'This feature uses AI to analyze user data and optimize content for each segment of the email list.',
+      title: 'Payment Pages',
+      desc: 'Experience seamless, secure, and swift payments with us – your gateway to hassle-free transactions!',
     },
     {
       icon: (
@@ -53,15 +86,34 @@ const Features = () => {
           stroke="currentColor"
           className="w-6 h-6"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-clock"
+          >
+            <path
+              stroke="none"
+              d="M0 0h24v24H0z"
+              fill="none"
+            />
+            <path d="M10.5 21h-4.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v3" />
+            <path d="M16 3v4" />
+            <path d="M8 3v4" />
+            <path d="M4 11h10" />
+            <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+            <path d="M18 16.5v1.5l.5 .5" />
+          </svg>
         </svg>
       ),
-      title: 'Personalized Email Experiences',
-      desc: 'Mailgo uses AI to create personalized emails for each recipient based on their past interactions with the brand.',
+      title: 'Webinar/Events',
+      desc: 'Elevate your webinars and events with our seamless management solutions – where engagement meets excellence!',
     },
     {
       icon: (
@@ -73,56 +125,75 @@ const Features = () => {
           stroke="currentColor"
           className="w-6 h-6"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"
-          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-certificate"
+          >
+            <path
+              stroke="none"
+              d="M0 0h24v24H0z"
+              fill="none"
+            />
+            <path d="M15 15m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+            <path d="M13 17.5v4.5l2 -1.5l2 1.5v-4.5" />
+            <path d="M10 19h-5a2 2 0 0 1 -2 -2v-10c0 -1.1 .9 -2 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -1 1.73" />
+            <path d="M6 9l12 0" />
+            <path d="M6 12l3 0" />
+            <path d="M6 15l2 0" />
+          </svg>
         </svg>
       ),
-      title: 'Automated A/B Testing',
-      desc: 'Test different versions of your emails in order to determine which one performs best with your audience.',
+      title: 'Courses',
+      desc: 'Unleash your potential with our all-in-one course creation and management service – where teaching meets innovation!',
     },
-    {
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"
-          />
-        </svg>
-      ),
-      title: 'Automated Segmentation',
-      desc: 'This helps to ensure that the right message is sent to the right people at the right time.',
-    },
-    {
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-          />
-        </svg>
-      ),
-      title: 'Integrate your sales dashboards',
-      desc: 'Integrate your tools like Shopify, WooCommerce to see your sales information across platforms.',
-    },
+    // {
+    //   icon: (
+    //     <svg
+    //       xmlns="http://www.w3.org/2000/svg"
+    //       fill="none"
+    //       viewBox="0 0 24 24"
+    //       strokeWidth={1.5}
+    //       stroke="currentColor"
+    //       className="w-6 h-6"
+    //     >
+    //       <path
+    //         strokeLinecap="round"
+    //         strokeLinejoin="round"
+    //         d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"
+    //       />
+    //     </svg>
+    //   ),
+    //   title: 'Automated Segmentation',
+    //   desc: 'This helps to ensure that the right message is sent to the right people at the right time.',
+    // },
+    // {
+    //   icon: (
+    //     <svg
+    //       xmlns="http://www.w3.org/2000/svg"
+    //       fill="none"
+    //       viewBox="0 0 24 24"
+    //       strokeWidth={1.5}
+    //       stroke="currentColor"
+    //       className="w-6 h-6"
+    //     >
+    //       <path
+    //         strokeLinecap="round"
+    //         strokeLinejoin="round"
+    //         d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+    //       />
+    //     </svg>
+    //   ),
+    //   title: 'Integrate your sales dashboards',
+    //   desc: 'Integrate your tools like Shopify, WooCommerce to see your sales information across platforms.',
+    // },
   ];
 
   return (
@@ -140,13 +211,15 @@ const Features = () => {
         >
           <div className="max-w-xl mx-auto text-center">
             <h2 className="text-gray-50 text-3xl font-semibold sm:text-4xl">
-              Start growing your email marketing with Mailgo
+              Transform your content into cash with our
+              integrated solutions
             </h2>
             <p className="mt-3">
-              Mailgo makes it easy for you to create
-              beautiful emails that get noticed and opened,
-              track results, and build relationships with
-              your customers.
+              Turn your content into cash with our seamless,
+              integrated solution. Whether you're creating
+              courses or managing webinars, our platform
+              provides everything you need to monetize your
+              work efficiently.
             </p>
           </div>
         </LayoutEffect>
@@ -158,7 +231,7 @@ const Features = () => {
           }}
         >
           <div className="relative mt-12">
-            <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="grid gap-8 grid-cols-2 ">
               {featuresList.map((item, idx) => (
                 <li
                   key={idx}

@@ -6,7 +6,7 @@ import LayoutEffect from '../../LayoutEffect';
 
 const Hero = () => (
   <section>
-    <div className="custom-screen py-28">
+    <div className="custom-screen sm:py-16 py-12">
       <LayoutEffect
         className="duration-1000 delay-300"
         isInviewState={{
@@ -16,19 +16,21 @@ const Hero = () => (
       >
         <div>
           <div className="space-y-5 max-w-3xl mx-auto text-center">
-            <h1
-              className="text-4xl bg-clip-text text-transparent bg-gradient-to-r font-extrabold mx-auto sm:text-6xl"
+            <div
+              className="text-2xl text-center bg-clip-text text-transparent bg-gradient-to-r font-extrabold mx-auto sm:text-5xl"
               style={{
                 backgroundImage:
                   'linear-gradient(179.1deg, #FFFFFF 0.77%, rgba(255, 255, 255, 0) 182.09%)',
               }}
             >
-              Manage your email marketing using AI
-            </h1>
+              The all-in-one platform for your
+              <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#9867F0] to-[#ED4E50]">
+                digital products and services
+              </span>
+            </div>
             <p className="max-w-xl mx-auto text-gray-300">
-              {`Gain control of your business's growth with
-              Mailgo's comprehensive marketing, automation,
-              and email marketing platform.`}
+              {`Consolidate all your digital products, coaching, subscriptions, courses, and email marketing into one link-in-bio store`}
             </p>
             <div className="flex justify-center font-medium text-sm">
               <NavLink

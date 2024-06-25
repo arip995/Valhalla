@@ -1,4 +1,3 @@
-import NavbarLayout from '@/Components/NavbarLayout/NavbarLayout';
 import { Loader } from '@mantine/core';
 import React from 'react';
 

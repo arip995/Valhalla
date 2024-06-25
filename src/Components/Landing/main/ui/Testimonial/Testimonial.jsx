@@ -13,45 +13,45 @@ const Testimonial = () => {
   const testimonials = [
     {
       avatar: user1,
-      name: 'Mark Zuckerberg',
-      title: 'Founder of meta',
+      name: 'Anil Choudhary',
+      // title: 'Founder of meta',
       quote:
-        "we've been using Mailgo for almost a year now and have nothing but great things to say. It's super easy to set up campaigns and its reporting features are incredibly detailed.",
+        "we've been using Nexify for almost a year now and have nothing but great things to say. It's super easy to set up  and its integrations features are incredibly detailed.",
     },
     {
       avatar: user2,
-      name: 'Guillermo Rauch',
-      title: 'Founder of Vercel',
+      name: 'Mayank Kumar',
+      // title: 'Founder of Vercel',
       quote:
-        "Mailgo has been a great addition to our email marketing strategy. It's so user-friendly, yet powerful and effective. I'm able to quickly create beautiful emails.",
+        "Nexify has been a great addition to our monetization strategy. It's so user-friendly, yet powerful and effective. I'm able to quickly create beautiful products.",
     },
     {
       avatar: user3,
-      name: 'Sidi jeddou',
-      title: 'Founder of Float UI',
+      name: 'Sahil Sharma',
+      // title: 'Founder of Float UI',
       quote:
-        "I highly recommend Mailgo for anyone looking for an easy-to-use and reliable email marketing tool! It's simple to use and has been a great help.",
+        "I highly recommend Nexify for anyone looking for an easy-to-use and reliable monetization tool! It's simple to use and has been a great help.",
     },
     {
       avatar: user4,
-      name: 'Ghazbel',
-      title: 'Founder of forceY',
+      name: 'Rahul Arya',
+      // title: 'Founder of forceY',
       quote:
-        "I've been using Mailgo for the past few months and I'm extremely impressed. The user interface is very intuitive, and I love the automated features .",
+        "I've been using Nexify for the past few months and I'm extremely impressed. The user interface is very intuitive, and I love the automated features .",
     },
     {
       avatar: user5,
-      name: 'Ana khan',
-      title: 'Founder of larax',
+      name: 'Ana Singh',
+      // title: 'Founder of larax',
       quote:
-        "Mailgo is the best email marketing tool I've ever used. It's incredibly simple and intuitive to use, yet it offers a wide range of features and options.",
+        "Nexify is the best creator monetization tool I've ever used. It's incredibly simple and intuitive to use, yet it offers a wide range of features and options.",
     },
     {
       avatar: user6,
-      name: 'Ahmed khasem',
-      title: 'Founder of Let’s code',
+      name: 'Sonu Anand',
+      // title: 'Founder of Let’s code',
       quote:
-        'Mailgo is definitely the way to go when it comes to email marketing + I highly recommend it as an email marketing tool with AI support.',
+        'Nexify is definitely the way to go when it comes to monetization + I highly recommend it as an monetization tool with AI support.',
     },
   ];
 
@@ -63,7 +63,7 @@ const Testimonial = () => {
       >
         <div className="max-w-2xl text-center md:mx-auto">
           <h2 className="text-gray-50 text-3xl font-semibold sm:text-4xl">
-            Mailgo is loved by the best founders around the
+            Nexify is loved by the best creators around the
             world
           </h2>
         </div>

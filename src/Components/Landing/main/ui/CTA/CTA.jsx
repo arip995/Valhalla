@@ -7,7 +7,7 @@ import LayoutEffect from '../../LayoutEffect';
 const CTA = () => (
   <section>
     <GradientWrapper wrapperClassName="max-w-xs h-[13rem] top-12 inset-0">
-      <div className="custom-screen py-28 relative">
+      <div className="custom-screen sm:py-16 py-12 relative">
         <LayoutEffect
           className="duration-1000 delay-300"
           isInviewState={{
@@ -18,13 +18,13 @@ const CTA = () => (
           <div className="relative z-10">
             <div className="max-w-xl mx-auto text-center">
               <h2 className="text-gray-50 text-3xl font-semibold sm:text-4xl">
-                Unleash the Power of AI with Email Marketing
+                Unleash the power of monetization solutions
               </h2>
               <p className="mt-5 text-gray-300">
-                Mailgo is the perfect answer! Our AI-based
-                email marketing platform enables you to
-                create highly targeted email campaigns that
-                are tailored to each individual subscriber.
+                Nexify is the perfect answer! Our
+                comphrensive platform enables you to create
+                highly targeted products that are tailored
+                to each individual subscriber.
               </p>
             </div>
             <div className="mt-5 flex justify-center font-medium text-sm">
