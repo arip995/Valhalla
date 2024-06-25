@@ -63,7 +63,7 @@ const Account = () => {
 
             <FileButton
               onChange={handleFileChange}
-              accept="image/png,image/jpeg,image/svg,image/jpg"
+              accept="image/*"
             >
               {props => (
                 <Button

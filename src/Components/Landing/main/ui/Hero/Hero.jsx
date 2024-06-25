@@ -1,7 +1,7 @@
 import GradientWrapper from '../../GradientWrapper';
 import Image from 'next/image';
 import NavLink from '../NavLink';
-import HeroImg from '../../../../../../public/images/main/hero.svg';
+import HeroImg from '../../../../../../public/images/main/hero.png';
 import LayoutEffect from '../../LayoutEffect';
 
 const Hero = () => (
@@ -59,7 +59,7 @@ const Hero = () => (
               height={691}
               width={1200}
               src={HeroImg.src}
-              quality={50}
+              quality={100}
               className="shadow-lg rounded-2xl"
               alt="Mailgo"
             />

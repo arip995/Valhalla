@@ -1,7 +1,7 @@
 import GradientWrapper from '../../GradientWrapper';
 import Image from 'next/image';
 import NavLink from '../NavLink';
-import bgPattern from '../../../../../../public/images/main/bg-pattern.webp';
+import BgPattern from '../../../../../../public/images/main/bg-pattern.webp';
 import LayoutEffect from '../../LayoutEffect';
 
 const CTA = () => (
@@ -50,7 +50,9 @@ const CTA = () => (
           </div>
         </LayoutEffect>
         <Image
-          src={bgPattern}
+          width={1274}
+          height={456}
+          src={BgPattern.src}
           className="w-full h-full object-cover m-auto absolute inset-0 pointer-events-none"
           alt="Background pattern"
         />

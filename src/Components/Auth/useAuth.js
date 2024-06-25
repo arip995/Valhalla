@@ -20,7 +20,7 @@ const useAuth = ({ tabName }) => {
   const [loginOrRegister, toggleLoginOrRegister] =
     useToggle(typeArray);
   const [emailOrPhoneNumber, toggleEmailOrPhoneNumber] =
-    useToggle(['email', 'phoneNumber']);
+    useToggle(['phoneNumber', 'email']);
   const [showOtp, toggleShowOtp] = useToggle([false, true]);
   const [isClickedAtleastOnce, setIsClickedAtleastOnce] =
     useState(null);
