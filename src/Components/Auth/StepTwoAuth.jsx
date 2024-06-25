@@ -6,6 +6,7 @@ import axiosInstance from '@/src/Utils/AxiosInstance';
 import { checkRestrictedChars } from '@/src/Utils/Regex';
 import {
   Button,
+  CheckIcon,
   Collapse,
   Divider,
   Flex,
@@ -31,6 +32,7 @@ const UserTypeCards = UserTypes.map(item => (
 ));
 const CategoryCards = Categories.map(item => (
   <Radio
+    icon={CheckIcon}
     value={item.value}
     label={item.value}
     key={item.value}

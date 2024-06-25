@@ -1,5 +1,6 @@
 import {
   Button,
+  CheckIcon,
   Flex,
   Loader,
   PinInput,
@@ -55,6 +56,7 @@ const StepOneCreateTelegram = ({
                     }}
                   >
                     <Radio
+                      icon={CheckIcon}
                       value={item.phoneNumber}
                       label={item.phoneNumber}
                     />

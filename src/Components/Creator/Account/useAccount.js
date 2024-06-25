@@ -93,7 +93,7 @@ const useAccount = () => {
     const fileSize = file.size;
 
     if (fileType.startsWith('image/')) {
-      if (fileSize <= 100 * 1024 * 1024) {
+      if (fileSize <= 10 * 1024 * 1024) {
         convertFileToBase64(file);
       } else {
         toast.error('File size exceeds 10MB');

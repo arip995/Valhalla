@@ -1,0 +1,30 @@
+.icon {
+  width: rem(18px);
+  height: rem(18px);
+}
+
+.dark {
+  @mixin dark {
+    display: none;
+  }
+
+  @mixin light {
+    display: block;
+  }
+}
+
+.light {
+  @mixin light {
+    display: none;
+  }
+
+  @mixin dark {
+    display: block;
+  }
+}
+
+.actionIcon {
+  border-radius: 100%;
+  width: 32px;
+  height: 30px;
+}

@@ -12,7 +12,9 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import {
   IconBrandDiscord,
+  IconBrandMeta,
   IconBrandTelegram,
+  IconBrandWhatsapp,
   IconCalendarEvent,
   IconCash,
   IconCertificate,
@@ -109,16 +111,6 @@ export function NavbarLayout({ activeTab, children }) {
     },
     { create: true },
     {
-      icon: IconBrandTelegram,
-      label: 'Telegram',
-      value: 'telegram',
-      path: '/app/telegram',
-      onClick: () => {
-        toggle();
-        router.push('/app/telegram');
-      },
-    },
-    {
       icon: IconLockDollar,
       label: 'Locked Content',
       value: 'lockedcontent',
@@ -126,6 +118,16 @@ export function NavbarLayout({ activeTab, children }) {
       onClick: () => {
         toggle();
         router.push('/app/lockedcontent');
+      },
+    },
+    {
+      icon: IconBrandTelegram,
+      label: 'Telegram',
+      value: 'telegram',
+      path: '/app/telegram',
+      onClick: () => {
+        toggle();
+        router.push('/app/telegram');
       },
     },
     // {
@@ -138,14 +140,32 @@ export function NavbarLayout({ activeTab, children }) {
     //   },
     // },
     // {
-    //   icon: IconCash,
-    //   label: 'Payment Page',
-    //   value: 'paymentPage',
-    //   path: '/app/paymentpage',
+    //   icon: IconBrandWhatsapp,
+    //   label: 'whatsapp',
+    //   value: 'whatsapp',
+    //   path: '/app/whatsapp',
     //   onClick: () => {
-    //     router.push('/app/paymentpage');
+    //     router.push('/app/whatsapp');
     //   },
     // },
+    // {
+    //   icon: IconBrandMeta,
+    //   label: 'meta',
+    //   value: 'meta',
+    //   path: '/app/meta',
+    //   onClick: () => {
+    //     router.push('/app/meta');
+    //   },
+    // },
+    {
+      icon: IconCash,
+      label: 'Payment Page',
+      value: 'paymentPage',
+      path: '/app/paymentpage',
+      onClick: () => {
+        router.push('/app/paymentpage');
+      },
+    },
     // {
     //   icon: IconCalendarEvent,
     //   label: 'Webinar',
@@ -155,15 +175,15 @@ export function NavbarLayout({ activeTab, children }) {
     //     router.push('/app/webinar');
     //   },
     // },
-    // {
-    //   icon: IconCertificate,
-    //   label: 'Courses',
-    //   value: 'courses',
-    //   path: '/app/courses',
-    //   onClick: () => {
-    //     router.push('/app/courses');
-    //   },
-    // },
+    {
+      icon: IconCertificate,
+      label: 'Courses',
+      value: 'courses',
+      path: '/app/courses',
+      onClick: () => {
+        router.push('/app/courses');
+      },
+    },
   ];
 
   const links = mockdata.map((link, index) => {

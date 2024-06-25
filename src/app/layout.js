@@ -6,6 +6,7 @@ import {
   MantineProvider,
   createTheme,
 } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({
@@ -26,6 +27,8 @@ export default function RootLayout({ children }) {
       <body>
         <ColorSchemeScript forceColorScheme="light" />
         <MantineProvider theme={{ colorScheme: 'light' }}>
+          <Notifications position="top-right" />
+
           {children}
         </MantineProvider>
       </body>

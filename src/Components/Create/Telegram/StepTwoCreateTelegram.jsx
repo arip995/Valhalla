@@ -1,5 +1,6 @@
 import {
   Button,
+  CheckIcon,
   Flex,
   Radio,
   Select,
@@ -37,6 +38,7 @@ const StepTwoCreateTelegram = ({
               }}
             >
               <Radio
+                icon={CheckIcon}
                 value={'new'}
                 label={'Create New'}
                 description={
@@ -53,6 +55,7 @@ const StepTwoCreateTelegram = ({
               }}
             >
               <Radio
+                icon={CheckIcon}
                 value={'old'}
                 label={'Existing Channel'}
                 description={

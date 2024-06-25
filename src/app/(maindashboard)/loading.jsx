@@ -8,7 +8,7 @@ const loading = () => {
       <div className="h-svh w-full fixed flex items-center justify-center">
         <Loader color="blue" />
       </div>
-      <NavbarLayout></NavbarLayout>
+      {/* <NavbarLayout></NavbarLayout> */}
     </>
   );
 };
