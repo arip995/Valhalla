@@ -56,7 +56,10 @@ const Hero = () => (
             wrapperClassName="max-w-3xl h-[250px] top-12 inset-0 sm:h-[300px] lg:h-[650px]"
           >
             <Image
-              src={HeroImg}
+              height={691}
+              width={1200}
+              src={HeroImg.src}
+              quality={50}
               className="shadow-lg rounded-2xl"
               alt="Mailgo"
             />
