@@ -34,6 +34,7 @@ const ContactInfo = () => {
         variant="filled"
       >
         <TextInput
+          radius="xl"
           readOnly
           label="Phone Number"
           value={phoneNumber}
@@ -50,6 +51,7 @@ const ContactInfo = () => {
           }
         />
         <TextInput
+          radius="xl"
           readOnly
           label="Email"
           value={email}
@@ -71,6 +73,7 @@ const ContactInfo = () => {
         variant="filled"
       >
         <TextInput
+          radius="xl"
           readOnly
           label="Support Phone Number"
           value={supportPhoneNumber}
@@ -87,6 +90,7 @@ const ContactInfo = () => {
           }
         />
         <TextInput
+          radius="xl"
           readOnly
           label="Support Email"
           value={supportEmail}

@@ -103,12 +103,14 @@ const Account = () => {
               )}
             >
               <TextInput
+                radius="xl"
                 label="First name"
                 {...personInfoForm.getInputProps(
                   'firstName'
                 )}
               />
               <TextInput
+                radius="xl"
                 label="last name"
                 placeholder="Your name"
                 mt="md"
@@ -133,6 +135,7 @@ const Account = () => {
           </Fieldset>
           <Fieldset legend="Username" variant="filled">
             <TextInput
+              radius="xl"
               label="Username"
               placeholder="pandaop"
               value={username}
@@ -142,7 +145,6 @@ const Account = () => {
                 setUsername(e.target.value);
               }}
               error={error}
-              radius="md"
               leftSection={<Text size="sm">@</Text>}
               rightSection={
                 !!loadingUsername && (

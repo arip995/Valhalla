@@ -46,30 +46,18 @@ function NavbarLink({
           my="sm"
         />
       ) : (
-        <>
-          <NavLink
-            onClick={onClick}
-            label={label}
-            leftSection={
-              <Icon
-                style={{ width: rem(15), height: rem(15) }}
-                stroke={1.5}
-              />
-            }
-            active={active}
-          />
-          {/* <UnstyledButton
+        <NavLink
+          style={{ borderRadius: '20px' }}
           onClick={onClick}
-          className={classes.link}
-          data-active={active || undefined}
-        >
-          <Icon
-            style={{ width: rem(15), height: rem(15) }}
-            stroke={1.5}
-          />
-          <span className={classes.text}>{label}</span>
-        </UnstyledButton> */}
-        </>
+          label={label}
+          leftSection={
+            <Icon
+              style={{ width: rem(15), height: rem(15) }}
+              stroke={1.5}
+            />
+          }
+          active={active}
+        ></NavLink>
       )}
     </>
   );
@@ -239,6 +227,7 @@ export function NavbarLayout({ activeTab, children }) {
       </AppShell.Header>
       <AppShell.Navbar>
         <AppShell.Section
+          withHeader={false}
           py={12}
           pl={16}
           className={classes.company}
@@ -250,20 +239,21 @@ export function NavbarLayout({ activeTab, children }) {
             {links}
           </div>
         </AppShell.Section>
-        <AppShell.Section
-          pl={16}
-          className={classes.footer}
-        >
-          <UnstyledButton
-            onClick={onClick => {}}
+        <AppShell.Section className={classes.footer}>
+          <NavLink
+            style={{ borderRadius: '20px' }}
             className={classes.footerButton}
-          >
-            <IconLogout
-              style={{ width: rem(15), height: rem(15) }}
-              stroke={1.5}
-            />
-            <span className={classes.text}>Logout</span>
-          </UnstyledButton>
+            onClick={onClick => {}}
+            label={'Logout'}
+            leftSection={
+              <IconLogout
+                style={{ width: rem(15), height: rem(15) }}
+                stroke={1.5}
+              />
+            }
+            color="red"
+            variant="subtle"
+          ></NavLink>
         </AppShell.Section>
       </AppShell.Navbar>
       <AppShell.Main

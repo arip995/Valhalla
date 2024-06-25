@@ -1,24 +1,28 @@
-.apps-header-container {
+.appsHeaderContainer {
   width: 100%;
   padding: 11px;
-  border-bottom: 1px solid var(--mantine-color-gray-3);
+  border-bottom: 1px solid
+    light-dark(
+      var(--mantine-color-gray-3),
+      var(--mantine-color-dark-4)
+    );
   height: 52px;
-  background-color: white;
+  background-color: light-dark(
+    var(--mantine-color-white),
+    var(--mantine-color-dark-7)
+  );
   z-index: 95;
   position: sticky;
   top: 0;
   @media (max-width: em(575px)) {
     top: 59px;
   }
-  .apps-header {
+  .appsHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .apps-header-center {
-    justify-content: space-between;
-  }
-  .apps-header-title {
+  .appsHeaderTitle {
     font-family: Greycliff CF, var(--mantine-font-family);
     font-weight: 600;
     font-size: large;
@@ -27,7 +31,7 @@
       font-size: medium;
     }
   }
-  .create-button {
+  .createButton {
     @media (max-width: em(767px)) {
       padding: 5px;
       .mantine-Button-label {

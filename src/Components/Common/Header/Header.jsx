@@ -1,5 +1,5 @@
 import { IconPlus } from '@tabler/icons-react';
-import '../../../styles/common/header.css';
+import classes from '../../../styles/common/header.module.css';
 import React from 'react';
 import { Button } from '@mantine/core';
 import { useRouter } from 'next/navigation';
@@ -9,10 +9,12 @@ const Header = ({ title, path }) => {
   const router = useRouter();
 
   return (
-    <div className="apps-header-container">
-      <div className={`apps-header `}>
+    <div className={classes.appsHeaderContainer}>
+      <div className={classes.appsHeader}>
         {!!title && (
-          <div className="apps-header-title">{title}</div>
+          <div className={classes.appsHeaderTitle}>
+            {title}
+          </div>
         )}
         {!!path && (
           <div className="flex gap-2">
@@ -21,7 +23,7 @@ const Header = ({ title, path }) => {
               variant="light"
               radius="xl"
               size="xs"
-              className="create-button"
+              className={classes.createButton}
               onClick={() => router.push(path)}
             >
               Create {title}

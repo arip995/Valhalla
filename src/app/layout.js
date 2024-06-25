@@ -11,8 +11,6 @@ import { Notifications } from '@mantine/notifications';
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({
   /** Your theme override here */
-  colorSchemeManager: 'light',
-  forceColorScheme: 'light',
   fontFamily: 'Open Sans, sans-serif',
   primaryColor: 'violet',
 });
@@ -30,7 +28,6 @@ export default function RootLayout({ children }) {
         <ColorSchemeScript forceColorScheme="light" />
         <MantineProvider theme={theme}>
           <Notifications position="top-right" />
-
           {children}
         </MantineProvider>
       </body>
