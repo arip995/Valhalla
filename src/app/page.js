@@ -16,16 +16,20 @@ import Footer from '@/Components/Landing/main/ui/Footer';
 
 export default function Page() {
   return (
-    <div className="flex flex-col bg-gray-900 scroll-smooth">
-      <Navbar />
-      <Hero />
-      <VisualFeatures />
-      <Features />
-      <CTA />
-      <Testimonial />
-      <Pricing />
-      <FAQs />
-      <Footer />
+    <div className="flex flex-col bg-gray-900 relative">
+      <div className="sticky top-0 z-50 bg-gray-900">
+        <Navbar />
+      </div>
+      <div className="flex flex-col">
+        <Hero />
+        <VisualFeatures />
+        <Features />
+        <CTA />
+        <Testimonial />
+        <Pricing />
+        <FAQs />
+        <Footer />
+      </div>
     </div>
     // <div className="w-100 bg-white min-h-[100vh] text-black">
     //   <Button

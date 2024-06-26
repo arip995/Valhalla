@@ -156,7 +156,7 @@ const Pricing = () => {
                         : 'bg-gray-800 hover:bg-gray-700 ring-gray-800'
                     }`}
                   >
-                    Get Started
+                    <a href="/signup">Get Started</a>
                   </Button>
                 </div>
               </div>
