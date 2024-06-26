@@ -22,11 +22,14 @@ const axiosInstance = axios.create({
 const sendCookieInterceptor = config => {
   const cookieValue = Cookies.get('accesstoken');
   console.log(cookieValue);
+  console.log(document.cookie);
   if (cookieValue) {
     config.headers = {
       ...config.headers,
       accesstoken: `Bearer ${cookieValue}`,
     };
+  } else {
+    return null;
   }
   return config;
 };
