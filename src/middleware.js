@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 export function middleware(req) {
   const accessToken =
     getCookie('accesstoken', { req }) || '';
+  console.log(req);
   if (!accessToken) {
     return NextResponse.redirect(
       new URL('/signin', req.url)
@@ -14,14 +15,14 @@ export function middleware(req) {
 export const config = {
   matcher: [
     '/creator',
-    '/creator/home',
-    '/creator/account',
-    '/creator/transaction',
-    '/creator/billing',
-    '/creator/account',
-    '/app/lockedcontent',
-    '/app/telegram',
-    '/create/telegram',
-    '/create/lockedcontent',
+    // '/creator/home',
+    // '/creator/account',
+    // '/creator/transaction',
+    // '/creator/billing',
+    // '/creator/account',
+    // '/app/lockedcontent',
+    // '/app/telegram',
+    // '/create/telegram',
+    // '/create/lockedcontent',
   ],
 };
