@@ -1,13 +1,9 @@
 'use client';
 
-import React from 'react';
-import '../../../styles/create/LockedContent.css';
-import PaperWrapper from '../../Auth/PaperWrapper';
-import useCreateLockedContent from './useCreateLockedContent';
+import { CategoriesList } from '@/Constants/constants';
 import {
   Button,
   FileButton,
-  Flex,
   NumberInput,
   Select,
   TextInput,
@@ -17,10 +13,12 @@ import {
   IconCurrencyRupee,
   IconUpload,
 } from '@tabler/icons-react';
+import { Toaster } from 'react-hot-toast';
+import '../../../styles/create/LockedContent.css';
 import HeaderWrapper from '../../Auth/HeaderWrapper';
-import { CategoriesList } from '@/Constants/constants';
-import toast, { Toaster } from 'react-hot-toast';
+import PaperWrapper from '../../Auth/PaperWrapper';
 import ListFiles from '../../Common/ListFiles/ListFiles';
+import useCreateLockedContent from './useCreateLockedContent';
 
 const CreateLockedContent = ({ data }) => {
   const {

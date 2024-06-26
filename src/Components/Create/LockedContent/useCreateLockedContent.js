@@ -1,10 +1,9 @@
 import axiosInstance from '@/Utils/AxiosInstance';
 import { useForm } from '@mantine/form';
 import { randomId } from '@mantine/hooks';
-import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
 
 const useCreateLockedContent = () => {
   const router = useRouter();
