@@ -13,13 +13,13 @@ const Footer = () => {
       name: 'Refund & Cancellation',
     },
     {
-      href: '/disclaimer',
-      name: 'Disclaimer',
+      href: '/terms-and-conditions',
+      name: 'Terms and Conditions',
     },
   ];
 
   return (
-    <footer className="mt-20">
+    <footer className="mt-20 w-full">
       <div className="custom-screen">
         <div className="flex gap-8">
           <a
