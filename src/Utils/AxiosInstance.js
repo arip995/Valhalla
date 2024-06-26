@@ -7,6 +7,8 @@ const axiosInstance = axios.create({
 
 // Helper function to get the cookie value
 const getCookie = name => {
+  console.log('name', name);
+  console.log('cookie', document.cookie);
   const cookies = document.cookie.split(';');
   for (const cookie of cookies) {
     const [key, value] = cookie.trim().split('=');
