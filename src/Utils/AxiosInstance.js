@@ -5,6 +5,18 @@ const axiosInstance = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}`, // Replace with your API base URL
 });
 
+// Helper function to get the cookie value
+const getCookie = name => {
+  const cookies = document.cookie.split(';');
+  for (const cookie of cookies) {
+    const [key, value] = cookie.trim().split('=');
+    if (key === name) {
+      return value;
+    }
+  }
+  return null;
+};
+
 const sendCookieInterceptor = config => {
   const cookieValue = getCookie('accesstoken');
 
@@ -23,18 +35,6 @@ axiosInstance.interceptors.request.use(
 );
 
 export default axiosInstance;
-
-// Helper function to get the cookie value
-const getCookie = name => {
-  const cookies = document.cookie.split(';');
-  for (const cookie of cookies) {
-    const [key, value] = cookie.trim().split('=');
-    if (key === name) {
-      return value;
-    }
-  }
-  return null;
-};
 
 //Example
 
