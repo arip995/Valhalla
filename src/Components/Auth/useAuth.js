@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import Cookies from 'js-cookie';
 
 const useAuth = ({ tabName }) => {
   const isBrowser = useIsBrowser();
@@ -116,6 +117,15 @@ const useAuth = ({ tabName }) => {
         localStorage.setItem(
           'accesstoken',
           JSON.stringify(data.data.data.accesstoken)
+        );
+        Cookies.set(
+          'accesstoken',
+          data.data.data.accesstoken,
+          {
+            expires: 700000000000000, // Cookie expiry time (in days)
+            secure: false, // Set to true if you want the cookie to be sent only over HTTPS
+            sameSite: 'lax', // Set the sameSite attribute (e.g. 'lax' or 'strict')
+          }
         );
       }
       toast.success('Signed in successfully');
