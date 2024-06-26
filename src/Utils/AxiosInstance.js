@@ -1,6 +1,5 @@
 // utils/axios-instance.js
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 const axiosInstance = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}`, // Replace with your API base URL
@@ -20,16 +19,14 @@ const axiosInstance = axios.create({
 // };
 
 const sendCookieInterceptor = config => {
-  const cookieValue = Cookies.get('accesstoken');
-  console.log(cookieValue);
-  console.log(document.cookie);
-  if (cookieValue) {
+  const accesstoken = JSON.parse(
+    localStorage.getItem('accesstoken')
+  );
+  if (accesstoken) {
     config.headers = {
       ...config.headers,
-      accesstoken: `Bearer ${cookieValue}`,
+      accesstoken: `Bearer ${accesstoken}`,
     };
-  } else {
-    return null;
   }
   return config;
 };

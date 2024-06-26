@@ -113,6 +113,10 @@ const useAuth = ({ tabName }) => {
           'user',
           JSON.stringify(data.data.data.user)
         );
+        localStorage.setItem(
+          'accesstoken',
+          JSON.stringify(data.data.data.accesstoken)
+        );
       }
       toast.success('Signed in successfully');
       if (data?.data?.data?.user.currentUsername) {
