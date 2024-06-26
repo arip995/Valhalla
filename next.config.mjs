@@ -7,7 +7,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Set-Cookie',
-            value: `accesstoken=;  HttpOnly; SameSite=lax; Secure=false`,
+            value: `accesstoken=;  HttpOnly; SameSite=none; Secure=true`,
           },
         ],
       },
