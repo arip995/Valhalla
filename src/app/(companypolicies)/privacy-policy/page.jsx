@@ -14,13 +14,13 @@ const page = () => {
           Last Updated: 30 Jun 2024
         </div>
         <div className="">
-          Nexify ("we," "our," or "us") is committed to
+          {` Nexify ("we," "our," or "us") is committed to
           protecting your privacy. This Privacy Policy
           explains how we collect, use, disclose, and
           safeguard your information when you use our
           website and services. Please read this policy
           carefully to understand our views and practices
-          regarding your personal data and how we will treat
+          regarding your personal data and how we will treat`}
           it.
         </div>
         <div className="text-xl font-semibold">
@@ -32,13 +32,13 @@ const page = () => {
         <div className="">
           <ul className="list-disc flex flex-col gap-2">
             <li>
-              We collect personal information that you
+              {`We collect personal information that you
               provide to us, such as your name, email
               address, phone number, payment information,
               and any other information you choose to
               provide when you create an account, purchase
               our services, or interact with our support
-              team.
+              team.`}
             </li>
           </ul>
         </div>
@@ -48,12 +48,12 @@ const page = () => {
         <div className="">
           <ul className="list-disc flex flex-col gap-2">
             <li>
-              We automatically collect certain information
+              {` We automatically collect certain information
               about your device and how you interact with
               our website and services. This may include
               your IP address, browser type, operating
               system, referring URLs, access times, pages
-              viewed, and other usage information.
+              viewed, and other usage information.`}
             </li>
           </ul>
         </div>
@@ -63,12 +63,12 @@ const page = () => {
         <div className="">
           <ul>
             <li>
-              We automatically collect certain information
+              {`We automatically collect certain information
               about your device and how you interact with
               our website and services. This may include
               your IP address, browser type, operating
               system, referring URLs, access times, pages
-              viewed, and other usage information.
+              viewed, and other usage information.`}
             </li>
           </ul>
         </div>
@@ -199,17 +199,17 @@ const page = () => {
         </ul>
         <div className="">
           To exercise any of these rights, please contact us
-          at [Contact Information].
+          at support@nexify.club.
         </div>
         <div className="text-xl font-bold">
           Changes to This Privacy Policy
         </div>
         <div className="">
-          We may update our Privacy Policy from time to
+          {`We may update our Privacy Policy from time to
           time. We will notify you of any changes by posting
           the new Privacy Policy on this page and updating
           the "Last Updated" date. You are advised to review
-          this Privacy Policy periodically for any changes.
+          this Privacy Policy periodically for any changes.`}
         </div>
         <div className="text-xl font-bold">Contact Us</div>
         <ul className="list-disc flex flex-col gap-2">

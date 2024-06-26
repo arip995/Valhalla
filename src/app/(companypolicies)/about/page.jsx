@@ -10,25 +10,25 @@ const Page = () => {
           About Us
         </div>
         <div className="">
-          Welcome to Nexify, the all-in-one solution for
+          {`Welcome to Nexify, the all-in-one solution for
           creators to monetize their content effortlessly.
           We understand the value of your expertise and
           passion, and we're here to help you turn it into a
           profitable venture. Our comprehensive platform is
           designed to empower you to create, manage, and
           monetize courses, webinars, events, and
-          communities with ease.
+          communities with ease.`}
         </div>
         <div className="text-xl font-semibold">
           Our Mission
         </div>
         <div className="">
-          Our mission is to provide creators with the tools
+          {`Our mission is to provide creators with the tools
           and support they need to share their knowledge,
           engage their audience, and generate sustainable
           income. We believe in the power of knowledge
           sharing and aim to make it accessible and
-          profitable for everyone.
+          profitable for everyone.`}
         </div>
         <div className="text-xl font-semibold">
           What We Offer
@@ -69,18 +69,18 @@ const Page = () => {
         </div>
         <div className="">
           {' '}
-          At nexify, we are committed to your success. Our
+          {`At nexify, we are committed to your success. Our
           platform is built with creators in mind, offering
           intuitive features, robust analytics, and flexible
           monetization options. Whether you're an educator,
           expert, or content creator, we provide the
-          resources you need to thrive in the digital
+          resources you need to thrive in the digital`}
           marketplace.
         </div>
         <div className="">
-          Join our community of successful creators and
+          {`Join our community of successful creators and
           start monetizing your content today. With Nexify,
-          the possibilities are endless.
+          the possibilities are endless.`}
         </div>
       </div>
       <Footer />

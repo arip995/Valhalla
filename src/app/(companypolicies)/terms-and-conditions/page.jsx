@@ -13,12 +13,12 @@ const page = () => {
           Last Updated: 30 Jun 2024
         </div>
         <div className="">
-          Welcome to Nexify! These Terms and Conditions
+          {`Welcome to Nexify! These Terms and Conditions
           ("Terms") govern your use of our website and
           services. By accessing or using our platform, you
           agree to comply with and be bound by these Terms.
           If you do not agree with these Terms, please do
-          not use our services.
+          not use our services.`}
         </div>
         <div className="text-2xl font-bold">
           1. Acceptance of Terms
@@ -99,12 +99,12 @@ const page = () => {
         <div className="">
           a. Your Content:
           <br />
-          You retain ownership of any content you upload or
+          {`You retain ownership of any content you upload or
           create using our services ("Your Content"). By
           posting Your Content, you grant Nexify a
           non-exclusive, royalty-free, worldwide license to
           use, display, and distribute Your Content in
-          connection with our services.
+          connection with our services.`}
         </div>
         <div className="">
           b. Prohibited Content:
@@ -150,11 +150,11 @@ const page = () => {
           8. Disclaimers
         </div>
         <div className="">
-          Our services are provided "as is" and "as
+          {`Our services are provided "as is" and "as
           available" without warranties of any kind, either
           express or implied. We do not warrant that our
           services will be uninterrupted, error-free, or
-          secure.
+          secure.`}
         </div>
         <div className="text-2xl font-bold">
           9. Limitation of Liability
@@ -175,24 +175,24 @@ const page = () => {
           10. Indemnification
         </div>
         <div className="">
-          You agree to indemnify and hold harmless Nexify
+          {` You agree to indemnify and hold harmless Nexify
           and its affiliates, officers, agents, and
           employees from any claims, liabilities, damages,
           losses, and expenses, including reasonable
           attorneys' fees, arising out of or in any way
           connected with your use of our services or your
-          violation of these Terms.
+          violation of these Terms.`}
         </div>
         <div className="text-2xl font-bold">
           11. Governing Law
         </div>
         <div className="">
-          These Terms shall be governed by and construed in
+          {`These Terms shall be governed by and construed in
           accordance with the laws of State of Odisha,
           without regard to its conflict of laws principles.
           Any legal action or proceeding arising under these
           Terms will be brought exclusively in the federal
-          or state courts located in State of Odisha.
+          or state courts located in State of Odisha.`}
         </div>
         <div className="text-2xl font-bold">
           12. Contact Us
