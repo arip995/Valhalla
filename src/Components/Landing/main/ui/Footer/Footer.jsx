@@ -108,10 +108,11 @@ const Footer = () => {
           <div className="flex items-center justify-center gap-x-6 text-gray-500 mt-6 sm:mt-0">
             <ul className="flex flex-wrap items-center gap-4 mt-6 sm:text-sm sm:mt-0">
               {footerNavs.map((item, idx) => (
-                <li className="text-gray-5s00 hover:text-gray-300 duration-150">
-                  <a key={idx} href={item.href}>
-                    {item.name}
-                  </a>
+                <li
+                  key={idx}
+                  className="text-gray-5s00 hover:text-gray-300 duration-150"
+                >
+                  <a href={item.href}>{item.name}</a>
                 </li>
               ))}
             </ul>

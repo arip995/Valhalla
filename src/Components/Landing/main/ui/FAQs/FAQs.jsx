@@ -95,35 +95,39 @@ const FaqsCard = props => {
       <h4 className="cursor-pointer pb-5 flex items-center justify-between text-lg text-gray-50 font-medium">
         {faqsList.q}
         {state ? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 text-gray-500 ml-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M20 12H4"
-            />
-          </svg>
+          <div className="">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 text-gray-500 ml-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20 12H4"
+              />
+            </svg>
+          </div>
         ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 text-gray-500 ml-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 4v16m8-8H4"
-            />
-          </svg>
+          <div className="">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 text-gray-500 ml-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 4v16m8-8H4"
+              />
+            </svg>
+          </div>
         )}
       </h4>
       <div
@@ -141,7 +145,7 @@ const FaqsCard = props => {
   );
 };
 
-export default () => {
+const FAQ = () => {
   const faqsList = [
     {
       q: 'How do I get started?',
@@ -190,7 +194,11 @@ export default () => {
           </div>
           <div className="mt-14 max-w-2xl mx-auto">
             {faqsList.map((item, idx) => (
-              <FaqsCard idx={idx} faqsList={item} />
+              <FaqsCard
+                idx={idx}
+                faqsList={item}
+                key={idx}
+              />
             ))}
           </div>
         </section>
@@ -198,3 +206,5 @@ export default () => {
     </SectionWrapper>
   );
 };
+
+export default FAQ;
