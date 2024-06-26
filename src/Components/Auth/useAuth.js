@@ -81,6 +81,7 @@ const useAuth = ({ tabName }) => {
               : authForm.values.phoneNumber,
           isSignUp:
             loginOrRegister === 'register' ? true : false,
+          isAuth: true,
         }
       );
       toggleShowOtp();
