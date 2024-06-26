@@ -26,7 +26,7 @@ export const PriceTypes = [
   },
 ];
 
-const useCreateLockedContent = () => {
+const useCreateTelegram = () => {
   const { setCurrentUser } = useUser();
   const [step, setStep] = useState(1);
   const [existingGroups, setExistingGroups] =
@@ -34,7 +34,7 @@ const useCreateLockedContent = () => {
   const [isSendingOldNumberOtp, setIsSendingOldNumberOtp] =
     useState(false);
   const [loading, setLoading] = useState(false);
-  const { user } = useGetCurrentUser();
+  const { user } = useUser();
   const router = useRouter();
 
   const stepOneForm = useForm({
@@ -379,4 +379,4 @@ const useCreateLockedContent = () => {
   };
 };
 
-export default useCreateLockedContent;
+export default useCreateTelegram;

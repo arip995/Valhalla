@@ -1,8 +1,11 @@
+'use client';
+
 import {
   Categories,
   UserTypes,
 } from '@/Constants/constants';
 import axiosInstance from '@/Utils/AxiosInstance';
+import useUser from '@/Utils/Hooks/useUser';
 import { checkRestrictedChars } from '@/Utils/Regex';
 import {
   Button,
@@ -21,7 +24,6 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import HeaderWrapper from './HeaderWrapper';
 import PaperWrapper from './PaperWrapper';
-import useUser from '@/Utils/Hooks/useUser';
 
 const UserTypeCards = UserTypes.map(item => (
   <Radio

@@ -1,7 +1,6 @@
 import axiosInstance from '@/Utils/AxiosInstance';
 import useUser from '@/Utils/Hooks/useUser';
 import { useForm } from '@mantine/form';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 

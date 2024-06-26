@@ -1,3 +1,5 @@
+'use client';
+
 import { IconPlus } from '@tabler/icons-react';
 import classes from '../../../styles/common/header.module.css';
 import React from 'react';

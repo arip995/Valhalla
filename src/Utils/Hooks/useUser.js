@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import useIsBrowser from '../useIsBrowser';
-import axiosInstance from '../AxiosInstance';
+// import axiosInstance from '../AxiosInstance';
 const useUser = fetch => {
   const [user, setUser] = useState();
   const [loadingGetUserData, setLoadingGetUserData] =

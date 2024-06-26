@@ -1,13 +1,7 @@
-'use client';
-import useUser from '@/Utils/Hooks/useUser';
-import { Button } from '@mantine/core';
-import React, { useState } from 'react';
 import lockImage from '../../../../public/images/locked-content/lock.png';
+import LockedContentBuyButton from './LockedContentBuyButton';
 
 const LockedContentDetails = ({ data }) => {
-  const { user } = useUser();
-  const [productData, setProductData] = useState(data);
-
   return (
     <>
       <div className="vlc-view-product-container">
@@ -26,11 +20,7 @@ const LockedContentDetails = ({ data }) => {
           <div className="vlc-view-product-unlocked-state"></div>
         )}
       </div>
-      <div className="vlc-view-product-button">
-        <Button size="md">
-          Unlock for ₹{productData?.price}
-        </Button>
-      </div>
+      <LockedContentBuyButton data={data} />
     </>
   );
 };

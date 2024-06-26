@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useAuth = ({ tabName }) => {
-  const isBrowser = useIsBrowser();
   const { user } = useUser();
   const typeArray =
     tabName === 'login'
