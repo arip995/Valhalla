@@ -114,19 +114,10 @@ const useAuth = ({ tabName }) => {
           'user',
           JSON.stringify(data.data.data.user)
         );
-        localStorage.setItem(
-          'accesstoken',
-          JSON.stringify(data.data.data.accesstoken)
-        );
-        Cookies.set(
-          'accesstoken',
-          data.data.data.accesstoken,
-          {
-            expires: 700000000000000, // Cookie expiry time (in days)
-            secure: false, // Set to true if you want the cookie to be sent only over HTTPS
-            sameSite: 'lax', // Set the sameSite attribute (e.g. 'lax' or 'strict')
-          }
-        );
+        // localStorage.setItem(
+        //   'accesstoken',
+        //   JSON.stringify(data.data.data.accesstoken)
+        // );
       }
       toast.success('Signed in successfully');
       if (data?.data?.data?.user.currentUsername) {
