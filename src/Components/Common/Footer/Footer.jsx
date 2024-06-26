@@ -7,7 +7,7 @@ const Footer = () => {
         <div class="flex flex-col items-center text-center">
           <div class="flex flex-wrap justify-center mt-6 -mx-4">
             <a
-              href="#"
+              href="/privacy-policy"
               class="mx-4 text-xs text-gray-600 transition-colors duration-300 hover:text-blue-500"
               aria-label="Reddit"
             >
@@ -16,7 +16,7 @@ const Footer = () => {
             </a>
 
             <a
-              href="#"
+              href="/refund-and-cancellation"
               class="mx-4 text-xs text-gray-600 transition-colors duration-300 hover:text-blue-500"
               aria-label="Reddit"
             >
@@ -25,7 +25,7 @@ const Footer = () => {
             </a>
 
             <a
-              href="#"
+              href="/terms-and-conditions"
               class="mx-4 text-xs text-gray-600 transition-colors duration-300 hover:text-blue-500"
               aria-label="Reddit"
             >
