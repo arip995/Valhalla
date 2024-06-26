@@ -1,18 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'Set-Cookie',
-            value: `panda=;  HttpOnly; SameSite=lax; Secure=false;Max-Age=86400;`,
-          },
-        ],
-      },
-    ];
-  },
   images: {
     remotePatterns: [
       {
