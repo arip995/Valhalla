@@ -1,12 +1,11 @@
 import axiosInstance from '@/Utils/AxiosInstance';
-import { setCurrentUser } from '@/Utils/User';
-import useGetCurrentUser from '@/Utils/useGetCurrentUser';
+import useUser from '@/Utils/Hooks/useUser';
 import { useDebouncedCallback } from '@mantine/hooks';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useUsername = () => {
-  const { user } = useGetCurrentUser();
+  const { user, setCurrentUser } = useUser();
   const [username, setUsername] = useState('');
   const [initialUsername, setInitialUsername] =
     useState('');

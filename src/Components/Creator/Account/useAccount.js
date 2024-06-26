@@ -1,13 +1,14 @@
 import axiosInstance from '@/Utils/AxiosInstance';
-import { setCurrentUser } from '@/Utils/User';
-import useGetCurrentUser from '@/Utils/useGetCurrentUser';
+import useUser from '@/Utils/Hooks/useUser';
 import { useForm } from '@mantine/form';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useAccount = () => {
-  const { user, fetchUserData } = useGetCurrentUser();
+  const { user, getUserData, setCurrentUser } = useUser(
+    (fetch = true)
+  );
   const [loading, setLoading] = useState({
     showUpdatePersonalInfoButton: false,
   });
@@ -40,7 +41,7 @@ const useAccount = () => {
       console.log(error);
       toast.error('An error occured at our side');
     } finally {
-      fetchUserData();
+      getUserData();
       setLoading(prev => {
         return {
           ...prev,
@@ -68,7 +69,7 @@ const useAccount = () => {
       console.log(error);
       toast.error(error?.response?.data?.message || '');
     } finally {
-      fetchUserData();
+      getUserData();
     }
   };
   const onRemoveImage = async () => {
@@ -85,7 +86,7 @@ const useAccount = () => {
     } catch (error) {
       toast.error(error?.response?.data?.message || '');
     } finally {
-      fetchUserData();
+      getUserData();
     }
   };
   const handleFileChange = file => {

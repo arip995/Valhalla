@@ -1,14 +1,13 @@
 import axiosInstance from '@/Utils/AxiosInstance';
 import { validateEmail } from '@/Utils/Regex';
-import { setCurrentUser } from '@/Utils/User';
-import useGetCurrentUser from '@/Utils/useGetCurrentUser';
+import useUser from '@/Utils/Hooks/useUser';
 import { useDisclosure } from '@mantine/hooks';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useContactSupportDetails = () => {
-  const { user, fetchUserData } = useGetCurrentUser();
+  const { user, getUserData, setCurrentUser } = useUser();
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [supportPhoneNumber, setSupportPhoneNumber] =
     useState(null);
@@ -127,7 +126,7 @@ const useContactSupportDetails = () => {
       setOtp('');
       setEditEntity('');
       setPreviousData();
-      fetchUserData();
+      getUserData();
     }
   }, [opened]);
   useEffect(() => {

@@ -1,6 +1,5 @@
 import axiosInstance from '@/Utils/AxiosInstance';
-import { setCurrentUser } from '@/Utils/User';
-import useGetCurrentUser from '@/Utils/useGetCurrentUser';
+import useUser from '@/Utils/Hooks/useUser';
 import { useForm } from '@mantine/form';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -28,6 +27,7 @@ export const PriceTypes = [
 ];
 
 const useCreateLockedContent = () => {
+  const { setCurrentUser } = useUser();
   const [step, setStep] = useState(1);
   const [existingGroups, setExistingGroups] =
     useState(false);

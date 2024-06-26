@@ -21,7 +21,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import HeaderWrapper from './HeaderWrapper';
 import PaperWrapper from './PaperWrapper';
-import { setCurrentUser } from '@/Utils/User';
+import useUser from '@/Utils/Hooks/useUser';
 
 const UserTypeCards = UserTypes.map(item => (
   <Radio
@@ -42,6 +42,7 @@ const CategoryCards = Categories.map(item => (
 
 const StepTwoAuth = () => {
   const router = useRouter();
+  const { setCurrentUser } = useUser();
   const [initialized, setInitialized] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');

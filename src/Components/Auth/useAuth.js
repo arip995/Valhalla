@@ -1,5 +1,5 @@
 import { validateEmail } from '@/Utils/Regex';
-import useGetCurrentUser from '@/Utils/useGetCurrentUser';
+import useUser from '@/Utils/Hooks/useUser';
 import useIsBrowser from '@/Utils/useIsBrowser';
 import { useForm } from '@mantine/form';
 import { useToggle } from '@mantine/hooks';

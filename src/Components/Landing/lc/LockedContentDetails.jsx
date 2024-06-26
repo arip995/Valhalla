@@ -1,11 +1,11 @@
 'use client';
-import useGetCurrentUser from '@/Utils/useGetCurrentUser';
+import useUser from '@/Utils/Hooks/useUser';
 import { Button } from '@mantine/core';
 import React, { useState } from 'react';
 import lockImage from '../../../../public/images/locked-content/lock.png';
 
 const LockedContentDetails = ({ data }) => {
-  const user = useGetCurrentUser();
+  const { user } = useUser();
   const [productData, setProductData] = useState(data);
 
   return (
