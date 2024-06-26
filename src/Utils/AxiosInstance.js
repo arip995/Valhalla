@@ -19,7 +19,7 @@ const getCookie = name => {
 
 const sendCookieInterceptor = config => {
   const cookieValue = getCookie('accesstoken');
-
+  console.log(cookieValue);
   // if (cookieValue && config.sendCookie) {
   if (cookieValue) {
     config.headers = {
