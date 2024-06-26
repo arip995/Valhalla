@@ -5,9 +5,8 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useAccount = () => {
-  const { user, getUserData, setCurrentUser } = useUser(
-    (fetch = true)
-  );
+  const { user, getUserData, setCurrentUser } =
+    useUser(true);
   const [loading, setLoading] = useState({
     showUpdatePersonalInfoButton: false,
   });
