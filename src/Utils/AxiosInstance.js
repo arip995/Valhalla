@@ -7,22 +7,21 @@ const axiosInstance = axios.create({
 });
 
 // Helper function to get the cookie value
-const getCookie = name => {
-  console.log('cookie', Cookies.get(name));
-  const cookies = document.cookie.split(';');
-  for (const cookie of cookies) {
-    const [key, value] = cookie.trim().split('=');
-    if (key === name) {
-      return value;
-    }
-  }
-  return null;
-};
+// const getCookie = name => {
+//   console.log('cookie', Cookies.get(name));
+//   const cookies = document.cookie.split(';');
+//   for (const cookie of cookies) {
+//     const [key, value] = cookie.trim().split('=');
+//     if (key === name) {
+//       return value;
+//     }
+//   }
+//   return null;
+// };
 
 const sendCookieInterceptor = config => {
-  const cookieValue = getCookie('accesstoken');
+  const cookieValue = Cookies.get('accesstoken');
   console.log(cookieValue);
-  // if (cookieValue && config.sendCookie) {
   if (cookieValue) {
     config.headers = {
       ...config.headers,
