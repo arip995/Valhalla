@@ -31,6 +31,7 @@ const StepOneAuth = ({
   otpForm,
   handleSubmit,
   authForm,
+  loading,
 }) => {
   return (
     <>
@@ -100,6 +101,7 @@ const StepOneAuth = ({
                 type="submit"
                 radius="xl"
                 fullWidth
+                loading={loading}
                 onClick={() => {
                   setIsClickedAtleastOnce(true);
                 }}
@@ -147,6 +149,7 @@ const StepOneAuth = ({
                 type="submit"
                 radius="xl"
                 fullWidth
+                loading={loading}
                 onClick={() => {
                   setIsClickedAtleastOnce(true);
                 }}

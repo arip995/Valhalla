@@ -19,6 +19,7 @@ const Auth = props => {
     otpForm,
     handleSubmit,
     authForm,
+    loading,
   } = useAuth({ tabName: props.tabName });
 
   return (
@@ -27,6 +28,7 @@ const Auth = props => {
         <div className="w-full flex  flex-col items-center gap-2">
           {step === 1 ? (
             <StepOneAuth
+              loading={loading}
               loginOrRegister={loginOrRegister}
               toggleLoginOrRegister={toggleLoginOrRegister}
               emailOrPhoneNumber={emailOrPhoneNumber}

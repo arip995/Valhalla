@@ -7,17 +7,17 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import Cookies from 'js-cookie';
 
 const useAuth = ({ tabName }) => {
   const isBrowser = useIsBrowser();
-  const { user } = useGetCurrentUser();
+  const { user } = useUser();
   const typeArray =
     tabName === 'login'
       ? ['login', 'register']
       : ['register', 'login'];
   const router = useRouter();
   const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
   const [loginOrRegister, toggleLoginOrRegister] =
     useToggle(typeArray);
   const [emailOrPhoneNumber, toggleEmailOrPhoneNumber] =
@@ -70,6 +70,7 @@ const useAuth = ({ tabName }) => {
 
   const sendOtp = async () => {
     try {
+      setLoading(true);
       const data = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/send_otp`,
         {
@@ -88,11 +89,14 @@ const useAuth = ({ tabName }) => {
       toast.success('Otp sent successfully!');
     } catch (error) {
       toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   const verifyOtp = async () => {
     try {
+      setLoading(true);
       const data = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/verify_otp`,
         {
@@ -115,10 +119,6 @@ const useAuth = ({ tabName }) => {
           'user',
           JSON.stringify(data.data.data.user)
         );
-        // localStorage.setItem(
-        //   'accesstoken',
-        //   JSON.stringify(data.data.data.accesstoken)
-        // );
       }
       toast.success('Signed in successfully');
       if (data?.data?.data?.user.currentUsername) {
@@ -130,6 +130,10 @@ const useAuth = ({ tabName }) => {
       }
     } catch (error) {
       toast.error(error.response.data.message);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 10000);
     }
   };
 
@@ -153,6 +157,7 @@ const useAuth = ({ tabName }) => {
     otpForm,
     handleSubmit,
     authForm,
+    loading,
   };
 };
 

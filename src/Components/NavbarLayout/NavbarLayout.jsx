@@ -29,6 +29,7 @@ import {
 import { useState } from 'react';
 import classes from '../../styles/Navbar/NavbarMinimal.module.css';
 import { usePathname, useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 function NavbarLink({
   Icon,
@@ -249,7 +250,11 @@ export function NavbarLayout({ activeTab, children }) {
           <NavLink
             style={{ borderRadius: '20px' }}
             className={classes.footerButton}
-            onClick={onClick => {}}
+            onClick={() => {
+              Cookies.remove('accesstoken');
+              localStorage.removeItem('user');
+              router.push('/signin');
+            }}
             label={'Logout'}
             leftSection={
               <IconLogout
