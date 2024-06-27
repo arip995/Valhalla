@@ -128,6 +128,7 @@ const useAuth = ({ tabName }) => {
         setStep(2);
       }
     } catch (error) {
+      setLoading(false);
       toast.error(error.response.data.message);
     } finally {
       setTimeout(() => {
