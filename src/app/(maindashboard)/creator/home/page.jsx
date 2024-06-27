@@ -10,9 +10,7 @@ const Page = async ({ data }) => {
   const { panda } = await getData();
 
   return (
-    <div className="z-20000 text-4xl text-black">
-      Home Home Home Home
-    </div>
+    <div className="z-20000 text-4xl text-black">Home</div>
   );
 };
 

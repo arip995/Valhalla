@@ -57,10 +57,15 @@ const useAuth = ({ tabName }) => {
     },
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = resendOtp => {
+    if (resendOtp === 'resend') {
+      sendOtp();
+      return;
+    }
     if (!showOtp) {
       setIsClickedAtleastOnce(false);
       sendOtp();
+      toggleShowOtp();
       return;
     } else {
       verifyOtp();
@@ -84,7 +89,6 @@ const useAuth = ({ tabName }) => {
           isAuth: true,
         }
       );
-      toggleShowOtp();
       toast.success('Otp sent successfully!');
     } catch (error) {
       toast.error(error.response.data.message);

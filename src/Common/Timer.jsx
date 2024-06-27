@@ -24,8 +24,8 @@ const Timer = ({
   completedContent,
 }) => {
   const [state, dispatch] = useReducer(timerReducer, {
-    minutes: 1,
-    seconds: 30,
+    minutes: 0,
+    seconds: 59,
     completed: false,
   });
 

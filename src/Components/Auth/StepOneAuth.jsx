@@ -66,60 +66,63 @@ const StepOneAuth = ({
       />
       <PaperWrapper>
         {showOtp ? (
-          <form onSubmit={otpForm.onSubmit(handleSubmit)}>
-            <Stack justify="center" align="center">
-              <div className="flex gap-1">
-                <Text size="sm" ta="center">
-                  Otp sent to
-                </Text>
-                <Text size="sm" ta="center" c={'dimmed'}>
-                  {emailOrPhoneNumber === 'email'
-                    ? authForm?.values?.email
-                    : `+91 ${authForm?.values?.phoneNumber}`}
-                </Text>
-                <IconEdit
-                  className="edit-icon icon"
-                  onClick={() => toggleShowOtp()}
-                  style={{
-                    width: rem(18),
-                    height: rem(18),
-                  }}
-                  stroke={1.5}
+          <>
+            <form onSubmit={otpForm.onSubmit(handleSubmit)}>
+              <Stack justify="center" align="center">
+                <div className="flex gap-1">
+                  <Text size="sm" ta="center">
+                    Otp sent to
+                  </Text>
+                  <Text size="sm" ta="center" c={'dimmed'}>
+                    {emailOrPhoneNumber === 'email'
+                      ? authForm?.values?.email
+                      : `+91 ${authForm?.values?.phoneNumber}`}
+                  </Text>
+                  <IconEdit
+                    className="edit-icon icon"
+                    onClick={() => toggleShowOtp()}
+                    style={{
+                      width: rem(18),
+                      height: rem(18),
+                    }}
+                    stroke={1.5}
+                  />
+                </div>
+
+                <PinInput
+                  size="lg"
+                  length={5}
+                  type="number"
+                  {...otpForm.getInputProps('otp')}
                 />
-              </div>
+              </Stack>
 
-              <PinInput
-                size="lg"
-                length={5}
-                type="number"
-                {...otpForm.getInputProps('otp')}
-              />
-            </Stack>
-
-            <Group justify="space-between" mt="xl">
-              <Button
-                type="submit"
-                radius="xl"
-                fullWidth
-                loading={loading}
-                onClick={() => {
-                  setIsClickedAtleastOnce(true);
-                }}
-              >
-                Verify OTP
-              </Button>
-            </Group>
-
+              <Group justify="space-between" mt="xl">
+                <Button
+                  type="submit"
+                  radius="xl"
+                  fullWidth
+                  loading={loading}
+                  onClick={() => {
+                    setIsClickedAtleastOnce(true);
+                  }}
+                >
+                  Verify OTP
+                </Button>
+              </Group>
+            </form>
             <Text size="sm" ta="center" mt={20}>
               Resend otp in{' '}
               <Anchor size="sm" component="button">
                 <Timer
-                  onClick={() => {}}
-                  completedContent="resend"
+                  onClick={() => {
+                    handleSubmit('resend');
+                  }}
+                  completedContent="Resend"
                 />
               </Anchor>
             </Text>
-          </form>
+          </>
         ) : (
           <form onSubmit={authForm.onSubmit(handleSubmit)}>
             <Stack>
