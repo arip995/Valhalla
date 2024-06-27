@@ -191,6 +191,8 @@ export function NavbarLayout({ children }) {
       value: 'courses',
       path: '/app/courses',
       onClick: () => {
+        toggle();
+        setActive('/app/courses');
         router.push('/app/courses');
       },
     },
