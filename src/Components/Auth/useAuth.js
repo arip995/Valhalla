@@ -57,14 +57,14 @@ const useAuth = ({ tabName }) => {
     },
   });
 
-  const handleSubmit = resendOtp => {
+  const handleSubmit = async resendOtp => {
     if (resendOtp === 'resend') {
       sendOtp();
       return;
     }
     if (!showOtp) {
       setIsClickedAtleastOnce(false);
-      sendOtp();
+      await sendOtp();
       toggleShowOtp();
       return;
     } else {
@@ -118,12 +118,12 @@ const useAuth = ({ tabName }) => {
         }
       );
       if (data?.data?.data?.user) {
+        toast.success('Signed in successfully');
         localStorage.setItem(
           'user',
           JSON.stringify(data.data.data.user)
         );
       }
-      toast.success('Signed in successfully');
       if (data?.data?.data?.user.currentUsername) {
         setTimeout(() => {
           router.push('/creator/home');
@@ -137,7 +137,7 @@ const useAuth = ({ tabName }) => {
     } finally {
       setTimeout(() => {
         setLoading(false);
-      }, 10000);
+      }, 100000);
     }
   };
 
