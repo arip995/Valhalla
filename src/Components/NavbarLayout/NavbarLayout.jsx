@@ -26,7 +26,7 @@ import {
   IconUser,
   IconWallet,
 } from '@tabler/icons-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classes from '../../styles/Navbar/NavbarMinimal.module.css';
 import { usePathname, useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
@@ -64,13 +64,12 @@ function NavbarLink({
   );
 }
 
-export function NavbarLayout({ activeTab, children }) {
+export function NavbarLayout({ children }) {
   const router = useRouter();
   const [opened, { toggle }] = useDisclosure(false);
-  const [active, setActive] = useState(activeTab || 'home');
+  const [active, setActive] = useState();
   const theme = useMantineTheme();
   const pathName = usePathname();
-
   const mockdata = [
     {
       icon: IconHome2,
