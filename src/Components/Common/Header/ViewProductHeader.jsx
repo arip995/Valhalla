@@ -13,13 +13,24 @@ const ViewProductHeader = ({
   return (
     <>
       <div className="vph-avatar-container">
-        <Image
-          className="w-[84px] h-[84px] overflow-hidden rounded-full"
-          src={profilePic}
-          width={84}
-          height={84}
-          quality={100}
-        />
+        {profilePic ? (
+          <Image
+            className="w-[80px] h-[80px] overflow-hidden rounded-full"
+            src={profilePic}
+            width={80}
+            height={80}
+            quality={100}
+          />
+        ) : (
+          <Avatar
+            className="w-[80px] h-[80px]"
+            color="initials"
+            size="lg"
+            name={`${firstName || ''} ${lastName || ''}`}
+            key={lastName || ''}
+          />
+        )}
+
         {/* <Avatar size="xl" color="blue" src={profilePic}>
           {firstName?.[0].toUpperCase()}
           {lastName?.[0].toUpperCase()}

@@ -67,9 +67,9 @@ function NavbarLink({
 export function NavbarLayout({ children }) {
   const router = useRouter();
   const [opened, { toggle }] = useDisclosure(false);
-  const [active, setActive] = useState();
   const theme = useMantineTheme();
   const pathName = usePathname();
+  const [active, setActive] = useState(pathName);
   const mockdata = [
     {
       icon: IconHome2,
@@ -78,7 +78,7 @@ export function NavbarLayout({ children }) {
       path: '/creator/home',
       onClick: () => {
         toggle();
-        setActive('home');
+        setActive('/creator/home');
         router.push('/creator/home');
       },
     },
@@ -89,7 +89,7 @@ export function NavbarLayout({ children }) {
       path: '/creator/transaction',
       onClick: () => {
         toggle();
-        setActive('transaction');
+        setActive('/creator/transaction');
         router.push('/creator/transaction');
       },
     },
@@ -100,7 +100,7 @@ export function NavbarLayout({ children }) {
       path: '/creator/billing',
       onClick: () => {
         toggle();
-        setActive('billing');
+        setActive('/creator/billing');
         router.push('/creator/billing');
       },
     },
@@ -111,7 +111,7 @@ export function NavbarLayout({ children }) {
       path: '/creator/account',
       onClick: () => {
         toggle();
-        setActive('account');
+        setActive('/creator/account');
         router.push('/creator/account');
       },
     },
@@ -123,7 +123,7 @@ export function NavbarLayout({ children }) {
       path: '/app/lockedcontent',
       onClick: () => {
         toggle();
-        setActive('lockedcontent');
+        setActive('/app/lockedcontent');
         router.push('/app/lockedcontent');
       },
     },
@@ -134,7 +134,7 @@ export function NavbarLayout({ children }) {
       path: '/app/telegram',
       onClick: () => {
         toggle();
-        setActive('telegram');
+        setActive('/app/telegram');
         router.push('/app/telegram');
       },
     },
@@ -171,6 +171,8 @@ export function NavbarLayout({ children }) {
       value: 'paymentPage',
       path: '/app/paymentpage',
       onClick: () => {
+        toggle();
+        setActive('/app/paymentpage');
         router.push('/app/paymentpage');
       },
     },
@@ -203,7 +205,7 @@ export function NavbarLayout({ children }) {
         Icon={Icon}
         label={label}
         key={link.label}
-        active={link.path === pathName}
+        active={link.path === active}
         onClick={() => link.onClick()}
       />
     );

@@ -55,10 +55,14 @@ const Account = () => {
                 quality={100}
               />
             ) : (
-              <Avatar size="lg">
-                {personInfoForm.values.firstName?.[0].toUpperCase()}
-                {personInfoForm.values.lastName?.[0].toUpperCase()}
-              </Avatar>
+              <Avatar
+                color="initials"
+                size="lg"
+                name={`${user?.firstName || ''} ${
+                  user?.lastName || ''
+                }`}
+                key={user?.lastName || ''}
+              />
             )}
 
             <FileButton

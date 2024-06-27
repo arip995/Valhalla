@@ -13,7 +13,7 @@ const LockedContentDetails = ({ data }) => {
               className="vlc-view-product-locked-state-image"
             />
             <div className="vlc-view-product-locked-state-text">
-              Message is locked
+              Content is locked
             </div>
           </div>
         ) : (
