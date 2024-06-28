@@ -1,6 +1,7 @@
 import axiosInstance from '@/Utils/AxiosInstance';
 import useUser from '@/Utils/Hooks/useUser';
 import { useForm } from '@mantine/form';
+import { useToggle } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -10,6 +11,10 @@ const useAccount = () => {
   const [loading, setLoading] = useState({
     showUpdatePersonalInfoButton: false,
   });
+  const [loadingImage, toggleLoadingImage] = useToggle([
+    false,
+    true,
+  ]);
 
   const personInfoForm = useForm({
     initialValues: {
@@ -49,6 +54,7 @@ const useAccount = () => {
     }
   };
   const onUpload = async payload => {
+    toggleLoadingImage();
     try {
       const data = await axiosInstance.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/image/save_image`,
@@ -67,6 +73,7 @@ const useAccount = () => {
       console.log(error);
       toast.error(error?.response?.data?.message || '');
     } finally {
+      toggleLoadingImage();
       getUserData();
     }
   };
@@ -160,6 +167,7 @@ const useAccount = () => {
     loading,
     handleFileChange,
     onRemoveImage,
+    loadingImage,
   };
 };
 

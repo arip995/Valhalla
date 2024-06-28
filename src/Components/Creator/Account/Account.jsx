@@ -4,11 +4,13 @@ import { checkRestrictedChars } from '@/Utils/Regex';
 import {
   ActionIcon,
   Avatar,
+  Box,
   Button,
   Collapse,
   Fieldset,
   FileButton,
   Loader,
+  LoadingOverlay,
   Text,
   TextInput,
 } from '@mantine/core';
@@ -29,6 +31,7 @@ const Account = () => {
     loading,
     handleFileChange,
     onRemoveImage,
+    loadingImage,
   } = useAccount();
 
   const {
@@ -46,24 +49,35 @@ const Account = () => {
         <Header title="Account Details" />
         <div className="account-form-container">
           <div className="account-profile-photo-container">
-            {user?.profilePic ? (
-              <Image
-                className="w-[56px] h-[56px] overflow-hidden rounded-full"
-                src={user.profilePic}
-                width={56}
-                height={56}
-                quality={100}
+            <Box pos="relative">
+              <LoadingOverlay
+                visible={loadingImage}
+                zIndex={1000}
+                overlayProps={{ radius: 'sm', blur: 2 }}
+                loaderProps={{
+                  color: 'pink',
+                  type: 'dots',
+                }}
               />
-            ) : (
-              <Avatar
-                color="initials"
-                size="lg"
-                name={`${user?.firstName || ''} ${
-                  user?.lastName || ''
-                }`}
-                key={user?.lastName || ''}
-              />
-            )}
+              {user?.profilePic ? (
+                <Image
+                  className="w-[56px] h-[56px] overflow-hidden rounded-full"
+                  src={user.profilePic}
+                  width={56}
+                  height={56}
+                  quality={100}
+                />
+              ) : (
+                <Avatar
+                  color="initials"
+                  size="lg"
+                  name={`${user?.firstName || ''} ${
+                    user?.lastName || ''
+                  }`}
+                  key={user?.lastName || ''}
+                />
+              )}
+            </Box>
 
             <FileButton
               onChange={handleFileChange}
