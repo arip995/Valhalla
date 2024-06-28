@@ -78,7 +78,7 @@ const CreateLockedContent = ({ data }) => {
               />
               <FileButton
                 onChange={handleFileChange}
-                accept="image/png,image/jpeg,image/svg,image/jpg,application/pdf,application/docx,application/docs,application/xlxs"
+                accept="image/*,application/*,video/mp4,audio/mp4"
               >
                 {props => (
                   <Button

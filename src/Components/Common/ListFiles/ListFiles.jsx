@@ -2,6 +2,7 @@ import {
   IconFile,
   IconFileText,
   IconTrash,
+  IconVideo,
 } from '@tabler/icons-react';
 import React from 'react';
 import '../../../styles/common/list-files.css';
@@ -14,6 +15,11 @@ const ListFiles = ({ files, onDelete = () => {} }) => {
         const isImage =
           !item.loading &&
           item.type.split('/')[0] === 'image'
+            ? true
+            : false;
+        const isVideo =
+          !item.loading &&
+          item.type.split('/')[0] === 'video'
             ? true
             : false;
 
@@ -33,6 +39,13 @@ const ListFiles = ({ files, onDelete = () => {} }) => {
                     <img
                       src={item.url}
                       className="list-files-image"
+                    />
+                  ) : isVideo ? (
+                    <IconVideo
+                      color="gray"
+                      size={16}
+                      className="list-files-image"
+                      stroke={1}
                     />
                   ) : (
                     <IconFileText

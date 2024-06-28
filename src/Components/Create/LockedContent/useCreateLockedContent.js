@@ -115,20 +115,15 @@ const useCreateLockedContent = () => {
   const handleFileChange = async file => {
     const fileType = file.type;
     const fileSize = file.size;
-    if (
-      createLockedContentForm.getValues().files.length === 5
-    ) {
-      toast.error('Max upload 5 files');
-      return;
-    }
 
-    addLoadingImage();
     if (
       fileType.startsWith('image/') ||
-      fileType.startsWith('application/')
+      fileType.startsWith('application/') ||
+      fileType.startsWith('video/')
     ) {
       if (fileSize <= 10 * 1024 * 1024) {
         convertFileToBase64(file);
+        addLoadingImage();
       } else {
         toast.error('File size exceeds 10MB');
       }
@@ -151,7 +146,7 @@ const useCreateLockedContent = () => {
     reader.readAsDataURL(file);
   };
 
-  const onFileDelete = url => {
+  const onFileDelete = async url => {
     const filteredFiles = createLockedContentForm
       .getValues()
       .files.filter(item => item.url !== url);
@@ -160,6 +155,17 @@ const useCreateLockedContent = () => {
       'files',
       filteredFiles
     );
+    try {
+      const data = await axiosInstance.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/image/delete_image`,
+        {
+          key: url.replace(
+            'https://nexify-try.s3.ap-south-1.amazonaws.com/',
+            ''
+          ),
+        }
+      );
+    } catch (error) {}
   };
 
   return {
