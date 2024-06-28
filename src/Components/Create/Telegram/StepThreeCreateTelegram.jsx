@@ -47,6 +47,7 @@ const StepThreeCreateTelegram = ({
         {/* <Input.Wrapper> */}
         <PlansAndPricing stepThreeForm={stepThreeForm} />
         <Button
+          className="z-40 sticky bottom-5"
           type="submit"
           loading={loading}
           onClick={() =>

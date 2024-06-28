@@ -138,7 +138,7 @@
   }
   .nexify-plan-edit-card-name-input {
     .mantine-Input-section {
-      z-index: 2000;
+      z-index: 30;
       padding: 0px 25px;
       background-color: #ffffff;
     }

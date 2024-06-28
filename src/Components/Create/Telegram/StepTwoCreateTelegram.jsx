@@ -2,6 +2,7 @@ import {
   Button,
   CheckIcon,
   Flex,
+  Grid,
   Group,
   Radio,
   Select,
@@ -28,44 +29,49 @@ const StepTwoCreateTelegram = ({
             );
           }}
         >
-          <Flex gap={'sm'}>
-            <Radio.Card
-              className={classes.root}
-              radius="md"
-              value={'old'}
-              key={'old'}
-            >
-              <Group wrap="nowrap" align="flex-start">
-                <Radio.Indicator icon={CheckIcon} />
-                <div className="flex flex-col gap-2">
-                  <Text className={classes.label}>
-                    Existing Channel
-                  </Text>
-                  <Text className={classes.description}>
-                    Connect with existing telegram channel.
-                  </Text>
-                </div>
-              </Group>
-            </Radio.Card>
-            <Radio.Card
-              className={classes.root}
-              radius="md"
-              value={'new'}
-              key={'new'}
-            >
-              <Group wrap="nowrap" align="flex-start">
-                <Radio.Indicator icon={CheckIcon} />
-                <div className="flex flex-col gap-2">
-                  <Text className={classes.label}>
-                    Create New
-                  </Text>
-                  <Text className={classes.description}>
-                    Create an new telegram channel.
-                  </Text>
-                </div>
-              </Group>
-            </Radio.Card>
-          </Flex>
+          <Grid gap={'sm'}>
+            <Grid.Col span={{ base: 12, md: 6 }}>
+              <Radio.Card
+                className={classes.root}
+                radius="md"
+                value={'old'}
+                key={'old'}
+              >
+                <Group wrap="nowrap" align="flex-start">
+                  <Radio.Indicator icon={CheckIcon} />
+                  <div className="flex flex-col gap-2">
+                    <Text className={classes.label}>
+                      Existing Channel
+                    </Text>
+                    <Text className={classes.description}>
+                      Connect with existing telegram
+                      channel.
+                    </Text>
+                  </div>
+                </Group>
+              </Radio.Card>
+            </Grid.Col>
+            <Grid.Col span={{ base: 12, md: 6 }}>
+              <Radio.Card
+                className={classes.root}
+                radius="md"
+                value={'new'}
+                key={'new'}
+              >
+                <Group wrap="nowrap" align="flex-start">
+                  <Radio.Indicator icon={CheckIcon} />
+                  <div className="flex flex-col gap-2">
+                    <Text className={classes.label}>
+                      Create New
+                    </Text>
+                    <Text className={classes.description}>
+                      Create an new telegram channel.
+                    </Text>
+                  </div>
+                </Group>
+              </Radio.Card>
+            </Grid.Col>
+          </Grid>
         </Radio.Group>
         <form
           className="ctg-s2"
