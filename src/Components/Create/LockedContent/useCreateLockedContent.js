@@ -79,6 +79,7 @@ const useCreateLockedContent = () => {
   };
 
   const onUpload = async payload => {
+    console.log(payload);
     try {
       const data = await axiosInstance.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/image/save_image`,
@@ -138,7 +139,10 @@ const useCreateLockedContent = () => {
       const base64String = reader.result;
       await onUpload({
         base64: base64String,
-        type: file.type,
+        type:
+          file.type === 'image/svg+xml'
+            ? 'image/svg'
+            : file.type,
         name: file.name,
         showImage: URL.createObjectURL(file),
       });
