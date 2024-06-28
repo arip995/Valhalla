@@ -64,8 +64,7 @@ const useAuth = ({ tabName }) => {
     }
     if (!showOtp) {
       setIsClickedAtleastOnce(false);
-      await sendOtp();
-      toggleShowOtp();
+      sendOtp();
       return;
     } else {
       verifyOtp();
@@ -89,6 +88,9 @@ const useAuth = ({ tabName }) => {
           isAuth: true,
         }
       );
+      if (!showOtp) {
+        toggleShowOtp();
+      }
       toast.success('Otp sent successfully!');
     } catch (error) {
       toast.error(error.response.data.message);
