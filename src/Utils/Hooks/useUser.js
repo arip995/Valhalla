@@ -36,11 +36,11 @@ const useUser = (fetch = false) => {
 
   useEffect(() => {
     if (isBrowser) {
+      getUserData();
       if (fetch) {
         fetchUserData();
         return;
       }
-      getUserData();
     }
   }, [isBrowser]);
 

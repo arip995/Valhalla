@@ -51,7 +51,8 @@ const useAuth = ({ tabName }) => {
     validateInputOnChange: true,
     validate: {
       otp: value =>
-        value?.length != 5 || !value
+        isClickedAtleastOnce &&
+        (value?.length != 5 || !value)
           ? 'Value is too short'
           : null,
     },
