@@ -18,7 +18,7 @@ export function middleware(req) {
 
   if (
     req.nextUrl.pathname.startsWith('/signin') ||
-    req.nextUrl.pathname.startsWith('/signip')
+    req.nextUrl.pathname.startsWith('/signup')
   ) {
     if (accessToken) {
       return NextResponse.redirect(
@@ -33,7 +33,7 @@ export function middleware(req) {
   if (
     !accessToken &&
     !req.nextUrl.pathname.startsWith('/signin') &&
-    !req.nextUrl.pathname.startsWith('/signip')
+    !req.nextUrl.pathname.startsWith('/signup')
   ) {
     return NextResponse.redirect(
       new URL('/signin', req.url)
