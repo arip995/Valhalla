@@ -7,7 +7,6 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import Cookies from 'js-cookie';
 
 const useAuth = ({ tabName }) => {
   const { user } = useUser();
@@ -125,14 +124,6 @@ const useAuth = ({ tabName }) => {
         localStorage.setItem(
           'user',
           JSON.stringify(data.data.data.user)
-        );
-        Cookies.set(
-          'accesstoken',
-          data.data.data.accesstoken,
-          {
-            sameSite: 'lax',
-            maxAge: 999999999999999,
-          }
         );
       }
       if (data?.data?.data?.user.currentUsername) {
