@@ -1,3 +1,5 @@
+'use client';
+
 import SectionWrapper from '../../SectionWrapper';
 import Feature1 from '../../../../../../public/images/main/Feature-1.svg';
 import Feature2 from '../../../../../../public/images/main/Feature-2.svg';

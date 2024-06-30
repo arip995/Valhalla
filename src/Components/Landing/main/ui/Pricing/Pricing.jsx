@@ -1,3 +1,5 @@
+'use client';
+
 import LayoutEffect from '../../LayoutEffect';
 import SectionWrapper from '../../SectionWrapper';
 import Button from '../Button';

@@ -1,3 +1,5 @@
+'use client';
+
 import SectionWrapper from '../../SectionWrapper';
 import GradientWrapper from '../../GradientWrapper';
 import user1 from '../../../../../../public/images/main/user1.webp';

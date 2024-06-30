@@ -1,8 +1,10 @@
-import GradientWrapper from '../../GradientWrapper';
+'use client';
+
 import Image from 'next/image';
-import NavLink from '../NavLink';
 import HeroImg from '../../../../../../public/images/main/hero.png';
+import GradientWrapper from '../../GradientWrapper';
 import LayoutEffect from '../../LayoutEffect';
+import NavLink from '../NavLink';
 
 const Hero = () => (
   <section>

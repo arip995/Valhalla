@@ -1,5 +1,3 @@
-'use client';
-
 import { Alert, Button, Notification } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import '@mantine/notifications/styles.css';
@@ -13,6 +11,15 @@ import FAQs from '@/Components/Landing/main/ui/FAQs';
 import '../styles/landing/main.css';
 import Navbar from '@/Components/Landing/main/ui/Navbar';
 import Footer from '@/Components/Landing/main/ui/Footer';
+
+export const metadata = {
+  title: 'Nexify',
+  description:
+    'The all-in-one platform for your digital products and services',
+  openGraph: {
+    images: ['../../public/images/main/user6.webp'],
+  },
+};
 
 export default function Page() {
   return (

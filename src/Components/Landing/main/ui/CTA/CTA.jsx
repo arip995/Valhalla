@@ -1,3 +1,5 @@
+'use client';
+
 import GradientWrapper from '../../GradientWrapper';
 import Image from 'next/image';
 import NavLink from '../NavLink';

@@ -1,18 +1,22 @@
-import { useInView } from "framer-motion"
-import { cloneElement, useRef } from "react";
+'use client';
 
-const LayoutEffect = ({ children,
-    className,
-    isInviewState: { trueState = "", falseState = "" }
+import { useInView } from 'framer-motion';
+import { cloneElement, useRef } from 'react';
+
+const LayoutEffect = ({
+  children,
+  className,
+  isInviewState: { trueState = '', falseState = '' },
 }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
-    const ref = useRef(null)
-    const isInView = useInView(ref, { once: true })
+  return cloneElement(children, {
+    ref,
+    className: `${children.props.className || ''} ${
+      className || ''
+    } ${isInView ? trueState : falseState}`,
+  });
+};
 
-    return cloneElement(children, {
-        ref,
-        className: `${children.props.className || ""} ${className || ""} ${isInView ? trueState : falseState}`
-    })
-}
-
-export default LayoutEffect
+export default LayoutEffect;
