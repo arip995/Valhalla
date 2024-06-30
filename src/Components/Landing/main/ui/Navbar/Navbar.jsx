@@ -14,13 +14,13 @@ const Navbar = () => {
     { name: 'FAQs', href: '/#faqs' },
   ];
 
-  useEffect(() => {
-    document.onclick = e => {
-      const target = e.target;
-      if (!menuBtnEl.current.contains(target))
-        setState(false);
-    };
-  }, []);
+  // useEffect(() => {
+  //   document.onclick = e => {
+  //     const target = e.target;
+  //     if (!menuBtnEl.current.contains(target))
+  //       setState(false);
+  //   };
+  // }, []);
 
   return (
     <header className="relative">
