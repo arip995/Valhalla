@@ -221,7 +221,7 @@ export function NavbarLayout({ children }) {
         breakpoint: 'xs',
         collapsed: { mobile: !opened },
       }}
-      transitionDuration={1000}
+      transitionDuration={500}
     >
       <AppShell.Header className={classes.header}>
         <Group h="100%" px="xs">
