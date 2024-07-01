@@ -13,7 +13,8 @@ import Navbar from '@/Components/Landing/main/ui/Navbar';
 import Footer from '@/Components/Landing/main/ui/Footer';
 
 export const metadata = {
-  title: 'Nexify',
+  title:
+    'Nexify: all-in-one platform for your digital products and services',
   description:
     'The all-in-one platform for your digital products and services',
   openGraph: {

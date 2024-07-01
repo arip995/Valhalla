@@ -5,7 +5,7 @@ import Header from '../../Common/Header/Header';
 
 const PremiumContent = () => {
   return (
-    <div style={{ transform: 'inherit' }}>
+    <div>
       <Header
         title="Locked Content"
         path="/create/lockedcontent"

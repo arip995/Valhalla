@@ -197,7 +197,6 @@ export function NavbarLayout({ children }) {
       },
     },
   ];
-
   const links = mockdata.map((link, index) => {
     const { icon: Icon, label, value } = link;
 
@@ -212,6 +211,10 @@ export function NavbarLayout({ children }) {
       />
     );
   });
+
+  useEffect(() => {
+    setActive(pathName);
+  }, [pathName]);
 
   return (
     <AppShell

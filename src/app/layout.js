@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google';
 import '@mantine/core/styles.css';
+import '@mantine/charts/styles.css';
 import './globals.css';
 import {
   ColorSchemeScript,
@@ -16,7 +17,8 @@ const theme = createTheme({
 });
 
 export const metadata = {
-  title: 'Nexify',
+  title:
+    'Nexify: all-in-one platform for your digital products and services',
   description: 'Monetize your content',
 };
 

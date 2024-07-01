@@ -10,12 +10,14 @@
 
   &.lc-container-animation {
     /* background-color: var(--mantine-color-gray-1); */
-    /* background: linear-gradient(
+    background: linear-gradient(
       279deg,
-      #0d2bd8,
-      #7287e5,
-      #7458ff
-    ); */
+      /* #0d7dd8,
+      #72dfe5,
+      #4368c9, */ #540dd8,
+      #72a0e5,
+      #7243c9
+    );
     background-size: 180% 180%;
     animation: gradient-animation 21s ease infinite;
     @keyframes gradient-animation {

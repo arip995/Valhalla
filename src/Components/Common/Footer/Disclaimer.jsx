@@ -19,7 +19,7 @@ const Disclaimer = () => {
           app or website affiliated with us. By utilizing
           our services, you acknowledge and agree to the
           terms set forth in this disclaimer.{' '}
-          <Anchor href="#" size="xs">
+          <Anchor href="/terms-and-conditions" size="xs">
             Learn more
           </Anchor>
         </div>

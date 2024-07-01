@@ -46,9 +46,11 @@
     border-radius: 10px;
     background: linear-gradient(
       279deg,
-      #324fe0,
+      /* #324fe0,
       #72a4e5,
-      #2b4a97
+      #2b4a97 */ #540dd8,
+      #8972e5,
+      #7243c9
     );
     background-size: 180% 180%;
     animation: gradient-animation 21s ease infinite;
