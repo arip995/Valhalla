@@ -20,8 +20,9 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  border-radius: var(--mantine-radius-md);
   height: rem(120px);
+  width: 100%;
+  border-radius: var(--mantine-radius-md);
   background-color: light-dark(
     var(--mantine-color-violet-0),
     var(--mantine-color-violet-7)
@@ -31,5 +32,8 @@
   &:hover {
     box-shadow: var(--mantine-shadow-md);
     transform: scale(1.05);
+  }
+  @media (min-width: em(576px)) {
+    width: rem(160px);
   }
 }

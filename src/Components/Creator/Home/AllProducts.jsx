@@ -39,7 +39,7 @@ export function AllProducts() {
     {
       title: 'Telegram Integration',
       icon: IconBrandTelegram,
-      color: 'indigo',
+      color: 'blue',
       onClick: () => {
         router.push('/app/telegram');
       },
@@ -56,7 +56,7 @@ export function AllProducts() {
     {
       title: 'Courses',
       icon: IconCertificate,
-      color: 'blue',
+      color: 'indigo',
       onClick: () => {
         router.push('/app/courses');
       },
@@ -82,17 +82,13 @@ export function AllProducts() {
 
   return (
     <div
-      className={`max-w-full md:max-w-[500px]`}
+      className={`flex flex-col gap-2`}
       color={theme.colors[6]}
     >
-      <Group justify="space-between">
-        <Text className={classes.title}>
-          Create Products
-        </Text>
-      </Group>
-      <SimpleGrid cols={2} mt="md">
+      <Text className={classes.title}>Create Products</Text>
+      <div className="flex flex-col md:flex-row gap-4">
         {items}
-      </SimpleGrid>
+      </div>
     </div>
   );
 }

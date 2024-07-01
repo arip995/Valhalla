@@ -28,6 +28,7 @@ const HomeChart = () => {
           color: 'indigo.6',
         },
       ]}
+      // withRightYAxis={false}
       dataKey="date"
       strokeWidth={2}
       curveType="natural"
