@@ -15,7 +15,7 @@
   position: sticky;
   top: 0;
   @media (max-width: em(575px)) {
-    top: 59px;
+    top: 52px;
   }
   .appsHeader {
     display: flex;

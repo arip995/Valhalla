@@ -219,7 +219,7 @@ export function NavbarLayout({ children }) {
 
   return (
     <AppShell
-      header={{ height: { base: 60, xs: 0 } }}
+      header={{ height: { base: 52, xs: 0 } }}
       navbar={{
         width: { base: '100%', xs: 200 },
         breakpoint: 'xs',
