@@ -16,7 +16,6 @@ import {
 } from '@mantine/core';
 import { Toaster } from 'react-hot-toast';
 import classes from '../../../styles/creator/Account.module.css';
-import commonClasses from '../../../styles/common/CommonContainer.module.css';
 import Header from '../../Common/Header/Header';
 import ContactInfo from './ContactInfo';
 import useAccount from './useAccount';
@@ -46,7 +45,7 @@ const Account = () => {
 
   return (
     <>
-      <div className={commonClasses.container}>
+      <div className="top-container">
         <Header title="Account Details" />
         <div className="flex  justify-center">
           <div

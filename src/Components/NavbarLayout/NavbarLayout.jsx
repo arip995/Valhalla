@@ -28,6 +28,7 @@ import {
 } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import classes from '../../styles/Navbar/NavbarMinimal.module.css';
+import '../../styles/common/root-dashboard-container.css';
 import { usePathname, useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 
