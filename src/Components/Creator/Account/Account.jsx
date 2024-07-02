@@ -124,6 +124,7 @@ const Account = () => {
                 legend: classes.legend,
               }}
               legend="Personal information"
+              radius="lg"
               p="lg"
             >
               <form
@@ -166,6 +167,7 @@ const Account = () => {
                 legend: classes.legend,
               }}
               legend="Username"
+              radius="lg"
               p="lg"
             >
               <TextInput

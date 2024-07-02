@@ -35,6 +35,7 @@ const ContactInfo = () => {
           legend: classes.legend,
         }}
         legend="Contact information"
+        radius="lg"
         p="lg"
       >
         <TextInput
@@ -77,6 +78,7 @@ const ContactInfo = () => {
           legend: classes.legend,
         }}
         legend="Support information"
+        radius="lg"
         p="lg"
       >
         <TextInput
