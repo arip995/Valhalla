@@ -26,10 +26,6 @@
     font-family: Greycliff CF, var(--mantine-font-family);
     font-weight: 600;
     font-size: large;
-    @media (max-width: em(767px)) {
-      font-weight: 500;
-      font-size: medium;
-    }
   }
   .createButton {
     @media (max-width: em(767px)) {
