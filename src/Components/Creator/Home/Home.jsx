@@ -5,10 +5,11 @@ import Header from '@/Components/Common/Header/Header';
 import HomeCards from './HomeCards';
 import { AllProducts } from './AllProducts';
 import HomeChart from './HomeChart';
+import commonClasses from '../../../styles/common/CommonContainer.module.css';
 
 const Home = () => {
   return (
-    <div>
+    <div className={commonClasses.container}>
       <Header title="Home" />
       <div className="p-4 md:p-8 flex flex-col gap-12">
         <HomeCards />

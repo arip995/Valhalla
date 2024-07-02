@@ -15,7 +15,8 @@ import {
   TextInput,
 } from '@mantine/core';
 import { Toaster } from 'react-hot-toast';
-import '../../../styles/creator/account.css';
+import classes from '../../../styles/creator/Account.module.css';
+import commonClasses from '../../../styles/common/CommonContainer.module.css';
 import Header from '../../Common/Header/Header';
 import ContactInfo from './ContactInfo';
 import useAccount from './useAccount';
@@ -45,142 +46,158 @@ const Account = () => {
 
   return (
     <>
-      <div className="account-container">
+      <div className={commonClasses.container}>
         <Header title="Account Details" />
-        <div className="account-form-container">
-          <div className="account-profile-photo-container">
-            <Box pos="relative">
-              <LoadingOverlay
-                visible={loadingImage}
-                zIndex={1000}
-                overlayProps={{ radius: 'sm', blur: 2 }}
-                loaderProps={{
-                  color: 'pink',
-                  type: 'dots',
-                }}
-              />
-              {user?.profilePic ? (
-                <Image
-                  className="w-[56px] h-[56px] overflow-hidden rounded-full"
-                  src={user.profilePic}
-                  width={56}
-                  height={56}
-                  quality={100}
-                />
-              ) : (
-                <Avatar
-                  color="initials"
-                  size="lg"
-                  name={`${user?.firstName || ''} ${
-                    user?.lastName || ''
-                  }`}
-                  key={user?.lastName || ''}
-                />
-              )}
-            </Box>
-
-            <FileButton
-              onChange={handleFileChange}
-              accept="image/*"
+        <div className="flex  justify-center">
+          <div
+            className={`${classes.accountFormContainer}  w-full`}
+          >
+            <div
+              className={
+                classes.accountProfilePhotoContainer
+              }
             >
-              {props => (
-                <Button
+              <Box pos="relative">
+                <LoadingOverlay
+                  visible={loadingImage}
+                  zIndex={1000}
+                  overlayProps={{ radius: 'sm', blur: 2 }}
+                  loaderProps={{
+                    color: 'pink',
+                    type: 'dots',
+                  }}
+                />
+                {user?.profilePic ? (
+                  <Image
+                    className="w-[56px] h-[56px] overflow-hidden rounded-full"
+                    src={user.profilePic}
+                    width={56}
+                    height={56}
+                    quality={100}
+                  />
+                ) : (
+                  <Avatar
+                    color="initials"
+                    size="lg"
+                    name={`${user?.firstName || ''} ${
+                      user?.lastName || ''
+                    }`}
+                    key={user?.lastName || ''}
+                  />
+                )}
+              </Box>
+
+              <FileButton
+                onChange={handleFileChange}
+                accept="image/*"
+              >
+                {props => (
+                  <Button
+                    variant="outline"
+                    color="gray"
+                    size="xs"
+                    radius="xl"
+                    {...props}
+                  >
+                    {user?.profilePic ? 'Change' : 'Upload'}
+                  </Button>
+                )}
+              </FileButton>
+              {user?.profilePic ? (
+                <ActionIcon
                   variant="outline"
                   color="gray"
-                  size="xs"
+                  size="md"
                   radius="xl"
-                  {...props}
+                  onClick={onRemoveImage}
                 >
-                  {user?.profilePic ? 'Change' : 'Upload'}
-                </Button>
-              )}
-            </FileButton>
-            {user?.profilePic ? (
-              <ActionIcon
-                variant="outline"
-                color="gray"
-                size="md"
-                radius="xl"
-                onClick={onRemoveImage}
+                  <IconX
+                    style={{ width: '70%', height: '70%' }}
+                    stroke={1.5}
+                    color="gray"
+                  />
+                </ActionIcon>
+              ) : null}
+            </div>
+            <Fieldset
+              classNames={{
+                legend: classes.legend,
+              }}
+              legend="Personal information"
+              p="lg"
+            >
+              <form
+                onSubmit={personInfoForm.onSubmit(
+                  onPersonalInfoSubmit
+                )}
               >
-                <IconX
-                  style={{ width: '70%', height: '70%' }}
-                  stroke={1.5}
-                  color="gray"
+                <TextInput
+                  radius="xl"
+                  label="First name"
+                  {...personInfoForm.getInputProps(
+                    'firstName'
+                  )}
                 />
-              </ActionIcon>
-            ) : null}
-          </div>
-          <Fieldset
-            legend="Personal information"
-            variant="filled"
-          >
-            <form
-              onSubmit={personInfoForm.onSubmit(
-                onPersonalInfoSubmit
-              )}
+                <TextInput
+                  radius="xl"
+                  label="last name"
+                  placeholder="Your name"
+                  mt="md"
+                  {...personInfoForm.getInputProps(
+                    'lastName'
+                  )}
+                />
+                <Collapse
+                  in={loading.showUpdatePersonalInfoButton}
+                >
+                  <Button
+                    type="submit"
+                    mt="md"
+                    radius="xl"
+                    variant="filled"
+                  >
+                    Update
+                  </Button>
+                </Collapse>
+              </form>
+            </Fieldset>
+            <Fieldset
+              classNames={{
+                legend: classes.legend,
+              }}
+              legend="Username"
+              p="lg"
             >
               <TextInput
                 radius="xl"
-                label="First name"
-                {...personInfoForm.getInputProps(
-                  'firstName'
-                )}
+                label="Username"
+                placeholder="pandaop"
+                value={username}
+                onChange={e => {
+                  if (!checkRestrictedChars(e.target.value))
+                    return;
+                  setUsername(e.target.value);
+                }}
+                error={error}
+                leftSection={<Text size="sm">@</Text>}
+                rightSection={
+                  !!loadingUsername && (
+                    <Loader color="blue" size={'sm'} />
+                  )
+                }
               />
-              <TextInput
-                radius="xl"
-                label="last name"
-                placeholder="Your name"
-                mt="md"
-                {...personInfoForm.getInputProps(
-                  'lastName'
-                )}
-              />
-              <Collapse
-                in={loading.showUpdatePersonalInfoButton}
-              >
+              <Collapse in={showUpdateUsernameButton}>
                 <Button
-                  type="submit"
                   mt="md"
                   radius="xl"
-                  variant="filled"
-                  // fullWidth
+                  onClick={onUpdateUsername}
                 >
                   Update
                 </Button>
               </Collapse>
-            </form>
-          </Fieldset>
-          <Fieldset legend="Username" variant="filled">
-            <TextInput
-              radius="xl"
-              label="Username"
-              placeholder="pandaop"
-              value={username}
-              onChange={e => {
-                if (!checkRestrictedChars(e.target.value))
-                  return;
-                setUsername(e.target.value);
-              }}
-              error={error}
-              leftSection={<Text size="sm">@</Text>}
-              rightSection={
-                !!loadingUsername && (
-                  <Loader color="blue" size={'sm'} />
-                )
-              }
-            />
-            <Collapse in={showUpdateUsernameButton}>
-              <Button
-                mt="md"
-                radius="xl"
-                onClick={onUpdateUsername}
-              >
-                Update
-              </Button>
-            </Collapse>
-          </Fieldset>
-          <ContactInfo />
+            </Fieldset>
+            <ContactInfo />
+          </div>
         </div>
       </div>
       <Toaster />

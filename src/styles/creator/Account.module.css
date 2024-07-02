@@ -1,0 +1,35 @@
+.accountContainer {
+  width: 100%;
+  background-color: light-dark(
+    var(--mantine-color-gray-0),
+    var(--mantine-color-gray-900)
+  );
+}
+.acountEditIcon {
+  &:hover {
+    cursor: pointer;
+  }
+}
+.accountProfilePhotoContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.legend {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.375;
+  color: light-dark(
+    var(--mantine-color-black),
+    var(--mantine-color-white)
+  );
+  word-break: break-word;
+}
+
+.accountFormContainer {
+  max-width: 600px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}

@@ -1,28 +1,16 @@
 import {
-  Card,
   Text,
-  SimpleGrid,
   UnstyledButton,
-  Anchor,
-  Group,
   useMantineTheme,
 } from '@mantine/core';
 import {
-  IconCreditCard,
-  IconBuildingBank,
-  IconRepeat,
-  IconReceiptRefund,
-  IconReceipt,
-  IconReceiptTax,
-  IconReport,
-  IconCashBanknote,
-  IconCoin,
-  IconCertificate,
   IconBrandTelegram,
+  IconCertificate,
+  IconCreditCard,
   IconLockDollar,
 } from '@tabler/icons-react';
-import classes from '../../../styles/creator/AllProducts.module.css';
 import { useRouter } from 'next/navigation';
+import classes from '../../../styles/creator/Home/AllProducts.module.css';
 
 export function AllProducts() {
   const router = useRouter();
@@ -74,7 +62,11 @@ export function AllProducts() {
         color={theme.colors[item.color][6]}
         size="2rem"
       />
-      <Text size="xs" mt={7}>
+      <Text
+        size="xs"
+        mt={7}
+        className={classes.productTitle}
+      >
         {item.title}
       </Text>
     </UnstyledButton>

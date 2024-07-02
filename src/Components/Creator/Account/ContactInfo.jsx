@@ -3,6 +3,7 @@ import { IconEdit } from '@tabler/icons-react';
 import React from 'react';
 import useContactSupportDetails from './useContactSupportDetails';
 import UpdateContactModal from './UpdateContactModal';
+import classes from '../../../styles/creator/Account.module.css';
 
 const ContactInfo = () => {
   const {
@@ -30,8 +31,11 @@ const ContactInfo = () => {
   return (
     <>
       <Fieldset
+        classNames={{
+          legend: classes.legend,
+        }}
         legend="Contact information"
-        variant="filled"
+        p="lg"
       >
         <TextInput
           radius="xl"
@@ -43,7 +47,7 @@ const ContactInfo = () => {
             <IconEdit
               size={18}
               stroke={1.5}
-              className="acount-edit-icon"
+              className={classes.acountEditIcon}
               onClick={() => {
                 onClickEdit('phoneNumber');
               }}
@@ -60,7 +64,7 @@ const ContactInfo = () => {
             <IconEdit
               size={18}
               stroke={1.5}
-              className="acount-edit-icon"
+              className={classes.acountEditIcon}
               onClick={() => {
                 onClickEdit('email');
               }}
@@ -69,8 +73,11 @@ const ContactInfo = () => {
         />
       </Fieldset>
       <Fieldset
+        classNames={{
+          legend: classes.legend,
+        }}
         legend="Support information"
-        variant="filled"
+        p="lg"
       >
         <TextInput
           radius="xl"
@@ -82,7 +89,7 @@ const ContactInfo = () => {
             <IconEdit
               stroke={1.5}
               size={18}
-              className="acount-edit-icon"
+              className={classes.acountEditIcon}
               onClick={() => {
                 onClickEdit('supportPhoneNumber');
               }}
@@ -99,7 +106,7 @@ const ContactInfo = () => {
             <IconEdit
               stroke={1.5}
               size={18}
-              className="acount-edit-icon"
+              className={classes.acountEditIcon}
               onClick={() => {
                 onClickEdit('supportEmail');
               }}

@@ -14,6 +14,12 @@
   font-weight: 700;
 }
 
+.productTitle {
+  font-size: small;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
 .item {
   display: flex;
   flex-direction: column;
@@ -25,7 +31,7 @@
   border-radius: var(--mantine-radius-md);
   background-color: light-dark(
     var(--mantine-color-violet-0),
-    var(--mantine-color-violet-7)
+    var(--mantine-color-violet-9)
   );
   transition: box-shadow 150ms ease, transform 100ms ease;
 

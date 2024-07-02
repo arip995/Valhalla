@@ -6,12 +6,18 @@ import React from 'react';
 import { Button } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 import { ThemeToggle } from '../ThemeToogle/ThemeToogle';
+import classNames from 'classnames';
 
-const Header = ({ title, path }) => {
+const Header = ({ title, path, className }) => {
   const router = useRouter();
 
   return (
-    <div className={classes.appsHeaderContainer}>
+    <div
+      className={classNames(
+        classes.appsHeaderContainer,
+        className
+      )}
+    >
       <div className={classes.appsHeader}>
         {!!title && (
           <div className={classes.appsHeaderTitle}>
@@ -30,9 +36,9 @@ const Header = ({ title, path }) => {
             >
               Create {title}
             </Button>
-            {/* <ThemeToggle /> */}
           </div>
         )}
+        {/* <ThemeToggle /> */}
       </div>
     </div>
   );
