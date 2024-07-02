@@ -57,6 +57,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  cursor: pointer;
   color: light-dark(
     var(--mantine-color-violet-9),
     var(--mantine-color-violet-1)

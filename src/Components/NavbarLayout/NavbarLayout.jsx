@@ -246,6 +246,11 @@ export function NavbarLayout({ children }) {
           py={12}
           pl={16}
           className={classes.company}
+          onClick={() => {
+            toggle();
+            setActive('/creator/home');
+            router.push('/creator/home');
+          }}
         >
           <img height={30} width={30} src={Logo.src} />{' '}
           Nexify
