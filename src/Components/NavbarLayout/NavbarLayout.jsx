@@ -28,6 +28,7 @@ import {
 } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import classes from '../../styles/Navbar/NavbarMinimal.module.css';
+import Logo from '../../app/icon.png';
 import '../../styles/common/root-dashboard-container.css';
 import { usePathname, useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
@@ -246,6 +247,7 @@ export function NavbarLayout({ children }) {
           pl={16}
           className={classes.company}
         >
+          <img height={30} width={30} src={Logo.src} />{' '}
           Nexify
         </AppShell.Section>
         <AppShell.Section grow p={8} component={ScrollArea}>

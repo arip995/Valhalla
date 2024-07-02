@@ -54,6 +54,13 @@
   font-family: Greycliff CF, var(--mantine-font-family);
   font-weight: 900;
   font-size: large;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: light-dark(
+    var(--mantine-color-violet-9),
+    var(--mantine-color-violet-1)
+  );
   /* border-bottom: 1px solid
     light-dark(
       var(--mantine-color-gray-3),
