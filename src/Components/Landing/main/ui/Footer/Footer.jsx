@@ -30,7 +30,7 @@ const Footer = () => {
             aria-label="social media"
           >
             <svg
-              className="w-6 h-6 hover:text-gray-200 duration-150"
+              className="h-6 w-6 duration-150 hover:text-gray-200"
               fill="none"
               viewBox="0 0 48 48"
             >
@@ -56,7 +56,7 @@ const Footer = () => {
             aria-label="social media"
           >
             <svg
-              className="w-6 h-6 hover:text-gray-200 duration-150"
+              className="h-6 w-6 duration-150 hover:text-gray-200"
               fill="none"
               viewBox="0 0 48 48"
             >
@@ -82,7 +82,7 @@ const Footer = () => {
             aria-label="social media"
           >
             <svg
-              className="w-6 h-6 hover:text-gray-200 duration-150"
+              className="h-6 w-6 duration-150 hover:text-gray-200"
               fill="none"
               viewBox="0 0 48 48"
             >
@@ -103,16 +103,16 @@ const Footer = () => {
             </svg>
           </a>
         </div>
-        <div className="mt-10 py-8 border-t border-gray-800 items-center justify-between sm:flex">
-          <p className="text-gray-400 text-center">
+        <div className="mt-10 items-center justify-between border-t border-gray-800 py-8 sm:flex">
+          <p className="text-center text-gray-400">
             © 2024 Nexify Inc. All rights reserved.
           </p>
-          <div className="flex items-center justify-center gap-x-6 text-gray-500 mt-6 sm:mt-0">
-            <ul className="flex flex-wrap items-center gap-4 mt-6 sm:text-sm sm:mt-0">
+          <div className="mt-6 flex items-center justify-center gap-x-6 text-gray-500 sm:mt-0">
+            <ul className="mt-6 flex flex-wrap items-center gap-4 sm:mt-0 sm:text-sm">
               {footerNavs.map((item, idx) => (
                 <li
                   key={idx}
-                  className="text-gray-5s00 hover:text-gray-300 duration-150"
+                  className="text-gray-5s00 duration-150 hover:text-gray-300"
                 >
                   <a href={item.href}>{item.name}</a>
                 </li>

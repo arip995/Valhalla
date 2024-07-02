@@ -64,7 +64,7 @@ const Testimonial = () => {
         className="custom-screen text-gray-300"
       >
         <div className="max-w-2xl text-center md:mx-auto">
-          <h2 className="text-gray-50 text-3xl font-semibold sm:text-4xl">
+          <h2 className="text-3xl font-semibold text-gray-50 sm:text-4xl">
             Nexify is loved by the best creators around the
             world
           </h2>
@@ -74,23 +74,23 @@ const Testimonial = () => {
           className="mt-12"
         >
           <LayoutEffect
-            className="duration-1000 delay-300"
+            className="delay-300 duration-1000"
             isInviewState={{
               trueState: 'opacity-1',
               falseState: 'opacity-0 translate-y-12',
             }}
           >
-            <ul className="grid gap-6 duration-1000 delay-300 ease-in-out sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="grid gap-6 delay-300 duration-1000 ease-in-out sm:grid-cols-2 lg:grid-cols-3">
               {testimonials.map((item, idx) => (
                 <li
                   key={idx}
-                  className="p-4 rounded-xl border border-gray-800"
+                  className="rounded-xl border border-gray-800 p-4"
                   style={{
                     backgroundImage:
                       'radial-gradient(100% 100% at 50% 50%, rgba(124, 58, 237, 0.05) 0%, rgba(124, 58, 237, 0) 100%)',
                   }}
                 >
-                  <figure className="flex flex-col justify-between gap-y-6 h-full">
+                  <figure className="flex h-full flex-col justify-between gap-y-6">
                     <blockquote className="">
                       <p className="">{item.quote}</p>
                     </blockquote>
@@ -98,13 +98,13 @@ const Testimonial = () => {
                       <Image
                         src={item.avatar}
                         alt={item.name}
-                        className="w-14 h-14 rounded-full object-cover"
+                        className="h-14 w-14 rounded-full object-cover"
                       />
                       <div>
-                        <span className="block text-gray-50 font-semibold">
+                        <span className="block font-semibold text-gray-50">
                           {item.name}
                         </span>
-                        <span className="block text-sm mt-0.5">
+                        <span className="mt-0.5 block text-sm">
                           {item.title}
                         </span>
                       </div>

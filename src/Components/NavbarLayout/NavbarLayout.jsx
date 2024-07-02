@@ -256,9 +256,7 @@ export function NavbarLayout({ children }) {
           Nexify
         </AppShell.Section>
         <AppShell.Section grow p={8} component={ScrollArea}>
-          <div className=" flex flex-col gap-2">
-            {links}
-          </div>
+          <div className="flex flex-col gap-2">{links}</div>
         </AppShell.Section>
         <AppShell.Section className={classes.footer}>
           <NavLink

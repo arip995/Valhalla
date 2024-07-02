@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div className="top-container">
       <Header title="Home" />
-      <div className="p-4 md:p-8 flex flex-col gap-12">
+      <div className="flex flex-col gap-12 p-4 md:p-8">
         <HomeCards />
         <HomeChart />
         <AllProducts />

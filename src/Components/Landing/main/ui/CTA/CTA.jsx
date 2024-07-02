@@ -9,17 +9,17 @@ import LayoutEffect from '../../LayoutEffect';
 const CTA = () => (
   <section>
     <GradientWrapper wrapperClassName="max-w-xs h-[13rem] top-12 inset-0">
-      <div className="custom-screen sm:py-16 py-12 relative">
+      <div className="custom-screen relative py-12 sm:py-16">
         <LayoutEffect
-          className="duration-1000 delay-300"
+          className="delay-300 duration-1000"
           isInviewState={{
             trueState: 'opacity-1',
             falseState: 'opacity-0 translate-y-6',
           }}
         >
           <div className="relative z-10">
-            <div className="max-w-xl mx-auto text-center">
-              <h2 className="text-gray-50 text-3xl font-semibold sm:text-4xl">
+            <div className="mx-auto max-w-xl text-center">
+              <h2 className="text-3xl font-semibold text-gray-50 sm:text-4xl">
                 Unleash the power of monetization solutions
               </h2>
               <p className="mt-5 text-gray-300">
@@ -29,17 +29,17 @@ const CTA = () => (
                 to each individual subscriber.
               </p>
             </div>
-            <div className="mt-5 flex justify-center font-medium text-sm">
+            <div className="mt-5 flex justify-center text-sm font-medium">
               <NavLink
                 href="/#pricing"
-                className="flex items-center text-white bg-purple-600 hover:bg-purple-500 active:bg-purple-700 "
+                className="flex items-center bg-purple-600 text-white hover:bg-purple-500 active:bg-purple-700"
               >
                 Start now
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
-                  className="w-5 h-5"
+                  className="h-5 w-5"
                 >
                   <path
                     fillRule="evenodd"
@@ -55,7 +55,7 @@ const CTA = () => (
           width={1274}
           height={456}
           src={BgPattern.src}
-          className="w-full h-full object-cover m-auto absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0 m-auto h-full w-full object-cover"
           alt="Background pattern"
         />
       </div>
