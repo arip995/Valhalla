@@ -22,13 +22,8 @@ const HomeChart = () => {
       h={300}
       data={data}
       series={[
-        {
-          name: 'temperature',
-          label: 'Avg. Temperature',
-          color: 'indigo.6',
-        },
+        { name: 'temperature', label: 'Avg. Temperature' },
       ]}
-      // withRightYAxis={false}
       dataKey="date"
       strokeWidth={2}
       curveType="natural"
