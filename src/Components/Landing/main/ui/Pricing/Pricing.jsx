@@ -64,13 +64,13 @@ const Pricing = () => {
 
   return (
     <SectionWrapper id="pricing" className="custom-screen">
-      <div className="relative max-w-xl mx-auto text-center">
-        <h2 className="text-gray-50 text-3xl font-semibold sm:text-4xl">
+      <div className="relative mx-auto max-w-xl text-center">
+        <h2 className="text-3xl font-semibold text-gray-50 sm:text-4xl">
           Find a plan to power your business
         </h2>
       </div>
       <LayoutEffect
-        className="duration-1000 delay-300"
+        className="delay-300 duration-1000"
         isInviewState={{
           trueState: 'opacity-1',
           falseState: 'opacity-0',
@@ -80,7 +80,7 @@ const Pricing = () => {
           {plans.map((item, idx) => (
             <div
               key={idx}
-              className={`relative flex-1 flex items-stretch flex-col rounded-xl border border-gray-800 mt-6 sm:mt-0 ${
+              className={`relative mt-6 flex flex-1 flex-col items-stretch rounded-xl border border-gray-800 sm:mt-0 ${
                 item.isMostPop
                   ? 'border border-purple-500'
                   : ''
@@ -91,13 +91,13 @@ const Pricing = () => {
                   : '',
               }}
             >
-              <div className="p-8 space-y-4 border-b border-gray-800 text-center">
-                <span className="text-purple-600 font-medium">
+              <div className="space-y-4 border-b border-gray-800 p-8 text-center">
+                <span className="font-medium text-purple-600">
                   {item.name}
                 </span>
-                <div className="text-gray-50 text-3xl font-semibold">
+                <div className="text-3xl font-semibold text-gray-50">
                   ₹{item.price}{' '}
-                  <span className="text-xl text-gray-400 font-normal">
+                  <span className="text-xl font-normal text-gray-400">
                     /mo
                   </span>
                 </div>
@@ -154,8 +154,8 @@ const Pricing = () => {
                   <Button
                     className={`w-full rounded-full text-white ring-offset-2 focus:ring ${
                       item.isMostPop
-                        ? 'bg-purple-600 hover:bg-purple-500 focus:bg-purple-700 ring-purple-600'
-                        : 'bg-gray-800 hover:bg-gray-700 ring-gray-800'
+                        ? 'bg-purple-600 ring-purple-600 hover:bg-purple-500 focus:bg-purple-700'
+                        : 'bg-gray-800 ring-gray-800 hover:bg-gray-700'
                     }`}
                   >
                     <a href="/signup">Get Started</a>

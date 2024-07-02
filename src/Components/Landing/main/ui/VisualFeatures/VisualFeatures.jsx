@@ -22,8 +22,8 @@ const VisualFeatures = () => {
   return (
     <SectionWrapper>
       <div className="custom-screen text-gray-300">
-        <div className="max-w-xl mx-auto text-center">
-          <h2 className="text-gray-50 text-3xl font-semibold sm:text-4xl">
+        <div className="mx-auto max-w-xl text-center">
+          <h2 className="text-3xl font-semibold text-gray-50 sm:text-4xl">
             Take your email marketing to the next level with
             Mailgo
           </h2>
@@ -34,10 +34,10 @@ const VisualFeatures = () => {
           </p>
         </div>
         <div className="mt-12">
-          <ul className="space-y-8 gap-x-6 sm:flex sm:space-y-0">
+          <ul className="gap-x-6 space-y-8 sm:flex sm:space-y-0">
             {features.map((item, idx) => (
               <li
-                className="flex-1 flex flex-col justify-between border border-gray-800 rounded-2xl"
+                className="flex flex-1 flex-col justify-between rounded-2xl border border-gray-800"
                 key={idx}
                 style={{
                   background:
@@ -45,7 +45,7 @@ const VisualFeatures = () => {
                 }}
               >
                 <div className="p-8">
-                  <h3 className="text-gray-50 text-xl font-semibold">
+                  <h3 className="text-xl font-semibold text-gray-50">
                     {item.title}
                   </h3>
                   <p className="mt-3 sm:text-sm md:text-base">
@@ -55,7 +55,7 @@ const VisualFeatures = () => {
                 <div className="pl-8">
                   <Image
                     src={item.img}
-                    className="w-full ml-auto"
+                    className="ml-auto w-full"
                     alt={item.title}
                   />
                 </div>

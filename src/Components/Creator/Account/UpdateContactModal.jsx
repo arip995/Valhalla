@@ -79,10 +79,10 @@ const UpdateContactModal = ({
                 {editEntity === 'email'
                   ? email
                   : editEntity === 'supportEmail'
-                  ? supportEmail
-                  : editEntity === 'phoneNumber'
-                  ? phoneNumber
-                  : supportPhoneNumber}
+                    ? supportEmail
+                    : editEntity === 'phoneNumber'
+                      ? phoneNumber
+                      : supportPhoneNumber}
               </Text>
               <IconEdit
                 onClick={() => setIsOtpScreen(false)}

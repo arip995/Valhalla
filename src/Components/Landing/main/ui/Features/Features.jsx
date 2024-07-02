@@ -11,7 +11,7 @@ const Features = () => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="h-6 w-6"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@ const Features = () => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="h-6 w-6"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,7 @@ const Features = () => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="h-6 w-6"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +123,7 @@ const Features = () => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="h-6 w-6"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -203,14 +203,14 @@ const Features = () => {
         className="custom-screen text-gray-300"
       >
         <LayoutEffect
-          className="duration-1000 delay-300"
+          className="delay-300 duration-1000"
           isInviewState={{
             trueState: 'opacity-1',
             falseState: 'opacity-0 translate-y-6',
           }}
         >
-          <div className="max-w-xl mx-auto text-center">
-            <h2 className="text-gray-50 text-3xl font-semibold sm:text-4xl">
+          <div className="mx-auto max-w-xl text-center">
+            <h2 className="text-3xl font-semibold text-gray-50 sm:text-4xl">
               Transform your content into cash with our
               integrated solutions
             </h2>
@@ -224,27 +224,27 @@ const Features = () => {
           </div>
         </LayoutEffect>
         <LayoutEffect
-          className="duration-1000 delay-500"
+          className="delay-500 duration-1000"
           isInviewState={{
             trueState: 'opacity-1',
             falseState: 'opacity-0',
           }}
         >
           <div className="relative mt-12">
-            <ul className="grid gap-8 grid-cols-2 ">
+            <ul className="grid grid-cols-2 gap-8">
               {featuresList.map((item, idx) => (
                 <li
                   key={idx}
-                  className="space-y-3 p-4 rounded-xl border border-gray-800"
+                  className="space-y-3 rounded-xl border border-gray-800 p-4"
                   style={{
                     background:
                       'radial-gradient(157.73% 157.73% at 50% -29.9%, rgba(203, 213, 225, 0.16) 0%, rgba(203, 213, 225, 0) 100%)',
                   }}
                 >
-                  <div className="w-12 h-12 flex items-center justify-center bg-gray-700 rounded-lg text-gray-50">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-700 text-gray-50">
                     {item.icon}
                   </div>
-                  <h3 className="text-lg text-gray-50 font-semibold">
+                  <h3 className="text-lg font-semibold text-gray-50">
                     {item.title}
                   </h3>
                   <p>{item.desc}</p>

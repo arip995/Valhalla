@@ -8,18 +8,18 @@ import NavLink from '../NavLink';
 
 const Hero = () => (
   <section>
-    <div className="custom-screen sm:py-16 py-12">
+    <div className="custom-screen py-12 sm:py-16">
       <LayoutEffect
-        className="duration-1000 delay-300"
+        className="delay-300 duration-1000"
         isInviewState={{
           trueState: 'opacity-1',
           falseState: 'opacity-0',
         }}
       >
         <div>
-          <div className="space-y-5 max-w-3xl mx-auto text-center">
+          <div className="mx-auto max-w-3xl space-y-5 text-center">
             <div
-              className="text-2xl text-center bg-clip-text text-transparent bg-gradient-to-r font-extrabold mx-auto sm:text-5xl"
+              className="mx-auto bg-gradient-to-r bg-clip-text text-center text-2xl font-extrabold text-transparent sm:text-5xl"
               style={{
                 backgroundImage:
                   'linear-gradient(179.1deg, #FFFFFF 0.77%, rgba(255, 255, 255, 0) 182.09%)',
@@ -27,24 +27,24 @@ const Hero = () => (
             >
               The all-in-one platform for your
               <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#9867F0] to-[#ED4E50]">
+              <span className="bg-gradient-to-r from-[#9867F0] to-[#ED4E50] bg-clip-text text-transparent">
                 digital products and services
               </span>
             </div>
-            <p className="max-w-xl mx-auto text-gray-300">
+            <p className="mx-auto max-w-xl text-gray-300">
               {`Consolidate all your digital products, coaching, subscriptions, courses, and email marketing into one link-in-bio store`}
             </p>
-            <div className="flex justify-center font-medium text-sm">
+            <div className="flex justify-center text-sm font-medium">
               <NavLink
                 href="/#pricing"
-                className="flex items-center text-white bg-purple-600 hover:bg-purple-500 active:bg-purple-700 "
+                className="flex items-center bg-purple-600 text-white hover:bg-purple-500 active:bg-purple-700"
               >
                 Get Started
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
-                  className="w-5 h-5"
+                  className="h-5 w-5"
                 >
                   <path
                     fillRule="evenodd"
@@ -64,7 +64,7 @@ const Hero = () => (
               width={1200}
               src={HeroImg.src}
               quality={100}
-              className="shadow-lg rounded-2xl"
+              className="rounded-2xl shadow-lg"
               alt="Mailgo"
             />
           </GradientWrapper>

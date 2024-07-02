@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import NavHeader from '../NavHeader';
 import NavLink from '../NavLink';
 
@@ -26,7 +26,7 @@ const Navbar = () => {
 
   return (
     <header className="relative">
-      <div className="custom-screen md:hidden">
+      <div className="custom-screen flex h-14 w-full items-center md:hidden">
         <NavHeader
           menuBtnEl={menuBtnEl}
           state={state}
@@ -34,23 +34,23 @@ const Navbar = () => {
         />
       </div>
       <nav
-        className={`md:text-sm md:static md:block ${
+        className={`md:static md:block md:text-sm ${
           state
-            ? 'bg-gray-900 absolute z-20 top-0 inset-x-0 rounded-b-2xl shadow-xl md:bg-gray-900'
+            ? 'absolute inset-x-0 top-0 z-20 rounded-b-2xl bg-gray-900 shadow-xl md:bg-gray-900'
             : 'hidden'
         }`}
       >
-        <div className="custom-screen items-center md:flex">
+        <div className="custom-screen mt-2 items-center md:flex">
           <NavHeader
             state={state}
             onClick={() => setState(!state)}
           />
           <div
-            className={`flex-1 items-center mt-8 text-gray-300 md:font-medium md:mt-0 md:flex ${
+            className={`mt-4 flex-1 items-center text-gray-300 md:mt-0 md:flex md:font-medium ${
               state ? 'block' : 'hidden'
             } `}
           >
-            <ul className="flex-1 justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
+            <ul className="flex-1 items-center justify-center space-y-6 md:flex md:space-x-6 md:space-y-0">
               {navigation.map((item, idx) => {
                 return (
                   <li
@@ -58,6 +58,7 @@ const Navbar = () => {
                     className="hover:text-gray-50"
                   >
                     <Link
+                      onClick={() => setState(false)}
                       href={item.href}
                       className="block"
                     >
@@ -67,7 +68,7 @@ const Navbar = () => {
                 );
               })}
             </ul>
-            <div className="gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
+            <div className="mt-6 items-center justify-end gap-x-6 space-y-6 md:mt-0 md:flex md:space-y-0">
               {/* <Link
                 href="/signin"
                 className="block hover:text-gray-50"
@@ -76,14 +77,14 @@ const Navbar = () => {
               </Link> */}
               <NavLink
                 href="/signin"
-                className="flex items-center justify-center gap-x-1 text-sm text-white font-medium custom-btn-bg border border-gray-500 active:bg-gray-900 md:inline-flex"
+                className="custom-btn-bg flex items-center justify-center gap-x-1 border border-gray-500 text-sm font-medium text-white active:bg-gray-900 md:inline-flex"
               >
                 {`Sign in`}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
-                  className="w-5 h-5"
+                  className="h-5 w-5"
                 >
                   <path
                     fillRule="evenodd"

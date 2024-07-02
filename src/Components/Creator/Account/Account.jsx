@@ -47,9 +47,9 @@ const Account = () => {
     <>
       <div className="top-container">
         <Header title="Account Details" />
-        <div className="flex  justify-center">
+        <div className="flex justify-center">
           <div
-            className={`${classes.accountFormContainer}  w-full`}
+            className={`${classes.accountFormContainer} w-full`}
           >
             <div
               className={
@@ -60,7 +60,7 @@ const Account = () => {
                 <LoadingOverlay
                   visible={loadingImage}
                   zIndex={1000}
-                  className="rounded-full	"
+                  className="rounded-full"
                   overlayProps={{ radius: 'sm', blur: 2 }}
                   loaderProps={{
                     color: 'pink',
@@ -69,7 +69,7 @@ const Account = () => {
                 />
                 {user?.profilePic ? (
                   <Image
-                    className="w-[66px] h-[66px] overflow-hidden rounded-full"
+                    className="h-[66px] w-[66px] overflow-hidden rounded-full"
                     src={user.profilePic}
                     width={66}
                     height={66}

@@ -90,17 +90,17 @@ const FaqsCard = props => {
 
   return (
     <div
-      className="space-y-3 mt-5 overflow-hidden border-b border-gray-600"
+      className="mt-5 space-y-3 overflow-hidden border-b border-gray-600"
       key={idx}
       onClick={handleOpenAnswer}
     >
-      <h4 className="cursor-pointer pb-5 flex items-center justify-between text-lg text-gray-50 font-medium">
+      <h4 className="flex cursor-pointer items-center justify-between pb-5 text-lg font-medium text-gray-50">
         {faqsList.q}
         {state ? (
           <div className="">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-gray-500 ml-2"
+              className="ml-2 h-5 w-5 text-gray-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -117,7 +117,7 @@ const FaqsCard = props => {
           <div className="">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-gray-500 ml-2"
+              className="ml-2 h-5 w-5 text-gray-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -178,23 +178,23 @@ const FAQ = () => {
   return (
     <SectionWrapper id="faqs">
       <LayoutEffect
-        className="duration-1000 delay-300"
+        className="delay-300 duration-1000"
         isInviewState={{
           trueState: 'opacity-1',
           falseState: 'opacity-0 translate-y-12',
         }}
       >
-        <section className="leading-relaxed max-w-screen-xl mt-12 mx-auto px-4 md:px-8">
+        <section className="mx-auto mt-12 max-w-screen-xl px-4 leading-relaxed md:px-8">
           <div className="space-y-3 text-center">
-            <h1 className="text-3xl text-gray-50 font-semibold">
+            <h1 className="text-3xl font-semibold text-gray-50">
               Frequently Asked Questions
             </h1>
-            <p className="text-gray-400 max-w-lg mx-auto">
+            <p className="mx-auto max-w-lg text-gray-400">
               Answered all frequently asked questions, Still
               confused? feel free to contact us.
             </p>
           </div>
-          <div className="mt-14 max-w-2xl mx-auto">
+          <div className="mx-auto mt-14 max-w-2xl">
             {faqsList.map((item, idx) => (
               <FaqsCard
                 idx={idx}

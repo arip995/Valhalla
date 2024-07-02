@@ -78,7 +78,7 @@ export function AllProducts() {
       color={theme.colors[6]}
     >
       <Text className={classes.title}>Create Products</Text>
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col gap-4 md:flex-row">
         {items}
       </div>
     </div>
