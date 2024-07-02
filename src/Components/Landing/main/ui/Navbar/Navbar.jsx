@@ -26,7 +26,7 @@ const Navbar = () => {
 
   return (
     <header className="relative">
-      <div className="custom-screen flex h-14 w-full items-center md:hidden">
+      <div className="custom-screen flex h-16 w-full items-center md:hidden">
         <NavHeader
           menuBtnEl={menuBtnEl}
           state={state}
@@ -76,10 +76,10 @@ const Navbar = () => {
                 Sign in
               </Link> */}
               <NavLink
-                href="/signin"
+                href="/signup"
                 className="custom-btn-bg flex items-center justify-center gap-x-1 border border-gray-500 text-sm font-medium text-white active:bg-gray-900 md:inline-flex"
               >
-                {`Sign in`}
+                {`Sign up`}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"

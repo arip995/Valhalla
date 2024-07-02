@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Brand from '../Brand';
 
 const NavHeader = ({ onClick, state, menuBtnEl }) => (
-  <div className="flex w-full items-center justify-between py-5 md:block md:w-fit">
+  <div className="flex w-full items-center justify-between py-3 md:block md:w-fit">
     <Link href="/">
       <Brand />
     </Link>
