@@ -61,6 +61,7 @@ const Account = () => {
                 <LoadingOverlay
                   visible={loadingImage}
                   zIndex={1000}
+                  className="rounded-full	"
                   overlayProps={{ radius: 'sm', blur: 2 }}
                   loaderProps={{
                     color: 'pink',
@@ -69,10 +70,10 @@ const Account = () => {
                 />
                 {user?.profilePic ? (
                   <Image
-                    className="w-[56px] h-[56px] overflow-hidden rounded-full"
+                    className="w-[66px] h-[66px] overflow-hidden rounded-full"
                     src={user.profilePic}
-                    width={56}
-                    height={56}
+                    width={66}
+                    height={66}
                     quality={100}
                   />
                 ) : (
