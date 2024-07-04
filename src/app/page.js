@@ -10,19 +10,28 @@ import VisualFeatures from '@/Components/Landing/main/ui/VisualFeatures';
 import '@mantine/notifications/styles.css';
 import '../styles/landing/main.css';
 
-export const metadata = {
-  title:
-    'Nexify: all-in-one platform for your digital products and services',
-  description:
-    'The all-in-one platform for your digital products and services',
-  openGraph: {
-    images: [
-      'https://nexify-try.s3.ap-south-1.amazonaws.com/a4aa635c-bae8-4b6a-9201-fd48eb3175fd.png',
-    ],
-  },
-};
+export async function generateMetadata(
+  { params, searchParams },
+  parent
+) {
+  const previousImages =
+    (await parent).openGraph?.images || [];
 
-export default function Page() {
+  return {
+    title:
+      'Nexify: all-in-one platform for your digital products and services',
+    description:
+      'The all-in-one platform for your digital products and services',
+    openGraph: {
+      images: [
+        'https://nexify-try.s3.ap-south-1.amazonaws.com/11d6044f-d452-4c13-b4de-e9aa1a08a164.png',
+        ...previousImages,
+      ],
+    },
+  };
+}
+
+export default function Page({ params, searchParams }) {
   return (
     <div className="relative flex flex-col bg-gray-900">
       <div className="sticky top-0 z-50 bg-gray-900">
