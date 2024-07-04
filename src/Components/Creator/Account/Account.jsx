@@ -120,11 +120,11 @@ const Account = () => {
               ) : null}
             </div>
             <Fieldset
+              radius="md"
               classNames={{
                 legend: classes.legend,
               }}
               legend="Personal information"
-              radius="lg"
               p="lg"
             >
               <form
@@ -163,11 +163,11 @@ const Account = () => {
               </form>
             </Fieldset>
             <Fieldset
+              radius="md"
               classNames={{
                 legend: classes.legend,
               }}
               legend="Username"
-              radius="lg"
               p="lg"
             >
               <TextInput

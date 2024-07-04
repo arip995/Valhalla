@@ -31,11 +31,11 @@ const ContactInfo = () => {
   return (
     <>
       <Fieldset
+        radius="md"
         classNames={{
           legend: classes.legend,
         }}
         legend="Contact information"
-        radius="lg"
         p="lg"
       >
         <TextInput
@@ -74,11 +74,11 @@ const ContactInfo = () => {
         />
       </Fieldset>
       <Fieldset
+        radius="md"
         classNames={{
           legend: classes.legend,
         }}
         legend="Support information"
-        radius="lg"
         p="lg"
       >
         <TextInput

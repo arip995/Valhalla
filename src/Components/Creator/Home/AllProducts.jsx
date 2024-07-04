@@ -11,6 +11,7 @@ import {
 } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import classes from '../../../styles/creator/Home/AllProducts.module.css';
+import Link from 'next/link';
 
 export function AllProducts() {
   const router = useRouter();
@@ -20,6 +21,7 @@ export function AllProducts() {
       title: 'Locked Content',
       icon: IconLockDollar,
       color: 'grape',
+      path: '/app/lockedcontent',
       onClick: () => {
         router.push('/app/lockedcontent');
       },
@@ -28,6 +30,7 @@ export function AllProducts() {
       title: 'Telegram Integration',
       icon: IconBrandTelegram,
       color: 'blue',
+      path: '/app/telegram',
       onClick: () => {
         router.push('/app/telegram');
       },
@@ -36,6 +39,7 @@ export function AllProducts() {
       title: 'Paymnent Page',
       icon: IconCreditCard,
       color: 'violet',
+      path: '/app/paymentpage',
       onClick: () => {
         router.push('/app/paymentpage');
       },
@@ -45,6 +49,7 @@ export function AllProducts() {
       title: 'Courses',
       icon: IconCertificate,
       color: 'indigo',
+      path: '/app/courses',
       onClick: () => {
         router.push('/app/courses');
       },
@@ -52,10 +57,10 @@ export function AllProducts() {
   ];
 
   const items = mockdata.map(item => (
-    <UnstyledButton
+    <Link
+      href={item.path}
       key={item.title}
       className={classes.item}
-      onClick={item.onClick}
     >
       <item.icon
         className=""
@@ -69,7 +74,7 @@ export function AllProducts() {
       >
         {item.title}
       </Text>
-    </UnstyledButton>
+    </Link>
   ));
 
   return (

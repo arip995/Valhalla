@@ -169,10 +169,10 @@ const useCreateTelegram = () => {
           ? createTelegramForm.values
               .isClickedAtleastOnce && 'Price is reqiuired'
           : value < 20
-          ? createTelegramForm.values
-              .isClickedAtleastOnce &&
-            'Price must be more than 20'
-          : null,
+            ? createTelegramForm.values
+                .isClickedAtleastOnce &&
+              'Price must be more than 20'
+            : null,
     },
   });
 
@@ -340,8 +340,12 @@ const useCreateTelegram = () => {
         '/telegram/create_new',
         payload
       );
-      console.log(data.data);
-      router.push(`/tg/${data.data?.data?.channelId}`);
+      console.log(
+        `/dashboard/tg/${data.data?.data?.channelId}`
+      );
+      router.push(
+        `/dashboard/tg/${data.data?.data?.channelId}`
+      );
     } catch (error) {
       setLoading(false);
       toast.error(error?.response?.data?.message);

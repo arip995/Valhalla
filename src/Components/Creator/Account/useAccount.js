@@ -99,6 +99,10 @@ const useAccount = () => {
     const fileSize = file.size;
 
     if (fileType.startsWith('image/')) {
+      if (fileType.startsWith('image/svg+xml')) {
+        toast.error('Svg is not accepted');
+        return;
+      }
       if (fileSize <= 10 * 1024 * 1024) {
         convertFileToBase64(file);
       } else {

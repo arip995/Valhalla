@@ -26,10 +26,11 @@ const CreateTelegram = ({ data }) => {
     user,
     loading,
   } = useCreateTelegram(data);
+
   return (
     <>
       <div className="lc-container lc-container-animation">
-        <div className="w-full flex  flex-col items-center gap-2">
+        <div className="flex w-full flex-col items-center gap-2">
           <HeaderWrapper
             titleOne={'Create Telegram Integration'}
           />
