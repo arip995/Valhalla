@@ -23,10 +23,28 @@ export async function generateMetadata(
     description:
       'The all-in-one platform for your digital products and services',
     openGraph: {
+      siteName: 'Nexify',
+      title:
+        'Nexify: all-in-one platform for your digital products and services',
+      description:
+        'The all-in-one platform for your digital products and services',
       images: [
         'https://nexify-try.s3.ap-south-1.amazonaws.com/11d6044f-d452-4c13-b4de-e9aa1a08a164.png',
         ...previousImages,
       ],
+    },
+    robots: {
+      index: false,
+      follow: true,
+      nocache: true,
+      googleBot: {
+        index: true,
+        follow: false,
+        noimageindex: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
   };
 }
