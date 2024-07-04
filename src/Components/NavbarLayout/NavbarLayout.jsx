@@ -1,4 +1,5 @@
 'use client';
+
 import {
   AppShell,
   Burger,
@@ -32,11 +33,14 @@ import Logo from '../../app/icon.png';
 import '../../styles/common/root-dashboard-container.css';
 import { usePathname, useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
+import Link from 'next/link';
+import useIsBrowser from '@/Utils/useIsBrowser';
 
 function NavbarLink({
   Icon,
   label,
   active,
+  path,
   onClick,
   create = false,
 }) {
@@ -49,18 +53,20 @@ function NavbarLink({
           my="sm"
         />
       ) : (
-        <NavLink
-          style={{ borderRadius: '20px' }}
-          onClick={onClick}
-          label={label}
-          leftSection={
-            <Icon
-              style={{ width: rem(15), height: rem(15) }}
-              stroke={1.5}
-            />
-          }
-          active={active}
-        ></NavLink>
+        <Link href={path}>
+          <NavLink
+            style={{ borderRadius: '20px' }}
+            onClick={onClick}
+            label={label}
+            leftSection={
+              <Icon
+                style={{ width: rem(15), height: rem(15) }}
+                stroke={1.5}
+              />
+            }
+            active={active}
+          ></NavLink>
+        </Link>
       )}
     </>
   );
@@ -72,6 +78,7 @@ export function NavbarLayout({ children }) {
   const theme = useMantineTheme();
   const pathName = usePathname();
   const [active, setActive] = useState(pathName);
+  const isBrowser = useIsBrowser();
   const mockdata = [
     {
       icon: IconHome2,
@@ -80,7 +87,7 @@ export function NavbarLayout({ children }) {
       path: '/creator/home',
       onClick: () => {
         toggle();
-        setActive('/creator/home');
+        // setActive('/creator/home');
         router.push('/creator/home');
       },
     },
@@ -91,7 +98,7 @@ export function NavbarLayout({ children }) {
       path: '/creator/transaction',
       onClick: () => {
         toggle();
-        setActive('/creator/transaction');
+        // setActive('/creator/transaction');
         router.push('/creator/transaction');
       },
     },
@@ -102,7 +109,7 @@ export function NavbarLayout({ children }) {
       path: '/creator/billing',
       onClick: () => {
         toggle();
-        setActive('/creator/billing');
+        // setActive('/creator/billing');
         router.push('/creator/billing');
       },
     },
@@ -113,7 +120,7 @@ export function NavbarLayout({ children }) {
       path: '/creator/account',
       onClick: () => {
         toggle();
-        setActive('/creator/account');
+        // setActive('/creator/account');
         router.push('/creator/account');
       },
     },
@@ -125,7 +132,7 @@ export function NavbarLayout({ children }) {
       path: '/app/lockedcontent',
       onClick: () => {
         toggle();
-        setActive('/app/lockedcontent');
+        // setActive('/app/lockedcontent');
         router.push('/app/lockedcontent');
       },
     },
@@ -136,7 +143,7 @@ export function NavbarLayout({ children }) {
       path: '/app/telegram',
       onClick: () => {
         toggle();
-        setActive('/app/telegram');
+        // setActive('/app/telegram');
         router.push('/app/telegram');
       },
     },
@@ -174,7 +181,7 @@ export function NavbarLayout({ children }) {
       path: '/app/paymentpage',
       onClick: () => {
         toggle();
-        setActive('/app/paymentpage');
+        // setActive('/app/paymentpage');
         router.push('/app/paymentpage');
       },
     },
@@ -194,13 +201,13 @@ export function NavbarLayout({ children }) {
       path: '/app/courses',
       onClick: () => {
         toggle();
-        setActive('/app/courses');
+        // setActive('/app/courses');
         router.push('/app/courses');
       },
     },
   ];
   const links = mockdata.map((link, index) => {
-    const { icon: Icon, label, value } = link;
+    const { icon: Icon, label, value, path } = link;
 
     return (
       <NavbarLink
@@ -208,6 +215,7 @@ export function NavbarLayout({ children }) {
         Icon={Icon}
         label={label}
         key={link.label}
+        path={path}
         active={link.path === active}
         onClick={() => link.onClick()}
       />
@@ -256,7 +264,9 @@ export function NavbarLayout({ children }) {
           Nexify
         </AppShell.Section>
         <AppShell.Section grow p={8} component={ScrollArea}>
-          <div className="flex flex-col gap-2">{links}</div>
+          <div className="flex flex-col gap-2">
+            {!!isBrowser && links}
+          </div>
         </AppShell.Section>
         <AppShell.Section className={classes.footer}>
           <NavLink
