@@ -23,14 +23,14 @@ const Footer = () => {
   return (
     <footer className="mt-20 w-full">
       <div className="custom-screen">
-        <div className="flex gap-8">
+        <div className="flex justify-center gap-8">
           <a
             href="/"
             target="_blank"
             aria-label="social media"
           >
             <svg
-              className="h-6 w-6 duration-150 hover:text-gray-200"
+              className="h-6 w-6 text-gray-400 duration-150 hover:text-blue-500"
               fill="none"
               viewBox="0 0 48 48"
             >
@@ -56,7 +56,7 @@ const Footer = () => {
             aria-label="social media"
           >
             <svg
-              className="h-6 w-6 duration-150 hover:text-gray-200"
+              className="h-6 w-6 text-gray-400 duration-150 hover:text-blue-300"
               fill="none"
               viewBox="0 0 48 48"
             >
@@ -82,7 +82,7 @@ const Footer = () => {
             aria-label="social media"
           >
             <svg
-              className="h-6 w-6 duration-150 hover:text-gray-200"
+              className="h-6 w-6 text-gray-400 duration-150 hover:text-blue-600"
               fill="none"
               viewBox="0 0 48 48"
             >

@@ -231,7 +231,7 @@ const Features = () => {
           }}
         >
           <div className="relative mt-12">
-            <ul className="grid grid-cols-2 gap-8">
+            <ul className="grid grid-cols-1 gap-8 md:grid-cols-2">
               {featuresList.map((item, idx) => (
                 <li
                   key={idx}

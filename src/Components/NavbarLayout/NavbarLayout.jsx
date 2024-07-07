@@ -55,6 +55,7 @@ function NavbarLink({
       ) : (
         <Link href={path}>
           <NavLink
+            // variant="filled"
             style={{ borderRadius: '20px' }}
             onClick={onClick}
             label={label}

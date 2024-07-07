@@ -1,5 +1,5 @@
 import { compact } from '@/Utils/Common';
-import { Button, Input } from '@mantine/core';
+import { Button, Input, Text } from '@mantine/core';
 import { randomId } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
@@ -189,12 +189,7 @@ const PlansAndPricing = ({ stepThreeForm }) => {
         {plans.map((plan, index) => {
           if (plan.editing) {
             return (
-              <Input.Wrapper
-                key={plan.id}
-                error={
-                  stepThreeForm.errors?.subscriptionPlans
-                }
-              >
+              <Input.Wrapper key={plan.id}>
                 <PlanEditCard
                   key={plan.id}
                   originalState={plan}
@@ -207,6 +202,14 @@ const PlansAndPricing = ({ stepThreeForm }) => {
                   deletePlan={deletePlan}
                   onCancel={onCancel}
                 />
+                {stepThreeForm.errors?.subscriptionPlans ? (
+                  <div className="text-xs text-red-400">
+                    {
+                      stepThreeForm.errors
+                        ?.subscriptionPlans
+                    }
+                  </div>
+                ) : null}
               </Input.Wrapper>
             );
           } else {
@@ -225,7 +228,6 @@ const PlansAndPricing = ({ stepThreeForm }) => {
           fullWidth
           variant="outline"
           onClick={addNewPlan}
-          color="blue"
           radius="md"
         >
           + Add another plan
