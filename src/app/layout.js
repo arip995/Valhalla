@@ -1,6 +1,5 @@
 import { Inter } from 'next/font/google';
 import '@mantine/core/styles.css';
-import '@mantine/charts/styles.css';
 import './globals.css';
 import {
   ColorSchemeScript,
@@ -8,6 +7,7 @@ import {
   createTheme,
 } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({
@@ -31,6 +31,7 @@ export default function RootLayout({ children }) {
         <MantineProvider theme={theme}>
           <Notifications position="top-right" />
           {children}
+          <SpeedInsights />
         </MantineProvider>
       </body>
     </html>
