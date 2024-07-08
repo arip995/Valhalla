@@ -15,7 +15,7 @@ const ViewProductHeader = ({
       <div className="vph-avatar-container">
         {profilePic ? (
           <Image
-            className="w-[80px] h-[80px] overflow-hidden rounded-full"
+            className="h-[80px] w-[80px] overflow-hidden rounded-full"
             src={profilePic}
             width={80}
             height={80}
@@ -23,7 +23,7 @@ const ViewProductHeader = ({
           />
         ) : (
           <Avatar
-            className="w-[80px] h-[80px]"
+            className="h-[80px] w-[80px]"
             color="initials"
             size="lg"
             name={`${firstName || ''} ${lastName || ''}`}

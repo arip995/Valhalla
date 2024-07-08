@@ -6,7 +6,7 @@ async function getData(id) {
     {
       next: {
         tags: ['lc'],
-        revalidate: 3600,
+        revalidate: 3600000,
       },
     }
   );

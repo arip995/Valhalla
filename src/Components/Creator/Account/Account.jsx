@@ -79,6 +79,7 @@ const Account = () => {
                   <Avatar
                     color="initials"
                     size="lg"
+                    className="h-[66px] w-[66px]"
                     name={`${user?.firstName || ''} ${
                       user?.lastName || ''
                     }`}
@@ -103,7 +104,7 @@ const Account = () => {
                   </Button>
                 )}
               </FileButton>
-              {/* {user?.profilePic ? (
+              {user?.profilePic ? (
                 <ActionIcon
                   variant="outline"
                   color="gray"
@@ -117,7 +118,7 @@ const Account = () => {
                     color="gray"
                   />
                 </ActionIcon>
-              ) : null} */}
+              ) : null}
             </div>
             <Fieldset
               radius="md"
