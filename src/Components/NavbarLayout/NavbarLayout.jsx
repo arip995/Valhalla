@@ -291,6 +291,7 @@ export function NavbarLayout({ children }) {
         </AppShell.Section>
       </AppShell.Navbar>
       <AppShell.Main
+        className={classes.appshellMain}
         style={
           {
             // backgroundColor: theme.colors.gray[1],

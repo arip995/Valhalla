@@ -51,7 +51,9 @@
 }
 
 .company {
-  font-family: Greycliff CF, var(--mantine-font-family);
+  font-family:
+    Greycliff CF,
+    var(--mantine-font-family);
   font-weight: 900;
   font-size: large;
   display: flex;
@@ -75,7 +77,16 @@
 .header {
   background: var(--mantine-color-gray-9);
   color: var(--mantine-color-white);
-  font-family: Greycliff CF, var(--mantine-font-family);
+  font-family:
+    Greycliff CF,
+    var(--mantine-font-family);
   font-weight: 900;
   font-size: large;
+}
+
+.appshellMain {
+  background-color: light-dark(
+    var(--mantine-color-gray-0),
+    var(--mantine-color-gray-900)
+  );
 }
