@@ -25,7 +25,6 @@ const HomeChart = () => {
         {
           name: 'temperature',
           label: 'Avg. Temperature',
-          color: 'green.6',
         },
       ]}
       dataKey="date"
