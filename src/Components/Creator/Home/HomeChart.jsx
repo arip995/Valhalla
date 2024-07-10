@@ -22,7 +22,11 @@ const HomeChart = () => {
       h={300}
       data={data}
       series={[
-        { name: 'temperature', label: 'Avg. Temperature' },
+        {
+          name: 'temperature',
+          label: 'Avg. Temperature',
+          color: 'green.6',
+        },
       ]}
       dataKey="date"
       strokeWidth={2}
