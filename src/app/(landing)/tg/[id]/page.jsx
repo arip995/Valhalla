@@ -2,7 +2,7 @@ import ViewTelegram from '@/Components/Landing/tg/ViewTelegram';
 
 async function getData(id) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/tg/get/${id}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/telegram/get_group_data?productId=${id}`,
     {
       next: {
         tags: ['tg'],
@@ -15,5 +15,7 @@ async function getData(id) {
 
 export default async function Page({ params }) {
   const { data } = await getData(params.id);
-  return <ViewTelegram id={params.id} />;
+  return (
+    <ViewTelegram prefetchedData={data} id={params.id} />
+  );
 }

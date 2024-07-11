@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ViewTelegram = ({ id }) => {
+const ViewTelegram = ({ prefetchedData, id }) => {
   return <div>{id}</div>;
 };
 

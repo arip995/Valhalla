@@ -134,7 +134,7 @@ const Pricing = () => {
                           stroke-width="1"
                           stroke-linecap="round"
                           stroke-linejoin="round"
-                          class="icon icon-tabler icons-tabler-outline icon-tabler-x"
+                          className="icon icon-tabler icons-tabler-outline icon-tabler-x"
                         >
                           <path
                             stroke="none"

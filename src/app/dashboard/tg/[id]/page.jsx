@@ -1,8 +1,7 @@
 import TelegramDashboard from '@/Components/TelegramDashboard/TelegramDashboard';
-import React from 'react';
 
 const page = async ({ params }) => {
-  return <TelegramDashboard data={data} />;
+  return <TelegramDashboard productId={params.id} />;
 };
 
 export default page;

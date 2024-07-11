@@ -23,7 +23,7 @@ const Features = () => {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"
+            className="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram"
           >
             <path
               stroke="none"
@@ -57,7 +57,7 @@ const Features = () => {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-credit-card-pay"
+            className="icon icon-tabler icons-tabler-outline icon-tabler-credit-card-pay"
           >
             <path
               stroke="none"
@@ -96,7 +96,7 @@ const Features = () => {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-clock"
+            className="icon icon-tabler icons-tabler-outline icon-tabler-calendar-clock"
           >
             <path
               stroke="none"
@@ -135,7 +135,7 @@ const Features = () => {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-certificate"
+            className="icon icon-tabler icons-tabler-outline icon-tabler-certificate"
           >
             <path
               stroke="none"

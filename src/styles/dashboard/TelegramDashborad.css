@@ -1,0 +1,14 @@
+.tg-dashboard-container {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: light-dark(
+    var(--mantine-color-gray-0),
+    var(--mantine-color-gray-900)
+  );
+  .tg-dashboard-content-container {
+    width: 100%;
+    max-width: 600px;
+  }
+}

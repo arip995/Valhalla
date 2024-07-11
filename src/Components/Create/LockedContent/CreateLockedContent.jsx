@@ -23,17 +23,17 @@ import useCreateLockedContent from './useCreateLockedContent';
 const CreateLockedContent = ({ data }) => {
   const {
     createLockedContentForm,
+    loading,
     onCreate,
     handleFileChange,
     onFileDelete,
     setIsSaveClickedAtleastOnce,
-    loading,
   } = useCreateLockedContent(data);
 
   return (
     <>
       <div className="lc-container lc-container-animation">
-        <div className="w-full flex  flex-col items-center gap-2">
+        <div className="flex w-full flex-col items-center gap-2">
           <HeaderWrapper
             titleOne={'Create Locked Content'}
           />

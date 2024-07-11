@@ -2,13 +2,13 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer class="bg-white">
-      <div class="container px-6 py-8 mx-auto">
-        <div class="flex flex-col items-center text-center">
-          <div class="flex flex-wrap justify-center mt-6 -mx-4">
+    <footer className="bg-white">
+      <div className="container mx-auto px-6 py-8">
+        <div className="flex flex-col items-center text-center">
+          <div className="-mx-4 mt-6 flex flex-wrap justify-center">
             <a
               href="/privacy-policy"
-              class="mx-4 text-xs text-gray-600 transition-colors duration-300 hover:text-blue-500"
+              className="mx-4 text-xs text-gray-600 transition-colors duration-300 hover:text-blue-500"
               aria-label="Reddit"
             >
               {' '}
@@ -17,7 +17,7 @@ const Footer = () => {
 
             <a
               href="/refund-and-cancellation"
-              class="mx-4 text-xs text-gray-600 transition-colors duration-300 hover:text-blue-500"
+              className="mx-4 text-xs text-gray-600 transition-colors duration-300 hover:text-blue-500"
               aria-label="Reddit"
             >
               {' '}
@@ -26,7 +26,7 @@ const Footer = () => {
 
             <a
               href="/terms-and-conditions"
-              class="mx-4 text-xs text-gray-600 transition-colors duration-300 hover:text-blue-500"
+              className="mx-4 text-xs text-gray-600 transition-colors duration-300 hover:text-blue-500"
               aria-label="Reddit"
             >
               {' '}
@@ -35,21 +35,21 @@ const Footer = () => {
           </div>
         </div>
 
-        <hr class="my-4 border-gray-200  dark:border-gray-700" />
+        <hr className="my-4 border-gray-200 dark:border-gray-700" />
 
-        <div class="flex flex-col items-center sm:flex-row sm:justify-between">
-          <p class="text-xs text-gray-500 dark:text-gray-600">
+        <div className="flex flex-col items-center sm:flex-row sm:justify-between">
+          <p className="text-xs text-gray-500 dark:text-gray-600">
             © Copyright 2021. All Rights Reserved.
           </p>
 
-          <div class="flex -mx-2">
+          <div className="-mx-2 flex">
             <a
               href="#"
-              class="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400"
+              className="mx-2 text-gray-600 transition-colors duration-300 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-400"
               aria-label="Reddit"
             >
               <svg
-                class="w-5 h-5 fill-current"
+                className="h-5 w-5 fill-current"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -60,11 +60,11 @@ const Footer = () => {
 
             <a
               href="#"
-              class="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+              className="mx-2 text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
               aria-label="Facebook"
             >
               <svg
-                class="w-5 h-5 fill-current"
+                className="h-5 w-5 fill-current"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -75,11 +75,11 @@ const Footer = () => {
 
             <a
               href="#"
-              class="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-800"
+              className="mx-2 text-gray-600 transition-colors duration-300 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-800"
               aria-label="Github"
             >
               <svg
-                class="w-5 h-5 fill-current"
+                className="h-5 w-5 fill-current"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
