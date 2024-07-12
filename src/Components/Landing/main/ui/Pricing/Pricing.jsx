@@ -151,15 +151,17 @@ const Pricing = () => {
                   ))}
                 </ul>
                 <div className="pt-8">
-                  <Button
-                    className={`w-full rounded-full text-white ring-offset-2 focus:ring ${
-                      item.isMostPop
-                        ? 'bg-purple-600 ring-purple-600 hover:bg-purple-500 focus:bg-purple-700'
-                        : 'bg-gray-800 ring-gray-800 hover:bg-gray-700'
-                    }`}
-                  >
-                    <a href="/signup">Get Started</a>
-                  </Button>
+                  <a href="/signup">
+                    <Button
+                      className={`w-full rounded-full text-white ring-offset-2 focus:ring ${
+                        item.isMostPop
+                          ? 'bg-purple-600 ring-purple-600 hover:bg-purple-500 focus:bg-purple-700'
+                          : 'bg-gray-800 ring-gray-800 hover:bg-gray-700'
+                      }`}
+                    >
+                      Get Started
+                    </Button>
+                  </a>
                 </div>
               </div>
             </div>
