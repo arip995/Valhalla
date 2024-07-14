@@ -30,15 +30,15 @@ export function middleware(req) {
     }
   }
 
-  // if (
-  //   !accessToken &&
-  //   !req.nextUrl.pathname.startsWith('/signin') &&
-  //   !req.nextUrl.pathname.startsWith('/signup')
-  // ) {
-  //   return NextResponse.redirect(
-  //     new URL('/signin', req.url)
-  //   );
-  // }
+  if (
+    !accessToken &&
+    !req.nextUrl.pathname.startsWith('/signin') &&
+    !req.nextUrl.pathname.startsWith('/signup')
+  ) {
+    return NextResponse.redirect(
+      new URL('/signin', req.url)
+    );
+  }
 }
 
 export const config = {
