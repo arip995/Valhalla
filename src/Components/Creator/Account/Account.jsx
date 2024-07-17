@@ -70,6 +70,7 @@ const Account = () => {
                 {user?.profilePic ? (
                   <Image
                     className="h-[66px] w-[66px] overflow-hidden rounded-full"
+                    alt=''
                     src={user.profilePic}
                     width={66}
                     height={66}
@@ -80,9 +81,8 @@ const Account = () => {
                     color="initials"
                     size="lg"
                     className="h-[66px] w-[66px]"
-                    name={`${user?.firstName || ''} ${
-                      user?.lastName || ''
-                    }`}
+                    name={`${user?.firstName || ''} ${user?.lastName || ''
+                      }`}
                     key={user?.lastName || ''}
                   />
                 )}

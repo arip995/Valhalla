@@ -1,5 +1,4 @@
 import { Inter } from 'next/font/google';
-import '@mantine/core/styles.css';
 import './globals.css';
 import {
   ColorSchemeScript,
@@ -8,6 +7,34 @@ import {
 } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import '@mantine/core/styles/global.css';
+import '@mantine/core/styles/UnstyledButton.css';
+import '@mantine/core/styles/Button.css';
+import '@mantine/core/styles/ScrollArea.css';
+import '@mantine/core/styles/UnstyledButton.css';
+import '@mantine/core/styles/Paper.css';
+import '@mantine/core/styles/Popover.css';
+import '@mantine/core/styles/CloseButton.css';
+import '@mantine/core/styles/Loader.css';
+import '@mantine/core/styles/Overlay.css';
+import '@mantine/core/styles/ModalBase.css';
+import '@mantine/core/styles/Input.css';
+import '@mantine/core/styles/InlineInput.css';
+import '@mantine/core/styles/Flex.css';
+import '@mantine/core/styles/Grid.css';
+import '@mantine/core/styles/SimpleGrid.css';
+import '@mantine/core/styles/Group.css';
+import '@mantine/core/styles/Anchor.css';
+import '@mantine/core/styles/TypographyStylesProvider.css';
+import '@mantine/core/styles/AppShell.css';
+import '@mantine/core/styles/NavLink.css';
+import '@mantine/core/styles/NumberInput.css';
+import '@mantine/core/styles/Radio.css';
+import '@mantine/core/styles/Avatar.css';
+import '@mantine/core/styles/LoadingOverlay.css';
+import '@mantine/core/styles/ActionIcon.css';
+import '@mantine/core/styles/Fieldset.css';
+import '@mantine/core/styles/Combobox.css';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({
