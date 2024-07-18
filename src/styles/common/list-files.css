@@ -7,13 +7,21 @@
   .list-files-content-container {
     display: flex;
     justify-content: space-between;
-    background-color: var(--mantine-color-gray-2);
+    background-color: light-dark(
+      var(--mantine-color-gray-1),
+      var(--mantine-color-gray-8)
+    );
+    border: 1px solid
+      light-dark(
+        var(--mantine-color-gray-3),
+        var(--mantine-color-dark-4)
+      );
     border-radius: 8px;
     padding: 8px;
   }
   .list-files-image {
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     border-radius: 8px;
   }
   .list-files-text-container {
@@ -23,18 +31,18 @@
   }
   .list-files-text {
     color: var(--mantine-color-gray-7);
-    text-align: right;
+    text-align: left;
     font-size: small;
   }
   .list-files-delete {
-    padding: 4px;
+    padding: 5px;
     border-radius: 4px;
     &:hover {
       cursor: pointer;
-      background-color: var(--mantine-color-red-0);
+      background-color: var(--mantine-color-red-1);
     }
   }
   .list-files-delete-icon {
-    color: var(--mantine-color-red-8);
+    color: var(--mantine-color-red-9);
   }
 }

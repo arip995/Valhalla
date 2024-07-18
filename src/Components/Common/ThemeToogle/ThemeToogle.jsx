@@ -34,7 +34,7 @@ export function ThemeToggle() {
       >
         <IconSun
           className={cx(classes.icon, classes.light)}
-          stroke={1.5}
+          stroke={1.3}
         />
         <IconMoon
           className={cx(classes.icon, classes.dark)}

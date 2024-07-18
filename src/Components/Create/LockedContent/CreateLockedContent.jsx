@@ -33,7 +33,7 @@ const CreateLockedContent = ({ data }) => {
   return (
     <>
       <div className="lc-container lc-container-animation">
-        <div className="flex w-full flex-col items-center gap-2">
+        <div className="flex w-full flex-col items-center gap-2 ">
           <HeaderWrapper
             titleOne={'Create Locked Content'}
           />

@@ -1,6 +1,6 @@
 .icon {
-  width: rem(18px);
-  height: rem(18px);
+  width: rem(16px);
+  height: rem(16px);
 }
 
 .dark {
@@ -25,6 +25,6 @@
 
 .actionIcon {
   border-radius: 100%;
-  width: 32px;
+  width: 30px;
   height: 30px;
 }

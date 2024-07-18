@@ -40,7 +40,7 @@ const Header = ({ title, path, className }) => {
             </Link>
           </div>
         )}
-        <ThemeToggle />
+        {/* <ThemeToggle /> */}
       </div>
     </div>
   );

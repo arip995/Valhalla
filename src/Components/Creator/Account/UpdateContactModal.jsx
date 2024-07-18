@@ -120,7 +120,7 @@ const UpdateContactModal = ({
                 label="Email"
                 placeholder="hello@panda.dev"
                 value={email}
-                radius="md"
+                radius="sm"
                 onChange={e => {
                   setEmail(e.target.value);
                 }}
@@ -130,7 +130,7 @@ const UpdateContactModal = ({
                 label="Support Email"
                 placeholder="hello@panda.dev"
                 value={supportEmail}
-                radius="md"
+                radius="sm"
                 onChange={e => {
                   setSupportEmail(e.target.value);
                 }}
@@ -141,11 +141,11 @@ const UpdateContactModal = ({
                 type="number"
                 placeholder="6345325643"
                 value={phoneNumber}
-                radius="md"
+                radius="sm"
                 onChange={e => {
                   setPhoneNumber(e.target.value);
                 }}
-                leftSection={<Text size="sm">+91</Text>}
+                leftSection={<div className='text-sm'>+91</div>}
               />
             ) : (
               <TextInput
@@ -153,7 +153,7 @@ const UpdateContactModal = ({
                 type="number"
                 placeholder="6345325643"
                 value={supportPhoneNumber}
-                radius="md"
+                radius="sm"
                 onChange={e => {
                   setSupportPhoneNumber(e.target.value);
                 }}
