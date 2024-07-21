@@ -42,6 +42,10 @@ import '@mantine/core/styles/LoadingOverlay.css';
 import '@mantine/core/styles/ActionIcon.css';
 import '@mantine/core/styles/Fieldset.css';
 import '@mantine/core/styles/Combobox.css';
+import '@mantine/core/styles/PinInput.css';
+import '@mantine/core/styles/Burger.css';
+import '@mantine/core/styles/Stack.css';
+import '@mantine/core/styles/Text.css';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({

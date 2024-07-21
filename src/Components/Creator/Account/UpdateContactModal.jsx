@@ -175,13 +175,3 @@ const UpdateContactModal = ({
 };
 
 export default UpdateContactModal;
-
-// ${
-//   editEntity === 'email'
-//     ? 'Email'
-//     : editEntity === 'supportEmail'
-//     ? 'Support Email'
-//     : editEntity === 'phoneNumber'
-//     ? 'Phone Number'
-//     : 'Support Phone Number'
-// }

@@ -26,7 +26,9 @@ const useTelegramDashboard = productId => {
     getData(productId);
   }
 
-  console.log(tgData);
+  return {
+    data: tgData,
+  };
 };
 
 export default useTelegramDashboard;

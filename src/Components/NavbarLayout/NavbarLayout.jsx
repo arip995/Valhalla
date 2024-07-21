@@ -240,30 +240,32 @@ export function NavbarLayout({ children }) {
       <AppShell.Header className={classes.header}>
         <Group h="100%" px="xs">
           <Burger
-            color="white"
+            color="red"
             opened={opened}
             onClick={toggle}
-            hiddenFrom="xs"
-            size="sm"
+            // hiddenFrom="xs"
+            size="lg"
           />
           Nexify
         </Group>
       </AppShell.Header>
       <AppShell.Navbar>
-        <AppShell.Section
-          withHeader={false}
-          py={12}
-          pl={16}
-          className={classes.company}
-          onClick={() => {
-            toggle();
-            setActive('/creator/home');
-            router.push('/creator/home');
-          }}
-        >
-          <img height={30} width={30} src={Logo.src} />{' '}
-          Nexify
-        </AppShell.Section>
+        <Link href={'/creator/home'}>
+          <AppShell.Section
+            withHeader={false}
+            py={12}
+            pl={16}
+            className={classes.company}
+            onClick={() => {
+              toggle();
+              setActive('/creator/home');
+              router.push('/creator/home');
+            }}
+          >
+            <img height={30} width={30} src={Logo.src} />{' '}
+            Nexify
+          </AppShell.Section>
+        </Link>
         <AppShell.Section grow p={8} component={ScrollArea}>
           <div className="flex flex-col gap-2">
             {!!isBrowser && links}

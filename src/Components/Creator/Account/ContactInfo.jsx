@@ -29,14 +29,6 @@ const ContactInfo = () => {
   } = useContactSupportDetails();
   return (
     <>
-      {/* <Fieldset
-        radius="sm"
-        classNames={{
-          legend: classes.legend,
-        }}
-        legend="Contact information"
-        p="lg"
-      > */}
       <TextInput
         radius="sm"
         readOnly
@@ -70,15 +62,6 @@ const ContactInfo = () => {
           />
         }
       />
-      {/* </Fieldset> */}
-      {/* <Fieldset
-        radius="sm"
-        classNames={{
-          legend: classes.legend,
-        }}
-        legend="Support information"
-        p="lg"
-      > */}
       <TextInput
         radius="sm"
         readOnly
@@ -112,7 +95,6 @@ const ContactInfo = () => {
           />
         }
       />
-      {/* </Fieldset> */}
       <UpdateContactModal
         phoneNumber={phoneNumber}
         setPhoneNumber={setPhoneNumber}

@@ -10,11 +10,6 @@
     cursor: pointer;
   }
 }
-.accountProfilePhotoContainer {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
 .legend {
   font-size: 14px;
   font-weight: 600;
@@ -31,15 +26,14 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
+  gap: 24px;
   background-color: light-dark(
     var(--mantine-color-white),
     var(--mantine-color-dark-9)
   );
-
   border: 1px solid
     light-dark(
       var(--mantine-color-gray-3),
       var(--mantine-color-dark-4)
     );
-  gap: 24px;
 }
