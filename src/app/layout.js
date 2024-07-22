@@ -46,6 +46,7 @@ import '@mantine/core/styles/PinInput.css';
 import '@mantine/core/styles/Burger.css';
 import '@mantine/core/styles/Stack.css';
 import '@mantine/core/styles/Text.css';
+import '@mantine/core/styles/Divider.css';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({

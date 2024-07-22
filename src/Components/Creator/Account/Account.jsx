@@ -45,7 +45,7 @@ const Account = () => {
             className={`${classes.accountFormContainer} w-full rounded-sm shadow-sm	mt-6`}
           >
             <ProfilePic avatarImage={user?.profilePic} loading={loadingImage} name={`${user?.firstName || ''} ${user?.lastName || ''
-              }`} handleAvatarChange={handleFileChange} onRemoveAvatar={onRemoveImage} />
+              }`} handleAvatarChange={handleFileChange} onRemoveAvatar={onRemoveImage} showRemoveButton />
             <form
               className='flex flex-col gap-6'
               onSubmit={personInfoForm.onSubmit(

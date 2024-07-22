@@ -3,7 +3,7 @@ import { IconX } from '@tabler/icons-react'
 import Image from 'next/image'
 import React from 'react'
 
-const ProfilePic = ({ avatarImage, name, loading, handleAvatarChange, onRemoveAvatar, showRemoveButton = true }) => {
+const ProfilePic = ({ avatarImage, name, loading, handleAvatarChange, onRemoveAvatar, showRemoveButton = false, mime_types = ['image/*'] }) => {
     return (
         <div
             className='flex items-center gap-3'
@@ -20,55 +20,58 @@ const ProfilePic = ({ avatarImage, name, loading, handleAvatarChange, onRemoveAv
                 />
                 {avatarImage ? (
                     <Image
-                        className="h-[66px] w-[66px] overflow-hidden rounded-full"
+                        className="h-[88px] w-[88px] overflow-hidden rounded-full"
                         alt=''
                         src={avatarImage}
-                        width={66}
-                        height={66}
+                        width={88}
+                        height={88}
                         quality={100}
                     />
                 ) : (
                     <Avatar
                         color="initials"
                         size="lg"
-                        className="h-[66px] w-[66px]"
+                        className="h-[88px] w-[88px]"
                         name={name || 'A'}
                         key={name || 'A'}
                     />
                 )}
             </Box>
-
-            <FileButton
-                onChange={handleAvatarChange}
-                accept="image/*"
-            >
-                {props => (
-                    <Button
-                        variant="outline"
-                        color="gray"
-                        size="xs"
-                        radius="xl"
-                        {...props}
+            {!loading ?
+                <>
+                    <FileButton
+                        onChange={handleAvatarChange}
+                        accept={mime_types}
                     >
-                        {avatarImage ? 'Change' : 'Upload'}
-                    </Button>
-                )}
-            </FileButton>
-            {showRemoveButton && avatarImage ? (
-                <ActionIcon
-                    variant="outline"
-                    color="gray"
-                    size="md"
-                    radius="xl"
-                    onClick={onRemoveAvatar}
-                >
-                    <IconX
-                        style={{ width: '70%', height: '70%' }}
-                        stroke={1.5}
-                        color="gray"
-                    />
-                </ActionIcon>
-            ) : null}
+                        {props => (
+                            <Button
+                                variant="outline"
+                                color="gray"
+                                size="xs"
+                                radius="xl"
+                                {...props}
+                            >
+                                {avatarImage ? 'Change' : 'Upload'}
+                            </Button>
+                        )}
+                    </FileButton>
+                    {showRemoveButton && avatarImage ? (
+                        <ActionIcon
+                            variant="outline"
+                            color="gray"
+                            size="md"
+                            radius="xl"
+                            onClick={onRemoveAvatar}
+                        >
+                            <IconX
+                                style={{ width: '70%', height: '70%' }}
+                                stroke={1.5}
+                                color="gray"
+                            />
+                        </ActionIcon>
+                    ) : null}
+                </>
+                : null}
         </div>
     )
 }

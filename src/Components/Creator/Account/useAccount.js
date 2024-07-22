@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axiosInstance from '@/Utils/AxiosInstance';
+import { handleFile } from '@/Utils/HandleFiles';
 import useUser from '@/Utils/Hooks/useUser';
 import { useForm } from '@mantine/form';
 import { useToggle } from '@mantine/hooks';
@@ -27,6 +29,7 @@ const useAccount = () => {
     validateInputOnChange: true,
     validate: {},
   });
+
   const onPersonalInfoSubmit = async () => {
     try {
       const payload = {
@@ -53,30 +56,7 @@ const useAccount = () => {
       });
     }
   };
-  const onUpload = async payload => {
-    toggleLoadingImage();
-    try {
-      const data = await axiosInstance.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/image/save_image`,
-        { file: { ...payload, quality: 50 } }
-      );
-      const payloadForUserUpdate = {
-        type: 'profilePic',
-        profilePic: data.data.data.url,
-      };
-      const userData = await axiosInstance.post(
-        'user/update_user_data',
-        payloadForUserUpdate
-      );
-      setCurrentUser(userData.data.data.user);
-    } catch (error) {
-      console.log(error);
-      toast.error(error?.response?.data?.message || '');
-    } finally {
-      toggleLoadingImage();
-      getUserData();
-    }
-  };
+
   const onRemoveImage = async () => {
     try {
       const payloadForUserUpdate = {
@@ -94,37 +74,32 @@ const useAccount = () => {
       getUserData();
     }
   };
-  const handleFileChange = file => {
-    const fileType = file.type;
-    const fileSize = file.size;
 
-    if (fileType.startsWith('image/')) {
-      if (fileSize <= 10 * 1024 * 1024) {
-        convertFileToBase64(file);
-      } else {
-        toast.error('File size exceeds 10MB');
-      }
-    } else {
-      toast.error('Only images allowed');
+  const handleFileChange = async file => {
+    toggleLoadingImage();
+    const url = await handleFile(file);
+    if (!url) {
+      toggleLoadingImage();
+      return;
     }
-  };
-  const convertFileToBase64 = async file => {
-    const reader = new FileReader();
-    let pushObject = {};
-    reader.onload = event => {
-      const base64String = reader.result;
-      pushObject = {
-        base64: base64String,
-        type:
-          file.type === 'image/svg+xml'
-            ? 'image/svg'
-            : file.type,
-        name: file.name,
-        showImage: URL.createObjectURL(file),
+    try {
+      const payloadForUserUpdate = {
+        type: 'profilePic',
+        profilePic: url,
       };
-      onUpload(pushObject);
-    };
-    reader.readAsDataURL(file);
+      const userData = await axiosInstance.post(
+        'user/update_user_data',
+        payloadForUserUpdate
+      );
+      setCurrentUser(userData.data.data.user);
+      toast.success('Updated successfully');
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message || '');
+    } finally {
+      toggleLoadingImage();
+      getUserData();
+    }
   };
 
   useEffect(() => {

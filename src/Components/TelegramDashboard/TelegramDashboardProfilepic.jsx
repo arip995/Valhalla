@@ -1,11 +1,12 @@
-import { Paper } from '@mantine/core';
+import { Paper, Text } from '@mantine/core';
 import React from 'react';
 import ProfilePic from '../Common/General/ProfilePic';
 
-const TelegramDashboardProfilepic = ({ data }) => {
+const TelegramDashboardProfilepic = ({ data, handleFileChange, loadingImage }) => {
   return <Paper withBorder className="p-4 w-full">
-    {/* <ProfilePic avatarImage={data?.profilePic} loading={false} name={`${data?.firstName || ''} ${data?.lastName || ''
-      }`} handleAvatarChange={handleFileChange} onRemoveAvatar={onRemoveImage} /> */}
+    <Text size="md" className='mb-2' fw={600}>Cover Image</Text>
+    <ProfilePic avatarImage={data?.coverImage?.url || data?.creatorDetails?.profilePic} loading={loadingImage} name={`${data?.creatorDetails?.firstName || ''} ${data?.creatorDetails?.lastName || ''
+      }`} handleAvatarChange={handleFileChange} />
   </Paper>;
 };
 

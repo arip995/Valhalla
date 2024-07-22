@@ -158,7 +158,6 @@ const useCreateLockedContent = () => {
             ? 'image/svg'
             : file.type,
         name: file.name,
-        showImage: URL.createObjectURL(file),
       });
     };
     reader.readAsDataURL(file);
