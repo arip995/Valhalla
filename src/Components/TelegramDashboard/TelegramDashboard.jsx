@@ -11,7 +11,7 @@ import TelegramDashboardProfilepic from './TelegramDashboardProfilepic';
 import useTelegramDashboard from './useTelegramDashboard';
 
 const TelegramDashboard = ({ productId }) => {
-  const { data, handleFileChange, loadingImage } = useTelegramDashboard(productId);
+  const { data, handleFileChange, loadingImage, basicDetailsForm, updateData } = useTelegramDashboard(productId);
 
   if (!data) {
     return (
@@ -24,8 +24,10 @@ const TelegramDashboard = ({ productId }) => {
       <div className="tg-dashboard-container">
         <div className="flex w-full max-w-[600px] flex-col items-center gap-4 overflow-auto p-3 md:p-6">
           <TelegramDashboardOpenlink data={data} />
-          <TelegramDashboardProfilepic data={data} handleFileChange={handleFileChange} loadingImage={loadingImage} />
-          <TelegramDashboardBasicDetails data={data} />
+          <TelegramDashboardProfilepic data={data} handleFileChange={handleFileChange} loadingImage={loadingImage} onUpdate={updateData}/>
+          {basicDetailsForm.values.description ?
+            <TelegramDashboardBasicDetails data={data} basicDetailsForm={basicDetailsForm} onUpdate={updateData} />
+            : null}
           <TelegramDashboardPlansAndPricing data={data} />
         </div>
       </div>

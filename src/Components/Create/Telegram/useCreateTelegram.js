@@ -94,7 +94,6 @@ const useCreateTelegram = () => {
   const stepThreeForm = useForm({
     initialValues: {
       title: '',
-      description: '',
       subscriptionPlans: [],
       isSaveClickedAtleastOnce: false,
       genre: '',
@@ -323,8 +322,8 @@ const useCreateTelegram = () => {
     setLoading(true);
     const payload = {
       groupName: stepTwoForm.values?.channelName,
-      groupDescription:
-        stepThreeForm.values?.description || '',
+      description: '<p></p>',
+      title: stepThreeForm.values?.title,
       phoneNumber: stepOneForm.values.phoneNumber
         ? `91${stepOneForm.values.phoneNumber}`
         : stepOneForm.values?.selectedNumber,
@@ -334,7 +333,6 @@ const useCreateTelegram = () => {
       groupId: stepTwoForm.values?.groupId,
       superGroup: stepTwoForm.values?.superGroup,
       genre: stepThreeForm.values?.genre,
-      title: stepThreeForm.values?.title,
     };
     try {
       const data = await axiosInstance.post(

@@ -27,7 +27,7 @@ const StepThreeCreateTelegram = ({
           radius="md"
           {...stepThreeForm.getInputProps('title')}
         />
-        <Textarea
+        {/* <Textarea
           label="Description"
           placeholder="About your product"
           autosize
@@ -36,7 +36,7 @@ const StepThreeCreateTelegram = ({
           value={stepThreeForm.values.description}
           radius="md"
           {...stepThreeForm.getInputProps('description')}
-        />
+        /> */}
         <Select
           checkIconPosition="right"
           label="Category"

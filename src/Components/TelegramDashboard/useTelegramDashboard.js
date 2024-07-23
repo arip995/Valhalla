@@ -1,22 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import axiosInstance from '@/Utils/AxiosInstance';
+import { handleFile } from '@/Utils/HandleFiles';
+import { useForm } from '@mantine/form';
 import {
-  useDidUpdate,
   useIsFirstRender,
-  useMounted,
   useToggle,
 } from '@mantine/hooks';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { handleFile } from '@/Utils/HandleFiles';
-import axiosInstance from '@/Utils/AxiosInstance';
 
 const useTelegramDashboard = productId => {
+  const firstRender = useIsFirstRender();
   const [tgData, setTgData] = useState(null);
   const [loadingImage, toggleLoadingImage] = useToggle([
     false,
     true,
   ]);
-  const firstRender = useIsFirstRender();
+  const basicDetailsForm = useForm({
+    validateInputOnChange: true,
+    validate: {
+      title: value => !value && 'Title is required',
+      description: value =>
+        !value && 'Description is required',
+    },
+  });
 
   async function getData(id) {
     try {
@@ -29,33 +36,41 @@ const useTelegramDashboard = productId => {
     }
   }
 
-  const handleFileChange = async file => {
-    toggleLoadingImage();
-    const url = await handleFile(file);
-    if (!url) {
-      toggleLoadingImage();
-      return;
-    }
-    console.log(url);
+  async function updateData(type, value) {
+    const payloadForUserUpdate = {
+      productId,
+      type,
+      value,
+    };
     try {
-      const payloadForUserUpdate = {
-        productId,
-        type: 'cover_image',
-        value: url,
-      };
+      toggleLoadingImage();
       const data = await axiosInstance.post(
         '/telegram/update_group',
         payloadForUserUpdate
       );
-      console.log(data.data.data.coverImage.url);
-      setTgData(prev => {
-        return {
-          ...prev,
-          coverImage: {
-            url: data.data.data.coverImage.url,
-          },
-        };
-      });
+      switch (type) {
+        case 'cover_image':
+          setTgData(prev => {
+            return {
+              ...prev,
+              coverImage: {
+                url: data.data.data.coverImage.url,
+              },
+            };
+          });
+          break;
+        case 'title_description':
+          setTgData(prev => {
+            return {
+              ...prev,
+              title: data.data.data.title,
+              description: data.data.data.description,
+            };
+          });
+          break;
+        default:
+          break;
+      }
       toast.success('Updated successfully');
     } catch (error) {
       console.log(error);
@@ -63,10 +78,23 @@ const useTelegramDashboard = productId => {
     } finally {
       toggleLoadingImage();
     }
+  }
+
+  const handleFileChange = async file => {
+    const url = await handleFile(file);
+    if (!url) {
+      toggleLoadingImage();
+      return;
+    }
+    updateData(cover_image, url);
   };
 
   useEffect(() => {
-    console.log(tgData);
+    basicDetailsForm.setValues({
+      title: tgData?.title,
+      description: tgData?.description,
+    });
+    console.log(tgData?.title);
   }, [tgData]);
 
   if (firstRender) {
@@ -77,6 +105,8 @@ const useTelegramDashboard = productId => {
     data: tgData,
     loadingImage,
     handleFileChange,
+    basicDetailsForm,
+    updateData,
   };
 };
 
