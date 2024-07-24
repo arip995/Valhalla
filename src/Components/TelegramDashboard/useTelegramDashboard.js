@@ -43,7 +43,6 @@ const useTelegramDashboard = productId => {
       value,
     };
     try {
-      toggleLoadingImage();
       const data = await axiosInstance.post(
         '/telegram/update_group',
         payloadForUserUpdate
@@ -58,6 +57,7 @@ const useTelegramDashboard = productId => {
               },
             };
           });
+          toggleLoadingImage();
           break;
         case 'title_description':
           setTgData(prev => {
@@ -76,17 +76,18 @@ const useTelegramDashboard = productId => {
       console.log(error);
       toast.error(error?.response?.data?.message || '');
     } finally {
-      toggleLoadingImage();
     }
   }
 
   const handleFileChange = async file => {
+    toggleLoadingImage();
+
     const url = await handleFile(file);
     if (!url) {
       toggleLoadingImage();
       return;
     }
-    updateData(cover_image, url);
+    updateData('cover_image', url);
   };
 
   useEffect(() => {
@@ -94,12 +95,15 @@ const useTelegramDashboard = productId => {
       title: tgData?.title,
       description: tgData?.description,
     });
-    console.log(tgData?.title);
   }, [tgData]);
 
   if (firstRender) {
     getData(productId);
   }
+
+  useEffect(() => {
+    console.log('loadingImage', loadingImage);
+  }, [loadingImage]);
 
   return {
     data: tgData,

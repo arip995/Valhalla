@@ -10,7 +10,7 @@ const TelegramDashboardProfilepic = ({ data, handleFileChange, loadingImage,onRe
     avatarImage={data?.coverImage?.url || data?.creatorDetails?.profilePic} loading={loadingImage} 
     name={`${data?.creatorDetails?.firstName || ''} ${data?.creatorDetails?.lastName || ''
       }`} handleAvatarChange={handleFileChange} showRemoveButton = {data?.coverImage?.url} onRemoveAvatar={()=>{
-        onUpdate('cover_image',"")
+        onUpdate('cover_image',"null")
       }}/>
   </Paper>);
 };
