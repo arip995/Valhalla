@@ -26,7 +26,7 @@ export const convertFileToBase64 = file => {
 export const handleFile = async (
   file,
   mimetypes = ['image'],
-  maxFileSize = 10,
+  maxFileSize = 1,
   quality = 50
 ) => {
   const fileType = file.type;
@@ -45,7 +45,7 @@ export const handleFile = async (
         console.error('Error converting file:', error);
       }
     } else {
-      toast.error('File size exceeds 10MB');
+      toast.error(`File size exceeds ${maxFileSize}MB`);
     }
   } else {
     toast.error(
