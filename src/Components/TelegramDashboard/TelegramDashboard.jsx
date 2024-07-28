@@ -1,12 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import '../../styles/dashboard/TelegramDashborad.css';
 import LayoutLoading from '../Common/Loading/LayoutLoading';
+import TelegramDashboardPlansAndPricingContainer from './PlansAndPricing/TelegramDashboardPlansAndPricingContainer';
 import TelegramDashboardBasicDetails from './TelegramDashboardBasicDetails';
 import TelegramDashboardOpenlink from './TelegramDashboardOpenlink';
-import TelegramDashboardPlansAndPricing from './TelegramDashboardPlansAndPricing';
 import TelegramDashboardProfilepic from './TelegramDashboardProfilepic';
 import useTelegramDashboard from './useTelegramDashboard';
 
@@ -34,14 +33,17 @@ const TelegramDashboard = ({ productId }) => {
             loadingImage={loadingImage}
             onUpdate={updateData}
           />
-          {basicDetailsForm.values.description ? (
-            <TelegramDashboardBasicDetails
-              data={data}
-              basicDetailsForm={basicDetailsForm}
-              onUpdate={updateData}
-            />
-          ) : null}
-          <TelegramDashboardPlansAndPricing data={data} />
+          {/* {basicDetailsForm.values.description ? ( */}
+          <TelegramDashboardBasicDetails
+            data={data}
+            basicDetailsForm={basicDetailsForm}
+            onUpdate={updateData}
+          />
+          {/* ) : null} */}
+          <TelegramDashboardPlansAndPricingContainer
+            data={data}
+            onUpdate={updateData}
+          />
         </div>
       </div>
       <Toaster />

@@ -42,6 +42,7 @@ const useTelegramDashboard = productId => {
       type,
       value,
     };
+    console.log(payloadForUserUpdate);
     try {
       const data = await axiosInstance.post(
         '/telegram/update_group',

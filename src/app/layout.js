@@ -54,6 +54,7 @@ const theme = createTheme({
   /** Your theme override here */
   fontFamily: 'Open Sans, sans-serif',
   primaryColor: 'violet',
+  cursorType: 'pointer',
 });
 
 export const metadata = {
