@@ -51,7 +51,7 @@ const TelegramDashboardBasicDetails = ({
       <form
         className="flex flex-col gap-3"
         onSubmit={basicDetailsForm.onSubmit(() => {
-          onUpdate('title_description', {
+          onUpdate('details', {
             title: basicDetailsForm.values.title,
             description:
               basicDetailsForm.values.description,

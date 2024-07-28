@@ -59,7 +59,7 @@ const useTelegramDashboard = productId => {
           });
           toggleLoadingImage();
           break;
-        case 'title_description':
+        case 'details':
           setTgData(prev => {
             return {
               ...prev,
@@ -100,10 +100,6 @@ const useTelegramDashboard = productId => {
   if (firstRender) {
     getData(productId);
   }
-
-  useEffect(() => {
-    console.log('loadingImage', loadingImage);
-  }, [loadingImage]);
 
   return {
     data: tgData,
