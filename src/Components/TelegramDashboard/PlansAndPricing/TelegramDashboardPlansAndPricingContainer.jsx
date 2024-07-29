@@ -1,6 +1,6 @@
 import { Paper, Text } from '@mantine/core';
 import React, { useState } from 'react';
-import PlansAndPricing from './PlansAndPricing';
+import TelegramDashboardPlansAndPricing from './TelegramDashboardPlansAndPricing';
 
 const TelegramDashboardPlansAndPricingContainer = ({
   data,
@@ -16,12 +16,13 @@ const TelegramDashboardPlansAndPricingContainer = ({
   const onDeletePlan = () => {};
   const onTogglePlanStatus = () => {};
   const onDragPlans = () => {};
+
   return (
     <Paper withBorder className="w-full p-4">
       <Text size="md" className="mb-2" fw={600}>
         Pland and pricing
       </Text>
-      <PlansAndPricing
+      <TelegramDashboardPlansAndPricing
         plans={data?.subscriptionPlans}
         onSavePlan={onSavePlan}
         onDeletePlan={onDeletePlan}

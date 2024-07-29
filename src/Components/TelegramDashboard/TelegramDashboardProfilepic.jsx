@@ -26,7 +26,7 @@ const TelegramDashboardProfilepic = ({
         handleAvatarChange={handleFileChange}
         showRemoveButton={data?.coverImage?.url}
         onRemoveAvatar={() => {
-          onUpdate('image', 'null');
+          onUpdate('cover_image', '');
         }}
       />
     </Paper>

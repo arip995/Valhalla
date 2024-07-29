@@ -1,10 +1,8 @@
 import axiosInstance from '@/Utils/AxiosInstance';
+import { updateObjectStates } from '@/Utils/Common';
 import { handleFile } from '@/Utils/HandleFiles';
 import { useForm } from '@mantine/form';
-import {
-  useIsFirstRender,
-  useToggle,
-} from '@mantine/hooks';
+import { useIsFirstRender } from '@mantine/hooks';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -12,10 +10,7 @@ import toast from 'react-hot-toast';
 const useTelegramDashboard = productId => {
   const firstRender = useIsFirstRender();
   const [tgData, setTgData] = useState(null);
-  const [loadingImage, toggleLoadingImage] = useToggle([
-    false,
-    true,
-  ]);
+  const [loadingImage, setLoadingImage] = useState(false);
   const basicDetailsForm = useForm({
     validateInputOnChange: true,
     validate: {
@@ -42,32 +37,36 @@ const useTelegramDashboard = productId => {
       type,
       value,
     };
-    console.log(payloadForUserUpdate);
     try {
       const data = await axiosInstance.post(
         '/telegram/update_group',
         payloadForUserUpdate
       );
+
       switch (type) {
         case 'cover_image':
-          setTgData(prev => {
-            return {
-              ...prev,
-              coverImage: {
-                url: data.data.data.coverImage.url,
-              },
-            };
-          });
-          toggleLoadingImage();
+          updateObjectStates(
+            {
+              name: 'coverImage.url',
+              value: data.data.data.coverImage.url,
+            },
+            setTgData
+          );
           break;
         case 'details':
-          setTgData(prev => {
-            return {
-              ...prev,
-              title: data.data.data.title,
-              description: data.data.data.description,
-            };
-          });
+          updateObjectStates(
+            [
+              {
+                name: 'title',
+                value: data.data.data.title,
+              },
+              {
+                name: 'description',
+                value: data.data.data.description,
+              },
+            ],
+            setTgData
+          );
           break;
         default:
           break;
@@ -77,15 +76,16 @@ const useTelegramDashboard = productId => {
       console.log(error);
       toast.error(error?.response?.data?.message || '');
     } finally {
+      setLoadingImage(false);
     }
   }
 
   const handleFileChange = async file => {
-    toggleLoadingImage();
+    setLoadingImage(true);
 
     const url = await handleFile(file);
     if (!url) {
-      toggleLoadingImage();
+      setLoadingImage(false);
       return;
     }
     updateData('cover_image', url);

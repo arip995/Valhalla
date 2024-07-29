@@ -33,13 +33,13 @@ const TelegramDashboard = ({ productId }) => {
             loadingImage={loadingImage}
             onUpdate={updateData}
           />
-          {/* {basicDetailsForm.values.description ? ( */}
-          <TelegramDashboardBasicDetails
-            data={data}
-            basicDetailsForm={basicDetailsForm}
-            onUpdate={updateData}
-          />
-          {/* ) : null} */}
+          {basicDetailsForm.values.description ? (
+            <TelegramDashboardBasicDetails
+              data={data}
+              basicDetailsForm={basicDetailsForm}
+              onUpdate={updateData}
+            />
+          ) : null}
           <TelegramDashboardPlansAndPricingContainer
             data={data}
             onUpdate={updateData}
