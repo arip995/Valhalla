@@ -1,5 +1,4 @@
 import { Inter } from 'next/font/google';
-import './globals.css';
 import {
   ColorSchemeScript,
   MantineProvider,
@@ -7,6 +6,8 @@ import {
 } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { ModalsProvider } from '@mantine/modals';
+import './globals.css';
 import '@mantine/core/styles/global.css';
 import '@mantine/core/styles/UnstyledButton.css';
 import '@mantine/core/styles/Button.css';
@@ -48,7 +49,8 @@ import '@mantine/core/styles/Stack.css';
 import '@mantine/core/styles/Text.css';
 import '@mantine/core/styles/Divider.css';
 import '@mantine/core/styles/Anchor.css';
-import { ModalsProvider } from '@mantine/modals';
+import '@mantine/core/styles/Switch.css';
+import '@mantine/core/styles/Drawer.css';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({

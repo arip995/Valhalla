@@ -65,7 +65,7 @@ const StepTwoCreateTelegram = ({
                       Create New
                     </Text>
                     <Text className={classes.description}>
-                      Create an new telegram channel.
+                      Create new telegram channel.
                     </Text>
                   </div>
                 </Group>

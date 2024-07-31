@@ -1,5 +1,8 @@
 import PricingTypeSelector from '@/Components/Create/Telegram/PlansAndPricing/PricingTypeSelector';
-import { DurationOptions } from '@/Constants/constants';
+import {
+  DurationOptions,
+  periodTypeOptions,
+} from '@/Constants/constants';
 import {
   Button,
   Checkbox,
@@ -54,7 +57,7 @@ const TGEPlanAndPriceEditCreate = ({
     };
     if (planType.toLowerCase() !== 'lifetime') {
       const unitDuration =
-        durationOptions.find(
+        DurationOptions.find(
           option => option.value === planType
         )?.days || 0;
       updateData.days =
@@ -178,8 +181,8 @@ const TGEPlanAndPriceEditCreate = ({
     setTempData({});
   };
 
-  const onUpdatePriceType = type => {
-    type
+  const onChangePriceType = type => {
+    type === 'Lifetime'
       ? updateDetails({
           name: 'planType',
           value: 'Lifetime',
@@ -216,7 +219,7 @@ const TGEPlanAndPriceEditCreate = ({
     if (!plan?._id) {
       setTempData({
         periodQuantity: 1,
-        planType: durationOptions[1].value,
+        planType: DurationOptions[1].value,
       });
       return;
     }
@@ -230,10 +233,13 @@ const TGEPlanAndPriceEditCreate = ({
       _id: plan._id,
     });
   }, [plan]);
-  console.log(tempData);
+
+  if (!tempData) return null;
+
   return (
     <>
       <Drawer
+        className="pd-add-plan"
         opened={openSideBar}
         onClose={() => resetTempData()}
       >
@@ -283,10 +289,24 @@ const TGEPlanAndPriceEditCreate = ({
                 Plan Type
               </div>
               <PricingTypeSelector
-                periodLabel={tempData.planType}
-                onSetLifetime={onUpdatePriceType}
+                onChange={onChangePriceType}
+                values={[
+                  {
+                    value: 'Lifetime',
+                    description: 'Lifetime',
+                  },
+                  {
+                    value: 'Subscription',
+                    description: 'Subscription',
+                  },
+                ]}
+                value={
+                  tempData.planType === 'Lifetime'
+                    ? 'Lifetime'
+                    : 'Subscription'
+                }
               />
-              <div className="pd-add-plan-block-body">
+              <div className="pd-add-plan-block-body mt-4">
                 {tempData?.planType?.toLowerCase() !==
                 'lifetime' ? (
                   <div className="pd-add-plan-duration-container">

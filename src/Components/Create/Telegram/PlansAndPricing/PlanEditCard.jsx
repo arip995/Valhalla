@@ -1,7 +1,11 @@
 import {
   Button,
   Checkbox,
+  Grid,
+  Group,
+  Radio,
   Select,
+  Text,
   TextInput,
 } from '@mantine/core';
 import { useEffect, useState } from 'react';
@@ -39,7 +43,6 @@ function PlanEditCard({
     isDiscountedPriceMoreThanPrice,
     setIsDiscountedPriceMoreThanPrice,
   ] = useState(false);
-
   const edited =
     periodLabel !== originalState.subscriptionPeriodLabel ||
     periodValue !== originalState.subscriptionPeriodValue ||
@@ -71,7 +74,9 @@ function PlanEditCard({
       });
   };
   const onChangePriceType = type => {
-    type ? onSetLifetime(true) : onSetLifetime(false);
+    type === 'Lifetime'
+      ? onSetLifetime(true)
+      : onSetLifetime(false);
   };
 
   useEffect(() => {
@@ -117,7 +122,24 @@ function PlanEditCard({
       <div className="nexify-plan-edit-card-content">
         <PricingTypeSelector
           onChange={onChangePriceType}
-          isLifetime={periodLabel === 'Lifetime'}
+          values={[
+            {
+              value: 'Lifetime',
+              label: 'Lifetime',
+              description: 'Charge a one-time fixed fee',
+            },
+            {
+              value: 'Subscription',
+              label: 'Subscription',
+              description:
+                'Charge weekly, monthly, annually',
+            },
+          ]}
+          value={
+            periodLabel === 'Lifetime'
+              ? 'Lifetime'
+              : 'Subscription'
+          }
         />
         {periodLabel !== 'Lifetime' ? (
           <div className="nexify-plan-edit-card-subsctiption-option">

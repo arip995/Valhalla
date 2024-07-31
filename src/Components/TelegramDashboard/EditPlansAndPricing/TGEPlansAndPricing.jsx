@@ -29,7 +29,7 @@ const TGEPlansAndPricing = ({
   };
 
   return (
-    <div>
+    <div className="pd-plans">
       <DragDropContext onDragEnd={onDragPlans}>
         <div className="pd-plans-body">
           <Droppable droppableId="droppable-id">

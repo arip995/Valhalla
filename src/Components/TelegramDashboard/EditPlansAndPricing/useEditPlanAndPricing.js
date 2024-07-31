@@ -1,13 +1,14 @@
 import axiosInstance from '@/Utils/AxiosInstance';
-import { useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useEditPlanAndPricing = (data, onUpdate) => {
-  const router = useRouter();
+  const router = useParams();
   const [openPlanSideBar, setOpenPlanSideBar] =
     useState(false);
   const [isSavingPlan, setIsSavingPlan] = useState(false);
+  const [isToggling, setIsToggling] = useState(false);
   const [isDeletingPlan, setIsDeletingPlan] =
     useState(false);
   const [plans, setPlans] = useState(
@@ -16,7 +17,7 @@ const useEditPlanAndPricing = (data, onUpdate) => {
 
   const updateDetails = (data = {}) => {
     return axiosInstance.post('/telegram/update_group', {
-      id: router.query.id,
+      productId: router.id,
       ...data,
     });
   };
@@ -25,6 +26,7 @@ const useEditPlanAndPricing = (data, onUpdate) => {
       const response = await axiosInstance.post(
         '/telegram/update_group',
         {
+          productId: router.id,
           data: {
             plans: updatedPlans.map(item => ({
               _id: item._id,
@@ -34,9 +36,9 @@ const useEditPlanAndPricing = (data, onUpdate) => {
         }
       );
 
-      if (!response.ok) {
-        throw new Error('Failed to update plans data');
-      }
+      // if (!response.data.data.subscriptionPlans.length) {
+      //   throw new Error('Failed to update plans data');
+      // }
 
       console.log('Plans data updated successfully');
     } catch (error) {
@@ -55,7 +57,7 @@ const useEditPlanAndPricing = (data, onUpdate) => {
         type: data._id ? 'editPlan' : 'addPlan',
         data: updateData,
       });
-      if (res?.data?.data?.subscriptionPlans?.length) {
+      if (res?.data?.plans?.length) {
         // setProductData(res?.data?.data?.group);
         setOpenPlanSideBar(false);
         toast.success(
@@ -79,7 +81,7 @@ const useEditPlanAndPricing = (data, onUpdate) => {
         type: 'deletePlan',
         data: { planId: data._id },
       });
-      if (res?.data?.data?.subscriptionPlans?.length) {
+      if (res?.data?.plans?.length) {
         // setProductData(res?.data?.data?.group)
         setOpenPlanSideBar(false);
         toast.success(`Plan deleted successfully`);
@@ -94,14 +96,14 @@ const useEditPlanAndPricing = (data, onUpdate) => {
     }
   };
   const onTogglePlanStatus = async data => {
-    if (!plan?._id) return;
-    if (plan.status === 1) {
+    if (!data?._id) return;
+    if (data.status === 1) {
       // creator is disabling the plan, check for the number of active plans
-      const activePlans = data?.subscriptionPlans.filter(
+      const activePlans = plans.filter(
         item => item.status === 1
       );
       if (activePlans.length < 2) {
-        toast('Need atleast 1 active plan');
+        toast.error('Need atleast 1 active plan');
         return;
       }
     }
@@ -116,16 +118,27 @@ const useEditPlanAndPricing = (data, onUpdate) => {
           status: data.status ? 0 : 1,
         },
       });
-
-      if (res?.data?.data?.subscriptionPlans?.length) {
-        // setProductData(res?.data?.data?.group);
+      if (res?.status == 200) {
+        setPlans(prev => {
+          return prev.map(item => {
+            if (item?._id === data._id) {
+              return {
+                ...item,
+                status: data.status === 0 ? 1 : 0,
+              };
+            } else {
+              return { ...item };
+            }
+          });
+        });
         toast.success(
           `Plan ${data.status ? 'disabled' : 'enabled'} successfully`
         );
       }
-    } catch (e) {
+    } catch (error) {
+      console.log(error);
       toast.error(
-        e?.response?.data?.Error ||
+        error?.response?.data?.Error ||
           `Error ${
             data.status ? 'disabling' : 'enabling'
           } plan. Try again later.`
@@ -135,8 +148,9 @@ const useEditPlanAndPricing = (data, onUpdate) => {
     }
   };
   const onDragPlans = result => {
+    console.log('first');
     if (!result.destination) return;
-    let tempPlans = [...data?.subscriptionPlans];
+    let tempPlans = [...plans];
     let [selectedRow] = tempPlans.splice(
       result.source.index,
       1
