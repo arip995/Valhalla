@@ -48,6 +48,7 @@ import '@mantine/core/styles/Stack.css';
 import '@mantine/core/styles/Text.css';
 import '@mantine/core/styles/Divider.css';
 import '@mantine/core/styles/Anchor.css';
+import { ModalsProvider } from '@mantine/modals';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({
@@ -71,7 +72,7 @@ export default function RootLayout({ children }) {
         <ColorSchemeScript forceColorScheme="light" />
         <MantineProvider theme={theme}>
           <Notifications position="top-right" />
-          {children}
+          <ModalsProvider>{children}</ModalsProvider>
           <SpeedInsights />
         </MantineProvider>
       </body>

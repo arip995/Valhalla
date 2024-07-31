@@ -5,8 +5,8 @@ import {
   TextInput,
 } from '@mantine/core';
 import { useEffect, useState } from 'react';
-import { periodTypeOptions } from '../useCreateTelegram';
 import PricingTypeSelector from './PricingTypeSelector';
+import { periodTypeOptions } from '@/Constants/constants';
 
 function PlanEditCard({
   originalState,
@@ -70,6 +70,9 @@ function PlanEditCard({
         discountedPrice: discountedPrice || null,
       });
   };
+  const onChangePriceType = type => {
+    type ? onSetLifetime(true) : onSetLifetime(false);
+  };
 
   useEffect(() => {
     let isValid =
@@ -113,8 +116,8 @@ function PlanEditCard({
     >
       <div className="nexify-plan-edit-card-content">
         <PricingTypeSelector
-          periodLabel={periodLabel}
-          onSetLifetime={onSetLifetime}
+          onChange={onChangePriceType}
+          isLifetime={periodLabel === 'Lifetime'}
         />
         {periodLabel !== 'Lifetime' ? (
           <div className="nexify-plan-edit-card-subsctiption-option">

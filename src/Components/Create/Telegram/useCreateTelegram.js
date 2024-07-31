@@ -1,30 +1,10 @@
+import { periodTypeOptions } from '@/Constants/constants';
 import axiosInstance from '@/Utils/AxiosInstance';
 import useUser from '@/Utils/Hooks/useUser';
 import { useForm } from '@mantine/form';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-
-export const periodTypeOptions = [
-  { label: 'Days', value: 'Daily', days: 1 },
-  { label: 'Weeks', value: 'Weekly', days: 7 },
-  { label: 'Months', value: 'Monthly', days: 30 },
-  { label: 'Years', value: 'Yearly', days: 365 },
-  { label: 'Lifetime', value: 'Lifetime', days: 36500 },
-];
-
-export const PriceTypes = [
-  {
-    heading: 'Fixed Price',
-    text: 'Charge a one-time fixed pay',
-    value: 'Lifetime',
-  },
-  {
-    heading: 'Subscription',
-    text: 'Charge weekly, monthly, annually',
-    value: 'Subscription',
-  },
-];
 
 const useCreateTelegram = () => {
   const { setCurrentUser } = useUser();

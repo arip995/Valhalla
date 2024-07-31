@@ -41,3 +41,17 @@ export function updateObjectStates(data, setterFunction) {
     return prevData;
   });
 }
+
+export function discountPercentage(value, discountedValue) {
+  if (
+    !value ||
+    !discountedValue ||
+    isNaN(value) ||
+    isNaN(discountedValue)
+  ) {
+    return 0;
+  }
+  return Math.round(
+    `${100 * ((value - discountedValue) / value)}%`
+  );
+}

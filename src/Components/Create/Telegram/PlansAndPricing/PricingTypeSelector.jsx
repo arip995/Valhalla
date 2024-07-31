@@ -1,26 +1,26 @@
+import { PriceTypes } from '@/Constants/constants';
 import { Grid, rem } from '@mantine/core';
 import { IconCheck } from '@tabler/icons-react';
 import classNames from 'classnames';
-import { PriceTypes } from '../useCreateTelegram';
+import '../../../../styles/common/plan-type.css';
 
 const PricingTypeSelector = ({
-  periodLabel,
-  onSetLifetime,
+  isLifetime,
+  onChange = () => {},
 }) => {
   if (!PriceTypes?.length) return null;
 
   return (
-    <Grid>
+    <Grid className="price-type-container">
       <Grid.Col
         span={{ base: 12, md: 6 }}
         onClick={() => {
-          periodLabel !== 'Lifetime' && onSetLifetime(true);
+          onChange(true); //true for lifetime
         }}
       >
         <div
           className={classNames('price-type-card', {
-            'price-type-card-active':
-              periodLabel == 'Lifetime',
+            'price-type-card-active': isLifetime,
           })}
         >
           <div className="price-type-info">
@@ -44,13 +44,12 @@ const PricingTypeSelector = ({
       <Grid.Col
         span={{ base: 12, md: 6 }}
         onClick={() => {
-          periodLabel == 'Lifetime' && onSetLifetime(false);
+          onChange(false); //false for subscription
         }}
       >
         <div
           className={classNames('price-type-card', {
-            'price-type-card-active':
-              periodLabel !== 'Lifetime',
+            'price-type-card-active': !isLifetime,
           })}
         >
           <div className="price-type-info">

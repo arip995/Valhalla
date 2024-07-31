@@ -1,29 +1,31 @@
 import { Paper, Text } from '@mantine/core';
 import React, { useState } from 'react';
-import TelegramDashboardPlansAndPricing from './TelegramDashboardPlansAndPricing';
+import TGEPlansAndPricing from './TGEPlansAndPricing';
+import useEditPlanAndPricing from './useEditPlanAndPricing';
 
-const TelegramDashboardPlansAndPricingContainer = ({
+const TGEPlansAndPricingContainer = ({
   data,
   onUpdate,
 }) => {
-  const [openPlanSideBar, setOpenPlanSideBar] =
-    useState(false);
-  const [isSavingPlan, setIsSavingPlan] = useState(false);
-  const [isDeletingPlan, setIsDeletingPlan] =
-    useState(false);
-
-  const onSavePlan = () => {};
-  const onDeletePlan = () => {};
-  const onTogglePlanStatus = () => {};
-  const onDragPlans = () => {};
+  const {
+    openPlanSideBar,
+    setOpenPlanSideBar,
+    isSavingPlan,
+    isDeletingPlan,
+    onSavePlan,
+    onDeletePlan,
+    onTogglePlanStatus,
+    onDragPlans,
+    plans,
+  } = useEditPlanAndPricing(data, onUpdate);
 
   return (
     <Paper withBorder className="w-full p-4">
       <Text size="md" className="mb-2" fw={600}>
         Pland and pricing
       </Text>
-      <TelegramDashboardPlansAndPricing
-        plans={data?.subscriptionPlans}
+      <TGEPlansAndPricing
+        plans={plans}
         onSavePlan={onSavePlan}
         onDeletePlan={onDeletePlan}
         onTogglePlanStatus={onTogglePlanStatus}
@@ -37,4 +39,4 @@ const TelegramDashboardPlansAndPricingContainer = ({
   );
 };
 
-export default TelegramDashboardPlansAndPricingContainer;
+export default TGEPlansAndPricingContainer;

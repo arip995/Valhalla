@@ -1,0 +1,35 @@
+.price-type-container {
+  .price-type-card .price-type__heading {
+    font-size: 15px;
+    font-weight: 600;
+    color: black;
+  }
+  .price-type-card-active {
+    pointer-events: none;
+    border: 1.5px solid rgb(93, 148, 243);
+  }
+  .price-type-card .price-type-indicator {
+    border-radius: 50%;
+    min-width: 24px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(15, 15, 15, 0.15);
+    position: relative;
+  }
+  .price-type-card.price-type-card-active
+    .price-type-indicator {
+    display: flex;
+    background-color: rgb(93, 148, 243);
+    border-color: rgb(93, 148, 243);
+    justify-content: center;
+    align-items: center;
+  }
+  .price-type-indicator__icon {
+    display: block;
+    position: absolute;
+    width: 12px;
+    height: 8px;
+    top: calc(50%);
+    left: calc(50%);
+  }
+}

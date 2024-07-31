@@ -3,7 +3,7 @@
 import { Toaster } from 'react-hot-toast';
 import '../../styles/dashboard/TelegramDashborad.css';
 import LayoutLoading from '../Common/Loading/LayoutLoading';
-import TelegramDashboardPlansAndPricingContainer from './PlansAndPricing/TelegramDashboardPlansAndPricingContainer';
+import TGEPlansAndPricingContainer from './EditPlansAndPricing/TGEPlansAndPricingContainer';
 import TelegramDashboardBasicDetails from './TelegramDashboardBasicDetails';
 import TelegramDashboardOpenlink from './TelegramDashboardOpenlink';
 import TelegramDashboardProfilepic from './TelegramDashboardProfilepic';
@@ -40,7 +40,7 @@ const TelegramDashboard = ({ productId }) => {
               onUpdate={updateData}
             />
           ) : null}
-          <TelegramDashboardPlansAndPricingContainer
+          <TGEPlansAndPricingContainer
             data={data}
             onUpdate={updateData}
           />
