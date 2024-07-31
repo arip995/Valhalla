@@ -177,6 +177,7 @@ const TGEPlanAndPriceEditCreate = ({
   };
 
   const resetTempData = () => {
+    setOpenSideBar(false);
     setIsSaveClickedAtleastOnce(false);
     setTempData({});
   };
@@ -242,22 +243,26 @@ const TGEPlanAndPriceEditCreate = ({
         className="pd-add-plan"
         opened={openSideBar}
         onClose={() => resetTempData()}
+        title={tempData?._id ? 'Edit Plan' : 'New Plan'}
+        closeButtonProps={{
+          icon: (
+            <IconLayoutSidebarRightExpand
+              stroke={1.5}
+              size={18}
+              className="pd-add-plan__close"
+              // onClick={() => {
+              //   setOpenSideBar(false);
+              // }}
+            />
+          ),
+        }}
       >
         {/* Header start */}
-        <div className="pd-add-plan-header">
-          <IconLayoutSidebarRightExpand
-            stroke={1.5}
-            size={18}
-            className="pd-add-plan__close"
-            onClick={() => {
-              setOpenSideBar(false);
-            }}
-          />
-
+        {/* <div className="pd-add-plan-header">
           <div>
             {tempData?._id ? 'Edit Plan' : 'New Plan'}
           </div>
-        </div>
+        </div> */}
         {/* Header end */}
         {/* Body start */}
         <div className="pd-add-plan-body">

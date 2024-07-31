@@ -19,7 +19,6 @@ const useTelegramDashboard = productId => {
         !value && 'Description is required',
     },
   });
-
   async function getData(id) {
     try {
       const data = await axios.get(
@@ -38,7 +37,7 @@ const useTelegramDashboard = productId => {
       value,
     };
     try {
-      const data = await axiosInstance.post(
+      await axiosInstance.post(
         '/telegram/update_group',
         payloadForUserUpdate
       );
@@ -48,7 +47,7 @@ const useTelegramDashboard = productId => {
           updateObjectStates(
             {
               name: 'coverImage.url',
-              value: data.data.data.coverImage.url,
+              value: value,
             },
             setTgData
           );
@@ -58,13 +57,22 @@ const useTelegramDashboard = productId => {
             [
               {
                 name: 'title',
-                value: data.data.data.title,
+                value: value.title,
               },
               {
                 name: 'description',
-                value: data.data.data.description,
+                value: value.description,
               },
             ],
+            setTgData
+          );
+          break;
+        case 'genre':
+          updateObjectStates(
+            {
+              name: 'genre',
+              value: value,
+            },
             setTgData
           );
           break;
@@ -93,6 +101,7 @@ const useTelegramDashboard = productId => {
 
   useEffect(() => {
     basicDetailsForm.setValues({
+      genre: tgData?.genre,
       title: tgData?.title,
       description: tgData?.description,
     });

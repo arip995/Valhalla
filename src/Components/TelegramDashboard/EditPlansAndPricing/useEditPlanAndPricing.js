@@ -148,7 +148,8 @@ const useEditPlanAndPricing = (data, onUpdate) => {
     }
   };
   const onDragPlans = result => {
-    console.log('first');
+    if (result.source.index === result.destination.index)
+      return;
     if (!result.destination) return;
     let tempPlans = [...plans];
     let [selectedRow] = tempPlans.splice(

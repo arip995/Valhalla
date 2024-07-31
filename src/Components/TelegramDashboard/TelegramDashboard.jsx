@@ -32,6 +32,7 @@ const TelegramDashboard = ({ productId }) => {
             handleFileChange={handleFileChange}
             loadingImage={loadingImage}
             onUpdate={updateData}
+            basicDetailsForm={basicDetailsForm}
           />
           {basicDetailsForm.values.description ? (
             <TelegramDashboardBasicDetails
