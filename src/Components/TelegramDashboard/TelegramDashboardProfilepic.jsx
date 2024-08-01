@@ -46,27 +46,29 @@ const TelegramDashboardProfilepic = ({
         placeholder="Select Category"
         data={CategoriesList}
         value={data.genre}
+        allowDeselect={false}
         onChange={value => {
           basicDetailsForm.setValues({ genre: value });
         }}
       />
       <Collapse
-        className="flex flex-row-reverse justify-between"
         in={basicDetailsForm.values?.genre !== data?.genre}
       >
-        <Button
-          className="mt-4"
-          onClick={() => {
-            onUpdate(
-              'genre',
-              basicDetailsForm.values.genre
-            );
-          }}
-          // color="black"
-          radius="md"
-        >
-          Publish
-        </Button>
+        <div className="mt-4 flex flex-row-reverse justify-between">
+          <Button
+            className=""
+            onClick={() => {
+              onUpdate(
+                'genre',
+                basicDetailsForm.values.genre
+              );
+            }}
+            // color="black"
+            radius="md"
+          >
+            Publish
+          </Button>
+        </div>
       </Collapse>
     </Paper>
   );

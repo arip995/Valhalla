@@ -117,7 +117,6 @@ const TelegramDashboardBasicDetails = ({
           </RichTextEditor>
         </div>
         <Collapse
-          className="flex flex-row-reverse justify-between"
           in={
             (basicDetailsForm.values?.title !==
               data?.title ||
@@ -126,13 +125,15 @@ const TelegramDashboardBasicDetails = ({
             !basicDetailsForm.errors.title
           }
         >
-          <Button
-            // fullWidth
-            type="submit"
-            radius="md"
-          >
-            Publish
-          </Button>
+          <div className="flex flex-row-reverse justify-between">
+            <Button
+              // fullWidth
+              type="submit"
+              radius="md"
+            >
+              Publish
+            </Button>
+          </div>
         </Collapse>
       </form>
     </Paper>
