@@ -6,6 +6,7 @@ import React from 'react';
 const TelegramDashboardOpenlink = ({ data }) => {
   return (
     <Paper
+      shadow="md"
       withBorder
       className="sticky top-0 z-20 w-full p-4"
     >
