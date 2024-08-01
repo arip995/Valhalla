@@ -1,6 +1,7 @@
 .nexify-custom-plans-container {
   display: flex;
   flex-direction: column;
+  color: rgba(15, 15, 15, 0.75);
   gap: 16px;
   .nexify-custom-plans-about-container {
     display: flex;
@@ -9,105 +10,98 @@
   }
   .nexify-custom-plans-about-container
     .nexify-custom-plans-title {
+    margin-bottom: -10px;
     font-size: 14px;
     font-weight: 500;
-    margin-bottom: -10px;
   }
   .nexify-custom-plans-about-container
     .nexify-custom-plans-about-info {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    background: #fffaeb;
-    border-radius: 5px;
     padding: 10px 16px;
+    border-radius: 5px;
+    background: #fffaeb;
+    gap: 8px;
   }
   .nexify-custom-plans-about-info
     .nexify-custom-plans-about-title {
     display: flex;
     align-items: center;
-    gap: 8px;
+    line-height: 20px;
     font-size: 14px;
     font-weight: 500;
-    line-height: 20px;
+    gap: 8px;
   }
   .nexify-custom-plans-about-info
     .nexify-custom-plans-about-description {
-    font-weight: 400;
-    font-size: 12px;
     line-height: 20px;
+    font-size: 12px;
+    font-weight: 400;
   }
   .nexify-plan-edit-card-subsctiption-option {
     width: 100%;
   }
   .nexify-plan-edit-card {
     width: 100%;
-    background: #ffffff;
     border: 1px solid #dadada;
     border-radius: 10px;
+    background: #ffffff;
     transition: transform 0.05s ease-in-out;
   }
   .nexify-plan-edit-card .nexify-plan-edit-card-content {
     display: flex;
     flex-direction: column;
-    gap: 16px;
     padding: 20px 16px;
+    gap: 16px;
   }
   .nexify-plan-edit-card .nexify-plan-edit-info-text {
-    font-style: normal;
-    font-weight: 400;
-    font-size: remCal(14);
     line-height: remCal(19);
     color: rgba(18, 18, 18, 0.7);
+    font-size: remCal(14);
+    font-style: normal;
+    font-weight: 400;
   }
   .nexify-plan-edit-card-flex-one {
     flex: 1;
   }
   .nexify-savedPlan {
     display: flex;
-    justify-content: space-between;
-    flex-direction: row;
     align-items: center;
-    padding: 12px 16px;
+    flex-direction: row;
+    justify-content: space-between;
     width: 100%;
     min-height: 80px;
+    padding: 12px 16px;
     border: 1px solid rgba(15, 15, 15, 0.15);
     border-radius: 8px;
     transition: transform 0.05s ease-out;
   }
   .nexify-savedPlan-title {
+    line-height: 22px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
-    line-height: 22px;
   }
 
   .nexify-savedPlan-planCost {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
     line-height: 20px;
     color: #999;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
   }
   .price-type-card {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 16px;
     height: 100%;
-    border-radius: 12px;
-    border: 1px solid rgba(15, 15, 15, 0.15);
-    cursor: pointer;
     padding: 12px 16px;
+    border: 1px solid rgba(15, 15, 15, 0.15);
+    border-radius: 12px;
+    color: rgba(15, 15, 15, 0.75);
+    cursor: pointer;
     font-size: 14px;
     font-weight: 400;
-    color: rgba(15, 15, 15, 0.75);
-  }
-  .nexify-plan-edit-card-name-input {
-    .mantine-Input-section {
-      z-index: 30;
-      padding: 0px 25px;
-      background-color: #ffffff;
-    }
+    gap: 16px;
   }
 }

@@ -34,11 +34,22 @@ html {
   }
 }
 
-.mantine-Input-section {
-  width: max-content;
-  margin: 6px;
-}
 .mantine-Drawer-header {
   padding: var(--mantine-spacing-md);
   border-bottom: 1px solid #e4e4e4;
+}
+.mantine-Drawer-title {
+  font-weight: 600;
+}
+.nexify-rightsection-change {
+  .mantine-TextInput-section {
+    padding: 0px 25px;
+    background-color: #ffffff;
+    font-size: small;
+  }
+  .mantine-NumberInput-section {
+    padding: 0px 25px;
+    background-color: #ffffff;
+    font-size: small;
+  }
 }

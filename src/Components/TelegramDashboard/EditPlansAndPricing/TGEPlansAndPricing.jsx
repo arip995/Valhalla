@@ -3,9 +3,10 @@ import {
   Draggable,
   Droppable,
 } from '@hello-pangea/dnd';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import TGEPlanAndPriceEditCreate from './TGEPlanAndPriceEditCreate';
 import TGESinglePlan from './TGESinglePlan';
+import { Button } from '@mantine/core';
 
 const TGEPlansAndPricing = ({
   openPlanSideBar = false,
@@ -86,15 +87,23 @@ const TGEPlansAndPricing = ({
               </div>
             )}
           </Droppable>
-          <div
-            className="pd-plans__add-cta"
+          <Button
+            variant="outline"
+            size="md"
             onClick={() => {
               setPlanObj({});
               setOpenPlanSideBar(true);
             }}
           >
             + Add another Plan
-          </div>
+          </Button>
+          {/* <div
+            className="pd-plans__add-cta"
+            onClick={() => {
+              setPlanObj({});
+              setOpenPlanSideBar(true);
+            }}
+          ></div> */}
         </div>
       </DragDropContext>
       <TGEPlanAndPriceEditCreate
@@ -111,4 +120,4 @@ const TGEPlansAndPricing = ({
   );
 };
 
-export default TGEPlansAndPricing;
+export default React.memo(TGEPlansAndPricing);

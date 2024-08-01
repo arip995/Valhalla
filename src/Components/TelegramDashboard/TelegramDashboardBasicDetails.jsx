@@ -1,23 +1,21 @@
-import React from 'react';
 import {
   Button,
   Collapse,
-  Flex,
   Input,
   Paper,
   Text,
-  Textarea,
   TextInput,
 } from '@mantine/core';
+import { Link, RichTextEditor } from '@mantine/tiptap';
 import '@mantine/tiptap/styles.css';
-import { RichTextEditor, Link } from '@mantine/tiptap';
-import { useEditor } from '@tiptap/react';
 import Highlight from '@tiptap/extension-highlight';
-import StarterKit from '@tiptap/starter-kit';
-import Underline from '@tiptap/extension-underline';
-import TextAlign from '@tiptap/extension-text-align';
-import Superscript from '@tiptap/extension-superscript';
 import SubScript from '@tiptap/extension-subscript';
+import Superscript from '@tiptap/extension-superscript';
+import TextAlign from '@tiptap/extension-text-align';
+import Underline from '@tiptap/extension-underline';
+import { useEditor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import React from 'react';
 
 const TelegramDashboardBasicDetails = ({
   data,
@@ -65,7 +63,7 @@ const TelegramDashboardBasicDetails = ({
           {...basicDetailsForm.getInputProps('title')}
         />
         <div className="flex flex-col gap-1">
-          <Input.Label>Description</Input.Label>
+          <Input.Label>About your channel</Input.Label>
           <RichTextEditor editor={editor}>
             <RichTextEditor.Toolbar
               sticky
@@ -119,6 +117,7 @@ const TelegramDashboardBasicDetails = ({
           </RichTextEditor>
         </div>
         <Collapse
+          className="flex flex-row-reverse justify-between"
           in={
             (basicDetailsForm.values?.title !==
               data?.title ||
@@ -128,9 +127,8 @@ const TelegramDashboardBasicDetails = ({
           }
         >
           <Button
-            fullWidth
+            // fullWidth
             type="submit"
-            color="black"
             radius="md"
           >
             Publish
@@ -141,4 +139,4 @@ const TelegramDashboardBasicDetails = ({
   );
 };
 
-export default TelegramDashboardBasicDetails;
+export default React.memo(TelegramDashboardBasicDetails);

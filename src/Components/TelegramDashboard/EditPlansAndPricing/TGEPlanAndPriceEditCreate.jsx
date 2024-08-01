@@ -3,23 +3,29 @@ import {
   DurationOptions,
   periodTypeOptions,
 } from '@/Constants/constants';
+import { discountPercentage } from '@/Utils/Common';
 import {
   Button,
   Checkbox,
   Drawer,
   Grid,
   Input,
+  NumberInput,
+  ScrollArea,
   Select,
   Text,
-  ScrollArea,
+  TextInput,
 } from '@mantine/core';
-import { IconLayoutSidebarRightExpand } from '@tabler/icons-react';
-import { useEffect, useState } from 'react';
 import { modals } from '@mantine/modals';
-import { discountPercentage } from '@/Utils/Common';
+import { IconLayoutSidebarRightExpand } from '@tabler/icons-react';
+import React, { useEffect, useState } from 'react';
 
 const MAX_TITLE_LENGTH = 75;
 const MIN_TITLE_LENGTH = 0;
+
+const MyScrollArea = props => (
+  <ScrollArea.Autosize type="never" {...props} />
+);
 
 const TGEPlanAndPriceEditCreate = ({
   openSideBar,
@@ -150,8 +156,8 @@ const TGEPlanAndPriceEditCreate = ({
 
     if (enableDiscountedPrice) {
       if (discountedPrice) {
-        if (price && discountedPrice > price) {
-          errorObj.discountedPrice = `Discounted price cannot be greater than plan price (₹${price})`;
+        if (price && discountedPrice >= price) {
+          errorObj.discountedPrice = `Discounted should be less than plan price (₹${price})`;
         }
       } else {
         errorObj.discountedPrice = canShowErrors
@@ -247,7 +253,7 @@ const TGEPlanAndPriceEditCreate = ({
         opened={openSideBar}
         onClose={() => resetTempData()}
         title={tempData?._id ? 'Edit Plan' : 'New Plan'}
-        scrollAreaComponent={ScrollArea.Autosize}
+        scrollAreaComponent={MyScrollArea}
         padding="0px"
         closeButtonProps={{
           icon: (
@@ -261,32 +267,31 @@ const TGEPlanAndPriceEditCreate = ({
         <div className="flex h-full flex-col justify-between">
           <div className="pd-add-plan-body mb-14">
             <div className="pd-add-plan-block">
-              <div className="pd-add-plan-block-header">
-                Plan Name
-              </div>
               <div className="pd-add-plan-block-body">
-                <Input
+                <TextInput
+                  className="nexify-rightsection-change"
+                  label="Plan Name"
                   rightSection={`${
                     tempData?.title?.length || 0
                   }/${MAX_TITLE_LENGTH}`}
                   placeholder="Give your plan a name"
                   value={tempData?.title || ''}
-                  onChange={e =>
+                  onChange={e => {
                     updateDetails({
                       name: 'title',
                       value:
                         e.target.value?.trimStart() || '',
-                    })
-                  }
+                    });
+                  }}
                   error={errors?.title}
-                ></Input>
+                ></TextInput>
               </div>
             </div>
             {!tempData?._id ? (
               <div className="pd-add-plan-block">
-                <div className="pd-add-plan-block-header">
+                <Input.Label className="mb-1">
                   Plan Type
-                </div>
+                </Input.Label>
                 <PricingTypeSelector
                   onChange={onChangePriceType}
                   values={[
@@ -309,52 +314,42 @@ const TGEPlanAndPriceEditCreate = ({
                   {tempData?.planType?.toLowerCase() !==
                   'lifetime' ? (
                     <div className="pd-add-plan-duration-container">
-                      <Input.Wrapper
-                        error={errors?.periodQuantity}
-                        infoText="^ Set a duration for your subscription plan"
-                      >
-                        <Grid>
-                          <Grid.Col size="3">
-                            <Input
-                              placeholder="0"
-                              value={
-                                tempData?.periodQuantity ||
-                                ''
-                              }
-                              onChange={e => {
-                                updateDetails({
-                                  name: 'periodQuantity',
-                                  value: Number(
-                                    e.target.value
-                                  ),
-                                });
-                              }}
-                              error={
-                                !!errors?.periodQuantity
-                              }
-                            />
-                          </Grid.Col>
-                          <Grid.Col
-                            size="9"
-                            onClick={e =>
-                              e.stopPropagation()
+                      <Grid>
+                        <Grid.Col size="3">
+                          <NumberInput
+                            label="Plan Duration"
+                            hideControls
+                            placeholder="0"
+                            value={
+                              tempData?.periodQuantity || ''
                             }
-                          >
-                            <Select
-                              checkIconPosition="right"
-                              data={periodTypeOptions}
-                              placeholder="Select time period"
-                              value={tempData?.planType}
-                              onChange={value => {
-                                updateDetails({
-                                  name: 'planType',
-                                  value: value,
-                                });
-                              }}
-                            />
-                          </Grid.Col>
-                        </Grid>
-                      </Input.Wrapper>
+                            onChange={value => {
+                              updateDetails({
+                                name: 'periodQuantity',
+                                value: Number(value),
+                              });
+                            }}
+                            error={errors?.periodQuantity}
+                          />
+                        </Grid.Col>
+                        <Grid.Col
+                          size="9"
+                          onClick={e => e.stopPropagation()}
+                        >
+                          <Select
+                            checkIconPosition="right"
+                            data={periodTypeOptions}
+                            placeholder="Select time period"
+                            value={tempData?.planType}
+                            onChange={value => {
+                              updateDetails({
+                                name: 'planType',
+                                value: value,
+                              });
+                            }}
+                          />
+                        </Grid.Col>
+                      </Grid>
                     </div>
                   ) : null}
                   <div className="pd-add-plan-help-block">
@@ -366,18 +361,17 @@ const TGEPlanAndPriceEditCreate = ({
               </div>
             ) : null}
             <div className="pd-add-plan-block">
-              <div className="pd-add-plan-block-header">
-                Plan Price
-              </div>
               <div className="pd-add-plan-block-body">
-                <Input
+                <NumberInput
+                  label="Plan Price"
+                  hideControls
                   type="number"
-                  placeholder=""
+                  placeholder="0"
                   value={tempData?.price || ''}
-                  onChange={e => {
+                  onChange={value => {
                     updateDetails({
                       name: 'price',
-                      value: Number(e.target.value),
+                      value: Number(value),
                     });
                   }}
                   error={errors?.price}
@@ -396,16 +390,22 @@ const TGEPlanAndPriceEditCreate = ({
                   inline
                 />
                 {tempData?.enableDiscountedPrice ? (
-                  <Input
+                  <NumberInput
+                    className="nexify-rightsection-change"
+                    label="Discounted Price"
+                    max={tempData?.price}
+                    clampBehavior="strict"
+                    placeholder="0"
+                    hideControls
                     rightSection={discountPercentage(
                       tempData.price,
                       tempData.discountedPrice
                     )}
                     value={tempData.discountedPrice || ''}
-                    onChange={e => {
+                    onChange={value => {
                       updateDetails({
                         name: 'discountedPrice',
-                        value: Number(e.target.value),
+                        value: Number(value),
                       });
                     }}
                     error={errors?.discountedPrice}
@@ -446,4 +446,4 @@ const TGEPlanAndPriceEditCreate = ({
   );
 };
 
-export default TGEPlanAndPriceEditCreate;
+export default React.memo(TGEPlanAndPriceEditCreate);

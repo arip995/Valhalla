@@ -1,9 +1,9 @@
-import React from 'react';
+import { Switch } from '@mantine/core';
 import {
   IconEdit,
   IconGripVertical,
 } from '@tabler/icons-react';
-import { Switch } from '@mantine/core';
+import React from 'react';
 
 const durationMapping = {
   daily: 'Day',
@@ -114,4 +114,4 @@ const TGESinglePlan = ({
   );
 };
 
-export default TGESinglePlan;
+export default React.memo(TGESinglePlan);

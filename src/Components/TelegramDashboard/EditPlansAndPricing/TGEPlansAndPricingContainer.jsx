@@ -1,5 +1,5 @@
 import { Paper, Text } from '@mantine/core';
-import React, { useState } from 'react';
+import React from 'react';
 import TGEPlansAndPricing from './TGEPlansAndPricing';
 import useEditPlanAndPricing from './useEditPlanAndPricing';
 
@@ -39,4 +39,4 @@ const TGEPlansAndPricingContainer = ({
   );
 };
 
-export default TGEPlansAndPricingContainer;
+export default React.memo(TGEPlansAndPricingContainer);

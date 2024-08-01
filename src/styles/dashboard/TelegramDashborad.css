@@ -129,6 +129,7 @@
   }
   .pd-add-plan-footer {
     position: fixed;
+    z-index: 201;
     bottom: 0px;
     display: flex;
     align-items: center;
@@ -139,12 +140,6 @@
     border-top: 1px solid #e4e4e4;
     background-color: var(--mantine-color-white);
     gap: 16px;
-  }
-  .pd-add-plan-block-header {
-    line-height: normal;
-    margin-bottom: 8px;
-    color: #0f0f0f;
-    font-size: 16px;
   }
   .pd-add-plan-block-body {
     display: flex;

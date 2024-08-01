@@ -1,3 +1,4 @@
+import { CategoriesList } from '@/Constants/constants';
 import {
   Button,
   Collapse,
@@ -7,16 +8,15 @@ import {
 } from '@mantine/core';
 import React from 'react';
 import ProfilePic from '../Common/General/ProfilePic';
-import { CategoriesList } from '@/Constants/constants';
 
 const TelegramDashboardProfilepic = ({
   data,
   handleFileChange,
   loadingImage,
-  onRemoveImage,
   basicDetailsForm,
   onUpdate,
 }) => {
+  console.log(basicDetailsForm.values?.genre, data?.genre);
   return (
     <Paper withBorder className="w-full p-4">
       <div className="">
@@ -51,18 +51,18 @@ const TelegramDashboardProfilepic = ({
         }}
       />
       <Collapse
+        className="flex flex-row-reverse justify-between"
         in={basicDetailsForm.values?.genre !== data?.genre}
       >
         <Button
           className="mt-4"
-          fullWidth
           onClick={() => {
             onUpdate(
               'genre',
               basicDetailsForm.values.genre
             );
           }}
-          color="black"
+          // color="black"
           radius="md"
         >
           Publish
@@ -72,4 +72,4 @@ const TelegramDashboardProfilepic = ({
   );
 };
 
-export default TelegramDashboardProfilepic;
+export default React.memo(TelegramDashboardProfilepic);

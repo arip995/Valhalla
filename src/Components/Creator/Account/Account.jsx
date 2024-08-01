@@ -6,7 +6,7 @@ import {
   Collapse,
   Loader,
   Text,
-  TextInput
+  TextInput,
 } from '@mantine/core';
 import { Toaster } from 'react-hot-toast';
 import classes from '../../../styles/creator/Account.module.css';
@@ -42,12 +42,20 @@ const Account = () => {
         <Header title="Account Details" />
         <div className="flex justify-center">
           <div
-            className={`${classes.accountFormContainer} w-full rounded-sm shadow-sm	mt-6`}
+            className={`${classes.accountFormContainer} mt-6 w-full rounded-sm shadow-sm`}
           >
-            <ProfilePic avatarImage={user?.profilePic} loading={loadingImage} name={`${user?.firstName || ''} ${user?.lastName || ''
-              }`} handleAvatarChange={handleFileChange} onRemoveAvatar={onRemoveImage} showRemoveButton />
+            <ProfilePic
+              avatarImage={user?.profilePic}
+              loading={loadingImage}
+              name={`${user?.firstName || ''} ${
+                user?.lastName || ''
+              }`}
+              handleAvatarChange={handleFileChange}
+              onRemoveAvatar={onRemoveImage}
+              showRemoveButton
+            />
             <form
-              className='flex flex-col gap-6'
+              className="flex flex-col gap-6"
               onSubmit={personInfoForm.onSubmit(
                 onPersonalInfoSubmit
               )}

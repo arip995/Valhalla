@@ -58,7 +58,7 @@ const StepOneCreateTelegram = ({
                     <Radio
                       icon={CheckIcon}
                       value={item.phoneNumber}
-                      label={item.phoneNumber}
+                      label={item.phoneNumber.substring(2)}
                     />
                   </div>
                 );
@@ -137,8 +137,8 @@ const StepOneCreateTelegram = ({
             {stepOneForm.values.isOtpScreen === -1
               ? 'Add new'
               : stepOneForm.values.isOtpScreen === 0
-              ? 'Get otp'
-              : 'Verify otp'}
+                ? 'Get otp'
+                : 'Verify otp'}
           </Button>
         </form>
       )}
