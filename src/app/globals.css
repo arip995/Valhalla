@@ -24,4 +24,21 @@ html {
   .text-balance {
     text-wrap: balance;
   }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+.mantine-Input-section {
+  width: max-content;
+  margin: 6px;
+}
+.mantine-Drawer-header {
+  padding: var(--mantine-spacing-md);
+  border-bottom: 1px solid #e4e4e4;
 }

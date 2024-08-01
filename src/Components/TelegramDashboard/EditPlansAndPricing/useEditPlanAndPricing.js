@@ -21,50 +21,30 @@ const useEditPlanAndPricing = (data, onUpdate) => {
       ...data,
     });
   };
-  const updatePlansData = async updatedPlans => {
-    try {
-      const response = await axiosInstance.post(
-        '/telegram/update_group',
-        {
-          productId: router.id,
-          data: {
-            plans: updatedPlans.map(item => ({
-              _id: item._id,
-            })),
-          },
-          type: 'updatePlanPositions',
-        }
-      );
-
-      // if (!response.data.data.subscriptionPlans.length) {
-      //   throw new Error('Failed to update plans data');
-      // }
-
-      console.log('Plans data updated successfully');
-    } catch (error) {
-      console.error(
-        'Error updating plans data:',
-        error.message
-      );
-    }
-  };
   const onSavePlan = async data => {
     if (isSavingPlan || !data) return;
     try {
       setIsSavingPlan(true);
       const updateData = { ...data, planId: data._id };
       const res = await updateDetails({
-        type: data._id ? 'editPlan' : 'addPlan',
+        type: data?.type
+          ? data.type
+          : data._id
+            ? 'editPlan'
+            : 'addPlan',
         data: updateData,
       });
-      if (res?.data?.plans?.length) {
-        // setProductData(res?.data?.data?.group);
-        setOpenPlanSideBar(false);
-        toast.success(
-          `Plan ${data._id ? `updated` : `created`} successfully`
-        );
+      if (!res.data.data.subscriptionPlans.length) {
+        throw new Error('Failed to update plans data');
       }
+      setPlans(res.data.data.subscriptionPlans);
+      setOpenPlanSideBar(false);
+      if (data.type === 'updatePlanPositions') return;
+      toast.success(
+        `Plan ${data._id ? `updated` : `created`} successfully`
+      );
     } catch (error) {
+      console.log(error);
       toast.error(
         error?.response?.data?.message ||
           `Error saving details. Try again later.`
@@ -81,12 +61,14 @@ const useEditPlanAndPricing = (data, onUpdate) => {
         type: 'deletePlan',
         data: { planId: data._id },
       });
-      if (res?.data?.plans?.length) {
-        // setProductData(res?.data?.data?.group)
+      console.log(res.data);
+      if (res?.data?.data?.subscriptionPlans?.length) {
+        setPlans(res.data.data.subscriptionPlans);
         setOpenPlanSideBar(false);
         toast.success(`Plan deleted successfully`);
       }
     } catch (error) {
+      console.log(error);
       toast.error(
         error?.response?.data?.Error ||
           `Error deleting plan. Try again later.`
@@ -162,7 +144,13 @@ const useEditPlanAndPricing = (data, onUpdate) => {
       selectedRow
     );
     setPlans(tempPlans);
-    updatePlansData(tempPlans);
+    onSavePlan({
+      plans: tempPlans.map(item => ({
+        _id: item._id,
+      })),
+      type: 'updatePlanPositions',
+    });
+    // updatePlansData(tempPlans);
   };
 
   return {

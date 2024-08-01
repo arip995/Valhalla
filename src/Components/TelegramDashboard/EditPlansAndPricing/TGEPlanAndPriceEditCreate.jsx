@@ -11,10 +11,12 @@ import {
   Input,
   Select,
   Text,
+  ScrollArea,
 } from '@mantine/core';
 import { IconLayoutSidebarRightExpand } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { modals } from '@mantine/modals';
+import { discountPercentage } from '@/Utils/Common';
 
 const MAX_TITLE_LENGTH = 75;
 const MIN_TITLE_LENGTH = 0;
@@ -94,6 +96,7 @@ const TGEPlanAndPriceEditCreate = ({
         </Text>
       ),
       labels: { confirm: 'Yes, Delete', cancel: 'Cancel' },
+      confirmProps: { color: 'red' },
       onCancel: () => {},
       onConfirm: onConfirmDelete,
     });
@@ -244,201 +247,200 @@ const TGEPlanAndPriceEditCreate = ({
         opened={openSideBar}
         onClose={() => resetTempData()}
         title={tempData?._id ? 'Edit Plan' : 'New Plan'}
+        scrollAreaComponent={ScrollArea.Autosize}
+        padding="0px"
         closeButtonProps={{
           icon: (
             <IconLayoutSidebarRightExpand
               stroke={1.5}
-              size={18}
-              className="pd-add-plan__close"
-              // onClick={() => {
-              //   setOpenSideBar(false);
-              // }}
+              size={24}
             />
           ),
         }}
       >
-        {/* Header start */}
-        {/* <div className="pd-add-plan-header">
-          <div>
-            {tempData?._id ? 'Edit Plan' : 'New Plan'}
-          </div>
-        </div> */}
-        {/* Header end */}
-        {/* Body start */}
-        <div className="pd-add-plan-body">
-          <div className="pd-add-plan-block">
-            <div className="pd-add-plan-block-header">
-              Plan Name
-            </div>
-            <div className="pd-add-plan-block-body">
-              <Input
-                rightSection={`${
-                  tempData?.title?.length || 0
-                }/${MAX_TITLE_LENGTH}`}
-                placeholder="Give your plan a name"
-                value={tempData?.title || ''}
-                onChange={e =>
-                  updateDetails({
-                    name: 'title',
-                    value:
-                      e.target.value?.trimStart() || '',
-                  })
-                }
-                error={errors?.title}
-              ></Input>
-            </div>
-          </div>
-          {!tempData?._id ? (
+        <div className="flex h-full flex-col justify-between">
+          <div className="pd-add-plan-body mb-14">
             <div className="pd-add-plan-block">
               <div className="pd-add-plan-block-header">
-                Plan Type
+                Plan Name
               </div>
-              <PricingTypeSelector
-                onChange={onChangePriceType}
-                values={[
-                  {
-                    value: 'Lifetime',
-                    description: 'Lifetime',
-                  },
-                  {
-                    value: 'Subscription',
-                    description: 'Subscription',
-                  },
-                ]}
-                value={
-                  tempData.planType === 'Lifetime'
-                    ? 'Lifetime'
-                    : 'Subscription'
-                }
-              />
-              <div className="pd-add-plan-block-body mt-4">
-                {tempData?.planType?.toLowerCase() !==
-                'lifetime' ? (
-                  <div className="pd-add-plan-duration-container">
-                    <Input.Wrapper
-                      error={errors?.periodQuantity}
-                      infoText="^ Set a duration for your subscription plan"
-                    >
-                      <Grid>
-                        <Grid.Col size="3">
-                          <Input
-                            placeholder="0"
-                            value={
-                              tempData?.periodQuantity || ''
+              <div className="pd-add-plan-block-body">
+                <Input
+                  rightSection={`${
+                    tempData?.title?.length || 0
+                  }/${MAX_TITLE_LENGTH}`}
+                  placeholder="Give your plan a name"
+                  value={tempData?.title || ''}
+                  onChange={e =>
+                    updateDetails({
+                      name: 'title',
+                      value:
+                        e.target.value?.trimStart() || '',
+                    })
+                  }
+                  error={errors?.title}
+                ></Input>
+              </div>
+            </div>
+            {!tempData?._id ? (
+              <div className="pd-add-plan-block">
+                <div className="pd-add-plan-block-header">
+                  Plan Type
+                </div>
+                <PricingTypeSelector
+                  onChange={onChangePriceType}
+                  values={[
+                    {
+                      value: 'Subscription',
+                      description: 'Subscription',
+                    },
+                    {
+                      value: 'Lifetime',
+                      description: 'Lifetime',
+                    },
+                  ]}
+                  value={
+                    tempData.planType === 'Lifetime'
+                      ? 'Lifetime'
+                      : 'Subscription'
+                  }
+                />
+                <div className="pd-add-plan-block-body mt-4">
+                  {tempData?.planType?.toLowerCase() !==
+                  'lifetime' ? (
+                    <div className="pd-add-plan-duration-container">
+                      <Input.Wrapper
+                        error={errors?.periodQuantity}
+                        infoText="^ Set a duration for your subscription plan"
+                      >
+                        <Grid>
+                          <Grid.Col size="3">
+                            <Input
+                              placeholder="0"
+                              value={
+                                tempData?.periodQuantity ||
+                                ''
+                              }
+                              onChange={e => {
+                                updateDetails({
+                                  name: 'periodQuantity',
+                                  value: Number(
+                                    e.target.value
+                                  ),
+                                });
+                              }}
+                              error={
+                                !!errors?.periodQuantity
+                              }
+                            />
+                          </Grid.Col>
+                          <Grid.Col
+                            size="9"
+                            onClick={e =>
+                              e.stopPropagation()
                             }
-                            onChange={e => {
-                              updateDetails({
-                                name: 'periodQuantity',
-                                value: Number(
-                                  e.target.value
-                                ),
-                              });
-                            }}
-                            error={!!errors?.periodQuantity}
-                          />
-                        </Grid.Col>
-                        <Grid.Col
-                          size="9"
-                          onClick={e => e.stopPropagation()}
-                        >
-                          <Select
-                            checkIconPosition="right"
-                            data={periodTypeOptions}
-                            placeholder="Select time period"
-                            onChange={value => {
-                              updateDetails({
-                                name: 'planType',
-                                value: value,
-                              });
-                            }}
-                          />
-                        </Grid.Col>
-                      </Grid>
-                    </Input.Wrapper>
+                          >
+                            <Select
+                              checkIconPosition="right"
+                              data={periodTypeOptions}
+                              placeholder="Select time period"
+                              value={tempData?.planType}
+                              onChange={value => {
+                                updateDetails({
+                                  name: 'planType',
+                                  value: value,
+                                });
+                              }}
+                            />
+                          </Grid.Col>
+                        </Grid>
+                      </Input.Wrapper>
+                    </div>
+                  ) : null}
+                  <div className="pd-add-plan-help-block">
+                    Note: Plan type cannot be edited once
+                    created. You will have to create a new
+                    plan, if needed.
                   </div>
-                ) : null}
-                <div className="pd-add-plan-help-block">
-                  Note: Plan type cannot be edited once
-                  created. You will have to create a new
-                  plan, if needed.
                 </div>
               </div>
-            </div>
-          ) : null}
-          <div className="pd-add-plan-block">
-            <div className="pd-add-plan-block-header">
-              Plan Price
-            </div>
-            <div className="pd-add-plan-block-body">
-              <Input
-                type="number"
-                placeholder=""
-                value={tempData?.price || ''}
-                onChange={e => {
-                  updateDetails({
-                    name: 'price',
-                    value: Number(e.target.value),
-                  });
-                }}
-                error={errors?.price}
-              />
-              <Checkbox
-                name="pd-plan-enable-discount-price"
-                id="pd-plan-enable-discount-price"
-                label="Offer discounted price on plan price"
-                checked={tempData?.enableDiscountedPrice}
-                onChange={e =>
-                  updateDetails({
-                    name: 'enableDiscountedPrice',
-                    value: e.target.checked,
-                  })
-                }
-                inline
-              />
-              {tempData?.enableDiscountedPrice ? (
+            ) : null}
+            <div className="pd-add-plan-block">
+              <div className="pd-add-plan-block-header">
+                Plan Price
+              </div>
+              <div className="pd-add-plan-block-body">
                 <Input
-                  rightSection={discountPercentage(
-                    tempData.price,
-                    tempData.discountedPrice
-                  )}
-                  value={tempData.discountedPrice || ''}
+                  type="number"
+                  placeholder=""
+                  value={tempData?.price || ''}
                   onChange={e => {
                     updateDetails({
-                      name: 'discountedPrice',
+                      name: 'price',
                       value: Number(e.target.value),
                     });
                   }}
-                  error={errors?.discountedPrice}
+                  error={errors?.price}
                 />
-              ) : null}
+                <Checkbox
+                  name="pd-plan-enable-discount-price"
+                  id="pd-plan-enable-discount-price"
+                  label="Offer discounted price on plan price"
+                  checked={tempData?.enableDiscountedPrice}
+                  onChange={e =>
+                    updateDetails({
+                      name: 'enableDiscountedPrice',
+                      value: e.target.checked,
+                    })
+                  }
+                  inline
+                />
+                {tempData?.enableDiscountedPrice ? (
+                  <Input
+                    rightSection={discountPercentage(
+                      tempData.price,
+                      tempData.discountedPrice
+                    )}
+                    value={tempData.discountedPrice || ''}
+                    onChange={e => {
+                      updateDetails({
+                        name: 'discountedPrice',
+                        value: Number(e.target.value),
+                      });
+                    }}
+                    error={errors?.discountedPrice}
+                  />
+                ) : null}
+              </div>
             </div>
           </div>
-        </div>
-        {/* Body end */}
-        {/* Footer start */}
-        <div className="pd-add-plan-footer">
-          <Button
-            onClick={() => onSaveChanges()}
-            disabled={isSaving || isDeleting}
-            loading={isDeleting}
-            variant="filled"
-            radius="xl"
-          >
-            Save Changes
-          </Button>
-          {tempData?._id && numOfPlans > 1 ? (
+          {/* <div className="pd-add-plan-footer-container "> */}
+          <div className="pd-add-plan-footer">
             <Button
-              onClick={() => onDeletePlan()}
-              disabled={isDeleting || isSaving}
+              onClick={() => onSaveChanges()}
+              disabled={isSaving || isDeleting}
               loading={isDeleting}
               variant="filled"
+              color="black"
               radius="xl"
             >
-              Delete Plan
+              Save Changes
             </Button>
-          ) : null}
+            {tempData?._id && numOfPlans > 1 ? (
+              <Button
+                onClick={() => onDeletePlan()}
+                disabled={isDeleting || isSaving}
+                loading={isDeleting}
+                variant="filled"
+                color="red"
+                radius="xl"
+              >
+                Delete Plan
+              </Button>
+            ) : null}
+          </div>
+          {/* </div> */}
         </div>
-        {/* Footer end */}
       </Drawer>
     </>
   );

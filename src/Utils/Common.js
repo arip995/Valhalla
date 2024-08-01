@@ -49,9 +49,7 @@ export function discountPercentage(value, discountedValue) {
     isNaN(value) ||
     isNaN(discountedValue)
   ) {
-    return 0;
+    return '0%';
   }
-  return Math.round(
-    `${100 * ((value - discountedValue) / value)}%`
-  );
+  return `${Math.round(100 * ((value - discountedValue) / value))}%`;
 }
