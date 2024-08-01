@@ -24,11 +24,11 @@
       gap: 12px;
       .pd-plan {
         display: flex;
-        justify-content: space-between;
         align-items: flex-start;
+        justify-content: space-between;
         padding: 12px 16px;
-        border-radius: 8px;
         border: 1px solid rgba(15, 15, 15, 0.15);
+        border-radius: 8px;
         background-color: white;
         .cl_draggable {
           height: 17px;
@@ -40,10 +40,10 @@
           margin-left: 20px;
           gap: 4px;
           .pd-plan__name {
-            font-size: 16px;
-            font-weight: 600;
             line-height: 1.5;
             color: rgba(18, 18, 18, 1);
+            font-size: 16px;
+            font-weight: 600;
           }
           .pd-plan-pricing {
             display: flex;
@@ -51,32 +51,32 @@
             gap: 6px;
             .pd-plan-pricing-main {
               display: flex;
-              gap: 2px;
-              font-size: 14px;
-              font-weight: 400;
               line-height: 1.5;
               color: rgba(18, 18, 18, 1);
+              font-size: 14px;
+              font-weight: 400;
+              gap: 2px;
             }
             .pd-plan-pricing-discounted {
-              font-size: 14px;
-              font-weight: 400;
               line-height: 1.5;
               color: rgba(18, 18, 18, 1);
+              font-size: 14px;
+              font-weight: 400;
               .pd-plan-pricing-discounted__price {
                 text-decoration: line-through;
               }
               .pd-plan-pricing-discounted__off {
                 margin-left: 6px;
-                text-decoration: none !important;
                 color: rgba(20, 120, 57, 1);
+                text-decoration: none !important;
               }
             }
           }
           .pd-plan-members {
-            font-size: 14px;
-            font-weight: 400;
             line-height: 1.5;
             color: rgba(18, 18, 18, 0.7);
+            font-size: 14px;
+            font-weight: 400;
           }
         }
         .pd-plan-actionables {
@@ -87,18 +87,18 @@
       }
     }
     .pd-plans__add-cta {
-      cursor: pointer;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      line-height: 1.5;
       padding: 14px 16px;
-      background: #ffffff;
       border: 1px dashed #cacaca;
       border-radius: 10px;
-      font-size: 14px;
-      line-height: 1.5;
       color: rgba(0, 0, 0, 0.3);
+      background: #ffffff;
+      cursor: pointer;
       letter-spacing: 0.16px;
+      font-size: 14px;
     }
   }
 }
@@ -112,39 +112,39 @@
   .pd-add-plan-header {
     display: flex;
     align-items: center;
+    line-height: normal;
     padding: 18px 24px;
     border-bottom: 1px solid #e4e4e4;
-    gap: 12px;
-    font-size: 16px;
-    line-height: normal;
     color: #121212;
+    font-size: 16px;
+    gap: 12px;
   }
   .pd-add-plan-body {
-    padding: 32px 24px;
-    overflow-y: auto;
     display: flex;
-    flex-direction: column;
-    gap: 26px;
+    overflow-y: auto;
     flex: 1;
+    flex-direction: column;
+    padding: 32px 24px;
+    gap: 26px;
   }
   .pd-add-plan-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row-reverse;
-    border-top: 1px solid #e4e4e4;
-    gap: 16px;
-    padding: 18px 24px;
-    background-color: var(--mantine-color-white);
     position: fixed;
     bottom: 0px;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    justify-content: space-between;
     width: 100%;
+    padding: 18px 24px;
+    border-top: 1px solid #e4e4e4;
+    background-color: var(--mantine-color-white);
+    gap: 16px;
   }
   .pd-add-plan-block-header {
-    font-size: 16px;
     line-height: normal;
-    color: #0f0f0f;
     margin-bottom: 8px;
+    color: #0f0f0f;
+    font-size: 16px;
   }
   .pd-add-plan-block-body {
     display: flex;
@@ -169,13 +169,13 @@
     margin-top: 8px;
   }
   .pd-add-plan-help-block {
-    border-radius: 5px;
-    background-color: #f6f6f6;
+    line-height: 1.4;
     padding: 16px;
+    border-radius: 5px;
+    color: rgba(18, 18, 18, 0.5);
+    background-color: #f6f6f6;
+    letter-spacing: 0.28px;
     font-size: 14px;
     font-weight: 400;
-    line-height: 1.4;
-    color: rgba(18, 18, 18, 0.5);
-    letter-spacing: 0.28px;
   }
 }
