@@ -16,7 +16,6 @@ const TelegramDashboardProfilepic = ({
   basicDetailsForm,
   onUpdate,
 }) => {
-  console.log(basicDetailsForm.values?.genre, data?.genre);
   return (
     <Paper withBorder className="w-full p-4">
       <div className="">
@@ -45,7 +44,7 @@ const TelegramDashboardProfilepic = ({
         label="Category"
         placeholder="Select Category"
         data={CategoriesList}
-        value={data.genre}
+        value={basicDetailsForm.values?.genre}
         allowDeselect={false}
         onChange={value => {
           basicDetailsForm.setValues({ genre: value });
