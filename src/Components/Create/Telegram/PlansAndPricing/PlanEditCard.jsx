@@ -195,8 +195,8 @@ function PlanEditCard({
             }}
           />
           <Checkbox
-            name="pd-plan-enable-discount-price"
-            id="pd-plan-enable-discount-price"
+            name="tgd-plan-enable-discount-price"
+            id="tgd-plan-enable-discount-price"
             label="Offer discounted price on plan price"
             className={'mt-2'}
             checked={enableDiscountedPrice}

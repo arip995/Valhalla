@@ -13,16 +13,16 @@
   }
 }
 
-.pd-plans {
-  .pd-plans-body {
+.tgd-plans {
+  .tgd-plans-body {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    .pd-plans-list {
+    .tgd-plans-list {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      .pd-plan {
+      .tgd-plan {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
@@ -34,22 +34,22 @@
           height: 17px;
           margin-top: 25px;
         }
-        .pd-plan-details {
+        .tgd-plan-details {
           display: flex;
           flex-direction: column;
           margin-left: 20px;
           gap: 4px;
-          .pd-plan__name {
+          .tgd-plan__name {
             line-height: 1.5;
             color: rgba(18, 18, 18, 1);
             font-size: 16px;
             font-weight: 600;
           }
-          .pd-plan-pricing {
+          .tgd-plan-pricing {
             display: flex;
             align-items: center;
             gap: 6px;
-            .pd-plan-pricing-main {
+            .tgd-plan-pricing-main {
               display: flex;
               line-height: 1.5;
               color: rgba(18, 18, 18, 1);
@@ -57,36 +57,36 @@
               font-weight: 400;
               gap: 2px;
             }
-            .pd-plan-pricing-discounted {
+            .tgd-plan-pricing-discounted {
               line-height: 1.5;
               color: rgba(18, 18, 18, 1);
               font-size: 14px;
               font-weight: 400;
-              .pd-plan-pricing-discounted__price {
+              .tgd-plan-pricing-discounted__price {
                 text-decoration: line-through;
               }
-              .pd-plan-pricing-discounted__off {
+              .tgd-plan-pricing-discounted__off {
                 margin-left: 6px;
                 color: rgba(20, 120, 57, 1);
                 text-decoration: none !important;
               }
             }
           }
-          .pd-plan-members {
+          .tgd-plan-members {
             line-height: 1.5;
             color: rgba(18, 18, 18, 0.7);
             font-size: 14px;
             font-weight: 400;
           }
         }
-        .pd-plan-actionables {
+        .tgd-plan-actionables {
           display: flex;
           align-items: center;
           gap: 12px;
         }
       }
     }
-    .pd-plans__add-cta {
+    .tgd-plans__add-cta {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -103,13 +103,13 @@
   }
 }
 
-.pd-add-plan {
-  .pd-add-plan__close {
+.tgd-add-plan {
+  .tgd-add-plan__close {
     width: 24px;
     height: 24px;
     cursor: pointer;
   }
-  .pd-add-plan-header {
+  .tgd-add-plan-header {
     display: flex;
     align-items: center;
     line-height: normal;
@@ -119,7 +119,7 @@
     font-size: 16px;
     gap: 12px;
   }
-  .pd-add-plan-body {
+  .tgd-add-plan-body {
     display: flex;
     overflow-y: auto;
     flex: 1;
@@ -127,7 +127,7 @@
     padding: 32px 24px;
     gap: 26px;
   }
-  .pd-add-plan-footer {
+  .tgd-add-plan-footer {
     position: fixed;
     z-index: 201;
     bottom: 0px;
@@ -141,17 +141,17 @@
     background-color: var(--mantine-color-white);
     gap: 16px;
   }
-  .pd-add-plan-block-body {
+  .tgd-add-plan-block-body {
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
-  .pd-add-plan-type-container {
+  .tgd-add-plan-type-container {
     display: flex;
     align-items: center;
     gap: 24px;
   }
-  .pd-add-plan-duration-container {
+  .tgd-add-plan-duration-container {
     padding-inline: 0;
     .row {
       margin-inline: -8px;
@@ -160,10 +160,10 @@
       padding-inline: 8px;
     }
   }
-  .pd-add-plan-help-text {
+  .tgd-add-plan-help-text {
     margin-top: 8px;
   }
-  .pd-add-plan-help-block {
+  .tgd-add-plan-help-block {
     line-height: 1.4;
     padding: 16px;
     border-radius: 5px;

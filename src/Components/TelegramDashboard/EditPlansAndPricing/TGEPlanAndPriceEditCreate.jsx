@@ -249,7 +249,7 @@ const TGEPlanAndPriceEditCreate = ({
   return (
     <>
       <Drawer
-        className="pd-add-plan"
+        className="tgd-add-plan"
         opened={openSideBar}
         onClose={() => resetTempData()}
         title={tempData?._id ? 'Edit Plan' : 'New Plan'}
@@ -265,9 +265,9 @@ const TGEPlanAndPriceEditCreate = ({
         }}
       >
         <div className="flex h-full flex-col justify-between">
-          <div className="pd-add-plan-body mb-14">
-            <div className="pd-add-plan-block">
-              <div className="pd-add-plan-block-body">
+          <div className="tgd-add-plan-body mb-14">
+            <div className="tgd-add-plan-block">
+              <div className="tgd-add-plan-block-body">
                 <TextInput
                   className="nexify-rightsection-change"
                   label="Plan Name"
@@ -288,7 +288,7 @@ const TGEPlanAndPriceEditCreate = ({
               </div>
             </div>
             {!tempData?._id ? (
-              <div className="pd-add-plan-block">
+              <div className="tgd-add-plan-block">
                 <Input.Label className="mb-1">
                   Plan Type
                 </Input.Label>
@@ -310,10 +310,10 @@ const TGEPlanAndPriceEditCreate = ({
                       : 'Subscription'
                   }
                 />
-                <div className="pd-add-plan-block-body mt-4">
+                <div className="tgd-add-plan-block-body mt-4">
                   {tempData?.planType?.toLowerCase() !==
                   'lifetime' ? (
-                    <div className="pd-add-plan-duration-container">
+                    <div className="tgd-add-plan-duration-container">
                       <Grid>
                         <Grid.Col size="3">
                           <NumberInput
@@ -352,7 +352,7 @@ const TGEPlanAndPriceEditCreate = ({
                       </Grid>
                     </div>
                   ) : null}
-                  <div className="pd-add-plan-help-block">
+                  <div className="tgd-add-plan-help-block">
                     Note: Plan type cannot be edited once
                     created. You will have to create a new
                     plan, if needed.
@@ -360,8 +360,8 @@ const TGEPlanAndPriceEditCreate = ({
                 </div>
               </div>
             ) : null}
-            <div className="pd-add-plan-block">
-              <div className="pd-add-plan-block-body">
+            <div className="tgd-add-plan-block">
+              <div className="tgd-add-plan-block-body">
                 <NumberInput
                   label="Plan Price"
                   hideControls
@@ -377,8 +377,8 @@ const TGEPlanAndPriceEditCreate = ({
                   error={errors?.price}
                 />
                 <Checkbox
-                  name="pd-plan-enable-discount-price"
-                  id="pd-plan-enable-discount-price"
+                  name="tgd-plan-enable-discount-price"
+                  id="tgd-plan-enable-discount-price"
                   label="Offer discounted price on plan price"
                   checked={tempData?.enableDiscountedPrice}
                   onChange={e =>
@@ -414,8 +414,8 @@ const TGEPlanAndPriceEditCreate = ({
               </div>
             </div>
           </div>
-          {/* <div className="pd-add-plan-footer-container "> */}
-          <div className="pd-add-plan-footer">
+          {/* <div className="tgd-add-plan-footer-container "> */}
+          <div className="tgd-add-plan-footer">
             <Button
               onClick={() => onSaveChanges()}
               disabled={isSaving || isDeleting}

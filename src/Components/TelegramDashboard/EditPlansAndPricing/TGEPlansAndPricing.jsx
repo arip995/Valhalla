@@ -30,9 +30,9 @@ const TGEPlansAndPricing = ({
   };
 
   return (
-    <div className="pd-plans">
+    <div className="tgd-plans">
       <DragDropContext onDragEnd={onDragPlans}>
-        <div className="pd-plans-body">
+        <div className="tgd-plans-body">
           <Droppable droppableId="droppable-id">
             {provided => (
               <div
@@ -40,7 +40,7 @@ const TGEPlansAndPricing = ({
                 {...provided.droppableProps}
               >
                 {plans?.length ? (
-                  <div className="pd-plans-list">
+                  <div className="tgd-plans-list">
                     {plans.map((obj, index) =>
                       plans.length > 1 ? (
                         <Draggable
@@ -98,7 +98,7 @@ const TGEPlansAndPricing = ({
             + Add another Plan
           </Button>
           {/* <div
-            className="pd-plans__add-cta"
+            className="tgd-plans__add-cta"
             onClick={() => {
               setPlanObj({});
               setOpenPlanSideBar(true);

@@ -53,7 +53,7 @@ const TelegramDashboardProfilepic = ({
       <Collapse
         in={basicDetailsForm.values?.genre !== data?.genre}
       >
-        <div className="mt-4 flex flex-row-reverse justify-between">
+        <div className="mt-4 flex justify-between">
           <Button
             className=""
             onClick={() => {

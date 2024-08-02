@@ -45,10 +45,10 @@ const TGESinglePlan = ({
   };
 
   return (
-    <div className="pd-plan">
-      <div className="pd-plan" style={{ border: 'none' }}>
+    <div className="tgd-plan">
+      <div className="tgd-plan" style={{ border: 'none' }}>
         {plansLength > 1 && (
-          <div className="pd-plan-draggable-image">
+          <div className="tgd-plan-draggable-image">
             <IconGripVertical
               stroke={1.5}
               size={18}
@@ -56,12 +56,12 @@ const TGESinglePlan = ({
             />
           </div>
         )}
-        <div className="pd-plan-details">
-          <div className="pd-plan__name">
+        <div className="tgd-plan-details">
+          <div className="tgd-plan__name">
             {planObj.subscriptionPeriod}
           </div>
-          <div className="pd-plan-pricing">
-            <div className="pd-plan-pricing-main">
+          <div className="tgd-plan-pricing">
+            <div className="tgd-plan-pricing-main">
               <span>₹</span>
               <span>
                 {planObj.enableDiscountedPrice
@@ -72,19 +72,19 @@ const TGESinglePlan = ({
               <span>{getDurationString()}</span>
             </div>
             {planObj?.enableDiscountedPrice ? (
-              <div className="pd-plan-pricing-discounted">
+              <div className="tgd-plan-pricing-discounted">
                 <span>₹</span>
-                <span className="pd-plan-pricing-discounted__price">
+                <span className="tgd-plan-pricing-discounted__price">
                   {planObj.cost}
                 </span>
-                <span className="pd-plan-pricing-discounted__off">{`(${getDiscountPercentage(
+                <span className="tgd-plan-pricing-discounted__off">{`(${getDiscountPercentage(
                   planObj?.discountedCost,
                   planObj.cost
                 )} % off)`}</span>
               </div>
             ) : null}
           </div>
-          <div className="pd-plan-members">
+          <div className="tgd-plan-members">
             {`${planObj?.totalSoldQuantity || 0} ${
               planObj?.totalSoldQuantity === 1
                 ? `Active Subscriber`
@@ -93,7 +93,7 @@ const TGESinglePlan = ({
           </div>
         </div>
       </div>
-      <div className="pd-plan-actionables">
+      <div className="tgd-plan-actionables">
         <IconEdit
           stroke={1.5}
           size={18}

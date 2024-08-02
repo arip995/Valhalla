@@ -11,7 +11,7 @@ const TelegramDashboardOpenlink = ({ data }) => {
       className="sticky top-0 z-20 w-full p-4"
     >
       <Text size="md" className="mb-2" fw={600}>
-        Page overview
+        Page Preview
       </Text>
       <Link
         href={`/tg/${data._id}`}

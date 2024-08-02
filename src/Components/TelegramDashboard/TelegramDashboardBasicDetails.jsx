@@ -44,7 +44,7 @@ const TelegramDashboardBasicDetails = ({
   return (
     <Paper withBorder className="w-full p-4">
       <Text size="md" className="mb-2" fw={600}>
-        Basic details
+        Basic Details
       </Text>
       <form
         className="flex flex-col gap-3"
@@ -125,7 +125,7 @@ const TelegramDashboardBasicDetails = ({
             !basicDetailsForm.errors.title
           }
         >
-          <div className="flex flex-row-reverse justify-between">
+          <div className="flex justify-between">
             <Button
               // fullWidth
               type="submit"
