@@ -10,7 +10,7 @@ import {
 } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import PricingTypeSelector from './PricingTypeSelector';
-import { periodTypeOptions } from '@/Constants/constants';
+import { PeriodTypeOptions } from '@/Constants/constants';
 
 function PlanEditCard({
   originalState,
@@ -163,7 +163,7 @@ function PlanEditCard({
               <Select
                 className={'nexify-plan-edit-card-flex-one'}
                 checkIconPosition="right"
-                data={periodTypeOptions}
+                data={PeriodTypeOptions}
                 defaultSearchValue={periodLabel}
                 // style={{ flex: 1 }}
                 placeholder="Select time period"

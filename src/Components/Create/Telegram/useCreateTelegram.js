@@ -1,4 +1,4 @@
-import { periodTypeOptions } from '@/Constants/constants';
+import { PeriodTypeOptions } from '@/Constants/constants';
 import axiosInstance from '@/Utils/AxiosInstance';
 import useUser from '@/Utils/Hooks/useUser';
 import { useForm } from '@mantine/form';
@@ -159,7 +159,7 @@ const useCreateTelegram = () => {
     const formattedPlans = [];
 
     plans.forEach(val => {
-      const selectedPeriod = periodTypeOptions.find(
+      const selectedPeriod = PeriodTypeOptions.find(
         per => per.label == val.subscriptionPeriodLabel
       );
       const days =

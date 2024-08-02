@@ -6,7 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import '../../../../styles/common/plan-and-pricing.css';
 import PlanCard from './PlanCard';
 import PlanEditCard from './PlanEditCard';
-import { periodTypeOptions } from '@/Constants/constants';
+import { PeriodTypeOptions } from '@/Constants/constants';
 
 const PlansAndPricing = ({ stepThreeForm }) => {
   const [plans, setPlans] = useState(
@@ -195,7 +195,7 @@ const PlansAndPricing = ({ stepThreeForm }) => {
                   originalState={plan}
                   index={index}
                   hideDelete={plans?.length == 1}
-                  periodTypeOptions={periodTypeOptions}
+                  PeriodTypeOptions={PeriodTypeOptions}
                   onSaveSubscriptionPlans={
                     onSaveSubscriptionPlans
                   }
