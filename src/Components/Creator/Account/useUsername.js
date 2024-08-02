@@ -21,7 +21,7 @@ const useUsername = () => {
     async () => {
       try {
         setLoadingUsername(true);
-        const data = await axiosInstance.post(
+        await axiosInstance.post(
           `${process.env.NEXT_PUBLIC_BASE_URL}/user/check_existing_username`,
           { username: username }
         );

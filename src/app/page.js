@@ -11,7 +11,7 @@ import '@mantine/notifications/styles.css';
 import '../styles/landing/main.css';
 
 export async function generateMetadata(
-  { params, searchParams },
+  // { params, searchParams },
   parent
 ) {
   const previousImages =
@@ -49,7 +49,7 @@ export async function generateMetadata(
   };
 }
 
-export default function Page({ params, searchParams }) {
+export default function Page() {
   return (
     <div className="relative flex flex-col bg-gray-900">
       <div className="sticky top-0 z-50 bg-gray-900">

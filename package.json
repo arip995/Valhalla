@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@hello-pangea/dnd": "^16.6.0",
@@ -43,7 +43,7 @@
     "react-hot-toast": "^2.4.1"
   },
   "devDependencies": {
-    "eslint": "^8",
+    "eslint": "^8.57.0",
     "eslint-config-next": "14.2.2",
     "postcss": "^8.4.38",
     "postcss-preset-mantine": "^1.14.4",

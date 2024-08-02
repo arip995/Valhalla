@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import axiosInstance from '@/Utils/AxiosInstance';
 import { handleFile } from '@/Utils/HandleFiles';
 import useUser from '@/Utils/Hooks/useUser';

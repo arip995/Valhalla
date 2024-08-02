@@ -1,9 +1,9 @@
 import axiosInstance from '@/Utils/AxiosInstance';
-import { validateEmail } from '@/Utils/Regex';
 import useUser from '@/Utils/Hooks/useUser';
+import { validateEmail } from '@/Utils/Regex';
 import { useDisclosure } from '@mantine/hooks';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useContactSupportDetails = () => {
@@ -96,14 +96,14 @@ const useContactSupportDetails = () => {
           editEntity === 'email'
             ? email
             : editEntity === 'supportEmail'
-            ? supportEmail
-            : '',
+              ? supportEmail
+              : '',
         phoneNumber:
           editEntity === 'phoneNumber'
             ? phoneNumber
             : editEntity === 'supportPhoneNumber'
-            ? supportPhoneNumber
-            : '',
+              ? supportPhoneNumber
+              : '',
         updateEntity: editEntity,
         otp: otp,
       };

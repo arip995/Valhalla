@@ -1,6 +1,5 @@
-import { validateEmail } from '@/Utils/Regex';
 import useUser from '@/Utils/Hooks/useUser';
-import useIsBrowser from '@/Utils/useIsBrowser';
+import { validateEmail } from '@/Utils/Regex';
 import { useForm } from '@mantine/form';
 import { useToggle } from '@mantine/hooks';
 import axios from 'axios';
@@ -75,7 +74,7 @@ const useAuth = ({ tabName }) => {
   const sendOtp = async () => {
     try {
       setLoading(true);
-      const data = await axios.post(
+      await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/send_otp`,
         {
           [emailOrPhoneNumber === 'email'

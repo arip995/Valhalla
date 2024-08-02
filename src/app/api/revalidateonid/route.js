@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 
-export async function GET(req, res) {
+export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const path = searchParams.get('path');
 

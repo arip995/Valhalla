@@ -3,7 +3,7 @@ import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
-const useEditPlanAndPricing = (data, onUpdate) => {
+const useEditPlanAndPricing = data => {
   const router = useParams();
   const [openPlanSideBar, setOpenPlanSideBar] =
     useState(false);
