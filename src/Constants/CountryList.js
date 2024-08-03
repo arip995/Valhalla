@@ -1357,6 +1357,7 @@ export const CountryFlag = isoCode => {
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
+      key={isoCode}
       src={flagUrl}
       alt={`Flag of ${isoCode}`}
       srcSet={`https://flagcdn.com/48x36/${isoCode.toLowerCase()}.png 2x,
