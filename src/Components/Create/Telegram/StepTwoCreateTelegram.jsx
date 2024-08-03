@@ -1,7 +1,6 @@
 import {
   Button,
   CheckIcon,
-  Flex,
   Grid,
   Group,
   Radio,
@@ -9,7 +8,6 @@ import {
   Text,
   TextInput,
 } from '@mantine/core';
-import React from 'react';
 import classes from '../../../styles/common/RadioCard.module.css';
 
 const StepTwoCreateTelegram = ({

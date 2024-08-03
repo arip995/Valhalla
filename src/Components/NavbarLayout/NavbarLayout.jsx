@@ -7,17 +7,16 @@ import {
   Group,
   NavLink,
   ScrollArea,
-  UnstyledButton,
   rem,
-  useMantineTheme,
+  // useMantineTheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import {
-  IconBrandDiscord,
-  IconBrandMeta,
+  // IconBrandDiscord,
+  // IconBrandMeta,
   IconBrandTelegram,
-  IconBrandWhatsapp,
-  IconCalendarEvent,
+  // IconBrandWhatsapp,
+  // IconCalendarEvent,
   IconCash,
   IconCertificate,
   IconCreditCardPay,
@@ -76,7 +75,7 @@ function NavbarLink({
 export function NavbarLayout({ children }) {
   const router = useRouter();
   const [opened, { toggle }] = useDisclosure(false);
-  const theme = useMantineTheme();
+  // const theme = useMantineTheme();
   const pathName = usePathname();
   const [active, setActive] = useState(pathName);
   const isBrowser = useIsBrowser();
@@ -207,8 +206,8 @@ export function NavbarLayout({ children }) {
       },
     },
   ];
-  const links = mockdata.map((link, index) => {
-    const { icon: Icon, label, value, path } = link;
+  const links = mockdata.map(link => {
+    const { icon: Icon, label, path } = link;
 
     return (
       <NavbarLink

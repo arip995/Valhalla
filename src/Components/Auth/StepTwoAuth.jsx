@@ -24,6 +24,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import HeaderWrapper from './HeaderWrapper';
 import PaperWrapper from './PaperWrapper';
+import toast from 'react-hot-toast';
 
 const UserTypeCards = UserTypes.map(item => (
   <Radio
@@ -59,13 +60,13 @@ const StepTwoAuth = () => {
       let error = { ...errors };
       if (!username) {
         error.username = 'usernameis reuired';
-        setErrors(_ => error);
+        setErrors(() => error);
         return;
       }
       delete error.user;
       setLoading(true);
       try {
-        const data = await axiosInstance.post(
+        await axiosInstance.post(
           `${process.env.NEXT_PUBLIC_BASE_URL}/user/check_existing_username`,
           { username: username },
           { sendCookie: true }
@@ -76,7 +77,7 @@ const StepTwoAuth = () => {
         error.username = 'Username taken';
         setLoading(false);
       }
-      setErrors(_ => error);
+      setErrors(() => error);
     },
     400
   );
@@ -113,8 +114,7 @@ const StepTwoAuth = () => {
 
   useEffect(() => {
     const newErrors = validateErrors();
-
-    setErrors(_ => newErrors);
+    setErrors(() => newErrors);
   }, [firstName, lastName, usertype, category]);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-const Page = ({ data }) => {
+const Page = () => {
   return <div className=""></div>;
 };
 

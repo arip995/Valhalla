@@ -107,7 +107,7 @@ const PlansAndPricing = ({ stepThreeForm }) => {
         element.style.opacity = '0';
         element.style.transform = 'scaleY(0.01)';
       }
-      await new Promise((resolve, reject) => {
+      await new Promise(resolve => {
         setTimeout(() => {
           resolve();
         }, 200);

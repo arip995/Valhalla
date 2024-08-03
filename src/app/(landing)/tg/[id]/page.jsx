@@ -16,6 +16,9 @@ async function getData(id) {
 export default async function Page({ params }) {
   const { data } = await getData(params.id);
   return (
-    <ViewTelegram prefetchedData={data} id={params.id} />
+    <ViewTelegram
+      prefetchedData={data}
+      productId={params.id}
+    />
   );
 }

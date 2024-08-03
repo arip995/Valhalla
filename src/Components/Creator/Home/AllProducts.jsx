@@ -1,17 +1,13 @@
-import {
-  Text,
-  UnstyledButton,
-  useMantineTheme,
-} from '@mantine/core';
+import { Text, useMantineTheme } from '@mantine/core';
 import {
   IconBrandTelegram,
   IconCertificate,
   IconCreditCard,
   IconLockDollar,
 } from '@tabler/icons-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import classes from '../../../styles/creator/Home/AllProducts.module.css';
-import Link from 'next/link';
 
 export function AllProducts() {
   const router = useRouter();

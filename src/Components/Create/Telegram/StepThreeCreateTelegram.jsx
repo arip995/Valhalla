@@ -1,13 +1,6 @@
-import {
-  Button,
-  Input,
-  Select,
-  TextInput,
-  Textarea,
-} from '@mantine/core';
-import React from 'react';
-import PlansAndPricing from './PlansAndPricing/PlansAndPricing';
 import { CategoriesList } from '@/Constants/constants';
+import { Button, Select, TextInput } from '@mantine/core';
+import PlansAndPricing from './PlansAndPricing/PlansAndPricing';
 
 const StepThreeCreateTelegram = ({
   stepThreeForm,
@@ -47,7 +40,7 @@ const StepThreeCreateTelegram = ({
         {/* <Input.Wrapper> */}
         <PlansAndPricing stepThreeForm={stepThreeForm} />
         <Button
-          className="z-40 sticky bottom-5"
+          className="sticky bottom-5 z-40"
           type="submit"
           loading={loading}
           onClick={() =>

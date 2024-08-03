@@ -1,26 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
+import { Text } from '@mantine/core';
 import {
-  IconFile,
   IconFileText,
   IconTrash,
   IconVideo,
 } from '@tabler/icons-react';
-import React from 'react';
 import '../../../styles/common/list-files.css';
-import { Text } from '@mantine/core';
 
-const ListFiles = ({ files, onDelete = () => { } }) => {
+const ListFiles = ({ files, onDelete = () => {} }) => {
   return (
     <div className="list-files-container">
       {files.map(item => {
         const isImage =
           !item.loading &&
-            item.type.split('/')[0] === 'image'
+          item.type.split('/')[0] === 'image'
             ? true
             : false;
         const isVideo =
           !item.loading &&
-            item.type.split('/')[0] === 'video'
+          item.type.split('/')[0] === 'video'
             ? true
             : false;
 
@@ -35,11 +33,11 @@ const ListFiles = ({ files, onDelete = () => { } }) => {
                 className="list-files-content-container"
                 key={item.name}
               >
-                <div className="list-files-image-container flex gap-2 items-center">
+                <div className="list-files-image-container flex items-center gap-2">
                   {isImage ? (
                     <img
                       src={item.url}
-                      alt=''
+                      alt=""
                       className="list-files-image"
                     />
                   ) : isVideo ? (
@@ -62,7 +60,6 @@ const ListFiles = ({ files, onDelete = () => { } }) => {
                   </div>
                 </div>
                 <div className="list-files-text-container">
-
                   <div
                     className="list-files-delete"
                     onClick={() => onDelete(item.url)}

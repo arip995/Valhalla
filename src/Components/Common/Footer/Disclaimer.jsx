@@ -1,6 +1,4 @@
-import React from 'react';
 import '../../../styles/common/disclaimer.css';
-import { Anchor } from '@mantine/core';
 
 const Disclaimer = () => {
   return (

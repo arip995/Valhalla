@@ -13,12 +13,9 @@ async function getData(id) {
   return await res.json();
 }
 
-export async function generateMetadata(
-  { params, searchParams },
-  parent
-) {
+export async function generateMetadata({ params }, parent) {
   // read route params
-  const id = params.id;
+  // const id = params.id;
 
   // fetch data
   const { data } = await getData(params.id);
@@ -39,10 +36,7 @@ export async function generateMetadata(
   };
 }
 
-export default async function Page({
-  params,
-  searchParams,
-}) {
+export default async function Page({ params }) {
   const { data } = await getData(params.id);
   return <ViewLockedContent data={data} id={params.id} />;
 }

@@ -48,7 +48,7 @@ const StepOneCreateTelegram = ({
                 return (
                   <div
                     key={item.phoneNumber}
-                    onClick={value => {
+                    onClick={() => {
                       stepOneForm.setFieldValue(
                         'selectedNumber',
                         item.phoneNumber

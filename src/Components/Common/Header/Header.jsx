@@ -1,17 +1,12 @@
 'use client';
 
-import { IconPlus } from '@tabler/icons-react';
-import classes from '../../../styles/common/header.module.css';
-import React from 'react';
 import { Button } from '@mantine/core';
-import { useRouter } from 'next/navigation';
-import { ThemeToggle } from '../ThemeToogle/ThemeToogle';
+import { IconPlus } from '@tabler/icons-react';
 import classNames from 'classnames';
 import Link from 'next/link';
+import classes from '../../../styles/common/header.module.css';
 
 const Header = ({ title, path, className }) => {
-  const router = useRouter();
-
   return (
     <div
       className={classNames(

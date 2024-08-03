@@ -18,7 +18,7 @@ const VisualFeatures = () => {
       img: Feature2,
     },
   ];
-  return null;
+
   return (
     <SectionWrapper>
       <div className="custom-screen text-gray-300">

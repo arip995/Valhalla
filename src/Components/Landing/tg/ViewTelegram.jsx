@@ -1,6 +1,7 @@
 import React from 'react';
 
-const ViewTelegram = ({ prefetchedData, id }) => {
+const ViewTelegram = ({ prefetchedData, productId }) => {
+  console.log(productId);
   return (
     <div
       dangerouslySetInnerHTML={{

@@ -1,12 +1,11 @@
-import cx from 'clsx';
 import {
   ActionIcon,
-  useMantineColorScheme,
-  useComputedColorScheme,
   Group,
-  rem,
+  useComputedColorScheme,
+  useMantineColorScheme,
 } from '@mantine/core';
-import { IconSun, IconMoon } from '@tabler/icons-react';
+import { IconMoon, IconSun } from '@tabler/icons-react';
+import cx from 'clsx';
 import classes from '../../../styles/common/theme-toggle.module.css';
 
 export function ThemeToggle() {

@@ -214,7 +214,7 @@ const TGEPlanAndPriceEditCreate = ({
     // save button has been clicked for the first time,
     // check for errors and proceed to save if the form is valid
     const newErrors = validateData();
-    setErrors(_ => newErrors);
+    setErrors(() => newErrors);
     if (Object.keys(newErrors).length) return;
     saveChanges();
   }, [isSaveClickedAtleastOnce]);
@@ -222,7 +222,7 @@ const TGEPlanAndPriceEditCreate = ({
   useEffect(() => {
     if (!tempData) return;
     const newErrors = validateData();
-    setErrors(_ => newErrors);
+    setErrors(() => newErrors);
   }, [tempData]);
 
   useEffect(() => {

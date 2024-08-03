@@ -5,7 +5,7 @@ const LockedContentDetails = ({ data }) => {
   return (
     <>
       <div className="vlc-view-product-container">
-        {true ? (
+        {data ? (
           <div className="vlc-view-product-locked-state">
             <img
               src={lockImage.src}

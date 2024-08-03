@@ -13,7 +13,6 @@ import StepTwoCreateTelegram from './StepTwoCreateTelegram';
 
 const CreateTelegram = ({ data }) => {
   const {
-    createTelegramForm,
     stepOneForm,
     stepTwoForm,
     stepThreeForm,

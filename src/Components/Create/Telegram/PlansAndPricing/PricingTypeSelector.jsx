@@ -3,11 +3,8 @@ import {
   Grid,
   Group,
   Radio,
-  rem,
   Text,
 } from '@mantine/core';
-import { IconCheck } from '@tabler/icons-react';
-import classNames from 'classnames';
 import '../../../../styles/common/plan-type.css';
 import classes from '../../../../styles/common/RadioCard.module.css';
 
