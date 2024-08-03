@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
 import Header from '@/Components/Common/Header/Header';
-import HomeCards from './HomeCards';
 import { AllProducts } from './AllProducts';
+import HomeCards from './HomeCards';
 import HomeChart from './HomeChart';
 
 const Home = () => {
