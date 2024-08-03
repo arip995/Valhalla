@@ -1,11 +1,13 @@
 import { TextInput } from '@mantine/core';
 import { IconEdit } from '@tabler/icons-react';
+import React from 'react';
 import classes from '../../../styles/creator/Account.module.css';
 import UpdateContactModal from './UpdateContactModal';
 import useContactSupportDetails from './useContactSupportDetails';
 
 const ContactInfo = () => {
   const {
+    initiaContactData,
     phoneNumber,
     setPhoneNumber,
     supportPhoneNumber,
@@ -34,7 +36,7 @@ const ContactInfo = () => {
         readOnly
         description="Phone Number"
         value={phoneNumber}
-        leftSection={<div className='text-sm'>+91</div>}
+        leftSection={<div className="text-sm">+91</div>}
         rightSection={
           <IconEdit
             size={18}
@@ -67,7 +69,7 @@ const ContactInfo = () => {
         readOnly
         description="Support Phone Number"
         value={supportPhoneNumber}
-        leftSection={<div className='text-sm'>+91</div>}
+        leftSection={<div className="text-sm">+91</div>}
         rightSection={
           <IconEdit
             stroke={1.5}
@@ -96,6 +98,7 @@ const ContactInfo = () => {
         }
       />
       <UpdateContactModal
+        initiaContactData={initiaContactData}
         phoneNumber={phoneNumber}
         setPhoneNumber={setPhoneNumber}
         supportPhoneNumber={supportPhoneNumber}
@@ -120,4 +123,4 @@ const ContactInfo = () => {
   );
 };
 
-export default ContactInfo;
+export default React.memo(ContactInfo);

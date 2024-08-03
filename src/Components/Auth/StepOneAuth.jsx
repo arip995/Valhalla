@@ -4,6 +4,7 @@ import {
   Button,
   Divider,
   Group,
+  NumberInput,
   PinInput,
   Stack,
   Text,
@@ -132,20 +133,17 @@ const StepOneAuth = ({
                   placeholder="hello@panda.dev"
                   value={authForm.values.email}
                   radius="md"
-                  type="email"
-                  name="email"
-                  id="email"
                   autocomplete="email"
                   {...authForm.getInputProps('email')}
                 />
               ) : (
-                <TextInput
+                <NumberInput
+                  hideControls
+                  clampBehavior="strict"
+                  max={9999999999}
                   label="Phone Number"
                   placeholder="6345325643"
                   autocomplete="tel"
-                  type="number"
-                  name="phone"
-                  id="phone"
                   value={authForm.values.phoneNumber}
                   radius="md"
                   leftSection={<Text size="sm">+91</Text>}

@@ -39,7 +39,7 @@ const useAuth = ({ tabName }) => {
           : null,
       phoneNumber: value =>
         emailOrPhoneNumber === 'phoneNumber'
-          ? value.length != 10
+          ? value?.toString()?.length != 10
             ? isClickedAtleastOnce && 'Invalid phone number'
             : null
           : null,

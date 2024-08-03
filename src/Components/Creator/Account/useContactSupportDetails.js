@@ -8,6 +8,8 @@ import toast from 'react-hot-toast';
 
 const useContactSupportDetails = () => {
   const { user, getUserData, setCurrentUser } = useUser();
+  const [initiaContactData, setInitialContactData] =
+    useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [supportPhoneNumber, setSupportPhoneNumber] =
     useState(null);
@@ -24,6 +26,12 @@ const useContactSupportDetails = () => {
   };
   const setPreviousData = () => {
     if (user?._id) {
+      setInitialContactData({
+        phoneNumber: user?.phoneNumber || '',
+        supportPhoneNumber: user?.supportPhoneNumber || '',
+        email: user?.email || '',
+        supportEmail: user?.supportEmail || '',
+      });
       setPhoneNumber(user?.phoneNumber || '');
       setSupportPhoneNumber(user?.supportPhoneNumber || '');
       setEmail(user?.email || '');
@@ -42,14 +50,17 @@ const useContactSupportDetails = () => {
         return;
       }
     } else if (editEntity === 'phoneNumber') {
-      if (!phoneNumber || phoneNumber?.length != 10) {
+      if (
+        !phoneNumber ||
+        phoneNumber?.toString()?.length != 10
+      ) {
         toast.error('Enter a valid phone number');
         return;
       }
     } else if (editEntity === 'supportPhoneNumber') {
       if (
         !supportPhoneNumber ||
-        supportPhoneNumber?.length != 10
+        supportPhoneNumber?.toString()?.length != 10
       ) {
         toast.error('Enter a valid phone number');
         return;
@@ -134,6 +145,7 @@ const useContactSupportDetails = () => {
   }, [user]);
 
   return {
+    initiaContactData,
     phoneNumber,
     setPhoneNumber,
     supportPhoneNumber,
