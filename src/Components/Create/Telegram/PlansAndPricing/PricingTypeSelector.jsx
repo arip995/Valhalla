@@ -6,7 +6,7 @@ import {
   Text,
 } from '@mantine/core';
 import '../../../../styles/common/plan-type.css';
-import classes from '../../../../styles/common/RadioCard.module.css';
+import classes from '../../../../styles/common/RadioCard.module1.css';
 
 const PricingTypeSelector = ({
   value,

@@ -3,7 +3,7 @@ import GLProductheader from './GLProductheader';
 
 const GLTelegramContainer = ({ data }) => {
   return (
-    <div className="min-h-svh w-full bg-white">
+    <div className="sticky top-0 w-full bg-white">
       <GLProductheader data={data} />
     </div>
   );

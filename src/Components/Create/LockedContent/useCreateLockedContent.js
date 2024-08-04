@@ -66,7 +66,6 @@ const useCreateLockedContent = () => {
       toast.error(
         error.response?.data?.message || 'An error occurred'
       );
-    } finally {
       setLoading(false);
     }
   };

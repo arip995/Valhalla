@@ -1,12 +1,15 @@
 import '../../../styles/common/disclaimer.css';
+import LearnMoreButton from './LearnMoreButton';
 
-const Disclaimer = () => {
+const Disclaimer = ({ showTitle = true }) => {
   return (
     <div className="disclaimer-container">
-      <div className="disclaimer-title">
-        By unlocking the message, you agree to the terms and
-        conditions.
-      </div>
+      {!!showTitle && (
+        <div className="disclaimer-title">
+          By unlocking the message, you agree to the terms
+          and conditions.
+        </div>
+      )}
       <div className="disclaimer">
         <div className="disclaimer-header">Disclaimer</div>
         <div className="disclaimer-description">
@@ -16,10 +19,8 @@ const Disclaimer = () => {
           disseminated by a content creator on or via any
           app or website affiliated with us. By utilizing
           our services, you acknowledge and agree to the
-          terms set forth in this disclaimer.{' '}
-          {/* <Anchor href="/terms-and-conditions" size="xs">
-            Learn more
-          </Anchor> */}
+          terms set forth in this disclaimer.
+          <LearnMoreButton />
         </div>
       </div>
     </div>

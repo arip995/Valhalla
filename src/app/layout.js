@@ -27,7 +27,6 @@ import '@mantine/core/styles/Flex.css';
 import '@mantine/core/styles/Grid.css';
 import '@mantine/core/styles/SimpleGrid.css';
 import '@mantine/core/styles/Group.css';
-import '@mantine/core/styles/Anchor.css';
 import '@mantine/core/styles/TypographyStylesProvider.css';
 import '@mantine/core/styles/AppShell.css';
 import '@mantine/core/styles/NavLink.css';
@@ -51,6 +50,7 @@ import '@mantine/core/styles/Divider.css';
 import '@mantine/core/styles/Switch.css';
 import '@mantine/core/styles/Drawer.css';
 import '@mantine/core/styles/Menu.css';
+import '@mantine/core/styles/Anchor.css';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({

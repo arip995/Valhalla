@@ -1,33 +1,33 @@
 .disclaimer-container {
-  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
+  width: 100%;
   margin-top: 20px;
   gap: 16px;
   .disclaimer-title {
-    font-size: 0.875rem;
     line-height: 1.25rem;
     color: rgb(107 114 128 /1);
+    font-size: 0.875rem;
   }
   .disclaimer {
-    padding: 12px;
-    border: 1px solid #324fe0;
-    border-radius: 8px;
     display: flex;
-    flex-direction: column;
-    gap: 4px;
     align-items: flex-start;
+    flex-direction: column;
+    padding: 12px;
+    border: 2px solid #ececec;
+    border-radius: 8px;
+    gap: 4px;
   }
   .disclaimer-header {
-    font-weight: 700;
-    font-size: 0.875rem;
     line-height: 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 700;
   }
   .disclaimer-description {
-    font-size: 0.75rem;
     line-height: 1rem;
     color: rgb(73, 80, 95);
+    font-size: 0.75rem;
   }
 }

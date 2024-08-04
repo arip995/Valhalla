@@ -48,7 +48,11 @@ const ViewProductHeader = ({
           </div>
         </div>
       </div>
-      <div className="vlc-view-product-title">{title}</div>
+      {!!title && (
+        <div className="vlc-view-product-title">
+          {title}
+        </div>
+      )}
     </>
   );
 };

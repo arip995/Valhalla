@@ -1,6 +1,5 @@
 'use client';
-import { getUserData } from '@/Utils/getusrData';
-import useIsBrowser from '@/Utils/useIsBrowser';
+import useUser from '@/Utils/Hooks/useUser';
 import { Avatar, Menu, rem, Text } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import {
@@ -8,31 +7,18 @@ import {
   IconShoppingCart,
 } from '@tabler/icons-react';
 import Cookies from 'js-cookie';
-import { useEffect, useState } from 'react';
 
 const GLProductheader = ({ data }) => {
-  const isBrowser = useIsBrowser();
-  const [user, setUser] = useState(null);
-
-  const updateUser = () => {
-    if (isBrowser) {
-      console.log('first');
-      setUser(getUserData());
-    }
-  };
+  const { user, removeUser } = useUser();
 
   const onConfirm = () => {
     Cookies.remove('accesstoken');
     localStorage.removeItem('user');
-    updateUser();
+    removeUser();
   };
 
-  useEffect(() => {
-    updateUser();
-  }, [isBrowser]);
-
   return (
-    <div className="sticky top-0 flex w-full justify-center border-2 border-b-gray-100 bg-white px-2 py-2 md:px-0">
+    <div className="flex w-full justify-center border-2 border-b-gray-100 bg-white px-2 py-2 md:px-0">
       <div className="flex w-full max-w-[768px] items-center justify-between gap-8">
         <div className="flex items-center gap-2 font-semibold">
           <Avatar
