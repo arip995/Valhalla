@@ -41,13 +41,7 @@ const GLProductheader = ({ data }) => {
                 }`}
               />
             </Menu.Target>
-            <Menu.Dropdown
-              style={{
-                dropdown: {
-                  width: '50px',
-                },
-              }}
-            >
+            <Menu.Dropdown>
               <Menu.Item
                 leftSection={
                   <IconShoppingCart

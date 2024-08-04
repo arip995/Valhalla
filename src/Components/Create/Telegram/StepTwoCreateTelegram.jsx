@@ -8,7 +8,7 @@ import {
   Text,
   TextInput,
 } from '@mantine/core';
-import classes from '../../../styles/common/RadioCard.module1.css';
+import classes from '../../../styles/common/RadioCardOne.module.css';
 
 const StepTwoCreateTelegram = ({
   stepTwoForm,

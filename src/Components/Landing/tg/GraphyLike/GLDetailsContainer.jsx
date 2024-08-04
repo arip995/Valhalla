@@ -1,6 +1,6 @@
 import Disclaimer from '@/Components/Common/Footer/Disclaimer';
 import ViewProductHeader from '@/Components/Common/Header/ViewProductHeader';
-import React from 'react';
+import GLManagePlans from './GLManagePlans';
 
 const GLDetailsContainer = ({ data }) => {
   return (
@@ -36,7 +36,9 @@ const GLDetailsContainer = ({ data }) => {
           )}
           <Disclaimer showTitle={false} />
         </div>
-        <div className="hidden w-5/12 md:block"></div>
+        <div className="hidden w-5/12 md:block">
+          <GLManagePlans data={data} />
+        </div>
       </div>
     </div>
   );
