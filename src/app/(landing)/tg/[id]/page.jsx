@@ -1,4 +1,5 @@
 import ViewTelegram from '@/Components/Landing/tg/ViewTelegram';
+import { notFound } from 'next/navigation';
 
 async function getData(id) {
   const res = await fetch(
@@ -15,6 +16,7 @@ async function getData(id) {
 
 export default async function Page({ params }) {
   const { data } = await getData(params.id);
+  if (!data?._id) notFound();
   return (
     <ViewTelegram
       prefetchedData={data}

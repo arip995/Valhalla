@@ -1,14 +1,19 @@
 import React from 'react';
+import GLTelegramContainer from './GraphyLike/GlTelegramContainer';
 
-const ViewTelegram = ({ prefetchedData, productId }) => {
-  console.log(productId);
+const ViewTelegram = ({ prefetchedData }) => {
+  console.log(prefetchedData);
   return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: prefetchedData?.description,
-      }}
-    ></div>
+    <div className="min-h-svh w-full bg-white">
+      <GLTelegramContainer data={prefetchedData} />
+    </div>
   );
 };
 
 export default ViewTelegram;
+
+// <div
+//       dangerouslySetInnerHTML={{
+//         __html: prefetchedData?.description,
+//       }}
+//     ></div>

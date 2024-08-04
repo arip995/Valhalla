@@ -50,6 +50,7 @@ import '@mantine/core/styles/Text.css';
 import '@mantine/core/styles/Divider.css';
 import '@mantine/core/styles/Switch.css';
 import '@mantine/core/styles/Drawer.css';
+import '@mantine/core/styles/Menu.css';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({
