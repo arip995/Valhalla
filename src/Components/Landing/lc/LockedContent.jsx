@@ -5,7 +5,7 @@ import LockedContentDetails from './LockedContentDetails';
 
 const LockedContent = ({ data }) => {
   return (
-    <>
+    <div className="flex min-h-svh flex-col justify-between">
       <div className="vlc-view-wrapper">
         <div className="vlc-view-container">
           <ViewProductHeader
@@ -24,7 +24,7 @@ const LockedContent = ({ data }) => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
