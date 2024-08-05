@@ -1,6 +1,6 @@
 import React from 'react';
-import GLTelegramContainer from './GraphyLike/GlTelegramContainer';
 import GLDetailsContainer from './GraphyLike/GLDetailsContainer';
+import GLTelegramContainer from './GraphyLike/GLTelegramContainer';
 
 const ViewTelegram = ({ prefetchedData }) => {
   console.log(prefetchedData);
