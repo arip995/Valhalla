@@ -17,10 +17,12 @@ import { discountPercentage } from '@/Utils/Common';
 
 const ViewPlans1 = ({
   plans,
+  defaultSelect,
   onSelect = () => {},
   onPay = () => {},
 }) => {
-  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [selectedPlan, setSelectedPlan] =
+    useState(defaultSelect);
   if (!plans?.length) return null;
 
   return (

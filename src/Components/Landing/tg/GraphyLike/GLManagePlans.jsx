@@ -15,6 +15,7 @@ const GLManagePlans = ({ data }) => {
       <div className="top-[71.5px] hidden flex-col gap-3 p-2 md:sticky md:flex">
         <ViewPlans1
           plans={data.subscriptionPlans}
+          defaultSelect={data.subscriptionPlans[0]._id}
           onSelect={plan => {
             console.log(plan);
           }}
@@ -51,6 +52,7 @@ const GLManagePlans = ({ data }) => {
         <div className="flex flex-col gap-3 p-2">
           <ViewPlans1
             plans={data.subscriptionPlans}
+            defaultSelect={data.subscriptionPlans[0]._id}
             onSelect={plan => {
               console.log(plan);
             }}
