@@ -1,3 +1,4 @@
+import NewScrollArea from '@/Components/Common/General/NewScrollArea';
 import PricingTypeSelector from '@/Components/Create/Telegram/PlansAndPricing/PricingTypeSelector';
 import {
   DurationOptions,
@@ -11,7 +12,6 @@ import {
   Grid,
   Input,
   NumberInput,
-  ScrollArea,
   Select,
   Text,
   TextInput,
@@ -22,10 +22,6 @@ import React, { useEffect, useState } from 'react';
 
 const MAX_TITLE_LENGTH = 75;
 const MIN_TITLE_LENGTH = 0;
-
-const MyScrollArea = props => (
-  <ScrollArea.Autosize type="never" {...props} />
-);
 
 const TGEPlanAndPriceEditCreate = ({
   openSideBar,
@@ -253,7 +249,7 @@ const TGEPlanAndPriceEditCreate = ({
         opened={openSideBar}
         onClose={() => resetTempData()}
         title={tempData?._id ? 'Edit Plan' : 'New Plan'}
-        scrollAreaComponent={MyScrollArea}
+        scrollAreaComponent={NewScrollArea}
         padding="0px"
         closeButtonProps={{
           icon: (

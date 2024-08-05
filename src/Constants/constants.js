@@ -203,3 +203,48 @@ export const DurationOptions = [
     days: 365,
   },
 ];
+
+export const PeriodTypeOptionsMapping = {
+  Daily: 'days',
+  Weekly: 'weeks',
+  Monthly: 'months',
+  Yearly: 'years',
+  Lifetime: 'Lifetime',
+};
+
+export const CalculatePeriod = (periodType, value) => {
+  switch (periodType) {
+    case 'Daily':
+      return value;
+    case 'Weekly':
+      return value / 7;
+    case 'Monthly':
+      return value / 30;
+    case 'Yearly':
+      return value / 365;
+    case 'Lifetime':
+      return '';
+  }
+};
+
+export const CalculatePeriodString = (
+  periodType,
+  value
+) => {
+  switch (periodType) {
+    case 'Daily':
+      return `${value} ${value === 1 ? 'day' : 'days'}`;
+    case 'Weekly':
+      return `${value / 7} ${value === 7 ? 'week' : 'weeks'}`;
+    case 'Monthly':
+      return `${value / 30} ${value === 30 ? 'month' : 'months'}`;
+    case 'Yearly':
+      return `${value / 365} ${value === 365 ? 'year' : 'years'}`;
+    case 'Lifetime':
+      return 'Lifetime';
+  }
+};
+
+export const CurrencySymbolMapping = {
+  rupees: '₹',
+};

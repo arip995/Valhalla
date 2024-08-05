@@ -4,7 +4,7 @@ import axiosInstance from '../AxiosInstance';
 import Cookies from 'js-cookie';
 
 const useUser = (fetch = false) => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(-1);
   const [loadingGetUserData, setLoadingGetUserData] =
     useState();
   const isBrowser = useIsBrowser();
