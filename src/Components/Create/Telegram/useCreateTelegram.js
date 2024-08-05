@@ -252,7 +252,7 @@ const useCreateTelegram = () => {
   };
 
   const onConnectExisting = async () => {
-    stepOneForm.setFieldValue('isOtpScreen', -2);
+    // stepOneForm.setFieldValue('isOtpScreen', -2);
     try {
       const data = await axiosInstance.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/telegram/validate_session`,

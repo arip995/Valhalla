@@ -98,6 +98,8 @@ const StepOneCreateTelegram = ({
             <TextInput
               className="ctg-s1-input"
               label="Phone Number"
+              clampBehaviour="strict"
+              max={9999999999}
               type="number"
               placeholder="6345325643"
               value={stepOneForm.values.phoneNumber}
