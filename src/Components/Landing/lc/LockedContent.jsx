@@ -1,5 +1,5 @@
+import FooterTwo from '@/Components/Common/Footer/FooterTwo';
 import Disclaimer from '../../Common/Footer/Disclaimer';
-import Footer from '../../Common/Footer/Footer';
 import ViewProductHeader from '../../Common/Header/ViewProductHeader';
 import LockedContentDetails from './LockedContentDetails';
 
@@ -23,7 +23,10 @@ const LockedContent = ({ data }) => {
           <Disclaimer />
         </div>
       </div>
-      <Footer />
+      <FooterTwo
+        description={`Want to create your own content? Experience
+            hassle-free payouts and premium support.`}
+      />
     </div>
   );
 };

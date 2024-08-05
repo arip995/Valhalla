@@ -1,48 +1,48 @@
 .vlc-container {
-  width: 100%;
-  height: 100%;
   /* height: 100svh; */
   /* height: 100dvh; */
   overflow-y: auto;
+  width: 100%;
+  height: 100%;
 
   .vlc-view-wrapper {
-    width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
+    width: 100%;
+    height: 100%;
   }
   .vlc-view-container {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
     width: 100%;
+    max-width: 500px;
     height: 100%;
     padding: 16px;
     margin-top: 50px;
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
     gap: 12px;
-    align-items: start;
     @media (max-width: em(767px)) {
       margin-top: 0px;
     }
   }
   .vlc-view-product-title {
-    font-weight: bold;
-    font-size: 18px;
     line-height: 23px;
     color: #000000;
+    font-size: 18px;
+    font-weight: bold;
   }
   .vlc-view-product-container {
+    overflow-y: auto;
     width: 100%;
     height: 200px;
-    overflow-y: auto;
   }
   .vlc-view-product-locked-state {
-    width: 100%;
-    height: 100%;
     display: flex;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
     background: linear-gradient(
       279deg,
@@ -67,8 +67,8 @@
     }
   }
   .vlc-view-product-locked-state-image {
-    height: 100px;
     width: 100px;
+    height: 100px;
     animation: pulse 2s infinite ease-in-out;
     @keyframes pulse {
       0% {
@@ -82,14 +82,11 @@
       }
     }
   }
-  .vlc-view-product-locked-state-text {
-    font-weight: 500;
-  }
 
   .vlc-view-product-button {
-    margin-top: 10px;
-    width: 100%;
     display: flex;
     justify-content: center;
+    width: 100%;
+    margin-top: 10px;
   }
 }

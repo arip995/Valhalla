@@ -1,6 +1,7 @@
 import Disclaimer from '@/Components/Common/Footer/Disclaimer';
 import ViewProductHeader from '@/Components/Common/Header/ViewProductHeader';
 import GLManagePlans from './GLManagePlans';
+import FooterTwo from '@/Components/Common/Footer/FooterTwo';
 
 const GLDetailsContainer = ({ data }) => {
   return (
@@ -36,7 +37,11 @@ const GLDetailsContainer = ({ data }) => {
               ></div>
             )}
             <Disclaimer showTitle={false} />
+            <div className="mt-4 block md:hidden">
+              <FooterTwo />
+            </div>
           </div>
+
           <div className="hidden w-5/12 md:block">
             <GLManagePlans data={data} />
           </div>

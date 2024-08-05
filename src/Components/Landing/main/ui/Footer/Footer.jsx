@@ -108,7 +108,7 @@ const Footer = () => {
             © 2024 Nexify Inc. All rights reserved.
           </p>
           <div className="mt-6 flex items-center justify-center gap-x-6 text-gray-500 sm:mt-0">
-            <ul className="mt-6 flex flex-wrap items-center gap-4 sm:mt-0 sm:text-sm">
+            <ul className="mt-6 flex flex-wrap items-center justify-center gap-4 sm:mt-0 sm:text-sm">
               {footerNavs.map((item, idx) => (
                 <li
                   key={idx}

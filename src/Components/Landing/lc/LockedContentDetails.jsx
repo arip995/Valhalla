@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import lockImage from '../../../../public/images/locked-content/lock.png';
 import LockedContentBuyButton from './LockedContentBuyButton';
 
@@ -12,8 +13,13 @@ const LockedContentDetails = ({ data }) => {
               alt=""
               className="vlc-view-product-locked-state-image"
             />
-            <div className="vlc-view-product-locked-state-text text-gray-50">
+            <div className="flex flex-col items-center justify-center gap-2 text-center text-sm font-semibold text-gray-50">
               Content is locked
+              <div>
+                {data.files.length
+                  ? `${data.files.length + 1} items`
+                  : `1 item`}{' '}
+              </div>
             </div>
           </div>
         ) : (
