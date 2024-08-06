@@ -30,7 +30,6 @@ import {
 import { useEffect, useState } from 'react';
 import classes from '../../styles/Navbar/NavbarMinimal.module.css';
 import Logo from '../../app/icon.png';
-import '../../styles/common/root-dashboard-container.css';
 import { usePathname, useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
@@ -275,7 +274,6 @@ export function NavbarLayout({ children }) {
         <AppShell.Section className={classes.footer}>
           <NavLink
             style={{ borderRadius: '20px' }}
-            className={classes.footerButton}
             onClick={() => {
               modals.openConfirmModal({
                 title: <Text fw={600}>Sign Out</Text>,

@@ -1,42 +1,47 @@
-.link {
-  margin-bottom: 10px;
+/* .topContainer {
   width: 100%;
-  padding: rem(10px);
-  border-radius: var(--mantine-radius-md);
+  min-height: 100vh;
+  min-height: 100dvh;
+} */
+.link {
   display: flex;
   align-items: center;
   justify-content: left;
-  gap: 10px;
+  width: 100%;
+  padding: rem(10px);
+  margin-bottom: 10px;
+  border-radius: var(--mantine-radius-md);
   color: light-dark(
     var(--mantine-color-gray-7),
     var(--mantine-color-dark-0)
   );
+  gap: 10px;
 
   &:hover {
-    cursor: pointer;
     background-color: light-dark(
       var(--mantine-color-gray-0),
       var(--mantine-color-dark-5)
     );
+    cursor: pointer;
   }
 
   &[data-active] {
     &,
     &:hover {
-      background-color: var(--mantine-color-blue-light);
       color: var(--mantine-color-blue-light-color);
+      background-color: var(--mantine-color-blue-light);
     }
   }
 }
 
 .footer {
   padding: rem(4px);
-  border-radius: inherit;
   border-top: 1px solid
     light-dark(
       var(--mantine-color-gray-3),
       var(--mantine-color-dark-4)
     );
+  border-radius: inherit;
 }
 .footerButton {
   /* &:hover {
@@ -46,24 +51,24 @@
 }
 
 .text {
-  font-weight: 400;
   font-size: small;
+  font-weight: 400;
 }
 
 .company {
-  font-family:
-    Greycliff CF,
-    var(--mantine-font-family);
-  font-weight: 900;
-  font-size: large;
   display: flex;
   align-items: center;
-  gap: 4px;
-  cursor: pointer;
   color: light-dark(
     var(--mantine-color-violet-9),
     var(--mantine-color-violet-1)
   );
+  cursor: pointer;
+  font-family:
+    Greycliff CF,
+    var(--mantine-font-family);
+  font-size: large;
+  font-weight: 900;
+  gap: 4px;
   /* border-bottom: 1px solid
     light-dark(
       var(--mantine-color-gray-3),
@@ -75,13 +80,13 @@
 }
 
 .header {
-  background: var(--mantine-color-gray-9);
   color: var(--mantine-color-white);
+  background: var(--mantine-color-gray-9);
   font-family:
     Greycliff CF,
     var(--mantine-font-family);
-  font-weight: 900;
   font-size: large;
+  font-weight: 900;
 }
 
 .appshellMain {
