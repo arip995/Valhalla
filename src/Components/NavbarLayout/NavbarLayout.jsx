@@ -7,6 +7,7 @@ import {
   Group,
   NavLink,
   ScrollArea,
+  Text,
   rem,
   // useMantineTheme,
 } from '@mantine/core';
@@ -34,6 +35,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
 import useIsBrowser from '@/Utils/useIsBrowser';
+import { modals } from '@mantine/modals';
 
 function NavbarLink({
   Icon,
@@ -275,9 +277,25 @@ export function NavbarLayout({ children }) {
             style={{ borderRadius: '20px' }}
             className={classes.footerButton}
             onClick={() => {
-              Cookies.remove('accesstoken');
-              localStorage.removeItem('user');
-              router.push('/signin');
+              modals.openConfirmModal({
+                title: <Text fw={600}>Sign Out</Text>,
+                children: (
+                  <Text size="sm">
+                    Do you really want to signout?
+                  </Text>
+                ),
+                labels: {
+                  confirm: 'Yes, Sign out',
+                  cancel: 'Cancel',
+                },
+                confirmProps: { color: 'red' },
+                onCancel: () => {},
+                onConfirm: () => {
+                  Cookies.remove('accesstoken');
+                  localStorage.removeItem('user');
+                  router.push('/signin');
+                },
+              });
             }}
             label={'Logout'}
             leftSection={
