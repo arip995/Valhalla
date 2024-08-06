@@ -46,7 +46,7 @@ const ViewPlans1 = ({
                   value={plan._id}
                   key={plan._id}
                 >
-                  <div className="flex w-full flex-nowrap justify-between">
+                  <div className="flex w-full flex-nowrap justify-between gap-2">
                     <Group wrap="nowrap" align="flex-start">
                       <Radio.Indicator icon={CheckIcon} />
                       <div className="flex flex-col gap-1">
@@ -71,7 +71,11 @@ const ViewPlans1 = ({
                     </Group>
                     <div className="flex items-center gap-1">
                       {plan.enableDiscountedPrice ? (
-                        <Text td="line-through" size="xs">
+                        <Text
+                          td="line-through"
+                          size="xs"
+                          c={'dimmed'}
+                        >
                           {CurrencySymbolMapping['rupees']}
                           {plan.cost}
                         </Text>

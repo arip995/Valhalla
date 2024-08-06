@@ -56,6 +56,8 @@ import '@mantine/core/styles/Anchor.css';
 const theme = createTheme({
   /** Your theme override here */
   fontFamily: 'Open Sans, sans-serif',
+  fontFamilyMonospace: 'Monaco, Courier, monospace',
+  headings: { fontFamily: 'Greycliff CF, sans-serif' },
   primaryColor: 'violet',
   cursorType: 'pointer',
 });
