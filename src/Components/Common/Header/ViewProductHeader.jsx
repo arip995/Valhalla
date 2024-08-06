@@ -17,8 +17,8 @@ const ViewProductHeader = ({
           <Image
             className="h-[80px] w-[80px] overflow-hidden rounded-full"
             src={profilePic}
-            placeholder="blur"
-            blurDataURL={coverImageBlurBig}
+            // placeholder="blur"
+            // blurDataURL={coverImageBlurBig}
             width={80}
             height={80}
             quality={100}
