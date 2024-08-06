@@ -3,6 +3,7 @@ import {
   CalculatePeriodString,
   CurrencySymbolMapping,
 } from '@/Constants/constants';
+import { discountPercentage } from '@/Utils/Common';
 import {
   Button,
   CheckIcon,
@@ -13,7 +14,6 @@ import {
 } from '@mantine/core';
 import { useState } from 'react';
 import classes from '../../../styles/common/RadioCardTwo.module.css';
-import { discountPercentage } from '@/Utils/Common';
 
 const ViewPlans1 = ({
   plans,
@@ -23,6 +23,7 @@ const ViewPlans1 = ({
 }) => {
   const [selectedPlan, setSelectedPlan] =
     useState(defaultSelect);
+
   if (!plans?.length) return null;
 
   return (

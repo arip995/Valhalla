@@ -1,7 +1,6 @@
 'use client';
 import NewScrollArea from '@/Components/Common/General/NewScrollArea';
 import ViewPlans1 from '@/Components/Common/General/ViewPlans1';
-
 import { Button, Drawer } from '@mantine/core';
 import { IconLayoutBottombarCollapse } from '@tabler/icons-react';
 import { useState } from 'react';
@@ -9,6 +8,12 @@ import { useState } from 'react';
 const GLManagePlans = ({ data }) => {
   const [openBottomSheet, setOpenBottomSheet] =
     useState(false);
+
+  // useEffect(() => {
+  //   if (window.innerWidth < 768) {
+  //     setOpenBottomSheet(true);
+  //   }
+  // }, []);
 
   return (
     <>
