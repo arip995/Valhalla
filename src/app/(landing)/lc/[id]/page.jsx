@@ -1,35 +1,78 @@
 import ViewLockedContent from '@/Components/Landing/lc/ViewLockedContent';
-
-async function getData(id) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/premiumcontent/get/${id}`,
-    {
-      next: {
-        tags: ['lc'],
-        revalidate: 3600000,
-      },
-    }
-  );
-  return await res.json();
-}
+import { getMetaData } from '@/Utils/getMetaData';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata({ params }, parent) {
-  // read route params
-  // const id = params.id;
+  const { data } = await getMetaData(params.id, 'lc');
 
-  // fetch data
-  const { data } = await getData(params.id);
-
-  // optionally access and extend (rather than replace) parent metadata
   const previousImages =
     (await parent).openGraph?.images || [];
+
+  const pageUrl = `https://${process.env.NEXT_PUBLIC_HOST}/tg/${params.id}`;
 
   return {
     title: data.title,
     description: data.description,
+    keywords: [
+      'Nexify',
+      'Creator',
+      'Course',
+      'Telegram',
+      'Payment',
+    ],
+    robots: {
+      index: false,
+      follow: false,
+      nocache: true,
+      googleBot: {
+        index: false,
+        follow: false,
+        noimageindex: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
+      title: data.title,
+      description: data.description,
+      domain: process.env.NEXT_PUBLIC_HOST,
+      type: 'website',
+      url: pageUrl,
+      author: data.creatorDetails.username,
+      sitename: 'Nexify',
       images: [
-        data.creatorDetails.profilePic,
+        {
+          url: data.coverImage?.url,
+          width: 500,
+          height: 500,
+        },
+        {
+          url: data.creatorDetails?.profilePic,
+          width: 500,
+          height: 500,
+        },
+        ...previousImages,
+      ],
+    },
+    twitter: {
+      title: data.title,
+      description: data.description,
+      type: 'website',
+      url: pageUrl,
+      author: data.creatorDetails.username,
+      sitename: 'Nexify',
+      images: [
+        {
+          url: data.coverImage?.url,
+          width: 500,
+          height: 500,
+        },
+        {
+          url: data.creatorDetails?.profilePic,
+          width: 500,
+          height: 500,
+        },
         ...previousImages,
       ],
     },
@@ -37,6 +80,8 @@ export async function generateMetadata({ params }, parent) {
 }
 
 export default async function Page({ params }) {
-  const { data } = await getData(params.id);
+  const { data } = await getMetaData(params.id, 'lc');
+  if (!data?._id) notFound();
+
   return <ViewLockedContent data={data} id={params.id} />;
 }

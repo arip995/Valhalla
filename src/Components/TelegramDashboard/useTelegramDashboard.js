@@ -22,7 +22,7 @@ const useTelegramDashboard = productId => {
   async function getData(id) {
     try {
       const data = await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/telegram/get_group_data?productId=${id}&tab=dashboard
+        `${process.env.NEXT_PUBLIC_BASE_URL}/telegram/get_group_data/${id}?tab=dashboard
 `
       );
       setTgData(data.data.data);

@@ -33,7 +33,7 @@ const ProfilePic = ({
         />
         {avatarImage ? (
           <Image
-            className="h-[88px] w-[88px] overflow-hidden rounded-full"
+            className="h-[88px] w-[88px] overflow-hidden rounded-full object-cover"
             alt=""
             src={avatarImage}
             width={88}

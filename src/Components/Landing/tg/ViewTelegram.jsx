@@ -4,7 +4,6 @@ import GLTelegramContainer from './GraphyLike/GLTelegramContainer';
 import FooterTwo from '@/Components/Common/Footer/FooterTwo';
 
 const ViewTelegram = ({ prefetchedData }) => {
-  console.log(prefetchedData);
   return (
     <div className="flex min-h-svh w-full flex-col bg-white">
       <GLTelegramContainer data={prefetchedData} />

@@ -15,7 +15,7 @@ const ViewProductHeader = ({
       <div className="vph-avatar-container">
         {profilePic ? (
           <Image
-            className="h-[80px] w-[80px] overflow-hidden rounded-full"
+            className="h-[80px] w-[80px] overflow-hidden rounded-full object-cover"
             src={profilePic}
             // placeholder="blur"
             // blurDataURL={coverImageBlurBig}
