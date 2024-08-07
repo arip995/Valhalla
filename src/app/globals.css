@@ -19,6 +19,11 @@
 html {
   scroll-behavior: smooth;
 }
+p {
+  opacity: 0.8;
+  font-size: 14px;
+  font-weight: 200;
+}
 
 @layer utilities {
   .text-balance {
