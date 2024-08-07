@@ -126,7 +126,7 @@ const useAuth = ({ tabName }) => {
           JSON.stringify(data.data.data.user)
         );
       }
-      if (data?.data?.data?.user.currentUsername) {
+      if (data?.data?.data?.user.username) {
         setTimeout(() => {
           router.push('/creator/home');
         }, 3000);
@@ -144,7 +144,7 @@ const useAuth = ({ tabName }) => {
   };
 
   useEffect(() => {
-    if (user?.currentUsername) {
+    if (user?.username) {
       router.push('/creator/home');
     } else if (user?._id) {
       setStep(2);

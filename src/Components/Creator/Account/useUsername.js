@@ -73,10 +73,10 @@ const useUsername = () => {
 
   useEffect(() => {
     if (user?._id) {
-      setInitialUsername(user.currentUsername);
-      setUsername(user.currentUsername);
+      setInitialUsername(user.username);
+      setUsername(user.username);
     }
-  }, user);
+  }, [user]);
 
   return {
     username,

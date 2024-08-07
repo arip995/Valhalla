@@ -55,7 +55,7 @@ import '@mantine/core/styles/Anchor.css';
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({
   /** Your theme override here */
-  fontFamily: 'Open Sans, sans-serif',
+  // fontFamily: 'Open Sans, sans-serif',
   fontFamilyMonospace: 'Monaco, Courier, monospace',
   headings: { fontFamily: 'Greycliff CF, sans-serif' },
   primaryColor: 'violet',
