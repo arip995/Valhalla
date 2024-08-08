@@ -306,7 +306,6 @@ export function NavbarLayout({ children }) {
             </Menu.Target>
             <Menu.Dropdown>
               <Menu.Item
-                borderRadius="xl"
                 color="red"
                 leftSection={
                   <IconLogout
