@@ -1,17 +1,19 @@
 'use client';
 
+import useIsBrowser from '@/Utils/useIsBrowser';
 import {
   AppShell,
   Burger,
   Divider,
   Group,
+  Menu,
   NavLink,
   ScrollArea,
   Text,
   rem,
-  // useMantineTheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { modals } from '@mantine/modals';
 import {
   // IconBrandDiscord,
   // IconBrandMeta,
@@ -20,21 +22,21 @@ import {
   // IconCalendarEvent,
   IconCash,
   IconCertificate,
+  IconChevronUp,
   IconCreditCardPay,
   IconHome2,
   IconLockDollar,
   IconLogout,
+  IconSettings,
   IconUser,
   IconWallet,
 } from '@tabler/icons-react';
-import { useEffect, useState } from 'react';
-import classes from '../../styles/Navbar/NavbarMinimal.module.css';
-import Logo from '../../app/icon.png';
-import { usePathname, useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
-import useIsBrowser from '@/Utils/useIsBrowser';
-import { modals } from '@mantine/modals';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import Logo from '../../app/icon.png';
+import classes from '../../styles/Navbar/NavbarMinimal.module.css';
 
 function NavbarLink({
   Icon,
@@ -272,39 +274,75 @@ export function NavbarLayout({ children }) {
           </div>
         </AppShell.Section>
         <AppShell.Section className={classes.footer}>
-          <NavLink
-            style={{ borderRadius: '20px' }}
-            onClick={() => {
-              modals.openConfirmModal({
-                title: <Text fw={600}>Sign Out</Text>,
-                children: (
-                  <Text size="sm">
-                    Do you really want to signout?
-                  </Text>
-                ),
-                labels: {
-                  confirm: 'Yes, Sign out',
-                  cancel: 'Cancel',
-                },
-                confirmProps: { color: 'red' },
-                onCancel: () => {},
-                onConfirm: () => {
-                  Cookies.remove('accesstoken');
-                  localStorage.removeItem('user');
-                  router.push('/signin');
-                },
-              });
-            }}
-            label={'Logout'}
-            leftSection={
-              <IconLogout
-                style={{ width: rem(15), height: rem(15) }}
-                stroke={1.5}
-              />
-            }
-            color="red"
-            variant="subtle"
-          ></NavLink>
+          <Menu shadow="md" width={190}>
+            <Menu.Target>
+              <NavLink
+                variant="subtle"
+                style={{ borderRadius: '20px' }}
+                fullWidth
+                label={
+                  <div className="flex items-center gap-2">
+                    <IconSettings
+                      style={{
+                        width: rem(17),
+                        height: rem(17),
+                      }}
+                      stroke={1.5}
+                    />
+                    Settings
+                  </div>
+                }
+                justify="space-between"
+                rightSection={
+                  <IconChevronUp
+                    style={{
+                      width: rem(17),
+                      height: rem(17),
+                    }}
+                    stroke={1.5}
+                  />
+                }
+              ></NavLink>
+            </Menu.Target>
+            <Menu.Dropdown>
+              <Menu.Item
+                borderRadius="xl"
+                color="red"
+                leftSection={
+                  <IconLogout
+                    style={{
+                      width: rem(17),
+                      height: rem(17),
+                    }}
+                    stroke={1.5}
+                  />
+                }
+                onClick={() => {
+                  modals.openConfirmModal({
+                    title: <Text fw={600}>Sign Out</Text>,
+                    children: (
+                      <Text size="sm">
+                        Do you really want to signout?
+                      </Text>
+                    ),
+                    labels: {
+                      confirm: 'Yes, Sign out',
+                      cancel: 'Cancel',
+                    },
+                    confirmProps: { color: 'red' },
+                    onCancel: () => {},
+                    onConfirm: () => {
+                      Cookies.remove('accesstoken');
+                      localStorage.removeItem('user');
+                      router.push('/signin');
+                    },
+                  });
+                }}
+              >
+                Logout
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
         </AppShell.Section>
       </AppShell.Navbar>
       <AppShell.Main

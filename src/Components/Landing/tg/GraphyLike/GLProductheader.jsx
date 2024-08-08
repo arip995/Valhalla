@@ -36,7 +36,7 @@ const GLProductheader = ({ data }) => {
               {user?._id ? (
                 <Menu
                   shadow="md"
-                  width={200}
+                  width={150}
                   trigger="hover"
                 >
                   <Menu.Target>
