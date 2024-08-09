@@ -2,9 +2,16 @@
 import NewScrollArea from '@/Components/Common/General/NewScrollArea';
 import ViewPlans1 from '@/Components/Common/General/ViewPlans1';
 import { Button, Drawer } from '@mantine/core';
+// import { getUserData } from '@/Utils/getuserData';
+// import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const GLManagePlans = ({ data }) => {
+  // const user =
+  //   typeof window !== 'undefined' ? getUserData() : '';
+  // const router = useRouter();
+  // const params = useParams();
+  // const idCreatorBuyer = user._id === data.creatorId;
   const [openBottomSheet, setOpenBottomSheet] =
     useState(false);
 
@@ -20,6 +27,13 @@ const GLManagePlans = ({ data }) => {
         <ViewPlans1
           plans={data.subscriptionPlans}
           defaultSelect={data.subscriptionPlans[0]._id}
+          // btnText={idCreatorBuyer ? 'Edit page' : ''}
+          onPay={() => {
+            // if (idCreatorBuyer) {
+            //   router.push(`/dashboard/tg/${params.id}`);
+            //   return;
+            // }
+          }}
           onSelect={plan => {
             console.log(plan);
           }}

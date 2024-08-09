@@ -20,6 +20,7 @@ const ViewPlans1 = ({
   defaultSelect,
   onSelect = () => {},
   onPay = () => {},
+  btnText = '',
 }) => {
   const [selectedPlan, setSelectedPlan] =
     useState(defaultSelect);
@@ -99,7 +100,11 @@ const ViewPlans1 = ({
         disabled={!selectedPlan}
         fullWidth
       >
-        {selectedPlan ? 'Proceed to pay' : 'Select a plan'}
+        {btnText
+          ? btnText
+          : selectedPlan
+            ? 'Proceed to pay'
+            : 'Select a plan'}
       </Button>
     </div>
   );
