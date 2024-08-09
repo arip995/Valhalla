@@ -32,7 +32,10 @@ export function middleware(req) {
     }
   }
 
-  if (req.nextUrl.pathname.startsWith('/creator/')) {
+  if (
+    req.nextUrl.pathname.startsWith('/creator') ||
+    req.nextUrl.pathname.startsWith('/dashboard')
+  ) {
     if (
       !accessToken &&
       !req.nextUrl.pathname.startsWith('/signin') &&
@@ -44,7 +47,10 @@ export function middleware(req) {
     }
   }
 
-  if (req.nextUrl.pathname.startsWith('/lc')) {
+  if (
+    req.nextUrl.pathname.startsWith('/lc') ||
+    req.nextUrl.pathname.startsWith('/tg')
+  ) {
     return NextResponse.next({ headers });
   }
 }
