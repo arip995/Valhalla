@@ -1,295 +1,133 @@
+'use client';
 /* eslint-disable @next/next/no-img-element */
-import { ActionIcon } from '@mantine/core';
-import { IconDotsVertical } from '@tabler/icons-react';
-import React from 'react';
+import Table from '@/Components/Common/Table/Table';
+import TableBody from '@/Components/Common/Table/TableBody';
+import TableFixedCell from '@/Components/Common/Table/TableFixedCell';
+import TableHeader from '@/Components/Common/Table/TableHeader';
+import TableWrapper from '@/Components/Common/Table/TableWrapper';
+import { ActionIcon, rem } from '@mantine/core';
+import {
+  IconDotsVertical,
+  IconPresentation,
+  IconReceipt2,
+  IconReportAnalytics,
+  IconUsers,
+} from '@tabler/icons-react';
 
 const page = () => {
+  const tableHeaderItems = [
+    { title: 'Title', icon: IconUsers },
+    { title: 'Price', icon: IconReceipt2 },
+    { title: 'Revenue', icon: IconPresentation },
+    { title: 'Sales', icon: IconReportAnalytics },
+    { title: '', icon: '' },
+  ];
+  const tableBodyItems = [
+    {
+      src: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
+      title: 'Arthur Melo',
+      price: 999,
+      sales: 444,
+      revenue: 9876,
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
+      title: 'Arthur Melo',
+      price: 499,
+      sales: 198,
+      revenue: 65298,
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
+      title: 'Arthur Melo',
+      price: 799,
+      sales: 234,
+      revenue: 9784,
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1531590878845-12627191e687?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
+      title: 'Arthur Melo',
+      price: 9999,
+      sales: 221,
+      revenue: 88765,
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
+      title: 'Arthur Melo',
+      price: 8999,
+      sales: 435,
+      revenue: 99456,
+    },
+  ];
   return (
-    <div className="mt-20">
-      <section className="container mx-auto px-4">
-        <div className="flex flex-col">
-          <div className="mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-              <div className="overflow-hidden rounded-lg border border-gray-200">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th
-                        scope="col"
-                        className="px-4 py-3.5 text-left text-sm font-normal text-gray-500 rtl:text-right"
-                      >
-                        Customer
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-4 py-3.5 text-left text-sm font-normal text-gray-500 rtl:text-right"
-                      >
-                        Date
-                      </th>
+    <TableWrapper>
+      <Table>
+        <TableHeader
+          headerItems={tableHeaderItems}
+          fixedElement={
+            <TableFixedCell className="audiance-table-fixed audiance-table-fixed-header"></TableFixedCell>
+          }
+          renderItem={header => {
+            return (
+              <div className="flex items-center gap-2">
+                {!!header.icon && (
+                  <header.icon
+                    style={{
+                      width: rem(16),
+                      height: rem(16),
+                    }}
+                  />
+                )}
 
-                      <th
-                        scope="col"
-                        className="px-4 py-3.5 text-left text-sm font-normal text-gray-500 rtl:text-right"
-                      >
-                        Status
-                      </th>
-
-                      <th
-                        scope="col"
-                        className="relative px-4 py-3.5"
-                      >
-                        <span className="sr-only">
-                          Actions
-                        </span>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200 bg-white">
-                    <tr>
-                      <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-500">
-                        <div className="flex items-center gap-x-2">
-                          <img
-                            className="h-8 w-8 rounded-full object-cover"
-                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-                            alt=""
-                          />
-                          <div>
-                            <h2 className="text-sm font-medium text-gray-800">
-                              Arthur Melo
-                            </h2>
-                            <p className="text-xs font-normal text-gray-600">
-                              authurmelo@example.com
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-500">
-                        Jan 6, 2022
-                      </td>
-                      <td className="whitespace-nowrap px-4 py-4 text-sm font-medium text-gray-700">
-                        <div className="inline-flex items-center gap-x-2 rounded-full bg-emerald-100/60 px-3 py-1 text-emerald-500">
-                          <svg
-                            width="12"
-                            height="12"
-                            viewBox="0 0 12 12"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M10 3L4.5 8.5L2 6"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-
-                          <h2 className="text-sm font-normal">
-                            Paid
-                          </h2>
-                        </div>
-                      </td>
-
-                      <td className="whitespace-nowrap px-4 py-4 text-sm">
-                        <ActionIcon
-                          variant="subtle"
-                          color="gray"
-                          aria-label="Settings"
-                        >
-                          <IconDotsVertical
-                            style={{
-                              width: '70%',
-                              height: '70%',
-                            }}
-                            stroke={1.5}
-                          />
-                        </ActionIcon>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-500">
-                        <div className="flex items-center gap-x-2">
-                          <img
-                            className="h-8 w-8 rounded-full object-cover"
-                            src="https://images.unsplash.com/photo-1531590878845-12627191e687?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
-                            alt=""
-                          />
-                          <div>
-                            <h2 className="text-sm font-medium text-gray-800">
-                              Andi Lane Andi LaneAndi
-                            </h2>
-                            <p className="text-xs font-normal text-gray-600">
-                              andi@example.com
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-500">
-                        Jan 5, 2022
-                      </td>
-                      <td className="whitespace-nowrap px-4 py-4 text-sm font-medium text-gray-700">
-                        <div className="inline-flex items-center gap-x-2 rounded-full bg-red-100/60 px-3 py-1 text-red-500">
-                          <svg
-                            width="12"
-                            height="12"
-                            viewBox="0 0 12 12"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M9 3L3 9M3 3L9 9"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-
-                          <h2 className="text-sm font-normal">
-                            Cancelled
-                          </h2>
-                        </div>
-                      </td>
-
-                      <td className="whitespace-nowrap px-4 py-4 text-sm">
-                        <ActionIcon
-                          variant="subtle"
-                          color="gray"
-                          aria-label="Settings"
-                        >
-                          <IconDotsVertical
-                            style={{
-                              width: '70%',
-                              height: '70%',
-                            }}
-                            stroke={1.5}
-                          />
-                        </ActionIcon>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-500">
-                        <div className="flex items-center gap-x-2">
-                          <img
-                            className="h-8 w-8 rounded-full object-cover"
-                            src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=644&q=80"
-                            alt=""
-                          />
-                          <div>
-                            <h2 className="text-sm font-medium text-gray-800">
-                              Orlando Diggs
-                            </h2>
-                            <p className="text-xs font-normal text-gray-600">
-                              orlando@example.com
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-500">
-                        Jan 4, 2022
-                      </td>
-                      <td className="whitespace-nowrap px-4 py-4 text-sm font-medium text-gray-700">
-                        <div className="inline-flex items-center gap-x-2 rounded-full bg-gray-100/60 px-3 py-1 text-gray-500">
-                          <svg
-                            width="12"
-                            height="12"
-                            viewBox="0 0 12 12"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M4.5 7L2 4.5M2 4.5L4.5 2M2 4.5H8C8.53043 4.5 9.03914 4.71071 9.41421 5.08579C9.78929 5.46086 10 5.96957 10 6.5V10"
-                              stroke="#667085"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-
-                          <h2 className="text-sm font-normal">
-                            Refunded
-                          </h2>
-                        </div>
-                      </td>
-
-                      <td className="whitespace-nowrap px-4 py-4 text-sm">
-                        <ActionIcon
-                          variant="subtle"
-                          color="gray"
-                          aria-label="Settings"
-                        >
-                          <IconDotsVertical
-                            style={{
-                              width: '70%',
-                              height: '70%',
-                            }}
-                            stroke={1.5}
-                          />
-                        </ActionIcon>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                {!!header.title && header.title}
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-6 flex items-center justify-between">
-          <a
-            href="#"
-            className="flex items-center gap-x-2 rounded-md border bg-white px-5 py-2 text-sm capitalize text-gray-700 transition-colors duration-200 hover:bg-gray-100"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="h-5 w-5 rtl:-scale-x-100"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
-              />
-            </svg>
-
-            <span>previous</span>
-          </a>
-          <a
-            href="#"
-            className="flex items-center gap-x-2 rounded-md border bg-white px-5 py-2 text-sm capitalize text-gray-700 transition-colors duration-200 hover:bg-gray-100"
-          >
-            <span>Next</span>
-
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="h-5 w-5 rtl:-scale-x-100"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-              />
-            </svg>
-          </a>
-        </div>
-      </section>
-    </div>
+            );
+          }}
+        />
+        <TableBody>
+          {tableBodyItems.map(item => {
+            return (
+              <tr
+                key={item.sales + item.src}
+                className="cursor-pointer hover:bg-gray-50 [&>td]:whitespace-nowrap [&>td]:px-4 [&>td]:py-4 [&>td]:text-sm [&>td]:text-gray-500"
+              >
+                <td className="flex items-center gap-2">
+                  <div className="h-10 w-10 overflow-hidden rounded-md">
+                    <img
+                      height={40}
+                      width={40}
+                      className="rounded-md transition duration-300 ease-in-out hover:scale-110"
+                      src={item.src}
+                    />
+                  </div>
+                  {item.title}
+                </td>
+                <td>₹{item.price}</td>
+                <td>₹{item.revenue}</td>
+                <td>{item.sales}</td>
+                <td>
+                  <ActionIcon variant="subtle" color="gray">
+                    <IconDotsVertical
+                      style={{
+                        width: rem(16),
+                        height: rem(16),
+                      }}
+                      stroke={1.5}
+                    />
+                  </ActionIcon>
+                </td>
+              </tr>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </TableWrapper>
   );
 };
 
 export default page;
 
-{
-  /* <TableWrapper>
+/* <TableWrapper>
         <Table tableElementRef={tableRef}>
           <TableHeader
             headerItems={tableHeaderItems}
@@ -371,4 +209,3 @@ export default page;
           </TableBody>
         </Table>
       </TableWrapper> */
-}

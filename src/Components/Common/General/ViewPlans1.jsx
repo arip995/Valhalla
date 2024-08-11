@@ -96,6 +96,7 @@ const ViewPlans1 = ({
         })}
       </Radio.Group>
       <Button
+        className="animate-shimmer bg-[linear-gradient(110deg,#7950f2,45%,#ffffff50,55%,#7950f2)] bg-[length:200%_100%]"
         onClick={() => onPay(selectedPlan)}
         disabled={!selectedPlan}
         fullWidth
@@ -111,3 +112,4 @@ const ViewPlans1 = ({
 };
 
 export default ViewPlans1;
+// bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%]
