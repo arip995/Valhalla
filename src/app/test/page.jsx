@@ -5,16 +5,31 @@ import TableBody from '@/Components/Common/Table/TableBody';
 import TableFixedCell from '@/Components/Common/Table/TableFixedCell';
 import TableHeader from '@/Components/Common/Table/TableHeader';
 import TableWrapper from '@/Components/Common/Table/TableWrapper';
-import { ActionIcon, rem } from '@mantine/core';
 import {
+  ActionIcon,
+  Button,
+  Menu,
+  rem,
+} from '@mantine/core';
+import { useClipboard } from '@mantine/hooks';
+import {
+  IconCheck,
+  IconCopy,
+  IconCreditCardOff,
   IconDotsVertical,
+  IconEdit,
+  IconExternalLink,
   IconPresentation,
   IconReceipt2,
   IconReportAnalytics,
+  IconSquareRoundedX,
+  IconTrash,
   IconUsers,
 } from '@tabler/icons-react';
 
 const page = () => {
+  const clipboard = useClipboard();
+
   const tableHeaderItems = [
     { title: 'Title', icon: IconUsers },
     { title: 'Price', icon: IconReceipt2 },
@@ -105,16 +120,129 @@ const page = () => {
                 <td>₹{item.price}</td>
                 <td>₹{item.revenue}</td>
                 <td>{item.sales}</td>
-                <td>
-                  <ActionIcon variant="subtle" color="gray">
-                    <IconDotsVertical
-                      style={{
-                        width: rem(16),
-                        height: rem(16),
-                      }}
-                      stroke={1.5}
-                    />
-                  </ActionIcon>
+                <td className="flex items-center gap-2">
+                  <Button
+                    variant="default"
+                    color="gray"
+                    size="xs"
+                    rightSection={
+                      clipboard.copied ? (
+                        <IconCheck
+                          style={{
+                            width: rem(12),
+                            height: rem(12),
+                          }}
+                          stroke={1.5}
+                        />
+                      ) : (
+                        <IconCopy
+                          onClick={() =>
+                            clipboard.copy(item.src)
+                          }
+                          style={{
+                            width: rem(12),
+                            height: rem(12),
+                          }}
+                          stroke={1.5}
+                        />
+                      )
+                    }
+                    radius="xl"
+                    styles={{
+                      root: {
+                        paddingRight: rem(14),
+                      },
+                      section: {
+                        marginLeft: rem(12),
+                      },
+                    }}
+                  >
+                    Share
+                  </Button>
+                  <Menu shadow="md">
+                    <Menu.Target>
+                      <ActionIcon
+                        variant="subtle"
+                        color="gray"
+                      >
+                        <IconDotsVertical
+                          style={{
+                            width: rem(16),
+                            height: rem(16),
+                          }}
+                          stroke={1.5}
+                        />
+                      </ActionIcon>
+                    </Menu.Target>
+                    <Menu.Dropdown>
+                      <Menu.Item
+                        leftSection={
+                          <IconEdit
+                            style={{
+                              width: rem(16),
+                              height: rem(16),
+                            }}
+                            stroke={1.5}
+                          />
+                        }
+                      >
+                        Edit
+                      </Menu.Item>
+                      <Menu.Item
+                        leftSection={
+                          <IconExternalLink
+                            style={{
+                              width: rem(16),
+                              height: rem(16),
+                            }}
+                            stroke={1.5}
+                          />
+                        }
+                      >
+                        Open Page
+                      </Menu.Item>
+                      <Menu.Item
+                        leftSection={
+                          <IconSquareRoundedX
+                            style={{
+                              width: rem(16),
+                              height: rem(16),
+                            }}
+                            stroke={1.5}
+                          />
+                        }
+                      >
+                        Unpublish
+                      </Menu.Item>
+                      <Menu.Item
+                        leftSection={
+                          <IconCreditCardOff
+                            style={{
+                              width: rem(16),
+                              height: rem(16),
+                            }}
+                            stroke={1.5}
+                          />
+                        }
+                      >
+                        Disable Payments
+                      </Menu.Item>
+                      <Menu.Item
+                        color="red"
+                        leftSection={
+                          <IconTrash
+                            style={{
+                              width: rem(16),
+                              height: rem(16),
+                            }}
+                            stroke={1.5}
+                          />
+                        }
+                      >
+                        Delete
+                      </Menu.Item>
+                    </Menu.Dropdown>
+                  </Menu>
                 </td>
               </tr>
             );
