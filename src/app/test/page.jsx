@@ -163,7 +163,7 @@ const page = () => {
                     >
                       Share
                     </Button>
-                    <Menu shadow="md">
+                    <Menu shadow="md" position="bottom-end">
                       <Menu.Target>
                         <ActionIcon
                           variant="subtle"
@@ -180,6 +180,7 @@ const page = () => {
                       </Menu.Target>
                       <Menu.Dropdown>
                         <Menu.Item
+                          className="my-2"
                           leftSection={
                             <IconEdit
                               style={{
@@ -193,6 +194,7 @@ const page = () => {
                           Edit
                         </Menu.Item>
                         <Menu.Item
+                          className="my-2"
                           leftSection={
                             <IconExternalLink
                               style={{
@@ -206,6 +208,7 @@ const page = () => {
                           Open Page
                         </Menu.Item>
                         <Menu.Item
+                          className="my-2"
                           leftSection={
                             <IconSquareRoundedX
                               style={{
@@ -219,6 +222,7 @@ const page = () => {
                           Unpublish
                         </Menu.Item>
                         <Menu.Item
+                          className="my-2"
                           leftSection={
                             <IconCreditCardOff
                               style={{
@@ -232,6 +236,7 @@ const page = () => {
                           Disable Payments
                         </Menu.Item>
                         <Menu.Item
+                          className="my-2"
                           color="red"
                           leftSection={
                             <IconTrash
