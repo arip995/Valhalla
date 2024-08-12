@@ -9,14 +9,20 @@ export const TableFixedCell = ({
 }) => {
   return type === 'tablehead' ? (
     <th
-      className={classNames('fixed-cell', className)}
+      className={classNames(
+        'sticky right-0 shadow-sm',
+        className
+      )}
       {...props}
     >
       {children}
     </th>
   ) : (
     <td
-      className={classNames('fixed-cell', className)}
+      className={classNames(
+        'sticky right-0 shadow-sm',
+        className
+      )}
       {...props}
     >
       {children}

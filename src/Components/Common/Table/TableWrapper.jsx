@@ -9,7 +9,7 @@ export const TableWrapper = ({
   return (
     <section
       className={classNames(
-        'container mx-auto px-4',
+        'container relative mx-auto px-4',
         className
       )}
       {...props}

@@ -40,7 +40,8 @@ const page = () => {
   const tableBodyItems = [
     {
       src: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
-      title: 'Arthur Melo',
+      title:
+        'Panda flex max-w-96 items-center gap-2 truncate truncate truncate truncate',
       price: 999,
       sales: 444,
       revenue: 9876,
@@ -84,7 +85,7 @@ const page = () => {
           }
           renderItem={header => {
             return (
-              <div className="flex items-center gap-2">
+              <div className="flex max-w-96 items-center gap-2">
                 {!!header.icon && (
                   <header.icon
                     style={{
@@ -106,8 +107,8 @@ const page = () => {
                 key={item.sales + item.src}
                 className="cursor-pointer hover:bg-gray-50 [&>td]:whitespace-nowrap [&>td]:px-4 [&>td]:py-4 [&>td]:text-sm [&>td]:text-gray-500"
               >
-                <td className="flex items-center gap-2">
-                  <div className="h-10 w-10 overflow-hidden rounded-md">
+                <td className="flex max-w-96 items-center gap-2">
+                  <div className="h-10 min-h-max w-10 min-w-max overflow-hidden rounded-md">
                     <img
                       height={40}
                       width={40}
@@ -115,135 +116,139 @@ const page = () => {
                       src={item.src}
                     />
                   </div>
-                  {item.title}
+                  <div className="truncate">
+                    {item.title}
+                  </div>
                 </td>
                 <td>₹{item.price}</td>
                 <td>₹{item.revenue}</td>
                 <td>{item.sales}</td>
-                <td className="flex items-center gap-2">
-                  <Button
-                    variant="default"
-                    color="gray"
-                    size="xs"
-                    rightSection={
-                      clipboard.copied ? (
-                        <IconCheck
-                          style={{
-                            width: rem(12),
-                            height: rem(12),
-                          }}
-                          stroke={1.5}
-                        />
-                      ) : (
-                        <IconCopy
-                          onClick={() =>
-                            clipboard.copy(item.src)
+                <TableFixedCell>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="default"
+                      color="gray"
+                      size="xs"
+                      rightSection={
+                        clipboard.copied ? (
+                          <IconCheck
+                            style={{
+                              width: rem(12),
+                              height: rem(12),
+                            }}
+                            stroke={1.5}
+                          />
+                        ) : (
+                          <IconCopy
+                            onClick={() =>
+                              clipboard.copy(item.src)
+                            }
+                            style={{
+                              width: rem(12),
+                              height: rem(12),
+                            }}
+                            stroke={1.5}
+                          />
+                        )
+                      }
+                      radius="xl"
+                      styles={{
+                        root: {
+                          paddingRight: rem(14),
+                        },
+                        section: {
+                          marginLeft: rem(12),
+                        },
+                      }}
+                    >
+                      Share
+                    </Button>
+                    <Menu shadow="md">
+                      <Menu.Target>
+                        <ActionIcon
+                          variant="subtle"
+                          color="gray"
+                        >
+                          <IconDotsVertical
+                            style={{
+                              width: rem(16),
+                              height: rem(16),
+                            }}
+                            stroke={1.5}
+                          />
+                        </ActionIcon>
+                      </Menu.Target>
+                      <Menu.Dropdown>
+                        <Menu.Item
+                          leftSection={
+                            <IconEdit
+                              style={{
+                                width: rem(16),
+                                height: rem(16),
+                              }}
+                              stroke={1.5}
+                            />
                           }
-                          style={{
-                            width: rem(12),
-                            height: rem(12),
-                          }}
-                          stroke={1.5}
-                        />
-                      )
-                    }
-                    radius="xl"
-                    styles={{
-                      root: {
-                        paddingRight: rem(14),
-                      },
-                      section: {
-                        marginLeft: rem(12),
-                      },
-                    }}
-                  >
-                    Share
-                  </Button>
-                  <Menu shadow="md">
-                    <Menu.Target>
-                      <ActionIcon
-                        variant="subtle"
-                        color="gray"
-                      >
-                        <IconDotsVertical
-                          style={{
-                            width: rem(16),
-                            height: rem(16),
-                          }}
-                          stroke={1.5}
-                        />
-                      </ActionIcon>
-                    </Menu.Target>
-                    <Menu.Dropdown>
-                      <Menu.Item
-                        leftSection={
-                          <IconEdit
-                            style={{
-                              width: rem(16),
-                              height: rem(16),
-                            }}
-                            stroke={1.5}
-                          />
-                        }
-                      >
-                        Edit
-                      </Menu.Item>
-                      <Menu.Item
-                        leftSection={
-                          <IconExternalLink
-                            style={{
-                              width: rem(16),
-                              height: rem(16),
-                            }}
-                            stroke={1.5}
-                          />
-                        }
-                      >
-                        Open Page
-                      </Menu.Item>
-                      <Menu.Item
-                        leftSection={
-                          <IconSquareRoundedX
-                            style={{
-                              width: rem(16),
-                              height: rem(16),
-                            }}
-                            stroke={1.5}
-                          />
-                        }
-                      >
-                        Unpublish
-                      </Menu.Item>
-                      <Menu.Item
-                        leftSection={
-                          <IconCreditCardOff
-                            style={{
-                              width: rem(16),
-                              height: rem(16),
-                            }}
-                            stroke={1.5}
-                          />
-                        }
-                      >
-                        Disable Payments
-                      </Menu.Item>
-                      <Menu.Item
-                        color="red"
-                        leftSection={
-                          <IconTrash
-                            style={{
-                              width: rem(16),
-                              height: rem(16),
-                            }}
-                            stroke={1.5}
-                          />
-                        }
-                      >
-                        Delete
-                      </Menu.Item>
-                    </Menu.Dropdown>
-                  </Menu>
-                </td>
+                        >
+                          Edit
+                        </Menu.Item>
+                        <Menu.Item
+                          leftSection={
+                            <IconExternalLink
+                              style={{
+                                width: rem(16),
+                                height: rem(16),
+                              }}
+                              stroke={1.5}
+                            />
+                          }
+                        >
+                          Open Page
+                        </Menu.Item>
+                        <Menu.Item
+                          leftSection={
+                            <IconSquareRoundedX
+                              style={{
+                                width: rem(16),
+                                height: rem(16),
+                              }}
+                              stroke={1.5}
+                            />
+                          }
+                        >
+                          Unpublish
+                        </Menu.Item>
+                        <Menu.Item
+                          leftSection={
+                            <IconCreditCardOff
+                              style={{
+                                width: rem(16),
+                                height: rem(16),
+                              }}
+                              stroke={1.5}
+                            />
+                          }
+                        >
+                          Disable Payments
+                        </Menu.Item>
+                        <Menu.Item
+                          color="red"
+                          leftSection={
+                            <IconTrash
+                              style={{
+                                width: rem(16),
+                                height: rem(16),
+                              }}
+                              stroke={1.5}
+                            />
+                          }
+                        >
+                          Delete
+                        </Menu.Item>
+                      </Menu.Dropdown>
+                    </Menu>
+                  </div>
+                </TableFixedCell>
               </tr>
             );
           })}

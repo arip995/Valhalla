@@ -9,7 +9,7 @@ const TableBody = ({
   return (
     <tbody
       className={classNames(
-        `divide-y divide-gray-200 bg-white`,
+        `divide-y divide-gray-200 bg-white [&>tr]:relative`,
         className
       )}
       {...props}
