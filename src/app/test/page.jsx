@@ -29,7 +29,6 @@ import {
 
 const page = () => {
   const clipboard = useClipboard();
-
   const tableHeaderItems = [
     { title: 'Title', icon: IconUsers },
     { title: 'Price', icon: IconReceipt2 },
@@ -75,6 +74,7 @@ const page = () => {
       revenue: 99456,
     },
   ];
+
   return (
     <TableWrapper>
       <Table>
