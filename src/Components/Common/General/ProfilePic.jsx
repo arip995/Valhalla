@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import {
   ActionIcon,
   Avatar,
@@ -7,8 +8,6 @@ import {
   LoadingOverlay,
 } from '@mantine/core';
 import { IconX } from '@tabler/icons-react';
-import Image from 'next/image';
-import React from 'react';
 
 const ProfilePic = ({
   avatarImage,
@@ -32,13 +31,13 @@ const ProfilePic = ({
           }}
         />
         {avatarImage ? (
-          <Image
+          <img
             className="h-[88px] w-[88px] overflow-hidden rounded-full object-cover"
             alt=""
             src={avatarImage}
             width={88}
             height={88}
-            quality={100}
+            // quality={100}
           />
         ) : (
           <Avatar
