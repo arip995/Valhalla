@@ -165,7 +165,14 @@ export const PeriodTypeOptions = [
   { label: 'Weeks', value: 'Weekly', days: 7 },
   { label: 'Months', value: 'Monthly', days: 30 },
   { label: 'Years', value: 'Yearly', days: 365 },
-  // { label: 'Lifetime', value: 'Lifetime', days: 36500 },
+  { label: 'Lifetime', value: 'Lifetime', days: 36500 },
+];
+export const PeriodTypeOptionsSelect = [
+  { label: 'Days', value: 'Daily', days: 1 },
+  { label: 'Weeks', value: 'Weekly', days: 7 },
+  { label: 'Months', value: 'Monthly', days: 30 },
+  { label: 'Years', value: 'Yearly', days: 365 },
+  { label: 'Lifetime', value: 'Lifetime', days: 36500 },
 ];
 
 export const PriceTypes = [

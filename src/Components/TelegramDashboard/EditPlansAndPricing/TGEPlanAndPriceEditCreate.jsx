@@ -2,7 +2,7 @@ import NewScrollArea from '@/Components/Common/General/NewScrollArea';
 import PricingTypeSelector from '@/Components/Create/Telegram/PlansAndPricing/PricingTypeSelector';
 import {
   DurationOptions,
-  PeriodTypeOptions,
+  PeriodTypeOptionsSelect,
 } from '@/Constants/constants';
 import { discountPercentage } from '@/Utils/Common';
 import {
@@ -334,7 +334,7 @@ const TGEPlanAndPriceEditCreate = ({
                         >
                           <Select
                             checkIconPosition="right"
-                            data={PeriodTypeOptions}
+                            data={PeriodTypeOptionsSelect}
                             placeholder="Select time period"
                             value={tempData?.planType}
                             onChange={value => {
