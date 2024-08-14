@@ -14,7 +14,7 @@ const ProductListing = ({ app }) => {
     <div>
       <Header title="Telegram" path="/create/telegram" />
       <div
-        className={classNames('mt-2 md:mt-4', {
+        className={classNames('mx-4 mt-2 md:mt-4', {
           hidden: loading === -1,
         })}
       >

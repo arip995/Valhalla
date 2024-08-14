@@ -242,11 +242,11 @@ export function NavbarLayout({ children }) {
       <AppShell.Header className={classes.header}>
         <Group h="100%" px="xs">
           <Burger
-            color="red"
+            color="white"
             opened={opened}
             onClick={toggle}
             // hiddenFrom="xs"
-            size="lg"
+            size="md"
           />
           Nexify
         </Group>
