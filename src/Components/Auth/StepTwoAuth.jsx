@@ -167,9 +167,7 @@ const StepTwoAuth = () => {
             radius="md"
             leftSection={<Text size="sm">@</Text>}
             rightSection={
-              !!loading && (
-                <Loader color="blue" size={'sm'} />
-              )
+              !!loading && <Loader size={'sm'} />
             }
             error={errors?.username}
           />

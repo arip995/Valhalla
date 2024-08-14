@@ -100,9 +100,7 @@ const Account = () => {
               error={error}
               leftSection={<Text size="sm">@</Text>}
               rightSection={
-                !!loadingUsername && (
-                  <Loader color="blue" size={'sm'} />
-                )
+                !!loadingUsername && <Loader size={'sm'} />
               }
             />
             <Collapse in={showUpdateUsernameButton}>
