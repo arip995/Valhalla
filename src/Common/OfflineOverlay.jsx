@@ -1,8 +1,13 @@
 import useOfflineStatus from '@/Utils/Hooks/useOfflineStatus';
 import useIsBrowser from '@/Utils/useIsBrowser';
 import { IconAlertTriangle } from '@tabler/icons-react';
-import DisableDevtool from 'disable-devtool';
-
+import dynamic from 'next/dynamic';
+const DisableDevtool = dynamic(
+  () => import('disable-devtool'),
+  {
+    ssr: false, // disable server-side rendering for this module
+  }
+);
 const OfflineOverlay = () => {
   const isOnline = useOfflineStatus();
   const isBrowser = useIsBrowser();
