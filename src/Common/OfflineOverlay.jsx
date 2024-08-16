@@ -1,9 +1,9 @@
-import useOnlineStatus from '@/Utils/Hooks/useOnlineStatus';
+import useOfflineStatus from '@/Utils/Hooks/useOfflineStatus';
 import { IconAlertTriangle } from '@tabler/icons-react';
 import React from 'react';
 
 const OfflineOverlay = () => {
-  const isOnline = useOnlineStatus();
+  const isOnline = useOfflineStatus();
 
   if (isOnline) {
     return null;
