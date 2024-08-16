@@ -37,6 +37,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Logo from '../../app/icon.png';
 import classes from '../../styles/Navbar/NavbarMinimal.module.css';
+import OfflineOverlay from '@/Common/OfflineOverlay';
 
 function NavbarLink({
   Icon,
@@ -230,131 +231,138 @@ export function NavbarLayout({ children }) {
   }, [pathName]);
 
   return (
-    <AppShell
-      header={{ height: { base: 52, xs: 0 } }}
-      navbar={{
-        width: { base: '100%', xs: 200 },
-        breakpoint: 'xs',
-        collapsed: { mobile: !opened },
-      }}
-      transitionDuration={500}
-    >
-      <AppShell.Header className={classes.header}>
-        <Group h="100%" px="xs">
-          <Burger
-            color="white"
-            opened={opened}
-            onClick={toggle}
-            // hiddenFrom="xs"
-            size="md"
-          />
-          Nexify
-        </Group>
-      </AppShell.Header>
-      <AppShell.Navbar>
-        <Link href={'/creator/home'}>
-          <AppShell.Section
-            withHeader={false}
-            py={12}
-            pl={16}
-            className={classes.company}
-            onClick={() => {
-              toggle();
-              setActive('/creator/home');
-              router.push('/creator/home');
-            }}
-          >
-            <img height={30} width={30} src={Logo.src} />{' '}
+    <>
+      <AppShell
+        header={{ height: { base: 52, xs: 0 } }}
+        navbar={{
+          width: { base: '100%', xs: 200 },
+          breakpoint: 'xs',
+          collapsed: { mobile: !opened },
+        }}
+        transitionDuration={500}
+      >
+        <AppShell.Header className={classes.header}>
+          <Group h="100%" px="xs">
+            <Burger
+              color="white"
+              opened={opened}
+              onClick={toggle}
+              // hiddenFrom="xs"
+              size="md"
+            />
             Nexify
+          </Group>
+        </AppShell.Header>
+        <AppShell.Navbar>
+          <Link href={'/creator/home'}>
+            <AppShell.Section
+              withHeader={false}
+              py={12}
+              pl={16}
+              className={classes.company}
+              onClick={() => {
+                toggle();
+                setActive('/creator/home');
+                router.push('/creator/home');
+              }}
+            >
+              <img height={30} width={30} src={Logo.src} />{' '}
+              Nexify
+            </AppShell.Section>
+          </Link>
+          <AppShell.Section
+            grow
+            p={8}
+            component={ScrollArea}
+          >
+            <div className="flex flex-col gap-2">
+              {!!isBrowser && links}
+            </div>
           </AppShell.Section>
-        </Link>
-        <AppShell.Section grow p={8} component={ScrollArea}>
-          <div className="flex flex-col gap-2">
-            {!!isBrowser && links}
-          </div>
-        </AppShell.Section>
-        <AppShell.Section className={classes.footer}>
-          <Menu shadow="md" width={190}>
-            <Menu.Target>
-              <NavLink
-                variant="subtle"
-                style={{ borderRadius: '20px' }}
-                fullWidth
-                label={
-                  <div className="flex items-center gap-2">
-                    <IconSettings
+          <AppShell.Section className={classes.footer}>
+            <Menu shadow="md" width={190}>
+              <Menu.Target>
+                <NavLink
+                  variant="subtle"
+                  style={{ borderRadius: '20px' }}
+                  fullWidth
+                  label={
+                    <div className="flex items-center gap-2">
+                      <IconSettings
+                        style={{
+                          width: rem(17),
+                          height: rem(17),
+                        }}
+                        stroke={1.5}
+                      />
+                      Settings
+                    </div>
+                  }
+                  justify="space-between"
+                  rightSection={
+                    <IconChevronUp
                       style={{
                         width: rem(17),
                         height: rem(17),
                       }}
                       stroke={1.5}
                     />
-                    Settings
-                  </div>
-                }
-                justify="space-between"
-                rightSection={
-                  <IconChevronUp
-                    style={{
-                      width: rem(17),
-                      height: rem(17),
-                    }}
-                    stroke={1.5}
-                  />
-                }
-              ></NavLink>
-            </Menu.Target>
-            <Menu.Dropdown>
-              <Menu.Item
-                color="red"
-                leftSection={
-                  <IconLogout
-                    style={{
-                      width: rem(17),
-                      height: rem(17),
-                    }}
-                    stroke={1.5}
-                  />
-                }
-                onClick={() => {
-                  modals.openConfirmModal({
-                    title: <Text fw={600}>Sign Out</Text>,
-                    children: (
-                      <Text size="sm">
-                        Do you really want to signout?
-                      </Text>
-                    ),
-                    labels: {
-                      confirm: 'Yes, Sign out',
-                      cancel: 'Cancel',
-                    },
-                    confirmProps: { color: 'red' },
-                    onCancel: () => {},
-                    onConfirm: () => {
-                      Cookies.remove('accesstoken');
-                      localStorage.removeItem('user');
-                      router.push('/signin');
-                    },
-                  });
-                }}
-              >
-                Logout
-              </Menu.Item>
-            </Menu.Dropdown>
-          </Menu>
-        </AppShell.Section>
-      </AppShell.Navbar>
-      <AppShell.Main
-        className={classes.appshellMain}
-        style={
-          {
-            // backgroundColor: theme.colors.gray[1],
+                  }
+                ></NavLink>
+              </Menu.Target>
+              <Menu.Dropdown>
+                <Menu.Item
+                  color="red"
+                  leftSection={
+                    <IconLogout
+                      style={{
+                        width: rem(17),
+                        height: rem(17),
+                      }}
+                      stroke={1.5}
+                    />
+                  }
+                  onClick={() => {
+                    modals.openConfirmModal({
+                      title: <Text fw={600}>Sign Out</Text>,
+                      children: (
+                        <Text size="sm">
+                          Do you really want to signout?
+                        </Text>
+                      ),
+                      labels: {
+                        confirm: 'Yes, Sign out',
+                        cancel: 'Cancel',
+                      },
+                      confirmProps: { color: 'red' },
+                      onCancel: () => {},
+                      onConfirm: () => {
+                        Cookies.remove('accesstoken');
+                        localStorage.removeItem('user');
+                        router.push('/signin');
+                      },
+                    });
+                  }}
+                >
+                  Logout
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+          </AppShell.Section>
+        </AppShell.Navbar>
+        <AppShell.Main
+          className={classes.appshellMain}
+          style={
+            {
+              // backgroundColor: theme.colors.gray[1],
+            }
           }
-        }
-      >
-        {children}
-      </AppShell.Main>
-    </AppShell>
+        >
+          {children}
+        </AppShell.Main>
+      </AppShell>
+      <OfflineOverlay />
+    </>
   );
 }
 
