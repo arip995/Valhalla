@@ -34,7 +34,6 @@ import {
   StatusColorMapping,
   StatusMapping,
 } from '@/Constants/ProductListingContants';
-import Image from 'next/image';
 
 const TableHeaderItems = [
   { title: 'Title', icon: IconUsers },
@@ -132,22 +131,20 @@ const CustomTable = ({
               >
                 <td className="flex max-w-96 items-center gap-2">
                   <div className="h-10 min-h-max w-10 min-w-max overflow-hidden rounded-md">
-                    <Image
+                    <img
+                      height={40}
+                      width={40}
                       className={classNames(
-                        'h-12 w-10 rounded-md transition duration-300 ease-in-out hover:scale-110',
+                        'h-10 rounded-md transition duration-300 ease-in-out hover:scale-110',
                         { hidden: !item.coverImage }
                       )}
                       src={item.coverImage}
-                      width={80}
-                      height={80}
-                      quality={100}
-                      priority
                     />
                     <img
                       height={40}
                       width={40}
                       className={classNames(
-                        'h-12 w-10 rounded-md transition duration-300 ease-in-out hover:scale-110',
+                        'h-10 rounded-md transition duration-300 ease-in-out hover:scale-110',
                         { hidden: item.coverImage }
                       )}
                       src={EmptyProductImage2.src}
