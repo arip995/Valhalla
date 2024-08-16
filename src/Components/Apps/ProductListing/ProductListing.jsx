@@ -4,7 +4,6 @@ import Header from '@/Components/Common/Header/Header';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import CustomTable from '@/Components/Common/Table/CustomTables/CustomTable';
 import { Pagination } from '@mantine/core';
-import classNames from 'classnames';
 import Filters from './Filters';
 import useProductListing from './useProductListing';
 
@@ -37,14 +36,7 @@ const ProductListing = () => {
           }
           path={`/create/${app === 'tg' ? 'telegram' : 'lockedcontent'}`}
         />
-        <div
-          className={classNames(
-            'mx-4 mt-2 flex flex-col items-end gap-2 md:mt-4',
-            {
-              hidden: loading === -1,
-            }
-          )}
-        >
+        <div className="mx-4 my-2 flex flex-col items-end gap-2 md:my-4">
           <Filters />
           {data.totalQueryCount == 0 ? (
             <EmptyStateOne app={app} />

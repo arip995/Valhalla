@@ -71,7 +71,6 @@ const Filters = ({
         radius="md"
         value={searchValue}
         className="w-full md:w-max md:min-w-80"
-        mt="md"
         rightSectionPointerEvents="all"
         styles={{
           input: {
@@ -107,11 +106,10 @@ const Filters = ({
         onOpen={() => setOpened(true)}
         onClose={() => setOpened(false)}
         radius="md"
-        // width="target"
         position="bottom-end"
         withinPortal
       >
-        <Menu.Target className="h-8">
+        <Menu.Target>
           <UnstyledButton
             className={classNames(
               'flex h-full min-h-10 w-max items-center justify-between px-2 md:w-40',
