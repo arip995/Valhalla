@@ -1,10 +1,12 @@
 import useOfflineStatus from '@/Utils/Hooks/useOfflineStatus';
+import useIsBrowser from '@/Utils/useIsBrowser';
 import { IconAlertTriangle } from '@tabler/icons-react';
 import DisableDevtool from 'disable-devtool';
 
 const OfflineOverlay = () => {
   const isOnline = useOfflineStatus();
-  if (process.env.NEXT_PUBLIC_ENV !== 'DEV') {
+  const isBrowser = useIsBrowser();
+  if (process.env.NEXT_PUBLIC_ENV !== 'DEV' && isBrowser) {
     DisableDevtool();
   }
   if (isOnline) {
