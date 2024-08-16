@@ -3,13 +3,15 @@ import {
   useIsFirstRender,
   usePagination,
 } from '@mantine/hooks';
+import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-const useProductListing = (app = 'telegram') => {
+const useProductListing = () => {
   const isFirstRender = useIsFirstRender();
+  const app = usePathname().split('/')[2];
   const [data, setData] = useState(null);
-  const [searchText, setSearchText] = useState(null);
+  const [searchText, setSearchText] = useState('');
   const [loading, setLoading] = useState(-1);
   const pagination = usePagination({
     total: data?.totalQueryCount || 10,
@@ -18,6 +20,7 @@ const useProductListing = (app = 'telegram') => {
 
   const setListingData = async () => {
     if (!isFirstRender) setLoading(1);
+
     try {
       const listingData = await axiosInstance.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/product/get`,
@@ -28,14 +31,13 @@ const useProductListing = (app = 'telegram') => {
         }
       );
       setData(listingData.data.data);
-      setLoading(0);
-      console.log(listingData.data.data);
     } catch (error) {
-      setLoading(0);
       toast.error(
         error?.response?.data?.message ||
           'An error occured at our side'
       );
+    } finally {
+      setLoading(0);
     }
   };
 
@@ -60,7 +62,8 @@ const useProductListing = (app = 'telegram') => {
   if (isFirstRender) {
     setListingData();
   }
-  return { data, pagination, updateFilters, loading };
+
+  return { app, data, pagination, updateFilters, loading };
 };
 
 export default useProductListing;

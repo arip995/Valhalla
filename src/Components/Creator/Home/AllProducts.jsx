@@ -17,18 +17,18 @@ export function AllProducts() {
       title: 'Locked Content',
       icon: IconLockDollar,
       color: 'grape',
-      path: '/app/lockedcontent',
+      path: '/app/lc',
       onClick: () => {
-        router.push('/app/lockedcontent');
+        router.push('/app/lc');
       },
     },
     {
-      title: 'Telegram Integration',
+      title: 'Telegram Community',
       icon: IconBrandTelegram,
       color: 'blue',
-      path: '/app/telegram',
+      path: '/app/tg',
       onClick: () => {
-        router.push('/app/telegram');
+        router.push('/app/tg');
       },
     },
     {

@@ -50,6 +50,8 @@ import '@mantine/core/styles/Divider.css';
 import '@mantine/core/styles/Switch.css';
 import '@mantine/core/styles/Drawer.css';
 import '@mantine/core/styles/Menu.css';
+import '@mantine/core/styles/Badge.css';
+import '@mantine/core/styles/Pagination.css';
 import '@mantine/core/styles/Anchor.css';
 
 // const inter = Inter({ subsets: ["latin"] });

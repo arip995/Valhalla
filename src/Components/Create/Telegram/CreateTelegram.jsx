@@ -31,7 +31,7 @@ const CreateTelegram = ({ data }) => {
       <div className="lc-container lc-container-animation">
         <div className="flex w-full flex-col items-center gap-2">
           <HeaderWrapper
-            titleOne={'Create Telegram Integration'}
+            titleOne={'Create Telegram Community'}
           />
           <PaperWrapper>
             {step === 1 ? (

@@ -83,7 +83,7 @@ export function NavbarLayout({ children }) {
   const pathName = usePathname();
   const [active, setActive] = useState(pathName);
   const isBrowser = useIsBrowser();
-  const mockdata = [
+  const sidenavData = [
     {
       icon: IconHome2,
       label: 'Home',
@@ -133,22 +133,22 @@ export function NavbarLayout({ children }) {
       icon: IconLockDollar,
       label: 'Locked Content',
       value: 'lockedcontent',
-      path: '/app/lockedcontent',
+      path: '/app/lc',
       onClick: () => {
         toggle();
         // setActive('/app/lockedcontent');
-        router.push('/app/lockedcontent');
+        router.push('/app/lc');
       },
     },
     {
       icon: IconBrandTelegram,
       label: 'Telegram',
       value: 'telegram',
-      path: '/app/telegram',
+      path: '/app/tg',
       onClick: () => {
         toggle();
-        // setActive('/app/telegram');
-        router.push('/app/telegram');
+        // setActive('/app/tg');
+        router.push('/app/tg');
       },
     },
     // {
@@ -210,7 +210,7 @@ export function NavbarLayout({ children }) {
       },
     },
   ];
-  const links = mockdata.map(link => {
+  const links = sidenavData.map(link => {
     const { icon: Icon, label, path } = link;
 
     return (

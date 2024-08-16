@@ -14,7 +14,7 @@ export function middleware(req) {
   }
   if (req.nextUrl.pathname === '/app' && accessToken) {
     return NextResponse.redirect(
-      new URL('/app/lockedcontent', req.url)
+      new URL('/app/lc', req.url)
     );
   }
 
@@ -64,10 +64,10 @@ export const config = {
     // '/creator/transaction',
     // '/creator/billing',
     // '/creator/account',
-    // '/app/lockedcontent',
-    // '/app/telegram',
+    // '/app/lc',
+    // '/app/tg',
     // '/create/telegram',
-    // '/create/lockedcontent',
+    // '/create/lc',
     // '/signin',
     // '/signup',
     // '/tg/:path*',

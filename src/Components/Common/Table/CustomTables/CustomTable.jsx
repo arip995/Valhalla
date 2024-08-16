@@ -6,11 +6,17 @@ import TableBody from '@/Components/Common/Table/TableBody';
 import TableFixedCell from '@/Components/Common/Table/TableFixedCell';
 import TableHeader from '@/Components/Common/Table/TableHeader';
 import TableWrapper from '@/Components/Common/Table/TableWrapper';
-import { ActionIcon, Menu, rem } from '@mantine/core';
+import {
+  ActionIcon,
+  Badge,
+  Menu,
+  rem,
+} from '@mantine/core';
 // import EmptyProductImage from '../../../../../public/images/common/emptystateproductimage.jpeg';
 // import EmptyProductImage1 from '../../../../../public/images/common/emptystateproductimage1.jpeg';
 import EmptyProductImage2 from '../../../../../public/images/common/emptystateproductimage2.jpeg';
 import {
+  IconBrandRedux,
   IconCreditCardOff,
   IconDotsVertical,
   IconEdit,
@@ -23,9 +29,15 @@ import {
   IconUsers,
 } from '@tabler/icons-react';
 import classNames from 'classnames';
+import Link from 'next/link';
+import {
+  StatusColorMapping,
+  StatusMapping,
+} from '@/Constants/ProductListingContants';
 
 const TableHeaderItems = [
   { title: 'Title', icon: IconUsers },
+  { title: 'Status', icon: IconBrandRedux },
   { title: 'Price', icon: IconReceipt2 },
   { title: 'Revenue', icon: IconPresentation },
   { title: 'Sales', icon: IconReportAnalytics },
@@ -71,6 +83,7 @@ const TableBodyItems = [
 ];
 
 const CustomTable = ({
+  app = 'tg',
   tableHeaderItems = TableHeaderItems,
   tableBodyItems = TableBodyItems,
   showShare = true,
@@ -141,6 +154,15 @@ const CustomTable = ({
                     {item.title}
                   </div>
                 </td>
+                <td>
+                  <Badge
+                    variant="dot"
+                    color={StatusColorMapping[item.status]}
+                    size="md"
+                  >
+                    {StatusMapping[item.status]}
+                  </Badge>
+                </td>
                 <td>₹{item.price}</td>
                 <td>₹{item.totalRevenue}</td>
                 <td>{item.totalSalesCount}</td>
@@ -171,36 +193,45 @@ const CustomTable = ({
                           </ActionIcon>
                         </Menu.Target>
                         <Menu.Dropdown>
-                          <Menu.Item
-                            className="my-1"
-                            disabled={item.status === 3}
-                            leftSection={
-                              <IconEdit
-                                style={{
-                                  width: rem(16),
-                                  height: rem(16),
-                                }}
-                                stroke={1.5}
-                              />
-                            }
+                          <Link
+                            href={`/dashboard/${app}/${item._id}`}
                           >
-                            Edit
-                          </Menu.Item>
-                          <Menu.Item
-                            className="my-1"
-                            disabled={item.status === 3}
-                            leftSection={
-                              <IconExternalLink
-                                style={{
-                                  width: rem(16),
-                                  height: rem(16),
-                                }}
-                                stroke={1.5}
-                              />
-                            }
+                            <Menu.Item
+                              className="my-1"
+                              disabled={item.status === 3}
+                              leftSection={
+                                <IconEdit
+                                  style={{
+                                    width: rem(16),
+                                    height: rem(16),
+                                  }}
+                                  stroke={1.5}
+                                />
+                              }
+                            >
+                              Edit
+                            </Menu.Item>
+                          </Link>
+                          <Link
+                            href={`/${app}/${item._id}`}
+                            prefetch={false}
                           >
-                            Open Page
-                          </Menu.Item>
+                            <Menu.Item
+                              className="my-1"
+                              disabled={item.status === 3}
+                              leftSection={
+                                <IconExternalLink
+                                  style={{
+                                    width: rem(16),
+                                    height: rem(16),
+                                  }}
+                                  stroke={1.5}
+                                />
+                              }
+                            >
+                              Open Page
+                            </Menu.Item>
+                          </Link>
 
                           {!item.isKycDone ||
                           item.status === 3 ||

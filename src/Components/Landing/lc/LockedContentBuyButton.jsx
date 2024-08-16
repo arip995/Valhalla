@@ -6,7 +6,7 @@ import React from 'react';
 const LockedContentBuyButton = ({ data }) => {
   return (
     <div className="vlc-view-product-button">
-      <Button size="md" fullWidth>
+      <Button size="md" fullWidth className="">
         Unlock for ₹{data?.price}
       </Button>
     </div>
