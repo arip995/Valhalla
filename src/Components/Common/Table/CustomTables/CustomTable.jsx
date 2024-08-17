@@ -222,49 +222,24 @@ const CustomTable = ({
                             </Menu.Item>
                           </Link>
 
-                          {!item.isKycDone ||
-                          item.status === 3 ||
-                          item.status === 4 ? null : (
-                            <>
-                              <Menu.Item
-                                className="my-1"
-                                onClick={() => {
-                                  onUpdate(
-                                    'edit',
-                                    item.status === 1
-                                      ? 5
-                                      : 1,
-                                    item._id
-                                  );
-                                }}
-                                leftSection={
-                                  <IconSquareRoundedX
-                                    style={{
-                                      width: rem(16),
-                                      height: rem(16),
-                                    }}
-                                    stroke={1.5}
-                                  />
-                                }
-                              >
-                                {item.status === 1
-                                  ? 'Unpublish'
-                                  : 'Publish'}
-                              </Menu.Item>
-                              {item.status === 5 ? null : (
+                          {
+                            // !item.isKycDone ||
+                            item.status === 3 ||
+                            item.status === 4 ? null : (
+                              <>
                                 <Menu.Item
                                   className="my-1"
                                   onClick={() => {
                                     onUpdate(
                                       'edit',
-                                      item.status === 6
-                                        ? 1
-                                        : 6,
+                                      item.status === 1
+                                        ? 5
+                                        : 1,
                                       item._id
                                     );
                                   }}
                                   leftSection={
-                                    <IconCreditCardOff
+                                    <IconSquareRoundedX
                                       style={{
                                         width: rem(16),
                                         height: rem(16),
@@ -273,13 +248,41 @@ const CustomTable = ({
                                     />
                                   }
                                 >
-                                  {item.status === 6
-                                    ? 'Enable Sale'
-                                    : 'Disable Sale'}
+                                  {item.status === 1
+                                    ? 'Unpublish'
+                                    : 'Publish'}
                                 </Menu.Item>
-                              )}
-                            </>
-                          )}
+                                {item.status ===
+                                5 ? null : (
+                                  <Menu.Item
+                                    className="my-1"
+                                    onClick={() => {
+                                      onUpdate(
+                                        'edit',
+                                        item.status === 6
+                                          ? 1
+                                          : 6,
+                                        item._id
+                                      );
+                                    }}
+                                    leftSection={
+                                      <IconCreditCardOff
+                                        style={{
+                                          width: rem(16),
+                                          height: rem(16),
+                                        }}
+                                        stroke={1.5}
+                                      />
+                                    }
+                                  >
+                                    {item.status === 6
+                                      ? 'Enable Sale'
+                                      : 'Disable Sale'}
+                                  </Menu.Item>
+                                )}
+                              </>
+                            )
+                          }
 
                           <Menu.Item
                             className="my-1"

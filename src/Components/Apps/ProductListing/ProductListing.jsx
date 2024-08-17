@@ -9,8 +9,14 @@ import useProductListing from './useProductListing';
 import { Toaster } from 'react-hot-toast';
 
 const ProductListing = () => {
-  const { app, onUpdate, data, loading } =
-    useProductListing();
+  const {
+    app,
+    onUpdate,
+    data,
+    loading,
+    searchText,
+    status,
+  } = useProductListing();
 
   if (loading === -1) {
     return (
@@ -38,14 +44,17 @@ const ProductListing = () => {
           path={`/create/${app === 'tg' ? 'telegram' : 'lockedcontent'}`}
         />
         <div className="mx-4 my-2 flex flex-col items-end gap-2 md:my-4">
-          <Filters onUpdate={onUpdate} />
+          <Filters
+            onUpdate={onUpdate}
+            searchText={searchText}
+            status={status}
+          />
           {data.totalQueryCount == 0 ? (
             <EmptyStateOne
               isTelegram={app === 'tg' ? true : false}
               isfilter
               onClear={() => {
-                onUpdate('search', '');
-                onUpdate('status', 1);
+                onUpdate('reset');
               }}
             />
           ) : (

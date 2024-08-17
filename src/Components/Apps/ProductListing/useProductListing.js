@@ -104,6 +104,10 @@ const useProductListing = () => {
         case 'page':
           setPageNo(updateData);
           break;
+        case 'reset':
+          setSearchText('');
+          setStatus(1);
+          break;
         case 'edit':
           if (updateData === 2) {
             modals.openConfirmModal({
@@ -188,7 +192,14 @@ const useProductListing = () => {
     setListingData();
   }
 
-  return { app, data, onUpdate, loading };
+  return {
+    app,
+    data,
+    onUpdate,
+    loading,
+    searchText,
+    status,
+  };
 };
 
 export default useProductListing;

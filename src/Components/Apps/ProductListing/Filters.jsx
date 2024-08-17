@@ -16,7 +16,7 @@ import {
   IconChevronDown,
   IconSearch,
 } from '@tabler/icons-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classes from '../../../styles/creator/ProductListing/MenuDropdown.module.css';
 import classNames from 'classnames';
 
@@ -64,6 +64,11 @@ const Filters = ({
     }
   );
 
+  useEffect(() => {
+    setSelected(status);
+    setSearchValue(searchText);
+  }, [searchText, status]);
+
   return (
     <div className="flex w-full items-end gap-2 md:flex-row md:justify-end">
       <TextInput
@@ -97,7 +102,6 @@ const Filters = ({
             aria-label="Clear input"
             onClick={() => {
               setSearchValue('');
-              handleUpdate('search', '');
             }}
             style={{
               display: searchValue ? undefined : 'none',
