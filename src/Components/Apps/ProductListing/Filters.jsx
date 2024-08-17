@@ -95,7 +95,10 @@ const Filters = ({
           <CloseButton
             variant="transparent"
             aria-label="Clear input"
-            onClick={() => setSearchValue('')}
+            onClick={() => {
+              setSearchValue('');
+              handleUpdate('search', '');
+            }}
             style={{
               display: searchValue ? undefined : 'none',
             }}

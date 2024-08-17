@@ -1,10 +1,11 @@
 import axiosInstance from '@/Utils/AxiosInstance';
 import {
+  useDebouncedCallback,
+  useDidUpdate,
   useIsFirstRender,
-  usePagination,
 } from '@mantine/hooks';
 import { usePathname } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useProductListing = () => {
@@ -12,11 +13,9 @@ const useProductListing = () => {
   const app = usePathname().split('/')[2];
   const [data, setData] = useState(null);
   const [searchText, setSearchText] = useState('');
+  const [status, setStatus] = useState(1);
   const [loading, setLoading] = useState(-1);
-  const pagination = usePagination({
-    total: data?.totalQueryCount || 10,
-    initialPage: 1,
-  });
+  const [pageNo, setPageNo] = useState(1);
 
   const setListingData = async () => {
     if (!isFirstRender) setLoading(1);
@@ -26,7 +25,8 @@ const useProductListing = () => {
         `${process.env.NEXT_PUBLIC_BASE_URL}/product/get`,
         {
           productType: app,
-          pageNo: pagination?.active || 1,
+          pageNo: pageNo,
+          status: Number(status),
           searchText,
         }
       );
@@ -41,29 +41,36 @@ const useProductListing = () => {
     }
   };
 
-  const updateFilters = useCallback(
-    async (updateType, updateData) => {
+  const onUpdate = useDebouncedCallback(
+    (updateType, updateData) => {
       switch (updateType) {
         case 'search':
+          setPageNo(1);
           setSearchText(updateData);
+          break;
+        case 'status':
+          setPageNo(1);
+          setStatus(updateData);
+          break;
+        case 'page':
+          setPageNo(updateData);
           break;
         default:
           break;
       }
     },
-    []
+    500
   );
 
-  useEffect(() => {
-    if (!searchText) return;
+  useDidUpdate(() => {
     setListingData();
-  }, [searchText]);
+  }, [searchText, status, pageNo]);
 
   if (isFirstRender) {
     setListingData();
   }
 
-  return { app, data, pagination, updateFilters, loading };
+  return { app, data, onUpdate, loading };
 };
 
 export default useProductListing;

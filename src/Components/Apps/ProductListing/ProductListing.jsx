@@ -8,9 +8,8 @@ import Filters from './Filters';
 import useProductListing from './useProductListing';
 
 const ProductListing = () => {
-  const { app, pagination, updateFilters, data, loading } =
+  const { app, onUpdate, data, loading } =
     useProductListing();
-  console.log(pagination, updateFilters);
   if (loading === -1) {
     return (
       <>
@@ -37,9 +36,16 @@ const ProductListing = () => {
           path={`/create/${app === 'tg' ? 'telegram' : 'lockedcontent'}`}
         />
         <div className="mx-4 my-2 flex flex-col items-end gap-2 md:my-4">
-          <Filters />
+          <Filters onUpdate={onUpdate} />
           {data.totalQueryCount == 0 ? (
-            <EmptyStateOne app={app} />
+            <EmptyStateOne
+              isTelegram={app === 'tg' ? true : false}
+              isfilter
+              onClear={() => {
+                onUpdate('search', '');
+                onUpdate('status', 1);
+              }}
+            />
           ) : (
             <>
               {loading ? (
@@ -51,9 +57,14 @@ const ProductListing = () => {
                 />
               )}
               <Pagination
-                total={Math.ceil(data.totalQueryCount / 10)}
                 withEdges
-                className={`${Math.ceil(data.totalQueryCount / 10) == 1 || loading ? 'hidden' : ''}`}
+                total={Math.floor(
+                  data.totalQueryCount / 10
+                )}
+                onChange={value => {
+                  onUpdate('page', value);
+                }}
+                className={`${Math.floor(data.totalQueryCount / 10) == 1 || loading ? 'hidden' : ''}`}
               />
             </>
           )}
