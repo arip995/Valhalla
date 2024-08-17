@@ -1,4 +1,4 @@
-import { compact } from '@/Utils/Common';
+import { Compact } from '@/Utils/Common';
 import { Button, Input } from '@mantine/core';
 import { randomId } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
@@ -113,7 +113,7 @@ const PlansAndPricing = ({ stepThreeForm }) => {
         }, 200);
       });
       setPlans(prevState => {
-        const updatedPlans = compact(
+        const updatedPlans = Compact(
           prevState.map(val => {
             if (val.id !== id) {
               !foundPlan && (prevPlanId = val.id);

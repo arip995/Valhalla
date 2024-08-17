@@ -1,31 +1,33 @@
 .appsHeaderContainer {
+  position: sticky;
+  z-index: 95;
+  top: 0;
   width: 100%;
+  height: 52px;
   padding: 11px;
   border-bottom: 1px solid
     light-dark(
       var(--mantine-color-gray-3),
       var(--mantine-color-dark-4)
     );
-  height: 52px;
   background-color: light-dark(
     var(--mantine-color-white),
     var(--mantine-color-dark-7)
   );
-  z-index: 95;
-  position: sticky;
-  top: 0;
   @media (max-width: em(575px)) {
     top: 52px;
   }
   .appsHeader {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
   }
   .appsHeaderTitle {
-    font-family: Greycliff CF, var(--mantine-font-family);
-    font-weight: 600;
+    font-family:
+      Greycliff CF,
+      var(--mantine-font-family);
     font-size: large;
+    font-weight: 600;
   }
   .createButton {
     @media (max-width: em(767px)) {

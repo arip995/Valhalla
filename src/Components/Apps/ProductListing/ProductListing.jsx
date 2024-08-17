@@ -6,10 +6,12 @@ import CustomTable from '@/Components/Common/Table/CustomTables/CustomTable';
 import { Pagination } from '@mantine/core';
 import Filters from './Filters';
 import useProductListing from './useProductListing';
+import { Toaster } from 'react-hot-toast';
 
 const ProductListing = () => {
   const { app, onUpdate, data, loading } =
     useProductListing();
+
   if (loading === -1) {
     return (
       <>
@@ -53,6 +55,7 @@ const ProductListing = () => {
               ) : (
                 <CustomTable
                   tableBodyItems={data.data || []}
+                  onUpdate={onUpdate}
                   app={app}
                 />
               )}
@@ -69,6 +72,7 @@ const ProductListing = () => {
             </>
           )}
         </div>
+        <Toaster />
       </>
     );
   }

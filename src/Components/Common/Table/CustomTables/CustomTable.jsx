@@ -1,22 +1,13 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import ShareButton from '@/Components/Common/Buttons/ShareButton';
-/* eslint-disable @next/next/no-img-element */
 import Table from '@/Components/Common/Table/Table';
 import TableBody from '@/Components/Common/Table/TableBody';
 import TableFixedCell from '@/Components/Common/Table/TableFixedCell';
 import TableHeader from '@/Components/Common/Table/TableHeader';
 import TableWrapper from '@/Components/Common/Table/TableWrapper';
+import { ActionIcon, Menu, rem } from '@mantine/core';
 import {
-  ActionIcon,
-  Badge,
-  Menu,
-  rem,
-} from '@mantine/core';
-// import EmptyProductImage from '../../../../../public/images/common/emptystateproductimage.jpeg';
-// import EmptyProductImage1 from '../../../../../public/images/common/emptystateproductimage1.jpeg';
-import EmptyProductImage2 from '../../../../../public/images/common/emptystateproductimage2.jpeg';
-import {
-  IconBrandRedux,
   IconCreditCardOff,
   IconDotsVertical,
   IconEdit,
@@ -30,14 +21,11 @@ import {
 } from '@tabler/icons-react';
 import classNames from 'classnames';
 import Link from 'next/link';
-import {
-  StatusColorMapping,
-  StatusMapping,
-} from '@/Constants/ProductListingContants';
+import EmptyProductImage2 from '../../../../../public/images/common/emptystateproductimage2.jpeg';
 
 const TableHeaderItems = [
   { title: 'Title', icon: IconUsers },
-  { title: 'Status', icon: IconBrandRedux },
+  // { title: 'Status', icon: IconBrandRedux },
   { title: 'Price', icon: IconReceipt2 },
   { title: 'Revenue', icon: IconPresentation },
   { title: 'Sales', icon: IconReportAnalytics },
@@ -88,6 +76,7 @@ const CustomTable = ({
   tableBodyItems = TableBodyItems,
   showShare = true,
   showMenu = true,
+  onUpdate = () => {},
 }) => {
   if (!tableBodyItems) return null;
   return (
@@ -154,7 +143,7 @@ const CustomTable = ({
                     {item.title}
                   </div>
                 </td>
-                <td>
+                {/* <td>
                   <Badge
                     variant="dot"
                     color={StatusColorMapping[item.status]}
@@ -162,7 +151,7 @@ const CustomTable = ({
                   >
                     {StatusMapping[item.status]}
                   </Badge>
-                </td>
+                </td> */}
                 <td>₹{item.price}</td>
                 <td>₹{item.totalRevenue}</td>
                 <td>{item.totalSalesCount}</td>
@@ -239,6 +228,15 @@ const CustomTable = ({
                             <>
                               <Menu.Item
                                 className="my-1"
+                                onClick={() => {
+                                  onUpdate(
+                                    'edit',
+                                    item.status === 1
+                                      ? 5
+                                      : 1,
+                                    item._id
+                                  );
+                                }}
                                 leftSection={
                                   <IconSquareRoundedX
                                     style={{
@@ -256,6 +254,15 @@ const CustomTable = ({
                               {item.status === 5 ? null : (
                                 <Menu.Item
                                   className="my-1"
+                                  onClick={() => {
+                                    onUpdate(
+                                      'edit',
+                                      item.status === 6
+                                        ? 1
+                                        : 6,
+                                      item._id
+                                    );
+                                  }}
                                   leftSection={
                                     <IconCreditCardOff
                                       style={{
@@ -267,8 +274,8 @@ const CustomTable = ({
                                   }
                                 >
                                   {item.status === 6
-                                    ? 'Disable Sale'
-                                    : 'Enable Sale'}
+                                    ? 'Enable Sale'
+                                    : 'Disable Sale'}
                                 </Menu.Item>
                               )}
                             </>
@@ -277,6 +284,9 @@ const CustomTable = ({
                           <Menu.Item
                             className="my-1"
                             color="red"
+                            onClick={() => {
+                              onUpdate('edit', 2, item._id);
+                            }}
                             leftSection={
                               <IconTrash
                                 style={{

@@ -4,7 +4,7 @@
  * @returns
  * removes all the falsy values from a array
  */
-export function compact(arr) {
+export function Compact(arr) {
   return arr.filter(Boolean);
 }
 
