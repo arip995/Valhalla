@@ -102,6 +102,7 @@ const Filters = ({
             aria-label="Clear input"
             onClick={() => {
               setSearchValue('');
+              handleUpdate('search', '');
             }}
             style={{
               display: searchValue ? undefined : 'none',
