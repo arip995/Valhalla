@@ -23,16 +23,16 @@ const Share = ({
   title = 'Example Title',
   showCopyInput = true,
   showShareIcons = true,
+  isWhatsappShare = true,
   isFacebookShare = true,
   isInstagramShare = true,
-  isWhatsappShare = true,
-  isMessengerShare = true,
-  isLinkedinShare = true,
-  isMailShare = true,
-  isPintrestShare = true,
-  isSkypeShare = true,
-  isTelegramShare = true,
   isTwitterShare = true,
+  isTelegramShare = true,
+  isMailShare = true,
+  isLinkedinShare = false,
+  isMessengerShare = false,
+  isPintrestShare = false,
+  isSkypeShare = false,
 }) => {
   const shareOnFacebook = () => {
     const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&title=${title}`;
