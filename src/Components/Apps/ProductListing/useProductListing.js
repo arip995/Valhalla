@@ -47,7 +47,6 @@ const useProductListing = () => {
 
   const updateProducts = async (productId, status) => {
     try {
-      setLoading(1);
       await axiosInstance.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/product/update`,
         {
@@ -60,8 +59,6 @@ const useProductListing = () => {
     } catch (error) {
       console.log(error);
       toast.success(error.response.data.message);
-    } finally {
-      setLoading(0);
     }
   };
 
