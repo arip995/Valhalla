@@ -1,8 +1,8 @@
-import CustomTable from '@/Components/Common/Table/CustomTables/CustomTable';
-import React from 'react';
+'use client';
+import Share from '@/Components/Common/General/Share';
 
 const page = () => {
-  return <CustomTable />;
+  return <Share />;
 };
 
 export default page;
