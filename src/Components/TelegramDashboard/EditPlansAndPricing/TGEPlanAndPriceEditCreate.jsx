@@ -93,9 +93,11 @@ const TGEPlanAndPriceEditCreate = ({
     modals.openConfirmModal({
       title: 'Delete Plan',
       children: (
-        <Text size="sm">
-          Are you sure you want to delete this plan?
-        </Text>
+        <div className="pb-4 pt-8">
+          <Text size="md">
+            Are you sure you want to delete this plan?
+          </Text>
+        </div>
       ),
       labels: { confirm: 'Yes, Delete', cancel: 'Cancel' },
       confirmProps: { color: 'red' },

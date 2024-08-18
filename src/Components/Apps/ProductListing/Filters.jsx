@@ -119,7 +119,7 @@ const Filters = ({
         <Menu.Target>
           <UnstyledButton
             className={classNames(
-              'flex h-full min-h-10 w-max items-center justify-between px-2 md:w-40',
+              'flex h-full min-h-10 min-w-max items-center justify-between px-2 md:w-40',
               classes.control
             )}
             data-expanded={opened || undefined}

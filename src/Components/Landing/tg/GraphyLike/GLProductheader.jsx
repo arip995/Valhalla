@@ -65,13 +65,14 @@ const GLProductheader = ({ data }) => {
                       color="red"
                       onClick={() => {
                         modals.openConfirmModal({
-                          title: (
-                            <Text fw={600}>Sign Out</Text>
-                          ),
+                          title: 'Sign Out',
                           children: (
-                            <Text size="sm">
-                              Do you really want to signout?
-                            </Text>
+                            <div className="pb-4 pt-8">
+                              <Text size="md" fw={500}>
+                                Do you really want to
+                                signout?
+                              </Text>
+                            </div>
                           ),
                           labels: {
                             confirm: 'Yes, Sign out',

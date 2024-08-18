@@ -71,7 +71,9 @@ const ProductListing = () => {
               <Pagination
                 withEdges
                 total={Math.floor(
-                  data.totalQueryCount / 10
+                  data.totalQueryCount % 10 === 0
+                    ? (data.totalQueryCount - 1) / 10
+                    : data.totalQueryCount / 10
                 )}
                 onChange={value => {
                   onUpdate('page', value);

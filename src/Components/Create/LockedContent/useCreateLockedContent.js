@@ -123,14 +123,12 @@ const useCreateLockedContent = () => {
             ...files.slice(indexToRemove + 1),
           ];
         }
-        console.log(data);
         // Add the new file to the array
         const newFile = {
           type,
           url: data.data.url,
           name,
         };
-        console.log(newFile);
 
         return {
           ...prev,
@@ -163,7 +161,6 @@ const useCreateLockedContent = () => {
   };
 
   const onFileDelete = async url => {
-    console.log(url);
     const filteredFiles =
       createLockedContentForm.values.files.filter(
         item => item.url !== url

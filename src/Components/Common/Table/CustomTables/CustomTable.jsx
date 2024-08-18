@@ -158,7 +158,9 @@ const CustomTable = ({
                 <TableFixedCell>
                   <div className="flex items-center gap-2">
                     {!!showShare && (
-                      <ShareButton link={'sss'} />
+                      <ShareButton
+                        link={`${process.env.NEXT_PUBLIC_HOST}${app}/${item._id}`}
+                      />
                     )}
 
                     {!!showMenu && (

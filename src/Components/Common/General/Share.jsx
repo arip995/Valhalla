@@ -2,6 +2,7 @@
 import {
   ActionIcon,
   CopyButton,
+  Divider,
   TextInput,
   Tooltip,
   rem,
@@ -87,7 +88,7 @@ const Share = ({
   return (
     <div className="flex w-full flex-col items-start gap-2">
       {showShareIcons ? (
-        <div className="flex w-full flex-wrap items-center justify-between gap-4 bg-white py-8">
+        <div className="flex w-full flex-wrap items-center justify-between gap-4 bg-white">
           {isWhatsappShare ? (
             <img
               src={WhatsappIcon.src}
@@ -170,45 +171,52 @@ const Share = ({
           ) : null}
         </div>
       ) : null}
-
       {showCopyInput ? (
-        <TextInput
-          value={url}
-          readOnly
-          className="pointer-default w-full"
-          styles={{
-            input: {
-              border: '1px solid #ececec',
-              minHeight: '40px',
-            },
-          }}
-          rightSection={
-            <CopyButton value={url} timeout={2000}>
-              {({ copied, copy }) => (
-                <Tooltip
-                  label={copied ? 'Copied' : 'Copy'}
-                  position="right"
-                >
-                  <ActionIcon
-                    color={copied ? 'teal' : 'gray'}
-                    variant="subtle"
-                    onClick={copy}
+        <>
+          <div className="w-full">
+            <Divider my="md" />
+          </div>
+          <TextInput
+            value={url}
+            readOnly
+            className="pointer-default w-full"
+            styles={{
+              input: {
+                border: '1px solid #ececec',
+                minHeight: '50px',
+                fontWeight: 600,
+                fontSize: '14px',
+                pointer: 'default',
+              },
+            }}
+            rightSection={
+              <CopyButton value={url} timeout={2000}>
+                {({ copied, copy }) => (
+                  <Tooltip
+                    label={copied ? 'Copied' : 'Copy'}
+                    position="right"
                   >
-                    {copied ? (
-                      <IconCheck
-                        style={{ width: rem(16) }}
-                      />
-                    ) : (
-                      <IconCopy
-                        style={{ width: rem(16) }}
-                      />
-                    )}
-                  </ActionIcon>
-                </Tooltip>
-              )}
-            </CopyButton>
-          }
-        />
+                    <ActionIcon
+                      color={copied ? 'teal' : 'gray'}
+                      variant="subtle"
+                      onClick={copy}
+                    >
+                      {copied ? (
+                        <IconCheck
+                          style={{ width: rem(16) }}
+                        />
+                      ) : (
+                        <IconCopy
+                          style={{ width: rem(16) }}
+                        />
+                      )}
+                    </ActionIcon>
+                  </Tooltip>
+                )}
+              </CopyButton>
+            }
+          />
+        </>
       ) : null}
     </div>
   );

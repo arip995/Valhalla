@@ -1,19 +1,15 @@
 import { rem } from '@mantine/core';
 import { useClipboard } from '@mantine/hooks';
+import { modals } from '@mantine/modals';
 import {
   IconCheck,
   IconCopy,
   IconShare,
 } from '@tabler/icons-react';
 import classNames from 'classnames';
-import React from 'react';
+import Share from '../General/Share';
 
-const ShareButton = ({
-  disabled,
-  link,
-  onClick = () => {},
-  className,
-}) => {
+const ShareButton = ({ disabled, link, className }) => {
   const clipboard = useClipboard();
   return (
     <div
@@ -35,7 +31,16 @@ const ShareButton = ({
         )}
         onClick={() => {
           if (disabled) return;
-          onClick();
+          modals.open({
+            title: 'Share on Social',
+            closeOnClickOutside: false,
+            closeOnEscape: false,
+            children: (
+              <div className="pb-4 pt-8">
+                <Share url={link} />
+              </div>
+            ),
+          });
         }}
       >
         <IconShare

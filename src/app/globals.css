@@ -41,6 +41,13 @@ html {
 .mantine-Drawer-title {
   font-weight: 600;
 }
+.mantine-Modal-header {
+  padding: var(--mantine-spacing-md);
+  border-bottom: 1px solid #e4e4e4;
+}
+.mantine-Modal-title {
+  font-weight: 600;
+}
 .nexify-rightsection-change {
   .mantine-TextInput-section {
     padding: 0px 25px;

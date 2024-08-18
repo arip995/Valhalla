@@ -87,6 +87,9 @@ const useProductListing = () => {
         };
       });
     }
+    if (updateData === 2) {
+      setListingData();
+    }
     await updateProducts(productId, updateData);
   };
 
@@ -111,9 +114,9 @@ const useProductListing = () => {
         case 'edit':
           if (updateData === 2) {
             modals.openConfirmModal({
-              title: <Text fw={600}>Delete Product</Text>,
+              title: 'Delete Product',
               children: (
-                <div className="flex flex-col items-center gap-3">
+                <div className="flex flex-col items-center gap-3 pb-4 pt-8">
                   <IconAlertOctagonFilled
                     color="red"
                     style={{
@@ -137,9 +140,7 @@ const useProductListing = () => {
               onCancel: () => {},
               onConfirm: () => {
                 modals.openConfirmModal({
-                  title: (
-                    <Text fw={600}>Delete Product</Text>
-                  ),
+                  title: 'Delete Product',
                   labels: {
                     confirm: 'Yes, Delete',
                     cancel: 'Cancel',
@@ -149,7 +150,7 @@ const useProductListing = () => {
                     color: 'red',
                   },
                   children: (
-                    <div className="flex flex-col items-center gap-3">
+                    <div className="flex flex-col items-center gap-3 pb-4 pt-8">
                       <IconAlertOctagonFilled
                         color="red"
                         style={{
@@ -191,7 +192,7 @@ const useProductListing = () => {
   if (isFirstRender) {
     setListingData();
   }
-
+  console.log(Math.ceil(data?.totalQueryCount / 10));
   return {
     app,
     data,
