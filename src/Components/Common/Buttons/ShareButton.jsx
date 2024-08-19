@@ -72,6 +72,7 @@ const ShareButton = ({ disabled, link, className }) => {
               height: rem(12),
             }}
             stroke={1.5}
+            color="teal"
           />
         ) : (
           <IconCopy
