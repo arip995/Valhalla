@@ -185,7 +185,7 @@ const Share = ({
                 border: '1px solid #ececec',
                 minHeight: '50px',
                 fontWeight: 600,
-                fontSize: '14px',
+                fontSize: '13px',
                 pointer: 'default',
               },
             }}
