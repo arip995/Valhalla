@@ -43,7 +43,7 @@ const ProductListing = () => {
           }
           path={`/create/${app === 'tg' ? 'telegram' : 'lockedcontent'}`}
         />
-        <div className="mx-4 my-2 flex flex-col items-end gap-2 md:my-4">
+        <div className="mx-4 my-2 flex flex-col items-end gap-4 md:my-4">
           <Filters
             onUpdate={onUpdate}
             searchText={searchText}
