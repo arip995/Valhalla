@@ -419,7 +419,6 @@ const TGEPlanAndPriceEditCreate = ({
               disabled={isSaving || isDeleting}
               loading={isDeleting}
               variant="filled"
-              color="black"
               radius="xl"
             >
               Save Changes
