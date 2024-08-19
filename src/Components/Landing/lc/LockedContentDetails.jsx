@@ -7,7 +7,7 @@ const LockedContentDetails = ({ data }) => {
     <>
       <div className="vlc-view-product-container">
         {data ? (
-          <div className="vlc-view-product-locked-state bg-gradient-to-r from-rose-100 to-teal-100">
+          <div className="vlc-view-product-locked-state bg-gradient-to-r from-teal-100 via-fuchsia-200 to-slate-100">
             <img
               src={lockImage.src}
               alt=""
