@@ -41,7 +41,7 @@ const CreateLockedContent = ({ data }) => {
           <HeaderWrapper
             titleOne={'Create Locked Content'}
           />
-          <PaperWrapper>
+          <PaperWrapper showBackButton={true}>
             <form
               onSubmit={createLockedContentForm.onSubmit(
                 onCreate

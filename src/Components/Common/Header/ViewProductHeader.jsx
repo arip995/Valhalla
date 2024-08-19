@@ -34,7 +34,7 @@ const ViewProductHeader = ({
           />
         )}
 
-        {/* <Avatar size="xl" color="blue" src={profilePic}>
+        {/* <Avatar size="xl" src={profilePic}>
           {firstName?.[0].toUpperCase()}
           {lastName?.[0].toUpperCase()}
         </Avatar> */}

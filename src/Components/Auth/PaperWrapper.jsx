@@ -1,17 +1,48 @@
-import { Paper } from '@mantine/core';
-import React from 'react';
+import {
+  ActionIcon,
+  Paper,
+  rem,
+  Tooltip,
+} from '@mantine/core';
+import { IconArrowBackUp } from '@tabler/icons-react';
+import { useRouter } from 'next/navigation';
 
-const PaperWrapper = ({ children }) => {
+const PaperWrapper = ({
+  children,
+  className,
+  showBackButton = false,
+}) => {
+  const router = useRouter();
   return (
-    <Paper
-      radius="md"
-      p="lg"
-      withBorder
-      shadow="md"
-      className={'signupPaper'}
-    >
-      {children}
-    </Paper>
+    <>
+      {!!showBackButton && (
+        <Tooltip label="Exit" position="right">
+          <ActionIcon
+            variant="default"
+            className="fixed left-2 top-2"
+            size="lg"
+            radius="lg"
+            onClick={() => {
+              router.back();
+            }}
+          >
+            <IconArrowBackUp
+              stroke={1}
+              color="black"
+              style={{ width: rem(20), height: rem(20) }}
+            />
+          </ActionIcon>
+        </Tooltip>
+      )}
+      <Paper
+        p="lg"
+        withBorder
+        shadow="md"
+        className={`signupPaper ${className}`}
+      >
+        {children}
+      </Paper>
+    </>
   );
 };
 

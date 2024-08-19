@@ -268,11 +268,10 @@ const useCreateTelegram = () => {
       } else {
         setStep(2);
       }
+      stepOneForm.setFieldValue('isOtpScreen', -1);
     } catch (error) {
       setIsSendingOldNumberOtp(true);
       await sendOtp(stepOneForm.values.selectedNumber);
-      // stepOneForm.setFieldValue('isOtpScreen', 1);
-      // toast.success('Otp sent successfully');
     }
   };
 
@@ -339,6 +338,7 @@ const useCreateTelegram = () => {
       setIsSendingOldNumberOtp(false);
     }
   }, [stepOneForm?.values?.isOtpScreen]);
+
   useEffect(() => {
     if (user) {
       if (!user.telegramIntegrations?.length) {
@@ -362,6 +362,7 @@ const useCreateTelegram = () => {
     onStepTwoSubmit,
     onStepThreeSubmit,
     loading,
+    setStep,
   };
 };
 

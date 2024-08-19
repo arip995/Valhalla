@@ -21,9 +21,7 @@ const StepOneCreateTelegram = ({
   return (
     <div className="ctg-s1-container">
       {stepOneForm.values.isOtpScreen === -2 ? (
-        <div className="">
-          <Loader color="blue" />
-        </div>
+        <Loader />
       ) : (
         <form
           className="ctg-s1"

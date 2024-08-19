@@ -6,7 +6,8 @@ import '../../../styles/create/Telegram.css';
 import HeaderWrapper from '../../Auth/HeaderWrapper';
 import PaperWrapper from '../../Auth/PaperWrapper';
 import useCreateTelegram from './useCreateTelegram';
-
+import { ActionIcon, Progress, Text } from '@mantine/core';
+import { IconArrowLeft } from '@tabler/icons-react';
 import StepOneCreateTelegram from './StepOneCreateTelegram';
 import StepThreeCreateTelegram from './StepThreeCreateTelegram';
 import StepTwoCreateTelegram from './StepTwoCreateTelegram';
@@ -22,6 +23,7 @@ const CreateTelegram = ({ data }) => {
     onConnectExisting,
     existingGroups,
     step,
+    setStep,
     user,
     loading,
   } = useCreateTelegram(data);
@@ -29,11 +31,62 @@ const CreateTelegram = ({ data }) => {
   return (
     <>
       <div className="lc-container lc-container-animation bg-gradient-to-l from-gray-200 via-fuchsia-100 to-stone-100">
-        <div className="flex w-full flex-col items-center gap-2">
+        <div className="flex w-11/12 max-w-[600px] flex-col items-center gap-2 md:w-1/2">
           <HeaderWrapper
             titleOne={'Create Telegram Community'}
           />
-          <PaperWrapper>
+          <div className="flex w-full justify-start"></div>
+          <PaperWrapper
+            className="!w-full"
+            showBackButton={true}
+          >
+            <div className="flex items-center justify-between">
+              {stepOneForm.values.isOtpScreen !== 0 &&
+              step === 1 ? (
+                <div />
+              ) : (
+                <ActionIcon
+                  variant="transparent"
+                  radius={'lg'}
+                  onClick={() => {
+                    if (
+                      step === 1 &&
+                      stepOneForm.values.isOtpScreen === 0
+                    ) {
+                      stepOneForm.setValues({
+                        isOtpScreen: -1,
+                      });
+                    } else if (step === 2) {
+                      setStep(1);
+                    } else if (step === 3) {
+                      setStep(2);
+                    }
+                  }}
+                >
+                  <IconArrowLeft stroke={1} color="black" />
+                </ActionIcon>
+              )}
+              <div className="flex items-center gap-2">
+                <Text size="md" fw={600}>
+                  {step === 1
+                    ? 'Connect with telegram'
+                    : step === 2
+                      ? 'Select/Create a channel'
+                      : 'Create a plan'}
+                </Text>
+                <Text size="xs" c={'dimmed'}>
+                  Step({step}/3)
+                </Text>
+              </div>
+            </div>
+            <Progress
+              radius="none"
+              my={'md'}
+              size="xs"
+              value={
+                step === 1 ? 33 : step === 2 ? 66 : 100
+              }
+            />
             {step === 1 ? (
               <StepOneCreateTelegram
                 stepOneForm={stepOneForm}
