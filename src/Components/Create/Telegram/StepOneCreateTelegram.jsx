@@ -114,7 +114,7 @@ const StepOneCreateTelegram = ({
               radius="md"
               disabled={!stepOneForm.values.selectedNumber}
               variant="filled"
-              color="black"
+              color="gray"
               fullWidth
               onClick={() => {
                 onConnectExisting();
@@ -125,7 +125,6 @@ const StepOneCreateTelegram = ({
           ) : null}
           <Button
             variant="filled"
-            color="black"
             radius="md"
             type="submit"
             fullWidth

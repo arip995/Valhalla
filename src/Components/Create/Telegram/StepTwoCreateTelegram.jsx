@@ -108,7 +108,6 @@ const StepTwoCreateTelegram = ({
           )}
           <Button
             variant="filled"
-            color="black"
             radius="md"
             type="submit"
             fullWidth

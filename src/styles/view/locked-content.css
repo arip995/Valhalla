@@ -44,14 +44,7 @@
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    background: linear-gradient(
-      279deg,
-      /* #324fe0,
-      #72a4e5,
-      #2b4a97 */ #540dd8,
-      #72a0e5,
-      #7243c9
-    );
+    /* background-image: url('../../../public/images/common/creationflowbackground.jpg'); */
     background-size: 180% 180%;
     animation: gradient-animation 21s ease infinite;
     @keyframes gradient-animation {

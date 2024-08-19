@@ -17,19 +17,8 @@ const StepThreeCreateTelegram = ({
           label="Title"
           placeholder="Index + Nifty"
           value={stepThreeForm.values.title}
-          radius="md"
           {...stepThreeForm.getInputProps('title')}
         />
-        {/* <Textarea
-          label="Description"
-          placeholder="About your product"
-          autosize
-          minRows={3}
-          maxRows={4}
-          value={stepThreeForm.values.description}
-          radius="md"
-          {...stepThreeForm.getInputProps('description')}
-        /> */}
         <Select
           checkIconPosition="right"
           label="Category"
@@ -49,7 +38,6 @@ const StepThreeCreateTelegram = ({
             })
           }
           fullWidth
-          color="black"
           radius="md"
         >
           Publish

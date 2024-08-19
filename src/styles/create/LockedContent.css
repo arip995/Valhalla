@@ -3,18 +3,18 @@
   justify-content: center;
   width: 100vw;
   min-height: 100vh;
-  padding: 20px 0px;
-
+  padding: 30px 0px;
   &.lc-container-animation {
-    /* background-color: var(--mantine-color-gray-1); */
-    background: linear-gradient(
+    /* #0d7dd8, */
+    /* #72dfe5, */
+    /* #4368c9,  */
+    /* background: linear-gradient(
       279deg,
-      /* #0d7dd8,
-      #72dfe5,
-      #4368c9, */ #540dd8,
+      #8facf5,
       #72a0e5,
-      #7243c9
-    );
+      #c8acfc
+    ); */
+    background-color: var(--mantine-color-gray-3);
     background-size: 180% 180%;
     animation: gradient-animation 21s ease infinite;
     @keyframes gradient-animation {
@@ -28,6 +28,9 @@
         background-position: 0% 50%;
       }
     }
+  }
+  @media (min-width: em(767px)) {
+    padding: 60px 0px;
   }
   .edit-icon {
     color: var(--mantine-color-gray-4);

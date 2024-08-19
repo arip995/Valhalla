@@ -7,13 +7,13 @@ const LockedContentDetails = ({ data }) => {
     <>
       <div className="vlc-view-product-container">
         {data ? (
-          <div className="vlc-view-product-locked-state">
+          <div className="vlc-view-product-locked-state bg-gradient-to-r from-rose-100 to-teal-100">
             <img
               src={lockImage.src}
               alt=""
               className="vlc-view-product-locked-state-image"
             />
-            <div className="flex flex-col items-center justify-center gap-2 text-center text-sm font-semibold text-gray-50">
+            <div className="flex flex-col items-center justify-center gap-2 text-center text-sm font-semibold text-black">
               Content is locked
               <div>
                 {data.files.length
