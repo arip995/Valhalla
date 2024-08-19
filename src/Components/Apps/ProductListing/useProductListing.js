@@ -115,12 +115,12 @@ const useProductListing = () => {
             modals.openConfirmModal({
               title: 'Delete Product',
               children: (
-                <div className="flex flex-col items-center gap-3 pb-4 pt-8">
+                <div className="flex items-start gap-3 pb-4 pt-8">
                   <IconAlertOctagonFilled
                     color="red"
                     style={{
-                      width: rem(36),
-                      height: rem(36),
+                      width: rem(40),
+                      height: rem(40),
                     }}
                   />
                   <Text size="sm" fw={600}>
@@ -134,7 +134,7 @@ const useProductListing = () => {
                 cancel: 'Cancel',
               },
               confirmProps: {
-                variant: 'default',
+                color: 'black',
               },
               onCancel: () => {},
               onConfirm: () => {
@@ -149,12 +149,12 @@ const useProductListing = () => {
                     color: 'red',
                   },
                   children: (
-                    <div className="flex flex-col items-center gap-3 pb-4 pt-8">
+                    <div className="flex items-center gap-3 pb-4 pt-8">
                       <IconAlertOctagonFilled
                         color="red"
                         style={{
-                          width: rem(36),
-                          height: rem(36),
+                          width: rem(40),
+                          height: rem(40),
                         }}
                       />
                       <Text size="sm" fw={600}>
