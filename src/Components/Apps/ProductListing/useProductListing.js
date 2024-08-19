@@ -66,6 +66,7 @@ const useProductListing = () => {
     updateData,
     productId
   ) => {
+    await updateProducts(productId, updateData);
     if (data.totalQueryCount === 1) {
       if (pageNo > 1) {
         setPageNo(prev => prev - 1);
@@ -79,7 +80,6 @@ const useProductListing = () => {
           totalQueryCount: prev.totalQueryCount - 1,
           data: Compact(
             prev.data.map(item => {
-              console.log(item === productId);
               if (item._id === productId) return null;
               return item;
             })
@@ -90,7 +90,6 @@ const useProductListing = () => {
     if (updateData === 2) {
       setListingData();
     }
-    await updateProducts(productId, updateData);
   };
 
   const onUpdate = useDebouncedCallback(
