@@ -21,7 +21,7 @@ const StepOneCreateTelegram = ({
   return (
     <div className="ctg-s1-container">
       {stepOneForm.values.isOtpScreen === -2 ? (
-        <Loader />
+        <Loader my={'xl'} />
       ) : (
         <form
           className="ctg-s1"

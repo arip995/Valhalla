@@ -259,7 +259,6 @@ function PlanEditCard({
           <Button
             variant="filled"
             radius="xl"
-            color="black"
             onClick={onClickSave}
             disabled={!isValid}
           >
