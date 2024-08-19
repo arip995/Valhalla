@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@hello-pangea/dnd": "^16.6.0",
-    "@mantine/carousel": "^7.12.0",
-    "@mantine/charts": "^7.12.0",
+    "@mantine/carousel": "^7.12.1",
+    "@mantine/charts": "^7.12.1",
     "@mantine/core": "^7.12.1",
     "@mantine/dates": "^7.12.1",
     "@mantine/form": "^7.12.1",
