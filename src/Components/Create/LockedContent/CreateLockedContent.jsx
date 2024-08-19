@@ -8,9 +8,11 @@ import {
   Select,
   TextInput,
   Textarea,
+  rem,
 } from '@mantine/core';
 import {
   IconCurrencyRupee,
+  IconExternalLink,
   IconUpload,
 } from '@tabler/icons-react';
 import { Toaster } from 'react-hot-toast';
@@ -19,6 +21,7 @@ import HeaderWrapper from '../../Auth/HeaderWrapper';
 import PaperWrapper from '../../Auth/PaperWrapper';
 import ListFiles from '../../Common/ListFiles/ListFiles';
 import useCreateLockedContent from './useCreateLockedContent';
+import Link from 'next/link';
 
 const CreateLockedContent = ({ data }) => {
   const {
@@ -27,6 +30,7 @@ const CreateLockedContent = ({ data }) => {
     onCreate,
     handleFileChange,
     onFileDelete,
+    productId,
     setIsSaveClickedAtleastOnce,
   } = useCreateLockedContent(data);
 
@@ -120,18 +124,41 @@ const CreateLockedContent = ({ data }) => {
                   'price'
                 )}
               />
-              <Button
-                fullWidth
-                loading={loading}
-                type="submit"
-                color="black"
-                radius="md"
-                onClick={() =>
-                  setIsSaveClickedAtleastOnce(true)
-                }
-              >
-                Publish
-              </Button>
+              <div className="sticky bottom-4 z-20 flex w-full flex-col gap-2 bg-white">
+                <Button
+                  fullWidth
+                  loading={loading}
+                  type="submit"
+                  radius="md"
+                  onClick={() =>
+                    setIsSaveClickedAtleastOnce(true)
+                  }
+                >
+                  Publish
+                </Button>
+                {productId ? (
+                  <Link href={`/lc/${productId}`}>
+                    <Button
+                      fullWidth
+                      justify="space-between"
+                      leftSection={<span />}
+                      rightSection={
+                        <IconExternalLink
+                          color="white"
+                          style={{
+                            width: rem(16),
+                            height: rem(16),
+                          }}
+                        />
+                      }
+                      type="submit"
+                      radius="md"
+                    >
+                      Open link
+                    </Button>
+                  </Link>
+                ) : null}
+              </div>
             </form>
           </PaperWrapper>
         </div>

@@ -3,7 +3,7 @@
   justify-content: center;
   width: 100vw;
   min-height: 100vh;
-  padding: 60px 0px;
+  padding: 20px 0px;
 
   &.lc-container-animation {
     /* background-color: var(--mantine-color-gray-1); */
@@ -28,9 +28,6 @@
         background-position: 0% 50%;
       }
     }
-  }
-  @media only screen and (max-width: 767px) {
-    padding-top: 75px;
   }
   .edit-icon {
     color: var(--mantine-color-gray-4);

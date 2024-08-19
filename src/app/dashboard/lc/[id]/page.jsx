@@ -1,7 +1,8 @@
+import CreateLockedContent from '@/Components/Create/LockedContent/CreateLockedContent';
 import React from 'react';
 
 const page = () => {
-  return <div></div>;
+  return <CreateLockedContent />;
 };
 
 export default page;

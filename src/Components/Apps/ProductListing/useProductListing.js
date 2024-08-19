@@ -192,7 +192,6 @@ const useProductListing = () => {
   if (isFirstRender) {
     setListingData();
   }
-  console.log(Math.ceil(data?.totalQueryCount / 10));
   return {
     app,
     data,

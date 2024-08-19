@@ -1,17 +1,27 @@
 import axiosInstance from '@/Utils/AxiosInstance';
+import { getMetaData } from '@/Utils/getMetaData';
 import { useForm } from '@mantine/form';
 import { randomId } from '@mantine/hooks';
-import { useRouter } from 'next/navigation';
-import { useState, useMemo } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import toast from 'react-hot-toast';
 
 const useCreateLockedContent = () => {
   const router = useRouter();
+  const isFirstRun = useRef(true);
+  const productId = usePathname().split('/')[3];
+  const [isEdititng, setisEditing] = useState(false);
+  const [editLoading, setEditLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [
     isSaveClickedAtleastOnce,
     setIsSaveClickedAtleastOnce,
   ] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const initialValues = useMemo(
     () => ({
@@ -20,6 +30,7 @@ const useCreateLockedContent = () => {
       category: '',
       price: '',
       files: [],
+      data: null,
     }),
     []
   );
@@ -51,18 +62,37 @@ const useCreateLockedContent = () => {
   });
 
   const onCreate = async () => {
+    let payload = {};
+    if (isEdititng) {
+      payload = {
+        productId,
+        contentDetails: {
+          ...createLockedContentForm.values.data,
+          ...createLockedContentForm.values,
+        },
+      };
+    } else {
+      payload = {
+        productId,
+        contentDetails: {
+          ...createLockedContentForm.values,
+        },
+      };
+    }
     setLoading(true);
     try {
       const { data } = await axiosInstance.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/premiumcontent/create`,
-        {
-          contentDetails: {
-            ...createLockedContentForm.values,
-          },
-        }
+        `${process.env.NEXT_PUBLIC_BASE_URL}/premiumcontent/${isEdititng ? 'update' : 'create'}`,
+        payload
       );
-      router.push(`/lc/${data.data._id}`);
+      if (isEdititng) {
+        setLoading(false);
+        toast.success('Updated successfully');
+      } else {
+        router.push(`/lc/${data.data._id}`);
+      }
     } catch (error) {
+      console.log(error);
       toast.error(
         error.response?.data?.message || 'An error occurred'
       );
@@ -169,7 +199,7 @@ const useCreateLockedContent = () => {
       'files',
       filteredFiles
     );
-
+    if (isEdititng) return;
     try {
       await axiosInstance.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/image/delete_image`,
@@ -187,6 +217,37 @@ const useCreateLockedContent = () => {
     }
   };
 
+  const fetchLcData = async () => {
+    try {
+      setEditLoading(true);
+      const data = await getMetaData(productId, 'lc');
+      createLockedContentForm.setValues({
+        title: data.data.title,
+        message: data.data.message,
+        category: data.data.category,
+        files: data.data.files,
+        price: data.data.price,
+        data: data.data,
+      });
+    } catch (error) {
+      toast.error('Check your internet connection');
+      console.log(error);
+    } finally {
+      setEditLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
+    if (productId) {
+      setisEditing(true);
+      fetchLcData();
+    }
+  }, []);
+
   return {
     createLockedContentForm,
     onCreate,
@@ -195,6 +256,8 @@ const useCreateLockedContent = () => {
     onFileDelete,
     isSaveClickedAtleastOnce,
     setIsSaveClickedAtleastOnce,
+    editLoading,
+    productId,
     loading,
   };
 };

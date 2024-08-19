@@ -70,15 +70,11 @@ const ProductListing = () => {
               )}
               <Pagination
                 withEdges
-                total={Math.floor(
-                  data.totalQueryCount % 10 === 0
-                    ? (data.totalQueryCount - 1) / 10
-                    : data.totalQueryCount / 10
-                )}
+                total={Math.ceil(data.totalQueryCount / 10)}
                 onChange={value => {
                   onUpdate('page', value);
                 }}
-                className={`${Math.floor(data.totalQueryCount / 10) == 1 || loading ? 'hidden' : ''}`}
+                className={`${Math.ceil(data.totalQueryCount / 10) == 1 || loading ? 'hidden' : ''}`}
               />
             </>
           )}
