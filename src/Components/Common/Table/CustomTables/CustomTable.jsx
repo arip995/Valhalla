@@ -74,6 +74,7 @@ const CustomTable = ({
   app = 'tg',
   tableHeaderItems = TableHeaderItems,
   tableBodyItems = TableBodyItems,
+  onRowClick = () => {},
   showShare = true,
   showMenu = true,
   onUpdate = () => {},
@@ -84,9 +85,6 @@ const CustomTable = ({
       <Table>
         <TableHeader
           headerItems={tableHeaderItems}
-          fixedElement={
-            <TableFixedCell className="audiance-table-fixed audiance-table-fixed-header"></TableFixedCell>
-          }
           renderItem={(header, index) => {
             return (
               <>
@@ -116,6 +114,7 @@ const CustomTable = ({
             return (
               <tr
                 key={item._id}
+                onClick={() => onRowClick(item)}
                 className="cursor-pointer hover:bg-gray-50 [&>td]:whitespace-nowrap [&>td]:px-4 [&>td]:py-4 [&>td]:text-sm [&>td]:text-gray-500"
               >
                 <td className="flex max-w-96 items-center gap-2">
@@ -173,6 +172,9 @@ const CustomTable = ({
                           <ActionIcon
                             variant="subtle"
                             color="gray"
+                            onClick={e =>
+                              e.stopPropagation()
+                            }
                           >
                             <IconDotsVertical
                               style={{
@@ -188,6 +190,9 @@ const CustomTable = ({
                             href={`/dashboard/${app}/${item._id}`}
                           >
                             <Menu.Item
+                              onClick={e =>
+                                e.stopPropagation()
+                              }
                               className="my-1"
                               disabled={item.status === 3}
                               leftSection={
@@ -208,6 +213,9 @@ const CustomTable = ({
                             prefetch={false}
                           >
                             <Menu.Item
+                              onClick={e =>
+                                e.stopPropagation()
+                              }
                               className="my-1"
                               disabled={item.status === 3}
                               leftSection={
@@ -231,7 +239,8 @@ const CustomTable = ({
                               <>
                                 <Menu.Item
                                   className="my-1"
-                                  onClick={() => {
+                                  onClick={e => {
+                                    e.stopPropagation();
                                     onUpdate(
                                       'edit',
                                       item.status === 1
@@ -258,7 +267,8 @@ const CustomTable = ({
                                 5 ? null : (
                                   <Menu.Item
                                     className="my-1"
-                                    onClick={() => {
+                                    onClick={e => {
+                                      e.stopPropagation();
                                       onUpdate(
                                         'edit',
                                         item.status === 6
@@ -289,7 +299,8 @@ const CustomTable = ({
                           <Menu.Item
                             className="my-1"
                             color="red"
-                            onClick={() => {
+                            onClick={e => {
+                              e.stopPropagation();
                               onUpdate('edit', 2, item._id);
                             }}
                             leftSection={

@@ -7,8 +7,10 @@ import { Pagination } from '@mantine/core';
 import Filters from './Filters';
 import useProductListing from './useProductListing';
 import { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 const ProductListing = () => {
+  const router = useRouter();
   const {
     app,
     onUpdate,
@@ -65,6 +67,11 @@ const ProductListing = () => {
                 <CustomTable
                   tableBodyItems={data.data || []}
                   onUpdate={onUpdate}
+                  onRowClick={row => {
+                    router.push(
+                      `/dashboard/${app}/${row._id}`
+                    );
+                  }}
                   app={app}
                 />
               )}
