@@ -91,7 +91,7 @@ const FooterTwo = ({ description }) => {
             Nexify
           </Link>
 
-          <p className="mt-4 max-w-xl text-center text-sm font-light text-gray-500">
+          <p className="mt-4 max-w-md text-center text-sm font-light text-gray-500">
             {description
               ? description
               : `Want to create your own community? Experience
