@@ -7,8 +7,10 @@ import {
   IconShoppingCart,
 } from '@tabler/icons-react';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
 const GLProductheader = ({ data }) => {
+  const router = useRouter();
   const { user, removeUser } = useUser();
 
   const onConfirm = () => {
@@ -50,6 +52,9 @@ const GLProductheader = ({ data }) => {
                   </Menu.Target>
                   <Menu.Dropdown>
                     <Menu.Item
+                      onClick={() => {
+                        router.push('/purchases');
+                      }}
                       leftSection={
                         <IconShoppingCart
                           style={{

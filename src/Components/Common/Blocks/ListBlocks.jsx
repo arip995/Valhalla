@@ -1,4 +1,4 @@
-import { ActionIcon } from '@mantine/core';
+import { ActionIcon, Anchor } from '@mantine/core';
 import {
   IconBook,
   IconInfoCircle,
@@ -52,9 +52,9 @@ const ListBlocks = () => {
               {item.title}
             </h4>
             <p>{item.desc}</p>
-            <a
+            <Anchor
               href={item.href}
-              className="inline-flex items-center gap-x-1 text-sm font-medium text-indigo-600 duration-150 hover:text-indigo-400"
+              className="inline-flex items-center gap-x-1 text-sm font-medium duration-150"
             >
               Learn more
               <svg
@@ -69,7 +69,7 @@ const ListBlocks = () => {
                   clipRule="evenodd"
                 />
               </svg>
-            </a>
+            </Anchor>
           </div>
         </li>
       ))}
