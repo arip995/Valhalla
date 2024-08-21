@@ -38,6 +38,11 @@ const StepOneCreateTelegram = ({
                   value
                 );
               }}
+              styles={{
+                label: {
+                  fontWeight: 600,
+                },
+              }}
               name="favoriteFramework"
               label="Select from existing number"
               withAsterisk
