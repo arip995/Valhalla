@@ -95,9 +95,11 @@ const FooterTwo = ({ description }) => {
             {description
               ? description
               : `Want to create your own community? Experience
-            hassle-free payouts and premium support.`}
+            hassle-free payouts and premium support.`}{' '}
             <Anchor
+              underline="always"
               href={`${process.env.NEXT_PUBLIC_HOST}creator/home`}
+              className="font-light"
               size="sm"
             >
               Create your own.
