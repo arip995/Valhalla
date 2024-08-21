@@ -52,10 +52,10 @@
 .company {
   display: flex;
   align-items: center;
-  color: light-dark(
+  /* color: light-dark(
     var(--mantine-color-violet-9),
     var(--mantine-color-violet-1)
-  );
+  ); */
   cursor: pointer;
   font-family:
     Greycliff CF,
