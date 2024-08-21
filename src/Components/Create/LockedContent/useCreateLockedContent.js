@@ -16,7 +16,7 @@ const useCreateLockedContent = () => {
   const productId = usePathname().split('/')[3];
   const [isEdititng, setisEditing] = useState(false);
   const [editLoading, setEditLoading] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [
     isSaveClickedAtleastOnce,
     setIsSaveClickedAtleastOnce,

@@ -2,8 +2,10 @@
 
 import { CategoriesList } from '@/Constants/constants';
 import {
+  Box,
   Button,
   FileButton,
+  LoadingOverlay,
   NumberInput,
   Select,
   TextInput,
@@ -31,132 +33,147 @@ const CreateLockedContent = ({ data }) => {
     handleFileChange,
     onFileDelete,
     productId,
+    editLoading,
     setIsSaveClickedAtleastOnce,
   } = useCreateLockedContent(data);
 
   return (
     <>
       <div className="lc-container lc-container-animation bg-gradient-to-l from-gray-200 via-fuchsia-100 to-stone-100">
-        <div className="flex w-full flex-col items-center gap-2">
+        <div className="flex w-11/12 max-w-[600px] flex-col items-center gap-2 md:w-1/2">
           <HeaderWrapper
             titleOne={'Create Locked Content'}
           />
-          <PaperWrapper showBackButton={true}>
-            <form
-              onSubmit={createLockedContentForm.onSubmit(
-                onCreate
-              )}
-              className="lc-create-from-wrapper"
+          <Box pos="relative" className="w-full">
+            <LoadingOverlay
+              visible={loading}
+              zIndex={1000}
+              overlayProps={{ radius: 'sm', blur: 2 }}
+            />
+            <PaperWrapper
+              className="!w-full"
+              showBackButton={true}
             >
-              <TextInput
-                label="Title"
-                placeholder=""
-                value={createLockedContentForm.values.title}
-                radius="md"
-                {...createLockedContentForm.getInputProps(
-                  'title'
+              <form
+                onSubmit={createLockedContentForm.onSubmit(
+                  onCreate
                 )}
-              />
-              <Select
-                checkIconPosition="right"
-                label="Category"
-                radius="md"
-                placeholder="Select Category"
-                data={CategoriesList}
-                {...createLockedContentForm.getInputProps(
-                  'category'
-                )}
-              />
-              <Textarea
-                label="Message"
-                placeholder=""
-                value={
-                  createLockedContentForm.values.message
-                }
-                minRows={4}
-                maxRows={10}
-                autosize
-                radius="md"
-                {...createLockedContentForm.getInputProps(
-                  'message'
-                )}
-              />
-              <FileButton
-                onChange={handleFileChange}
-                accept="image/*,application/*,video/mp4,audio/mp4"
+                className="lc-create-from-wrapper"
               >
-                {props => (
-                  <Button
-                    variant="outline"
-                    radius="md"
-                    leftSection={<IconUpload size={20} />}
-                    {...props}
-                  >
-                    Upload files
-                  </Button>
-                )}
-              </FileButton>
-              {createLockedContentForm.getValues().files
-                .length ? (
-                <ListFiles
-                  files={
-                    createLockedContentForm.getValues()
-                      .files
+                <TextInput
+                  label="Title"
+                  placeholder=""
+                  value={
+                    createLockedContentForm.values.title
                   }
-                  onDelete={onFileDelete}
-                />
-              ) : null}
-              <NumberInput
-                label="Price"
-                placeholder=""
-                hideControls
-                allowNegative={false}
-                value={createLockedContentForm.values.price}
-                leftSection={
-                  <IconCurrencyRupee size={17} />
-                }
-                radius="md"
-                {...createLockedContentForm.getInputProps(
-                  'price'
-                )}
-              />
-              <div className="sticky bottom-4 z-20 flex w-full flex-col gap-2 bg-white">
-                <Button
-                  fullWidth
-                  loading={loading}
-                  type="submit"
                   radius="md"
-                  onClick={() =>
-                    setIsSaveClickedAtleastOnce(true)
+                  {...createLockedContentForm.getInputProps(
+                    'title'
+                  )}
+                />
+                <Select
+                  checkIconPosition="right"
+                  label="Category"
+                  radius="md"
+                  placeholder="Select Category"
+                  data={CategoriesList}
+                  {...createLockedContentForm.getInputProps(
+                    'category'
+                  )}
+                />
+                <Textarea
+                  label="Message"
+                  placeholder=""
+                  value={
+                    createLockedContentForm.values.message
                   }
+                  minRows={4}
+                  maxRows={10}
+                  autosize
+                  radius="md"
+                  {...createLockedContentForm.getInputProps(
+                    'message'
+                  )}
+                />
+                <FileButton
+                  onChange={handleFileChange}
+                  accept="image/*,application/*,video/mp4,audio/mp4"
                 >
-                  Publish
-                </Button>
-                {productId ? (
-                  <Link href={`/lc/${productId}`}>
+                  {props => (
                     <Button
-                      fullWidth
-                      justify="space-between"
-                      leftSection={<span />}
-                      rightSection={
-                        <IconExternalLink
-                          color="white"
-                          style={{
-                            width: rem(16),
-                            height: rem(16),
-                          }}
-                        />
-                      }
-                      type="submit"
+                      variant="outline"
                       radius="md"
+                      leftSection={<IconUpload size={20} />}
+                      {...props}
                     >
-                      Open link
+                      Upload files
                     </Button>
-                  </Link>
+                  )}
+                </FileButton>
+                {createLockedContentForm.getValues().files
+                  .length ? (
+                  <ListFiles
+                    files={
+                      createLockedContentForm.getValues()
+                        .files
+                    }
+                    onDelete={onFileDelete}
+                  />
                 ) : null}
-              </div>
-            </form>
-          </PaperWrapper>
+                <NumberInput
+                  label="Price"
+                  placeholder=""
+                  hideControls
+                  allowNegative={false}
+                  value={
+                    createLockedContentForm.values.price
+                  }
+                  leftSection={
+                    <IconCurrencyRupee size={17} />
+                  }
+                  radius="md"
+                  {...createLockedContentForm.getInputProps(
+                    'price'
+                  )}
+                />
+                <div className="sticky bottom-4 z-20 flex w-full flex-col gap-2 bg-white">
+                  <Button
+                    fullWidth
+                    loading={editLoading}
+                    type="submit"
+                    radius="md"
+                    onClick={() =>
+                      setIsSaveClickedAtleastOnce(true)
+                    }
+                  >
+                    Publish
+                  </Button>
+                  {productId ? (
+                    <Link href={`/lc/${productId}`}>
+                      <Button
+                        fullWidth
+                        justify="space-between"
+                        leftSection={<span />}
+                        rightSection={
+                          <IconExternalLink
+                            color="white"
+                            style={{
+                              width: rem(16),
+                              height: rem(16),
+                            }}
+                          />
+                        }
+                        type="submit"
+                        radius="md"
+                      >
+                        Open link
+                      </Button>
+                    </Link>
+                  ) : null}
+                </div>
+              </form>
+            </PaperWrapper>
+          </Box>
         </div>
       </div>
       <Toaster />

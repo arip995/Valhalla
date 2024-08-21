@@ -42,13 +42,11 @@ const CreateTelegram = ({ data }) => {
           <HeaderWrapper
             titleOne={'Create Telegram Community'}
           />
-          <div className="flex w-full justify-start"></div>
           <Box pos="relative" className="w-full">
             <LoadingOverlay
               visible={loading}
               zIndex={1000}
               overlayProps={{ radius: 'sm', blur: 2 }}
-              loaderProps={{ type: 'bars' }}
             />
             <PaperWrapper
               className="!w-full"
