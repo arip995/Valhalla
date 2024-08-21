@@ -66,7 +66,6 @@ const CreateLockedContent = ({ data }) => {
                   value={
                     createLockedContentForm.values.title
                   }
-                  radius="md"
                   {...createLockedContentForm.getInputProps(
                     'title'
                   )}
@@ -74,7 +73,6 @@ const CreateLockedContent = ({ data }) => {
                 <Select
                   checkIconPosition="right"
                   label="Category"
-                  radius="md"
                   placeholder="Select Category"
                   data={CategoriesList}
                   {...createLockedContentForm.getInputProps(
@@ -90,7 +88,6 @@ const CreateLockedContent = ({ data }) => {
                   minRows={4}
                   maxRows={10}
                   autosize
-                  radius="md"
                   {...createLockedContentForm.getInputProps(
                     'message'
                   )}
@@ -102,7 +99,6 @@ const CreateLockedContent = ({ data }) => {
                   {props => (
                     <Button
                       variant="outline"
-                      radius="md"
                       leftSection={<IconUpload size={20} />}
                       {...props}
                     >
@@ -131,7 +127,6 @@ const CreateLockedContent = ({ data }) => {
                   leftSection={
                     <IconCurrencyRupee size={17} />
                   }
-                  radius="md"
                   {...createLockedContentForm.getInputProps(
                     'price'
                   )}
@@ -141,7 +136,6 @@ const CreateLockedContent = ({ data }) => {
                     fullWidth
                     loading={editLoading}
                     type="submit"
-                    radius="md"
                     onClick={() =>
                       setIsSaveClickedAtleastOnce(true)
                     }
@@ -164,7 +158,6 @@ const CreateLockedContent = ({ data }) => {
                           />
                         }
                         type="submit"
-                        radius="md"
                       >
                         Open link
                       </Button>

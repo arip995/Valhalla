@@ -31,7 +31,6 @@ const StepTwoCreateTelegram = ({
             <Grid.Col span={{ base: 12, md: 6 }}>
               <Radio.Card
                 className={classes.root}
-                radius="md"
                 value={'old'}
                 key={'old'}
               >
@@ -52,7 +51,6 @@ const StepTwoCreateTelegram = ({
             <Grid.Col span={{ base: 12, md: 6 }}>
               <Radio.Card
                 className={classes.root}
-                radius="md"
                 value={'new'}
                 key={'new'}
               >
@@ -83,7 +81,6 @@ const StepTwoCreateTelegram = ({
                 label="Channel name"
                 placeholder="Bull"
                 value={stepTwoForm.values.channelName}
-                radius="md"
                 {...stepTwoForm.getInputProps(
                   'channelName'
                 )}

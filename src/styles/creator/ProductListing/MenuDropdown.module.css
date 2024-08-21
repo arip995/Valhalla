@@ -4,7 +4,7 @@
       var(--mantine-color-gray-2),
       var(--mantine-color-dark-6)
     );
-  border-radius: var(--mantine-radius-md);
+  border-radius: var(--mantine-radius-sm);
   background-color: light-dark(
     var(--mantine-color-white),
     var(--mantine-color-dark-6)

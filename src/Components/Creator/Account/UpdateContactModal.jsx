@@ -117,7 +117,6 @@ const UpdateContactModal = ({
             />
             <Button
               onClick={onVerifyOtp}
-              radius={'md'}
               disabled={!otp || otp?.length != 5}
               fullWidth
             >
@@ -170,7 +169,6 @@ const UpdateContactModal = ({
             )}
             <Button
               onClick={onSendOtp}
-              radius={'md'}
               // loading={checkDisabled()}
               disabled={checkDisabled()}
             >

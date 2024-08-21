@@ -32,7 +32,6 @@ const PricingTypeSelector = ({
             >
               <Radio.Card
                 className={classes.root}
-                radius="md"
                 value={item.value}
                 key={item.value}
               >

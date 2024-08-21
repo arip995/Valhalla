@@ -228,7 +228,6 @@ const PlansAndPricing = ({ stepThreeForm }) => {
           fullWidth
           variant="outline"
           onClick={addNewPlan}
-          radius="md"
         >
           + Add another plan
         </Button>

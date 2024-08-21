@@ -22,7 +22,7 @@ const HomeCards = () => {
       stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
 
     return (
-      <Paper withBorder p="md" radius="md" key={stat.title}>
+      <Paper withBorder p="md" key={stat.title}>
         <Group justify="apart">
           <div>
             <Text
@@ -47,7 +47,6 @@ const HomeCards = () => {
                   : 'var(--mantine-color-red-6)',
             }}
             size={38}
-            radius="md"
           >
             <DiffIcon size="1.8rem" stroke={1.5} />
           </ThemeIcon>

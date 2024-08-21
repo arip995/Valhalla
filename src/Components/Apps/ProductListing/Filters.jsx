@@ -73,7 +73,6 @@ const Filters = ({
     <div className="flex w-full items-end gap-2 md:flex-row md:justify-end">
       <TextInput
         placeholder="Search title"
-        radius="md"
         value={searchValue}
         className="w-full md:w-max md:min-w-80"
         rightSectionPointerEvents="all"
@@ -113,7 +112,6 @@ const Filters = ({
       <Menu
         onOpen={() => setOpened(true)}
         onClose={() => setOpened(false)}
-        radius="md"
         position="bottom-end"
         withinPortal
       >

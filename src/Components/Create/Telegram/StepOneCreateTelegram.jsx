@@ -106,7 +106,6 @@ const StepOneCreateTelegram = ({
               type="number"
               placeholder="6345325643"
               value={stepOneForm.values.phoneNumber}
-              radius="md"
               leftSection={<Text size="sm">+91</Text>}
               {...stepOneForm.getInputProps('phoneNumber')}
             />
@@ -114,7 +113,6 @@ const StepOneCreateTelegram = ({
 
           {stepOneForm.values.isOtpScreen === -1 ? (
             <Button
-              radius="md"
               disabled={!stepOneForm.values.selectedNumber}
               variant="filled"
               fullWidth
@@ -127,7 +125,6 @@ const StepOneCreateTelegram = ({
           ) : null}
           <Button
             variant="filled"
-            radius="md"
             type="submit"
             fullWidth
             onClick={() =>

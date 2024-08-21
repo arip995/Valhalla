@@ -36,7 +36,6 @@ const StepThreeCreateTelegram = ({
             })
           }
           fullWidth
-          radius="md"
         >
           Publish
         </Button>
