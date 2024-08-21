@@ -6,53 +6,40 @@ import {
   IconLockDollar,
 } from '@tabler/icons-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import classes from '../../../styles/creator/Home/AllProducts.module.css';
 
+const ListData = [
+  {
+    title: 'Locked Content',
+    icon: IconLockDollar,
+    color: 'grape',
+    path: '/app/lc',
+  },
+  {
+    title: 'Telegram Community',
+    icon: IconBrandTelegram,
+    color: 'blue',
+    path: '/app/tg',
+  },
+  {
+    title: 'Paymnent Page',
+    icon: IconCreditCard,
+    color: 'violet',
+    path: '/app/paymentpage',
+  },
+
+  {
+    title: 'Courses',
+    icon: IconCertificate,
+    color: 'indigo',
+    path: '/app/courses',
+  },
+];
+
 export function AllProducts() {
-  const router = useRouter();
   const theme = useMantineTheme();
-  const mockdata = [
-    {
-      title: 'Locked Content',
-      icon: IconLockDollar,
-      color: 'grape',
-      path: '/app/lc',
-      onClick: () => {
-        router.push('/app/lc');
-      },
-    },
-    {
-      title: 'Telegram Community',
-      icon: IconBrandTelegram,
-      color: 'blue',
-      path: '/app/tg',
-      onClick: () => {
-        router.push('/app/tg');
-      },
-    },
-    {
-      title: 'Paymnent Page',
-      icon: IconCreditCard,
-      color: 'violet',
-      path: '/app/paymentpage',
-      onClick: () => {
-        router.push('/app/paymentpage');
-      },
-    },
 
-    {
-      title: 'Courses',
-      icon: IconCertificate,
-      color: 'indigo',
-      path: '/app/courses',
-      onClick: () => {
-        router.push('/app/courses');
-      },
-    },
-  ];
-
-  const items = mockdata.map(item => (
+  const items = ListData.map(item => (
     <Link
       href={item.path}
       key={item.title}
