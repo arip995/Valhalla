@@ -113,4 +113,3 @@ const ViewPlans1 = ({
 };
 
 export default ViewPlans1;
-// bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%]

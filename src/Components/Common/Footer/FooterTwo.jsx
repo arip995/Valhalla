@@ -7,6 +7,7 @@ import VisacardIcon from '../../../../public/images/common/visacard.png';
 import MastercardIcon from '../../../../public/images/common/mastercard.png';
 
 import Link from 'next/link';
+import { Anchor } from '@mantine/core';
 
 const FooterTwo = ({ description }) => {
   return (
@@ -95,14 +96,12 @@ const FooterTwo = ({ description }) => {
               ? description
               : `Want to create your own community? Experience
             hassle-free payouts and premium support.`}
-
-            <Link
-              className="cursor-pointer text-sm font-light text-violet-500"
-              href="/creator/home"
+            <Anchor
+              href={`${process.env.NEXT_PUBLIC_HOST}creator/home`}
+              size="sm"
             >
-              {' '}
               Create your own.
-            </Link>
+            </Anchor>
           </p>
         </div>
       </div>
