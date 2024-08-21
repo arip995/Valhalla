@@ -63,7 +63,7 @@ const theme = createTheme({
   fontFamily: 'Open Sans, sans-serif',
   fontFamilyMonospace: 'Monaco, Courier, monospace',
   headings: { fontFamily: 'Greycliff CF, sans-serif' },
-  primaryColor: 'violet',
+  primaryColor: 'grape',
   cursorType: 'pointer',
 });
 

@@ -14,6 +14,7 @@ import {
 } from '@mantine/core';
 import { useState } from 'react';
 import classes from '../../../styles/common/RadioCardTwo.module.css';
+import { Shimmer } from '@/Constants/StyleConstants';
 
 const ViewPlans1 = ({
   plans,
@@ -96,7 +97,7 @@ const ViewPlans1 = ({
         })}
       </Radio.Group>
       <Button
-        className="animate-shimmer bg-[linear-gradient(110deg,#7950f2,45%,#ffffff50,55%,#7950f2)] bg-[length:200%_100%]"
+        className={Shimmer()}
         onClick={() => onPay(selectedPlan)}
         disabled={!selectedPlan}
         fullWidth

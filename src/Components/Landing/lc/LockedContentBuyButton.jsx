@@ -1,5 +1,6 @@
 'use client';
 
+import { Shimmer } from '@/Constants/StyleConstants';
 import { Button } from '@mantine/core';
 import React from 'react';
 
@@ -9,7 +10,7 @@ const LockedContentBuyButton = ({ data }) => {
       <Button
         size="md"
         color="black"
-        className="animate-shimmer bg-[linear-gradient(110deg,#000000,45%,#ffffff50,55%,#000000)] bg-[length:200%_100%]"
+        className={Shimmer('#000000')}
         fullWidth
       >
         Unlock for ₹{data?.price}

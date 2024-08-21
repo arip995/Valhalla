@@ -7,6 +7,7 @@ import {
 } from '@mantine/core';
 import '../../../../styles/common/plan-type.css';
 import classes from '../../../../styles/common/RadioCardOne.module.css';
+import React from 'react';
 
 const PricingTypeSelector = ({
   value,
@@ -62,4 +63,4 @@ const PricingTypeSelector = ({
   );
 };
 
-export default PricingTypeSelector;
+export default React.memo(PricingTypeSelector);

@@ -6,7 +6,7 @@ import {
   Select,
   TextInput,
 } from '@mantine/core';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PricingTypeSelector from './PricingTypeSelector';
 
 function PlanEditCard({
@@ -272,4 +272,4 @@ function PlanEditCard({
   );
 }
 
-export default PlanEditCard;
+export default React.memo(PlanEditCard);

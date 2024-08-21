@@ -61,4 +61,4 @@ function PlanCard({
   );
 }
 
-export default PlanCard;
+export default React.memo(PlanCard);

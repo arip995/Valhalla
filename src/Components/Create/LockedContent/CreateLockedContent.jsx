@@ -89,12 +89,7 @@ const CreateLockedContent = ({ data }) => {
                   <Button
                     variant="outline"
                     radius="md"
-                    leftSection={
-                      <IconUpload
-                        size={20}
-                        color="#7950f2"
-                      />
-                    }
+                    leftSection={<IconUpload size={20} />}
                     {...props}
                   >
                     Upload files

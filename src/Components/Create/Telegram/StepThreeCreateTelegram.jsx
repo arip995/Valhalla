@@ -1,11 +1,11 @@
 import { CategoriesList } from '@/Constants/constants';
 import { Button, Select, TextInput } from '@mantine/core';
 import PlansAndPricing from './PlansAndPricing/PlansAndPricing';
+import React from 'react';
 
 const StepThreeCreateTelegram = ({
   stepThreeForm,
   onStepThreeSubmit,
-  loading,
 }) => {
   return (
     <div className="ctg-s3-container">
@@ -26,12 +26,10 @@ const StepThreeCreateTelegram = ({
           data={CategoriesList}
           {...stepThreeForm.getInputProps('genre')}
         />
-        {/* <Input.Wrapper> */}
         <PlansAndPricing stepThreeForm={stepThreeForm} />
         <Button
           className="sticky bottom-5 z-40"
           type="submit"
-          loading={loading}
           onClick={() =>
             stepThreeForm.setValues({
               isSaveClickedAtleastOnce: true,
@@ -42,10 +40,9 @@ const StepThreeCreateTelegram = ({
         >
           Publish
         </Button>
-        {/* </Input.Wrapper> */}
       </form>
     </div>
   );
 };
 
-export default StepThreeCreateTelegram;
+export default React.memo(StepThreeCreateTelegram);
