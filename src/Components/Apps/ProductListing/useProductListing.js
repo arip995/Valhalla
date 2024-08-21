@@ -26,7 +26,7 @@ const useProductListing = () => {
 
     try {
       const listingData = await axiosInstance.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/product/get`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/product/get_listing_data`,
         {
           productType: app,
           pageNo: pageNo,

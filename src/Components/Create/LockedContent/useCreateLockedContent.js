@@ -1,5 +1,4 @@
 import axiosInstance from '@/Utils/AxiosInstance';
-import { getMetaData } from '@/Utils/getMetaData';
 import { useForm } from '@mantine/form';
 import { randomId } from '@mantine/hooks';
 import { usePathname, useRouter } from 'next/navigation';
@@ -220,7 +219,9 @@ const useCreateLockedContent = () => {
   const fetchLcData = async () => {
     try {
       setEditLoading(true);
-      const data = await getMetaData(productId, 'lc');
+      const { data } = await axiosInstance.get(
+        `/product/get_individual_product_data/lc/${productId}`
+      );
       createLockedContentForm.setValues({
         title: data.data.title,
         message: data.data.message,
@@ -230,7 +231,10 @@ const useCreateLockedContent = () => {
         data: data.data,
       });
     } catch (error) {
-      toast.error('Check your internet connection');
+      toast.error(
+        error.response.data.message ||
+          'Check your internet connection'
+      );
       console.log(error);
     } finally {
       setEditLoading(false);

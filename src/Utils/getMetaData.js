@@ -11,14 +11,10 @@ export const getProductData = async (path, tag) => {
   return await res.json();
 };
 
-export const getApiPath = (type, id) => {
-  return `${type === 'tg' ? '/telegram/get_group_data' : '/premiumcontent/get'}/${id}`;
-};
-
 export const getMetaData = async (id, tag) => {
   //   const headerList = headers();
   //   const pathname = headerList.get('x-current-path');
   //   const path = pathname.split('/')[1];
-  const apiPath = getApiPath(tag, id);
+  const apiPath = `/product/get_individual_product_data/${tag}/${id}`;
   return await getProductData(apiPath, tag);
 };
