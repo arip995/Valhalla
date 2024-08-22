@@ -185,7 +185,6 @@ const StepOneAuth = ({
                 leftSection={
                   emailOrPhoneNumber === 'email' ? (
                     <IconPhone
-                      className="icon-auth icon"
                       style={{
                         width: rem(20),
                         height: rem(20),
@@ -194,7 +193,6 @@ const StepOneAuth = ({
                     />
                   ) : (
                     <IconMail
-                      className="icon-auth icon"
                       style={{
                         width: rem(20),
                         height: rem(20),

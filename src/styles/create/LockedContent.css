@@ -35,12 +35,6 @@
   .edit-icon {
     color: var(--mantine-color-gray-4);
   }
-  .icon-auth {
-    color: var(--mantine-color-blue-9);
-  }
-  .icon {
-    cursor: pointer;
-  }
   .signupPaper {
     width: 90%;
     max-width: 600px;
