@@ -59,6 +59,9 @@
     font-size: 30px;
     font-weight: 900;
   }
+  .icon {
+    cursor: pointer;
+  }
   .auth-title-alter {
     font-size: 26px;
     font-weight: 700;
