@@ -14,7 +14,7 @@
       #72a0e5,
       #c8acfc
     ); */
-    background-color: var(--mantine-color-gray-3);
+    /* background-color: var(--mantine-color-gray-1); */
     background-size: 180% 180%;
     animation: gradient-animation 21s ease infinite;
     @keyframes gradient-animation {

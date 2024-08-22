@@ -12,7 +12,7 @@ const NotFoundOne = () => {
     <div className="mx-auto flex h-screen max-w-screen-xl items-center justify-start bg-white px-4 md:px-8">
       <div className="mx-auto max-w-lg text-gray-600">
         <div className="space-y-3 text-center">
-          <Text size="lg" fw={500} c="grape.4">
+          <Text size="lg" fw={500} c="violet.4">
             404 Error
           </Text>
           <p className="text-4xl font-semibold text-gray-800 sm:text-5xl">

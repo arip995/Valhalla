@@ -64,7 +64,7 @@ const StepOneAuth = ({
                 : 'Already have an account?  '}
 
               <Text
-                c="grape.4"
+                c="violet.4"
                 className="text-sm font-normal"
               >
                 {pathname === 'signin' ? (

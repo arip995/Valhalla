@@ -8,7 +8,7 @@ const LockedContentBuyButton = ({ data }) => {
     <div className="vlc-view-product-button">
       <Button
         size="md"
-        className="animate-shimmer bg-[linear-gradient(110deg,#be4bdb,45%,#ffffff50,55%,#be4bdb)] bg-[length:200%_100%]"
+        className="animate-shimmer bg-[linear-gradient(110deg,#7950f2,45%,#ffffff50,55%,#7950f2)] bg-[length:200%_100%]"
         fullWidth
       >
         Unlock for ₹{data?.price}

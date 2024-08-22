@@ -12,7 +12,7 @@ const ListData = [
   {
     title: 'Locked Content',
     icon: IconLockDollar,
-    color: 'grape',
+    color: 'violet',
     path: '/app/lc',
   },
   {

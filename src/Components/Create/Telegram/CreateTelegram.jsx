@@ -37,7 +37,7 @@ const CreateTelegram = ({ data }) => {
 
   return (
     <>
-      <div className="lc-container lc-container-animation bg-gradient-to-l from-gray-200 via-fuchsia-100 to-stone-100">
+      <div className="lc-container lc-container-animation">
         <div className="flex w-11/12 max-w-[600px] flex-col items-center gap-2 md:w-1/2">
           <HeaderWrapper
             titleOne={'Create Telegram Community'}
