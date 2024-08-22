@@ -1,13 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import Logo from '../../../app/icon.png';
-import GpayIcon from '../../../../public/images/common/gpay.png';
-import PhonpeIcon from '../../../../public/images/common/phonepe.png';
-import PaytmIcon from '../../../../public/images/common/paytm.png';
-import VisacardIcon from '../../../../public/images/common/visacard.png';
-import MastercardIcon from '../../../../public/images/common/mastercard.png';
-
-import Link from 'next/link';
 import { Anchor } from '@mantine/core';
+import Link from 'next/link';
+import Logo from '../../../../public/icons/neifyiconsmall.webp';
+import GpayIcon from '../../../../public/images/common/gpay.png';
+import MastercardIcon from '../../../../public/images/common/mastercard.png';
+import PaytmIcon from '../../../../public/images/common/paytm.png';
+import PhonpeIcon from '../../../../public/images/common/phonepe.png';
+import VisacardIcon from '../../../../public/images/common/visacard.png';
 
 const FooterTwo = ({ description }) => {
   return (

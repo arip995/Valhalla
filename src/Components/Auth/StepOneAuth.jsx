@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Timer from '@/Common/Timer.jsx';
 import {
   Anchor,
@@ -17,10 +18,11 @@ import {
   IconMail,
   IconPhone,
 } from '@tabler/icons-react';
+import Link from 'next/link';
 import { Toaster } from 'react-hot-toast';
+import Logo from '../../../public/icons/neifyiconsmall.webp';
 import HeaderWrapper from './HeaderWrapper';
 import PaperWrapper from './PaperWrapper';
-import Link from 'next/link';
 
 const StepOneAuth = ({
   pathname,
@@ -38,35 +40,47 @@ const StepOneAuth = ({
     <>
       <HeaderWrapper
         titleOne={
-          pathname === 'signin'
-            ? 'Welcome back!'
-            : 'Create your account'
-        }
-        titleTwo={
-          <div className="flex w-full flex-wrap justify-center gap-2">
-            {pathname === 'signin'
-              ? 'Do not have an account yet?  '
-              : 'Already have an account?  '}
-
-            <Text
-              c="grape.4"
-              className="text-sm font-normal"
-            >
-              {pathname === 'signin' ? (
-                <Link size="sm" href="/signup">
-                  Create account
-                </Link>
-              ) : (
-                <Link size="sm" href="/signin">
-                  Sign in
-                </Link>
-              )}
-              .
-            </Text>
+          <div className="flex items-center gap-2">
+            <img
+              className="h-8 w-auto"
+              src={Logo.src}
+              alt="Nexify"
+            />
+            Nexify
           </div>
         }
       />
       <PaperWrapper>
+        <HeaderWrapper
+          titleOneAlternative={
+            pathname === 'signin'
+              ? 'Log in'
+              : 'Create your account'
+          }
+          titleTwo={
+            <div className="flex w-full flex-wrap justify-center gap-2">
+              {pathname === 'signin'
+                ? 'Do not have an account yet?  '
+                : 'Already have an account?  '}
+
+              <Text
+                c="grape.4"
+                className="text-sm font-normal"
+              >
+                {pathname === 'signin' ? (
+                  <Link size="sm" href="/signup" prefetch>
+                    Create account
+                  </Link>
+                ) : (
+                  <Link size="sm" href="/signin" prefetch>
+                    Sign in
+                  </Link>
+                )}
+                .
+              </Text>
+            </div>
+          }
+        />
         {showOtp ? (
           <>
             <form onSubmit={otpForm.onSubmit(handleSubmit)}>

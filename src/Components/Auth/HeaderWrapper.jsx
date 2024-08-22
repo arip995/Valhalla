@@ -1,16 +1,29 @@
 import { Title } from '@mantine/core';
 
-const HeaderWrapper = ({ titleOne, titleTwo }) => {
+const HeaderWrapper = ({
+  titleOne,
+  titleOneAlternative,
+  titleTwo,
+}) => {
   return (
     <>
       {!!titleOne && (
         <Title
           ta="center"
-          size="xl"
           mb={15}
           className={'auth-title'}
+          c={'gray.8'}
         >
           {titleOne}
+        </Title>
+      )}
+      {!!titleOneAlternative && (
+        <Title
+          ta="center"
+          mb={15}
+          className={'auth-title-alter'}
+        >
+          {titleOneAlternative}
         </Title>
       )}
       {!!titleTwo && (

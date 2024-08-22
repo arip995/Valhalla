@@ -49,6 +49,10 @@
     font-size: 25px;
     font-weight: 700;
   }
+  .auth-title-alter {
+    font-size: 24px;
+    font-weight: 700;
+  }
 
   .lc-create-from-wrapper {
     display: flex;
