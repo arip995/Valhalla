@@ -8,12 +8,7 @@ const HeaderWrapper = ({
   return (
     <>
       {!!titleOne && (
-        <Title
-          ta="center"
-          mb={15}
-          className={'auth-title'}
-          c={'gray.8'}
-        >
+        <Title ta="center" mb={15} className={'auth-title'}>
           {titleOne}
         </Title>
       )}
