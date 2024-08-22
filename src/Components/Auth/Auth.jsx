@@ -6,11 +6,10 @@ import StepTwoAuth from './StepTwoAuth';
 import useAuth from './useAuth';
 import '../../styles/auth/auth.css';
 
-const Auth = props => {
+const Auth = () => {
   const {
     step,
-    loginOrRegister,
-    toggleLoginOrRegister,
+    pathname,
     emailOrPhoneNumber,
     toggleEmailOrPhoneNumber,
     showOtp,
@@ -20,17 +19,16 @@ const Auth = props => {
     handleSubmit,
     authForm,
     loading,
-  } = useAuth({ tabName: props.tabName });
+  } = useAuth();
 
   return (
     <>
       <div className="signup-container signup-container-animation">
-        <div className="w-full flex  flex-col items-center gap-2">
+        <div className="flex w-full flex-col items-center gap-2">
           {step === 1 ? (
             <StepOneAuth
               loading={loading}
-              loginOrRegister={loginOrRegister}
-              toggleLoginOrRegister={toggleLoginOrRegister}
+              pathname={pathname}
               emailOrPhoneNumber={emailOrPhoneNumber}
               toggleEmailOrPhoneNumber={
                 toggleEmailOrPhoneNumber

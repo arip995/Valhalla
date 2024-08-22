@@ -1,4 +1,4 @@
-import { Text, Title } from '@mantine/core';
+import { Title } from '@mantine/core';
 
 const HeaderWrapper = ({ titleOne, titleTwo }) => {
   return (
@@ -14,9 +14,9 @@ const HeaderWrapper = ({ titleOne, titleTwo }) => {
         </Title>
       )}
       {!!titleTwo && (
-        <Text size="sm" ta="center" mb={40}>
+        <div className="mb-10 text-center text-sm">
           {titleTwo}
-        </Text>
+        </div>
       )}
     </>
   );

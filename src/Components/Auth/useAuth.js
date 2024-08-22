@@ -1,23 +1,19 @@
+import { setUserData } from '@/Utils/getuserData';
 import useUser from '@/Utils/Hooks/useUser';
 import { validateEmail } from '@/Utils/Regex';
 import { useForm } from '@mantine/form';
 import { useToggle } from '@mantine/hooks';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-const useAuth = ({ tabName }) => {
+const useAuth = () => {
   const { user } = useUser();
-  const typeArray =
-    tabName === 'login'
-      ? ['login', 'register']
-      : ['register', 'login'];
+  const pathname = usePathname().substring(1);
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [loginOrRegister, toggleLoginOrRegister] =
-    useToggle(typeArray);
   const [emailOrPhoneNumber, toggleEmailOrPhoneNumber] =
     useToggle(['phoneNumber', 'email']);
   const [showOtp, toggleShowOtp] = useToggle([false, true]);
@@ -83,8 +79,7 @@ const useAuth = ({ tabName }) => {
             emailOrPhoneNumber === 'email'
               ? authForm.values.email
               : authForm.values.phoneNumber,
-          isSignUp:
-            loginOrRegister === 'register' ? true : false,
+          isSignUp: pathname === 'signup' ? true : false,
           isAuth: true,
         }
       );
@@ -112,8 +107,7 @@ const useAuth = ({ tabName }) => {
               ? authForm.values.email
               : authForm.values.phoneNumber,
           otp: otpForm.values.otp,
-          isSignUp:
-            loginOrRegister === 'register' ? true : false,
+          isSignUp: pathname === 'signup' ? true : false,
         },
         {
           withCredentials: true,
@@ -121,10 +115,7 @@ const useAuth = ({ tabName }) => {
       );
       if (data?.data?.data?.user) {
         toast.success('Signed in successfully');
-        localStorage.setItem(
-          'user',
-          JSON.stringify(data.data.data.user)
-        );
+        setUserData(data.data.data.user);
       }
       if (data?.data?.data?.user.username) {
         setTimeout(() => {
@@ -153,8 +144,7 @@ const useAuth = ({ tabName }) => {
 
   return {
     step,
-    loginOrRegister,
-    toggleLoginOrRegister,
+    pathname,
     emailOrPhoneNumber,
     toggleEmailOrPhoneNumber,
     showOtp,

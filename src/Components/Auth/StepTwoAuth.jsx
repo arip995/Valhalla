@@ -53,6 +53,7 @@ const StepTwoAuth = () => {
   const [usertype, setUsertype] = useState();
   const [category, setCategory] = useState();
   const [loading, setLoading] = useState(false);
+  const [createLoading, setCreateLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
   const validateUsername = useDebouncedCallback(
@@ -92,6 +93,7 @@ const StepTwoAuth = () => {
 
   const handleOnboard = async () => {
     try {
+      setCreateLoading(true);
       const payload = {
         type: 'signup',
         firstName,
@@ -107,7 +109,9 @@ const StepTwoAuth = () => {
       );
       setCurrentUser(data.data.data.user);
       router.push('/creator/home');
+      toast.success('Account created successfully');
     } catch (error) {
+      setCreateLoading(false);
       toast.error(error.response.data.message);
     }
   };
@@ -216,6 +220,7 @@ const StepTwoAuth = () => {
             mt="md"
             radius="xl"
             variant="filled"
+            loading={createLoading}
             disabled={
               Object.keys(errors || {}).length ||
               !username.length ||

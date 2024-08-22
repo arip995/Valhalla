@@ -20,10 +20,10 @@ import {
 import { Toaster } from 'react-hot-toast';
 import HeaderWrapper from './HeaderWrapper';
 import PaperWrapper from './PaperWrapper';
+import Link from 'next/link';
 
 const StepOneAuth = ({
-  loginOrRegister,
-  toggleLoginOrRegister,
+  pathname,
   emailOrPhoneNumber,
   toggleEmailOrPhoneNumber,
   showOtp,
@@ -38,31 +38,32 @@ const StepOneAuth = ({
     <>
       <HeaderWrapper
         titleOne={
-          loginOrRegister === 'login'
+          pathname === 'signin'
             ? 'Welcome back!'
             : 'Create your account'
         }
         titleTwo={
-          <>
-            {loginOrRegister === 'login'
+          <div className="flex w-full flex-wrap justify-center gap-2">
+            {pathname === 'signin'
               ? 'Do not have an account yet?  '
               : 'Already have an account?  '}
 
-            <Anchor
-              size="sm"
-              component="button"
-              onClick={() => {
-                if (showOtp) {
-                  toggleShowOtp();
-                }
-                toggleLoginOrRegister();
-              }}
+            <Text
+              c="grape.4"
+              className="text-sm font-normal"
             >
-              {loginOrRegister === 'login'
-                ? 'Create account'
-                : 'Sign in'}
-            </Anchor>
-          </>
+              {pathname === 'signin' ? (
+                <Link size="sm" href="/signup">
+                  Create account
+                </Link>
+              ) : (
+                <Link size="sm" href="/signin">
+                  Sign in
+                </Link>
+              )}
+              .
+            </Text>
+          </div>
         }
       />
       <PaperWrapper>
@@ -162,7 +163,7 @@ const StepOneAuth = ({
                   setIsClickedAtleastOnce(true);
                 }}
               >
-                {upperFirst(loginOrRegister)}
+                {upperFirst(pathname)}
               </Button>
             </Group>
           </form>
@@ -178,7 +179,9 @@ const StepOneAuth = ({
               <Button
                 radius="xl"
                 variant="default"
+                justify="space-between"
                 emailOrPhoneNumber={emailOrPhoneNumber}
+                rightSection={<span />}
                 leftSection={
                   emailOrPhoneNumber === 'email' ? (
                     <IconPhone
