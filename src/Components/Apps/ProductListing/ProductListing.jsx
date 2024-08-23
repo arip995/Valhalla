@@ -8,6 +8,7 @@ import Filters from './Filters';
 import useProductListing from './useProductListing';
 import { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import React from 'react';
 
 const ProductListing = () => {
   const router = useRouter();
@@ -92,4 +93,4 @@ const ProductListing = () => {
   }
 };
 
-export default ProductListing;
+export default React.memo(ProductListing);
