@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import useIsBrowser from '../useIsBrowser';
 import axiosInstance from '../AxiosInstance';
-import Cookies from 'js-cookie';
+import { logout } from '../getuserData';
+import useIsBrowser from '../useIsBrowser';
 
 const useUser = (fetch = false) => {
   const [user, setUser] = useState(-1);
@@ -20,8 +20,7 @@ const useUser = (fetch = false) => {
     localStorage.setItem('user', JSON.stringify(data));
   };
   const removeUser = () => {
-    Cookies.remove('accesstoken');
-    localStorage.removeItem('user');
+    logout();
     setUser(null);
   };
 

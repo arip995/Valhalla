@@ -23,7 +23,7 @@ const useUsername = () => {
         setLoadingUsername(true);
         await axiosInstance.post(
           `${process.env.NEXT_PUBLIC_BASE_URL}/user/check_existing_username`,
-          { username: username }
+          { username: username, userId: user._id }
         );
         setError('');
         setShowUpdateUsernameButton(true);

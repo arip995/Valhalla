@@ -2,7 +2,7 @@
 
 import OfflineOverlay from '@/Common/OfflineOverlay';
 import { SidenavData } from '@/Constants/Navbarlayout';
-import { getUserData } from '@/Utils/getuserData';
+import { getUserData, logout } from '@/Utils/getuserData';
 import useIsBrowser from '@/Utils/useIsBrowser';
 import {
   AppShell,
@@ -21,7 +21,6 @@ import {
   IconSettings,
   IconUser,
 } from '@tabler/icons-react';
-import Cookies from 'js-cookie';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
@@ -39,7 +38,7 @@ export function NavbarLayout({ children }) {
   const [active, setActive] = useState(pathName);
 
   const Links = useMemo(() => {
-    const mapData = !user?.isCreator
+    const mapData = user?.isCreator
       ? SidenavData
       : [SidenavData[3], SidenavData[4]];
     return mapData.map(link => {
@@ -189,8 +188,7 @@ export function NavbarLayout({ children }) {
                       confirmProps: { color: 'red' },
                       onCancel: () => {},
                       onConfirm: () => {
-                        Cookies.remove('accesstoken');
-                        localStorage.removeItem('user');
+                        logout();
                         router.push('/signin');
                       },
                     });

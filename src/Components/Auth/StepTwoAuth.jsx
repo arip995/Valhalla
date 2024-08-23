@@ -21,7 +21,7 @@ import {
 } from '@mantine/core';
 import { useDebouncedCallback } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import HeaderWrapper from './HeaderWrapper';
 import PaperWrapper from './PaperWrapper';
 import toast from 'react-hot-toast';
@@ -105,7 +105,7 @@ const StepTwoAuth = () => {
       const data = await axiosInstance.post(
         'user/update_user_data',
         payload,
-        { sendCookie: true }
+        { withCredentials: true }
       );
       setCurrentUser(data.data.data.user);
       router.push('/home');
@@ -239,4 +239,4 @@ const StepTwoAuth = () => {
   );
 };
 
-export default StepTwoAuth;
+export default React.memo(StepTwoAuth);

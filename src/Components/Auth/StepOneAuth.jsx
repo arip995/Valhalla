@@ -23,6 +23,7 @@ import { Toaster } from 'react-hot-toast';
 import Logo from '../../../public/icons/neifyiconsmall.webp';
 import HeaderWrapper from './HeaderWrapper';
 import PaperWrapper from './PaperWrapper';
+import React from 'react';
 
 const StepOneAuth = ({
   pathname,
@@ -226,4 +227,4 @@ const StepOneAuth = ({
   );
 };
 
-export default StepOneAuth;
+export default React.memo(StepOneAuth);

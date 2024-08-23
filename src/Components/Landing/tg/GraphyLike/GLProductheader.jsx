@@ -6,7 +6,6 @@ import {
   IconLogout,
   IconShoppingCart,
 } from '@tabler/icons-react';
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
 const GLProductheader = ({ data }) => {
@@ -14,8 +13,6 @@ const GLProductheader = ({ data }) => {
   const { user, removeUser } = useUser();
 
   const onConfirm = () => {
-    Cookies.remove('accesstoken');
-    localStorage.removeItem('user');
     removeUser();
   };
 

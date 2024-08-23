@@ -41,6 +41,7 @@ const useAuth = () => {
           : null,
     },
   });
+
   const otpForm = useForm({
     initialValue: { otp: '' },
     validateInputOnChange: true,
@@ -135,12 +136,10 @@ const useAuth = () => {
   };
 
   useEffect(() => {
-    if (user?.username) {
-      router.push('/home');
-    } else if (user?._id) {
+    if (user.isCreator && !user?.username) {
       setStep(2);
     }
-  }, [router?.isReady]);
+  }, [user]);
 
   return {
     step,

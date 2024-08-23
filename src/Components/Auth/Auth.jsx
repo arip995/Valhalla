@@ -5,6 +5,7 @@ import StepOneAuth from './StepOneAuth';
 import StepTwoAuth from './StepTwoAuth';
 import useAuth from './useAuth';
 import '../../styles/auth/auth.css';
+import React from 'react';
 
 const Auth = () => {
   const {
@@ -52,4 +53,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default React.memo(Auth);
