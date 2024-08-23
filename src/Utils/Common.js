@@ -53,3 +53,7 @@ export function discountPercentage(value, discountedValue) {
   }
   return `${Math.round(100 * ((value - discountedValue) / value))}%`;
 }
+
+export const isDevEnv = () => {
+  return process.env.ENV === 'DEV';
+};
