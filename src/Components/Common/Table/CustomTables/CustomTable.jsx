@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 import ShareButton from '@/Components/Common/Buttons/ShareButton';
 import Table from '@/Components/Common/Table/Table';
@@ -6,6 +5,10 @@ import TableBody from '@/Components/Common/Table/TableBody';
 import TableFixedCell from '@/Components/Common/Table/TableFixedCell';
 import TableHeader from '@/Components/Common/Table/TableHeader';
 import TableWrapper from '@/Components/Common/Table/TableWrapper';
+import {
+  StatusColorMapping,
+  StatusMapping,
+} from '@/Constants/ProductListingContants';
 import {
   ActionIcon,
   Badge,
@@ -28,10 +31,6 @@ import {
 import classNames from 'classnames';
 import Link from 'next/link';
 import EmptyProductImage2 from '../../../../../public/images/common/emptystateproductimage2.jpeg';
-import {
-  StatusColorMapping,
-  StatusMapping,
-} from '@/Constants/ProductListingContants';
 
 const TableHeaderItems = [
   { title: 'Title', icon: IconUsers },

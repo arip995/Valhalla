@@ -1,12 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 
+import HeaderWrapper from '@/Components/Auth/HeaderWrapper';
 import { Button } from '@mantine/core';
 import { useRouter } from 'next/navigation';
-import IconPageNotFound from '../../../../public/icons/pagenotfound.svg';
 import Logo from '../../../../public/icons/neifyiconsmall.webp';
-
-import HeaderWrapper from '@/Components/Auth/HeaderWrapper';
+import IconPageNotFound from '../../../../public/icons/pagenotfound.svg';
 
 const NotFoundOne = () => {
   const router = useRouter();
