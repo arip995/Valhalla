@@ -40,7 +40,7 @@ const StepOneAuth = ({
     <>
       <HeaderWrapper
         titleOne={
-          <div className="flex items-center gap-2 text-gray-700">
+          <div className="flex select-none items-center gap-2 text-gray-700">
             <img
               className="h-8 w-auto"
               src={Logo.src}
