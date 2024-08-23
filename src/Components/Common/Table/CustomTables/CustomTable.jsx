@@ -6,8 +6,14 @@ import TableBody from '@/Components/Common/Table/TableBody';
 import TableFixedCell from '@/Components/Common/Table/TableFixedCell';
 import TableHeader from '@/Components/Common/Table/TableHeader';
 import TableWrapper from '@/Components/Common/Table/TableWrapper';
-import { ActionIcon, Menu, rem } from '@mantine/core';
 import {
+  ActionIcon,
+  Badge,
+  Menu,
+  rem,
+} from '@mantine/core';
+import {
+  IconBrandRedux,
   IconCreditCardOff,
   IconDotsVertical,
   IconEdit,
@@ -22,10 +28,14 @@ import {
 import classNames from 'classnames';
 import Link from 'next/link';
 import EmptyProductImage2 from '../../../../../public/images/common/emptystateproductimage2.jpeg';
+import {
+  StatusColorMapping,
+  StatusMapping,
+} from '@/Constants/ProductListingContants';
 
 const TableHeaderItems = [
   { title: 'Title', icon: IconUsers },
-  // { title: 'Status', icon: IconBrandRedux },
+  { title: 'Status', icon: IconBrandRedux },
   { title: 'Price', icon: IconReceipt2 },
   { title: 'Revenue', icon: IconPresentation },
   { title: 'Sales', icon: IconReportAnalytics },
@@ -142,7 +152,7 @@ const CustomTable = ({
                     {item.title}
                   </div>
                 </td>
-                {/* <td>
+                <td className="min-w-40">
                   <Badge
                     variant="dot"
                     color={StatusColorMapping[item.status]}
@@ -150,10 +160,14 @@ const CustomTable = ({
                   >
                     {StatusMapping[item.status]}
                   </Badge>
-                </td> */}
-                <td>₹{item.price}</td>
-                <td>₹{item.totalRevenue}</td>
-                <td>{item.totalSalesCount}</td>
+                </td>
+                <td className="min-w-36">₹{item.price}</td>
+                <td className="min-w-36">
+                  ₹{item.totalRevenue}
+                </td>
+                <td className="min-w-36">
+                  {item.totalSalesCount}
+                </td>
                 <TableFixedCell>
                   <div className="flex items-center gap-2">
                     {!!showShare && (

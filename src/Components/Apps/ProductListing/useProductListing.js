@@ -17,7 +17,7 @@ const useProductListing = () => {
   const app = usePathname().split('/')[2];
   const [data, setData] = useState(null);
   const [searchText, setSearchText] = useState('');
-  const [status, setStatus] = useState(1);
+  const [status, setStatus] = useState([0, 1, 5, 6]);
   const [loading, setLoading] = useState(-1);
   const [pageNo, setPageNo] = useState(1);
 
@@ -30,7 +30,7 @@ const useProductListing = () => {
         {
           productType: app,
           pageNo: pageNo,
-          status: Number(status),
+          status: status,
           searchText,
         }
       );
@@ -108,7 +108,7 @@ const useProductListing = () => {
           break;
         case 'reset':
           setSearchText('');
-          setStatus(1);
+          setStatus([0, 1, 5, 6]);
           break;
         case 'edit':
           if (updateData === 2) {

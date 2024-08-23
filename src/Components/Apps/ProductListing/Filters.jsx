@@ -1,8 +1,10 @@
 import {
+  StatusArray,
   StatusColorMapping,
   StatusMapping,
 } from '@/Constants/ProductListingContants';
 import {
+  Avatar,
   Badge,
   CloseButton,
   Group,
@@ -13,55 +15,72 @@ import {
 } from '@mantine/core';
 import { useDebouncedCallback } from '@mantine/hooks';
 import {
+  IconCheck,
   IconChevronDown,
   IconSearch,
 } from '@tabler/icons-react';
-import { useEffect, useState } from 'react';
-import classes from '../../../styles/creator/ProductListing/MenuDropdown.module.css';
 import classNames from 'classnames';
+import React, { useEffect, useMemo, useState } from 'react';
+import classes from '../../../styles/creator/ProductListing/MenuDropdown.module.css';
 
 const Filters = ({
   searchText = '',
   onUpdate = () => {},
-  status = 1,
+  status = [0, 1, 5, 6],
 }) => {
   const [opened, setOpened] = useState(false);
   const [selected, setSelected] = useState(status);
   const [searchValue, setSearchValue] =
     useState(searchText);
-
   const handleUpdate = useDebouncedCallback(
     (type, value) => {
       onUpdate(type, value);
     },
     500
   );
-  const items = Object.keys(StatusMapping || {}).map(
-    item => {
-      if (Number(item) === Number(selected)) return null;
-      return (
-        <Menu.Item
-          onClick={() => {
-            setSelected(item);
-            handleUpdate('status', item);
-          }}
-          key={item}
-        >
-          <Badge
-            variant="dot"
-            color={StatusColorMapping[item]}
-            styles={{
-              root: {
-                border: '0px',
-                background: 'transparent',
-              },
+  const items = useMemo(
+    () =>
+      StatusArray.map(item => {
+        return (
+          <Menu.Item
+            onClick={() => {
+              setSelected(prev => {
+                if (prev.includes(item)) {
+                  prev = prev.filter(val => val !== item);
+                } else {
+                  prev = [...prev, item];
+                }
+                handleUpdate('status', prev);
+                return prev;
+              });
             }}
+            key={item}
           >
-            {StatusMapping[item]}
-          </Badge>
-        </Menu.Item>
-      );
-    }
+            <Group justify="space-between">
+              <Badge
+                variant="dot"
+                color={StatusColorMapping[item]}
+                styles={{
+                  root: {
+                    border: '0px',
+                    background: 'transparent',
+                  },
+                }}
+              >
+                {StatusMapping[item]}
+              </Badge>
+              {selected.includes(item) ? (
+                <IconCheck
+                  size="1rem"
+                  className={classes.icon}
+                  stroke={1}
+                />
+              ) : null}
+            </Group>
+          </Menu.Item>
+        );
+      }),
+    [selected]
   );
 
   useEffect(() => {
@@ -123,20 +142,22 @@ const Filters = ({
             )}
             data-expanded={opened || undefined}
           >
-            <Group gap="xs">
-              <Badge
-                variant="dot"
-                color={StatusColorMapping[selected]}
-                styles={{
-                  root: {
-                    border: '0px',
-                    background: 'transparent',
-                  },
-                }}
-              >
-                {StatusMapping[selected]}
-              </Badge>
-            </Group>
+            <Avatar.Group>
+              {selected.map(item => (
+                <Avatar
+                  key={item}
+                  variant="filled"
+                  className="hidden:svg"
+                  size="xs"
+                  color={StatusColorMapping[Number(item)]}
+                >
+                  {' '}
+                </Avatar>
+              ))}
+            </Avatar.Group>
+            <Badge color="black" variant="transparent">
+              Status
+            </Badge>
             <IconChevronDown
               size="1rem"
               className={classes.icon}
@@ -150,4 +171,4 @@ const Filters = ({
   );
 };
 
-export default Filters;
+export default React.memo(Filters);
