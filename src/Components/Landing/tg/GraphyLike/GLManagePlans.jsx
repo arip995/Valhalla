@@ -1,10 +1,11 @@
 'use client';
 import NewScrollArea from '@/Components/Common/General/NewScrollArea';
 import ViewPlans1 from '@/Components/Common/General/ViewPlans1';
-import { Button, Drawer } from '@mantine/core';
 import { getUserData } from '@/Utils/getuserData';
+import { Drawer } from '@mantine/core';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import BuyButton from '../../lc/BuyButton';
 
 const GLManagePlans = ({ data }) => {
   const [user, setUser] = useState(null);
@@ -40,14 +41,13 @@ const GLManagePlans = ({ data }) => {
         />
       </div>
 
-      <div className="fixed bottom-0 left-0 w-full border-t-2 border-gray-100 bg-white px-2 py-4 md:hidden">
+      <div className="fixed bottom-0 left-0 w-full border-t-2 border-gray-100 bg-white px-2 py-4 shadow-md md:hidden">
         <div className="flex w-full max-w-[768px] items-center gap-8">
-          <Button
-            fullWidth
+          <BuyButton
             onClick={() => setOpenBottomSheet(true)}
           >
             Select a plan
-          </Button>
+          </BuyButton>
         </div>
       </div>
       <Drawer

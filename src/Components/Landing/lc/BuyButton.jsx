@@ -4,11 +4,18 @@ import { Button } from '@mantine/core';
 import classNames from 'classnames';
 import React from 'react';
 
-const BuyButton = ({ className, props, children }) => {
+const BuyButton = ({
+  className,
+  props,
+  children,
+  onClick = () => {},
+  animate = true,
+}) => {
   return (
     <Button
+      onClick={onClick}
       className={classNames(
-        'animate-shimmer bg-[linear-gradient(110deg,#7950f2,45%,#ffffff50,55%,#7950f2)] bg-[length:200%_100%]',
+        `${animate ? 'animate-shimmer bg-[linear-gradient(110deg,#7950f2,45%,#ffffff50,55%,#7950f2)] bg-[length:200%_100%]' : ''} `,
         className
       )}
       fullWidth
