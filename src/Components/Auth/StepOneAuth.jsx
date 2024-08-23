@@ -62,10 +62,7 @@ const StepOneAuth = ({
               {pathname === 'signin'
                 ? 'Do not have an account yet?  '
                 : 'Already have an account?  '}
-              <Text
-                c="violet.4"
-                className="text-sm font-normal"
-              >
+              <div className="text-sm font-normal text-violet-500">
                 {pathname === 'signin' ? (
                   <Link size="sm" href="/signup" prefetch>
                     Create account
@@ -76,7 +73,7 @@ const StepOneAuth = ({
                   </Link>
                 )}
                 .
-              </Text>
+              </div>
             </div>
           }
         />
