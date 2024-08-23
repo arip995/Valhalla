@@ -27,6 +27,7 @@
 }
 
 .icon {
+  color: var(--mantine-color-gray-6);
   transition: transform 150ms ease;
   transform: rotate(0deg);
 

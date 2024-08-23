@@ -70,11 +70,7 @@ const Filters = ({
                 {StatusMapping[item]}
               </Badge>
               {selected.includes(item) ? (
-                <IconCheck
-                  size="1rem"
-                  className={classes.icon}
-                  stroke={1}
-                />
+                <IconCheck size="1rem" stroke={1} />
               ) : null}
             </Group>
           </Menu.Item>
