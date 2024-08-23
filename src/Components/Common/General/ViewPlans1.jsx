@@ -12,20 +12,21 @@ import {
   Radio,
   Text,
 } from '@mantine/core';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import classes from '../../../styles/common/RadioCardTwo.module.css';
+import { statusErrorTextMapping } from '@/Constants/ProductListingContants';
 
 const ViewPlans1 = ({
-  plans,
-  defaultSelect,
+  data,
   onSelect = () => {},
   onPay = () => {},
-  btnText = '',
+  isCreatorBuyer,
 }) => {
-  const [selectedPlan, setSelectedPlan] =
-    useState(defaultSelect);
+  const [selectedPlan, setSelectedPlan] = useState(
+    data.subscriptionPlans?.[0]?._id
+  );
 
-  if (!plans?.length) return null;
+  if (!data.subscriptionPlans?.length) return null;
 
   return (
     <div className="flex flex-col gap-3">
@@ -37,7 +38,7 @@ const ViewPlans1 = ({
           onSelect(value);
         }}
       >
-        {plans.map(plan => {
+        {data.subscriptionPlans.map(plan => {
           return (
             <Grid gap={'sm'} key={plan._id}>
               <Grid.Col span={{ base: 12 }}>
@@ -97,17 +98,16 @@ const ViewPlans1 = ({
       </Radio.Group>
       <BuyButton
         onClick={() => onPay(selectedPlan)}
-        disabled={!selectedPlan}
+        disabled={!selectedPlan || data.status !== 1}
+        animate={data.status === 1 ? true : false}
         fullWidth
       >
-        {btnText
-          ? btnText
-          : selectedPlan
-            ? 'Proceed to pay'
-            : 'Select a plan'}
+        {data.status === 1
+          ? `${isCreatorBuyer ? 'Edit page' : 'Proceed to pay'}`
+          : statusErrorTextMapping[data.status]}
       </BuyButton>
     </div>
   );
 };
 
-export default ViewPlans1;
+export default React.memo(ViewPlans1);

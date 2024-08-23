@@ -6,10 +6,10 @@ import React from 'react';
 
 const BuyButton = ({
   className,
-  props,
   children,
   onClick = () => {},
   animate = true,
+  ...props
 }) => {
   return (
     <Button

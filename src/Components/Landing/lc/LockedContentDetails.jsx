@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import lockImage from '../../../../public/images/locked-content/lock.png';
-import BuyButton from './BuyButton';
+import LockedContentBuyButton from './LockedContentBuyButton';
 
 const LockedContentDetails = ({ data }) => {
   return (
@@ -26,7 +26,7 @@ const LockedContentDetails = ({ data }) => {
           <div className="vlc-view-product-unlocked-state"></div>
         )}
       </div>
-      <BuyButton>Unlock for ₹{data?.price}</BuyButton>
+      <LockedContentBuyButton data={data} />
     </>
   );
 };

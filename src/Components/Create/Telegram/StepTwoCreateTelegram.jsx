@@ -105,7 +105,6 @@ const StepTwoCreateTelegram = ({
           )}
           <Button
             variant="filled"
-            radius="md"
             type="submit"
             fullWidth
             onClick={() =>

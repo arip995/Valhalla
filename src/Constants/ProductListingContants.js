@@ -1,3 +1,4 @@
+export const StatusArray = [0, 1, 5, 6, 4, 3];
 export const StatusMapping = {
   0: 'Draft',
   1: 'Published',
@@ -7,7 +8,6 @@ export const StatusMapping = {
   4: 'Under review',
   3: 'Rejected',
 };
-export const StatusArray = [0, 1, 5, 6, 4, 3];
 export const StatusColorMapping = {
   0: 'yellow',
   1: 'green',
@@ -16,4 +16,10 @@ export const StatusColorMapping = {
   4: 'yellow',
   5: 'red',
   6: 'red',
+};
+export const statusErrorTextMapping = {
+  0: 'Page is in draft',
+  6: 'Sale ended',
+  4: 'Page is under review',
+  3: 'Page is fraudlent',
 };

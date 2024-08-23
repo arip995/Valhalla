@@ -167,6 +167,7 @@ export const PeriodTypeOptions = [
   { label: 'Years', value: 'Yearly', days: 365 },
   { label: 'Lifetime', value: 'Lifetime', days: 36500 },
 ];
+
 export const PeriodTypeOptionsSelect = [
   { label: 'Days', value: 'Daily', days: 1 },
   { label: 'Weeks', value: 'Weekly', days: 7 },

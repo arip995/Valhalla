@@ -69,9 +69,7 @@ const ProductListing = () => {
                   tableBodyItems={data.data || []}
                   onUpdate={onUpdate}
                   onRowClick={row => {
-                    router.push(
-                      `/dashboard/${app}/${row._id}`
-                    );
+                    router.push(`/${app}/${row._id}`);
                   }}
                   app={app}
                 />

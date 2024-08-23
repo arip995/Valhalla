@@ -6,17 +6,22 @@ import { Drawer } from '@mantine/core';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import BuyButton from '../../lc/BuyButton';
+import { statusErrorTextMapping } from '@/Constants/ProductListingContants';
 
 const GLManagePlans = ({ data }) => {
   const [user, setUser] = useState(null);
   const router = useRouter();
   const params = useParams();
-  const idCreatorBuyer = user?._id === data.creatorId;
+  const isCreatorBuyer = user?._id === data.creatorId;
   const [openBottomSheet, setOpenBottomSheet] =
     useState(false);
 
   useEffect(() => {
-    if (window.innerWidth < 768 && !openBottomSheet) {
+    if (
+      window.innerWidth < 768 &&
+      !openBottomSheet &&
+      data.status === 1
+    ) {
       setOpenBottomSheet(true);
     }
     setUser(getUserData());
@@ -26,11 +31,9 @@ const GLManagePlans = ({ data }) => {
     <>
       <div className="top-[71.5px] hidden flex-col gap-3 p-2 md:sticky md:flex">
         <ViewPlans1
-          plans={data.subscriptionPlans}
-          defaultSelect={data.subscriptionPlans?.[0]?._id}
-          btnText={idCreatorBuyer ? 'Edit page' : ''}
+          isCreatorBuyer={isCreatorBuyer}
           onPay={() => {
-            if (idCreatorBuyer) {
+            if (isCreatorBuyer) {
               router.push(`/dashboard/tg/${params.id}`);
               return;
             }
@@ -46,8 +49,11 @@ const GLManagePlans = ({ data }) => {
           <BuyButton
             animate={false}
             onClick={() => setOpenBottomSheet(true)}
+            disabled={data.status !== 1}
           >
-            Select a plan
+            {data.status === 1
+              ? 'Select a plan'
+              : statusErrorTextMapping[data.status]}
           </BuyButton>
         </div>
       </div>
@@ -63,8 +69,13 @@ const GLManagePlans = ({ data }) => {
       >
         <div className="flex flex-col gap-3 p-2">
           <ViewPlans1
-            plans={data.subscriptionPlans}
-            defaultSelect={data.subscriptionPlans?.[0]?._id}
+            isCreatorBuyer={isCreatorBuyer}
+            onPay={() => {
+              if (isCreatorBuyer) {
+                router.push(`/dashboard/tg/${params.id}`);
+                return;
+              }
+            }}
             onSelect={plan => {
               console.log(plan);
             }}
