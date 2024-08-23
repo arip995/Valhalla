@@ -46,7 +46,9 @@ const CreateTelegram = ({ data }) => {
             <LoadingOverlay
               visible={loading}
               zIndex={1000}
-              overlayProps={{ radius: 'sm', blur: 2 }}
+              overlayProps={{
+                blur: 2,
+              }}
             />
             <PaperWrapper
               className="!w-full"
