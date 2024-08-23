@@ -1,5 +1,4 @@
 import axiosInstance from '@/Utils/AxiosInstance';
-import { Compact } from '@/Utils/Common';
 import { rem, Text } from '@mantine/core';
 import {
   useDebouncedCallback,
@@ -21,8 +20,8 @@ const useProductListing = () => {
   const [loading, setLoading] = useState(-1);
   const [pageNo, setPageNo] = useState(1);
 
-  const setListingData = async () => {
-    if (!isFirstRender) setLoading(1);
+  const setListingData = async (showLoading = true) => {
+    if (!isFirstRender && showLoading) setLoading(1);
 
     try {
       const listingData = await axiosInstance.post(
@@ -67,28 +66,10 @@ const useProductListing = () => {
     productId
   ) => {
     await updateProducts(productId, updateData);
-    if (data.totalQueryCount === 1) {
-      if (pageNo > 1) {
-        setPageNo(prev => prev - 1);
-      } else {
-        setListingData();
-      }
+    if (data.totalQueryCount === 1 && pageNo > 1) {
+      setPageNo(prev => prev - 1);
     } else {
-      setData(prev => {
-        return {
-          ...prev,
-          totalQueryCount: prev.totalQueryCount - 1,
-          data: Compact(
-            prev.data.map(item => {
-              if (item._id === productId) return null;
-              return item;
-            })
-          ),
-        };
-      });
-    }
-    if (updateData === 2) {
-      setListingData();
+      setListingData(false);
     }
   };
 

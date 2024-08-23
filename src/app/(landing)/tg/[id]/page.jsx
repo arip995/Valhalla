@@ -81,8 +81,8 @@ export async function generateMetadata({ params }, parent) {
 
 export default async function Page({ params }) {
   const { data } = await getMetaData(params.id, 'tg');
+  if (!data?._id || data?.status === 5) notFound();
 
-  if (!data?._id) notFound();
   return (
     <ViewTelegram
       prefetchedData={data}

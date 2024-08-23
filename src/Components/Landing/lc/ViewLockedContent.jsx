@@ -1,10 +1,10 @@
 import '../../../styles/view/locked-content.css';
 import LockedContent from './LockedContent';
 
-const ViewLockedContent = async ({ data, id }) => {
+const ViewLockedContent = async ({ data, productId }) => {
   return (
     <div className="vlc-container" suppressHydrationWarning>
-      <LockedContent data={data} productId={id} />
+      <LockedContent data={data} productId={productId} />
     </div>
   );
 };

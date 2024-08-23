@@ -81,7 +81,9 @@ export async function generateMetadata({ params }, parent) {
 
 export default async function Page({ params }) {
   const { data } = await getMetaData(params.id, 'lc');
-  if (!data?._id) notFound();
+  if (!data?._id || data?.status === 5) notFound();
 
-  return <ViewLockedContent data={data} id={params.id} />;
+  return (
+    <ViewLockedContent data={data} productId={params.id} />
+  );
 }

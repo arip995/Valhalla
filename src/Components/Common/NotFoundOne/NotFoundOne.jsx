@@ -1,9 +1,8 @@
 'use client';
 
-import { Button, Text } from '@mantine/core';
-import React from 'react';
-import ListBlocks from '../Blocks/ListBlocks';
+import { Button } from '@mantine/core';
 import { useRouter } from 'next/navigation';
+import ListBlocks from '../Blocks/ListBlocks';
 
 const NotFoundOne = () => {
   const router = useRouter();
@@ -12,9 +11,6 @@ const NotFoundOne = () => {
     <div className="mx-auto flex h-screen max-w-screen-xl items-center justify-start bg-white px-4 md:px-8">
       <div className="mx-auto max-w-lg text-gray-600">
         <div className="space-y-3 text-center">
-          <Text size="lg" fw={500} c="violet.4">
-            404 Error
-          </Text>
           <p className="text-4xl font-semibold text-gray-800 sm:text-5xl">
             Page not found
           </p>
