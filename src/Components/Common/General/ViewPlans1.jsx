@@ -1,11 +1,11 @@
 'use client';
+import BuyButton from '@/Components/Landing/lc/BuyButton';
 import {
   CalculatePeriodString,
   CurrencySymbolMapping,
 } from '@/Constants/constants';
 import { discountPercentage } from '@/Utils/Common';
 import {
-  Button,
   CheckIcon,
   Grid,
   Group,
@@ -95,8 +95,7 @@ const ViewPlans1 = ({
           );
         })}
       </Radio.Group>
-      <Button
-        className="animate-shimmer bg-[linear-gradient(110deg,#7950f2,45%,#ffffff50,55%,#7950f2)] bg-[length:200%_100%]"
+      <BuyButton
         onClick={() => onPay(selectedPlan)}
         disabled={!selectedPlan}
         fullWidth
@@ -106,7 +105,7 @@ const ViewPlans1 = ({
           : selectedPlan
             ? 'Proceed to pay'
             : 'Select a plan'}
-      </Button>
+      </BuyButton>
     </div>
   );
 };
