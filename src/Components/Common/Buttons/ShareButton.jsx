@@ -1,4 +1,4 @@
-import { rem } from '@mantine/core';
+import { rem, Tooltip } from '@mantine/core';
 import { useClipboard } from '@mantine/hooks';
 import { modals } from '@mantine/modals';
 import {
@@ -52,38 +52,42 @@ const ShareButton = ({ disabled, link, className }) => {
         />
         <div>Share</div>
       </div>
-      <div
-        className={classNames(
-          'flex items-center justify-center gap-[8px] rounded-l-none rounded-r-[500px] border border-gray-300 bg-white py-[3px] pl-[6px] pr-[12px]',
-          {
-            'hover:bg-gray-100': !disabled,
-          }
-        )}
-        onClick={e => {
-          e.stopPropagation();
-          if (clipboard.copied || disabled) return;
-          clipboard.copy(link);
-        }}
+      <Tooltip
+        label={clipboard.copied ? 'Copied' : 'Copy link'}
       >
-        {clipboard.copied ? (
-          <IconCheck
-            style={{
-              width: rem(12),
-              height: rem(12),
-            }}
-            stroke={1.5}
-            color="teal"
-          />
-        ) : (
-          <IconCopy
-            style={{
-              width: rem(12),
-              height: rem(12),
-            }}
-            stroke={1.5}
-          />
-        )}
-      </div>
+        <div
+          className={classNames(
+            'flex items-center justify-center gap-[8px] rounded-l-none rounded-r-[500px] border border-gray-300 bg-white py-[3px] pl-[6px] pr-[12px]',
+            {
+              'hover:bg-gray-100': !disabled,
+            }
+          )}
+          onClick={e => {
+            e.stopPropagation();
+            if (clipboard.copied || disabled) return;
+            clipboard.copy(link);
+          }}
+        >
+          {clipboard.copied ? (
+            <IconCheck
+              style={{
+                width: rem(12),
+                height: rem(12),
+              }}
+              stroke={1.5}
+              color="teal"
+            />
+          ) : (
+            <IconCopy
+              style={{
+                width: rem(12),
+                height: rem(12),
+              }}
+              stroke={1.5}
+            />
+          )}
+        </div>
+      </Tooltip>
     </div>
   );
 };

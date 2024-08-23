@@ -2,7 +2,6 @@
 import ShareButton from '@/Components/Common/Buttons/ShareButton';
 import Table from '@/Components/Common/Table/Table';
 import TableBody from '@/Components/Common/Table/TableBody';
-import TableFixedCell from '@/Components/Common/Table/TableFixedCell';
 import TableHeader from '@/Components/Common/Table/TableHeader';
 import TableWrapper from '@/Components/Common/Table/TableWrapper';
 import {
@@ -167,7 +166,7 @@ const CustomTable = ({
                 <td className="min-w-36">
                   {item.totalSalesCount}
                 </td>
-                <TableFixedCell>
+                <td className="min-w-36">
                   <div className="flex items-center gap-2">
                     {!!showShare && (
                       <ShareButton
@@ -332,7 +331,7 @@ const CustomTable = ({
                       </Menu>
                     )}
                   </div>
-                </TableFixedCell>
+                </td>
               </tr>
             );
           })}
