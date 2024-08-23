@@ -12,9 +12,6 @@ export const getProductData = async (path, tag) => {
 };
 
 export const getMetaData = async (id, tag) => {
-  //   const headerList = headers();
-  //   const pathname = headerList.get('x-current-path');
-  //   const path = pathname.split('/')[1];
   const apiPath = `/product/get_individual_product_data/${tag}/${id}`;
   return await getProductData(apiPath, tag);
 };

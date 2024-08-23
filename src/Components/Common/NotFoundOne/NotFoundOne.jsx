@@ -44,7 +44,7 @@ const NotFoundOne = () => {
           <div className="flex w-full justify-center">
             <Button
               onClick={() => {
-                router.push('/creator/home');
+                router.push('/home');
               }}
             >
               Back to Homepage

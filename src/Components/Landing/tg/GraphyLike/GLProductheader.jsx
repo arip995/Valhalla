@@ -53,7 +53,7 @@ const GLProductheader = ({ data }) => {
                   <Menu.Dropdown>
                     <Menu.Item
                       onClick={() => {
-                        router.push('/purchases');
+                        router.push('/purchase');
                       }}
                       leftSection={
                         <IconShoppingCart

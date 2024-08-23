@@ -2,76 +2,71 @@ import { getCookie } from 'cookies-next';
 import { NextResponse } from 'next/server';
 
 export function middleware(req) {
-  const accessToken =
-    getCookie('accesstoken', { req }) || '';
-  const headers = new Headers(req.headers);
-  headers.set('x-current-path', req.nextUrl.pathname);
+  const isCreator = true;
+  const accessToken = getCookie('accesstoken', { req });
 
-  if (req.nextUrl.pathname === '/creator' && accessToken) {
-    return NextResponse.redirect(
-      new URL('/creator/home', req.url)
-    );
-  }
-  if (req.nextUrl.pathname === '/app' && accessToken) {
-    return NextResponse.redirect(
-      new URL('/app/lc', req.url)
-    );
-  }
+  const redirectPaths = [
+    { path: '/', redirect: '/home' },
+    { path: '/app', redirect: '/app/lc' },
+  ];
 
-  if (
-    req.nextUrl.pathname.startsWith('/signin') ||
-    req.nextUrl.pathname.startsWith('/signup')
-  ) {
-    if (accessToken) {
-      return NextResponse.redirect(
-        //Second param resolves the url object relative to second param
-        //With second patam pathname: /creator/home
-        //Without second patam pathname: /signin/creator/home
-        new URL('/creator/home', req.url)
-      );
+  const authRequiredPaths = [
+    { path: '/home', redirect: '/signin' },
+    { path: '/transaction', redirect: '/signin' },
+    { path: '/billing', redirect: '/signin' },
+    { path: '/audience', redirect: '/signin' },
+    { path: '/dashboard', redirect: '/signin' },
+    { path: '/purchase', redirect: '/signin' },
+    { path: '/account', redirect: '/signin' },
+  ];
+
+  const nonCreatorAllowedPaths = [
+    { path: '/purchase', next: true },
+    { path: '/account', next: true },
+  ];
+
+  if (accessToken) {
+    for (const { path, redirect } of redirectPaths) {
+      if (req.nextUrl.pathname === path) {
+        return NextResponse.redirect(
+          new URL(redirect, req.url)
+        );
+      }
     }
-  }
 
-  if (
-    req.nextUrl.pathname.startsWith('/creator') ||
-    req.nextUrl.pathname.startsWith('/dashboard')
-  ) {
     if (
-      !accessToken &&
-      !req.nextUrl.pathname.startsWith('/signin') &&
-      !req.nextUrl.pathname.startsWith('/signup')
+      req.nextUrl.pathname.startsWith('/signin') ||
+      req.nextUrl.pathname.startsWith('/signup')
     ) {
       return NextResponse.redirect(
-        new URL('/signin', req.url)
+        new URL('/home', req.url)
       );
     }
-  }
 
-  if (
-    req.nextUrl.pathname.startsWith('/lc') ||
-    req.nextUrl.pathname.startsWith('/tg')
-  ) {
-    return NextResponse.next({ headers });
+    if (!isCreator) {
+      if (
+        !nonCreatorAllowedPaths.some(({ path }) =>
+          req.nextUrl.pathname.startsWith(path)
+        )
+      ) {
+        return NextResponse.redirect(
+          new URL('/purchase', req.url)
+        );
+      }
+    }
+  } else {
+    for (const { path, redirect } of authRequiredPaths) {
+      if (req.nextUrl.pathname.startsWith(path)) {
+        return NextResponse.redirect(
+          new URL(redirect, req.url)
+        );
+      }
+    }
   }
 }
 
 export const config = {
   matcher: [
-    // '/creator',
-    // '/app',
-    // '/creator/home',
-    // '/creator/account',
-    // '/creator/transaction',
-    // '/creator/billing',
-    // '/creator/account',
-    // '/app/lc',
-    // '/app/tg',
-    // '/create/telegram',
-    // '/create/lc',
-    // '/signin',
-    // '/signup',
-    // '/tg/:path*',
-    // '/lc/',
     '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 };

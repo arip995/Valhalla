@@ -19,6 +19,7 @@ import {
   IconChevronUp,
   IconLogout,
   IconSettings,
+  IconUser,
 } from '@tabler/icons-react';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
@@ -38,10 +39,10 @@ export function NavbarLayout({ children }) {
   const [active, setActive] = useState(pathName);
 
   const Links = useMemo(() => {
-    const mapdata = !user?.isCreator
+    const mapData = !user?.isCreator
       ? SidenavData
       : [SidenavData[3], SidenavData[4]];
-    return mapdata.map(link => {
+    return mapData.map(link => {
       const { icon: Icon, label, path } = link;
       return (
         <NavbarLink
@@ -88,7 +89,7 @@ export function NavbarLayout({ children }) {
           </Group>
         </AppShell.Header>
         <AppShell.Navbar>
-          <Link href={'/creator/home'}>
+          <Link href={'/home'}>
             <AppShell.Section
               withHeader={false}
               py={12}
@@ -96,8 +97,8 @@ export function NavbarLayout({ children }) {
               className={classes.company}
               onClick={() => {
                 setOpened(false);
-                setActive('/creator/home');
-                router.push('/creator/home');
+                setActive('/home');
+                router.push('/home');
               }}
             >
               <img height={30} width={30} src={Logo.src} />{' '}
@@ -145,6 +146,21 @@ export function NavbarLayout({ children }) {
                 ></NavLink>
               </Menu.Target>
               <Menu.Dropdown>
+                <Link href={'/account'}>
+                  <Menu.Item
+                    leftSection={
+                      <IconUser
+                        style={{
+                          width: rem(17),
+                          height: rem(17),
+                        }}
+                        stroke={1.5}
+                      />
+                    }
+                  >
+                    Account
+                  </Menu.Item>
+                </Link>
                 <Menu.Item
                   color="red"
                   leftSection={

@@ -119,7 +119,7 @@ const useAuth = () => {
       }
       if (data?.data?.data?.user.username) {
         setTimeout(() => {
-          router.push('/creator/home');
+          router.push('/home');
         }, 3000);
       } else {
         setStep(2);
@@ -136,7 +136,7 @@ const useAuth = () => {
 
   useEffect(() => {
     if (user?.username) {
-      router.push('/creator/home');
+      router.push('/home');
     } else if (user?._id) {
       setStep(2);
     }

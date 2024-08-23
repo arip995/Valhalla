@@ -108,7 +108,7 @@ const StepTwoAuth = () => {
         { sendCookie: true }
       );
       setCurrentUser(data.data.data.user);
-      router.push('/creator/home');
+      router.push('/home');
       toast.success('Account created successfully');
     } catch (error) {
       setCreateLoading(false);

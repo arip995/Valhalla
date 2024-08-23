@@ -13,7 +13,7 @@ export default function NavbarLink({
     <>
       {create ? (
         <Divider
-          label={`Create`}
+          label={`Apps`}
           labelPosition="center"
           my="sm"
         />

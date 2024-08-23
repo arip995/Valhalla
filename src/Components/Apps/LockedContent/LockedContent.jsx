@@ -10,12 +10,6 @@ const PremiumContent = () => {
         title="Locked Content"
         path="/create/lockedcontent"
       />
-
-      {/* <iframe
-        src="http://localhost:3001/creator/home"
-        width="300"
-        height="500"
-      ></iframe> */}
     </div>
   );
 };
