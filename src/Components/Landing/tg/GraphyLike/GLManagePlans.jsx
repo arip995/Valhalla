@@ -32,6 +32,7 @@ const GLManagePlans = ({ data }) => {
       <div className="top-[71.5px] hidden flex-col gap-3 p-2 md:sticky md:flex">
         <ViewPlans1
           isCreatorBuyer={isCreatorBuyer}
+          data={data}
           onPay={() => {
             if (isCreatorBuyer) {
               router.push(`/dashboard/tg/${params.id}`);
@@ -70,6 +71,7 @@ const GLManagePlans = ({ data }) => {
         <div className="flex flex-col gap-3 p-2">
           <ViewPlans1
             isCreatorBuyer={isCreatorBuyer}
+            data={data}
             onPay={() => {
               if (isCreatorBuyer) {
                 router.push(`/dashboard/tg/${params.id}`);

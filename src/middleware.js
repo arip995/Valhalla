@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export function middleware(req) {
   let username = getCookie('username', { req });
-  username = username === 'true';
+  username = username === 'false' ? false : true;
   const accessToken = getCookie('accesstoken', { req });
   const redirectPaths = [
     { path: '/', redirect: '/home' },
