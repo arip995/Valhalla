@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 
 const GLProductheader = ({ data }) => {
   const router = useRouter();
-  const { user, removeUser } = useUser();
+  const { user, removeUser } = useUser(true);
 
   const onConfirm = () => {
     removeUser();

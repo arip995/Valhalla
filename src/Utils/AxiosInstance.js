@@ -7,6 +7,7 @@ const axiosInstance = axios.create({
 
 const sendCookieInterceptor = config => {
   const accesstoken = Cookies.get('accesstoken');
+  console.log(accesstoken);
   if (accesstoken) {
     config.headers = {
       ...config.headers,

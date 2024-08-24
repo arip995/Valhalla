@@ -2,9 +2,9 @@ import { getCookie } from 'cookies-next';
 import { NextResponse } from 'next/server';
 
 export function middleware(req) {
-  const username = getCookie('username', { req });
+  let username = getCookie('username', { req });
+  username = username === 'true';
   const accessToken = getCookie('accesstoken', { req });
-
   const redirectPaths = [
     { path: '/', redirect: '/home' },
     { path: '/app', redirect: '/app/lc' },
@@ -73,6 +73,6 @@ export function middleware(req) {
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|icon.png|manifest.webmanifest).*)',
   ],
 };
