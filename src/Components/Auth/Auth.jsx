@@ -4,7 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import StepOneAuth from './StepOneAuth';
 import StepTwoAuth from './StepTwoAuth';
 import useAuth from './useAuth';
-import '../../styles/auth/auth.css';
+import '../../styles/common/common-container.css';
 import React from 'react';
 
 const Auth = () => {
@@ -24,7 +24,7 @@ const Auth = () => {
 
   return (
     <>
-      <div className="signup-container signup-container-animation">
+      <div className="container-animation container">
         <div className="flex w-full flex-col items-center gap-2">
           {step === 1 ? (
             <StepOneAuth

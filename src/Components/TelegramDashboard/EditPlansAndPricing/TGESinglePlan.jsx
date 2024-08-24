@@ -97,7 +97,8 @@ const TGESinglePlan = ({
         <IconEdit
           stroke={1.5}
           size={18}
-          className="edit-icon cursor-pointer"
+          color="gray.4"
+          className="cursor-pointer"
           onClick={() => {
             onEdit(planObj._id);
           }}

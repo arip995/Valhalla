@@ -18,7 +18,7 @@ import {
   IconUpload,
 } from '@tabler/icons-react';
 import { Toaster } from 'react-hot-toast';
-import '../../../styles/create/LockedContent.css';
+import '../../../styles/common/common-container.css';
 import HeaderWrapper from '../../Auth/HeaderWrapper';
 import PaperWrapper from '../../Auth/PaperWrapper';
 import ListFiles from '../../Common/ListFiles/ListFiles';
@@ -39,8 +39,8 @@ const CreateLockedContent = ({ data }) => {
 
   return (
     <>
-      <div className="lc-container lc-container-animation">
-        <div className="flex w-11/12 max-w-[600px] flex-col items-center gap-2 md:w-1/2">
+      <div className="container">
+        <div className="flex w-11/12 max-w-[600px] flex-col items-center gap-3 md:w-1/2">
           <HeaderWrapper
             titleOne={'Create Locked Content'}
           />
@@ -58,7 +58,7 @@ const CreateLockedContent = ({ data }) => {
                 onSubmit={createLockedContentForm.onSubmit(
                   onCreate
                 )}
-                className="lc-create-from-wrapper"
+                className="flex w-full flex-col gap-2"
               >
                 <TextInput
                   label="Title"
@@ -93,6 +93,7 @@ const CreateLockedContent = ({ data }) => {
                   )}
                 />
                 <FileButton
+                  fullWidth
                   onChange={handleFileChange}
                   accept="image/*,application/*,video/mp4,audio/mp4"
                 >

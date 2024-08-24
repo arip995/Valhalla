@@ -92,7 +92,8 @@ const StepOneAuth = ({
                       : `+91 ${authForm?.values?.phoneNumber}`}
                   </Text>
                   <IconEdit
-                    className="edit-icon icon"
+                    color="gray.4"
+                    className="cursor-pointer"
                     onClick={() => toggleShowOtp()}
                     style={{
                       width: rem(18),

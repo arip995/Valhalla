@@ -1,11 +1,5 @@
 'use client';
 
-import { Toaster } from 'react-hot-toast';
-import '../../../styles/create/LockedContent.css';
-import '../../../styles/create/Telegram.css';
-import HeaderWrapper from '../../Auth/HeaderWrapper';
-import PaperWrapper from '../../Auth/PaperWrapper';
-import useCreateTelegram from './useCreateTelegram';
 import {
   ActionIcon,
   Box,
@@ -14,10 +8,16 @@ import {
   Text,
 } from '@mantine/core';
 import { IconArrowLeft } from '@tabler/icons-react';
+import React from 'react';
+import { Toaster } from 'react-hot-toast';
+import '../../../styles/common/common-container.css';
+import '../../../styles/create/Telegram.css';
+import HeaderWrapper from '../../Auth/HeaderWrapper';
+import PaperWrapper from '../../Auth/PaperWrapper';
 import StepOneCreateTelegram from './StepOneCreateTelegram';
 import StepThreeCreateTelegram from './StepThreeCreateTelegram';
 import StepTwoCreateTelegram from './StepTwoCreateTelegram';
-import React from 'react';
+import useCreateTelegram from './useCreateTelegram';
 
 const CreateTelegram = ({ data }) => {
   const {
@@ -37,7 +37,7 @@ const CreateTelegram = ({ data }) => {
 
   return (
     <>
-      <div className="lc-container lc-container-animation">
+      <div className="container">
         <div className="flex w-11/12 max-w-[600px] flex-col items-center gap-2 md:w-1/2">
           <HeaderWrapper
             titleOne={'Create Telegram Community'}
