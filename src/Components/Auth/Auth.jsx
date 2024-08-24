@@ -24,7 +24,7 @@ const Auth = () => {
 
   return (
     <>
-      <div className="container-animation container">
+      <div className="container-animation top-container">
         <div className="flex w-full flex-col items-center gap-2">
           {step === 1 ? (
             <StepOneAuth
