@@ -23,6 +23,8 @@ export function middleware(req) {
   const nonCreatorAllowedPaths = [
     { path: '/purchase', next: true },
     { path: '/account', next: true },
+    { path: '/lc', next: true },
+    { path: '/tg', next: true },
   ];
 
   if (accessToken) {
