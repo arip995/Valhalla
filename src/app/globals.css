@@ -15,7 +15,17 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+html,
+body {
+  overflow-y: scroll;
+  scrollbar-width: none; /* for Firefox */
+  -ms-overflow-style: none; /* for IE */
+}
 
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* for Chrome and Safari */
+}
 html {
   scroll-behavior: smooth;
 }
