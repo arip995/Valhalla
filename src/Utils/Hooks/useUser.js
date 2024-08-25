@@ -35,7 +35,7 @@ const useUser = (fetch = false) => {
     } catch (error) {
       console.log(error);
     } finally {
-      setLoadingGetUserData(true);
+      setLoadingGetUserData(false);
     }
   };
 

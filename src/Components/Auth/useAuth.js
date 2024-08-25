@@ -4,13 +4,19 @@ import { validateEmail } from '@/Utils/Regex';
 import { useForm } from '@mantine/form';
 import { useToggle } from '@mantine/hooks';
 import axios from 'axios';
-import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useAuth = () => {
-  const { user } = useUser();
+  const { user } = useUser(true);
+  const isFirstRender = useRef(true);
   const pathname = usePathname().substring(1);
+  const params = useSearchParams();
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -136,10 +142,46 @@ const useAuth = () => {
   };
 
   useEffect(() => {
-    if (user.isCreator && !user?.username) {
+    if (user?.isCreator && !user?.username) {
       setStep(2);
     }
   }, [user]);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (params.get('success') === 'false') {
+      setTimeout(() => {
+        toast.error(`failed to ${pathname}`);
+      }, 2000);
+      router.replace(`/${pathname}`);
+      return;
+    } else if (params.get('success') === 'true') {
+      setTimeout(() => {
+        toast.success(`Signed in successfully`);
+      }, 2000);
+      router.replace(`/${pathname}`);
+      return;
+    }
+    if (pathname === 'signin') {
+      if (params.get('createaccount') === 'true') {
+        setTimeout(() => {
+          toast.error(`Create a account first.`);
+        }, 2000);
+        router.replace(`/${pathname}`);
+      }
+      return;
+    } else {
+      if (params.get('signin') === 'true') {
+        setTimeout(() => {
+          toast.error(`Already have an account. Signin.`);
+        }, 2000);
+        router.replace(`/${pathname}`);
+      }
+    }
+  }, []);
 
   return {
     step,

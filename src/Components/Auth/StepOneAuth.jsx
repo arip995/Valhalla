@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Timer from '@/Common/Timer.jsx';
+import { googleOauth } from '@/Utils/Common';
 import {
   Anchor,
   Button,
@@ -19,11 +20,12 @@ import {
   IconPhone,
 } from '@tabler/icons-react';
 import Link from 'next/link';
+import React from 'react';
 import { Toaster } from 'react-hot-toast';
 import Logo from '../../../public/icons/neifyiconsmall.webp';
+import GoogleButton from '../Common/Buttons/GoogleButton/GoogleButton';
 import HeaderWrapper from './HeaderWrapper';
 import PaperWrapper from './PaperWrapper';
-import React from 'react';
 
 const StepOneAuth = ({
   pathname,
@@ -187,11 +189,12 @@ const StepOneAuth = ({
               labelPosition="center"
               my="lg"
             />
-            <Group grow mb="md" mt="md">
+            <div className="flex w-full flex-col gap-2 md:flex-row">
               <Button
                 radius="xl"
                 variant="default"
                 justify="space-between"
+                fullWidth
                 emailOrPhoneNumber={emailOrPhoneNumber}
                 rightSection={<span />}
                 leftSection={
@@ -219,7 +222,17 @@ const StepOneAuth = ({
                   ? 'Phone Number'
                   : 'Email'}
               </Button>
-            </Group>
+              <GoogleButton
+                radius="lg"
+                onClick={() =>
+                  googleOauth(
+                    `${pathname === 'signin' && 'isSignin=true'}&fromAuthPage=true`
+                  )
+                }
+              >
+                Continue with Google
+              </GoogleButton>
+            </div>
           </>
         ) : null}
       </PaperWrapper>

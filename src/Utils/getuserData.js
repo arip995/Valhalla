@@ -10,5 +10,9 @@ export const setUserData = data => {
 export const logout = () => {
   Cookies.remove('accesstoken');
   Cookies.remove('username');
-  localStorage.removeItem('user');
+  Cookies.remove('isCreator');
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    localStorage.removeItem(key);
+  }
 };

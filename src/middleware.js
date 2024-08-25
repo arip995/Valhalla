@@ -3,8 +3,11 @@ import { NextResponse } from 'next/server';
 
 export function middleware(req) {
   let username = getCookie('username', { req });
-  username = username === 'false' ? false : true;
+  username = username !== 'undefined';
+  let isCreator = getCookie('isCreator', { req });
+  isCreator = isCreator !== 'undefined';
   const accessToken = getCookie('accesstoken', { req });
+
   const redirectPaths = [
     { path: '/', redirect: '/home' },
     { path: '/app', redirect: '/app/lc' },
@@ -34,6 +37,26 @@ export function middleware(req) {
           req.nextUrl.pathname.startsWith(path)
         )
       ) {
+        if (isCreator) return;
+        return NextResponse.redirect(
+          new URL('/purchase', req.url)
+        );
+      }
+    }
+
+    if (
+      req.nextUrl.pathname.startsWith('/signin') ||
+      req.nextUrl.pathname.startsWith('/signup')
+    ) {
+      if (isCreator) {
+        if (!username) {
+          return;
+        } else {
+          return NextResponse.redirect(
+            new URL('/home', req.url)
+          );
+        }
+      } else {
         return NextResponse.redirect(
           new URL('/purchase', req.url)
         );
@@ -47,17 +70,6 @@ export function middleware(req) {
             new URL(redirect, req.url)
           );
         }
-      }
-    }
-
-    if (
-      req.nextUrl.pathname.startsWith('/signin') ||
-      req.nextUrl.pathname.startsWith('/signup')
-    ) {
-      if (username) {
-        return NextResponse.redirect(
-          new URL('/home', req.url)
-        );
       }
     }
   } else {

@@ -21,7 +21,7 @@ import {
 } from '@mantine/core';
 import { useDebouncedCallback } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import HeaderWrapper from './HeaderWrapper';
 import PaperWrapper from './PaperWrapper';
 import toast from 'react-hot-toast';
@@ -30,7 +30,7 @@ const UserTypeCards = UserTypes.map(item => (
   <Radio
     icon={CheckIcon}
     value={item.value}
-    label={item.value}
+    label={item.label}
     key={item.value}
   />
 ));
@@ -45,8 +45,8 @@ const CategoryCards = Categories.map(item => (
 
 const StepTwoAuth = () => {
   const router = useRouter();
-  const { setCurrentUser } = useUser();
-  const [initialized, setInitialized] = useState(false);
+  const { user, setCurrentUser } = useUser(true);
+  const isFirstRender = useRef(1);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
@@ -60,7 +60,7 @@ const StepTwoAuth = () => {
     async () => {
       let error = { ...errors };
       if (!username) {
-        error.username = 'usernameis reuired';
+        error.username = 'username is reuired';
         setErrors(() => error);
         return;
       }
@@ -122,14 +122,23 @@ const StepTwoAuth = () => {
   }, [firstName, lastName, usertype, category]);
 
   useEffect(() => {
-    if (initialized) {
-      validateUsername();
+    if (isFirstRender.current < 3) {
+      isFirstRender.current += 1;
+      return;
     }
+    validateUsername();
   }, [username]);
 
   useEffect(() => {
-    setInitialized(true);
-  }, []);
+    if (user) {
+      if (user.firstName) {
+        setFirstName(user.firstName);
+      }
+      if (user.lastName) {
+        setLastName(user.lastName);
+      }
+    }
+  }, [user?.firstName, user?.lastName]);
 
   return (
     <>
@@ -176,11 +185,17 @@ const StepTwoAuth = () => {
             error={errors?.username}
           />
         </Stack>
+
         <Radio.Group
           value={usertype}
           onChange={setUsertype}
+          className="w-full"
           mt={'md'}
-          label="I am"
+          label={
+            <div className="text-md mt-4 w-full text-center font-semibold">
+              I am
+            </div>
+          }
         >
           <Flex
             mih={50}
@@ -216,23 +231,25 @@ const StepTwoAuth = () => {
               {CategoryCards}
             </Flex>
           </Radio.Group>
-          <Button
-            mt="md"
-            radius="xl"
-            variant="filled"
-            loading={createLoading}
-            disabled={
-              Object.keys(errors || {}).length ||
-              !username.length ||
-              loading
-            }
-            onClick={() => {
-              handleOnboard();
-            }}
-            fullWidth
-          >
-            Start Earning
-          </Button>
+          <div className="sticky bottom-4">
+            <Button
+              mt="md"
+              radius="xl"
+              variant="filled"
+              loading={createLoading}
+              disabled={
+                Object.keys(errors || {}).length ||
+                !username.length ||
+                loading
+              }
+              onClick={() => {
+                handleOnboard();
+              }}
+              fullWidth
+            >
+              Start Earning
+            </Button>
+          </div>
         </Collapse>
       </PaperWrapper>
     </>

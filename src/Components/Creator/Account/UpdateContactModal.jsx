@@ -81,7 +81,11 @@ const UpdateContactModal = ({
         }}
       >
         {isOtpScreen ? (
-          <Stack justify="center" align="center">
+          <Stack
+            justify="center"
+            align="center"
+            className="pb-4 pt-8"
+          >
             <div className="flex gap-1">
               <Text size="sm" ta="center" fw={500}>
                 Otp sent to
@@ -124,7 +128,11 @@ const UpdateContactModal = ({
             </Button>
           </Stack>
         ) : (
-          <Flex gap="md" direction="column">
+          <Flex
+            gap="md"
+            direction="column"
+            className="pb-4 pt-8"
+          >
             {editEntity === 'email' ||
             editEntity === 'supportEmail' ? (
               <TextInput

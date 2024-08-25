@@ -54,6 +54,11 @@ export function discountPercentage(value, discountedValue) {
   return `${Math.round(100 * ((value - discountedValue) / value))}%`;
 }
 
-export const isDevEnv = () => {
+export const isDev = () => {
   return process.env.ENV === 'DEV';
+};
+
+export const googleOauth = query => {
+  const currentUrl = window.location.href;
+  window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/google/auth?redirect=${encodeURIComponent(currentUrl)}&${query}`;
 };
