@@ -7,7 +7,6 @@ export function middleware(req) {
   let isCreator = getCookie('isCreator', { req });
   isCreator = isCreator !== 'undefined';
   const accessToken = getCookie('accesstoken', { req });
-  console.log(username, accessToken, isCreator);
 
   const redirectPaths = [
     { path: '/', redirect: '/home' },

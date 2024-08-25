@@ -2,8 +2,15 @@ import { useEffect, useState } from 'react';
 import axiosInstance from '../AxiosInstance';
 import { logout } from '../getuserData';
 import useIsBrowser from '../useIsBrowser';
+import { getCookie } from 'cookies-next';
 
 const useUser = (fetch = false) => {
+  let username = getCookie('username');
+  username = username !== 'undefined';
+  let isCreator = getCookie('isCreator');
+  isCreator = isCreator !== 'undefined';
+  const accessToken = getCookie('accesstoken');
+  console.log(username, accessToken, isCreator);
   const [user, setUser] = useState(-1);
   const [loadingGetUserData, setLoadingGetUserData] =
     useState();
