@@ -84,7 +84,7 @@ const UpdateContactModal = ({
           <Stack
             justify="center"
             align="center"
-            className="pb-4 pt-8"
+            className="py-4"
           >
             <div className="flex gap-1">
               <Text size="sm" ta="center" fw={500}>
@@ -131,7 +131,7 @@ const UpdateContactModal = ({
           <Flex
             gap="md"
             direction="column"
-            className="pb-4 pt-8"
+            className="py-4"
           >
             {editEntity === 'email' ||
             editEntity === 'supportEmail' ? (
