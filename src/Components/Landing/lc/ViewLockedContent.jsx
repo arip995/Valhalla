@@ -3,7 +3,10 @@ import LockedContent from './LockedContent';
 
 const ViewLockedContent = async ({ data, productId }) => {
   return (
-    <div className="vlc-container" suppressHydrationWarning>
+    <div
+      className="vlc-container flex min-h-svh w-full overflow-auto"
+      suppressHydrationWarning
+    >
       <LockedContent data={data} productId={productId} />
     </div>
   );
