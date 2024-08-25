@@ -25,7 +25,7 @@ export async function generateMetadata({ params }, parent) {
       follow: false,
       nocache: true,
       googleBot: {
-        index: true,
+        index: false,
         follow: false,
         noimageindex: true,
         'max-video-preview': -1,
