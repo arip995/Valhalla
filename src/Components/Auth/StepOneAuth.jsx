@@ -54,32 +54,34 @@ const StepOneAuth = ({
         }
       />
       <PaperWrapper>
-        <HeaderWrapper
-          titleOneAlternative={
-            pathname === 'signin'
-              ? 'Log in'
-              : 'Create your account'
-          }
-          titleTwo={
-            <div className="flex w-full flex-wrap justify-center gap-2">
-              {pathname === 'signin'
-                ? 'Do not have an account yet?  '
-                : 'Already have an account?  '}
-              <div className="text-sm font-normal text-violet-500">
-                {pathname === 'signin' ? (
-                  <Link size="sm" href="/signup" prefetch>
-                    Create account
-                  </Link>
-                ) : (
-                  <Link size="sm" href="/signin" prefetch>
-                    Sign in
-                  </Link>
-                )}
-                .
+        {showOtp ? null : (
+          <HeaderWrapper
+            titleOneAlternative={
+              pathname === 'signin'
+                ? 'Log in'
+                : 'Create your account'
+            }
+            titleTwo={
+              <div className="flex w-full flex-wrap justify-center gap-2">
+                {pathname === 'signin'
+                  ? 'Do not have an account yet?  '
+                  : 'Already have an account?  '}
+                <div className="text-sm font-normal text-violet-500">
+                  {pathname === 'signin' ? (
+                    <Link size="sm" href="/signup" prefetch>
+                      Create account
+                    </Link>
+                  ) : (
+                    <Link size="sm" href="/signin" prefetch>
+                      Sign in
+                    </Link>
+                  )}
+                  .
+                </div>
               </div>
-            </div>
-          }
-        />
+            }
+          />
+        )}
         {showOtp ? (
           <>
             <form onSubmit={otpForm.onSubmit(handleSubmit)}>
@@ -94,12 +96,11 @@ const StepOneAuth = ({
                       : `+91 ${authForm?.values?.phoneNumber}`}
                   </Text>
                   <IconEdit
-                    color="gray.4"
-                    className="cursor-pointer"
+                    className="cursor-pointer text-gray-600"
                     onClick={() => toggleShowOtp()}
                     style={{
-                      width: rem(18),
-                      height: rem(18),
+                      width: rem(16),
+                      height: rem(16),
                     }}
                     stroke={1.5}
                   />
