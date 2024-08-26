@@ -12,7 +12,7 @@ import toast from 'react-hot-toast';
 
 const useCreateLockedContent = () => {
   const router = useRouter();
-  const isFirstRun = useRef(true);
+  const isFirstRender = useRef(true);
   const productId = usePathname().split('/')[3];
   const [isEdititng, setisEditing] = useState(false);
   const [editLoading, setEditLoading] = useState(false);
@@ -242,10 +242,11 @@ const useCreateLockedContent = () => {
   };
 
   useEffect(() => {
-    if (isFirstRun.current) {
-      isFirstRun.current = false;
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
       return;
     }
+    console.log(isFirstRender.current);
     if (productId) {
       setisEditing(true);
       fetchLcData();
