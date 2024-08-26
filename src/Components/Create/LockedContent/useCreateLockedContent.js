@@ -241,12 +241,12 @@ const useCreateLockedContent = () => {
     }
   };
 
+  console.log(isFirstRender.current);
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
-    console.log(isFirstRender.current);
     if (productId) {
       setisEditing(true);
       fetchLcData();
