@@ -98,6 +98,11 @@ const Filters = ({
           },
         }}
         onChange={event => {
+          if (event.currentTarget.value) {
+            if (event.currentTarget.value.trim() === '') {
+              return;
+            }
+          }
           setSearchValue(event.currentTarget.value);
           handleUpdate('search', event.currentTarget.value);
         }}
