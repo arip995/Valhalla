@@ -30,7 +30,7 @@ import NavbarLink from './NavbarLink';
 
 export function NavbarLayout({ children }) {
   const pathName = usePathname();
-  const user = useUser();
+  const { user } = useUser(true);
   const router = useRouter();
   const [opened, setOpened] = useState(false);
   const [active, setActive] = useState(pathName);
