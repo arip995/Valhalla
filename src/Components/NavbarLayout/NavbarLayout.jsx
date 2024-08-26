@@ -2,8 +2,8 @@
 
 import OfflineOverlay from '@/Common/OfflineOverlay';
 import { SidenavData } from '@/Constants/Navbarlayout';
-import { getUserData, logout } from '@/Utils/getuserData';
-import useIsBrowser from '@/Utils/useIsBrowser';
+import { logout } from '@/Utils/getuserData';
+import useUser from '@/Utils/Hooks/useUser';
 import {
   AppShell,
   Burger,
@@ -30,9 +30,7 @@ import NavbarLink from './NavbarLink';
 
 export function NavbarLayout({ children }) {
   const pathName = usePathname();
-  const isBrowser = useIsBrowser();
-  const user =
-    typeof window !== 'undefined' ? getUserData() : null;
+  const user = useUser();
   const router = useRouter();
   const [opened, setOpened] = useState(false);
   const [active, setActive] = useState(pathName);
@@ -110,7 +108,7 @@ export function NavbarLayout({ children }) {
             component={ScrollArea}
           >
             <div className="flex flex-col gap-2">
-              {!!isBrowser && Links}
+              {Links}
             </div>
           </AppShell.Section>
           <AppShell.Section className={classes.footer}>
