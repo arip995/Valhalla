@@ -54,8 +54,8 @@ export function discountPercentage(value, discountedValue) {
   return `${Math.round(100 * ((value - discountedValue) / value))}%`;
 }
 
-export const isDev = () => {
-  return process.env.ENV === 'DEV';
+export const isDevEnv = () => {
+  return process.env.NEXT_PUBLIC_ENV === 'DEV';
 };
 
 export const googleOauth = query => {

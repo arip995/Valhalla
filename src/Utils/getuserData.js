@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import { isDevEnv } from './Common';
 
 export const getUserData = () => {
   return JSON.parse(localStorage.getItem('user') || '{}');
@@ -8,21 +9,20 @@ export const setUserData = data => {
 };
 
 export const logout = () => {
-  Cookies.remove('accesstoken', {
+  const deleteCookieObject = {
     domain: 'nexify.club',
     secure: true,
     sameSite: 'None',
-  });
-  Cookies.remove('username', {
-    domain: 'nexify.club',
-    secure: true,
-    sameSite: 'None',
-  });
-  Cookies.remove('isCreator', {
-    domain: 'nexify.club',
-    secure: true,
-    sameSite: 'None',
-  });
+  };
+  if (isDevEnv()) {
+    delete deleteCookieObject.domain;
+    delete deleteCookieObject.secure;
+    delete deleteCookieObject.sameSite;
+  }
+
+  Cookies.remove('accesstoken', deleteCookieObject);
+  Cookies.remove('username', deleteCookieObject);
+  Cookies.remove('isCreator', deleteCookieObject);
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
     localStorage.removeItem(key);
