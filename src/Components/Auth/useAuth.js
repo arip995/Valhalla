@@ -130,7 +130,6 @@ const useAuth = () => {
         }, 3000);
       } else {
         setStep(2);
-        fetchUserData();
       }
     } catch (error) {
       setLoading(false);
@@ -161,6 +160,7 @@ const useAuth = () => {
       return;
     } else if (params.get('success') === 'true') {
       setTimeout(() => {
+        fetchUserData();
         toast.success(`Signed in successfully`);
       }, 2000);
       router.replace(`/${pathname}`);
