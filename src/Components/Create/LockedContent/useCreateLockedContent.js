@@ -2,17 +2,11 @@ import axiosInstance from '@/Utils/AxiosInstance';
 import { useForm } from '@mantine/form';
 import { randomId } from '@mantine/hooks';
 import { usePathname, useRouter } from 'next/navigation';
-import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useCreateLockedContent = () => {
   const router = useRouter();
-  const isFirstRender = useRef(true);
   const productId = usePathname().split('/')[3];
   const [isEdititng, setisEditing] = useState(false);
   const [editLoading, setEditLoading] = useState(false);
@@ -242,14 +236,9 @@ const useCreateLockedContent = () => {
   };
 
   useEffect(() => {
-    console.log(isFirstRender.current);
     if (productId) {
       setisEditing(true);
       fetchLcData();
-    }
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
     }
   }, []);
 
