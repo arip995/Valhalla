@@ -55,8 +55,10 @@ const CreateTelegram = ({ data }) => {
               showBackButton={true}
             >
               <div className="flex items-center justify-between">
-                {stepOneForm.values.isOtpScreen !== 0 &&
-                step === 1 ? (
+                {(stepOneForm.values.isOtpScreen !== 0 &&
+                  step === 1) ||
+                (!user?.telegramIntegrations.length !== 0 &&
+                  step === 1) ? (
                   <div />
                 ) : (
                   <ActionIcon
