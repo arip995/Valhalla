@@ -30,7 +30,7 @@ const useProductListing = () => {
           productType: app,
           pageNo: pageNo,
           status: status,
-          searchText,
+          searchText: searchText.trim(),
         }
       );
       setData(listingData.data.data);

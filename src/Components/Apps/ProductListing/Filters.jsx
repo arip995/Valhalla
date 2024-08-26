@@ -99,7 +99,7 @@ const Filters = ({
         }}
         onChange={event => {
           setSearchValue(event.currentTarget.value);
-          handleUpdate('search', event.target.value);
+          handleUpdate('search', event.currentTarget.value);
         }}
         leftSection={
           <IconSearch
