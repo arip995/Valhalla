@@ -8,24 +8,35 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-}
+} */
+
 html,
 body {
   overflow-y: scroll;
-  scrollbar-width: none; /* for Firefox */
-  -ms-overflow-style: none; /* for IE */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-  display: none; /* for Chrome and Safari */
+  display: none;
 }
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 1px;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }

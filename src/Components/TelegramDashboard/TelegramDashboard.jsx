@@ -24,8 +24,8 @@ const TelegramDashboard = ({ productId }) => {
 
   return (
     <>
-      <div className="tg-dashboard-container no-scrollbar">
-        <div className="no-scrollbar flex w-full max-w-[600px] flex-col items-center gap-4 p-3 md:p-6">
+      <div className="tg-dashboard-container">
+        <div className="flex w-full max-w-[600px] flex-col items-center gap-4 p-3 md:p-6">
           <TelegramDashboardOpenlink data={data} />
           <TelegramDashboardProfilepic
             data={data}
