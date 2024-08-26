@@ -13,7 +13,7 @@ import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useAuth = () => {
-  const { user, fetchUserData } = useUser();
+  const { user } = useUser(true);
   const isFirstRender = useRef(true);
   const pathname = usePathname().substring(1);
   const params = useSearchParams();
@@ -160,7 +160,6 @@ const useAuth = () => {
       return;
     } else if (params.get('success') === 'true') {
       setTimeout(() => {
-        fetchUserData();
         toast.success(`Signed in successfully`);
       }, 2000);
       router.replace(`/${pathname}`);
