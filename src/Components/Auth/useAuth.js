@@ -13,7 +13,7 @@ import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useAuth = () => {
-  const { user } = useUser();
+  const { user, fetchUserData } = useUser();
   const isFirstRender = useRef(true);
   const pathname = usePathname().substring(1);
   const params = useSearchParams();
@@ -130,6 +130,7 @@ const useAuth = () => {
         }, 3000);
       } else {
         setStep(2);
+        fetchUserData();
       }
     } catch (error) {
       setLoading(false);

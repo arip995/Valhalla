@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie';
+import { deleteCookie } from 'cookies-next';
 
 export const getUserData = () => {
   return JSON.parse(localStorage.getItem('user') || '{}');
@@ -8,9 +8,16 @@ export const setUserData = data => {
 };
 
 export const logout = () => {
-  Cookies.remove('accesstoken');
-  Cookies.remove('username');
-  Cookies.remove('isCreator');
+  deleteCookie('accesstoken', {
+    domain: window.location.hostname,
+  });
+  deleteCookie('username', {
+    domain: window.location.hostname,
+  });
+  deleteCookie('isCreator', {
+    domain: window.location.hostname,
+  });
+
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
     localStorage.removeItem(key);

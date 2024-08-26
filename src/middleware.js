@@ -73,12 +73,19 @@ export function middleware(req) {
         }
       }
     }
-  } else {
-    for (const { path, redirect } of authRequiredPaths) {
-      if (req.nextUrl.pathname.startsWith(path)) {
+  }
+  for (const { path, redirect } of authRequiredPaths) {
+    if (req.nextUrl.pathname.startsWith(path)) {
+      if (!accessToken) {
         return NextResponse.redirect(
           new URL(redirect, req.url)
         );
+      } else {
+        if (isCreator && !username) {
+          return NextResponse.redirect(
+            new URL(redirect, req.url)
+          );
+        }
       }
     }
   }

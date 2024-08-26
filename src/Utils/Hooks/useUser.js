@@ -58,6 +58,7 @@ const useUser = (fetch = false) => {
         : null,
     setUserData,
     setCurrentUser,
+    fetchUserData,
     loadingGetUserData,
     removeUser,
   };
