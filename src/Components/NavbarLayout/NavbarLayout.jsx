@@ -27,9 +27,11 @@ import { useEffect, useMemo, useState } from 'react';
 import Logo from '../../app/icon.png';
 import classes from '../../styles/Navbar/NavbarMinimal.module.css';
 import NavbarLink from './NavbarLink';
+import useIsBrowser from '@/Utils/useIsBrowser';
 
 export function NavbarLayout({ children }) {
   const pathName = usePathname();
+  const isBrowser = useIsBrowser();
   const { user } = useUser();
   const router = useRouter();
   const [opened, setOpened] = useState(false);
@@ -108,7 +110,7 @@ export function NavbarLayout({ children }) {
             component={ScrollArea}
           >
             <div className="flex flex-col gap-2">
-              {Links}
+              {!!isBrowser && Links}
             </div>
           </AppShell.Section>
           <AppShell.Section className={classes.footer}>
