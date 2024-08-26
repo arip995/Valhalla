@@ -13,7 +13,7 @@ import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useAuth = () => {
-  const { user } = useUser(true);
+  const { user } = useUser();
   const isFirstRender = useRef(true);
   const pathname = usePathname().substring(1);
   const params = useSearchParams();

@@ -32,7 +32,7 @@ import useIsBrowser from '@/Utils/useIsBrowser';
 export function NavbarLayout({ children }) {
   const pathName = usePathname();
   const isBrowser = useIsBrowser();
-  const { user } = useUser();
+  const { user } = useUser(true);
   const router = useRouter();
   const [opened, setOpened] = useState(false);
   const [active, setActive] = useState(pathName);
