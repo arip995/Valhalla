@@ -41,7 +41,7 @@ export const SidenavData = [
     value: 'audience',
     path: '/audience',
   },
-  { create: true },
+  { apps: true },
   {
     icon: IconLockDollar,
     label: 'Locked Content',
@@ -56,9 +56,9 @@ export const SidenavData = [
   },
   {
     icon: IconCash,
-    label: 'Payment Page',
-    value: 'paymentPage',
-    path: '/app/paymentpage',
+    label: 'Digital Products',
+    value: 'digitalproduct',
+    path: '/app/digitalproduct',
   },
   {
     icon: IconCertificate,

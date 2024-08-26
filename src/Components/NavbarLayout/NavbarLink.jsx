@@ -7,11 +7,11 @@ export default function NavbarLink({
   active,
   path,
   onClick,
-  create = false,
+  apps = false,
 }) {
   return (
     <>
-      {create ? (
+      {apps ? (
         <Divider
           label={`Apps`}
           labelPosition="center"

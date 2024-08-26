@@ -45,7 +45,7 @@ export function NavbarLayout({ children }) {
       const { icon: Icon, label, path } = link;
       return (
         <NavbarLink
-          create={link.create}
+          apps={link.apps}
           Icon={Icon}
           label={label}
           key={link.label}
