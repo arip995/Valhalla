@@ -19,7 +19,7 @@ const PaperWrapper = ({
         <Tooltip label="Exit" position="right">
           <ActionIcon
             variant="default"
-            className="fixed left-2 top-2"
+            className="!fixed left-2 top-2"
             size="lg"
             radius="lg"
             onClick={() => {

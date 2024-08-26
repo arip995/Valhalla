@@ -132,7 +132,7 @@ const CreateLockedContent = ({ data }) => {
                     'price'
                   )}
                 />
-                <div className="sticky bottom-4 z-20 flex w-full flex-col gap-2 bg-white">
+                <div className="!sticky bottom-4 z-20 flex w-full flex-col gap-2 bg-white">
                   <Button
                     fullWidth
                     loading={editLoading}
