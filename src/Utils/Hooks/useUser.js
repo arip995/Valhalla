@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axiosInstance from '../AxiosInstance';
-import { getUserData, logout } from '../getuserData';
+import { logout } from '../getuserData';
 import useIsBrowser from '../useIsBrowser';
 import { getCookie } from 'cookies-next';
 
@@ -9,7 +9,7 @@ const useUser = (fetch = false) => {
   let isCreator = getCookie('isCreator');
   const accessToken = getCookie('accesstoken');
   console.log(username, accessToken, isCreator);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(-1);
   const [loadingGetUserData, setLoadingGetUserData] =
     useState();
   const isBrowser = useIsBrowser();
@@ -24,7 +24,6 @@ const useUser = (fetch = false) => {
     localStorage.removeItem('user');
     localStorage.setItem('user', JSON.stringify(data));
   };
-
   const removeUser = () => {
     logout();
     setUser(null);
@@ -47,7 +46,7 @@ const useUser = (fetch = false) => {
 
   useEffect(() => {
     if (isBrowser) {
-      getUserData();
+      setUserData();
       if (fetch) {
         fetchUserData();
         return;
