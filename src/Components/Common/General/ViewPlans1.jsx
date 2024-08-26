@@ -103,7 +103,7 @@ const ViewPlans1 = ({
         fullWidth
       >
         {data.status === 1
-          ? `${isCreatorBuyer ? 'Edit page' : 'Proceed to pay'}`
+          ? `${isCreatorBuyer ? 'Owner, Edit page' : 'Proceed to pay'}`
           : statusErrorTextMapping[data.status]}
       </BuyButton>
     </div>
