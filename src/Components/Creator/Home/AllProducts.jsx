@@ -22,10 +22,10 @@ const ListData = [
     path: '/app/tg',
   },
   {
-    title: 'Paymnent Page',
+    title: 'Digital Products',
     icon: IconCreditCard,
     color: 'violet',
-    path: '/app/paymentpage',
+    path: '/app/dp',
   },
 
   {

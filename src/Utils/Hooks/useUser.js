@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axiosInstance from '../AxiosInstance';
-import { logout } from '../getuserData';
+import { getUserData, logout } from '../getuserData';
 import useIsBrowser from '../useIsBrowser';
 
 const useUser = (fetch = false) => {
@@ -19,6 +19,7 @@ const useUser = (fetch = false) => {
     localStorage.removeItem('user');
     localStorage.setItem('user', JSON.stringify(data));
   };
+
   const removeUser = () => {
     logout();
     setUser(null);
@@ -50,7 +51,11 @@ const useUser = (fetch = false) => {
   }, [isBrowser]);
 
   return {
-    user,
+    user: user
+      ? user
+      : typeof window !== 'undefined'
+        ? getUserData()
+        : null,
     setUserData,
     setCurrentUser,
     loadingGetUserData,

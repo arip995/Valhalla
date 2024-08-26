@@ -58,7 +58,7 @@ export const SidenavData = [
     icon: IconCash,
     label: 'Digital Products',
     value: 'digitalproduct',
-    path: '/app/digitalproduct',
+    path: '/app/dp',
   },
   {
     icon: IconCertificate,
