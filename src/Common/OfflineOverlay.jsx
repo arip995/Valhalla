@@ -1,19 +1,19 @@
 import useOfflineStatus from '@/Utils/Hooks/useOfflineStatus';
-import useIsBrowser from '@/Utils/useIsBrowser';
+// import useIsBrowser from '@/Utils/useIsBrowser';
 import { IconCloudOff } from '@tabler/icons-react';
-import dynamic from 'next/dynamic';
-const DisableDevtool = dynamic(
-  () => import('disable-devtool'),
-  {
-    ssr: false, // disable server-side rendering for this module
-  }
-);
+// import dynamic from 'next/dynamic';
+// const DisableDevtool = dynamic(
+//   () => import('disable-devtool'),
+//   {
+//     ssr: false, // disable server-side rendering for this module
+//   }
+// );
 const OfflineOverlay = () => {
   const isOnline = useOfflineStatus();
-  const isBrowser = useIsBrowser();
-  if (process.env.NEXT_PUBLIC_ENV !== 'DEV' && isBrowser) {
-    DisableDevtool();
-  }
+  // const isBrowser = useIsBrowser();
+  // if (process.env.NEXT_PUBLIC_ENV !== 'DEV' && isBrowser) {
+  //   DisableDevtool();
+  // }
   if (isOnline) {
     return null;
   }
