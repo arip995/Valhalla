@@ -189,7 +189,7 @@ const useCreateTelegram = () => {
           phoneNumber,
         }
       );
-      toast.success('Otp sent successfully');
+      toast.success('Otp sent to telegram successfully');
       stepOneForm.setFieldValue(
         'sessionString',
         data.data.data.sessionString

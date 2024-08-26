@@ -71,7 +71,7 @@ const StepOneCreateTelegram = ({
             <>
               <Flex gap={'xs'} align="center">
                 <Text size="sm" ta="center" c={'dimmed'}>
-                  Otp sent to{' '}
+                  Otp sent to telegram{' '}
                   {stepOneForm.values.phoneNumber ||
                     stepOneForm.values.selectedNumber}
                 </Text>
