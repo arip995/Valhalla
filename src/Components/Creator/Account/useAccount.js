@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useAccount = () => {
-  const { user, getUserData, setCurrentUser } =
+  const { user, setUserData, setCurrentUser } =
     useUser(true);
   const [loading, setLoading] = useState({
     showUpdatePersonalInfoButton: false,
@@ -46,7 +46,7 @@ const useAccount = () => {
       console.log(error);
       toast.error('An error occured at our side');
     } finally {
-      getUserData();
+      setUserData();
       setLoading(prev => {
         return {
           ...prev,
@@ -70,7 +70,7 @@ const useAccount = () => {
     } catch (error) {
       toast.error(error?.response?.data?.message || '');
     } finally {
-      getUserData();
+      setUserData();
     }
   };
 
@@ -97,7 +97,7 @@ const useAccount = () => {
       toast.error(error?.response?.data?.message || '');
     } finally {
       toggleLoadingImage();
-      getUserData();
+      setUserData();
     }
   };
 

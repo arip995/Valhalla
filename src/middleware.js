@@ -21,6 +21,7 @@ export function middleware(req) {
     { path: '/dashboard', redirect: '/signin' },
     { path: '/purchase', redirect: '/signin' },
     { path: '/account', redirect: '/signin' },
+    { path: '/app', redirect: '/signin' },
   ];
 
   const nonCreatorAllowedPaths = [

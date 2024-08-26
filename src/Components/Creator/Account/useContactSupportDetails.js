@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useContactSupportDetails = () => {
-  const { user, getUserData, setCurrentUser } = useUser();
+  const { user, setUserData, setCurrentUser } = useUser();
   const [initiaContactData, setInitialContactData] =
     useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
@@ -137,7 +137,7 @@ const useContactSupportDetails = () => {
       setOtp('');
       setEditEntity('');
       setPreviousData();
-      getUserData();
+      setUserData();
     }
   }, [opened]);
   useEffect(() => {
