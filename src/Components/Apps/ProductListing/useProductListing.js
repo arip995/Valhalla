@@ -172,6 +172,7 @@ const useProductListing = () => {
   if (isFirstRender) {
     setListingData();
   }
+
   return {
     app,
     data,

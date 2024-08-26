@@ -9,12 +9,11 @@ import {
   useRouter,
   useSearchParams,
 } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useAuth = () => {
   const { user } = useUser(true);
-  const isFirstRender = useRef(true);
   const pathname = usePathname().substring(1);
   const params = useSearchParams();
   const router = useRouter();
@@ -148,10 +147,6 @@ const useAuth = () => {
   }, [user]);
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
     if (params.get('success') === 'false') {
       setTimeout(() => {
         toast.error(`failed to ${pathname}`);
