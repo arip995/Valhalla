@@ -60,5 +60,5 @@ export const isDevEnv = () => {
 
 export const googleOauth = query => {
   const currentUrl = window.location.href;
-  window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/google/auth?redirect=${encodeURIComponent(currentUrl)}&${query}`;
+  window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/google/auth?redirect=${encodeURIComponent(currentUrl)}${!!query && `&${query}`}`;
 };

@@ -148,7 +148,6 @@ const StepOneAuth = ({
                   label="Email"
                   placeholder="hello@panda.dev"
                   value={authForm.values.email}
-                  radius="md"
                   autocomplete="email"
                   {...authForm.getInputProps('email')}
                 />
@@ -161,7 +160,6 @@ const StepOneAuth = ({
                   placeholder="6345325643"
                   autocomplete="tel"
                   value={authForm.values.phoneNumber}
-                  radius="md"
                   leftSection={<Text size="sm">+91</Text>}
                   {...authForm.getInputProps('phoneNumber')}
                 />
@@ -196,7 +194,6 @@ const StepOneAuth = ({
                 variant="default"
                 justify="space-between"
                 fullWidth
-                emailOrPhoneNumber={emailOrPhoneNumber}
                 rightSection={<span />}
                 leftSection={
                   emailOrPhoneNumber === 'email' ? (

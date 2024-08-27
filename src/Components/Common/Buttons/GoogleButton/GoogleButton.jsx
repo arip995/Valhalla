@@ -5,10 +5,14 @@ const GoogleButton = props => {
   return (
     <Button
       leftSection={<GoogleIcon />}
+      justify="space-between"
+      rightSection={<span />}
       fullWidth
       variant="default"
       {...props}
-    />
+    >
+      Log in via Google
+    </Button>
   );
 };
 

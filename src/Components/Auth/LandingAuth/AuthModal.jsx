@@ -1,0 +1,290 @@
+import GoogleButton from '@/Components/Common/Buttons/GoogleButton/GoogleButton';
+import { googleOauth } from '@/Utils/Common';
+import {
+  Anchor,
+  Button,
+  Divider,
+  Modal,
+  NumberInput,
+  PinInput,
+  rem,
+  Text,
+  TextInput,
+} from '@mantine/core';
+import {
+  IconChevronLeft,
+  IconEdit,
+  IconMail,
+  IconMailFilled,
+  IconPhone,
+  IconPhoneFilled,
+} from '@tabler/icons-react';
+import React from 'react';
+import uselandingAuth from './uselandingAuth';
+import Timer from '@/Common/Timer';
+
+const AuthModal = ({
+  opened,
+  onClose = () => {},
+  onAuthComplete = () => {},
+  signin = true,
+}) => {
+  const {
+    isSignin,
+    setIsSignin,
+    step,
+    setStep,
+    isEmail,
+    setIsEmail,
+    authForm,
+    otpForm,
+    handleAuthSubmit,
+    handleOtpSubmit,
+    loading,
+  } = uselandingAuth(signin, onAuthComplete);
+
+  return (
+    <Modal
+      opened={opened}
+      onClose={onClose}
+      keepMounted={false}
+      title={
+        step === 2 ? (
+          <IconChevronLeft
+            onClick={() => setStep(1)}
+            style={{
+              width: rem(20),
+              height: rem(20),
+            }}
+            stroke={1.5}
+          />
+        ) : null
+      }
+      overlayProps={{
+        backgroundOpacity: 0.55,
+        blur: 3,
+      }}
+    >
+      <div className="flex w-full flex-col gap-2 p-4">
+        {step === 1 ? (
+          <>
+            <div className="pb-3 text-lg font-semibold">
+              {isSignin
+                ? 'Log in and continue'
+                : 'Create an account'}
+            </div>
+            <GoogleButton onClick={googleOauth} />
+            <Button
+              variant="default"
+              justify="space-between"
+              fullWidth
+              rightSection={<span />}
+              leftSection={
+                isEmail ? (
+                  <IconPhone
+                    style={{
+                      width: rem(20),
+                      height: rem(20),
+                    }}
+                    stroke={1.5}
+                  />
+                ) : (
+                  <IconMail
+                    style={{
+                      width: rem(20),
+                      height: rem(20),
+                    }}
+                    stroke={1.5}
+                  />
+                )
+              }
+              onClick={() => setIsEmail(prev => !prev)}
+            >
+              {isEmail ? 'Phone Number' : 'Email'}
+            </Button>
+            <Divider
+              label="or"
+              labelPosition="center"
+              my="md"
+            />
+            <form
+              className="flex w-full flex-col gap-4"
+              onSubmit={authForm?.onSubmit(
+                handleAuthSubmit
+              )}
+            >
+              {isEmail ? (
+                <TextInput
+                  placeholder="Email"
+                  value={authForm?.values.email}
+                  autocomplete="email"
+                  {...authForm?.getInputProps('email')}
+                />
+              ) : (
+                <NumberInput
+                  hideControls
+                  clampBehavior="strict"
+                  max={9999999999}
+                  placeholder="Phone Number"
+                  autocomplete="tel"
+                  value={authForm?.values.phoneNumber}
+                  leftSection={<Text size="sm">+91</Text>}
+                  {...authForm?.getInputProps(
+                    'phoneNumber'
+                  )}
+                />
+              )}
+              {!isSignin ? (
+                <TextInput
+                  placeholder="Full Name"
+                  autocomplete="name"
+                  value={authForm?.values.name}
+                  {...authForm?.getInputProps('name')}
+                />
+              ) : null}
+              <Button
+                type="submit"
+                fullWidth
+                color="black"
+                loading={loading === 1}
+                leftSection={
+                  isEmail ? (
+                    <IconMailFilled
+                      color="white"
+                      style={{
+                        width: rem(20),
+                        height: rem(20),
+                      }}
+                    />
+                  ) : (
+                    <IconPhoneFilled
+                      color="white"
+                      style={{
+                        width: rem(20),
+                        height: rem(20),
+                      }}
+                    />
+                  )
+                }
+                onClick={() => {
+                  authForm.setValues({
+                    isClickedAtleastOnce: true,
+                  });
+                }}
+              >
+                {`${isSignin ? 'Log in' : 'Sign up'} via ${isEmail ? 'Email' : 'Phone Number'} OTP`}
+              </Button>
+            </form>
+            <div className="text-xs font-normal">
+              {isSignin ? (
+                <>
+                  Don’t have an account?{' '}
+                  <span
+                    className="cursor-pointer underline"
+                    onClick={() => setIsSignin(false)}
+                  >
+                    Sign up
+                  </span>
+                </>
+              ) : (
+                <>
+                  Already have an account?{' '}
+                  <span
+                    className="cursor-pointer underline"
+                    onClick={() => setIsSignin(true)}
+                  >
+                    Sign in
+                  </span>
+                </>
+              )}
+            </div>
+            <div className="mt-6 text-center text-xs text-slate-500">
+              <div>
+                By continuing, you agree to our Terms of
+              </div>
+              <div className="mt-1 flex w-full justify-center gap-1">
+                <a
+                  href="/terms-and-conditions"
+                  className="cursor-pointer text-black"
+                >
+                  Terms of Service
+                </a>
+                <div className=" ">&</div>
+                <a
+                  href="/privacy-policy"
+                  className="cursor-pointer text-black"
+                >
+                  Privacy Policy
+                </a>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="py-1 text-lg font-semibold">
+              An OTP has been sent to your{' '}
+              {isEmail ? 'email' : 'phone number'}
+            </div>
+            <div className="text-sm font-normal">
+              {isEmail
+                ? `Please check your email ${authForm?.values?.email}.com . If you can't find the email, please check your spam folders.`
+                : `Please check your phone number ${authForm?.values?.phoneNumber}`}
+            </div>
+            <form
+              className="flex w-full flex-col gap-4"
+              onSubmit={otpForm?.onSubmit(handleOtpSubmit)}
+            >
+              <div className="flex gap-1">
+                <Text size="sm" ta="center" c={'dimmed'}>
+                  {isEmail
+                    ? authForm?.values?.email
+                    : `+91 ${authForm?.values?.phoneNumber}`}
+                </Text>
+                <IconEdit
+                  className="cursor-pointer text-gray-600"
+                  onClick={() => setStep(1)}
+                  style={{
+                    width: rem(16),
+                    height: rem(16),
+                  }}
+                  stroke={1.5}
+                />
+              </div>
+              <PinInput
+                size="lg"
+                length={5}
+                type="number"
+                {...(otpForm?.getInputProps('otp') || {})}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                loading={loading}
+                onClick={() => {
+                  otpForm.setValues({
+                    isClickedAtleastOnce: true,
+                  });
+                }}
+              >
+                Verify OTP
+              </Button>
+              <Text size="sm" ta="center" mt={20}>
+                Resend otp in{' '}
+                <Anchor size="sm" component="button">
+                  <Timer
+                    onClick={() => {
+                      handleAuthSubmit('resend');
+                    }}
+                    completedContent="Resend"
+                  />
+                </Anchor>
+              </Text>
+            </form>
+          </>
+        )}
+      </div>
+    </Modal>
+  );
+};
+
+export default React.memo(AuthModal);
