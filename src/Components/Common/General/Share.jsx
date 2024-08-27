@@ -194,7 +194,6 @@ const Share = ({
                 {({ copied, copy }) => (
                   <Tooltip
                     label={copied ? 'Copied' : 'Copy'}
-                    position="right"
                   >
                     <ActionIcon
                       color={copied ? 'teal' : 'gray'}
