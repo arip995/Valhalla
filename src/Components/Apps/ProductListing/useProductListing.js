@@ -37,7 +37,7 @@ const useProductListing = () => {
     } catch (error) {
       toast.error(
         error?.response?.data?.message ||
-          'An error occured at our side'
+          'Check your internet connection'
       );
     } finally {
       setLoading(0);

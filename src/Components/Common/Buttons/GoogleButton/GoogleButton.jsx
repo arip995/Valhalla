@@ -11,7 +11,9 @@ const GoogleButton = props => {
       variant="default"
       {...props}
     >
-      Log in via Google
+      {props?.children
+        ? props.children
+        : 'Log in via Google'}
     </Button>
   );
 };

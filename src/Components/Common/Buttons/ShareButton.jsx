@@ -33,8 +33,6 @@ const ShareButton = ({ disabled, link, className }) => {
           if (disabled) return;
           modals.open({
             title: 'Share on Social',
-            closeOnClickOutside: false,
-            closeOnEscape: false,
             children: (
               <div className="pb-4 pt-8">
                 <Share url={link} />

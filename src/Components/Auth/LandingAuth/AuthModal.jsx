@@ -1,3 +1,4 @@
+import Timer from '@/Common/Timer';
 import GoogleButton from '@/Components/Common/Buttons/GoogleButton/GoogleButton';
 import { googleOauth } from '@/Utils/Common';
 import {
@@ -15,19 +16,16 @@ import {
   IconChevronLeft,
   IconEdit,
   IconMail,
-  IconMailFilled,
   IconPhone,
-  IconPhoneFilled,
 } from '@tabler/icons-react';
 import React from 'react';
 import uselandingAuth from './uselandingAuth';
-import Timer from '@/Common/Timer';
 
 const AuthModal = ({
   opened,
   onClose = () => {},
   onAuthComplete = () => {},
-  signin = true,
+  signin = false,
 }) => {
   const {
     isSignin,
@@ -149,7 +147,7 @@ const AuthModal = ({
                 loading={loading === 1}
                 leftSection={
                   isEmail ? (
-                    <IconMailFilled
+                    <IconMail
                       color="white"
                       style={{
                         width: rem(20),
@@ -157,7 +155,7 @@ const AuthModal = ({
                       }}
                     />
                   ) : (
-                    <IconPhoneFilled
+                    <IconPhone
                       color="white"
                       style={{
                         width: rem(20),
@@ -175,7 +173,7 @@ const AuthModal = ({
                 {`${isSignin ? 'Log in' : 'Sign up'} via ${isEmail ? 'Email' : 'Phone Number'} OTP`}
               </Button>
             </form>
-            <div className="text-xs font-normal">
+            <div className="mt-2 text-xs font-normal">
               {isSignin ? (
                 <>
                   Don’t have an account?{' '}
@@ -204,6 +202,7 @@ const AuthModal = ({
               </div>
               <div className="mt-1 flex w-full justify-center gap-1">
                 <a
+                  target="_blank"
                   href="/terms-and-conditions"
                   className="cursor-pointer text-black"
                 >
@@ -211,6 +210,7 @@ const AuthModal = ({
                 </a>
                 <div className=" ">&</div>
                 <a
+                  target="_blank"
                   href="/privacy-policy"
                   className="cursor-pointer text-black"
                 >

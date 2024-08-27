@@ -145,7 +145,10 @@ export function NavbarLayout({ children }) {
                 ></NavLink>
               </Menu.Target>
               <Menu.Dropdown>
-                <Link href={'/account'}>
+                <Link
+                  href={'/account'}
+                  onClick={() => setOpened(false)}
+                >
                   <Menu.Item
                     leftSection={
                       <IconUser

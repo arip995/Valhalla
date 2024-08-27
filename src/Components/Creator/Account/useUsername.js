@@ -53,7 +53,7 @@ const useUsername = () => {
     } catch (error) {
       console.log(error);
       setShowUpdateUsernameButton(false);
-      toast.error('An error occured at our side');
+      toast.error('Check your internet connection');
     }
   };
 
