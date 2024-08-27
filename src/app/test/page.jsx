@@ -6,10 +6,10 @@ import { useState } from 'react';
 
 const page = () => {
   const [opened, setOpened] = useState(false);
-  const googleOauth = () => {
-    const currentUrl = window.location.href;
-    window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/google/auth?redirect=${encodeURIComponent(currentUrl)}`;
-  };
+  // const googleOauth = () => {
+  //   const currentUrl = window.location.href;
+  //   window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/google/auth?redirect=${encodeURIComponent(currentUrl)}`;
+  // };
 
   return (
     <>
