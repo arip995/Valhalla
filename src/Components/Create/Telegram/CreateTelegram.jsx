@@ -57,7 +57,8 @@ const CreateTelegram = ({ data }) => {
               <div className="flex items-center justify-between">
                 {(stepOneForm.values.isOtpScreen !== 0 &&
                   step === 1) ||
-                (!user?.telegramIntegrations.length !== 0 &&
+                (!user?.telegramIntegrations?.length !==
+                  0 &&
                   step === 1) ? (
                   <div />
                 ) : (
