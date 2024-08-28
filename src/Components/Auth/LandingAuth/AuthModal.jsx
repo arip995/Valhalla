@@ -40,10 +40,11 @@ const AuthModal = ({
     sendOtp,
     verifyOtp,
     loading,
-  } = uselandingAuth(signin, onAuthComplete);
+  } = uselandingAuth(signin, onAuthComplete, opened);
 
   return (
     <Modal
+      trapFocus={false}
       opened={opened}
       onClose={onClose}
       keepMounted={false}
@@ -249,7 +250,7 @@ const AuthModal = ({
               <Button
                 type="submit"
                 fullWidth
-                loading={loading}
+                loading={loading === 2}
                 onClick={() => {
                   otpForm.setValues({
                     isClickedAtleastOnce: true,

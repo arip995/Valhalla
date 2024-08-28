@@ -37,7 +37,7 @@ const useProductListing = () => {
     } catch (error) {
       toast.error(
         error?.response?.data?.message ||
-          'Check your internet connection'
+          'No internet connection'
       );
     } finally {
       setLoading(0);

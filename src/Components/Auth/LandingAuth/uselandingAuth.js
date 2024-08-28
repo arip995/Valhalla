@@ -3,14 +3,14 @@ import { convertFullNameToFirstNameLastName } from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
 import { validateEmail } from '@/Utils/Regex';
 import { useForm } from '@mantine/form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-const uselandingAuth = (signin, onAuthComplete) => {
+const uselandingAuth = (signin, onAuthComplete, opened) => {
   const [isSignin, setIsSignin] = useState(signin);
-  const { setUserData } = useUser(true);
+  const { setCurrentUser } = useUser();
   const [step, setStep] = useState(1);
-  const [isEmail, setIsEmail] = useState(true);
+  const [isEmail, setIsEmail] = useState(false);
   const [loading, setLoading] = useState(0);
   const authForm = useForm({
     initialValues: {
@@ -43,7 +43,6 @@ const uselandingAuth = (signin, onAuthComplete) => {
         : null,
     }),
   });
-
   const otpForm = useForm({
     initialValue: { otp: '', isClickedAtleastOnce: false },
     validateInputOnChange: true,
@@ -56,10 +55,18 @@ const uselandingAuth = (signin, onAuthComplete) => {
     }),
   });
 
+  const reset = () => {
+    setIsSignin(signin);
+    setStep(1);
+    setIsEmail(false);
+    setLoading(0);
+    authForm.reset();
+    otpForm.reset();
+  };
+
   const sendOtp = async () => {
-    console.log('first');
     try {
-      setLoading(true);
+      setLoading(1);
       await axiosInstance.post(`/auth/send_otp`, {
         [isEmail ? 'email' : 'phoneNumber']: isEmail
           ? authForm.values.email
@@ -74,13 +81,13 @@ const uselandingAuth = (signin, onAuthComplete) => {
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
-      setLoading(false);
+      setLoading(0);
     }
   };
 
   const verifyOtp = async () => {
     try {
-      setLoading(true);
+      setLoading(2);
       const { firstName, lastName } =
         convertFullNameToFirstNameLastName(
           authForm.values.name
@@ -104,16 +111,25 @@ const uselandingAuth = (signin, onAuthComplete) => {
       );
       if (data?.data?.data?.user?._id) {
         toast.success(`Signed in successfully`);
-        setUserData(data.data.data.user);
+        setCurrentUser(data.data.data.user);
+        onAuthComplete();
       }
     } catch (error) {
-      setLoading(false);
-      toast.error(error.response.data.message);
+      setLoading(0);
+      toast.error(
+        error.response.data.message ||
+          'No internet connection'
+      );
     } finally {
-      onAuthComplete();
-      setLoading(false);
+      setLoading(0);
     }
   };
+
+  useEffect(() => {
+    if (!opened) {
+      reset();
+    }
+  }, [opened]);
 
   return {
     isSignin,

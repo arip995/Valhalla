@@ -9,15 +9,12 @@ import {
 } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 const GLProductheader = ({ data }) => {
   const router = useRouter();
   const { user, removeUser } = useUser(true);
   const [opened, setOpened] = useState(false);
-
-  const onConfirm = () => {
-    removeUser();
-  };
 
   return (
     <>
@@ -85,7 +82,7 @@ const GLProductheader = ({ data }) => {
                           },
                           confirmProps: { color: 'red' },
                           onCancel: () => {},
-                          onConfirm: onConfirm,
+                          onConfirm: removeUser,
                         });
                       }}
                       leftSection={
@@ -113,8 +110,10 @@ const GLProductheader = ({ data }) => {
           )}
         </div>
       </div>
+      <Toaster />
       {!!opened && (
         <AuthModal
+          signin
           opened={opened}
           onClose={() => setOpened(false)}
           onAuthComplete={() => {

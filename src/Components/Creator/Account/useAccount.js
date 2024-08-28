@@ -44,7 +44,7 @@ const useAccount = () => {
       toast.success('Updated successfully');
     } catch (error) {
       console.log(error);
-      toast.error('Check your internet connection');
+      toast.error('No internet connection');
     } finally {
       setUserData();
       setLoading(prev => {
