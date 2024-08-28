@@ -63,3 +63,15 @@ export const googleOauth = query => {
   const redirectUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/google/auth?redirect=${encodeURIComponent(currentUrl)}${!!query && `&${query}`}`;
   window.location.href = redirectUrl;
 };
+
+export const convertFullNameToFirstNameLastName =
+  fullName => {
+    const words = fullName.split(' ');
+    if (words.length === 1) {
+      return { firstName: fullName, lastName: '' };
+    } else {
+      const firstName = words[0];
+      const lastName = words.slice(1).join(' ');
+      return { firstName, lastName };
+    }
+  };

@@ -148,7 +148,7 @@ const StepOneAuth = ({
                   label="Email"
                   placeholder="hello@panda.dev"
                   value={authForm.values.email}
-                  autocomplete="email"
+                  autoComplete="email"
                   {...authForm.getInputProps('email')}
                 />
               ) : (
@@ -158,7 +158,7 @@ const StepOneAuth = ({
                   max={9999999999}
                   label="Phone Number"
                   placeholder="6345325643"
-                  autocomplete="tel"
+                  autoComplete="tel"
                   value={authForm.values.phoneNumber}
                   leftSection={<Text size="sm">+91</Text>}
                   {...authForm.getInputProps('phoneNumber')}

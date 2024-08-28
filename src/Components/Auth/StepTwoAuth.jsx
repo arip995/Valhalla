@@ -153,6 +153,7 @@ const StepTwoAuth = () => {
             placeholder="Jacob"
             value={firstName}
             onChange={e => {
+              if (e.target.value > 60) return;
               setFirstName(e.target.value);
             }}
             radius="md"
@@ -163,6 +164,7 @@ const StepTwoAuth = () => {
             placeholder="Jones"
             value={lastName}
             onChange={e => {
+              if (e.target.value > 60) return;
               setLastName(e.target.value);
             }}
             radius="md"

@@ -140,7 +140,7 @@ const UpdateContactModal = ({
                 placeholder="hello@panda.dev"
                 value={isEmail ? email : supportEmail}
                 radius="sm"
-                autocomplete="email"
+                autoComplete="email"
                 onChange={e => {
                   isEmail
                     ? setEmail(e.target.value)
@@ -151,7 +151,7 @@ const UpdateContactModal = ({
               <NumberInput
                 hideControls
                 clampBehavior="strict"
-                autocomplete="tel"
+                autoComplete="tel"
                 max={9999999999}
                 label={
                   isPhoneNumber

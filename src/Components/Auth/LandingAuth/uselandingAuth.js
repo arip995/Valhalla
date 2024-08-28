@@ -1,9 +1,14 @@
+import axiosInstance from '@/Utils/AxiosInstance';
+import { convertFullNameToFirstNameLastName } from '@/Utils/Common';
+import useUser from '@/Utils/Hooks/useUser';
 import { validateEmail } from '@/Utils/Regex';
 import { useForm } from '@mantine/form';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const uselandingAuth = (signin, onAuthComplete) => {
   const [isSignin, setIsSignin] = useState(signin);
+  const { setUserData } = useUser(true);
   const [step, setStep] = useState(1);
   const [isEmail, setIsEmail] = useState(true);
   const [loading, setLoading] = useState(0);
@@ -21,7 +26,10 @@ const uselandingAuth = (signin, onAuthComplete) => {
         !isSignin &&
         !values.name
           ? 'Name is required'
-          : null,
+          : values.name.length > 60
+            ? !isSignin &&
+              'Name should be less than 60 characters'
+            : null,
       email: isEmail
         ? !validateEmail(values?.email)
           ? values.isClickedAtleastOnce && 'Invalid email'
@@ -48,19 +56,61 @@ const uselandingAuth = (signin, onAuthComplete) => {
     }),
   });
 
-  const handleAuthSubmit = () => {
+  const sendOtp = async () => {
+    console.log('first');
     try {
       setLoading(true);
+      await axiosInstance.post(`/auth/send_otp`, {
+        [isEmail ? 'email' : 'phoneNumber']: isEmail
+          ? authForm.values.email
+          : authForm.values.phoneNumber,
+        isSignUp: !isSignin,
+        isAuth: true,
+      });
+      if (step === 1) {
+        setStep(2);
+      }
+      // toast.success('Otp sent successfully!');
     } catch (error) {
+      toast.error(error.response.data.message);
+    } finally {
       setLoading(false);
     }
   };
 
-  const handleOtpSubmit = () => {
+  const verifyOtp = async () => {
     try {
       setLoading(true);
-      onAuthComplete();
+      const { firstName, lastName } =
+        convertFullNameToFirstNameLastName(
+          authForm.values.name
+        );
+
+      const data = await axiosInstance.post(
+        `/auth/verify_otp`,
+        {
+          [isEmail ? 'email' : 'phoneNumber']: isEmail
+            ? authForm.values.email
+            : authForm.values.phoneNumber,
+          otp: otpForm.values.otp,
+          firstName,
+          lastName,
+          isSignUp: !isSignin,
+          ...(!isSignin ? { isCreator: false } : {}),
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      if (data?.data?.data?.user?._id) {
+        toast.success(`Signed in successfully`);
+        setUserData(data.data.data.user);
+      }
     } catch (error) {
+      setLoading(false);
+      toast.error(error.response.data.message);
+    } finally {
+      onAuthComplete();
       setLoading(false);
     }
   };
@@ -74,8 +124,8 @@ const uselandingAuth = (signin, onAuthComplete) => {
     setIsEmail,
     authForm,
     otpForm,
-    handleAuthSubmit,
-    handleOtpSubmit,
+    sendOtp,
+    verifyOtp,
     loading,
   };
 };
