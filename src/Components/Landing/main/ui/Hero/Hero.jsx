@@ -8,7 +8,7 @@ import NavLink from '../NavLink';
 
 const Hero = () => (
   <section>
-    <div className="custom-screen py-12 sm:py-16">
+    <div className="custom-screen py-20">
       <LayoutEffect
         className="delay-300 duration-1000"
         isInviewState={{

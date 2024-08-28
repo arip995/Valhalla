@@ -26,7 +26,7 @@ const Navbar = () => {
 
   return (
     <header className="relative">
-      <div className="custom-screen flex h-16 w-full items-center md:hidden">
+      <div className="custom-screen sticky top-0 flex h-16 w-full items-center md:hidden">
         <NavHeader
           menuBtnEl={menuBtnEl}
           state={state}
@@ -69,15 +69,9 @@ const Navbar = () => {
               })}
             </ul>
             <div className="mt-6 items-center justify-end gap-x-6 space-y-6 md:mt-0 md:flex md:space-y-0">
-              {/* <Link
-                href="/signin"
-                className="block hover:text-gray-50"
-              >
-                Sign in
-              </Link> */}
               <NavLink
                 href="/signup"
-                className="custom-btn-bg flex items-center justify-center gap-x-1 border border-gray-500 text-sm font-medium text-white active:bg-gray-900 md:inline-flex"
+                className="custom-btn-bg flex items-center justify-center gap-x-1 border border-gray-500 text-sm font-semibold text-white active:bg-gray-900 md:inline-flex"
               >
                 {`Sign up`}
                 <svg

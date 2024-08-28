@@ -25,7 +25,6 @@
   line-height: 1.3;
   color: var(--mantine-color-bright);
   font-size: var(--mantine-font-size-md);
-  /* font-family: var(--mantine-font-family-monospace); */
   font-weight: bold;
 }
 

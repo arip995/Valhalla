@@ -1,27 +1,27 @@
 .list-files-container {
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
   gap: 8px;
   .list-files-content-container {
     display: flex;
     justify-content: space-between;
-    background-color: light-dark(
-      var(--mantine-color-gray-1),
-      var(--mantine-color-gray-8)
-    );
+    padding: 8px;
     border: 1px solid
       light-dark(
         var(--mantine-color-gray-3),
         var(--mantine-color-dark-4)
       );
     border-radius: 8px;
-    padding: 8px;
+    background-color: light-dark(
+      var(--mantine-color-gray-1),
+      var(--mantine-color-gray-8)
+    );
   }
   .list-files-image {
-    height: 40px;
-    width: 40px;
+    min-width: 24px;
+    min-height: 24px;
     border-radius: 8px;
   }
   .list-files-text-container {
@@ -38,8 +38,8 @@
     padding: 5px;
     border-radius: 4px;
     &:hover {
-      cursor: pointer;
       background-color: var(--mantine-color-red-1);
+      cursor: pointer;
     }
   }
   .list-files-delete-icon {

@@ -47,7 +47,7 @@ export async function generateMetadata(
 export default function Page() {
   return (
     <div className="relative flex flex-col bg-gray-900">
-      <div className="sticky top-0 z-50 bg-gray-900">
+      <div className="fixed top-0 z-50 w-full bg-gray-900">
         <Navbar />
       </div>
       <div className="flex flex-col">

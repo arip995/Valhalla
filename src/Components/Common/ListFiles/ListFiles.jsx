@@ -1,6 +1,7 @@
 import { Text } from '@mantine/core';
 import {
   IconFileText,
+  IconPhoto,
   IconTrash,
   IconVideo,
 } from '@tabler/icons-react';
@@ -34,22 +35,25 @@ const ListFiles = ({ files, onDelete = () => {} }) => {
               >
                 <div className="list-files-image-container flex items-center gap-2">
                   {isImage ? (
-                    <img
-                      src={item.url}
-                      alt=""
+                    <IconPhoto
+                      color="gray"
                       className="list-files-image"
+                      stroke={1}
                     />
-                  ) : isVideo ? (
+                  ) : // <img
+                  //   src={item.url}
+                  //   alt=""
+                  //   className="list-files-image"
+                  // />
+                  isVideo ? (
                     <IconVideo
                       color="gray"
-                      size={16}
                       className="list-files-image"
                       stroke={1}
                     />
                   ) : (
                     <IconFileText
                       color="gray"
-                      size={16}
                       className="list-files-image"
                       stroke={1}
                     />
