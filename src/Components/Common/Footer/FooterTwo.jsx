@@ -97,7 +97,7 @@ const FooterTwo = ({ description }) => {
             hassle-free payouts and premium support.`}{' '}
             <Anchor
               underline="always"
-              href={`${process.env.NEXT_PUBLIC_HOST}creator/home`}
+              href={`${process.env.NEXT_PUBLIC_HOST}/home`}
               className="font-light"
               size="sm"
             >

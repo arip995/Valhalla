@@ -82,7 +82,7 @@ const ViewPlans1 = ({
                           {plan.cost}
                         </Text>
                       ) : null}
-                      <Text size="sm" fw={700}>
+                      <Text className={classes.label}>
                         {CurrencySymbolMapping['rupees']}
                         {plan.enableDiscountedPrice
                           ? plan.discountedCost

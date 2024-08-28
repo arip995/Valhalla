@@ -59,7 +59,6 @@ const TelegramDashboardBasicDetails = ({
         <TextInput
           label="Title"
           placeholder="Index + Nifty"
-          radius="md"
           {...basicDetailsForm.getInputProps('title')}
         />
         <div className="flex flex-col gap-1">

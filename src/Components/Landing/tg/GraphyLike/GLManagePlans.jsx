@@ -1,15 +1,16 @@
 'use client';
+
 import NewScrollArea from '@/Components/Common/General/NewScrollArea';
 import ViewPlans1 from '@/Components/Common/General/ViewPlans1';
-import { getUserData } from '@/Utils/getuserData';
+import { statusErrorTextMapping } from '@/Constants/ProductListingContants';
+import useUser from '@/Utils/Hooks/useUser';
 import { Drawer } from '@mantine/core';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import BuyButton from '../../lc/BuyButton';
-import { statusErrorTextMapping } from '@/Constants/ProductListingContants';
 
 const GLManagePlans = ({ data }) => {
-  const [user, setUser] = useState(null);
+  const { user } = useUser();
   const router = useRouter();
   const params = useParams();
   const isCreatorBuyer = user?._id === data.creatorId;
@@ -24,7 +25,6 @@ const GLManagePlans = ({ data }) => {
     ) {
       setOpenBottomSheet(true);
     }
-    setUser(getUserData());
   }, []);
 
   return (
