@@ -1,4 +1,5 @@
 'use client';
+import AuthModal from '@/Components/Auth/LandingAuth/AuthModal';
 import useUser from '@/Utils/Hooks/useUser';
 import { Avatar, Menu, rem, Text } from '@mantine/core';
 import { modals } from '@mantine/modals';
@@ -7,10 +8,12 @@ import {
   IconShoppingCart,
 } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const GLProductheader = ({ data }) => {
   const router = useRouter();
   const { user, removeUser } = useUser(true);
+  const [opened, setOpened] = useState(false);
 
   const onConfirm = () => {
     removeUser();
@@ -99,12 +102,26 @@ const GLProductheader = ({ data }) => {
                   </Menu.Dropdown>
                 </Menu>
               ) : (
-                <div className="cursor-pointer">Login</div>
+                <div
+                  className="cursor-pointer"
+                  onClick={() => setOpened(true)}
+                >
+                  Login
+                </div>
               )}
             </>
           )}
         </div>
       </div>
+      {!!opened && (
+        <AuthModal
+          opened={opened}
+          onClose={() => setOpened(false)}
+          onAuthComplete={() => {
+            setOpened(false);
+          }}
+        />
+      )}
     </>
   );
 };

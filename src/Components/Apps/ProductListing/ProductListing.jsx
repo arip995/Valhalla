@@ -25,15 +25,19 @@ const ProductListing = () => {
     return (
       <>
         <LayoutLoading />
+        <Toaster />
       </>
     );
   }
 
   if (!data?.totalCount && !loading) {
     return (
-      <EmptyStateOne
-        isTelegram={app === 'tg' ? true : false}
-      />
+      <>
+        <EmptyStateOne
+          isTelegram={app === 'tg' ? true : false}
+        />
+        <Toaster />
+      </>
     );
   }
 
