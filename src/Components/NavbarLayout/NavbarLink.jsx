@@ -41,7 +41,10 @@ export default function NavbarLink({
               />
             ) : (
               <NavLink
-                style={{ borderRadius: '6px' }}
+                childrenOffset="xs"
+                style={{
+                  borderRadius: '6px',
+                }}
                 onClick={onClick}
                 label={
                   <div className="flex flex-col items-center break-words text-center text-[10px]">

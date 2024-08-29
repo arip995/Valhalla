@@ -7,7 +7,6 @@ import {
   IconLockDollar,
   IconShoppingBag,
   IconUser,
-  IconWallet,
 } from '@tabler/icons-react';
 
 export const SidenavData = [
@@ -19,19 +18,13 @@ export const SidenavData = [
   },
   {
     icon: IconCreditCardPay,
-    label: 'Transactions',
-    value: 'transaction',
-    path: '/transaction',
-  },
-  {
-    icon: IconWallet,
-    label: 'Billing',
-    value: 'billing',
-    path: '/billing',
+    label: 'Payment',
+    value: 'Payment',
+    path: '/payment',
   },
   {
     icon: IconShoppingBag,
-    label: 'Purchases',
+    label: 'Purchase',
     value: 'purchase',
     path: '/purchase',
   },
@@ -56,15 +49,15 @@ export const SidenavData = [
   },
   {
     icon: IconCash,
-    label: 'Digital Products',
+    label: 'Digital Product',
     value: 'digitalproduct',
     path: '/app/dp',
   },
   {
     icon: IconCertificate,
-    label: 'Courses',
-    value: 'courses',
-    path: '/app/courses',
+    label: 'Course',
+    value: 'course',
+    path: '/app/course',
   },
   // {
   //   icon: IconBrandDiscord,
