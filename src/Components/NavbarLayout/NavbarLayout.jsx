@@ -77,7 +77,6 @@ export function NavbarLayout({ children }) {
         header={{ height: { base: 52, sm: 0 } }}
         navbar={{
           width: {
-            base: '100%',
             sm: showLabel ? 200 : 94,
           },
           breakpoint: 'sm',
