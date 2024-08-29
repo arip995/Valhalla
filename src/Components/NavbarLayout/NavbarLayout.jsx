@@ -107,7 +107,7 @@ export function NavbarLayout({ children }) {
             {showLabel ? (
               <div className="flex w-full items-center justify-between gap-2">
                 <div className="flex gap-2">
-                  <Link href="/">
+                  <Link href="/" prefetch={false}>
                     <img
                       height={24}
                       width={24}
@@ -142,7 +142,7 @@ export function NavbarLayout({ children }) {
                 >
                   <IconMenu2 stroke={1} />
                 </ActionIcon>
-                <Link href="/">
+                <Link href="/" prefetch={false}>
                   <img
                     height={24}
                     width={24}
