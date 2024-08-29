@@ -19,12 +19,6 @@
       margin-top: 0px;
     }
   }
-  .vlc-view-product-title {
-    line-height: 23px;
-    color: #000000;
-    font-size: 18px;
-    font-weight: bold;
-  }
   .vlc-view-product-container {
     overflow-y: auto;
     width: 100%;
