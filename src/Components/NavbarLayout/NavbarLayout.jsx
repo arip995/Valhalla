@@ -107,15 +107,16 @@ export function NavbarLayout({ children }) {
             {showLabel ? (
               <div className="flex w-full items-center justify-between gap-2">
                 <div className="flex gap-2">
-                  <img
-                    height={24}
-                    width={24}
-                    src={Logo.src}
-                    onClick={() => {
-                      setOpened(false);
-                      router.push('/home');
-                    }}
-                  />
+                  <Link href="/">
+                    <img
+                      height={24}
+                      width={24}
+                      src={Logo.src}
+                      onClick={() => {
+                        setOpened(false);
+                      }}
+                    />
+                  </Link>
                   Nexify
                 </div>
                 <ActionIcon
@@ -141,15 +142,16 @@ export function NavbarLayout({ children }) {
                 >
                   <IconMenu2 stroke={1} />
                 </ActionIcon>
-                <img
-                  height={24}
-                  width={24}
-                  src={Logo.src}
-                  onClick={() => {
-                    setOpened(false);
-                    router.push('/home');
-                  }}
-                />
+                <Link href="/">
+                  <img
+                    height={24}
+                    width={24}
+                    src={Logo.src}
+                    onClick={() => {
+                      setOpened(false);
+                    }}
+                  />
+                </Link>
               </div>
             )}
           </AppShell.Section>
