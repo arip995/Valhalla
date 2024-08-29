@@ -4,7 +4,9 @@ import OfflineOverlay from '@/Common/OfflineOverlay';
 import { SidenavData } from '@/Constants/Navbarlayout';
 import { logout } from '@/Utils/getuserData';
 import useUser from '@/Utils/Hooks/useUser';
+import useIsBrowser from '@/Utils/useIsBrowser';
 import {
+  ActionIcon,
   AppShell,
   Burger,
   Group,
@@ -12,12 +14,14 @@ import {
   NavLink,
   ScrollArea,
   Text,
+  Tooltip,
   rem,
 } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import {
   IconChevronUp,
   IconLogout,
+  IconMenu2,
   IconSettings,
   IconUser,
 } from '@tabler/icons-react';
@@ -27,15 +31,16 @@ import { useEffect, useMemo, useState } from 'react';
 import Logo from '../../app/icon.png';
 import classes from '../../styles/Navbar/NavbarMinimal.module.css';
 import NavbarLink from './NavbarLink';
-import useIsBrowser from '@/Utils/useIsBrowser';
+import { useMediaQuery } from '@mantine/hooks';
 
 export function NavbarLayout({ children }) {
+  const router = useRouter();
   const pathName = usePathname();
   const isBrowser = useIsBrowser();
+  const isMobile = useMediaQuery('(max-width: 48em)');
   const { user } = useUser(true);
-  const router = useRouter();
   const [opened, setOpened] = useState(false);
-  const [active, setActive] = useState(pathName);
+  const [showLabel, setShowLabel] = useState(false);
 
   const Links = useMemo(() => {
     const mapData = user?.isCreator
@@ -46,29 +51,35 @@ export function NavbarLayout({ children }) {
       return (
         <NavbarLink
           apps={link.apps}
+          showLabel={showLabel}
           Icon={Icon}
           label={label}
           key={link.label}
           path={path}
-          active={link.path === active}
+          active={link.path === pathName}
           onClick={() => {
             setOpened(false);
           }}
         />
       );
     });
-  }, [user?._id, active]);
+  }, [user?._id, pathName, showLabel]);
 
   useEffect(() => {
-    setActive(pathName);
-  }, [pathName]);
+    if (isMobile) {
+      setShowLabel(true);
+    }
+  }, [isMobile]);
 
   return (
-    <>
+    <div suppressHydrationWarning={true}>
       <AppShell
         header={{ height: { base: 52, sm: 0 } }}
         navbar={{
-          width: { base: '100%', sm: 200 },
+          width: {
+            base: '100%',
+            sm: showLabel ? 200 : 94,
+          },
           breakpoint: 'sm',
           collapsed: { mobile: !opened },
         }}
@@ -88,22 +99,61 @@ export function NavbarLayout({ children }) {
           </Group>
         </AppShell.Header>
         <AppShell.Navbar>
-          <Link href={'/home'}>
-            <AppShell.Section
-              withHeader={false}
-              py={12}
-              pl={16}
-              className={classes.company}
-              onClick={() => {
-                setOpened(false);
-                setActive('/home');
-                router.push('/home');
-              }}
-            >
-              <img height={30} width={30} src={Logo.src} />{' '}
-              Nexify
-            </AppShell.Section>
-          </Link>
+          <AppShell.Section
+            withHeader={false}
+            py={12}
+            px={16}
+            className={classes.company}
+          >
+            {showLabel ? (
+              <div className="flex w-full items-center justify-between gap-2">
+                <div className="flex gap-2">
+                  <img
+                    height={24}
+                    width={24}
+                    src={Logo.src}
+                    onClick={() => {
+                      setOpened(false);
+                      router.push('/home');
+                    }}
+                  />
+                  Nexify
+                </div>
+                <ActionIcon
+                  variant="subtle"
+                  color="black"
+                  size={'lg'}
+                  onClick={() =>
+                    setShowLabel(prev => !prev)
+                  }
+                >
+                  <IconMenu2 stroke={1} />
+                </ActionIcon>
+              </div>
+            ) : (
+              <div className="flex w-full flex-col items-center gap-4">
+                <ActionIcon
+                  variant="subtle"
+                  color="black"
+                  size={'lg'}
+                  onClick={() => {
+                    setShowLabel(prev => !prev);
+                  }}
+                >
+                  <IconMenu2 stroke={1} />
+                </ActionIcon>
+                <img
+                  height={24}
+                  width={24}
+                  src={Logo.src}
+                  onClick={() => {
+                    setOpened(false);
+                    router.push('/home');
+                  }}
+                />
+              </div>
+            )}
+          </AppShell.Section>
           <AppShell.Section
             grow
             p={8}
@@ -118,29 +168,49 @@ export function NavbarLayout({ children }) {
               <Menu.Target>
                 <NavLink
                   variant="subtle"
-                  style={{ borderRadius: '20px' }}
+                  style={{ borderRadius: '6px' }}
                   fullWidth
                   label={
-                    <div className="flex items-center gap-2">
-                      <IconSettings
+                    showLabel ? (
+                      <div className="flex items-center gap-2">
+                        <IconSettings
+                          style={{
+                            width: rem(17),
+                            height: rem(17),
+                          }}
+                          stroke={1.5}
+                        />
+                        Settings
+                      </div>
+                    ) : (
+                      <Tooltip
+                        label={'Settings'}
+                        position="right"
+                        offset={20}
+                      >
+                        <div className="flex justify-center">
+                          <IconSettings
+                            style={{
+                              width: rem(20),
+                              height: rem(20),
+                            }}
+                            stroke={1.5}
+                          />
+                        </div>
+                      </Tooltip>
+                    )
+                  }
+                  justify="space-between"
+                  rightSection={
+                    showLabel && (
+                      <IconChevronUp
                         style={{
                           width: rem(17),
                           height: rem(17),
                         }}
                         stroke={1.5}
                       />
-                      Settings
-                    </div>
-                  }
-                  justify="space-between"
-                  rightSection={
-                    <IconChevronUp
-                      style={{
-                        width: rem(17),
-                        height: rem(17),
-                      }}
-                      stroke={1.5}
-                    />
+                    )
                   }
                 ></NavLink>
               </Menu.Target>
@@ -208,7 +278,7 @@ export function NavbarLayout({ children }) {
         </AppShell.Main>
       </AppShell>
       <OfflineOverlay />
-    </>
+    </div>
   );
 }
 

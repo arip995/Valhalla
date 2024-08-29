@@ -7,31 +7,59 @@ export default function NavbarLink({
   active,
   path,
   onClick,
+  showLabel = false,
   apps = false,
 }) {
   return (
     <>
       {apps ? (
-        <Divider
-          label={`Apps`}
-          labelPosition="center"
-          my="sm"
-        />
-      ) : (
-        <Link href={path}>
-          <NavLink
-            style={{ borderRadius: '20px' }}
-            onClick={onClick}
-            label={label}
-            leftSection={
-              <Icon
-                style={{ width: rem(15), height: rem(15) }}
-                stroke={1.5}
-              />
-            }
-            active={active}
+        <>
+          <Divider
+            label={`Apps`}
+            labelPosition="center"
+            my="sm"
           />
-        </Link>
+        </>
+      ) : (
+        <>
+          <Link href={path}>
+            {showLabel ? (
+              <NavLink
+                style={{ borderRadius: '6px' }}
+                onClick={onClick}
+                label={label}
+                leftSection={
+                  <Icon
+                    style={{
+                      width: rem(20),
+                      height: rem(20),
+                    }}
+                    stroke={1.5}
+                  />
+                }
+                active={active}
+              />
+            ) : (
+              <NavLink
+                style={{ borderRadius: '6px' }}
+                onClick={onClick}
+                label={
+                  <div className="flex flex-col items-center break-words text-center text-[8px]">
+                    <Icon
+                      style={{
+                        width: rem(20),
+                        height: rem(20),
+                      }}
+                      stroke={1.5}
+                    />
+                    {label}
+                  </div>
+                }
+                active={active}
+              />
+            )}
+          </Link>
+        </>
       )}
     </>
   );
