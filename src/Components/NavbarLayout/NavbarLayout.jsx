@@ -14,9 +14,9 @@ import {
   NavLink,
   ScrollArea,
   Text,
-  Tooltip,
   rem,
 } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { modals } from '@mantine/modals';
 import {
   IconChevronUp,
@@ -31,7 +31,6 @@ import { useEffect, useMemo, useState } from 'react';
 import Logo from '../../app/icon.png';
 import classes from '../../styles/Navbar/NavbarMinimal.module.css';
 import NavbarLink from './NavbarLink';
-import { useMediaQuery } from '@mantine/hooks';
 
 export function NavbarLayout({ children }) {
   const router = useRouter();
@@ -77,7 +76,7 @@ export function NavbarLayout({ children }) {
         header={{ height: { base: 52, sm: 0 } }}
         navbar={{
           width: {
-            sm: showLabel ? 200 : 94,
+            sm: showLabel ? 200 : 100,
           },
           breakpoint: 'sm',
           collapsed: { mobile: !opened },
@@ -184,21 +183,16 @@ export function NavbarLayout({ children }) {
                         Settings
                       </div>
                     ) : (
-                      <Tooltip
-                        label={'Settings'}
-                        position="right"
-                        offset={20}
-                      >
-                        <div className="flex justify-center">
-                          <IconSettings
-                            style={{
-                              width: rem(20),
-                              height: rem(20),
-                            }}
-                            stroke={1.5}
-                          />
-                        </div>
-                      </Tooltip>
+                      <div className="flex flex-col items-center text-[10px]">
+                        <IconSettings
+                          style={{
+                            width: rem(20),
+                            height: rem(20),
+                          }}
+                          stroke={1.5}
+                        />
+                        Settings
+                      </div>
                     )
                   }
                   justify="space-between"

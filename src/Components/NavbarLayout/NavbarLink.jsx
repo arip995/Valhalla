@@ -44,7 +44,7 @@ export default function NavbarLink({
                 style={{ borderRadius: '6px' }}
                 onClick={onClick}
                 label={
-                  <div className="flex flex-col items-center break-words text-center text-[8px]">
+                  <div className="flex flex-col items-center break-words text-center text-[10px]">
                     <Icon
                       style={{
                         width: rem(20),
