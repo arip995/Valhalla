@@ -67,6 +67,8 @@ export function NavbarLayout({ children }) {
   useEffect(() => {
     if (isMobile) {
       setShowLabel(true);
+    } else {
+      setShowLabel(false);
     }
   }, [isMobile]);
 
