@@ -10,7 +10,7 @@ const NavHeader = ({ onClick, state, menuBtnEl }) => (
     </Link>
     <NavLink
       href="/signup"
-      className="custom-btn-bg flex items-center justify-center gap-x-1 border border-gray-500 text-sm font-semibold text-white active:bg-gray-900 md:inline-flex"
+      className="custom-btn-bg flex items-center justify-center gap-x-1 border border-gray-500 text-sm font-semibold text-white active:bg-gray-900 md:hidden"
     >
       {`Sign up`}
       <svg
