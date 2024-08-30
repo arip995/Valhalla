@@ -248,6 +248,7 @@ const TGEPlanAndPriceEditCreate = ({
     <>
       <Drawer
         className="tgd-add-plan"
+        trapFocus={false}
         opened={openSideBar}
         onClose={() => resetTempData()}
         title={tempData?._id ? 'Edit Plan' : 'New Plan'}
@@ -407,35 +408,35 @@ const TGEPlanAndPriceEditCreate = ({
               </div>
             </div>
           </div>
-          {/* <div className="tgd-add-plan-footer-container "> */}
-          <div className="tgd-add-plan-footer">
-            <Button
-              onClick={() => onSaveChanges()}
-              disabled={isSaving || isDeleting}
-              loading={isDeleting}
-              variant="filled"
-              size="xs"
-              radius="xl"
-            >
-              {tempData?._id
-                ? 'Create Plan'
-                : 'Save Changes'}
-            </Button>
-            {tempData?._id && numOfPlans > 1 ? (
+          <div className="tgd-add-plan-footer shadow-md">
+            <div className="flex gap-2">
+              {tempData?._id && numOfPlans > 1 ? (
+                <Button
+                  onClick={() => onDeletePlan()}
+                  disabled={isDeleting || isSaving}
+                  loading={isDeleting}
+                  variant="filled"
+                  color="red"
+                  size="xs"
+                  radius="xl"
+                >
+                  Delete Plan
+                </Button>
+              ) : null}
               <Button
-                onClick={() => onDeletePlan()}
-                disabled={isDeleting || isSaving}
+                onClick={() => onSaveChanges()}
+                disabled={isSaving || isDeleting}
                 loading={isDeleting}
                 variant="filled"
-                color="red"
                 size="xs"
                 radius="xl"
               >
-                Delete Plan
+                {tempData?._id
+                  ? 'Create Plan'
+                  : 'Save Changes'}
               </Button>
-            ) : null}
+            </div>
           </div>
-          {/* </div> */}
         </div>
       </Drawer>
     </>

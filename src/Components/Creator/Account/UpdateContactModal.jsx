@@ -72,7 +72,8 @@ const UpdateContactModal = ({
       <Modal
         opened={openedModal}
         onClose={closeModal}
-        title={`Update`}
+        title="Update"
+        trapFocus={false}
         shadow="xl"
         centered
         overlayProps={{
