@@ -9,7 +9,6 @@ import {
 } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Toaster } from 'react-hot-toast';
 
 const GLProductheader = ({ data }) => {
   const router = useRouter();
@@ -110,7 +109,6 @@ const GLProductheader = ({ data }) => {
           )}
         </div>
       </div>
-      <Toaster />
       {!!opened && (
         <AuthModal
           signin

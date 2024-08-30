@@ -20,7 +20,6 @@ import {
 } from '@tabler/icons-react';
 import React from 'react';
 import uselandingAuth from './uselandingAuth';
-import { Toaster } from 'react-hot-toast';
 
 const AuthModal = ({
   opened,
@@ -274,7 +273,6 @@ const AuthModal = ({
           </>
         )}
       </div>
-      <Toaster />
     </Modal>
   );
 };
