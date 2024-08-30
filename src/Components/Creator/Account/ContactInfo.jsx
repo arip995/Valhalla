@@ -28,7 +28,9 @@ const ContactInfo = () => {
     otp,
     setOtp,
     onVerifyOtp,
+    isCreator,
   } = useContactSupportDetails();
+
   return (
     <>
       <TextInput
@@ -64,39 +66,43 @@ const ContactInfo = () => {
           />
         }
       />
-      <TextInput
-        radius="sm"
-        readOnly
-        description="Support Phone Number"
-        value={supportPhoneNumber}
-        leftSection={<div className="text-sm">+91</div>}
-        rightSection={
-          <IconEdit
-            stroke={1.5}
-            size={18}
-            className={classes.acountEditIcon}
-            onClick={() => {
-              onClickEdit('supportPhoneNumber');
-            }}
+      {isCreator ? (
+        <>
+          <TextInput
+            radius="sm"
+            readOnly
+            description="Support Phone Number"
+            value={supportPhoneNumber}
+            leftSection={<div className="text-sm">+91</div>}
+            rightSection={
+              <IconEdit
+                stroke={1.5}
+                size={18}
+                className={classes.acountEditIcon}
+                onClick={() => {
+                  onClickEdit('supportPhoneNumber');
+                }}
+              />
+            }
           />
-        }
-      />
-      <TextInput
-        radius="sm"
-        readOnly
-        description="Support Email"
-        value={supportEmail}
-        rightSection={
-          <IconEdit
-            stroke={1.5}
-            size={18}
-            className={classes.acountEditIcon}
-            onClick={() => {
-              onClickEdit('supportEmail');
-            }}
+          <TextInput
+            radius="sm"
+            readOnly
+            description="Support Email"
+            value={supportEmail}
+            rightSection={
+              <IconEdit
+                stroke={1.5}
+                size={18}
+                className={classes.acountEditIcon}
+                onClick={() => {
+                  onClickEdit('supportEmail');
+                }}
+              />
+            }
           />
-        }
-      />
+        </>
+      ) : null}
       <UpdateContactModal
         initiaContactData={initiaContactData}
         phoneNumber={phoneNumber}

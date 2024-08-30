@@ -43,16 +43,19 @@ const Account = () => {
         <div
           className={`${classes.accountFormContainer} mt-6 w-full rounded-sm shadow-sm`}
         >
-          <ProfilePic
-            avatarImage={user?.profilePic}
-            loading={loadingImage}
-            name={`${user?.firstName || ''} ${
-              user?.lastName || ''
-            }`}
-            handleAvatarChange={handleFileChange}
-            onRemoveAvatar={onRemoveImage}
-            showRemoveButton
-          />
+          {user?.isCreator ? (
+            <ProfilePic
+              avatarImage={user?.profilePic}
+              loading={loadingImage}
+              name={`${user?.firstName || ''} ${
+                user?.lastName || ''
+              }`}
+              handleAvatarChange={handleFileChange}
+              onRemoveAvatar={onRemoveImage}
+              showRemoveButton
+            />
+          ) : null}
+
           <form
             className="flex flex-col gap-6"
             onSubmit={personInfoForm.onSubmit(
@@ -82,27 +85,36 @@ const Account = () => {
               </Button>
             </Collapse>
           </form>
-          <TextInput
-            radius="sm"
-            description="Username"
-            placeholder="pandaop"
-            value={username}
-            onChange={e => {
-              if (!checkRestrictedChars(e.target.value))
-                return;
-              setUsername(e.target.value);
-            }}
-            error={error}
-            leftSection={<Text size="sm">@</Text>}
-            rightSection={
-              !!loadingUsername && <Loader size={'sm'} />
-            }
-          />
-          <Collapse in={showUpdateUsernameButton}>
-            <Button radius="sm" onClick={onUpdateUsername}>
-              Update
-            </Button>
-          </Collapse>
+          {user?.isCreator ? (
+            <>
+              <TextInput
+                radius="sm"
+                description="Username"
+                placeholder="pandaop"
+                value={username}
+                onChange={e => {
+                  if (!checkRestrictedChars(e.target.value))
+                    return;
+                  setUsername(e.target.value);
+                }}
+                error={error}
+                leftSection={<Text size="sm">@</Text>}
+                rightSection={
+                  !!loadingUsername && (
+                    <Loader size={'sm'} />
+                  )
+                }
+              />
+              <Collapse in={showUpdateUsernameButton}>
+                <Button
+                  radius="sm"
+                  onClick={onUpdateUsername}
+                >
+                  Update
+                </Button>
+              </Collapse>
+            </>
+          ) : null}
           <ContactInfo />
         </div>
       </div>

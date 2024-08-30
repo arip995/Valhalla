@@ -5,7 +5,7 @@ export function middleware(req) {
   let username = getCookie('username', { req });
   username = username !== 'undefined';
   let isCreator = getCookie('isCreator', { req });
-  isCreator = isCreator !== 'undefined';
+  isCreator = isCreator == 'true';
   const accessToken = getCookie('accesstoken', { req });
 
   const redirectPaths = [
@@ -39,6 +39,7 @@ export function middleware(req) {
         )
       ) {
         if (isCreator) return;
+        console.log('first');
         return NextResponse.redirect(
           new URL('/purchase', req.url)
         );

@@ -15,22 +15,20 @@ const TelegramDashboardOpenlink = ({ data }) => {
         passHref
         legacyBehavior
       >
-        <a target="_blank">
-          <Button
-            leftSection={<span />}
-            justify="space-between"
-            rightSection={
-              <IconExternalLink
-                style={{ height: rem(20), width: rem(20) }}
-                stroke={1.5}
-                color="white"
-              />
-            }
-            fullWidth
-          >
-            Open Preview
-          </Button>
-        </a>
+        <Button
+          leftSection={<span />}
+          justify="space-between"
+          rightSection={
+            <IconExternalLink
+              style={{ height: rem(20), width: rem(20) }}
+              stroke={1.5}
+              color="white"
+            />
+          }
+          fullWidth
+        >
+          Open Preview
+        </Button>
       </Link>
     </Paper>
   );

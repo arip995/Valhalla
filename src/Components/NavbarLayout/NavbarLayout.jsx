@@ -44,7 +44,7 @@ export function NavbarLayout({ children }) {
   const Links = useMemo(() => {
     const mapData = user?.isCreator
       ? SidenavData
-      : [SidenavData[3]];
+      : [SidenavData[2]];
     return mapData.map(link => {
       const { icon: Icon, label, path } = link;
       return (

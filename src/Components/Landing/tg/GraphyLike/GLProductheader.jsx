@@ -27,7 +27,7 @@ const GLProductheader = ({ data }) => {
                 data.creatorDetails?.lastName || ''
               }`}
             />
-            {data.creatorDetails.username}
+            @{data.creatorDetails.username}
           </div>
           {user === -1 ? null : (
             <>

@@ -167,6 +167,7 @@ const useContactSupportDetails = () => {
     otp,
     setOtp,
     onVerifyOtp,
+    isCreator: user?.isCreator,
   };
 };
 

@@ -36,7 +36,7 @@ const ViewProductHeader = ({
             {firstName?.toUpperCase()}{' '}
             {lastName?.toUpperCase()}
           </div>
-          <div className="text-sm">@{username}</div>
+          {/* <div className="text-sm">@{username}</div> */}
         </div>
       </div>
       {!!title && (

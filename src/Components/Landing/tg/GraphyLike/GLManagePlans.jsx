@@ -29,7 +29,7 @@ const GLManagePlans = ({ data }) => {
 
   return (
     <>
-      <div className="top-[71.5px] hidden flex-col gap-3 p-2 md:sticky md:flex">
+      <div className="top-4 hidden flex-col gap-3 md:sticky md:flex">
         <ViewPlans1
           isCreatorBuyer={isCreatorBuyer}
           data={data}
@@ -59,6 +59,7 @@ const GLManagePlans = ({ data }) => {
         </div>
       </div>
       <Drawer
+        trapFocus={false}
         className="tgd-add-plan"
         scrollAreaComponent={NewScrollArea}
         padding="0px"

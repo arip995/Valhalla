@@ -1,13 +1,17 @@
 import '../../../styles/view/locked-content.css';
+import GLProductheader from '../tg/GraphyLike/GLProductheader';
 import LockedContent from './LockedContent';
 
 const ViewLockedContent = async ({ data, productId }) => {
   return (
     <div
-      className="vlc-container flex min-h-svh w-full overflow-auto"
+      className="vlc-container flex h-screen w-full flex-col overflow-auto"
       suppressHydrationWarning
     >
-      <LockedContent data={data} productId={productId} />
+      <GLProductheader data={data} />
+      <div className="flex flex-1 flex-col justify-between overflow-y-auto">
+        <LockedContent data={data} productId={productId} />
+      </div>
     </div>
   );
 };

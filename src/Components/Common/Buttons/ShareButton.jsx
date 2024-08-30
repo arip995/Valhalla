@@ -22,7 +22,7 @@ const ShareButton = ({ disabled, link, className }) => {
         }
       )}
     >
-      <div
+      <button
         className={classNames(
           'flex items-center justify-center gap-[6px] rounded-l-[21px] rounded-r-none border-y border-l border-gray-300 bg-white py-[3px] pl-[12px] pr-[6px] text-[12px] font-medium leading-[20px] tracking-[0.16px] text-black',
           {
@@ -49,7 +49,7 @@ const ShareButton = ({ disabled, link, className }) => {
           stroke={1.5}
         />
         <div>Share</div>
-      </div>
+      </button>
       <Tooltip
         label={clipboard.copied ? 'Copied' : 'Copy link'}
       >
