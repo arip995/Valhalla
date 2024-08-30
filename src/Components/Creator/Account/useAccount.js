@@ -135,7 +135,7 @@ const useAccount = () => {
         initialLastName: user.lastName,
       });
     }
-  }, [user]);
+  }, [user?._id]);
 
   return {
     user,

@@ -347,7 +347,7 @@ const useCreateTelegram = () => {
         stepOneForm.setFieldValue('isOtpScreen', -1);
       }
     }
-  }, [user]);
+  }, [user?._id]);
 
   return {
     step,

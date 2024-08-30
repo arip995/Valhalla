@@ -140,9 +140,10 @@ const useContactSupportDetails = () => {
       setUserData();
     }
   }, [opened]);
+
   useEffect(() => {
     setPreviousData();
-  }, [user]);
+  }, [user?._id]);
 
   return {
     initiaContactData,

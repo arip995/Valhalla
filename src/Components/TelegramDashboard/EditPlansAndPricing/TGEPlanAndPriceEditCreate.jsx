@@ -17,10 +17,10 @@ import {
   TextInput,
 } from '@mantine/core';
 import { modals } from '@mantine/modals';
-import { IconLayoutSidebarRightExpand } from '@tabler/icons-react';
+import { IconX } from '@tabler/icons-react';
 import React, { useEffect, useState } from 'react';
 
-const MAX_TITLE_LENGTH = 75;
+const MAX_TITLE_LENGTH = 60;
 const MIN_TITLE_LENGTH = 0;
 
 const TGEPlanAndPriceEditCreate = ({
@@ -254,12 +254,7 @@ const TGEPlanAndPriceEditCreate = ({
         scrollAreaComponent={NewScrollArea}
         padding="0px"
         closeButtonProps={{
-          icon: (
-            <IconLayoutSidebarRightExpand
-              stroke={1.5}
-              size={24}
-            />
-          ),
+          icon: <IconX stroke={1.5} size={24} />,
         }}
       >
         <div className="flex h-full flex-col justify-between">
@@ -419,9 +414,12 @@ const TGEPlanAndPriceEditCreate = ({
               disabled={isSaving || isDeleting}
               loading={isDeleting}
               variant="filled"
+              size="xs"
               radius="xl"
             >
-              Save Changes
+              {tempData?._id
+                ? 'Create Plan'
+                : 'Save Changes'}
             </Button>
             {tempData?._id && numOfPlans > 1 ? (
               <Button
@@ -430,6 +428,7 @@ const TGEPlanAndPriceEditCreate = ({
                 loading={isDeleting}
                 variant="filled"
                 color="red"
+                size="xs"
                 radius="xl"
               >
                 Delete Plan

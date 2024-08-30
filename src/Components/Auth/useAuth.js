@@ -144,7 +144,7 @@ const useAuth = () => {
     if (user?.isCreator && !user?.username) {
       setStep(2);
     }
-  }, [user]);
+  }, [user?._id]);
 
   useEffect(() => {
     if (params.get('success') === 'false') {

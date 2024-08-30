@@ -76,7 +76,7 @@ const useUsername = () => {
       setInitialUsername(user.username);
       setUsername(user.username);
     }
-  }, [user]);
+  }, [user?._id]);
 
   return {
     username,
