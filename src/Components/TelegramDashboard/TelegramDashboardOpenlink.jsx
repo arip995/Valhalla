@@ -1,4 +1,4 @@
-import { Button, Paper, rem, Text } from '@mantine/core';
+import { Button, Paper, rem } from '@mantine/core';
 import { IconExternalLink } from '@tabler/icons-react';
 import Link from 'next/link';
 import React from 'react';
@@ -10,9 +10,6 @@ const TelegramDashboardOpenlink = ({ data }) => {
       withBorder
       className="sticky top-0 z-20 w-full p-4"
     >
-      <Text size="md" className="mb-2" fw={600}>
-        Page Preview
-      </Text>
       <Link
         href={`/tg/${data._id}`}
         passHref
@@ -31,7 +28,7 @@ const TelegramDashboardOpenlink = ({ data }) => {
             }
             fullWidth
           >
-            Open link
+            Open Preview
           </Button>
         </a>
       </Link>

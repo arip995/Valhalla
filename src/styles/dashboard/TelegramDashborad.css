@@ -1,7 +1,6 @@
 .tg-dashboard-container {
   display: flex;
   justify-content: center;
-  min-height: 100vh;
   /* min-width: 100vw; */
   background-color: light-dark(
     var(--mantine-color-gray-0),
