@@ -1,13 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axiosInstance from '../AxiosInstance';
 import { getUserData, logout } from '../getuserData';
 import useIsBrowser from '../useIsBrowser';
-import Cookies from 'js-cookie';
 
-const useUser = (
-  fetch = false,
-  updateInInterval = false
-) => {
+const useUser = (fetch = false) => {
+  const userRef = useRef();
   const [user, setUser] = useState(-1);
   const [loadingGetUserData, setLoadingGetUserData] =
     useState();
@@ -55,28 +52,20 @@ const useUser = (
   }, [isBrowser]);
 
   useEffect(() => {
-    let interval;
-    if (updateInInterval) {
-      interval = setInterval(() => {
-        const accessToken = Cookies.get('accesstoken');
-        if (accessToken) {
-          fetchUserData();
-        }
-        if (accessToken) {
-          clearInterval(interval);
-        }
-      }, 2000);
-    }
+    userRef.current = user;
+  }, [user]);
 
+  useEffect(() => {
     let updatedLocalStorageInterval = setInterval(() => {
+      const storedUser = JSON.parse(
+        localStorage.getItem('user') || '{}'
+      );
+      if (userRef.current?._id === storedUser?._id) return;
       setUserData();
     }, 2000);
 
     return () => {
-      if (interval) {
-        clearInterval(interval);
-        clearInterval(updatedLocalStorageInterval);
-      }
+      clearInterval(updatedLocalStorageInterval);
     };
   }, []);
 
