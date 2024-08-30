@@ -122,26 +122,26 @@ export function NavbarLayout({ children }) {
                 </div>
                 <ActionIcon
                   variant="subtle"
-                  color="black"
+                  color="rgba(199, 199, 199, 1)"
                   size={'lg'}
                   onClick={() =>
                     setShowLabel(prev => !prev)
                   }
                 >
-                  <IconMenu2 stroke={1} />
+                  <IconMenu2 stroke={1} color="black" />
                 </ActionIcon>
               </div>
             ) : (
               <div className="flex w-full flex-col items-center gap-4">
                 <ActionIcon
                   variant="subtle"
-                  color="black"
+                  color="rgba(199, 199, 199, 1)"
                   size={'lg'}
                   onClick={() => {
                     setShowLabel(prev => !prev);
                   }}
                 >
-                  <IconMenu2 stroke={1} />
+                  <IconMenu2 stroke={1} color="black" />
                 </ActionIcon>
                 <Link href="/" prefetch={false}>
                   <img
