@@ -89,7 +89,7 @@ const useEditPlanAndPricing = data => {
         return;
       }
     }
-    if (isToggling || !data?._id) return;
+    if (isToggling) return;
     try {
       setIsToggling(true);
 
