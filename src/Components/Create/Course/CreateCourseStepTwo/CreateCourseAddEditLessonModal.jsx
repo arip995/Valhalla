@@ -15,7 +15,7 @@ const CreateCourseAddEditLessonModal = ({
       <Modal
         opened={show}
         title="Lesson"
-        onClise={() => setShow(false)}
+        onClose={() => setShow(false)}
         className={'ael-modal-container'}
       >
         {show ? (
