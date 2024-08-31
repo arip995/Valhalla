@@ -1,20 +1,7 @@
-/**
- *
- * @param {*} arr
- * @returns
- * removes all the falsy values from a array
- */
 export function Compact(arr) {
   return arr.filter(Boolean);
 }
 
-/**
- *
- * @param {*} data
- * @param {*} setterFunction
- * @returns
- * For up
- */
 export function updateObjectStates(data, setterFunction) {
   // data can be an object or list of objects of type {name: <name>, value: <value>}
   // name is a string and supports dot notation
@@ -75,3 +62,34 @@ export const convertFullNameToFirstNameLastName =
       return { firstName, lastName };
     }
   };
+
+export const onDrag = (
+  result,
+  arrray,
+  onSuccess = () => {}
+) => {
+  if (result.source.index === result.destination.index)
+    return;
+  if (!result.destination) return;
+  let tempArray = [...arrray];
+  let [selectedRow] = tempArray.splice(
+    result.source.index,
+    1
+  );
+  tempArray.splice(
+    result.destination.index,
+    0,
+    selectedRow
+  );
+  onSuccess(tempArray);
+  return tempArray;
+};
+
+export const getUniqueId = () => {
+  const now = new Date();
+  const timestamp = now.getTime();
+  return String(
+    Math.floor(timestamp / 1000) +
+      Math.floor(Math.random() * 1000000)
+  );
+};
