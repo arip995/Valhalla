@@ -4,19 +4,18 @@ import { Button } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 import classNames from 'classnames';
 import Link from 'next/link';
-import classes from '../../../styles/common/header.module.css';
 
 const Header = ({ title, path, className }) => {
   return (
     <div
       className={classNames(
-        classes.appsHeaderContainer,
+        'z-[95] h-[52px] w-full border-b border-solid border-b-[#dee2e6] bg-white p-[11px] shadow-sm',
         className
       )}
     >
-      <div className={classes.appsHeader}>
+      <div className="flex items-center justify-between">
         {!!title && (
-          <div className={classes.appsHeaderTitle}>
+          <div className="text-lg font-semibold">
             {title}
           </div>
         )}
@@ -28,7 +27,6 @@ const Header = ({ title, path, className }) => {
                 variant="light"
                 radius="xl"
                 size="xs"
-                className={classes.createButton}
               >
                 Create {title}
               </Button>

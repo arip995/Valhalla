@@ -1,7 +1,7 @@
-import Telegram from '@/Components/Apps/Telegram/Telegram';
+import Course from '@/Components/Apps/Course/Course';
 
 const Page = ({ data }) => {
-  return <Telegram {...data} />;
+  return <Course {...data} />;
 };
 
 export default Page;
