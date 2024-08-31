@@ -183,7 +183,7 @@ const CreateModulesAndLessons = () =>
     return (
       <div>
         <div className="cmal-container">
-          <div className="cmal-container-title">
+          <div className="cmal-container-title mb-4">
             Add lessons of your course
           </div>
           <DragDropContext
@@ -194,7 +194,7 @@ const CreateModulesAndLessons = () =>
                 <div
                   ref={provided.innerRef}
                   {...provided.droppableProps}
-                  className="cmal-container"
+                  className="flex w-full flex-col"
                 >
                   {courseList.length > 0 && (
                     <>
@@ -209,6 +209,7 @@ const CreateModulesAndLessons = () =>
                               <div
                                 ref={provided.innerRef}
                                 {...provided.draggableProps}
+                                className="mb-4"
                               >
                                 <CreateCourseModuleContainer
                                   module={module}
