@@ -6,7 +6,7 @@ const ViewProductHeader = ({
   profilePic,
   firstName,
   lastName,
-  username,
+  // username,
   title,
 }) => {
   return (
