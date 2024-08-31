@@ -64,10 +64,7 @@ const TelegramDashboardBasicDetails = ({
         <div className="flex flex-col gap-1">
           <Input.Label>About your channel</Input.Label>
           <RichTextEditor editor={editor}>
-            <RichTextEditor.Toolbar
-              sticky
-              stickyOffset={60}
-            >
+            <RichTextEditor.Toolbar sticky stickyOffset={0}>
               <RichTextEditor.ControlsGroup>
                 <RichTextEditor.Bold />
                 <RichTextEditor.Italic />

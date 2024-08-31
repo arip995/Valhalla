@@ -62,3 +62,34 @@ export const convertFullNameToFirstNameLastName =
       return { firstName, lastName };
     }
   };
+
+export const onDrag = (
+  result,
+  arrray,
+  onSuccess = () => {}
+) => {
+  if (result.source.index === result.destination.index)
+    return;
+  if (!result.destination) return;
+  let tempArray = [...arrray];
+  let [selectedRow] = tempArray.splice(
+    result.source.index,
+    1
+  );
+  tempArray.splice(
+    result.destination.index,
+    0,
+    selectedRow
+  );
+  onSuccess(tempArray);
+  return tempArray;
+};
+
+export const getUniqueId = () => {
+  const now = new Date();
+  const timestamp = now.getTime();
+  return String(
+    Math.floor(timestamp / 1000) +
+      Math.floor(Math.random() * 1000000)
+  );
+};
