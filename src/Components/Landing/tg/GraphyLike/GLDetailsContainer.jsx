@@ -21,12 +21,17 @@ const GLDetailsContainer = ({ data }) => {
             <div className="leading-title1 mb-8 mt-6 text-xl font-semibold text-black">
               {data.title}
             </div>
-            <div className="my-4 flex gap-2">
-              <div className="rounded-sm bg-gray-100 px-2 py-1 shadow-sm">
-                {data.genre}
+            <div className="flex-flex-col">
+              <div className="text-sm font-semibold text-gray-900">
+                About this offering
               </div>
-              <div className="rounded-sm bg-gray-100 px-2 py-1 shadow-sm">
-                ⚡️{data.subscriptionPlans.length} Plans
+              <div className="mb-4 mt-2 flex gap-2">
+                <div className="rounded-sm bg-gray-100 px-2 py-1 shadow-sm">
+                  {data.genre}
+                </div>
+                <div className="rounded-sm bg-gray-100 px-2 py-1 shadow-sm">
+                  ⚡️{data.subscriptionPlans.length} Plans
+                </div>
               </div>
             </div>
             {!!data?.description && (
