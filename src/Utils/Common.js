@@ -1,20 +1,3 @@
-/**
- *
- * @param {*} arr
- * @returns
- * removes all the falsy values from a array
- */
-export function Compact(arr) {
-  return arr.filter(Boolean);
-}
-
-/**
- *
- * @param {*} data
- * @param {*} setterFunction
- * @returns
- * For up
- */
 export function updateObjectStates(data, setterFunction) {
   // data can be an object or list of objects of type {name: <name>, value: <value>}
   // name is a string and supports dot notation
