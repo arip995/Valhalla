@@ -1,4 +1,5 @@
 import axiosInstance from '@/Utils/AxiosInstance';
+import { onDrag } from '@/Utils/Common';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -130,19 +131,8 @@ const useEditPlanAndPricing = data => {
     }
   };
   const onDragPlans = result => {
-    if (result.source.index === result.destination.index)
-      return;
-    if (!result.destination) return;
-    let tempPlans = [...plans];
-    let [selectedRow] = tempPlans.splice(
-      result.source.index,
-      1
-    );
-    tempPlans.splice(
-      result.destination.index,
-      0,
-      selectedRow
-    );
+    const tempPlans = onDrag(result, plans);
+    if (!tempPlans?.length) return;
     setPlans(tempPlans);
     onSavePlan({
       plans: tempPlans.map(item => ({
@@ -150,7 +140,6 @@ const useEditPlanAndPricing = data => {
       })),
       type: 'updatePlanPositions',
     });
-    // updatePlansData(tempPlans);
   };
 
   return {
