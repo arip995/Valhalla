@@ -5,10 +5,10 @@ import { Modal } from '@mantine/core';
 const CreateCourseAddEditLessonModal = ({
   show,
   setShow,
-  dataToEdit,
-  canDelete,
-  onDelete,
-  onUpdate,
+  // dataToEdit,
+  // canDelete,
+  // onDelete,
+  // onUpdate,
 }) => {
   return (
     <>
