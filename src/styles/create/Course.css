@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  /* gap: 16px; */
   .cmal-container-title {
     font-size: small;
     font-weight: 600;
@@ -61,6 +60,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: max-content;
     padding: 4px 8px;
     border-radius: 4px;
     background: #f2f2f2;
@@ -69,6 +69,7 @@
     gap: 10px;
   }
   .caml-preview-type-button-published {
+    min-width: max-content;
     color: #24975d;
     background: #ebfbf3;
   }

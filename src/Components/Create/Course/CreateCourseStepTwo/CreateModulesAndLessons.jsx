@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import CreateCourseModuleContainer from './CreateCourseModuleContainer';
 import '../../../../styles/create/Course.css';
 import CreateCourseAddEditLessonModal from './CreateCourseAddEditLessonModal';
+import { Accordion } from '@mantine/core';
 
 const CreateModulesAndLessons = () =>
   //     {
@@ -200,32 +201,42 @@ const CreateModulesAndLessons = () =>
                     <>
                       {courseList.map((module, index) => {
                         return (
-                          <Draggable
+                          <Accordion
                             key={module.id}
-                            draggableId={module.id}
-                            index={index}
+                            variant="default"
+                            chevronPosition="left"
+                            radius="xl"
+                            defaultValue="Apples"
                           >
-                            {provided => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                className="mb-4"
-                              >
-                                <CreateCourseModuleContainer
-                                  module={module}
-                                  moduleIndex={index}
-                                  onDragLesson={
-                                    onDragLesson
-                                  }
-                                  onEditLesson={
-                                    onEditLesson
-                                  }
-                                  onAddLesson={onAddLesson}
-                                  provided={provided}
-                                />
-                              </div>
-                            )}
-                          </Draggable>
+                            <Draggable
+                              key={module.id}
+                              draggableId={module.id}
+                              index={index}
+                            >
+                              {provided => (
+                                <div
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  className="mb-4"
+                                >
+                                  <CreateCourseModuleContainer
+                                    module={module}
+                                    moduleIndex={index}
+                                    onDragLesson={
+                                      onDragLesson
+                                    }
+                                    onEditLesson={
+                                      onEditLesson
+                                    }
+                                    onAddLesson={
+                                      onAddLesson
+                                    }
+                                    provided={provided}
+                                  />
+                                </div>
+                              )}
+                            </Draggable>
+                          </Accordion>
                         );
                       })}
                     </>
