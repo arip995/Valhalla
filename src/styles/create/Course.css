@@ -1,0 +1,117 @@
+.cmal-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+  .cmal-container-title {
+    font-size: small;
+    font-weight: 600;
+  }
+  .cmal-container-module-container {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    background: #fff;
+    gap: 8px;
+  }
+  .cmal-module-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .cmal-module-title {
+    font-size: small;
+    font-weight: 600;
+  }
+  .caml-lesson-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .caml-lesson-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 8px;
+    border-bottom: 1px solid #e5e5e5;
+    background: #fff;
+    gap: 8px;
+  }
+  .cmal-lesson-title-left-container {
+    display: flex;
+    width: 100%;
+    gap: 8px;
+  }
+  .cmal-lesson-title-left-wrapper {
+    display: flex;
+    align-items: center;
+    font-size: small;
+    font-weight: 500;
+    gap: 8px;
+  }
+  .cmal-lesson-title-left {
+    color: var(--surface-7);
+  }
+  .cmal-lesson-title-left-preview-type {
+    color: var(--surface-5);
+  }
+  .cmal-lesson-title-right-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .caml-preview-type-button-draft {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: #f2f2f2;
+    font-size: small;
+    font-weight: 600;
+    gap: 10px;
+  }
+  .caml-preview-type-button-published {
+    color: #24975d;
+    background: #ebfbf3;
+  }
+  .cmal-module-title-right-container {
+    display: flex;
+    gap: 16px;
+  }
+  .cmal-lesson-title-left-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 8x;
+  }
+  .caml-pointer {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .caml-add-lesson {
+    width: fit-content;
+    margin-top: 16px;
+    color: #0085ff;
+    cursor: pointer;
+    font-size: small;
+    font-weight: 500;
+  }
+  .caml-add-module {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    color: var(--surface-2);
+    font-size: small;
+    font-weight: 500;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
