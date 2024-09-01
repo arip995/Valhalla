@@ -32,7 +32,7 @@ const CreateCourseModuleContainer = ({
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-center">
-          <Accordion.Control className="w-12"></Accordion.Control>
+          <Accordion.Control className="!w-12"></Accordion.Control>
           <div className="text-truncate flex items-center gap-2 text-sm font-semibold">
             {showDrag ? (
               <div
