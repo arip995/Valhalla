@@ -53,9 +53,9 @@ const CreateCourseLessonContainer = ({
         <ActionIcon
           variant="subtle"
           color="rgba(199, 199, 199, 1)"
+          onClick={() => onEditLesson(moduleIndex, index)}
         >
           <IconChevronRight
-            onClick={() => onEditLesson(moduleIndex, index)}
             color="rgba(199, 199, 199, 1)"
             style={{
               width: rem(16),
