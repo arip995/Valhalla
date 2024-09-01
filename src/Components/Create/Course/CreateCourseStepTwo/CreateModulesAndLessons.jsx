@@ -32,7 +32,7 @@ const CreateModulesAndLessons = () =>
             description: '',
             supportMaterial: [],
             freePreview: false,
-            status: 'draft',
+            status: 0,
             lessonType: 'textImage',
             lesson: {},
             textImage:
@@ -138,7 +138,7 @@ const CreateModulesAndLessons = () =>
         description: '',
         supportMaterial: [],
         freePreview: false,
-        status: 'draft',
+        status: 0,
         lessonType: 'textImage',
         lesson: {},
         textImage:
@@ -182,9 +182,9 @@ const CreateModulesAndLessons = () =>
     if (!courseList || !isBrowser) return null;
 
     return (
-      <div>
-        <div className="cmal-container">
-          <div className="cmal-container-title mb-4">
+      <div className="cmal-container">
+        <div className="flex w-full flex-col">
+          <div className="mb-4 text-sm font-semibold">
             Add lessons of your course
           </div>
           <DragDropContext
@@ -247,7 +247,7 @@ const CreateModulesAndLessons = () =>
             </Droppable>
           </DragDropContext>
           <div
-            className="caml-add-module"
+            className="flex cursor-pointer items-center justify-center rounded-lg border border-solid border-neutral-200 p-2.5 text-sm font-medium"
             onClick={onAddModule}
           >
             + New Module
