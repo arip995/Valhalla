@@ -6,6 +6,7 @@ import {
 import {
   Accordion,
   ActionIcon,
+  Badge,
   Button,
 } from '@mantine/core';
 import {
@@ -13,7 +14,6 @@ import {
   IconGripVertical,
 } from '@tabler/icons-react';
 import CreateCourseLessonContainer from './CreateCourseLessonContainer';
-import classNames from 'classnames';
 
 const CreateCourseModuleContainer = ({
   module,
@@ -47,17 +47,15 @@ const CreateCourseModuleContainer = ({
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <div
-            className={classNames(
-              'min-h-max min-w-max rounded bg-[#f2f2f2] px-2 py-1 text-xs font-semibold',
-              {
-                'min-w-max bg-[#ebfbf3] text-[#24975d]':
-                  module.status === 1,
-              }
-            )}
+          <Badge
+            variant="light"
+            color={module.status === 1 ? 'green' : 'gray'}
+            radius="sm"
+            className="min-w-max"
           >
             {module.status === 1 ? 'Published' : 'Draft'}
-          </div>
+          </Badge>
+
           <ActionIcon
             variant="subtle"
             color="rgba(199, 199, 199, 1)"

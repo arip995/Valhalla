@@ -1,9 +1,8 @@
-import { ActionIcon, rem } from '@mantine/core';
+import { ActionIcon, Badge, rem } from '@mantine/core';
 import {
   IconChevronRight,
   IconGripVertical,
 } from '@tabler/icons-react';
-import classNames from 'classnames';
 
 const CreateCourseLessonContainer = ({
   lesson,
@@ -37,17 +36,14 @@ const CreateCourseLessonContainer = ({
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <div
-          className={classNames(
-            'h-max min-w-max rounded bg-[#f2f2f2] px-2 py-1 text-xs font-semibold',
-            {
-              'min-w-max bg-[#ebfbf3] text-[#24975d]':
-                lesson.status === 1,
-            }
-          )}
+        <Badge
+          variant="light"
+          color={lesson.status === 1 ? 'green' : 'gray'}
+          radius="sm"
+          className="min-w-max"
         >
           {lesson.status === 1 ? 'Published' : 'Draft'}
-        </div>
+        </Badge>
         <ActionIcon
           variant="subtle"
           color="rgba(199, 199, 199, 1)"
