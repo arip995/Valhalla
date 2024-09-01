@@ -48,7 +48,7 @@ const TGESinglePlan = ({
     <div className="tgd-plan">
       <div className="tgd-plan" style={{ border: 'none' }}>
         {plansLength > 1 && (
-          <div className="tgd-plan-draggable-image">
+          <div className="tgd-plan-draggable-image cursor-grab">
             <IconGripVertical
               stroke={1.5}
               size={18}
