@@ -50,6 +50,7 @@ const TGEPlansAndPricing = ({
                         >
                           {provided => (
                             <div
+                              className="mb-3"
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
