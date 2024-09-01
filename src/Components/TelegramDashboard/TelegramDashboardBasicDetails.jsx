@@ -1,21 +1,25 @@
 import {
+  ActionIcon,
   Button,
   Collapse,
   Input,
   Paper,
+  rem,
   Text,
   TextInput,
 } from '@mantine/core';
 import { Link, RichTextEditor } from '@mantine/tiptap';
 import '@mantine/tiptap/styles.css';
+import { IconCamera } from '@tabler/icons-react';
 import Highlight from '@tiptap/extension-highlight';
+import Image from '@tiptap/extension-image';
 import SubScript from '@tiptap/extension-subscript';
 import Superscript from '@tiptap/extension-superscript';
 import TextAlign from '@tiptap/extension-text-align';
 import Underline from '@tiptap/extension-underline';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import React from 'react';
+import React, { useCallback } from 'react';
 
 const TelegramDashboardBasicDetails = ({
   data,
@@ -30,6 +34,7 @@ const TelegramDashboardBasicDetails = ({
       Superscript,
       SubScript,
       Highlight,
+      Image,
       TextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
@@ -40,6 +45,14 @@ const TelegramDashboardBasicDetails = ({
       basicDetailsForm.setValues({ description: html });
     },
   });
+
+  const addImage = useCallback(() => {
+    const url = window.prompt('URL');
+
+    if (url) {
+      editor.chain().focus().setImage({ src: url }).run();
+    }
+  }, [editor]);
 
   return (
     <Paper withBorder className="w-full p-4">
@@ -107,6 +120,25 @@ const TelegramDashboardBasicDetails = ({
                 <RichTextEditor.Undo />
                 <RichTextEditor.Redo />
               </RichTextEditor.ControlsGroup>
+              <div className="h-[26px] w-[26px]">
+                <ActionIcon
+                  variant="default"
+                  size="sm"
+                  style={{
+                    height: 'inherit',
+                    width: 'inherit',
+                  }}
+                  onClick={addImage}
+                >
+                  <IconCamera
+                    style={{
+                      width: rem(18),
+                      height: rem(18),
+                    }}
+                    stroke={1.5}
+                  />
+                </ActionIcon>
+              </div>
             </RichTextEditor.Toolbar>
 
             <RichTextEditor.Content className="min-h-32" />
