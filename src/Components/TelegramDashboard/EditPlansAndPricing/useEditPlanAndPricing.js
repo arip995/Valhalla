@@ -55,6 +55,7 @@ const useEditPlanAndPricing = data => {
       setIsSavingPlan(false);
     }
   };
+
   const onDeletePlan = async data => {
     if (isDeletingPlan || !data?._id) return;
     try {
