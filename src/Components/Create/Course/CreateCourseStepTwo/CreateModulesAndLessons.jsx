@@ -22,7 +22,7 @@ const CreateModulesAndLessons = () =>
     const [courseList, setCourseList] = useState([
       {
         id: getUniqueId(),
-        title: 'EC2',
+        title: 'Module 2: Introduction',
         dripTime: new Date(),
         status: 1,
         lessons: [
