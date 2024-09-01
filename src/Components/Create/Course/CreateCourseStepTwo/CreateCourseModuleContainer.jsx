@@ -3,7 +3,11 @@ import {
   Draggable,
   Droppable,
 } from '@hello-pangea/dnd';
-import { Accordion, ActionIcon } from '@mantine/core';
+import {
+  Accordion,
+  ActionIcon,
+  Button,
+} from '@mantine/core';
 import {
   IconDotsVertical,
   IconGripVertical,
@@ -14,6 +18,7 @@ import classNames from 'classnames';
 const CreateCourseModuleContainer = ({
   module,
   moduleIndex,
+  showDrag,
   onDragLesson,
   onEditLesson,
   onAddLesson,
@@ -29,12 +34,15 @@ const CreateCourseModuleContainer = ({
         <div className="flex items-center justify-center">
           <Accordion.Control className="w-12"></Accordion.Control>
           <div className="text-truncate flex items-center gap-2 text-sm font-semibold">
-            <div
-              {...(provided?.dragHandleProps || {})}
-              className="cursor-grab"
-            >
-              <IconGripVertical color="rgba(199, 199, 199, 1)" />
-            </div>
+            {showDrag ? (
+              <div
+                {...(provided?.dragHandleProps || {})}
+                className="cursor-grab"
+              >
+                <IconGripVertical color="rgba(199, 199, 199, 1)" />
+              </div>
+            ) : null}
+
             {module.title}
           </div>
         </div>
@@ -51,7 +59,6 @@ const CreateCourseModuleContainer = ({
             {module.status === 1 ? 'Published' : 'Draft'}
           </div>
           <ActionIcon
-            size="lg"
             variant="subtle"
             color="rgba(199, 199, 199, 1)"
           >
@@ -112,14 +119,16 @@ const CreateCourseModuleContainer = ({
             </Droppable>
           </DragDropContext>
         </div>
-        <div
-          className="mt-4 w-fit cursor-pointer text-sm font-medium text-[#8c00ff]"
+        <Button
+          variant="transparent"
+          size="sm"
+          className="mt-4 w-fit cursor-pointer font-medium"
           onClick={() => {
             onAddLesson(moduleIndex);
           }}
         >
           + Add Lesson
-        </div>
+        </Button>
       </Accordion.Panel>
     </Accordion.Item>
   );

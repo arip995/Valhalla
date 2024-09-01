@@ -1,14 +1,15 @@
 import { Modal } from '@mantine/core';
+import CreateCourseAddEditLesson from './CreateCourseAddEditLesson';
 
 // import AddEditLesson from './AddEditLesson';
 
 const CreateCourseAddEditLessonModal = ({
   show,
   setShow,
-  // dataToEdit,
-  // canDelete,
-  // onDelete,
-  // onUpdate,
+  dataToEdit,
+  canDelete,
+  onDelete,
+  onUpdate,
 }) => {
   return (
     <>
@@ -19,14 +20,13 @@ const CreateCourseAddEditLessonModal = ({
         className={'ael-modal-container'}
       >
         {show ? (
-          <div className=""></div>
-        ) : //   <AddEditLesson
-        //     dataToEdit={dataToEdit}
-        //     canDelete={canDelete}
-        //     onDelete={onDelete}
-        //     onUpdate={onUpdate}
-        //   />
-        null}
+          <CreateCourseAddEditLesson
+            dataToEdit={dataToEdit}
+            canDelete={canDelete}
+            onDelete={onDelete}
+            onUpdate={onUpdate}
+          />
+        ) : null}
       </Modal>
     </>
   );

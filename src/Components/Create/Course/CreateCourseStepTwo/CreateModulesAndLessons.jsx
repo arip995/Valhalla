@@ -205,7 +205,6 @@ const CreateModulesAndLessons = () =>
                             key={module.id}
                             variant="default"
                             chevronPosition="left"
-                            radius="xl"
                             defaultValue="Apples"
                           >
                             <Draggable
@@ -220,6 +219,9 @@ const CreateModulesAndLessons = () =>
                                   className="mb-4"
                                 >
                                   <CreateCourseModuleContainer
+                                    showDrag={
+                                      courseList?.length > 1
+                                    }
                                     module={module}
                                     moduleIndex={index}
                                     onDragLesson={
