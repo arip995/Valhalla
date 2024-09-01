@@ -80,6 +80,7 @@ const theme = createTheme({
   //     '#0043b5',
   //   ],
   // },
+
   cursorType: 'pointer',
 });
 
