@@ -21,7 +21,7 @@ export default async function Icon({ params }) {
         src={
           data.coverImage?.url ||
           data.creatorDetails?.profilePic ||
-          'https://nexify-try.s3.ap-south-1.amazonaws.com/34aa82c3-9933-4705-acac-b294f4812f220.png'
+          'https://nexify-try.s3.ap-south-1.amazonaws.com/11d6044f-d452-4c13-b4de-e9aa1a08a164.png'
         }
       />
     ),
