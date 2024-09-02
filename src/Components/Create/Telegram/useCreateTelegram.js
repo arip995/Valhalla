@@ -195,6 +195,7 @@ const useCreateTelegram = () => {
         data.data.data.sessionString
       );
       stepOneForm.setFieldValue('isOtpScreen', 1);
+      if (showWarning) setShowWarning(false);
     } catch (error) {
       toast.error('Failed to send otp');
       setShowWarning(true);
