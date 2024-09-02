@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 const useCreateTelegram = () => {
   const { setCurrentUser } = useUser();
   const [step, setStep] = useState(1);
-  const [showWarning, setShowWarning] = useState(false);
+  const [showWarning, setShowWarning] = useState(0);
   const [existingGroups, setExistingGroups] =
     useState(false);
   const [isSendingOldNumberOtp, setIsSendingOldNumberOtp] =
@@ -182,6 +182,7 @@ const useCreateTelegram = () => {
   };
 
   const sendOtp = async phoneNumber => {
+    const toastId = toast.loading('Sending OTP');
     try {
       const data = await axiosInstance.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/telegram/send_auth`,
@@ -197,10 +198,14 @@ const useCreateTelegram = () => {
       stepOneForm.setFieldValue('isOtpScreen', 1);
       if (showWarning) setShowWarning(false);
     } catch (error) {
-      toast.error('Failed to send otp');
-      setShowWarning(true);
+      toast.error(
+        typeof error?.response?.data?.message === 'string'
+          ? error?.response?.data?.message
+          : 'Failed to send otp'
+      );
       stepOneForm.setFieldValue('isOtpScreen', 0);
     } finally {
+      toast.remove(toastId);
       stepOneForm.setFieldValue(
         'isSaveClickedAtleastOnce',
         false
@@ -228,7 +233,18 @@ const useCreateTelegram = () => {
       await getExistingGroups(phoneNumber);
       return data;
     } catch (error) {
-      toast.error('Failed to verify otp');
+      toast.error('Invalid code');
+      console.log(error?.response);
+      if (
+        (typeof error?.response?.data?.message == 'string'
+          ? error?.response?.data?.message
+          : ''
+        )
+          ?.toLowerCase()
+          .includes('2fa')
+      ) {
+        setShowWarning(prev => prev + 1);
+      }
       stepOneForm.setFieldValue('isOtpScreen', 1);
     }
   };
@@ -277,7 +293,12 @@ const useCreateTelegram = () => {
     }
   };
 
-  const onStepOneSubmit = async () => {
+  const onStepOneSubmit = async val => {
+    if (val === 'send_otp') {
+      stepOneForm.setFieldValue('isOtpScreen', -2);
+      await sendOtp(`91${stepOneForm.values.phoneNumber}`);
+      return;
+    }
     if (stepOneForm.values.isOtpScreen === 0) {
       stepOneForm.setFieldValue('isOtpScreen', -2);
       await sendOtp(`91${stepOneForm.values.phoneNumber}`);
