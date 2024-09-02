@@ -31,6 +31,7 @@ const UpdateContactModal = ({
   otp,
   setOtp,
   onVerifyOtp,
+  loading,
 }) => {
   const checkDisabled = () => {
     if (editEntity === 'email') {
@@ -121,6 +122,7 @@ const UpdateContactModal = ({
               value={otp}
             />
             <Button
+              loading={loading}
               onClick={onVerifyOtp}
               disabled={!otp || otp?.length != 5}
               fullWidth
@@ -177,6 +179,7 @@ const UpdateContactModal = ({
               />
             )}
             <Button
+              loading={loading}
               onClick={onSendOtp}
               // loading={checkDisabled()}
               disabled={checkDisabled()}
