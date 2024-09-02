@@ -93,6 +93,10 @@ const CreateCourseModuleContainer = ({
                                   {...provided.draggableProps}
                                 >
                                   <CreateCourseLessonContainer
+                                    showDrag={
+                                      module?.lessons
+                                        ?.length > 1
+                                    }
                                     provided={provided}
                                     lesson={lesson}
                                     index={index}
