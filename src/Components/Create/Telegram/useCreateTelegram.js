@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 const useCreateTelegram = () => {
   const { setCurrentUser } = useUser();
   const [step, setStep] = useState(1);
+  const [showWarning, setShowWarning] = useState(false);
   const [existingGroups, setExistingGroups] =
     useState(false);
   const [isSendingOldNumberOtp, setIsSendingOldNumberOtp] =
@@ -26,10 +27,9 @@ const useCreateTelegram = () => {
       otp: '',
       isSaveClickedAtleastOnce: false,
     },
-    validateInputOnChange: true,
     validate: {
       phoneNumber: value => {
-        return !value || value?.length !== 10
+        return !value || value?.toString().length !== 10
           ? stepOneForm.values.isSaveClickedAtleastOnce &&
             stepOneForm.values.isOtpScreen === 0
             ? 'Enter valid phone number'
@@ -197,6 +197,7 @@ const useCreateTelegram = () => {
       stepOneForm.setFieldValue('isOtpScreen', 1);
     } catch (error) {
       toast.error('Failed to send otp');
+      setShowWarning(true);
       stepOneForm.setFieldValue('isOtpScreen', 0);
     } finally {
       stepOneForm.setFieldValue(
@@ -361,6 +362,7 @@ const useCreateTelegram = () => {
     onStepOneSubmit,
     onStepTwoSubmit,
     onStepThreeSubmit,
+    showWarning,
     loading,
     setStep,
   };

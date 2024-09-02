@@ -30,7 +30,6 @@ const useAuth = () => {
       email: '',
       phoneNumber: '',
     },
-    validateInputOnChange: true,
     validate: {
       email: value =>
         emailOrPhoneNumber === 'email'
@@ -49,7 +48,6 @@ const useAuth = () => {
 
   const otpForm = useForm({
     initialValue: { otp: '' },
-    validateInputOnChange: true,
     validate: {
       otp: value =>
         isClickedAtleastOnce &&

@@ -29,6 +29,7 @@ const CreateTelegram = ({ data }) => {
     onStepThreeSubmit,
     onConnectExisting,
     existingGroups,
+    showWarning,
     step,
     setStep,
     user,
@@ -55,11 +56,8 @@ const CreateTelegram = ({ data }) => {
               showBackButton={true}
             >
               <div className="flex items-center justify-between">
-                {(stepOneForm.values.isOtpScreen !== 0 &&
-                  step === 1) ||
-                (!user?.telegramIntegrations?.length !==
-                  0 &&
-                  step === 1) ? (
+                {step === 1 &&
+                stepOneForm.values.isOtpScreen !== 0 ? (
                   <div />
                 ) : (
                   <ActionIcon
@@ -113,6 +111,7 @@ const CreateTelegram = ({ data }) => {
                   onStepOneSubmit={onStepOneSubmit}
                   onConnectExisting={onConnectExisting}
                   user={user}
+                  showWarning={showWarning}
                 />
               ) : step === 2 ? (
                 <StepTwoCreateTelegram
