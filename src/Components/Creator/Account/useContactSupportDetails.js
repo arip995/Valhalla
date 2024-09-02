@@ -18,6 +18,7 @@ const useContactSupportDetails = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [editEntity, setEditEntity] = useState(false);
   const [isOtpScreen, setIsOtpScreen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [otp, setOtp] = useState('');
 
   const onClickEdit = type => {
@@ -39,6 +40,7 @@ const useContactSupportDetails = () => {
     }
   };
   const onSendOtp = async () => {
+    setLoading(true);
     if (editEntity === 'email') {
       if (!email || !validateEmail(email)) {
         toast.error('Enter a valid email');
@@ -98,9 +100,12 @@ const useContactSupportDetails = () => {
       setIsOtpScreen(true);
     } catch (error) {
       toast.error(error?.response?.data?.message || '');
+    } finally {
+      setLoading(false);
     }
   };
   const onVerifyOtp = async () => {
+    setLoading(true);
     try {
       let payload = {
         email:
@@ -128,6 +133,8 @@ const useContactSupportDetails = () => {
     } catch (error) {
       console.log(error);
       toast.error(error?.response?.data?.message || '');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -167,6 +174,7 @@ const useContactSupportDetails = () => {
     otp,
     setOtp,
     onVerifyOtp,
+    loading,
     isCreator: user?.isCreator,
   };
 };

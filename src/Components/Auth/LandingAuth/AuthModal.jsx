@@ -15,6 +15,7 @@ import {
 } from '@mantine/core';
 import {
   IconChevronLeft,
+  IconEdit,
   IconMail,
   IconPhone,
 } from '@tabler/icons-react';
@@ -227,13 +228,22 @@ const AuthModal = ({
               An OTP has been sent to your{' '}
               {isEmail ? 'Email' : 'Phone Number'}{' '}
             </div>
-            <div className="text-center text-xs font-semibold">
+            <div className="flex items-center text-center text-xs font-semibold">
               {isEmail
                 ? `Please check your email ${authForm?.values?.email}.com . If you can't find the email, please check your spam folders.`
                 : `Please check your phone number`}{' '}
               {isEmail
                 ? authForm?.values?.email
                 : `+91 ${authForm?.values?.phoneNumber}`}
+              <IconEdit
+                className="ml-1 cursor-pointer"
+                onClick={() => setStep(1)}
+                color="gray"
+                style={{
+                  height: rem(12),
+                  width: rem(12),
+                }}
+              />
             </div>
             <form
               className="flex w-full flex-col items-center gap-4"

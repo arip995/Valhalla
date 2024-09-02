@@ -29,6 +29,7 @@ const ContactInfo = () => {
     setOtp,
     onVerifyOtp,
     isCreator,
+    loading,
   } = useContactSupportDetails();
 
   return (
@@ -124,6 +125,7 @@ const ContactInfo = () => {
         otp={otp}
         setOtp={setOtp}
         onVerifyOtp={onVerifyOtp}
+        loading={loading}
       />
     </>
   );
