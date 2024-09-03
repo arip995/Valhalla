@@ -28,7 +28,7 @@ const CreateCourseModuleContainer = ({
     <Accordion.Item
       key={module.title}
       value={module.title}
-      className="flex flex-col gap-2 rounded-lg border border-solid border-neutral-200 bg-white p-4"
+      className="flex flex-col gap-2 rounded-lg border border-solid border-neutral-200 bg-white p-2 md:p-4"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center justify-center">
@@ -59,8 +59,9 @@ const CreateCourseModuleContainer = ({
           <ActionIcon
             variant="subtle"
             color="rgba(199, 199, 199, 1)"
+            size="xs"
           >
-            <IconDotsVertical size="1rem" />
+            <IconDotsVertical />
           </ActionIcon>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { ActionIcon, Badge, rem } from '@mantine/core';
 import {
-  IconChevronRight,
+  IconDotsVertical,
   IconGripVertical,
 } from '@tabler/icons-react';
 
@@ -51,14 +51,9 @@ const CreateCourseLessonContainer = ({
           variant="subtle"
           color="rgba(199, 199, 199, 1)"
           onClick={() => onEditLesson(moduleIndex, index)}
+          size="xs"
         >
-          <IconChevronRight
-            color="rgba(199, 199, 199, 1)"
-            style={{
-              width: rem(16),
-              height: rem(16),
-            }}
-          />
+          <IconDotsVertical />
         </ActionIcon>
       </div>
     </div>
