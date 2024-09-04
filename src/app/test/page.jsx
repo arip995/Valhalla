@@ -1,11 +1,11 @@
 'use client';
 import ImageCropModal from '@/Common/CropModal';
+import { handleFile } from '@/Utils/HandleFiles';
 import React, { useState } from 'react';
 
 function page() {
   const [imageSrc, setImageSrc] = useState(null);
   const [cropModalOpen, setCropModalOpen] = useState(false);
-
   // Handle image upload and show the crop modal
   const handleImageUpload = event => {
     const file = event.target.files[0];
@@ -20,8 +20,9 @@ function page() {
   };
 
   // Handle crop completion
-  const handleCropComplete = croppedImage => {
-    console.log('Cropped Image URL:', croppedImage); // Do something with the cropped image
+  const handleCropComplete = async file => {
+    const url = await handleFile(file);
+    console.log(url);
   };
 
   return (

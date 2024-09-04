@@ -1,22 +1,18 @@
-import React, {
-  useState,
-  useRef,
-  useCallback,
-} from 'react';
+/* eslint-disable no-unused-vars */
+import { Button, Modal, Slider } from '@mantine/core';
+import { useCallback, useRef, useState } from 'react';
 import ReactCrop, {
   centerCrop,
   makeAspectCrop,
 } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
-import 'react-image-crop/dist/ReactCrop.css';
-import { Button, Modal, Slider } from '@mantine/core';
 
 function centerAspectCrop(mediaWidth, mediaHeight, aspect) {
   return centerCrop(
     makeAspectCrop(
       {
-        unit: '%',
-        width: 100,
+        unit: 'px',
+        width: mediaWidth,
       },
       aspect,
       mediaWidth,
@@ -27,146 +23,174 @@ function centerAspectCrop(mediaWidth, mediaHeight, aspect) {
   );
 }
 
-function ImageCropModal({
+function CropModal({
   open,
   imageSrc,
   onClose,
   onCropComplete,
   aspect = 1,
   circularCrop = true,
+  title = 'Edit Photo',
+  children,
 }) {
   const [crop, setCrop] = useState({
-    unit: '%',
-  }); // Initial crop state with a 1:1 aspect ratio
+    aspect,
+    unit: 'px',
+    width: 100,
+  });
   const [completedCrop, setCompletedCrop] = useState(null);
-  const [scale, setScale] = useState(1);
-  const [rotation, setRotation] = useState(0);
   const imgRef = useRef(null);
 
   // Handle setting the image reference when loaded
-  const onImageLoad = useCallback(e => {
-    if (aspect) {
-      const { width, height } = e.currentTarget;
-      setCrop(centerAspectCrop(width, height, aspect));
-    }
-  }, []);
+  const onImageLoad = useCallback(
+    e => {
+      if (aspect) {
+        const { width, height } = e.currentTarget;
+        const initialCrop = centerAspectCrop(
+          width,
+          height,
+          aspect
+        );
+        setCrop(initialCrop);
+        setCompletedCrop(initialCrop); // Set completedCrop when the image loads
+      }
+    },
+    [aspect]
+  );
 
   // Handle the crop completion
-  const onComplete = crop => {
+  const onComplete = async crop => {
     setCompletedCrop(crop);
   };
 
   // Generate the cropped image using canvas
   const getCroppedImg = async () => {
     if (!completedCrop || !imgRef.current) return;
-
-    const image = imgRef.current;
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-
-    // Set canvas size to crop area
-    const cropWidth = completedCrop.width * scale;
-    const cropHeight = completedCrop.height * scale;
-    canvas.width = cropWidth;
-    canvas.height = cropHeight;
-
-    // Set transformation to rotate and scale the image
-    ctx.translate(cropWidth / 2, cropHeight / 2);
-    ctx.rotate((rotation * Math.PI) / 180);
-    ctx.scale(scale, scale);
-    ctx.translate(-cropWidth / 2, -cropHeight / 2);
-
-    // Draw the image on the canvas
-    ctx.drawImage(
-      image,
-      completedCrop.x * scale,
-      completedCrop.y * scale,
-      completedCrop.width * scale,
-      completedCrop.height * scale,
-      0,
-      0,
-      cropWidth,
-      cropHeight
-    );
-
-    // Get the cropped image as a blob URL
-    canvas.toBlob(blob => {
-      if (blob) {
-        const croppedImageUrl = URL.createObjectURL(blob);
-        onCropComplete(croppedImageUrl);
-        onClose();
+    try {
+      const image = imgRef.current;
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        throw new Error('No 2d context');
       }
-    }, 'image/jpeg');
+
+      // Set canvas size to crop area
+      const scaleX = image.naturalWidth / image.width;
+      const scaleY = image.naturalHeight / image.height;
+      // devicePixelRatio slightly increases sharpness on retina devices
+      // at the expense of slightly slower render times and needing to
+      // size the image back down if you want to download/upload and be
+      // true to the images natural size.
+      const pixelRatio = window.devicePixelRatio;
+      // const pixelRatio = 1
+
+      canvas.width = Math.floor(
+        crop.width * scaleX * pixelRatio
+      );
+      canvas.height = Math.floor(
+        crop.height * scaleY * pixelRatio
+      );
+
+      ctx.scale(pixelRatio, pixelRatio);
+      ctx.imageSmoothingQuality = 'high';
+
+      const cropX = crop.x * scaleX;
+      const cropY = crop.y * scaleY;
+
+      const centerX = image.naturalWidth / 2;
+      const centerY = image.naturalHeight / 2;
+
+      ctx.save();
+
+      // 5) Move the crop origin to the canvas origin (0,0)
+      ctx.translate(-cropX, -cropY);
+      // 4) Move the origin to the center of the original position
+      ctx.translate(centerX, centerY);
+      // 3) Rotate around the origin
+      // 2) Scale the image
+      // 1) Move the center of the image to the origin (0,0)
+      ctx.translate(-centerX, -centerY);
+      ctx.drawImage(
+        image,
+        0,
+        0,
+        image.naturalWidth,
+        image.naturalHeight,
+        0,
+        0,
+        image.naturalWidth,
+        image.naturalHeight
+      );
+
+      // Get the MIME type of the original image
+      // Get the MIME type of the original image
+      const mimeType =
+        image.src.split(';')[0].split(':')[1] ||
+        'image/jpeg';
+
+      // Convert canvas to data URL
+      const dataUrl = canvas.toDataURL(mimeType);
+
+      // Convert the data URL to a Blob
+      const blob = await (await fetch(dataUrl)).blob();
+
+      // Create a File object from the Blob
+      const fileName = 'cropped-image.png'; // You can change this to any desired filename
+      const file = new File([blob], fileName, {
+        type: mimeType,
+      });
+
+      return file;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
-    <Modal opened={open} onClose={onClose} size="lg">
-      <div
-        style={{
-          padding: 20,
-          background: '#fff',
-          margin: 'auto',
-          maxWidth: 600,
-        }}
+    <div>
+      {children}
+      <Modal
+        opened={open}
+        onClose={onClose}
+        size="lg"
+        title={title}
+        keepMounted={false}
       >
-        <div className="flex w-full justify-center bg-black">
-          <ReactCrop
-            crop={crop}
-            circularCrop={circularCrop}
-            aspect={aspect}
-            onChange={c => setCrop(c)}
-            onComplete={onComplete}
-            onImageLoaded={onImageLoad}
-            className="max-h-[300px]"
-          >
-            <img
-              ref={imgRef}
-              alt="Crop me"
-              src={imageSrc}
-              style={{
-                transform: `scale(${scale}) rotate(${rotation}deg)`,
-              }}
-              onLoad={onImageLoad}
-            />
-          </ReactCrop>
-        </div>
+        <div className="mt-4">
+          <div className="flex w-full justify-center bg-black">
+            <ReactCrop
+              crop={crop}
+              circularCrop={circularCrop}
+              aspect={aspect}
+              onChange={c => setCrop(c)}
+              onComplete={onComplete}
+              onImageLoaded={onImageLoad}
+              className="max-h-[300px]"
+            >
+              <img
+                ref={imgRef}
+                alt="Crop me"
+                src={imageSrc}
+                onLoad={onImageLoad}
+              />
+            </ReactCrop>
+          </div>
 
-        <div style={{ marginTop: 20 }}>
-          <div className="mb-6 flex w-full items-center gap-2">
-            Scale:
-            <Slider
-              className="w-full"
-              label={scale}
-              defaultValue={scale}
-              min={1}
-              max={5}
-              step={0.2}
-              onChange={setScale}
-            />
+          <div className="mt-4">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={async () => {
+                onCropComplete(await getCroppedImg());
+              }}
+            >
+              Crop
+            </Button>
           </div>
-          <div className="mb-6 flex w-full items-center gap-2">
-            Rotation:
-            <Slider
-              className="w-full"
-              label={rotation}
-              defaultValue={rotation}
-              min={0}
-              max={360}
-              step={1}
-              onChange={setRotation}
-            />
-          </div>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={getCroppedImg}
-          >
-            Crop
-          </Button>
         </div>
-      </div>
-    </Modal>
+      </Modal>
+    </div>
   );
 }
 
-export default ImageCropModal;
+export default CropModal;
