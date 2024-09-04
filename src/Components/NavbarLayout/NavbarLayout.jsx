@@ -107,19 +107,21 @@ export function NavbarLayout({ children }) {
           >
             {showLabel ? (
               <div className="flex w-full items-center justify-between gap-2">
-                <div className="flex gap-2">
-                  <Link href="/" prefetch={false}>
-                    <img
-                      height={24}
-                      width={24}
-                      src={Logo.src}
-                      onClick={() => {
-                        setOpened(false);
-                      }}
-                    />
-                  </Link>
+                <Link
+                  href="/"
+                  prefetch={false}
+                  className="flex select-none items-center gap-1"
+                >
+                  <img
+                    height={24}
+                    width={24}
+                    src={Logo.src}
+                    onClick={() => {
+                      setOpened(false);
+                    }}
+                  />
                   Nexify
-                </div>
+                </Link>
                 <ActionIcon
                   variant="subtle"
                   color="rgba(199, 199, 199, 1)"

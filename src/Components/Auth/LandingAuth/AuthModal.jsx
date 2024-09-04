@@ -250,6 +250,7 @@ const AuthModal = ({
               onSubmit={otpForm?.onSubmit(verifyOtp)}
             >
               <PinInput
+                autoFocus
                 mt="md"
                 size="lg"
                 length={5}

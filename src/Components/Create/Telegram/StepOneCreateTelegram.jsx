@@ -176,6 +176,7 @@ const StepOneCreateTelegram = ({
                     />
                   </Flex>
                   <PinInput
+                    autoFocus
                     className="mb-2"
                     size="lg"
                     length={5}
