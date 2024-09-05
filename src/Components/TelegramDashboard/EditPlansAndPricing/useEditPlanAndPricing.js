@@ -51,7 +51,6 @@ const useEditPlanAndPricing = data => {
           `Error saving details. Try again later.`
       );
     } finally {
-      toast.success('Updated successfully');
       setIsSavingPlan(false);
     }
   };
