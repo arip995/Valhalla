@@ -1,10 +1,11 @@
 'use client';
 import ImageCropModal from '@/Common/CropModal';
 import { handleFile } from '@/Utils/HandleFiles';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function page() {
   const [imageSrc, setImageSrc] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [cropModalOpen, setCropModalOpen] = useState(false);
   // Handle image upload and show the crop modal
   const handleImageUpload = event => {
@@ -25,9 +26,17 @@ function page() {
     console.log(url);
   };
 
+  useEffect(() => {
+    if (!cropModalOpen) setSelectedFile('');
+  }, [cropModalOpen]);
+
   return (
     <div>
-      <input type="file" onChange={handleImageUpload} />
+      <input
+        value={selectedFile}
+        type="file"
+        onChange={handleImageUpload}
+      />
       {imageSrc && (
         <ImageCropModal
           open={cropModalOpen}

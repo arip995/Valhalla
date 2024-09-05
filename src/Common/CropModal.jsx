@@ -176,12 +176,13 @@ function CropModal({
             </ReactCrop>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-4 flex w-full flex-row-reverse">
             <Button
               variant="contained"
               color="primary"
               onClick={async () => {
                 onCropComplete(await getCroppedImg());
+                onClose();
               }}
             >
               Crop

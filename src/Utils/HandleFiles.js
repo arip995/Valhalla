@@ -44,7 +44,8 @@ export const handleFile = async (
   file,
   mimetypes = ['image'],
   maxFileSize = 1,
-  quality = 50
+  quality = 50,
+  validateOnly = false
 ) => {
   try {
     // Validate file type
@@ -60,6 +61,7 @@ export const handleFile = async (
     if (file.size > maxFileSize * 1024 * 1024) {
       throw new Error(`File size exceeds ${maxFileSize}MB`);
     }
+    if (validateOnly) return 'validated';
 
     // Convert file to base64
     const payload = await convertFileToBase64(file);
