@@ -29,7 +29,7 @@ export async function generateMetadata(
       description:
         'The all-in-one platform for your digital products and services',
       images: [
-        'https://nexify-try.s3.ap-south-1.amazonaws.com/11d6044f-d452-4c13-b4de-e9aa1a08a164.png',
+        'https://nexify-try.s3.ap-south-1.amazonaws.com/499766c5-b634-4ec9-a0f6-1a2bc19a591a.png',
         ...previousImages,
       ],
     },
