@@ -22,11 +22,11 @@ const ProfilePic = ({
   mime_types = ['image/*'],
 }) => {
   const [imageSrc, setImageSrc] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(0);
+  const [fileKey, setFileKey] = useState(0);
   const [cropModalOpen, setCropModalOpen] = useState(false);
 
   const handleUpload = async file => {
-    setSelectedFile(prev => prev + 1);
+    setFileKey(prev => prev + 1);
     const data = await handleFile(
       file,
       undefined,
@@ -80,7 +80,7 @@ const ProfilePic = ({
       {!loading ? (
         <>
           <FileButton
-            key={selectedFile}
+            key={fileKey}
             onChange={handleUpload}
             accept={mime_types}
           >
@@ -118,7 +118,6 @@ const ProfilePic = ({
           open={cropModalOpen}
           imageSrc={imageSrc}
           onClose={() => {
-            setSelectedFile('');
             setCropModalOpen(false);
           }}
           onCropComplete={handleAvatarChange}
