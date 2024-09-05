@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
+import CropModal from '@/Common/CropModal';
+import { handleFile } from '@/Utils/HandleFiles';
 import {
   ActionIcon,
   Avatar,
@@ -8,6 +10,7 @@ import {
   LoadingOverlay,
 } from '@mantine/core';
 import { IconX } from '@tabler/icons-react';
+import { useState } from 'react';
 
 const ProfilePic = ({
   avatarImage,
@@ -18,6 +21,31 @@ const ProfilePic = ({
   showRemoveButton = false,
   mime_types = ['image/*'],
 }) => {
+  const [imageSrc, setImageSrc] = useState(null);
+  const [fileKey, setFileKey] = useState(0);
+  const [cropModalOpen, setCropModalOpen] = useState(false);
+
+  const handleUpload = async file => {
+    setFileKey(prev => prev + 1);
+    const data = await handleFile(
+      file,
+      undefined,
+      undefined,
+      undefined,
+      true
+    );
+    if (data === 'validated') {
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setImageSrc(reader.result);
+          setCropModalOpen(true);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  };
+
   return (
     <div className="flex items-center gap-3">
       <Box pos="relative">
@@ -52,7 +80,8 @@ const ProfilePic = ({
       {!loading ? (
         <>
           <FileButton
-            onChange={handleAvatarChange}
+            key={fileKey}
+            onChange={handleUpload}
             accept={mime_types}
           >
             {props => (
@@ -84,6 +113,16 @@ const ProfilePic = ({
           ) : null}
         </>
       ) : null}
+      {imageSrc && (
+        <CropModal
+          open={cropModalOpen}
+          imageSrc={imageSrc}
+          onClose={() => {
+            setCropModalOpen(false);
+          }}
+          onCropComplete={handleAvatarChange}
+        />
+      )}
     </div>
   );
 };

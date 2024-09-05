@@ -1,32 +1,52 @@
 'use client';
+import ImageCropModal from '@/Common/CropModal';
+import { handleFile } from '@/Utils/HandleFiles';
+import React, { useEffect, useState } from 'react';
 
-import AuthModal from '@/Components/Auth/LandingAuth/AuthModal';
-import { Button } from '@mantine/core';
-import { useState } from 'react';
+function page() {
+  const [imageSrc, setImageSrc] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [cropModalOpen, setCropModalOpen] = useState(false);
+  // Handle image upload and show the crop modal
+  const handleImageUpload = event => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImageSrc(reader.result);
+        setCropModalOpen(true);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
-const page = () => {
-  const [opened, setOpened] = useState(false);
-  // const googleOauth = () => {
-  //   const currentUrl = window.location.href;
-  //   window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/google/auth?redirect=${encodeURIComponent(currentUrl)}`;
-  // };
+  // Handle crop completion
+  const handleCropComplete = async file => {
+    const url = await handleFile(file);
+    console.log(url);
+  };
+
+  useEffect(() => {
+    if (!cropModalOpen) setSelectedFile('');
+  }, [cropModalOpen]);
 
   return (
-    <>
-      <div className="mt-20 flex w-full justify-center">
-        <Button onClick={() => setOpened(true)}>
-          Signin
-        </Button>
-      </div>
-      <AuthModal
-        opened={opened}
-        onClose={() => setOpened(false)}
-        onAuthComplete={() => {
-          setOpened(false);
-        }}
+    <div>
+      <input
+        value={selectedFile}
+        type="file"
+        onChange={handleImageUpload}
       />
-    </>
+      {imageSrc && (
+        <ImageCropModal
+          open={cropModalOpen}
+          imageSrc={imageSrc}
+          onClose={() => setCropModalOpen(false)}
+          onCropComplete={handleCropComplete}
+        />
+      )}
+    </div>
   );
-};
+}
 
 export default page;

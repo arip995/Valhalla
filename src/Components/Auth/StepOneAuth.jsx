@@ -22,7 +22,7 @@ import {
 import Link from 'next/link';
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
-import Logo from '../../../public/icons/neifyiconsmall.webp';
+import Logo from '../../app/icon.png';
 import GoogleButton from '../Common/Buttons/GoogleButton/GoogleButton';
 import HeaderWrapper from './HeaderWrapper';
 import PaperWrapper from './PaperWrapper';
@@ -43,9 +43,9 @@ const StepOneAuth = ({
     <>
       <HeaderWrapper
         titleOne={
-          <div className="flex select-none items-center gap-2 text-gray-700">
+          <div className="flex select-none items-center text-gray-700">
             <img
-              className="h-8 w-auto"
+              className="h-12 w-auto"
               src={Logo.src}
               alt="Nexify"
             />
@@ -107,6 +107,7 @@ const StepOneAuth = ({
                 </div>
 
                 <PinInput
+                  autoFocus
                   size="lg"
                   length={5}
                   type="number"

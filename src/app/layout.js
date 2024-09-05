@@ -56,6 +56,7 @@ import '@mantine/core/styles/Tooltip.css';
 import '@mantine/core/styles/Progress.css';
 import '@mantine/core/styles/Accordion.css';
 import '@mantine/core/styles/Alert.css';
+import '@mantine/core/styles/Slider.css';
 import '@mantine/core/styles/Anchor.css';
 
 // const inter = Inter({ subsets: ["latin"] });

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Anchor } from '@mantine/core';
 import Link from 'next/link';
-import Logo from '../../../../public/icons/neifyiconsmall.webp';
+import Logo from '../../../../src/app/icon.png';
 import GpayIcon from '../../../../public/images/common/gpay.png';
 import MastercardIcon from '../../../../public/images/common/mastercard.png';
 import PaytmIcon from '../../../../public/images/common/paytm.png';
@@ -80,7 +80,7 @@ const FooterTwo = ({ description }) => {
         <div className="flex flex-col items-center text-center">
           <Link
             href="/"
-            className="flex items-center gap-1 text-sm font-semibold text-gray-700"
+            className="flex items-center text-sm font-semibold text-gray-700"
           >
             <img
               className="h-4 w-auto"

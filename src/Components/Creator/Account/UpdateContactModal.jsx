@@ -49,7 +49,7 @@ const UpdateContactModal = ({
       if (
         !phoneNumber ||
         phoneNumber?.toString()?.length != 10 ||
-        phoneNumber === initiaContactData?.phoneNumber
+        phoneNumber == initiaContactData?.phoneNumber
       ) {
         return true;
       }
@@ -57,7 +57,7 @@ const UpdateContactModal = ({
       if (
         !supportPhoneNumber ||
         supportPhoneNumber?.toString()?.length != 10 ||
-        supportPhoneNumber ===
+        supportPhoneNumber ==
           initiaContactData?.supportPhoneNumber
       ) {
         return true;
@@ -113,6 +113,7 @@ const UpdateContactModal = ({
               />
             </div>
             <PinInput
+              autoFocus
               size="lg"
               length={5}
               type="number"
@@ -139,6 +140,7 @@ const UpdateContactModal = ({
             {editEntity === 'email' ||
             editEntity === 'supportEmail' ? (
               <TextInput
+                autoFocus
                 label={isEmail ? 'Email' : 'Support Email'}
                 placeholder="hello@panda.dev"
                 value={isEmail ? email : supportEmail}
@@ -152,6 +154,7 @@ const UpdateContactModal = ({
               />
             ) : (
               <NumberInput
+                autoFocus
                 hideControls
                 clampBehavior="strict"
                 autoComplete="tel"

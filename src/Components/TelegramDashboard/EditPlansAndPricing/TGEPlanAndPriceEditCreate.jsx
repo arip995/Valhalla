@@ -432,8 +432,8 @@ const TGEPlanAndPriceEditCreate = ({
                 radius="xl"
               >
                 {tempData?._id
-                  ? 'Create Plan'
-                  : 'Save Changes'}
+                  ? 'Save Changes'
+                  : 'Create Plan'}
               </Button>
             </div>
           </div>
