@@ -1,85 +1,12 @@
 'use client';
-
-import LayoutEffect from '../../LayoutEffect';
-import SectionWrapper from '../../SectionWrapper';
-
-// const faqsList = [
-//   {
-//     q: 'What is an email marketing tool?',
-//     a: 'An email marketing tool is a software application that allows you to create, send, and manage email campaigns. It helps you to create professional-looking emails, track their performance, and analyze the results.',
-//   },
-//   {
-//     q: 'What are the benefits of using an email marketing tool?',
-//     a: 'An email marketing tool can help you reach a larger audience, increase engagement with your customers, and generate more leads.',
-//   },
-//   {
-//     q: 'How do I get started with an email marketing tool?',
-//     a: 'To get started with an email marketing tool, you will need to sign up for an account with our provider, Once you have signed up for an account, you can start.',
-//   },
-//   {
-//     q: 'How does an AI-powered email marketing tool work?',
-//     a: 'Social media is a great place for businesses because it has the An AI-powered email marketing tool works by analyzing customer data to identify patterns and trends in order to create more targeted campaigns.',
-//   },
-//   {
-//     q: 'What are the benefits of using an AI-powered email marketing tool?',
-//     a: 'AI-powered email marketing tools can help marketers save time and money by automating tasks such as segmentation, personalization, content optimization, and more.',
-//   },
-//   {
-//     q: 'Can I sell my digital products using Mailgo?',
-//     a: 'Of course you can market and sell your digital products and subscriptions with Mailgo to drive higher conversions and save big on fees.',
-//   },
-// ];
-
-// const FAQs = () => (
-//   <SectionWrapper id="faqs">
-//     <div className="custom-screen text-gray-300">
-//       <div className="max-w-xl text-center xl:mx-auto">
-//         <h2 className="text-gray-50 text-3xl font-extrabold sm:text-4xl">
-//           Everything you need to know
-//         </h2>
-//         <p className="mt-3">
-//           Here are the most questions people always ask
-//           about.
-//         </p>
-//       </div>
-//       <div className="mt-12">
-//         <LayoutEffect
-//           className="duration-1000 delay-300"
-//           isInviewState={{
-//             trueState: 'opacity-1',
-//             falseState: 'opacity-0 translate-y-12',
-//           }}
-//         >
-//           <ul className="space-y-8 gap-12 grid-cols-2 sm:grid sm:space-y-0 lg:grid-cols-3">
-//             {faqsList.map((item, idx) => (
-//               <li key={idx} className="space-y-3">
-//                 <summary className="flex items-center justify-between font-semibold text-gray-100">
-//                   {item.q}
-//                 </summary>
-//                 <p
-//                   dangerouslySetInnerHTML={{
-//                     __html: item.a,
-//                   }}
-//                   className="leading-relaxed"
-//                 ></p>
-//               </li>
-//             ))}
-//           </ul>
-//         </LayoutEffect>
-//       </div>
-//     </div>
-//   </SectionWrapper>
-// );
-
-// export default FAQs;
-
 import { useRef, useState } from 'react';
+import SectionWrapper from '../../SectionWrapper';
+import LayoutEffect from '../../LayoutEffect';
 
-const FaqsCard = props => {
+const FaqsCard = ({ faqsList, idx }) => {
   const answerElRef = useRef();
   const [state, setState] = useState(false);
   const [answerH, setAnswerH] = useState('0px');
-  const { faqsList, idx } = props;
 
   const handleOpenAnswer = () => {
     const answerElH =
@@ -90,64 +17,60 @@ const FaqsCard = props => {
 
   return (
     <div
-      className="mt-5 space-y-3 overflow-hidden border-b border-gray-600"
+      className="mt-6 overflow-hidden rounded-lg border-b border-gray-700 transition-all duration-300 ease-in-out hover:bg-gray-800"
       key={idx}
       onClick={handleOpenAnswer}
     >
-      <h4 className="flex cursor-pointer items-center justify-between pb-5 text-lg font-medium text-gray-50">
+      <h4 className="flex cursor-pointer items-center justify-between px-4 py-6 text-lg font-medium text-gray-100">
         {faqsList.q}
         {state ? (
-          <div className="">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="ml-2 h-5 w-5 text-gray-500"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M20 12H4"
-              />
-            </svg>
-          </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="ml-4 h-6 w-6 text-violet-400 transition-transform duration-300 ease-in-out"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M20 12H4"
+            />
+          </svg>
         ) : (
-          <div className="">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="ml-2 h-5 w-5 text-gray-500"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 4v16m8-8H4"
-              />
-            </svg>
-          </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="ml-4 h-6 w-6 text-violet-400 transition-transform duration-300 ease-in-out"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M12 4v16m8-8H4"
+            />
+          </svg>
         )}
       </h4>
       <div
         ref={answerElRef}
-        className="duration-300"
+        className="overflow-hidden transition-all duration-300 ease-in-out"
         style={
           state ? { height: answerH } : { height: '0px' }
         }
       >
-        <div>
-          <p className="text-gray-100">{faqsList.a}</p>
+        <div className="px-4 pb-6 text-gray-300">
+          {faqsList.a}
         </div>
       </div>
     </div>
   );
 };
 
-const FAQ = () => {
+const FAQs = () => {
   const faqsList = [
     {
       q: 'How do I get started?',
@@ -184,29 +107,17 @@ const FAQ = () => {
           falseState: 'opacity-0 translate-y-12',
         }}
       >
-        <section className="mx-auto mt-12 max-w-screen-xl px-4 leading-relaxed md:px-8">
-          <div className="space-y-3 text-center">
-            <h1 className="text-3xl font-semibold text-gray-50">
-              Frequently Asked Questions
-            </h1>
-            <p className="mx-auto max-w-lg text-gray-400">
-              Answered all frequently asked questions, Still
-              confused? feel free to contact us.
-            </p>
-          </div>
-          <div className="mx-auto mt-14 max-w-2xl">
-            {faqsList.map((item, idx) => (
-              <FaqsCard
-                idx={idx}
-                faqsList={item}
-                key={idx}
-              />
-            ))}
-          </div>
-        </section>
+        <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-center text-3xl font-extrabold text-gray-100 sm:text-4xl">
+            Frequently Asked Questions
+          </h2>
+          {faqsList.map((item, idx) => (
+            <FaqsCard key={idx} faqsList={item} idx={idx} />
+          ))}
+        </div>
       </LayoutEffect>
     </SectionWrapper>
   );
 };
 
-export default FAQ;
+export default FAQs;
