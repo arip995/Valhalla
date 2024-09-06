@@ -279,7 +279,7 @@ const AuthModal = ({
                 <Anchor
                   size="sm"
                   component="button"
-                  className="font-medium text-blue-600 transition-colors duration-300 hover:text-blue-800"
+                  className="font-medium"
                 >
                   <Timer
                     onClick={() => {
