@@ -10,7 +10,7 @@ import { useCallback } from 'react';
 
 const CustomEditor = ({ editor, label, className }) => {
   const addImage = useCallback(() => {
-    const url = window.prompt('URL');
+    const url = window.prompt('Enter Image URL');
     if (url) {
       editor.chain().focus().setImage({ src: url }).run();
     }
