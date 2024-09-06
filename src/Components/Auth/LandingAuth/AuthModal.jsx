@@ -50,7 +50,11 @@ const AuthModal = ({
       keepMounted={false}
       title={
         step === 2 ? (
-          <ActionIcon variant="subtle" color="gray">
+          <ActionIcon
+            variant="subtle"
+            color="gray"
+            className="transition-all duration-300 hover:bg-gray-100"
+          >
             <IconChevronLeft
               className="cursor-pointer"
               onClick={() => setStep(1)}
@@ -67,15 +71,16 @@ const AuthModal = ({
         backgroundOpacity: 0.55,
         blur: 3,
       }}
+      className="font-sans"
     >
-      <div className="flex w-full flex-col gap-2 p-4">
+      <div className="flex w-full flex-col gap-4 p-6">
         {step === 1 ? (
           <>
-            <div className="pb-3 text-lg font-semibold">
+            <h2 className="pb-4 text-2xl font-bold tracking-tight">
               {isSignin
                 ? 'Log in and continue'
                 : 'Create an account'}
-            </div>
+            </h2>
             <GoogleButton onClick={googleOauth} />
             <Button
               variant="default"
@@ -102,13 +107,14 @@ const AuthModal = ({
                 )
               }
               onClick={() => setIsEmail(prev => !prev)}
+              className="transition-all duration-300 hover:bg-gray-100"
             >
               {isEmail ? 'Phone Number' : 'Email'}
             </Button>
             <Divider
               label="or"
               labelPosition="center"
-              my="md"
+              className="my-4"
             />
             <form
               className="flex w-full flex-col gap-4"
@@ -120,6 +126,7 @@ const AuthModal = ({
                   value={authForm?.values.email}
                   autoComplete="email"
                   {...authForm?.getInputProps('email')}
+                  className="w-full"
                 />
               ) : (
                 <NumberInput
@@ -129,20 +136,26 @@ const AuthModal = ({
                   placeholder="Phone Number"
                   autoComplete="tel"
                   value={authForm?.values.phoneNumber}
-                  leftSection={<Text size="sm">+91</Text>}
+                  leftSection={
+                    <Text size="sm" className="font-medium">
+                      +91
+                    </Text>
+                  }
                   {...authForm?.getInputProps(
                     'phoneNumber'
                   )}
+                  className="w-full"
                 />
               )}
-              {!isSignin ? (
+              {!isSignin && (
                 <TextInput
                   placeholder="Full Name"
                   autoComplete="name"
                   value={authForm?.values.name}
                   {...authForm?.getInputProps('name')}
+                  className="w-full"
                 />
-              ) : null}
+              )}
               <Button
                 type="submit"
                 fullWidth
@@ -172,50 +185,39 @@ const AuthModal = ({
                     isClickedAtleastOnce: true,
                   });
                 }}
+                className="transition-all duration-300 hover:opacity-90"
               >
                 {`${isSignin ? 'Log in' : 'Sign up'} via ${isEmail ? 'Email' : 'Phone Number'} OTP`}
               </Button>
             </form>
-            <div className="mt-2 text-xs font-normal">
-              {isSignin ? (
-                <>
-                  Don’t have an account?{' '}
-                  <span
-                    className="cursor-pointer underline"
-                    onClick={() => setIsSignin(false)}
-                  >
-                    Sign up
-                  </span>
-                </>
-              ) : (
-                <>
-                  Already have an account?{' '}
-                  <span
-                    className="cursor-pointer underline"
-                    onClick={() => setIsSignin(true)}
-                  >
-                    Sign in
-                  </span>
-                </>
-              )}
+            <div className="mt-4 flex items-center gap-1 text-sm font-normal">
+              {isSignin
+                ? `Don't have an account?`
+                : 'Already have an account?'}
+              <Text
+                className="cursor-pointer font-medium underline"
+                onClick={() => setIsSignin(prev => !prev)}
+              >
+                {isSignin ? 'Sign up' : 'Sign in'}
+              </Text>
             </div>
-            <div className="mt-6 text-center text-xs text-slate-500">
-              <div>
+            <div className="mt-8 text-center text-xs text-slate-500">
+              <p className="mb-2">
                 By continuing, you agree to our Terms of
-              </div>
-              <div className="mt-1 flex w-full justify-center gap-1">
+              </p>
+              <div className="flex w-full justify-center gap-2">
                 <a
                   target="_blank"
                   href="/terms-and-conditions"
-                  className="cursor-pointer text-black"
+                  className="cursor-pointer font-medium text-black transition-colors duration-300 hover:text-gray-700"
                 >
                   Terms of Service
                 </a>
-                <div className=" ">&</div>
+                <span>&</span>
                 <a
                   target="_blank"
                   href="/privacy-policy"
-                  className="cursor-pointer text-black"
+                  className="cursor-pointer font-medium text-black transition-colors duration-300 hover:text-gray-700"
                 >
                   Privacy Policy
                 </a>
@@ -224,38 +226,40 @@ const AuthModal = ({
           </>
         ) : (
           <>
-            <div className="py-1 text-lg font-semibold">
+            <h2 className="mb-4 text-xl font-bold">
               An OTP has been sent to your{' '}
-              {isEmail ? 'Email' : 'Phone Number'}{' '}
-            </div>
-            <div className="flex items-center text-center text-xs font-semibold">
-              {isEmail
-                ? `Please check your email ${authForm?.values?.email}.com . If you can't find the email, please check your spam folders.`
-                : `Please check your phone number`}{' '}
-              {isEmail
-                ? authForm?.values?.email
-                : `+91 ${authForm?.values?.phoneNumber}`}
+              {isEmail ? 'Email' : 'Phone Number'}
+            </h2>
+            <div className="flex items-center text-center text-sm font-medium">
+              <p>
+                {isEmail
+                  ? `Please check your email ${authForm?.values?.email}.com. If you can't find the email, please check your spam folders.`
+                  : `Please check your phone number`}{' '}
+                {isEmail
+                  ? authForm?.values?.email
+                  : `+91 ${authForm?.values?.phoneNumber}`}
+              </p>
               <IconEdit
-                className="ml-1 cursor-pointer"
+                className="ml-2 cursor-pointer transition-colors duration-300 hover:text-gray-700"
                 onClick={() => setStep(1)}
                 color="gray"
                 style={{
-                  height: rem(12),
-                  width: rem(12),
+                  height: rem(16),
+                  width: rem(16),
                 }}
               />
             </div>
             <form
-              className="flex w-full flex-col items-center gap-4"
+              className="mt-6 flex w-full flex-col items-center gap-6"
               onSubmit={otpForm?.onSubmit(verifyOtp)}
             >
               <PinInput
                 autoFocus
-                mt="md"
                 size="lg"
                 length={5}
                 type="number"
                 {...(otpForm?.getInputProps('otp') || {})}
+                className="text-lg"
               />
               <Button
                 type="submit"
@@ -266,12 +270,17 @@ const AuthModal = ({
                     isClickedAtleastOnce: true,
                   });
                 }}
+                className="transition-all duration-300 hover:opacity-90"
               >
                 Verify OTP
               </Button>
-              <Text size="sm" ta="center" mt={20}>
-                Resend otp in{' '}
-                <Anchor size="sm" component="button">
+              <Text size="sm" ta="center" className="mt-4">
+                Resend OTP in{' '}
+                <Anchor
+                  size="sm"
+                  component="button"
+                  className="font-medium text-blue-600 transition-colors duration-300 hover:text-blue-800"
+                >
                   <Timer
                     onClick={() => {
                       sendOtp('resend');
