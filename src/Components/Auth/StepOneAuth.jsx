@@ -88,7 +88,7 @@ const StepOneAuth = ({
               <Stack justify="center" align="center">
                 <div className="flex gap-1">
                   <Text size="sm" ta="center">
-                    Otp sent to
+                    Enter Otp sent to
                   </Text>
                   <Text size="sm" ta="center" c={'dimmed'}>
                     {emailOrPhoneNumber === 'email'
