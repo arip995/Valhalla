@@ -6,7 +6,6 @@ import {
   IconLockDollar,
 } from '@tabler/icons-react';
 import Link from 'next/link';
-import classes from '../../../styles/creator/Home/AllProducts.module.css';
 
 const ListData = [
   {
@@ -24,7 +23,7 @@ const ListData = [
   {
     title: 'Digital Products',
     icon: IconCreditCard,
-    color: 'violet',
+    color: 'teal',
     path: '/app/dp',
   },
 
@@ -39,35 +38,29 @@ const ListData = [
 export function AllProducts() {
   const theme = useMantineTheme();
 
-  const items = ListData.map(item => (
-    <Link
-      href={item.path}
-      key={item.title}
-      className={classes.item}
-    >
-      <item.icon
-        className=""
-        color={theme.colors[item.color][6]}
-        size="2rem"
-      />
-      <Text
-        size="xs"
-        mt={7}
-        className={classes.productTitle}
-      >
-        {item.title}
-      </Text>
-    </Link>
-  ));
-
   return (
-    <div
-      className={`flex flex-col gap-2`}
-      color={theme.colors[6]}
-    >
-      <Text className={classes.title}>Create Products</Text>
-      <div className="flex flex-col gap-4 md:flex-row">
-        {items}
+    <div className="flex flex-col space-y-8 rounded-lg">
+      <Text className="pb-4 text-3xl font-bold text-gray-800">
+        Create Products
+      </Text>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {ListData.map(item => (
+          <Link
+            href={item.path}
+            key={item.title}
+            className="flex transform flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition duration-300 ease-in-out hover:scale-105 hover:bg-gray-50 hover:shadow-lg"
+          >
+            <item.icon
+              className="mb-4"
+              color={theme.colors[item.color][6]}
+              size="2.5rem"
+              stroke={1}
+            />
+            <Text className="text-center text-base font-semibold text-gray-700">
+              {item.title}
+            </Text>
+          </Link>
+        ))}
       </div>
     </div>
   );
