@@ -54,7 +54,7 @@ export function AllProducts() {
               className="mb-4"
               color={theme.colors[item.color][6]}
               size="2.5rem"
-              stroke={1}
+              stroke={1.5}
             />
             <Text className="text-center text-base font-semibold text-gray-700">
               {item.title}
