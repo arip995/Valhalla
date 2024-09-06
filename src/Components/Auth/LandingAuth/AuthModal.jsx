@@ -274,22 +274,23 @@ const AuthModal = ({
               >
                 Verify OTP
               </Button>
-              <Text size="sm" ta="center" className="mt-4">
-                Resend OTP in{' '}
-                <Anchor
-                  size="sm"
-                  component="button"
-                  className="font-medium"
-                >
-                  <Timer
-                    onClick={() => {
-                      sendOtp('resend');
-                    }}
-                    completedContent="Resend"
-                  />
-                </Anchor>
-              </Text>
             </form>
+            <Text size="sm" ta="center" className="mt-4">
+              Resend OTP in{' '}
+              <Anchor
+                size="sm"
+                component="button"
+                className="font-medium"
+              >
+                <Timer
+                  onClick={() => {
+                    sendOtp('resend');
+                    console.log('clicked');
+                  }}
+                  completedContent="Resend"
+                />
+              </Anchor>
+            </Text>
           </>
         )}
       </div>
