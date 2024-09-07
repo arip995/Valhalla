@@ -1,4 +1,8 @@
-import { Text, useMantineTheme } from '@mantine/core';
+import {
+  Paper,
+  Text,
+  useMantineTheme,
+} from '@mantine/core';
 import {
   IconBrandTelegram,
   IconCertificate,
@@ -40,26 +44,32 @@ export function AllProducts() {
 
   return (
     <div className="flex flex-col space-y-8 rounded-lg">
-      <Text className="pb-4 text-3xl font-bold text-gray-800">
+      <Text className="text-2xl font-bold text-gray-800">
         Create Products
       </Text>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {ListData.map(item => (
-          <Link
-            href={item.path}
+          <Paper
             key={item.title}
-            className="flex transform flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition duration-300 ease-in-out hover:scale-105 hover:bg-gray-50 hover:shadow-lg"
+            withBorder
+            radius="md"
+            className="transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg"
           >
-            <item.icon
-              className="mb-4"
-              color={theme.colors[item.color][6]}
-              size="2.5rem"
-              stroke={1.5}
-            />
-            <Text className="text-center text-base font-semibold text-gray-700">
-              {item.title}
-            </Text>
-          </Link>
+            <Link
+              href={item.path}
+              className="flex transform flex-col items-center justify-center p-4"
+            >
+              <item.icon
+                className="mb-4"
+                color={theme.colors[item.color][6]}
+                size="2.5rem"
+                stroke={1.5}
+              />
+              <Text className="text-center text-base font-semibold text-gray-900">
+                {item.title}
+              </Text>
+            </Link>
+          </Paper>
         ))}
       </div>
     </div>
