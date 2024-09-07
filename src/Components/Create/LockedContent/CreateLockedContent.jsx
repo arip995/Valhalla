@@ -141,6 +141,7 @@ const CreateLockedContent = ({ data }) => {
                       setIsSaveClickedAtleastOnce(true)
                     }
                   >
+                    {productId ? 'Update and ' : null}
                     Publish
                   </Button>
                   {productId ? (
