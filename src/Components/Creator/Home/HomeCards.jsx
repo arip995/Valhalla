@@ -10,19 +10,19 @@ import {
   IconArrowDownRight,
 } from '@tabler/icons-react';
 
-const data = [
+const Data = [
   { title: 'Revenue', value: '$13,456', diff: 34 },
   { title: 'Profit', value: '$4,145', diff: -13 },
   { title: 'Coupons usage', value: '745', diff: 18 },
 ];
 
 const HomeCards = () => {
-  const stats = data.map(stat => {
+  const stats = Data.map(stat => {
     const DiffIcon =
       stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
 
     return (
-      <Paper withBorder p="md" key={stat.title}>
+      <Paper withBorder p="md" key={stat.title} radius="md">
         <Group justify="apart">
           <div>
             <Text
