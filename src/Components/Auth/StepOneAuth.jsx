@@ -147,6 +147,7 @@ const StepOneAuth = ({
               {emailOrPhoneNumber === 'email' ? (
                 <TextInput
                   label="Email"
+                  autoFocus
                   placeholder="hello@panda.dev"
                   value={authForm.values.email}
                   autoComplete="email"
@@ -155,6 +156,7 @@ const StepOneAuth = ({
               ) : (
                 <NumberInput
                   hideControls
+                  autoFocus
                   clampBehavior="strict"
                   max={9999999999}
                   label="Phone Number"

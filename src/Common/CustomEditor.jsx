@@ -1,14 +1,39 @@
-import { ActionIcon, Input, rem } from '@mantine/core';
-import { RichTextEditor } from '@mantine/tiptap';
+/* eslint-disable no-unused-vars */
+import { Input } from '@mantine/core';
+import { Link, RichTextEditor } from '@mantine/tiptap';
 import '@mantine/tiptap/styles.css';
-import {
-  IconBrandYoutube,
-  IconCamera,
-} from '@tabler/icons-react';
+import Highlight from '@tiptap/extension-highlight';
+import TextAlign from '@tiptap/extension-text-align';
+import Underline from '@tiptap/extension-underline';
+import { useEditor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
 import classNames from 'classnames';
 import { useCallback } from 'react';
 
-const CustomEditor = ({ editor, label, className }) => {
+const CustomEditor = ({
+  label,
+  className,
+  value,
+  onUpdate = () => {},
+  ...props
+}) => {
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      Underline,
+      Link,
+      Highlight,
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
+      }),
+    ],
+    content: value,
+    onUpdate: ({ editor }) => {
+      const html = editor.getHTML();
+      onUpdate(html);
+    },
+  });
+
   const addImage = useCallback(() => {
     const url = window.prompt('Enter Image URL');
     if (url) {
@@ -16,8 +41,8 @@ const CustomEditor = ({ editor, label, className }) => {
     }
   }, [editor]);
 
-  const addYoutubeVideo = useCallback(() => {
-    const url = prompt('Enter YouTube URL');
+  const addVideo = useCallback(() => {
+    const url = prompt('Enter video URL');
     if (url) {
       editor.commands.setYoutubeVideo({
         src: url,
@@ -27,7 +52,7 @@ const CustomEditor = ({ editor, label, className }) => {
     }
   }, [editor]);
 
-  if (!editor) return null;
+  // if (!editor) return null;
 
   return (
     <div
@@ -35,6 +60,7 @@ const CustomEditor = ({ editor, label, className }) => {
         'flex flex-col gap-1',
         className
       )}
+      {...props}
     >
       {!!label && <Input.Label>{label}</Input.Label>}
       <RichTextEditor editor={editor}>
@@ -44,52 +70,18 @@ const CustomEditor = ({ editor, label, className }) => {
             <RichTextEditor.Italic />
             <RichTextEditor.Underline />
             <RichTextEditor.Strikethrough />
-            <RichTextEditor.ClearFormatting />
             <RichTextEditor.Highlight />
-            <RichTextEditor.Code />
-          </RichTextEditor.ControlsGroup>
-
-          <RichTextEditor.ControlsGroup>
-            <RichTextEditor.H1 />
-            <RichTextEditor.H2 />
-            <RichTextEditor.H3 />
-            <RichTextEditor.H4 />
-          </RichTextEditor.ControlsGroup>
-
-          <RichTextEditor.ControlsGroup>
-            <RichTextEditor.Blockquote />
-            <RichTextEditor.Hr />
             <RichTextEditor.BulletList />
             <RichTextEditor.OrderedList />
-            <RichTextEditor.Subscript />
-            <RichTextEditor.Superscript />
-          </RichTextEditor.ControlsGroup>
-
-          <RichTextEditor.ControlsGroup>
             <RichTextEditor.Link />
             <RichTextEditor.Unlink />
           </RichTextEditor.ControlsGroup>
 
           <RichTextEditor.ControlsGroup>
-            <RichTextEditor.AlignLeft />
-            <RichTextEditor.AlignCenter />
-            <RichTextEditor.AlignJustify />
-            <RichTextEditor.AlignRight />
-          </RichTextEditor.ControlsGroup>
-
-          <RichTextEditor.ControlsGroup>
-            <RichTextEditor.Undo />
-            <RichTextEditor.Redo />
-          </RichTextEditor.ControlsGroup>
-          <div className="h-[26px] w-[26px]">
-            <ActionIcon
-              variant="default"
-              size="sm"
-              style={{
-                height: 'inherit',
-                width: 'inherit',
-              }}
+            {/* <RichTextEditor.Control
               onClick={addImage}
+              aria-label="Insert image"
+              title="Insert image"
             >
               <IconCamera
                 style={{
@@ -98,17 +90,11 @@ const CustomEditor = ({ editor, label, className }) => {
                 }}
                 stroke={1.5}
               />
-            </ActionIcon>
-          </div>
-          <div className="h-[26px] w-[26px]">
-            <ActionIcon
-              variant="default"
-              size="sm"
-              style={{
-                height: 'inherit',
-                width: 'inherit',
-              }}
-              onClick={addYoutubeVideo}
+            </RichTextEditor.Control>
+            <RichTextEditor.Control
+              onClick={addVideo}
+              aria-label="Insert video"
+              title="Insert video"
             >
               <IconBrandYoutube
                 style={{
@@ -117,8 +103,13 @@ const CustomEditor = ({ editor, label, className }) => {
                 }}
                 stroke={1.5}
               />
-            </ActionIcon>
-          </div>
+            </RichTextEditor.Control> */}
+          </RichTextEditor.ControlsGroup>
+
+          <RichTextEditor.ControlsGroup>
+            <RichTextEditor.Undo />
+            <RichTextEditor.Redo />
+          </RichTextEditor.ControlsGroup>
         </RichTextEditor.Toolbar>
 
         <RichTextEditor.Content className="min-h-32" />

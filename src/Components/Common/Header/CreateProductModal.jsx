@@ -52,17 +52,17 @@ const CreateProductModal = ({
     }
     try {
       setLoading(true);
-      const data = await axiosInstance.post(
+      const response = await axiosInstance.post(
         '/course/create',
         {
           title,
         }
       );
-      if (data?.data?.data?._id) {
+      if (response?.data?.data?._id) {
         toast.success('Product created successfully');
         setSuccess(true);
         router.push(
-          `/dashboard/course/${data.data.data._id}`
+          `/dashboard/course/${response.data.data._id}`
         );
       }
     } catch (error) {

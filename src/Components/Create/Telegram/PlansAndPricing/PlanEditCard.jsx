@@ -208,7 +208,6 @@ function PlanEditCard({
             clampBehavior="strict"
             max={cost}
             value={discountedPrice || ''}
-            className="nexify-rightsection-change"
             rightSection={`${
               Number(
                 Math.trunc((discountedPrice / cost) * 100)
@@ -228,7 +227,6 @@ function PlanEditCard({
         ) : null}
         <TextInput
           label="Plan Name"
-          className="nexify-rightsection-change"
           type="text"
           value={planTitle}
           rightSection={`${planTitle?.length || 0}/${75}`}

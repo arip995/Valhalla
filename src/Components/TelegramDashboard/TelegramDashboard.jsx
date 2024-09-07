@@ -27,7 +27,7 @@ const TelegramDashboard = ({ productId }) => {
       <div className="tg-dashboard-container">
         <div className="flex h-screen w-full max-w-[600px] flex-col items-center gap-4 p-3 md:p-6">
           <TelegramDashboardOpenlink data={data} />
-          <div className="hide-scrollbar flex flex-col items-center gap-4 overflow-y-auto">
+          <div className="hide-scrollbar flex w-full flex-col items-center gap-4 overflow-y-auto">
             <TelegramDashboardProfilepic
               data={data}
               handleFileChange={handleFileChange}
