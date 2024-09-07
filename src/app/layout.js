@@ -54,7 +54,9 @@ import '@mantine/core/styles/Pagination.css';
 import '@mantine/core/styles/Kbd.css';
 import '@mantine/core/styles/Tooltip.css';
 import '@mantine/core/styles/Progress.css';
+import '@mantine/core/styles/Accordion.css';
 import '@mantine/core/styles/Alert.css';
+import '@mantine/core/styles/Tabs.css';
 import '@mantine/core/styles/Slider.css';
 import '@mantine/core/styles/Anchor.css';
 
@@ -80,6 +82,7 @@ const theme = createTheme({
   //     '#0043b5',
   //   ],
   // },
+
   cursorType: 'pointer',
 });
 

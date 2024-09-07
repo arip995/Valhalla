@@ -263,7 +263,6 @@ const TGEPlanAndPriceEditCreate = ({
             <div className="tgd-add-plan-block">
               <div className="tgd-add-plan-block-body">
                 <TextInput
-                  className="nexify-rightsection-change"
                   label="Plan Name"
                   rightSection={`${
                     tempData?.title?.length || 0
@@ -385,7 +384,6 @@ const TGEPlanAndPriceEditCreate = ({
                 />
                 {tempData?.enableDiscountedPrice ? (
                   <NumberInput
-                    className="nexify-rightsection-change"
                     label="Discounted Price"
                     max={tempData?.price}
                     clampBehavior="strict"

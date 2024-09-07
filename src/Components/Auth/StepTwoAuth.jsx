@@ -149,6 +149,7 @@ const StepTwoAuth = () => {
         <Stack>
           <TextInput
             required
+            autoFocus
             label="First Name"
             placeholder="Jacob"
             value={firstName}

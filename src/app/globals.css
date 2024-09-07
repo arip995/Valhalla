@@ -27,31 +27,36 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
 }
-.hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-
-  &::-webkit-scrollbar {
-    display: none;
-    width: 1px;
-  }
-}
 
 html {
   scroll-behavior: smooth;
 }
+ul {
+  list-style: disc;
+  margin: 0;
+  padding: 0;
+}
+li {
+  margin-bottom: 10px;
+}
+ol {
+  list-style: decimal;
+  margin-left: 10px;
+  padding: 0;
+}
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  /* Hide scrollbar for IE, Edge and Firefox */
-  .no-scrollbar {
+  .hide-scrollbar {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;
+      width: 1px;
+    }
+  }
+  .text-balance {
+    text-wrap: balance;
   }
 }
 
@@ -69,15 +74,13 @@ html {
 .mantine-Modal-title {
   font-weight: 600;
 }
-.nexify-rightsection-change {
-  .mantine-TextInput-section {
-    padding: 0px 25px;
-    background-color: #ffffff;
-    font-size: small;
-  }
-  .mantine-NumberInput-section {
-    padding: 0px 25px;
-    background-color: #ffffff;
-    font-size: small;
-  }
+.mantine-TextInput-section[data-position='right'] {
+  padding: 0px 25px;
+  background-color: #ffffff;
+  font-size: small;
+}
+.mantine-NumberInput-section[data-position='right'] {
+  padding: 0px 25px;
+  background-color: #ffffff;
+  font-size: small;
 }

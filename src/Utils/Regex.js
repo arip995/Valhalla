@@ -1,3 +1,5 @@
+export const restrictedChars = /[^a-zA-Z0-9]/;
+
 export const validateEmail = email => {
   // Regular expression for email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -27,8 +29,22 @@ export const validatePhoneNumber = phoneNumber => {
   return false;
 };
 
-export const restrictedChars = /[^a-zA-Z0-9]/;
-
 export const checkRestrictedChars = val => {
   return !restrictedChars.test(val);
+};
+
+export const validateEditorContent = content => {
+  let textContent = content?.trim();
+  textContent = content
+    ?.replace(/&nbsp;/g, ' ')
+    .replace(/<[^>]*>/g, '')
+    .trim();
+  console.log(textContent);
+  if (!textContent) {
+    return 'Content is required';
+  }
+  if (textContent.length > 10000) {
+    return 'Content should be less than 10000 characters';
+  }
+  return null;
 };
