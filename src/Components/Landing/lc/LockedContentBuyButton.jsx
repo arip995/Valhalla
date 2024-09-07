@@ -24,7 +24,7 @@ const LockedContentBuyButton = ({ data }) => {
       }}
     >
       {data.status === 1
-        ? `${isCreatorBuyer ? 'Edit page' : `Unlock for ₹${data?.price}`}`
+        ? `${isCreatorBuyer ? 'Owner, Edit page' : `Unlock for ₹${data?.price}`}`
         : statusErrorTextMapping[data.status]}{' '}
     </BuyButton>
   );
