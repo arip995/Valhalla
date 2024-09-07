@@ -7,7 +7,12 @@ import Link from 'next/link';
 import { useState } from 'react';
 import CreateProductModal from './CreateProductModal';
 
-const Header = ({ title, path, className }) => {
+const Header = ({
+  title,
+  path,
+  modal = false,
+  className,
+}) => {
   const [opened, setOpened] = useState(false);
 
   return (
@@ -35,7 +40,7 @@ const Header = ({ title, path, className }) => {
                 Create {title}
               </Button>
             </Link>
-          ) : (
+          ) : modal ? (
             <Button
               leftSection={<IconPlus size={20} />}
               variant="light"
@@ -47,7 +52,7 @@ const Header = ({ title, path, className }) => {
             >
               Create {title}
             </Button>
-          )}
+          ) : null}
 
           {/* <ThemeToggle /> */}
         </div>
