@@ -43,14 +43,14 @@ const ProductListing = () => {
 
   if (data?.totalCount) {
     return (
-      <>
+      <div className="flex h-[calc(100vh-52px)] w-full flex-col md:h-screen">
         <Header
           title={
             app === 'tg' ? 'Telegram' : 'Locked Content'
           }
           path={`/create/${app === 'tg' ? 'telegram' : 'lockedcontent'}`}
         />
-        <div className="flex flex-col items-end gap-4 px-4 py-2 md:py-4">
+        <div className="flex flex-1 flex-col items-end gap-4 overflow-y-auto px-4 py-4">
           <Filters
             onUpdate={onUpdate}
             searchText={searchText}
@@ -92,7 +92,7 @@ const ProductListing = () => {
           )}
         </div>
         <Toaster />
-      </>
+      </div>
     );
   }
 };
