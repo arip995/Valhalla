@@ -4,6 +4,7 @@ import { useForm } from '@mantine/form';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { SectionTypes } from './CreateCourseStepOne/SectionDetails/Sections';
 
 const useCreateCourse = () => {
   const router = useRouter();
@@ -69,6 +70,9 @@ const useCreateCourse = () => {
       courseForm.setValues(prevValues => ({
         ...prevValues,
         ...(response.data.data || {}),
+        sections:
+          response.data.data?.sections?.length ||
+          SectionTypes,
         loading: 0,
       }));
     } catch (error) {

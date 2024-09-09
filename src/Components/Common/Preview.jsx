@@ -2,7 +2,7 @@ import React from 'react';
 
 const Preview = ({ children }) => {
   return (
-    <div className="relative hidden h-full w-7/12 overflow-hidden sm:block">
+    <div className="relative hidden h-full w-8/12 overflow-hidden lg:block">
       <div className="absolute inset-0 flex flex-col">
         {[...Array(20)].map((_, rowIndex) => (
           <div key={rowIndex} className="flex flex-grow">

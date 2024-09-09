@@ -10,17 +10,68 @@ import {
   TextInput,
 } from '@mantine/core';
 import React from 'react';
+import Sections from './SectionDetails/Sections';
 
 const CreateCourseStepOne = ({
   courseForm,
   handleSubmit = () => {},
 }) => {
+  const onUpdateSection = (updatedSection, sectionType) => {
+    const updatedSections = courseForm.values.sections.map(
+      existingSection => {
+        if (existingSection.type === sectionType) {
+          if (Array.isArray(updatedSection)) {
+            // If updatedSection is an array, update it directly
+            return {
+              ...existingSection,
+              value: updatedSection,
+            };
+          } else if (
+            updatedSection.id &&
+            Array.isArray(existingSection.value) &&
+            existingSection.value.some(
+              item => item.id === updatedSection.id
+            )
+          ) {
+            // Update existing section
+            return {
+              ...existingSection,
+              value: existingSection.value.map(item =>
+                item.id === updatedSection.id
+                  ? { ...item, ...updatedSection }
+                  : item
+              ),
+            };
+          } else {
+            // Add new section
+            return {
+              ...existingSection,
+              value: Array.isArray(existingSection.value)
+                ? [...existingSection.value, updatedSection]
+                : [updatedSection],
+            };
+          }
+        }
+        return existingSection;
+      }
+    );
+    courseForm.setValues({
+      sections: updatedSections,
+    });
+  };
+
   return (
     <form
       id="my-form"
       onSubmit={courseForm.onSubmit(handleSubmit)}
       className="flex flex-1 flex-col gap-3 p-4"
     >
+      <div className="mb-2 text-xl font-bold">Sections</div>
+      <Sections
+        sections={courseForm.values.sections}
+        updateSection={onUpdateSection}
+      />
+      <Divider my="md" size="lg" />
       <div className="mb-2 text-xl font-bold">
         Basic Details
       </div>
@@ -100,10 +151,6 @@ const CreateCourseStepOne = ({
           {...courseForm.getInputProps('discountedPrice')}
         />
       </Collapse>
-      <Divider my="md" size="lg" />
-      <div className="mb-[9000px] text-xl font-bold">
-        Sections
-      </div>
     </form>
   );
 };

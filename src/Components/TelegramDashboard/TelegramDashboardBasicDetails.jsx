@@ -52,9 +52,7 @@ const TelegramDashboardBasicDetails = ({
           }
         >
           <div className="flex justify-between">
-            <Button type="submit" radius="md">
-              Publish
-            </Button>
+            <Button type="submit">Publish</Button>
           </div>
         </Collapse>
       </form>

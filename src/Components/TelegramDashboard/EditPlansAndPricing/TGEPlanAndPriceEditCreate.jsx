@@ -259,7 +259,7 @@ const TGEPlanAndPriceEditCreate = ({
         }}
       >
         <div className="flex h-full flex-col justify-between">
-          <div className="tgd-add-plan-body mb-14">
+          <div className="mb-14 flex flex-1 flex-col gap-2 overflow-y-auto px-4 py-2">
             <div className="tgd-add-plan-block">
               <div className="tgd-add-plan-block-body">
                 <TextInput
@@ -406,7 +406,7 @@ const TGEPlanAndPriceEditCreate = ({
               </div>
             </div>
           </div>
-          <div className="tgd-add-plan-footer shadow-md">
+          <div className="fixed bottom-0 z-[201] flex w-full flex-row-reverse items-center justify-between gap-4 border-t border-[#e4e4e4] bg-white px-6 py-3 shadow-md">
             <div className="flex gap-2">
               {tempData?._id && numOfPlans > 1 ? (
                 <Button

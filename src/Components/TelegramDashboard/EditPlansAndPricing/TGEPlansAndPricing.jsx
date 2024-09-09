@@ -30,82 +30,79 @@ const TGEPlansAndPricing = ({
   };
 
   return (
-    <div className="tgd-plans">
+    <>
       <DragDropContext onDragEnd={onDragPlans}>
-        <div className="tgd-plans-body">
-          <Droppable droppableId="droppable-id">
-            {provided => (
-              <div
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-              >
-                {plans?.length ? (
-                  <div className="tgd-plans-list">
-                    {plans.map((obj, index) =>
-                      plans.length > 1 ? (
-                        <Draggable
-                          key={obj._id}
-                          draggableId={obj._id}
-                          index={index}
-                        >
-                          {provided => (
-                            <div
-                              className="mb-3"
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              <TGESinglePlan
-                                planObj={obj}
-                                numOfPlans={plans?.length}
-                                onEdit={onEditPlan}
-                                onToggleStatus={
-                                  onTogglePlanStatus
-                                }
-                                index={index}
-                                plansLength={plans.length}
-                              />
-                            </div>
-                          )}
-                        </Draggable>
-                      ) : (
-                        <TGESinglePlan
-                          key={obj._id}
-                          planObj={obj}
-                          numOfPlans={plans?.length}
-                          onEdit={onEditPlan}
-                          onToggleStatus={
-                            onTogglePlanStatus
-                          }
-                          index={index}
-                          plansLength={plans.length}
-                        />
-                      )
-                    )}
-                    {provided.placeholder}
-                  </div>
-                ) : null}
-              </div>
-            )}
-          </Droppable>
-          <Button
-            variant="outline"
-            size="md"
-            onClick={() => {
-              setPlanObj({});
-              setOpenPlanSideBar(true);
-            }}
-          >
-            + Add another Plan
-          </Button>
-          {/* <div
+        <Droppable droppableId="droppable-id">
+          {provided => (
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+            >
+              {plans?.length ? (
+                <div className="flex flex-col">
+                  {plans.map((obj, index) =>
+                    plans.length > 1 ? (
+                      <Draggable
+                        key={obj._id}
+                        draggableId={obj._id}
+                        index={index}
+                      >
+                        {provided => (
+                          <div
+                            className="mb-3"
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <TGESinglePlan
+                              planObj={obj}
+                              numOfPlans={plans?.length}
+                              onEdit={onEditPlan}
+                              onToggleStatus={
+                                onTogglePlanStatus
+                              }
+                              index={index}
+                              plansLength={plans.length}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    ) : (
+                      <TGESinglePlan
+                        key={obj._id}
+                        planObj={obj}
+                        numOfPlans={plans?.length}
+                        onEdit={onEditPlan}
+                        onToggleStatus={onTogglePlanStatus}
+                        index={index}
+                        plansLength={plans.length}
+                      />
+                    )
+                  )}
+                  {provided.placeholder}
+                </div>
+              ) : null}
+            </div>
+          )}
+        </Droppable>
+        <Button
+          variant="outline"
+          fullWidth
+          size="md"
+          onClick={() => {
+            setPlanObj({});
+            setOpenPlanSideBar(true);
+          }}
+        >
+          + Add another Plan
+        </Button>
+        {/* <div
             className="tgd-plans__add-cta"
             onClick={() => {
               setPlanObj({});
               setOpenPlanSideBar(true);
             }}
           ></div> */}
-        </div>
       </DragDropContext>
       <TGEPlanAndPriceEditCreate
         openSideBar={openPlanSideBar}
@@ -117,7 +114,7 @@ const TGEPlansAndPricing = ({
         isSaving={isSavingPlan}
         isDeleting={isDeletingPlan}
       />
-    </div>
+    </>
   );
 };
 

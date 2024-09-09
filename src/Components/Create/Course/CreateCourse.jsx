@@ -1,5 +1,10 @@
 'use client';
-import { Button, CloseButton, Tabs } from '@mantine/core';
+import {
+  Button,
+  CloseButton,
+  Divider,
+  Tabs,
+} from '@mantine/core';
 import CreateCourseStepOne from './CreateCourseStepOne/CreateCourseStepOne';
 import CreateCourseStepTwo from './CreateCourseStepTwo/CreateCourseStepTwo';
 import useCreateCourse from './useCreateCourse';
@@ -12,32 +17,72 @@ const CreateCourse = () => {
   return (
     <div className="flex h-screen w-full flex-col">
       <div className="flex h-full w-full flex-col sm:flex-row">
-        <div className="flex h-screen w-full flex-col sm:w-5/12">
+        <div className="flex h-screen w-full flex-col lg:w-6/12">
           <div className="flex w-full flex-col gap-1 border-b-[1px] border-gray-300">
-            <div className="flex w-full items-center gap-2 p-2 text-sm text-gray-500">
-              <div className="border-r-[1px] border-gray-300">
+            <div className="flex w-full items-center justify-between gap-2 p-2 text-sm text-gray-500">
+              <div className="flex items-center gap-2">
                 <CloseButton
                   onClick={() => router.back()}
                 />
+                <Divider
+                  orientation="vertical"
+                  className="h-7"
+                  mr={4}
+                />
+                Step 1 of 2
               </div>
-              Step 1 of 2
-            </div>
-            {courseForm.values.stepsCompleted > 1 ? (
-              <Tabs
-                defaultValue="details"
-                variant="default"
+              <form
+                onSubmit={courseForm.onSubmit(
+                  handleSubmit,
+                  errors => {
+                    if (Object.keys(errors || {}).length) {
+                      const firstErrorPath =
+                        Object.keys(errors)?.[0];
+                      courseForm
+                        .getInputNode(firstErrorPath)
+                        ?.focus();
+                      document
+                        .getElementById(
+                          courseForm.key(firstErrorPath)
+                        )
+                        ?.scrollIntoView({
+                          block: 'start',
+                          behavior: 'smooth',
+                          inline: 'nearest',
+                          offset: 400,
+                        });
+                    }
+                  }
+                )}
               >
-                <Tabs.List grow>
-                  <Tabs.Tab value="details">
-                    Details
-                  </Tabs.Tab>
-                  <Tabs.Tab value="content">
-                    Content
-                  </Tabs.Tab>
-                </Tabs.List>
-              </Tabs>
-            ) : null}
+                <Button
+                  type="submit"
+                  size="xs"
+                  color="black"
+                  radius="xl"
+                  onClick={() => {
+                    courseForm.setValues({
+                      isSaveClickedAtleastOnce: true,
+                    });
+                  }}
+                >
+                  {courseForm.values.stepsCompleted === 1
+                    ? 'Publish course'
+                    : courseForm.values.stepsCompleted > 1
+                      ? 'Create Course'
+                      : 'Save and continue'}
+                </Button>
+              </form>
+            </div>
           </div>
+          {courseForm.values.stepsCompleted > 1 ? (
+            <Tabs defaultValue="details" variant="default">
+              <Tabs.List grow>
+                <Tabs.Tab value="details">Details</Tabs.Tab>
+                <Tabs.Tab value="content">Content</Tabs.Tab>
+              </Tabs.List>
+            </Tabs>
+          ) : null}
 
           <div className="flex flex-1 flex-col overflow-y-auto">
             {courseForm.values.step === 1 ? (
@@ -50,7 +95,7 @@ const CreateCourse = () => {
               />
             )}
           </div>
-          <div className="flex flex-row-reverse border-t-[1px] border-gray-300 p-2">
+          {/* <div className="flex flex-row-reverse border-t-[1px] border-gray-300 p-2">
             <form
               onSubmit={courseForm.onSubmit(
                 handleSubmit,
@@ -90,7 +135,7 @@ const CreateCourse = () => {
                     : 'Save and continue'}
               </Button>
             </form>
-          </div>
+          </div> */}
         </div>
         <div className="hidden w-[1px] bg-gray-300 sm:block"></div>
         <Preview>

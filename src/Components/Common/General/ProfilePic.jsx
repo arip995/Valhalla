@@ -16,8 +16,8 @@ const ProfilePic = ({
   avatarImage,
   name,
   loading,
-  handleAvatarChange,
-  onRemoveAvatar,
+  handleAvatarChange = () => {},
+  onRemoveAvatar = () => {},
   showRemoveButton = false,
   mime_types = ['image/*'],
 }) => {

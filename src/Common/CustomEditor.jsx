@@ -69,15 +69,15 @@ const CustomEditor = ({
             <RichTextEditor.Bold />
             <RichTextEditor.Italic />
             <RichTextEditor.Underline />
-            <RichTextEditor.Strikethrough />
+            {/* <RichTextEditor.Strikethrough /> */}
             <RichTextEditor.Highlight />
+          </RichTextEditor.ControlsGroup>
+
+          <RichTextEditor.ControlsGroup>
             <RichTextEditor.BulletList />
             <RichTextEditor.OrderedList />
             <RichTextEditor.Link />
             <RichTextEditor.Unlink />
-          </RichTextEditor.ControlsGroup>
-
-          <RichTextEditor.ControlsGroup>
             {/* <RichTextEditor.Control
               onClick={addImage}
               aria-label="Insert image"

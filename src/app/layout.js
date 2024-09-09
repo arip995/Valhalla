@@ -58,14 +58,16 @@ import '@mantine/core/styles/Accordion.css';
 import '@mantine/core/styles/Alert.css';
 import '@mantine/core/styles/Tabs.css';
 import '@mantine/core/styles/Slider.css';
+import '@mantine/core/styles/Rating.css';
 import '@mantine/core/styles/Anchor.css';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({
   /** Your theme override here */
-  fontFamily: 'Open Sans, sans-serif',
-  fontFamilyMonospace: 'Monaco, Courier, monospace',
-  headings: { fontFamily: 'Greycliff CF, sans-serif' },
+  // fontFamily: 'Open Sans, sans-serif',
+  // fontFamily: 'Inter, sans-serif',
+  // fontFamilyMonospace: 'Monaco, Courier, monospace',
+  // headings: { fontFamily: 'Greycliff CF, sans-serif' },
   primaryColor: 'violet',
   // primaryColor: 'bright-blue',
   // colors: {

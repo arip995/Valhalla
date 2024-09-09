@@ -74,7 +74,7 @@ const CreateProductModal = ({
   return (
     <Modal
       opened={opened}
-      onClose={onClose}
+      onClose={loading ? () => {} : onClose}
       title="Create new Course"
     >
       <form

@@ -152,6 +152,9 @@ function CropModal({
       <Modal
         opened={open}
         onClose={onClose}
+        overlayProps={{
+          blur: 20,
+        }}
         size="lg"
         title={title}
         keepMounted={false}
