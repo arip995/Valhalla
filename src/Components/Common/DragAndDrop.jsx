@@ -22,8 +22,8 @@ const DragAndDrop = ({
                 {array.map((item, index) =>
                   array.length > 1 ? (
                     <Draggable
-                      key={item._id}
-                      draggableId={item._id}
+                      key={item.type || item.id}
+                      draggableId={item.type || item.id}
                       index={index}
                     >
                       {provided => (
