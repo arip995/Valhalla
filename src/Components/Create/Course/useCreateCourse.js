@@ -16,6 +16,7 @@ const useCreateCourse = () => {
       step: 1,
       cta: 'Buy Now',
       title: '',
+      sections: SectionTypes,
     },
     validateInputOnChange: true,
     clearInputErrorOnChange: false,
@@ -67,16 +68,22 @@ const useCreateCourse = () => {
         toast.error('Check your internet connection');
         throw new Error('Check your internet connection');
       }
+
       courseForm.setValues(prevValues => ({
         ...prevValues,
         ...(response.data.data || {}),
-        sections:
-          response.data.data?.sections?.length ||
-          SectionTypes,
+        sections: response.data.data?.sections?.length
+          ? response.data.data.sections
+          : SectionTypes,
         loading: 0,
       }));
     } catch (error) {
       console.log(error);
+      // toast.error(
+      //   typeof error?.response?.data?.message === 'string'
+      //     ? error?.response?.data?.message
+      //     : 'Check yout internet connection'
+      // );
       courseForm.setValues(prevValues => ({
         ...prevValues,
         loading: 0,

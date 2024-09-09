@@ -24,7 +24,7 @@ const CreateCourseStepOne = ({
             // If updatedSection is an array, update it directly
             return {
               ...existingSection,
-              value: updatedSection,
+              value: [...updatedSection],
             };
           } else if (
             updatedSection.id &&
@@ -68,7 +68,7 @@ const CreateCourseStepOne = ({
     >
       <div className="mb-2 text-xl font-bold">Sections</div>
       <Sections
-        sections={courseForm.values.sections}
+        form={courseForm}
         updateSection={onUpdateSection}
       />
       <Divider my="md" size="lg" />

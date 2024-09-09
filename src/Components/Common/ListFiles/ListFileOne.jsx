@@ -32,6 +32,17 @@ const ListFileOne = ({
         undefined,
         maxSize
       );
+      if (!url) {
+        setFiles(prevFiles => {
+          const loadingIndex = prevFiles.findIndex(
+            f => f.loading
+          );
+          return prevFiles.filter(
+            (_, index) => index !== loadingIndex
+          );
+        });
+        return;
+      }
       setFiles(prevFiles => {
         const updatedFiles = [...prevFiles];
         const loadingIndex = updatedFiles.findIndex(
@@ -57,9 +68,7 @@ const ListFileOne = ({
         );
       });
       toast.error(
-        typeof error === 'string'
-          ? error
-          : 'An error occurred while uploading the file'
+        typeof error === 'string' ? error : 'Network error'
       );
     }
   };
@@ -87,7 +96,10 @@ const ListFileOne = ({
   };
 
   useEffect(() => {
-    onUpdate(files);
+    const nonLoadingFiles = files.filter(
+      file => !file.loading
+    );
+    onUpdate(nonLoadingFiles);
   }, [files]);
 
   return (

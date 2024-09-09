@@ -3,6 +3,7 @@ import {
   Draggable,
   Droppable,
 } from '@hello-pangea/dnd';
+import React from 'react';
 
 const DragAndDrop = ({
   onDrag = () => {},
@@ -22,8 +23,18 @@ const DragAndDrop = ({
                 {array.map((item, index) =>
                   array.length > 1 ? (
                     <Draggable
-                      key={item.type || item.id}
-                      draggableId={item.type || item.id}
+                      key={
+                        item.id ||
+                        item._id ||
+                        item.type ||
+                        index
+                      }
+                      draggableId={
+                        item.id ||
+                        item._id ||
+                        item.type ||
+                        index
+                      }
                       index={index}
                     >
                       {provided => (
@@ -31,7 +42,6 @@ const DragAndDrop = ({
                           className="mb-2"
                           ref={provided.innerRef}
                           {...provided.draggableProps}
-                          {...provided.dragHandleProps}
                         >
                           {children({
                             provided,
@@ -62,4 +72,4 @@ const DragAndDrop = ({
   );
 };
 
-export default DragAndDrop;
+export default React.memo(DragAndDrop);

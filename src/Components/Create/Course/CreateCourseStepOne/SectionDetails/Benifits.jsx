@@ -45,20 +45,20 @@ const Benifits = ({ section, onSave = () => {} }) => {
   return (
     <div className="mt-4 flex w-full flex-col gap-4">
       {Array.isArray(benefits) ? (
-        benefits.map(benefit => (
+        benefits.map(item => (
           <TextInput
             placeholder="Add a Benefit"
-            key={benefit.id}
+            key={item.id}
             onChange={e =>
-              onChange(benefit.id, e.target.value)
+              onChange(item.id, e.target.value)
             }
-            value={benefit.value}
+            value={item.value}
           />
         ))
       ) : (
         <TextInput
           placeholder="Update Benefit"
-          key={benefits.id}
+          key={1}
           onChange={e =>
             onChange(benefits.id, e.target.value)
           }

@@ -1,10 +1,6 @@
 import DragAndDrop from '@/Components/Common/DragAndDrop';
-import {
-  Accordion,
-  Badge,
-  rem,
-  Switch,
-} from '@mantine/core';
+import { onDrag } from '@/Utils/Common';
+import { Accordion, Badge, Switch } from '@mantine/core';
 import {
   IconBlockquote,
   IconBrandInstagram,
@@ -16,38 +12,38 @@ import {
   IconPhoto,
 } from '@tabler/icons-react';
 import React, { useEffect, useState } from 'react';
-import SectionsModal from './SectionsModal';
 import { Toaster } from 'react-hot-toast';
-import { onDrag } from '@/Utils/Common';
+import SectionsModal from './SectionsModal';
+import ShowSectionsList from './ShowSectionsList';
 
 export const SocialPlatforms = [
-  // {
-  //   type: 'instagram',
-  // },
-  // {
-  //   type: 'twitter',
-  // },
-  // {
-  //   type: 'facebook',
-  // },
-  // {
-  //   type: 'youtube',
-  // },
-  // {
-  //   type: 'tiktok',
-  // },
-  // {
-  //   type: 'linkedin',
-  // },
-  // {
-  //   type: 'behance',
-  // },
-  // {
-  //   type: 'dribbble',
-  // },
-  // {
-  //   type: 'whatsapp',
-  // },
+  {
+    type: 'instagram',
+  },
+  {
+    type: 'twitter',
+  },
+  {
+    type: 'facebook',
+  },
+  {
+    type: 'youtube',
+  },
+  {
+    type: 'tiktok',
+  },
+  {
+    type: 'linkedin',
+  },
+  {
+    type: 'behance',
+  },
+  {
+    type: 'dribbble',
+  },
+  {
+    type: 'whatsapp',
+  },
 ];
 export const SocialTitleMapping = {
   instagram: 'Instagram',
@@ -102,26 +98,30 @@ export const SectionTypes = [
   {
     type: 'testimonial',
     label: 'testimonial',
+    isEnabled: false,
   },
   {
     type: 'highlight',
     label: 'Highlight',
+    isEnabled: false,
   },
-  { type: 'faq', label: 'FAQ' },
+  { type: 'faq', label: 'FAQ', isEnabled: false },
   {
     type: 'social',
     label: 'Social',
-    value: SocialPlatforms,
+    isEnabled: false,
   },
-  { type: 'about', label: 'About' },
-  { type: 'benifit', label: 'Benifit' },
-  { type: 'gallery', label: 'Gallery' },
+  { type: 'about', label: 'About', isEnabled: false },
+  { type: 'benifit', label: 'Benifit', isEnabled: false },
+  { type: 'gallery', label: 'Gallery', isEnabled: false },
 ];
 
-const Sections = ({ sections, updateSection }) => {
+const Sections = ({ updateSection, form }) => {
+  const sections = form.values.sections;
   const [opened, setOpened] = useState(false);
   const [type, setType] = useState(null);
   const [section, setSection] = useState();
+
   const onSave = section => {
     setOpened(false);
     updateSection(section, type);
@@ -130,9 +130,47 @@ const Sections = ({ sections, updateSection }) => {
     if (!result.destination) return;
     const assets = onDrag(result, sections);
     if (!assets?.length) return;
-    // setCourseList(() => {
-    //   return [...assets];
-    // });
+    form.setValues({ sections: assets });
+  };
+  const onDragSectionItems = (result, sectionType) => {
+    if (!result.destination) return;
+    const updatedSections = sections.map(section => {
+      if (section.type === sectionType) {
+        const updatedValues = onDrag(
+          result,
+          section.value || []
+        );
+        return { ...section, value: updatedValues };
+      }
+      return section;
+    });
+    form.setValues({ sections: updatedSections });
+  };
+  const onAddOrEditSection = (
+    type,
+    value,
+    isEdit = false
+  ) => {
+    setType(type);
+    setOpened(true);
+    if (type === 'social') {
+      setSection(value);
+    }
+    if (isEdit) {
+      setSection(value);
+    }
+  };
+  const onToggleSection = type => {
+    const updatedSections = sections.map(section => {
+      if (section.type === type) {
+        return {
+          ...section,
+          isEnabled: !section.isEnabled,
+        };
+      }
+      return section;
+    });
+    form.setValues({ sections: updatedSections });
   };
 
   useEffect(() => {
@@ -154,7 +192,6 @@ const Sections = ({ sections, updateSection }) => {
               variant="default"
               chevronPosition="left"
               defaultValue="Apples"
-              {...provided?.dragHandleProps}
             >
               <Accordion.Item
                 key={item.type}
@@ -163,7 +200,9 @@ const Sections = ({ sections, updateSection }) => {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center justify-center">
-                    <Accordion.Control className="!w-12" />
+                    {item.value?.length ? (
+                      <Accordion.Control className="!w-12" />
+                    ) : null}
                     <div className="text-truncate flex items-center gap-2 text-sm font-semibold">
                       {showDrag ? (
                         <div
@@ -181,11 +220,12 @@ const Sections = ({ sections, updateSection }) => {
                     <Badge
                       variant="transparent"
                       radius="sm"
-                      className="min-w-max text-sm font-semibold"
+                      className="min-w-max cursor-pointer text-sm font-semibold"
                       onClick={() => {
-                        setOpened(true);
-                        setType(item.type);
-                        // setSection(section.value);
+                        onAddOrEditSection(
+                          item.type,
+                          item.value
+                        );
                       }}
                     >
                       + Add
@@ -194,45 +234,50 @@ const Sections = ({ sections, updateSection }) => {
                       color="teal"
                       checked={item.isEnabled}
                       onChange={() => {
-                        console.log('onChange');
+                        onToggleSection(item.type);
                       }}
                     />
                   </div>
                 </div>
-                <Accordion.Panel className="flex flex-col gap-4">
-                  <div className="flex items-center justify-between gap-2 border-b border-solid border-b-neutral-200 bg-white px-2 py-4">
-                    <div className="flex w-full items-center gap-2">
-                      {!!showDrag && (
-                        <div
-                          {...(provided?.dragHandleProps ||
-                            {})}
-                          className="cursor-grab"
-                        >
-                          <IconGripVertical
-                            color="rgba(199, 199, 199, 1)"
-                            style={{
-                              width: rem(16),
-                              height: rem(16),
-                            }}
-                          />
-                        </div>
+                {item.value?.length ? (
+                  <Accordion.Panel className="flex flex-col gap-4">
+                    <DragAndDrop
+                      array={item.value}
+                      onDrag={result =>
+                        onDragSectionItems(
+                          result,
+                          item.type
+                        )
+                      }
+                    >
+                      {({
+                        provided,
+                        item: itemValue,
+                        showDrag,
+                      }) => (
+                        <ShowSectionsList
+                          type={item.type}
+                          showDrag={showDrag}
+                          item={itemValue}
+                          provided={provided}
+                          onDragSectionItems={
+                            onDragSectionItems
+                          }
+                          onAddOrEditSection={
+                            onAddOrEditSection
+                          }
+                          onToggleSection={onToggleSection}
+                        />
                       )}
-                      <div className="flex items-center gap-2 text-sm font-medium">
-                        <div className="cmal-lesson-title-left text-truncate">
-                          {SectionTitleMapping[item.type]}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Accordion.Panel>
+                    </DragAndDrop>
+                    {/* */}
+                  </Accordion.Panel>
+                ) : null}
               </Accordion.Item>
             </Accordion>
           )}
         </DragAndDrop>
       ) : null}
-      {/* );
-        }
-      })} */}
       <SectionsModal
         type={type}
         section={section}

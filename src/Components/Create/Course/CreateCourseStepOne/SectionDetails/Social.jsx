@@ -10,30 +10,25 @@ const Social = ({ section = SocialPlatforms, onSave }) => {
   const [connectedPlatforms, setConnectedPlatforms] =
     useState(() => {
       const initialState = {};
-      [section].forEach(platform => {
-        if (platform.value) {
-          initialState[platform.type] = platform.value;
-        }
+      SocialPlatforms.forEach(platform => {
+        const existingPlatform = section.find(
+          s => s.type === platform.type
+        );
+        initialState[platform.type] = existingPlatform
+          ? existingPlatform.value || ''
+          : '';
       });
+      console.log(initialState);
       return initialState;
     });
 
-  const handleConnect = (
-    platformName,
-    initialValue = ''
-  ) => {
-    console.log(platformName, connectedPlatforms);
+  const handleConnect = platformName => {
     setConnectedPlatforms(prev => {
       const newState = { ...prev };
-      if (newState[platformName] !== undefined) {
-        delete newState[platformName];
-      } else {
-        newState[platformName] = initialValue;
-      }
+      newState[platformName] = '';
       return newState;
     });
   };
-
   const handleInputChange = (platformName, value) => {
     setConnectedPlatforms(prev => ({
       ...prev,
@@ -42,11 +37,16 @@ const Social = ({ section = SocialPlatforms, onSave }) => {
   };
 
   const handleSave = () => {
-    const updatedSection = section.map(platform => ({
-      ...platform,
-      value: connectedPlatforms[platform.type] || '',
-    }));
+    const updatedSection = Object.entries(
+      connectedPlatforms
+    )
+      .map(([type, value]) => ({
+        type,
+        value: value || '',
+      }))
+      .filter(platform => platform.value !== '');
     if (onSave) {
+      console.log(updatedSection);
       onSave(updatedSection);
     }
   };
@@ -55,32 +55,34 @@ const Social = ({ section = SocialPlatforms, onSave }) => {
     <div className="flex w-full flex-col gap-4">
       <div className="mt-4 flex items-center justify-center overflow-y-auto">
         <div className="flex h-[55vh] w-full flex-col gap-4">
-          {section?.map((platform, index) => {
-            return (
-              <div
-                key={index}
-                className="mx-2 flex items-center justify-between rounded-lg border bg-gray-50 p-4"
-              >
-                <div className="flex w-full items-center space-x-3">
-                  <img
-                    src={socialIconsMapping[platform.type]}
-                    alt={platform.type}
-                    className="h-10 w-10"
-                  />
-                  <div className="w-full flex-grow">
-                    {connectedPlatforms[platform.type] !==
-                    undefined ? (
+          {Object.keys(connectedPlatforms)?.map(
+            (platformType, index) => {
+              const platform = SocialPlatforms.find(
+                p => p.type === platformType
+              );
+              if (!platform) return null;
+
+              return (
+                <div
+                  key={index}
+                  className="mx-2 flex items-center justify-between rounded-lg border bg-gray-50 p-4"
+                >
+                  <div className="flex w-full items-center space-x-3">
+                    <img
+                      src={socialIconsMapping[platformType]}
+                      alt={platformType}
+                      className="h-10 w-10"
+                    />
+                    <div className="w-full flex-grow">
                       <div className="socials flex w-full items-center">
                         <TextInput
                           fullWidth
                           value={
-                            connectedPlatforms[
-                              platform.type
-                            ]
+                            connectedPlatforms[platformType]
                           }
                           onChange={e =>
                             handleInputChange(
-                              platform.type,
+                              platformType,
                               e.target.value
                             )
                           }
@@ -88,39 +90,27 @@ const Social = ({ section = SocialPlatforms, onSave }) => {
                           placeholder="username"
                           className="w-full"
                           leftSection={
-                            <span className="text-sm text-gray-500">{`${SocialTitleMapping[platform.type.toLowerCase()].toLowerCase()}.com/`}</span>
+                            <span className="text-sm text-gray-500">{`${SocialTitleMapping[platformType.toLowerCase()].toLowerCase()}.com/`}</span>
                           }
                         />
                       </div>
-                    ) : (
-                      <>
-                        <h3 className="text-base font-medium text-gray-800">
-                          {platform.type}
-                        </h3>
-                        {/* <p className="text-sm text-gray-500" >
-                          Tap to connect
-                        </p> */}
-                      </>
-                    )}
+                    </div>
                   </div>
+                  <button
+                    className="ml-3 text-gray-500 hover:text-gray-700"
+                    onClick={() =>
+                      handleConnect(
+                        platformType,
+                        platform.value || ''
+                      )
+                    }
+                  >
+                    x
+                  </button>
                 </div>
-                <button
-                  className="ml-3 text-gray-500 hover:text-gray-700"
-                  onClick={() =>
-                    handleConnect(
-                      platform.type,
-                      platform.value || ''
-                    )
-                  }
-                >
-                  {connectedPlatforms[platform.type] !==
-                    undefined || platform.value
-                    ? 'x'
-                    : '+'}
-                </button>
-              </div>
-            );
-          })}
+              );
+            }
+          )}
         </div>
       </div>
       <div className="flex w-full justify-end">
