@@ -220,7 +220,7 @@ const Sections = ({ updateSection, form }) => {
                     <Badge
                       variant="transparent"
                       radius="sm"
-                      className="min-w-max cursor-pointer text-sm font-semibold"
+                      className="min-w-max !cursor-pointer text-sm font-semibold"
                       onClick={() => {
                         onAddOrEditSection(
                           item.type,
