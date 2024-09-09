@@ -82,7 +82,7 @@ const CreateCourseStepOne = ({
         {...courseForm.getInputProps('title')}
       />
       <CustomEditor
-        label="About your channel"
+        label="About your course"
         id={courseForm.key('description')}
         value={courseForm.values.description}
         onUpdate={html => {
