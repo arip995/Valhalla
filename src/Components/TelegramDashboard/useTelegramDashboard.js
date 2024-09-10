@@ -46,7 +46,7 @@ const useTelegramDashboard = productId => {
         case 'cover_image':
           updateObjectStates(
             {
-              name: 'coverImage.url',
+              name: 'coverImage',
               value: value,
             },
             setTgData

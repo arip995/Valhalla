@@ -10,7 +10,7 @@ const LockedContent = ({ data }) => {
         <div className="vlc-view-container">
           <ViewProductHeader
             profilePic={
-              data.coverImage?.url ||
+              data.coverImage ||
               data.creatorDetails.profilePic
             }
             name={`${data.creatorDetails.firstName} ${data.creatorDetails.lastName}`}
