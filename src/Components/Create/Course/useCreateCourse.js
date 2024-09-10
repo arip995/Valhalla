@@ -79,11 +79,11 @@ const useCreateCourse = () => {
       }));
     } catch (error) {
       console.log(error);
-      // toast.error(
-      //   typeof error?.response?.data?.message === 'string'
-      //     ? error?.response?.data?.message
-      //     : 'Check yout internet connection'
-      // );
+      toast.error(
+        typeof error?.response?.data?.message === 'string'
+          ? error?.response?.data?.message
+          : 'Check yout internet connection'
+      );
       courseForm.setValues(prevValues => ({
         ...prevValues,
         loading: 0,

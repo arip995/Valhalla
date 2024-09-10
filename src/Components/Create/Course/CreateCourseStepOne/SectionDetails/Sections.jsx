@@ -126,6 +126,14 @@ export const SectionTypes = [
     isEnabled: false,
   },
 ];
+export const SectionArrray = [
+  'testimonial',
+  'faq',
+  'benifit',
+  'social',
+  'about',
+  'highlight',
+];
 
 const Sections = ({ updateSection, form }) => {
   const sections = form.values.sections;
@@ -236,7 +244,7 @@ const Sections = ({ updateSection, form }) => {
               key={item.type}
               variant="default"
               chevronPosition="left"
-              defaultValue="Apples"
+              defaultValue={SectionArrray}
             >
               <Accordion.Item
                 key={item.type}
