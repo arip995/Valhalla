@@ -6,16 +6,24 @@ import {
   SocialTitleMapping,
 } from './Sections';
 
-const Social = ({ section = SocialPlatforms, onSave }) => {
+const Social = ({ section, onSave }) => {
   const [connectedPlatforms, setConnectedPlatforms] =
     useState(() => {
       const initialState = {};
       SocialPlatforms.forEach(platform => {
-        const existingPlatform = section.find(
-          s => s.type === platform.type
-        );
+        let existingPlatform;
+        if (Array.isArray(section)) {
+          existingPlatform = section.find(
+            s => s.type === platform.type
+          );
+        } else if (section && typeof section === 'object') {
+          existingPlatform =
+            section.type === platform.type
+              ? section
+              : undefined;
+        }
         initialState[platform.type] = existingPlatform
-          ? existingPlatform.value || ''
+          ? existingPlatform.value
           : '';
       });
       console.log(initialState);
@@ -29,6 +37,7 @@ const Social = ({ section = SocialPlatforms, onSave }) => {
       return newState;
     });
   };
+
   const handleInputChange = (platformName, value) => {
     setConnectedPlatforms(prev => ({
       ...prev,

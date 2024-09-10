@@ -1,21 +1,17 @@
 import ProfilePic from '@/Components/Common/General/ProfilePic';
-import { getUniqueId } from '@/Utils/Common';
 import { handleFile } from '@/Utils/HandleFiles';
 import { isValidUrl } from '@/Utils/Regex';
 import {
   Button,
   Input,
-  Rating,
   Textarea,
   TextInput,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import React from 'react';
 
-const Testimonial = ({ section, onSave = () => {} }) => {
-  const testimonialForm = useForm({
+const About = ({ section, onSave = () => {} }) => {
+  const aboutForm = useForm({
     initialValues: {
-      id: getUniqueId(),
       isClickedSaveAtleastOnce: false,
       loading: false,
       image:
@@ -40,27 +36,24 @@ const Testimonial = ({ section, onSave = () => {} }) => {
         !values.description?.length
           ? 'Description is required'
           : null,
-      rating:
-        values.isClickedSaveAtleastOnce && !values.rating
-          ? 'Rating is required'
-          : null,
     }),
-    transformValues: values => ({
-      id: values.id,
-      image: values.image.trim(),
-      name: values.name.trim(),
-      description: values.description.trim(),
-      rating: values.rating,
-    }),
+    transformValues: values => [
+      {
+        image: values.image.trim(),
+        name: values.name.trim(),
+        description: values.description.trim(),
+      },
+    ],
   });
+  console.log(aboutForm.values, section);
 
   const handleFileChange = async file => {
-    testimonialForm.setFieldValue('loading', true);
+    aboutForm.setFieldValue('loading', true);
     const url = await handleFile(file);
     if (!url) {
       return;
     }
-    testimonialForm.setValues({
+    aboutForm.setValues({
       image: url,
       loading: false,
     });
@@ -68,21 +61,21 @@ const Testimonial = ({ section, onSave = () => {} }) => {
 
   return (
     <form
-      onSubmit={testimonialForm.onSubmit(onSave)}
+      onSubmit={aboutForm.onSubmit(onSave)}
       className="mt-2 flex w-full flex-col gap-4"
     >
       <Input.Label className="mb-[-10px]">
-        Testimonial Image
+        Your Image
       </Input.Label>
       <ProfilePic
-        avatarImage={testimonialForm.values.image}
-        loading={testimonialForm.values.loading}
+        avatarImage={aboutForm.values.image}
+        loading={aboutForm.values.loading}
         handleAvatarChange={handleFileChange}
       />
       <TextInput
         label="Name"
         name="name"
-        {...testimonialForm.getInputProps('name')}
+        {...aboutForm.getInputProps('name')}
       />
       <Textarea
         autosize
@@ -90,17 +83,12 @@ const Testimonial = ({ section, onSave = () => {} }) => {
         minRows={4}
         label="Description"
         name="description"
-        {...testimonialForm.getInputProps('description')}
+        {...aboutForm.getInputProps('description')}
       />
-      <div className="flex items-center gap-2">
-        <Input.Label>Rating</Input.Label>
-        <Rating
-          {...testimonialForm.getInputProps('rating')}
-        />
-      </div>
-      {!!testimonialForm.errors.rating && (
+
+      {!!aboutForm.errors.rating && (
         <Input.Error className="mt-[-10px]">
-          {testimonialForm.errors.rating}
+          {aboutForm.errors.rating}
         </Input.Error>
       )}
       <div className="flex w-full justify-end">
@@ -108,7 +96,7 @@ const Testimonial = ({ section, onSave = () => {} }) => {
           type="submit"
           color="black"
           onClick={() => {
-            testimonialForm.setFieldValue(
+            aboutForm.setFieldValue(
               'isClickedSaveAtleastOnce',
               true
             );
@@ -121,4 +109,4 @@ const Testimonial = ({ section, onSave = () => {} }) => {
   );
 };
 
-export default Testimonial;
+export default About;

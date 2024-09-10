@@ -101,26 +101,37 @@ export const SectionTypes = [
     isEnabled: false,
   },
   {
-    type: 'highlight',
-    label: 'Highlight',
+    type: 'faq',
+    label: 'FAQ',
     isEnabled: false,
   },
-  { type: 'faq', label: 'FAQ', isEnabled: false },
+  {
+    type: 'benifit',
+    label: 'Benifit',
+    isEnabled: false,
+  },
   {
     type: 'social',
     label: 'Social',
     isEnabled: false,
   },
-  { type: 'about', label: 'About', isEnabled: false },
-  { type: 'benifit', label: 'Benifit', isEnabled: false },
-  { type: 'gallery', label: 'Gallery', isEnabled: false },
+  {
+    type: 'about',
+    label: 'About',
+    isEnabled: false,
+  },
+  {
+    type: 'highlight',
+    label: 'Highlight',
+    isEnabled: false,
+  },
 ];
 
 const Sections = ({ updateSection, form }) => {
   const sections = form.values.sections;
   const [opened, setOpened] = useState(false);
   const [type, setType] = useState(null);
-  const [section, setSection] = useState();
+  const [section, setSection] = useState([]);
 
   const onSave = section => {
     setOpened(false);
@@ -153,12 +164,38 @@ const Sections = ({ updateSection, form }) => {
   ) => {
     setType(type);
     setOpened(true);
-    if (type === 'social') {
-      setSection(value);
-    }
     if (isEdit) {
       setSection(value);
+      return;
     }
+    if (
+      type === 'social' ||
+      type === 'benifit' ||
+      type === 'gallery'
+    ) {
+      setSection(value || []);
+      return;
+    }
+    if (type === 'about') {
+      console.log(value);
+      const about = {
+        name:
+          value?.[0]?.name ||
+          form.values.creatorDetails.firstName
+            ? `${form.values.creatorDetails.firstName} ${form.values.creatorDetails.lastName}`
+            : '',
+        description:
+          value?.[0]?.description ||
+          form.values.creatorDetails.description ||
+          '',
+        image:
+          value?.[0]?.image ||
+          form.values.creatorDetails.profilePic,
+      };
+      setSection(about);
+      return;
+    }
+    setSection(null);
   };
   const onToggleSection = type => {
     const updatedSections = sections.map(section => {
@@ -200,7 +237,9 @@ const Sections = ({ updateSection, form }) => {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center justify-center">
-                    {item.value?.length ? (
+                    {item.value?.length ||
+                    item.type == 'about' ||
+                    item.type == 'highlight' ? (
                       <Accordion.Control className="!w-12" />
                     ) : null}
                     <div className="text-truncate flex items-center gap-2 text-sm font-semibold">
@@ -220,7 +259,7 @@ const Sections = ({ updateSection, form }) => {
                     <Badge
                       variant="transparent"
                       radius="sm"
-                      className="min-w-max !cursor-pointer text-sm font-semibold"
+                      className="min-w-max !cursor-pointer text-xs font-semibold"
                       onClick={() => {
                         onAddOrEditSection(
                           item.type,
@@ -228,7 +267,16 @@ const Sections = ({ updateSection, form }) => {
                         );
                       }}
                     >
-                      + Add
+                      {item.type == 'highlight'
+                        ? null
+                        : item.type == 'about'
+                          ? 'Edit'
+                          : item.value?.length &&
+                              (item.type == 'social' ||
+                                item.type == 'benifit' ||
+                                item.type == 'gallery')
+                            ? '+Add/Edit'
+                            : '+Add'}
                     </Badge>
                     <Switch
                       color="teal"
@@ -239,7 +287,14 @@ const Sections = ({ updateSection, form }) => {
                     />
                   </div>
                 </div>
-                {item.value?.length ? (
+                {item.type == 'highlight' ? (
+                  <Accordion.Panel className="flex flex-col gap-4">
+                    <ShowSectionsList
+                      type={item.type}
+                      provided={provided}
+                    />
+                  </Accordion.Panel>
+                ) : item.value?.length ? (
                   <Accordion.Panel className="flex flex-col gap-4">
                     <DragAndDrop
                       array={item.value}
@@ -266,7 +321,6 @@ const Sections = ({ updateSection, form }) => {
                           onAddOrEditSection={
                             onAddOrEditSection
                           }
-                          onToggleSection={onToggleSection}
                         />
                       )}
                     </DragAndDrop>

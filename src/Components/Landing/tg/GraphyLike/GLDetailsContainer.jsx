@@ -14,8 +14,7 @@ const GLDetailsContainer = ({ data }) => {
                 data.coverImage?.url ||
                 data.creatorDetails.profilePic
               }
-              firstName={data.creatorDetails.firstName}
-              lastName={data.creatorDetails.lastName}
+              name={`${data.creatorDetails.firstName} ${data.creatorDetails.lastName}`}
               username={data.creatorDetails.username}
             />
             <div className="leading-title1 mb-8 mt-6 text-xl font-semibold text-black">

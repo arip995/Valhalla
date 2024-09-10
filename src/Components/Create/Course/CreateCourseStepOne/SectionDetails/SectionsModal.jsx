@@ -6,6 +6,7 @@ import Benifits from './Benifits';
 import { SectionTitleMapping } from './Sections';
 import Gallery from './Gallery';
 import Social from './Social';
+import About from './About';
 
 const SectionsModal = ({
   opened,
@@ -14,6 +15,7 @@ const SectionsModal = ({
   type,
   onSave = () => {},
 }) => {
+  console.log(section);
   return (
     <Modal
       overlayProps={{
@@ -36,6 +38,8 @@ const SectionsModal = ({
         <Gallery section={section} onSave={onSave} />
       ) : type === 'social' ? (
         <Social section={section} onSave={onSave} />
+      ) : type === 'about' ? (
+        <About section={section} onSave={onSave} />
       ) : null}
     </Modal>
   );

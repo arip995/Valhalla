@@ -13,8 +13,7 @@ const LockedContent = ({ data }) => {
               data.coverImage?.url ||
               data.creatorDetails.profilePic
             }
-            firstName={data.creatorDetails.firstName}
-            lastName={data.creatorDetails.lastName}
+            name={`${data.creatorDetails.firstName} ${data.creatorDetails.lastName}`}
             username={data.creatorDetails.username}
             title={data.title}
           />

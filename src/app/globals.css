@@ -74,12 +74,8 @@ ol {
   font-weight: 600;
 }
 .mantine-TextInput-section[data-position='right'] {
-  padding: 0px 25px;
-  background-color: #ffffff;
   font-size: small;
 }
 .mantine-NumberInput-section[data-position='right'] {
-  padding: 0px 25px;
-  background-color: #ffffff;
   font-size: small;
 }
