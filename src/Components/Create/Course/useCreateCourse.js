@@ -68,15 +68,25 @@ const useCreateCourse = () => {
         toast.error('Check your internet connection');
         throw new Error('Check your internet connection');
       }
+      courseForm.setValues(prevValues => {
+        let calculatedSections = prevValues.sections;
+        if (Array.isArray(response.data.data.sections)) {
+          calculatedSections = SectionTypes.map(
+            item =>
+              response.data.data.sections.find(
+                val => val.type === item.type
+              ) || item
+          );
+        }
 
-      courseForm.setValues(prevValues => ({
-        ...prevValues,
-        ...(response.data.data || {}),
-        sections: response.data.data?.sections?.length
-          ? response.data.data.sections
-          : SectionTypes,
-        loading: 0,
-      }));
+        console.log(calculatedSections);
+        return {
+          ...prevValues,
+          ...(response.data.data || {}),
+          sections: calculatedSections,
+          loading: 0,
+        };
+      });
     } catch (error) {
       console.log(error);
       toast.error(
