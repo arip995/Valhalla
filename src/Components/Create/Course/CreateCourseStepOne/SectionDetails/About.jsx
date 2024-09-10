@@ -45,7 +45,6 @@ const About = ({ section, onSave = () => {} }) => {
       },
     ],
   });
-  console.log(aboutForm.values, section);
 
   const handleFileChange = async file => {
     aboutForm.setFieldValue('loading', true);

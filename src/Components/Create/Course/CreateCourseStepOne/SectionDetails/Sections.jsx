@@ -11,7 +11,7 @@ import {
   IconMessage2,
   IconPhoto,
 } from '@tabler/icons-react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import SectionsModal from './SectionsModal';
 import ShowSectionsList from './ShowSectionsList';
@@ -209,10 +209,18 @@ const Sections = ({ updateSection, form }) => {
     });
     form.setValues({ sections: updatedSections });
   };
-
-  useEffect(() => {
-    console.log(sections);
-  }, [sections]);
+  const onDeleteSectionItems = (type, item) => {
+    let value = [];
+    sections.map(section => {
+      if (section.type === type) {
+        value = Array.isArray(section.value)
+          ? section.value.filter(val => val.id !== item.id)
+          : section.value;
+      }
+      return section;
+    });
+    updateSection(value, type);
+  };
 
   if (!sections?.length) return null;
 
@@ -238,7 +246,6 @@ const Sections = ({ updateSection, form }) => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center justify-center">
                     {item.value?.length ||
-                    item.type == 'about' ||
                     item.type == 'highlight' ? (
                       <Accordion.Control className="!w-12" />
                     ) : null}
@@ -315,6 +322,9 @@ const Sections = ({ updateSection, form }) => {
                           showDrag={showDrag}
                           item={itemValue}
                           provided={provided}
+                          onDeleteSectionItems={
+                            onDeleteSectionItems
+                          }
                           onDragSectionItems={
                             onDragSectionItems
                           }

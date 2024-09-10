@@ -1,5 +1,5 @@
 import { Button, TextInput } from '@mantine/core';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   socialIconsMapping,
   SocialPlatforms,
@@ -26,7 +26,6 @@ const Social = ({ section, onSave }) => {
           ? existingPlatform.value
           : '';
       });
-      console.log(initialState);
       return initialState;
     });
 
@@ -55,7 +54,6 @@ const Social = ({ section, onSave }) => {
       }))
       .filter(platform => platform.value !== '');
     if (onSave) {
-      console.log(updatedSection);
       onSave(updatedSection);
     }
   };

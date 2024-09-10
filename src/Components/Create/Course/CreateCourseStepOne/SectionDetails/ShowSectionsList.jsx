@@ -15,6 +15,7 @@ import {
 import React from 'react';
 import { SocialTitleMapping } from './Sections';
 import ViewProductHeader from '@/Components/Common/Header/ViewProductHeader';
+import { modals } from '@mantine/modals';
 const Actions = [
   {
     label: 'Edit',
@@ -81,8 +82,26 @@ const ShowSectionsList = ({
   showDrag,
   type,
   onAddOrEditSection = () => {},
-  onDeleteSection = () => {},
+  onDeleteSectionItems = () => {},
 }) => {
+  const onDelete = (type, item) => {
+    modals.openConfirmModal({
+      title: 'Delete section',
+      overlayProps: {
+        blur: 20,
+      },
+      children: (
+        <div className="my-4 font-bold text-black">
+          Are you sure you want to delete this {type}?
+        </div>
+      ),
+      labels: { confirm: 'Delete', cancel: 'Cancel' },
+      confirmProps: { color: 'red' },
+      onConfirm: () => {
+        onDeleteSectionItems(type, item);
+      },
+    });
+  };
   if (type === 'testimonial') {
     return (
       <div className="flex items-center justify-between gap-2 border-b border-solid border-b-neutral-200 bg-white px-2 py-4">
@@ -116,7 +135,7 @@ const ShowSectionsList = ({
         <ActionMenu
           onClick={val => {
             if (val === 'delete') {
-              onDeleteSection('testimonial', item);
+              onDelete('testimonial', item);
               return;
             }
             onAddOrEditSection('testimonial', item, true);
@@ -155,7 +174,7 @@ const ShowSectionsList = ({
         <ActionMenu
           onClick={val => {
             if (val === 'delete') {
-              onDeleteSection('faq', item);
+              onDelete('faq', item);
               return;
             }
             onAddOrEditSection('faq', item, true);
@@ -191,7 +210,7 @@ const ShowSectionsList = ({
         {/* <ActionMenu
           onClick={val => {
             if (val === 'delete') {
-              onDeleteSection('benifit', item);
+              onDelete('benifit', item);
               return;
             }
             onAddOrEditSection('benifit', item, true);
