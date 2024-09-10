@@ -11,6 +11,8 @@ import {
 } from '@mantine/core';
 import React from 'react';
 import Sections from './SectionDetails/Sections';
+import { discountPercentage } from '@/Utils/Common';
+import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 
 const CreateCourseStepOne = ({
   courseForm,
@@ -59,6 +61,9 @@ const CreateCourseStepOne = ({
       sections: updatedSections,
     });
   };
+  if (courseForm.values.loading === -1) {
+    return <LayoutLoading />;
+  }
 
   return (
     <form
@@ -81,14 +86,17 @@ const CreateCourseStepOne = ({
         id={courseForm.key('title')}
         {...courseForm.getInputProps('title')}
       />
-      <CustomEditor
-        label="About your course"
-        id={courseForm.key('description')}
-        value={courseForm.values.description}
-        onUpdate={html => {
-          courseForm.setValues({ description: html });
-        }}
-      />
+      {courseForm.values.description ? (
+        <CustomEditor
+          label="About your course"
+          id={courseForm.key('description')}
+          value={courseForm.values.description}
+          onUpdate={html => {
+            courseForm.setValues({ description: html });
+          }}
+        />
+      ) : null}
+
       {!!courseForm.errors?.description && (
         <Input.Error className="mt-[-8px]">
           {courseForm.errors?.description}
@@ -136,18 +144,10 @@ const CreateCourseStepOne = ({
           hideControls
           max={1000000}
           clampBehavior="strict"
-          rightSection={`${
-            Number(
-              courseForm.values.price &&
-                !isNaN(courseForm.values.price)
-                ? Math.trunc(
-                    (courseForm.values.discountedPrice /
-                      courseForm.values.price) *
-                      100
-                  )
-                : 0
-            ) || 0
-          }%`}
+          rightSection={discountPercentage(
+            courseForm.values.price,
+            courseForm.values.discountedPrice
+          )}
           {...courseForm.getInputProps('discountedPrice')}
         />
       </Collapse>

@@ -56,7 +56,35 @@ const useCreateCourse = () => {
               ? 'Discounted Price should be greater than 0'
               : null,
     }),
+    transformValues: values => {
+      let data = { ...values };
+      delete data.isSaveClickedAtleastOnce;
+      delete data.step;
+      delete data.loading;
+      delete data._id;
+      let sections = data.sections.filter(
+        item =>
+          item.value?.length || item.type === 'highlight'
+      );
+
+      return {
+        ...data,
+        courseId,
+        sections,
+      };
+    },
   });
+
+  const calculateSections = sections => {
+    if (!Array.isArray(sections)) {
+      return SectionTypes;
+    }
+
+    return SectionTypes.map(
+      item =>
+        sections.find(val => val.type === item.type) || item
+    );
+  };
 
   const fetchProduct = async () => {
     courseForm.setValues({ loading: 1 });
@@ -68,22 +96,17 @@ const useCreateCourse = () => {
         toast.error('Check your internet connection');
         throw new Error('Check your internet connection');
       }
+      const responseData = response.data.data;
       courseForm.setValues(prevValues => {
-        let calculatedSections = prevValues.sections;
-        if (Array.isArray(response.data.data.sections)) {
-          calculatedSections = SectionTypes.map(
-            item =>
-              response.data.data.sections.find(
-                val => val.type === item.type
-              ) || item
-          );
-        }
+        const sections = calculateSections(
+          responseData.sections
+        );
 
-        console.log(calculatedSections);
         return {
           ...prevValues,
-          ...(response.data.data || {}),
-          sections: calculatedSections,
+          ...(responseData || {}),
+          sections: sections,
+          step: responseData.stepsCompleted === 1 ? 2 : 1,
           loading: 0,
         };
       });
@@ -100,9 +123,41 @@ const useCreateCourse = () => {
       }));
     }
   };
-
   const handleSubmit = async values => {
-    console.log('courseForm', values);
+    courseForm.setValues({ loading: 1 });
+    try {
+      const response = await axiosInstance.post(
+        `/course/update`,
+        { ...values }
+      );
+      const responseData = response.data.data;
+      console.log(response);
+      courseForm.setValues(prevValues => {
+        return {
+          ...prevValues,
+          ...(responseData || {}),
+          sections: calculateSections(
+            responseData.sections
+          ),
+          step: responseData.stepsCompleted === 1 ? 2 : 1,
+          loading: 0,
+        };
+      });
+      toast.success('Updated successfully');
+    } catch (error) {
+      console.log(error);
+      toast.error(
+        typeof error?.response?.data?.message === 'string'
+          ? error?.response?.data?.message
+          : 'Check yout internet connection'
+      );
+      courseForm.setValues(prevValues => ({
+        ...prevValues,
+        loading: 0,
+      }));
+    }
+
+    // console.log('courseForm', values);
   };
 
   useEffect(() => {
@@ -115,6 +170,7 @@ const useCreateCourse = () => {
     }
   }, [courseForm.values.price]);
 
+  console.log(courseForm.values);
   useEffect(() => {
     fetchProduct();
   }, []);

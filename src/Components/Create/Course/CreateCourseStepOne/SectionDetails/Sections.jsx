@@ -12,7 +12,6 @@ import {
   IconPhoto,
 } from '@tabler/icons-react';
 import React, { useState } from 'react';
-import { Toaster } from 'react-hot-toast';
 import SectionsModal from './SectionsModal';
 import ShowSectionsList from './ShowSectionsList';
 
@@ -242,7 +241,6 @@ const Sections = ({ updateSection, form }) => {
               key={item.type}
               variant="default"
               chevronPosition="left"
-              defaultValue={SectionArrray}
             >
               <Accordion.Item
                 key={item.type}
@@ -360,7 +358,6 @@ const Sections = ({ updateSection, form }) => {
         }}
         onSave={onSave}
       />
-      <Toaster />
     </div>
   );
 };

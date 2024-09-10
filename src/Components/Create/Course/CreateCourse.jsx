@@ -10,6 +10,7 @@ import CreateCourseStepTwo from './CreateCourseStepTwo/CreateCourseStepTwo';
 import useCreateCourse from './useCreateCourse';
 import Preview from '@/Components/Common/Preview';
 import React from 'react';
+import { Toaster } from 'react-hot-toast';
 const CreateCourse = () => {
   const { courseForm, handleSubmit, router } =
     useCreateCourse();
@@ -142,6 +143,7 @@ const CreateCourse = () => {
           <div>Preview</div>
         </Preview>
       </div>
+      <Toaster />
     </div>
   );
 };
