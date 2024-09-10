@@ -3,7 +3,7 @@ import CreateModulesAndLessons from './CreateModulesAndLessons';
 
 const CreateCourseStepTwo = ({ courseForm }) => {
   return (
-    <div className="flex-flex-col w-full">
+    <div className="flex-flex-col w-full p-4">
       <CreateModulesAndLessons courseForm={courseForm} />
     </div>
   );
