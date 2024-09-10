@@ -21,7 +21,7 @@ const SectionsModal = ({
       }}
       closeOnClickOutside={false}
       closeOnEscape={false}
-      autoFocus={false}
+      trapFocus={false}
       opened={opened}
       onClose={onClose}
       title={`${section?.id ? 'Edit' : 'Add'} ${SectionTitleMapping[type]}`}
