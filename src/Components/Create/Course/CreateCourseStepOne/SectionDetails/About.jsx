@@ -101,7 +101,7 @@ const About = ({ section, onSave = () => {} }) => {
             );
           }}
         >
-          {section?.id ? 'Edit' : 'Add'}
+          Save
         </Button>
       </div>
     </form>

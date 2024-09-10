@@ -59,9 +59,11 @@ const CreateCourseModuleContainer = ({
           <ActionIcon
             variant="subtle"
             color="rgba(199, 199, 199, 1)"
-            size="xs"
+            size="sm"
           >
-            <IconDotsVertical />
+            <IconDotsVertical
+              style={{ width: '70%', height: '70%' }}
+            />
           </ActionIcon>
         </div>
       </div>

@@ -2,7 +2,7 @@ import { Modal } from '@mantine/core';
 import React from 'react';
 import Testimonial from './Testimonial';
 import Faq from './Faq';
-import Benifits from './Benifits';
+import Benifit from './Benifit';
 import { SectionTitleMapping } from './Sections';
 import Gallery from './Gallery';
 import Social from './Social';
@@ -15,7 +15,6 @@ const SectionsModal = ({
   type,
   onSave = () => {},
 }) => {
-  console.log(section);
   return (
     <Modal
       overlayProps={{
@@ -33,7 +32,7 @@ const SectionsModal = ({
       ) : type === 'faq' ? (
         <Faq section={section} onSave={onSave} />
       ) : type === 'benifit' ? (
-        <Benifits section={section} onSave={onSave} />
+        <Benifit section={section} onSave={onSave} />
       ) : type === 'gallery' ? (
         <Gallery section={section} onSave={onSave} />
       ) : type === 'social' ? (

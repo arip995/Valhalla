@@ -7,13 +7,12 @@ import {
 import { IconTrash } from '@tabler/icons-react';
 import React, { useState } from 'react';
 
-const Benifits = ({ section, onSave = () => {} }) => {
+const Benifit = ({ section, onSave = () => {} }) => {
   const [benefits, setBenefits] = useState(
     section?.length
       ? [...section]
       : [{ id: getUniqueId(), value: '' }]
   );
-  console.log(benefits);
 
   const onChange = (id, value) => {
     if (Array.isArray(benefits)) {
@@ -74,7 +73,7 @@ const Benifits = ({ section, onSave = () => {} }) => {
       setBenefits(newBenefits);
     }
   };
-  console.log(benefits.length > 1);
+
   return (
     <div className="mt-4 flex w-full flex-col gap-4">
       {Array.isArray(benefits) ? (
@@ -141,4 +140,4 @@ const Benifits = ({ section, onSave = () => {} }) => {
   );
 };
 
-export default Benifits;
+export default Benifit;

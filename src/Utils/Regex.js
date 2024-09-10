@@ -39,7 +39,6 @@ export const validateEditorContent = content => {
     ?.replace(/&nbsp;/g, ' ')
     .replace(/<[^>]*>/g, '')
     .trim();
-  console.log(textContent);
   if (!textContent) {
     return 'Content is required';
   }

@@ -38,9 +38,14 @@ const ActionMenu = ({ onClick = () => {}, type }) => {
           variant="subtle"
           color="rgba(199, 199, 199, 1)"
           onClick={() => () => {}}
-          size="xs"
+          size="sm"
         >
-          <IconDotsVertical />
+          <IconDotsVertical
+            style={{
+              width: '70%',
+              height: '70%',
+            }}
+          />
         </ActionIcon>
       </Menu.Target>
       <Menu.Dropdown>
@@ -247,12 +252,17 @@ const ShowSectionsList = ({
   }
   if (type == 'about' && item?.name) {
     return (
-      <ViewProductHeader
-        showVercelImageTag={false}
-        profilePic={item?.image}
-        name={item.name}
-        description={item.description}
-      />
+      <div className="flex flex-col gap-3">
+        <div className="text-lg font-semibold">
+          About me
+        </div>
+        <ViewProductHeader
+          profilePic={item?.image}
+          name={item.name}
+          description={item.description}
+          inViewPage={false}
+        />
+      </div>
     );
   }
   if (type == 'highlight') {

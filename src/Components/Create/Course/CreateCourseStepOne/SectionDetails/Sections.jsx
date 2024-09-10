@@ -97,32 +97,30 @@ export const SectionTitleMapping = {
 export const SectionTypes = [
   {
     type: 'testimonial',
-    label: 'testimonial',
     isEnabled: false,
   },
   {
     type: 'faq',
-    label: 'FAQ',
     isEnabled: false,
   },
   {
     type: 'benifit',
-    label: 'Benifit',
     isEnabled: false,
   },
   {
     type: 'social',
-    label: 'Social',
+    isEnabled: false,
+  },
+  {
+    type: 'gallery',
     isEnabled: false,
   },
   {
     type: 'about',
-    label: 'About',
     isEnabled: false,
   },
   {
     type: 'highlight',
-    label: 'Highlight',
     isEnabled: false,
   },
 ];
@@ -293,13 +291,16 @@ const Sections = ({ updateSection, form }) => {
                             ? '+Add/Edit'
                             : '+Add'}
                     </Badge>
-                    <Switch
-                      color="teal"
-                      checked={item.isEnabled}
-                      onChange={() => {
-                        onToggleSection(item.type);
-                      }}
-                    />
+                    {item?.value?.length ||
+                    item.type === 'highlight' ? (
+                      <Switch
+                        color="teal"
+                        checked={item.isEnabled}
+                        onChange={() => {
+                          onToggleSection(item.type);
+                        }}
+                      />
+                    ) : null}
                   </div>
                 </div>
                 {item.type == 'highlight' ? (

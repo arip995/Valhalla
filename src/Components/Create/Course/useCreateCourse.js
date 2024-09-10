@@ -91,8 +91,8 @@ const useCreateCourse = () => {
     }
   };
 
-  const handleSubmit = async () => {
-    console.log('courseForm', courseForm.errors);
+  const handleSubmit = async values => {
+    console.log('courseForm', values);
   };
 
   useEffect(() => {

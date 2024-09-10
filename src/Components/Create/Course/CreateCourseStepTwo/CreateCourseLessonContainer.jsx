@@ -51,9 +51,11 @@ const CreateCourseLessonContainer = ({
           variant="subtle"
           color="rgba(199, 199, 199, 1)"
           onClick={() => onEditLesson(moduleIndex, index)}
-          size="xs"
+          size="sm"
         >
-          <IconDotsVertical />
+          <IconDotsVertical
+            style={{ width: '70%', height: '70%' }}
+          />
         </ActionIcon>
       </div>
     </div>

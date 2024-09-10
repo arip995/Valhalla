@@ -8,14 +8,14 @@ const ViewProductHeader = ({
   // username,
   title,
   description,
-  showVercelImageTag = true,
+  inViewPage = true,
 }) => {
   return (
     <>
       <div className="flex items-center gap-3">
         {profilePic ? (
           <>
-            {showVercelImageTag ? (
+            {inViewPage ? (
               <Image
                 className="h-[80px] w-[80px] overflow-hidden rounded-full object-cover"
                 src={profilePic}
@@ -43,8 +43,10 @@ const ViewProductHeader = ({
           />
         )}
         <div className="flex flex-col justify-start">
-          <div className="text-sm">Created by</div>
-          <div className="text-sm font-bold">
+          {!!inViewPage && (
+            <div className="text-sm">Created by</div>
+          )}
+          <div className="text-sm font-semibold">
             {name?.toUpperCase()}
           </div>
           {/* <div className="text-sm">@{username}</div> */}
