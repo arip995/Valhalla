@@ -102,7 +102,7 @@ const useEditPlanAndPricing = data => {
           status: data.status ? 0 : 1,
         },
       });
-      if (res?.status == 200) {
+      if (res?.ok) {
         setPlans(prev => {
           return prev.map(item => {
             if (item?._id === data._id) {

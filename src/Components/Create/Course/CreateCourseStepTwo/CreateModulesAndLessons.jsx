@@ -185,7 +185,7 @@ const CreateModulesAndLessons = () =>
       <div className="cmal-container">
         <div className="flex w-full flex-col">
           <div className="mb-4 text-sm font-semibold">
-            Add lessons of your course
+            Add modules and lessons of your course
           </div>
           <DragDropContext
             onDragEnd={result => onDragModule(result)}

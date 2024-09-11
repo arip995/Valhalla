@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { SectionTypes } from './CreateCourseStepOne/SectionDetails/Sections';
+import { getUniqueId } from '@/Utils/Common';
 
 const useCreateCourse = () => {
   const router = useRouter();
@@ -80,10 +81,22 @@ const useCreateCourse = () => {
       return SectionTypes;
     }
 
-    return SectionTypes.map(
+    const result = SectionTypes.map(
       item =>
         sections.find(val => val.type === item.type) || item
     );
+
+    return result.map(item => {
+      if (item._id) {
+        return {
+          type: item.type,
+          value: item.value,
+          isEnables: item.isEnabled,
+          id: item?._id || getUniqueId(),
+        };
+      }
+      return item;
+    });
   };
 
   const fetchProduct = async () => {
@@ -92,7 +105,7 @@ const useCreateCourse = () => {
       const response = await axiosInstance.get(
         `/course/get/${courseId}`
       );
-      if (!response.status) {
+      if (!response.ok) {
         toast.error('Check your internet connection');
         throw new Error('Check your internet connection');
       }

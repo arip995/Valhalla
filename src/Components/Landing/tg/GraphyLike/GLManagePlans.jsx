@@ -48,7 +48,6 @@ const GLManagePlans = ({ data }) => {
       <div className="fixed bottom-0 left-0 w-full border-t-2 border-gray-100 bg-white px-2 py-4 shadow-md md:hidden">
         <div className="flex w-full max-w-[768px] items-center gap-8">
           <BuyButton
-            animate={false}
             onClick={() => setOpenBottomSheet(true)}
             disabled={data.status !== 1}
           >

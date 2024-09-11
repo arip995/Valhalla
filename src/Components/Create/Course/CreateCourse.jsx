@@ -30,7 +30,7 @@ const CreateCourse = () => {
                   className="h-7"
                   mr={4}
                 />
-                Step 1 of 2
+                Step {courseForm.values.step || 1} of 2
               </div>
               <form
                 onSubmit={courseForm.onSubmit(
