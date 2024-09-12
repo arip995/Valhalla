@@ -1,4 +1,3 @@
-import CustomEditor from '@/Common/CustomEditor';
 import { CategoriesList } from '@/Constants/constants';
 import {
   Checkbox,
@@ -13,6 +12,7 @@ import React from 'react';
 import Sections from './SectionDetails/Sections';
 import { discountPercentage } from '@/Utils/Common';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
+import CustomTipTapEditor from '@/Components/Common/Editor/CustomTipTapEditor';
 
 const CreateCourseStepOne = ({
   courseForm,
@@ -87,7 +87,7 @@ const CreateCourseStepOne = ({
         {...courseForm.getInputProps('title')}
       />
       {courseForm.values.description ? (
-        <CustomEditor
+        <CustomTipTapEditor
           label="About your course"
           id={courseForm.key('description')}
           value={courseForm.values.description}

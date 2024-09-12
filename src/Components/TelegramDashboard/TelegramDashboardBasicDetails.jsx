@@ -1,4 +1,3 @@
-import CustomEditor from '@/Common/CustomEditor';
 import {
   Button,
   Collapse,
@@ -7,6 +6,7 @@ import {
   TextInput,
 } from '@mantine/core';
 import React from 'react';
+import CustomTipTapEditor from '../Common/Editor/CustomTipTapEditor';
 
 const TelegramDashboardBasicDetails = ({
   data,
@@ -33,7 +33,7 @@ const TelegramDashboardBasicDetails = ({
           placeholder="Index + Nifty"
           {...basicDetailsForm.getInputProps('title')}
         />
-        <CustomEditor
+        <CustomTipTapEditor
           value={basicDetailsForm.values?.description}
           onUpdate={value => {
             basicDetailsForm.setValues({

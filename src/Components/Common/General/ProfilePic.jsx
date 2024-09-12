@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import CropModal from '@/Common/CropModal';
+import CropModal from '@/Components/Common/CropModal';
 import { handleFile } from '@/Utils/HandleFiles';
 import {
   ActionIcon,

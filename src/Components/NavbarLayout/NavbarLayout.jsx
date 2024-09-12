@@ -1,6 +1,6 @@
 'use client';
 
-import OfflineOverlay from '@/Common/OfflineOverlay';
+import OfflineOverlay from '@/Components/Common/OfflineOverlay';
 import { SidenavData } from '@/Constants/Navbarlayout';
 import { logout } from '@/Utils/getuserData';
 import useUser from '@/Utils/Hooks/useUser';

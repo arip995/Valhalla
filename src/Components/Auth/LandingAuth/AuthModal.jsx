@@ -1,4 +1,4 @@
-import Timer from '@/Common/Timer';
+import Timer from '@/Components/Common/Timer';
 import GoogleButton from '@/Components/Common/Buttons/GoogleButton/GoogleButton';
 import { googleOauth } from '@/Utils/Common';
 import {

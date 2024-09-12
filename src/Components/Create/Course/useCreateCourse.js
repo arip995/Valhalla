@@ -105,7 +105,8 @@ const useCreateCourse = () => {
       const response = await axiosInstance.get(
         `/course/get/${courseId}`
       );
-      if (!response.ok) {
+      console.log(response);
+      if (!response.data?.ok) {
         toast.error('Check your internet connection');
         throw new Error('Check your internet connection');
       }
@@ -183,7 +184,7 @@ const useCreateCourse = () => {
     }
   }, [courseForm.values.price]);
 
-  console.log(courseForm.values);
+  // console.log(courseForm.values);
   useEffect(() => {
     fetchProduct();
   }, []);

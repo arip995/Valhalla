@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 'use client';
-import ImageCropModal from '@/Common/CropModal';
+import ImageCropModal from '@/Components/Common/CropModal';
 import ListFileOne from '@/Components/Common/ListFiles/ListFileOne';
 import UploadButtonOne from '@/Components/Common/Upload/UploadButtonOne';
 import { handleFile } from '@/Utils/HandleFiles';

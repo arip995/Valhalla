@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import Timer from '@/Common/Timer.jsx';
+import Timer from '@/Components/Common/Timer.jsx';
 import { googleOauth } from '@/Utils/Common';
 import {
   Anchor,
