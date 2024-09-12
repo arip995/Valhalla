@@ -3,7 +3,7 @@
 import HeaderWrapper from '@/Components/Auth/HeaderWrapper';
 import { Button } from '@mantine/core';
 import { useRouter } from 'next/navigation';
-import Logo from '../../../../public/icons/neifyiconsmall.webp';
+import Logo from '../../../../public/icons/neifyiconsmall.png';
 import IconPageNotFound from '../../../../public/icons/pagenotfound.svg';
 
 const NotFoundOne = () => {
