@@ -8,12 +8,21 @@ import {
   ActionIcon,
   Badge,
   Button,
+  Menu,
+  rem,
+  Text,
 } from '@mantine/core';
 import {
   IconDotsVertical,
+  IconEdit,
   IconGripVertical,
+  IconPlaystationCircle,
+  IconTrash,
 } from '@tabler/icons-react';
 import CreateCourseLessonContainer from './CreateCourseLessonContainer';
+import React from 'react';
+import { modals } from '@mantine/modals';
+import toast from 'react-hot-toast';
 
 const CreateCourseModuleContainer = ({
   module,
@@ -22,6 +31,10 @@ const CreateCourseModuleContainer = ({
   onDragLesson,
   onEditLesson,
   onAddLesson,
+  onDelete,
+  onUpdate,
+  length,
+  onEditModuleTitle,
   provided,
 }) => {
   return (
@@ -55,16 +68,100 @@ const CreateCourseModuleContainer = ({
           >
             {module.status === 1 ? 'Published' : 'Draft'}
           </Badge>
-
-          <ActionIcon
-            variant="subtle"
-            color="rgba(199, 199, 199, 1)"
-            size="sm"
-          >
-            <IconDotsVertical
-              style={{ width: '70%', height: '70%' }}
-            />
-          </ActionIcon>
+          <Menu width={150} position="bottom-end">
+            <Menu.Target>
+              <ActionIcon
+                variant="subtle"
+                color="rgba(199, 199, 199, 1)"
+                size="sm"
+              >
+                <IconDotsVertical
+                  style={{ width: '70%', height: '70%' }}
+                />
+              </ActionIcon>
+            </Menu.Target>
+            <Menu.Dropdown>
+              <Menu.Item
+                onClick={() => {
+                  onEditModuleTitle(
+                    module.title,
+                    module.id
+                  );
+                }}
+                leftSection={
+                  <IconEdit
+                    style={{
+                      width: rem(14),
+                      height: rem(14),
+                    }}
+                  />
+                }
+              >
+                Edit
+              </Menu.Item>
+              <Menu.Item
+                onClick={() => {
+                  onUpdate({ moduleIndex });
+                  // onChangeStatus(module.id);
+                }}
+                leftSection={
+                  <IconPlaystationCircle
+                    style={{
+                      width: rem(14),
+                      height: rem(14),
+                    }}
+                  />
+                }
+              >
+                {module.status === 1
+                  ? 'Save as Draft'
+                  : 'Publish'}
+              </Menu.Item>
+              <Menu.Item
+                onClick={() => {
+                  if (length === 1) {
+                    toast.error('Need atleast 1 module');
+                    return;
+                  }
+                  modals.openConfirmModal({
+                    title: 'Delete',
+                    children: (
+                      <div className="pb-4 pt-8">
+                        <Text size="md" fw={500}>
+                          Are you sure you want to delete
+                          this module?
+                        </Text>
+                      </div>
+                    ),
+                    labels: {
+                      confirm: 'Yes, Delete',
+                      cancel: 'Cancel',
+                    },
+                    confirmProps: { color: 'red' },
+                    onCancel: () => {},
+                    onConfirm: () => {
+                      onUpdate({
+                        type: 'delete',
+                        moduleIndex,
+                      });
+                      onDelete(module.id);
+                    },
+                  });
+                }}
+                color="red"
+                leftSection={
+                  <IconTrash
+                    style={{
+                      width: rem(14),
+                      height: rem(14),
+                    }}
+                  />
+                }
+              >
+                Delete
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
         </div>
       </div>
       <Accordion.Panel className="flex flex-col gap-4">
@@ -96,6 +193,9 @@ const CreateCourseModuleContainer = ({
                                   {...provided.draggableProps}
                                 >
                                   <CreateCourseLessonContainer
+                                    length={
+                                      module.lessons.length
+                                    }
                                     showDrag={
                                       module?.lessons
                                         ?.length > 1
@@ -103,9 +203,11 @@ const CreateCourseModuleContainer = ({
                                     provided={provided}
                                     lesson={lesson}
                                     index={index}
+                                    onUpdate={onUpdate}
                                     moduleIndex={
                                       moduleIndex
                                     }
+                                    lessonIndex={index}
                                     onEditLesson={
                                       onEditLesson
                                     }
@@ -139,4 +241,4 @@ const CreateCourseModuleContainer = ({
   );
 };
 
-export default CreateCourseModuleContainer;
+export default React.memo(CreateCourseModuleContainer);

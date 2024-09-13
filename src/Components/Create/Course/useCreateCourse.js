@@ -98,14 +98,12 @@ const useCreateCourse = () => {
       return item;
     });
   };
-
   const fetchProduct = async () => {
     courseForm.setValues({ loading: 1 });
     try {
       const response = await axiosInstance.get(
         `/course/get/${courseId}`
       );
-      console.log(response);
       if (!response.data?.ok) {
         toast.error('Check your internet connection');
         throw new Error('Check your internet connection');
@@ -138,6 +136,7 @@ const useCreateCourse = () => {
     }
   };
   const handleSubmit = async values => {
+    console.log(values);
     courseForm.setValues({ loading: 1 });
     try {
       const response = await axiosInstance.post(
@@ -184,7 +183,6 @@ const useCreateCourse = () => {
     }
   }, [courseForm.values.price]);
 
-  // console.log(courseForm.values);
   useEffect(() => {
     fetchProduct();
   }, []);

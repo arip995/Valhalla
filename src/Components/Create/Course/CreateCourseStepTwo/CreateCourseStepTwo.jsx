@@ -9,4 +9,4 @@ const CreateCourseStepTwo = ({ courseForm }) => {
   );
 };
 
-export default CreateCourseStepTwo;
+export default React.memo(CreateCourseStepTwo);
