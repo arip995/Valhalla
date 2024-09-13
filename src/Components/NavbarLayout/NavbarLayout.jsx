@@ -98,7 +98,11 @@ export function NavbarLayout({ children }) {
             Nexify
           </Group>
         </AppShell.Header>
-        <AppShell.Navbar>
+        <AppShell.Navbar
+          style={{
+            transition: 'width 0.3s',
+          }}
+        >
           <AppShell.Section
             withHeader={false}
             py={12}
