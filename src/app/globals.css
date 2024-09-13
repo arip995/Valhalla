@@ -18,7 +18,7 @@
 
 html,
 body {
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -32,16 +32,16 @@ html {
   scroll-behavior: smooth;
 }
 ul {
-  list-style: disc;
-  margin: 0;
   padding: 0;
+  margin: 0;
+  list-style: disc;
 }
 li {
   margin-bottom: 10px;
 }
 ol {
-  list-style: decimal;
   padding: 0;
+  list-style: decimal;
 }
 
 @layer utilities {
