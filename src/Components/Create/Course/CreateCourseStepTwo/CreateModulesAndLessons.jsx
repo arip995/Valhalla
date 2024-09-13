@@ -13,6 +13,7 @@ import {
   Accordion,
   Button,
   Modal,
+  ScrollArea,
   TextInput,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
@@ -436,10 +437,33 @@ const CreateModulesAndLessons = () => {
       <Modal
         trapFocus={false}
         opened={openAddModuleModal}
+        fullScreen
         onClose={() => {
           setOpenAddModuleModal(false);
+          addModuleForm.reset();
         }}
       >
+        <ScrollArea.Autosize
+          type="always"
+          className="max-h-[calc(100vh-80px)] pb-12"
+          scrollbarSize={5}
+        >
+          <form
+            onSubmit={addModuleForm.onSubmit(
+              ({ title, id }) => {
+                onAddUpdateModuleTitle(title, id);
+                addModuleForm.reset();
+                setOpenAddModuleModal(false);
+              }
+            )}
+            className="relative my-2 flex flex-col gap-5 overflow-y-auto"
+          >
+            <TextInput
+              label="Enter Module title"
+              {...addModuleForm.getInputProps('title')}
+            />
+          </form>
+        </ScrollArea.Autosize>
         <form
           onSubmit={addModuleForm.onSubmit(
             ({ title, id }) => {
@@ -448,14 +472,12 @@ const CreateModulesAndLessons = () => {
               setOpenAddModuleModal(false);
             }
           )}
-          className="my-2 flex flex-col gap-5"
+          className="absolute bottom-0 w-full max-w-[calc(100vw-30px)] border-t border-gray-200 bg-white py-4"
         >
-          <TextInput
-            label="Enter Module title"
-            {...addModuleForm.getInputProps('title')}
-          />
-
-          <Button type="submit">Add Module </Button>
+          <Button type="submit" fullWidth>
+            {addModuleForm.values.id ? 'Edit' : 'Add'}{' '}
+            Module{' '}
+          </Button>
         </form>
       </Modal>
     </>

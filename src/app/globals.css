@@ -21,6 +21,11 @@ body {
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  /* background-image: radial-gradient(
+    120% 140% at 50% 10%,
+    transparent 40%,
+    hsla(210, 100%, 90%, 0.2) 70%
+  ) ; */
 }
 
 html::-webkit-scrollbar,
@@ -60,14 +65,14 @@ ol {
 }
 
 .mantine-Drawer-header {
-  padding: var(--mantine-spacing-md);
+  padding: 0px var(--mantine-spacing-md);
   border-bottom: 1px solid #e4e4e4;
 }
 .mantine-Drawer-title {
   font-weight: 600;
 }
 .mantine-Modal-header {
-  padding: var(--mantine-spacing-md);
+  height: 30px;
   border-bottom: 1px solid #e4e4e4;
 }
 .mantine-Modal-title {
