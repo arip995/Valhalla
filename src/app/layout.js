@@ -54,6 +54,7 @@ import '@mantine/core/styles/Pagination.css';
 import '@mantine/core/styles/Kbd.css';
 import '@mantine/core/styles/Tooltip.css';
 import '@mantine/core/styles/Progress.css';
+import '@mantine/core/styles/RingProgress.css';
 import '@mantine/core/styles/Accordion.css';
 import '@mantine/core/styles/Alert.css';
 import '@mantine/core/styles/Tabs.css';

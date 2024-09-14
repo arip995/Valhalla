@@ -1,14 +1,15 @@
 /* eslint-disable no-unused-vars */
 'use client';
+import axiosInstance from '@/Utils/AxiosInstance';
 import {
   Button,
   FileButton,
-  Progress,
+  RingProgress,
+  Text,
 } from '@mantine/core';
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import tus from 'tus-js-client';
-import axiosInstance from '@/Utils/AxiosInstance';
 
 const page = () => {
   const [progress, setProgress] = useState(0);
@@ -25,6 +26,7 @@ const page = () => {
   }, []);
 
   const uploadFile = async file => {
+    if (!file.name) return;
     let response;
     let uploadData;
     let uploadSessions =
@@ -129,42 +131,54 @@ const page = () => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center p-40">
-      <FileButton onChange={uploadFile} accept="video/*">
+      <FileButton
+        onChange={uploadFile}
+        accept=".mp4,.webm,.ogg,.mov,.avi,.wmv,.flv,.mkv,.m4v"
+      >
         {props => <Button {...props}>Upload videos</Button>}
       </FileButton>
-      <Progress
+      <RingProgress
+        sections={[{ value: progress, color: 'blue' }]}
+        size={80}
         autoContrast
-        value={progress}
+        thickness={3}
+        label={
+          <Text c="blue" fw={400} ta="center" size="sm">
+            {`${progress}%`}
+          </Text>
+        }
         striped
         animated
-        className="mt-4 w-full"
+        // className="mt-4 w-full"
       />
+      <div
+        style={{
+          position: 'relative',
+          marginTop: '200px',
+          aspectRatio: '16/9',
+          // maxHeight: '500px',
+          // maxWidth: '500px',
+          height: '100%',
+          width: '100%',
+        }}
+      >
+        <iframe
+          src="https://iframe.mediadelivery.net/embed/305839/d7bf59f4-5702-483c-9298-f8edbcf26eb3?autoplay=false&loop=false&muted=false&preload=false&responsive=true"
+          loading="lazy"
+          style={{
+            border: '0',
+            position: 'absolute',
+            top: '0',
+            height: '100%',
+            width: '100%',
+          }}
+          allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
+          allowfullscreen="true"
+        ></iframe>
+      </div>
       <Toaster />
     </div>
   );
 };
 
 export default page;
-
-// <div
-//   style={{
-//     position: 'relative',
-//     marginTop: '200px',
-//     height: '500px',
-//     width: '500px',
-//   }}
-// >
-//   <iframe
-//     src="https://iframe.mediadelivery.net/embed/305839/456e7258-c937-4a2b-ad5f-ce94fe067f54?autoplay=false&loop=false&muted=false&preload=false&responsive=true"
-//     loading="lazy"
-//     style={{
-//       border: '0',
-//       position: 'absolute',
-//       top: '0',
-//       height: '100%',
-//       width: '100%',
-//     }}
-//     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
-//     allowfullscreen="true"
-//   ></iframe>
-// </div>
