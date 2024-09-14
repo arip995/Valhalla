@@ -35,17 +35,16 @@ export const checkRestrictedChars = val => {
 
 export const validateEditorContent = content => {
   let textContent = content?.trim();
-  textContent = content
-    ?.replace(/&nbsp;/g, ' ')
-    .replace(/<[^>]*>/g, '')
-    .trim();
-  if (!textContent) {
-    return 'Content is required';
-  }
-  if (textContent.length > 10000) {
-    return 'Content should be less than 10000 characters';
-  }
-  return null;
+  return !textContent ||
+    (!/^(?!<[^>]*>$)(?!.*<[^>]*><\/[^>]*>).*$/.test(
+      textContent
+    ) &&
+      (/<img[^>]+src=["'][^"']+["'][^>]*>/.test(
+        textContent
+      ) ||
+        !/^<[^>]*>$/.test(textContent)))
+    ? 'Text or Image content is required'
+    : null;
 };
 
 export const isValidUrl = url => {

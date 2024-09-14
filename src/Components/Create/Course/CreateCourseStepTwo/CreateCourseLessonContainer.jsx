@@ -20,7 +20,7 @@ const CreateCourseLessonContainer = ({
   lessonIndex,
   showDrag,
   moduleIndex,
-  // onEditLesson,
+  onEditLesson,
   onUpdate,
   length,
   provided,
@@ -84,6 +84,9 @@ const CreateCourseLessonContainer = ({
           </Menu.Target>
           <Menu.Dropdown>
             <Menu.Item
+              onClick={() => {
+                onEditLesson(moduleIndex, lessonIndex);
+              }}
               leftSection={
                 <IconEdit
                   style={{

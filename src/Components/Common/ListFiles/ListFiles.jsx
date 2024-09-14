@@ -1,6 +1,7 @@
 import { Text } from '@mantine/core';
 import {
   IconFileText,
+  IconMusic,
   IconPhoto,
   IconTrash,
   IconVideo,
@@ -14,6 +15,11 @@ const ListFiles = ({ files, onDelete = () => {} }) => {
         const isImage =
           !item.loading &&
           item.type.split('/')[0] === 'image'
+            ? true
+            : false;
+        const isAudio =
+          !item.loading &&
+          item.type.split('/')[0] === 'audio'
             ? true
             : false;
         const isVideo =
@@ -40,13 +46,14 @@ const ListFiles = ({ files, onDelete = () => {} }) => {
                       className="list-files-image"
                       stroke={1}
                     />
-                  ) : // <img
-                  //   src={item.url}
-                  //   alt=""
-                  //   className="list-files-image"
-                  // />
-                  isVideo ? (
+                  ) : isVideo ? (
                     <IconVideo
+                      color="gray"
+                      className="list-files-image"
+                      stroke={1}
+                    />
+                  ) : isAudio ? (
+                    <IconMusic
                       color="gray"
                       className="list-files-image"
                       stroke={1}

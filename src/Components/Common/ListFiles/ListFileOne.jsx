@@ -1,7 +1,16 @@
 import axiosInstance from '@/Utils/AxiosInstance';
 import { getUniqueId } from '@/Utils/Common';
 import { handleFile } from '@/Utils/HandleFiles';
-import { FileButton } from '@mantine/core';
+import {
+  Divider,
+  FileButton,
+  TextInput,
+  Tooltip,
+} from '@mantine/core';
+import {
+  IconBrandVimeo,
+  IconBrandYoutubeFilled,
+} from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import UploadButtonOne from '../Upload/UploadButtonOne';
@@ -10,8 +19,14 @@ const ListFileOne = ({
   onUpdate = () => {},
   maxSize = 5,
   type = 'upload',
+  onlyOne = false,
   mimeTypes = ['image/*'],
   file = [],
+  showLink = false,
+  uploadButtonText,
+  uploadButtonDescription,
+  link = '',
+  onChangeLink = () => {},
 }) => {
   const [files, setFiles] = useState(
     file.length ? file : []
@@ -29,7 +44,7 @@ const ListFileOne = ({
       addLoadingImage();
       const url = await handleFile(
         file,
-        undefined,
+        mimeTypes,
         maxSize
       );
       if (!url) {
@@ -103,20 +118,53 @@ const ListFileOne = ({
   }, [files]);
 
   return (
-    <div className="flex w-full flex-col gap-4">
+    <div className="flex w-full flex-col gap-2">
       {type === 'upload' ? (
-        <UploadButtonOne
-          onUpload={onUpload}
-          maxSize={maxSize}
-          mimeTypes={mimeTypes}
-        />
+        <>
+          {onlyOne && files?.length > 0 ? null : (
+            <UploadButtonOne
+              buttonText={uploadButtonText}
+              description={uploadButtonDescription}
+              onUpload={onUpload}
+              maxSize={maxSize}
+              mimeTypes={mimeTypes}
+            />
+          )}
+        </>
       ) : (
         <FileButton
+          disabled={link}
           onChange={onUpload}
           accept={mimeTypes}
         />
       )}
       <ListFiles files={files} onDelete={onFileDelete} />
+
+      {!!showLink && (
+        <>
+          <Divider position="center" label="OR" />
+          <div className="flex w-full flex-col gap-4">
+            <Tooltip
+              disabled={files?.length < 1}
+              label="Delete the uploaded video above to enable this field."
+            >
+              <TextInput
+                label="Video Link"
+                rightSectionWidth={60}
+                rightSection={
+                  <div className="flex items-center gap-1">
+                    <IconBrandYoutubeFilled color="red" />
+                    <IconBrandVimeo color="cyan" />
+                  </div>
+                }
+                placeholder="Link"
+                disabled={files.length >= 1}
+                onChange={e => onChangeLink(e.target.value)}
+              />
+            </Tooltip>
+          </div>
+        </>
+      )}
     </div>
   );
 };

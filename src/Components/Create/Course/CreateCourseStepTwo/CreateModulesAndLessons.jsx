@@ -1,8 +1,4 @@
-import {
-  Compact,
-  getUniqueId,
-  onDrag,
-} from '@/Utils/Common';
+import { getUniqueId, onDrag } from '@/Utils/Common';
 import useIsBrowser from '@/Utils/useIsBrowser';
 import {
   DragDropContext,
@@ -18,10 +14,10 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import '../../../../styles/create/Course.css';
 import CreateCourseAddEditLessonModal from './CreateCourseAddEditLessonModal';
 import CreateCourseModuleContainer from './CreateCourseModuleContainer';
-import toast from 'react-hot-toast';
 
 const CreateModulesAndLessons = () => {
   const isBrowser = useIsBrowser();
@@ -40,7 +36,7 @@ const CreateModulesAndLessons = () => {
   const [courseList, setCourseList] = useState([
     {
       id: getUniqueId(),
-      title: 'Module 2: Introduction',
+      title: 'Module 1: Introduction',
       dripTime: new Date(),
       status: 1,
       lessons: [
@@ -50,13 +46,13 @@ const CreateModulesAndLessons = () => {
           description: '',
           supportMaterial: [],
           isPreview: false,
+          isSaved: false,
           status: 1,
-          lessonType: 'textImage',
-          lesson: {},
-          textImage:
-            '<p>This is the lesson of your course here.</p>',
-          video: {},
-          audio: {},
+          lessonType: '',
+          textImage: '',
+          video: [],
+          file: [],
+          audio: [],
         },
       ],
     },
@@ -67,41 +63,54 @@ const CreateModulesAndLessons = () => {
   const [activeModuleIndex, setActiveModuleIndex] =
     useState(null);
 
-  const onDragModule = result => {
+  const onDragModuleAndLesson = (
+    result,
+    moduleIndex = null
+  ) => {
     if (!result.destination) return;
-    const assets = onDrag(result, courseList);
-    if (!assets?.length) return;
-    setCourseList(() => {
-      return [...assets];
-    });
+
+    if (moduleIndex === null) {
+      // Module drag
+      const assets = onDrag(result, courseList);
+      if (!assets?.length) return;
+      setCourseList(() => [...assets]);
+    } else {
+      // Lesson drag
+      let assets = onDrag(result, [
+        ...courseList[moduleIndex].lessons,
+      ]);
+      if (!assets?.length) return;
+      const newCourseList = [...courseList];
+      newCourseList[moduleIndex].lessons = [...assets];
+      setCourseList(() => [...newCourseList]);
+    }
   };
 
-  const onDragLesson = (result, lessonIndex) => {
-    if (!result.destination) return;
-    let assets = [...courseList[lessonIndex].lessons];
-    let [selectedRow] = assets.splice(
-      result.source.index,
-      1
-    );
-    assets.splice(result.destination.index, 0, selectedRow);
-    const newCourseList = courseList.map((item, index) => {
-      if (index === lessonIndex) {
-        return { ...item, lessons: [...assets] };
-      } else {
-        return item;
-      }
-    });
-    setCourseList(() => {
-      return newCourseList;
-    });
-  };
-
-  const onEditLesson = (moduleIndex, lessonIndex) => {
-    setActiveModuleIndex(moduleIndex);
-    setDataToEdit(
-      courseList[moduleIndex].lessons[lessonIndex]
-    );
-    setShowAddEditLesson(true);
+  const onEditLesson = (
+    moduleIndex,
+    lessonIndex,
+    update = false,
+    updatedData
+  ) => {
+    if (update) {
+      let newCourseList = [...courseList];
+      newCourseList[activeModuleIndex].lessons =
+        newCourseList[activeModuleIndex].lessons.map(
+          lesson => {
+            if (lesson.id === updatedData.id) {
+              return updatedData;
+            }
+            return lesson;
+          }
+        );
+      setCourseList(() => [...newCourseList]);
+    } else {
+      setActiveModuleIndex(moduleIndex);
+      setDataToEdit(
+        courseList[moduleIndex].lessons[lessonIndex]
+      );
+      setShowAddEditLesson(true);
+    }
   };
 
   const onUpdateCourseList = data => {
@@ -129,13 +138,13 @@ const CreateModulesAndLessons = () => {
       description: '',
       supportMaterial: [],
       isPreview: false,
+      isSaved: false,
       status: courseList[moduleIndex].status,
-      lessonType: 'textImage',
-      lesson: {},
-      textImage:
-        '<p>This is the lesson of your course here.</p>',
-      video: {},
-      audio: {},
+      lessonType: '',
+      textImage: '',
+      video: [],
+      file: [],
+      audio: [],
     });
     setCourseList(() => [...newCourseList]);
   };
@@ -170,14 +179,13 @@ const CreateModulesAndLessons = () => {
               description: '',
               supportMaterial: [],
               isPreview: false,
-
-              status: 'draft',
-              lessonType: 'textImage',
-              lesson: {},
-              textImage:
-                '<p>This is the lesson of your course here.</p>',
-              video: {},
-              audio: {},
+              isSaved: false,
+              status: 1,
+              lessonType: '',
+              textImage: '',
+              video: [],
+              file: [],
+              audio: [],
             },
           ],
         },
@@ -185,74 +193,6 @@ const CreateModulesAndLessons = () => {
     }
 
     setCourseList(newCourseList);
-  };
-
-  const onChangeStatus = (id, isModule = true) => {
-    if (!id) return;
-
-    let newCourseList = [...courseList];
-    if (isModule) {
-      newCourseList = newCourseList.map(module => {
-        if (module.id === id) {
-          module.lessons = module.lessons.map(lesson => {
-            return {
-              ...lesson,
-              status: module.status === 1 ? 0 : 1,
-            };
-          });
-          return {
-            ...module,
-            status: module.status === 1 ? 0 : 1,
-          };
-        }
-        return module;
-      });
-    } else {
-      newCourseList = newCourseList.map(module => {
-        module.lessons = module.lessons.map(lesson => {
-          if (lesson.id === id) {
-            return {
-              ...lesson,
-              status: lesson.status === 1 ? 0 : 1,
-            };
-          }
-          return lesson;
-        });
-        return module;
-      });
-    }
-    console.log(newCourseList);
-    setCourseList(newCourseList);
-  };
-
-  const onDelete = (id, isModule = true) => {
-    if (!id) return;
-    let newCourseList = [...courseList];
-    const lessonId = id;
-    if (isModule) {
-      newCourseList = newCourseList.map(module => {
-        if (module.id === id) {
-          return;
-        }
-        return module;
-      });
-    } else {
-      newCourseList = newCourseList.map(module => {
-        module.lessons = module.lessons.map(lesson => {
-          if (lesson.id === lessonId) {
-            return;
-          }
-          return lesson;
-        });
-      });
-      newCourseList.forEach(module => {
-        module.lessons = module.lessons.filter(
-          lesson => lesson !== null && lesson !== undefined
-        );
-      });
-    }
-    newCourseList = Compact(newCourseList);
-    setCourseList(() => [...newCourseList]);
   };
 
   const onUpdate = ({
@@ -335,7 +275,9 @@ const CreateModulesAndLessons = () => {
             Add modules and lessons of your course
           </div>
           <DragDropContext
-            onDragEnd={result => onDragModule(result)}
+            onDragEnd={result =>
+              onDragModuleAndLesson(result)
+            }
           >
             <Droppable droppableId="droppable-id">
               {provided => (
@@ -386,7 +328,7 @@ const CreateModulesAndLessons = () => {
                                     module={module}
                                     moduleIndex={index}
                                     onDragLesson={
-                                      onDragLesson
+                                      onDragModuleAndLesson
                                     }
                                     onEditLesson={
                                       onEditLesson
@@ -394,11 +336,7 @@ const CreateModulesAndLessons = () => {
                                     onAddLesson={
                                       onAddLesson
                                     }
-                                    onChangeStatus={
-                                      onChangeStatus
-                                    }
                                     onUpdate={onUpdate}
-                                    onDelete={onDelete}
                                     provided={provided}
                                   />
                                 </div>
@@ -423,16 +361,20 @@ const CreateModulesAndLessons = () => {
             + New Module
           </div>
         </div>
-        <CreateCourseAddEditLessonModal
-          canDelete={
-            courseList[activeModuleIndex]?.lessons?.length >
-            1
-          }
-          show={showAddEditLesson}
-          setShow={setShowAddEditLesson}
-          dataToEdit={dataToEdit}
-          onUpdate={onUpdateCourseList}
-        />
+        {!!showAddEditLesson && (
+          <CreateCourseAddEditLessonModal
+            onEditLesson={onEditLesson}
+            opened={showAddEditLesson}
+            setOpened={setShowAddEditLesson}
+            onClose={() => {
+              setShowAddEditLesson(false);
+              setDataToEdit({});
+              setActiveModuleIndex(null);
+            }}
+            dataToEdit={dataToEdit}
+            onUpdate={onUpdateCourseList}
+          />
+        )}
       </div>
       <Modal
         trapFocus={false}

@@ -3,12 +3,13 @@ import classNames from 'classnames';
 // import React, { useState } from 'react';
 
 const UploadButtonOne = ({
-  buttonText = 'Upload Image',
+  buttonText = 'Upload Images',
   description = '(16:9) recommended, max size',
   maxSize = 5,
-  mimeTypes = ['image/*'],
+  mimeTypes = 'image/*',
   onUpload = () => {},
   allowVideoLinks = false,
+  disabled = false,
 }) => {
   //   const [uploadLink, setUploadLink] = useState('');
   return (
@@ -31,6 +32,7 @@ const UploadButtonOne = ({
             type="file"
             accept={mimeTypes}
             onChange={e => onUpload(e.target.files[0])}
+            disabled={disabled}
           />
           {!!allowVideoLinks && (
             <>

@@ -50,7 +50,9 @@ export const handleFile = async (
   try {
     // Validate file type
     if (
-      !mimetypes.some(mime => file.type.startsWith(mime))
+      !mimetypes.some(mime =>
+        file.type.startsWith(mime.slice(0, -1))
+      )
     ) {
       throw new Error(
         `Only ${mimetypes.map(item => item.slice(0, -1)).join(', ')} are allowed`
