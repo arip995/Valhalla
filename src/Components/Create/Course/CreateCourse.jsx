@@ -11,26 +11,29 @@ import useCreateCourse from './useCreateCourse';
 import Preview from '@/Components/Common/Preview';
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
+
 const CreateCourse = () => {
   const { courseForm, handleSubmit, router } =
     useCreateCourse();
 
   return (
-    <div className="flex h-screen w-full flex-col">
+    <div className="flex h-screen w-full flex-col bg-gray-50">
       <div className="flex h-full w-full flex-col sm:flex-row">
-        <div className="flex h-screen w-full flex-col lg:w-6/12">
-          <div className="flex w-full flex-col gap-1 border-b-[1px] border-gray-300">
-            <div className="flex w-full items-center justify-between gap-2 p-2 text-sm text-gray-500">
-              <div className="flex items-center gap-2">
+        <div className="flex h-screen w-full flex-col bg-white shadow-md lg:w-7/12">
+          <div className="flex w-full flex-col gap-2 border-b border-gray-200 p-3">
+            <div className="flex w-full items-center justify-between gap-4 text-sm text-gray-600">
+              <div className="flex items-center gap-4">
                 <CloseButton
                   onClick={() => router.back()}
+                  className="transition-colors hover:bg-gray-100"
                 />
                 <Divider
                   orientation="vertical"
-                  className="h-7"
-                  mr={4}
+                  className="h-8"
                 />
-                Step {courseForm.values.step || 1} of 2
+                <span className="font-medium">
+                  Step {courseForm.values.step || 1} of 2
+                </span>
               </div>
               <form
                 onSubmit={courseForm.onSubmit(
@@ -47,10 +50,8 @@ const CreateCourse = () => {
                           courseForm.key(firstErrorPath)
                         )
                         ?.scrollIntoView({
-                          block: 'start',
+                          block: 'center',
                           behavior: 'smooth',
-                          inline: 'nearest',
-                          offset: 400,
                         });
                     }
                   }
@@ -59,8 +60,9 @@ const CreateCourse = () => {
                 <Button
                   type="submit"
                   size="xs"
-                  color="black"
                   radius="xl"
+                  color="black"
+                  className="transition-all hover:shadow-md"
                   onClick={() => {
                     courseForm.setValues({
                       isSaveClickedAtleastOnce: true,
@@ -76,14 +78,24 @@ const CreateCourse = () => {
               </form>
             </div>
           </div>
-          {courseForm.values.stepsCompleted > 1 ? (
-            <Tabs defaultValue="details" variant="default">
+          {courseForm.values.stepsCompleted > 1 && (
+            <Tabs defaultValue="details" size="">
               <Tabs.List grow>
-                <Tabs.Tab value="details">Details</Tabs.Tab>
-                <Tabs.Tab value="content">Content</Tabs.Tab>
+                <Tabs.Tab
+                  value="details"
+                  className="font-medium"
+                >
+                  Details
+                </Tabs.Tab>
+                <Tabs.Tab
+                  value="content"
+                  className="font-medium"
+                >
+                  Content
+                </Tabs.Tab>
               </Tabs.List>
             </Tabs>
-          ) : null}
+          )}
 
           <div className="flex flex-1 flex-col overflow-y-auto">
             {courseForm.values.step === 1 ? (
@@ -96,51 +108,12 @@ const CreateCourse = () => {
               />
             )}
           </div>
-          {/* <div className="flex flex-row-reverse border-t-[1px] border-gray-300 p-2">
-            <form
-              onSubmit={courseForm.onSubmit(
-                handleSubmit,
-                errors => {
-                  if (Object.keys(errors || {}).length) {
-                    const firstErrorPath =
-                      Object.keys(errors)?.[0];
-                    courseForm
-                      .getInputNode(firstErrorPath)
-                      ?.focus();
-                    document
-                      .getElementById(
-                        courseForm.key(firstErrorPath)
-                      )
-                      ?.scrollIntoView({
-                        block: 'start',
-                        behavior: 'smooth',
-                        inline: 'nearest',
-                        offset: 400,
-                      });
-                  }
-                }
-              )}
-            >
-              <Button
-                type="submit"
-                onClick={() => {
-                  courseForm.setValues({
-                    isSaveClickedAtleastOnce: true,
-                  });
-                }}
-              >
-                {courseForm.values.stepsCompleted === 1
-                  ? 'Publish course'
-                  : courseForm.values.stepsCompleted > 1
-                    ? 'Create Course'
-                    : 'Save and continue'}
-              </Button>
-            </form>
-          </div> */}
         </div>
-        <div className="hidden w-[1px] bg-gray-300 sm:block"></div>
-        <Preview>
-          <div>Preview</div>
+        <div className="hidden w-[1px] bg-gray-200 sm:block"></div>
+        <Preview className="flex-1 bg-white p-4">
+          <div className="text-lg font-semibold text-gray-700">
+            Preview
+          </div>
         </Preview>
       </div>
       <Toaster />

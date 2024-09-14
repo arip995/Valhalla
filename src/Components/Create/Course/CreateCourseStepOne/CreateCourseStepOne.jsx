@@ -70,12 +70,6 @@ const CreateCourseStepOne = ({
       onSubmit={courseForm.onSubmit(handleSubmit)}
       className="flex flex-1 flex-col gap-3 p-4"
     >
-      <div className="mb-2 text-xl font-bold">Sections</div>
-      <Sections
-        form={courseForm}
-        updateSection={onUpdateSection}
-      />
-      <Divider my="md" size="lg" />
       <div className="mb-2 text-xl font-bold">
         Basic Details
       </div>
@@ -97,7 +91,7 @@ const CreateCourseStepOne = ({
       ) : null}
 
       {!!courseForm.errors?.description && (
-        <Input.Error className="mt-[-8px]">
+        <Input.Error className="!mt-[-8px]">
           {courseForm.errors?.description}
         </Input.Error>
       )}
@@ -150,6 +144,12 @@ const CreateCourseStepOne = ({
           {...courseForm.getInputProps('discountedPrice')}
         />
       </Collapse>
+      <Divider my="md" size="lg" />
+      <div className="mb-2 text-xl font-bold">Sections</div>
+      <Sections
+        form={courseForm}
+        updateSection={onUpdateSection}
+      />
     </form>
   );
 };

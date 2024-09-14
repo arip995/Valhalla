@@ -9,7 +9,6 @@ import {
   Accordion,
   Button,
   Modal,
-  ScrollArea,
   TextInput,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
@@ -93,17 +92,17 @@ const CreateModulesAndLessons = () => {
     updatedData
   ) => {
     if (update) {
-      let newCourseList = [...courseList];
-      newCourseList[activeModuleIndex].lessons =
-        newCourseList[activeModuleIndex].lessons.map(
-          lesson => {
-            if (lesson.id === updatedData.id) {
-              return updatedData;
-            }
-            return lesson;
-          }
-        );
-      setCourseList(() => [...newCourseList]);
+      setCourseList(prevCourseList => {
+        const newCourseList = [...prevCourseList];
+        newCourseList[activeModuleIndex].lessons =
+          newCourseList[activeModuleIndex].lessons.map(
+            lesson =>
+              lesson.id === updatedData.id
+                ? updatedData
+                : lesson
+          );
+        return newCourseList;
+      });
     } else {
       setActiveModuleIndex(moduleIndex);
       setDataToEdit(
@@ -113,21 +112,19 @@ const CreateModulesAndLessons = () => {
     }
   };
 
-  const onUpdateCourseList = data => {
-    console.log(data);
-    const newCourseList = [...courseList];
-    const lessonId = data.id;
-    newCourseList.forEach(module => {
-      module.lessons = module.lessons.map(lesson => {
-        if (lesson.id === lessonId) {
-          return data;
-        }
-        return lesson;
-      });
+  const onUpdateCourseList = updatedLesson => {
+    setCourseList(prevCourseList => {
+      return prevCourseList.map(module => ({
+        ...module,
+        lessons: module.lessons.map(lesson =>
+          lesson.id === updatedLesson.id
+            ? updatedLesson
+            : lesson
+        ),
+      }));
     });
-    console.log(newCourseList);
+
     setShowAddEditLesson(false);
-    setCourseList(() => [...newCourseList]);
   };
 
   const onAddLesson = moduleIndex => {
@@ -240,7 +237,6 @@ const CreateModulesAndLessons = () => {
           }
           break;
         case 'delete':
-          console.log(lessonIndex);
           newCourseList[moduleIndex].lessons?.splice(
             lessonIndex,
             1
@@ -269,7 +265,7 @@ const CreateModulesAndLessons = () => {
 
   return (
     <>
-      <div className="cmal-container">
+      <div>
         <div className="flex w-full flex-col">
           <div className="mb-4 text-sm font-semibold">
             Add modules and lessons of your course
@@ -354,14 +350,15 @@ const CreateModulesAndLessons = () => {
               )}
             </Droppable>
           </DragDropContext>
-          <div
-            className="flex cursor-pointer items-center justify-center rounded-lg border border-solid border-neutral-200 p-2.5 text-sm font-medium"
+          <Button
+            variant="default"
+            fullWidth
             onClick={() => {
               setOpenAddModuleModal(true);
             }}
           >
             + New Module
-          </div>
+          </Button>
         </div>
         {!!showAddEditLesson && (
           <CreateCourseAddEditLessonModal
@@ -381,33 +378,11 @@ const CreateModulesAndLessons = () => {
       <Modal
         trapFocus={false}
         opened={openAddModuleModal}
-        fullScreen
         onClose={() => {
           setOpenAddModuleModal(false);
           addModuleForm.reset();
         }}
       >
-        <ScrollArea.Autosize
-          type="always"
-          className="max-h-[calc(100vh-80px)] pb-12"
-          scrollbarSize={5}
-        >
-          <form
-            onSubmit={addModuleForm.onSubmit(
-              ({ title, id }) => {
-                onAddUpdateModuleTitle(title, id);
-                addModuleForm.reset();
-                setOpenAddModuleModal(false);
-              }
-            )}
-            className="relative my-2 flex flex-col gap-5 overflow-y-auto"
-          >
-            <TextInput
-              label="Enter Module title"
-              {...addModuleForm.getInputProps('title')}
-            />
-          </form>
-        </ScrollArea.Autosize>
         <form
           onSubmit={addModuleForm.onSubmit(
             ({ title, id }) => {
@@ -416,8 +391,12 @@ const CreateModulesAndLessons = () => {
               setOpenAddModuleModal(false);
             }
           )}
-          className="absolute bottom-0 w-full max-w-[calc(100vw-30px)] border-t border-gray-200 bg-white py-4"
+          className="relative my-2 flex flex-col gap-5 overflow-y-auto"
         >
+          <TextInput
+            label="Enter Module title"
+            {...addModuleForm.getInputProps('title')}
+          />
           <Button type="submit" fullWidth>
             {addModuleForm.values.id ? 'Edit' : 'Add'}{' '}
             Module{' '}

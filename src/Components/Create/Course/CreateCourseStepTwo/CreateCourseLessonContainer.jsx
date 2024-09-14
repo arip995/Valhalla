@@ -43,12 +43,7 @@ const CreateCourseLessonContainer = ({
           </div>
         )}
         <div className="flex items-center gap-2 text-sm font-medium">
-          <div className="cmal-lesson-title-left text-truncate">
-            {lesson.title}
-          </div>
-          <div className="cmal-lesson-title-left-preview-type">
-            {lesson.freePreview ? '(Free Preview)' : null}
-          </div>
+          {lesson.title}
         </div>
       </div>
       <div className="flex items-center gap-2">

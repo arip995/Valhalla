@@ -229,8 +229,7 @@ const CreateCourseModuleContainer = ({
           </DragDropContext>
         </div>
         <Button
-          variant="transparent"
-          size="sm"
+          variant="default"
           className="mt-4 w-fit cursor-pointer font-medium"
           onClick={() => {
             onAddLesson(moduleIndex);
