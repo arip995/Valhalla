@@ -38,6 +38,7 @@ const PaperWrapper = ({
         p="lg"
         withBorder
         shadow="md"
+        mb="md"
         className={`w-11/12 max-w-[600px] md:w-1/2 ${className}`}
       >
         {children}

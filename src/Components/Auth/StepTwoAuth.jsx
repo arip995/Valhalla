@@ -9,12 +9,11 @@ import useUser from '@/Utils/Hooks/useUser';
 import { checkRestrictedChars } from '@/Utils/Regex';
 import {
   Button,
-  CheckIcon,
+  Chip,
   Collapse,
   Divider,
   Flex,
   Loader,
-  Radio,
   Stack,
   Text,
   TextInput,
@@ -22,25 +21,19 @@ import {
 import { useDebouncedCallback } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
+import toast from 'react-hot-toast';
 import HeaderWrapper from './HeaderWrapper';
 import PaperWrapper from './PaperWrapper';
-import toast from 'react-hot-toast';
 
 const UserTypeCards = UserTypes.map(item => (
-  <Radio
-    icon={CheckIcon}
-    value={item.value}
-    label={item.label}
-    key={item.value}
-  />
+  <Chip value={item.value} key={item.value}>
+    {item.label}
+  </Chip>
 ));
 const CategoryCards = Categories.map(item => (
-  <Radio
-    icon={CheckIcon}
-    value={item.value}
-    label={item.value}
-    key={item.value}
-  />
+  <Chip value={item.value} key={item.value}>
+    {item.label}
+  </Chip>
 ));
 
 const StepTwoAuth = () => {
@@ -145,7 +138,7 @@ const StepTwoAuth = () => {
       <HeaderWrapper
         titleOne={'Tell us a bit about yourself'}
       />
-      <PaperWrapper>
+      <PaperWrapper className="relative">
         <Stack>
           <TextInput
             required
@@ -188,17 +181,13 @@ const StepTwoAuth = () => {
             error={errors?.username}
           />
         </Stack>
-
-        <Radio.Group
+        <div className="text-md mt-4 w-full text-left font-semibold">
+          I am
+        </div>
+        <Chip.Group
           value={usertype}
           onChange={setUsertype}
           className="w-full"
-          mt={'md'}
-          label={
-            <div className="text-md mt-4 w-full text-center font-semibold">
-              I am
-            </div>
-          }
         >
           <Flex
             mih={50}
@@ -211,7 +200,7 @@ const StepTwoAuth = () => {
           >
             {UserTypeCards}
           </Flex>
-        </Radio.Group>
+        </Chip.Group>
         <Collapse in={usertype}>
           <Divider
             label={`What category best describes my product.`}
@@ -219,7 +208,7 @@ const StepTwoAuth = () => {
             my="md"
           />
 
-          <Radio.Group
+          <Chip.Group
             value={category}
             onChange={setCategory}
           >
@@ -233,10 +222,11 @@ const StepTwoAuth = () => {
             >
               {CategoryCards}
             </Flex>
-          </Radio.Group>
-          <div className="sticky bottom-4">
+          </Chip.Group>
+        </Collapse>
+        {usertype && (
+          <div className="sticky bottom-5 mt-4">
             <Button
-              mt="md"
               radius="xl"
               variant="filled"
               loading={createLoading}
@@ -253,7 +243,7 @@ const StepTwoAuth = () => {
               Start Earning
             </Button>
           </div>
-        </Collapse>
+        )}
       </PaperWrapper>
     </>
   );

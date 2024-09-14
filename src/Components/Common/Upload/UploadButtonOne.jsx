@@ -4,8 +4,9 @@ import classNames from 'classnames';
 
 const UploadButtonOne = ({
   buttonText = 'Upload Images',
-  description = '(16:9) recommended, max size',
+  description = '(16:9) recommended',
   maxSize = 5,
+  showMaxSize = true,
   mimeTypes = 'image/*',
   onUpload = () => {},
   allowVideoLinks = false,
@@ -24,7 +25,8 @@ const UploadButtonOne = ({
             {buttonText}
           </div>
           <div className="mt-4">
-            {`${description} - ${maxSize}MB`}
+            {`${description} `}
+            {showMaxSize && `, max size - ${maxSize}MB`}
           </div>
           <input
             id="upload-trigger"

@@ -3,6 +3,7 @@ import React from 'react';
 import CreateCourseLessonType from './CreateCourseLessonType';
 import CustomTipTapEditor from '@/Components/Common/Editor/CustomTipTapEditor';
 import ListFileOne from '@/Components/Common/ListFiles/ListFileOne';
+import UploadVideoStream from '@/Components/Common/Upload/UploadVideoStream';
 
 const CreateCourseAddEditLesson = ({ form }) => {
   return (
@@ -60,6 +61,13 @@ const CreateCourseAddEditLesson = ({ form }) => {
                   onUpdate={value =>
                     form.setFieldValue('audio', value)
                   }
+                />
+              ) : form.values.lessonType === 'video' ? (
+                <UploadVideoStream
+                  onUpload={value =>
+                    form.setFieldValue('video', value)
+                  }
+                  file={form.values.video}
                 />
               ) : null}
               {form.values.lessonType ? (

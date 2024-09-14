@@ -29,9 +29,18 @@ const CreateCourseAddEditLessonModal = ({
         values.lessonType === 'textImage' &&
         validateEditorContent(values.textImage),
       video:
-        values.lessonType === 'video' && !values.video
+        values.lessonType === 'video' &&
+        !values.video.length
           ? 'Video is required'
-          : null,
+          : values.video[0].type === 'link' &&
+              !/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+/.test(
+                values.video[0].link
+              )
+            ? 'Enter a valid video link'
+            : values.video[0].type !== 'link' &&
+                !values.video[0]?.videoId
+              ? 'Upload a video'
+              : null,
       audio:
         values.lessonType === 'audio' && !values.audio
           ? 'Audio is required'
@@ -42,6 +51,7 @@ const CreateCourseAddEditLessonModal = ({
           : null,
     }),
   });
+
   return (
     <Modal
       opened={opened}
