@@ -337,7 +337,9 @@ const CreateModulesAndLessons = () => {
                                       onAddLesson
                                     }
                                     onUpdate={onUpdate}
-                                    provided={provided}
+                                    dragHandleProps={
+                                      provided?.dragHandleProps
+                                    }
                                   />
                                 </div>
                               )}

@@ -16,6 +16,7 @@ import {
 import toast from 'react-hot-toast';
 
 const CreateCourseLessonContainer = ({
+  dragHandleProps,
   lesson,
   lessonIndex,
   showDrag,
@@ -23,14 +24,13 @@ const CreateCourseLessonContainer = ({
   onEditLesson,
   onUpdate,
   length,
-  provided,
 }) => {
   return (
     <div className="flex items-center justify-between gap-2 border-b border-solid border-b-neutral-200 bg-white px-2 py-4">
       <div className="flex w-full items-center gap-2">
         {!!showDrag && (
           <div
-            {...(provided?.dragHandleProps || {})}
+            {...(dragHandleProps || {})}
             className="cursor-grab"
           >
             <IconGripVertical

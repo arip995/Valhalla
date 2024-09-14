@@ -35,7 +35,7 @@ const CreateCourseModuleContainer = ({
   onUpdate,
   length,
   onEditModuleTitle,
-  provided,
+  dragHandleProps,
 }) => {
   return (
     <Accordion.Item
@@ -49,7 +49,7 @@ const CreateCourseModuleContainer = ({
           <div className="text-truncate flex items-center gap-2 text-sm font-semibold">
             {showDrag ? (
               <div
-                {...(provided?.dragHandleProps || {})}
+                {...(dragHandleProps || {})}
                 className="cursor-grab"
               >
                 <IconGripVertical color="rgba(199, 199, 199, 1)" />
@@ -200,7 +200,9 @@ const CreateCourseModuleContainer = ({
                                       module?.lessons
                                         ?.length > 1
                                     }
-                                    provided={provided}
+                                    dragHandleProps={
+                                      provided?.dragHandleProps
+                                    }
                                     lesson={lesson}
                                     index={index}
                                     onUpdate={onUpdate}

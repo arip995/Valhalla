@@ -82,7 +82,7 @@ const ActionMenu = ({ onClick = () => {}, type }) => {
 };
 
 const ShowSectionsList = ({
-  provided,
+  dragHandleProps,
   item,
   showDrag,
   type,
@@ -113,7 +113,7 @@ const ShowSectionsList = ({
         <div className="flex w-full items-center gap-2">
           {!!showDrag && (
             <div
-              {...(provided?.dragHandleProps || {})}
+              {...(dragHandleProps || {})}
               className="cursor-grab"
             >
               <IconGripVertical
@@ -155,7 +155,7 @@ const ShowSectionsList = ({
         <div className="flex w-full items-center gap-2">
           {!!showDrag && (
             <div
-              {...(provided?.dragHandleProps || {})}
+              {...(dragHandleProps || {})}
               className="cursor-grab"
             >
               <IconGripVertical
@@ -194,7 +194,7 @@ const ShowSectionsList = ({
         <div className="flex w-full items-center gap-2">
           {!!showDrag && (
             <div
-              {...(provided?.dragHandleProps || {})}
+              {...(dragHandleProps || {})}
               className="cursor-grab"
             >
               <IconGripVertical
@@ -230,7 +230,7 @@ const ShowSectionsList = ({
         <div className="flex w-full items-center gap-2">
           {!!showDrag && (
             <div
-              {...(provided?.dragHandleProps || {})}
+              {...(dragHandleProps || {})}
               className="cursor-grab"
             >
               <IconGripVertical
@@ -318,7 +318,7 @@ const ShowSectionsList = ({
         <div className="flex w-full items-center gap-2">
           {!!showDrag && (
             <div
-              {...(provided?.dragHandleProps || {})}
+              {...(dragHandleProps || {})}
               className="cursor-grab"
             >
               <IconGripVertical

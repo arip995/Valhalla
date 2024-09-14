@@ -64,7 +64,6 @@ const CreateCourseStepOne = ({
   if (courseForm.values.loading === -1) {
     return <LayoutLoading />;
   }
-
   return (
     <form
       id="my-form"

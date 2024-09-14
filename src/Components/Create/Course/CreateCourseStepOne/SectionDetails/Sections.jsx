@@ -303,10 +303,7 @@ const Sections = ({ updateSection, form }) => {
                 </div>
                 {item.type == 'highlight' ? (
                   <Accordion.Panel className="flex flex-col gap-4">
-                    <ShowSectionsList
-                      type={item.type}
-                      provided={provided}
-                    />
+                    <ShowSectionsList type={item.type} />
                   </Accordion.Panel>
                 ) : item.value?.length ? (
                   <Accordion.Panel className="flex flex-col gap-4">
@@ -328,7 +325,9 @@ const Sections = ({ updateSection, form }) => {
                           type={item.type}
                           showDrag={showDrag}
                           item={itemValue}
-                          provided={provided}
+                          dragHandleProps={
+                            provided?.dragHandleProps
+                          }
                           onDeleteSectionItems={
                             onDeleteSectionItems
                           }
