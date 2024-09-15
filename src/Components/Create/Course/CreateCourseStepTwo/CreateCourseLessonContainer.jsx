@@ -9,6 +9,7 @@ import { modals } from '@mantine/modals';
 import {
   IconDotsVertical,
   IconEdit,
+  IconEye,
   IconGripVertical,
   IconPlaystationCircle,
   IconTrash,
@@ -103,7 +104,7 @@ const CreateCourseLessonContainer = ({
                 });
               }}
               leftSection={
-                <IconPlaystationCircle
+                <IconEye
                   style={{
                     width: rem(14),
                     height: rem(14),
