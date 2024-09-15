@@ -1,8 +1,8 @@
-import { Button, Modal, ScrollArea } from '@mantine/core';
-import { useForm } from '@mantine/form';
-import CreateCourseAddEditLesson from './CreateCourseAddEditLesson';
-import React from 'react';
 import { validateEditorContent } from '@/Utils/Regex';
+import { Button, Modal } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import React from 'react';
+import CreateCourseAddEditLesson from './CreateCourseAddEditLesson';
 
 // import AddEditLesson from './AddEditLesson';
 
@@ -29,20 +29,23 @@ const CreateCourseAddEditLessonModal = ({
         values.lessonType === 'textImage' &&
         validateEditorContent(values.textImage),
       video:
-        values.lessonType === 'video' &&
-        !values.video.length
-          ? 'Video is required'
-          : values.video[0].type === 'link' &&
-              !/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+/.test(
-                values.video[0].link
-              )
-            ? 'Enter a valid video link'
-            : values.video[0].type !== 'link' &&
-                !values.video[0]?.videoId
-              ? 'Upload a video'
-              : null,
+        values.lessonType !== 'video'
+          ? null
+          : values.lessonType === 'video' &&
+              !values.video.length
+            ? 'Video is required'
+            : values.video?.[0]?.type === 'link' &&
+                !/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+/.test(
+                  values.video[0].link
+                )
+              ? 'Enter a valid video link'
+              : values.video?.[0]?.type !== 'link' &&
+                  !values.video?.[0]?.videoId
+                ? 'Upload a video'
+                : null,
       audio:
-        values.lessonType === 'audio' && !values.audio
+        values.lessonType === 'audio' &&
+        !values.audio?.length
           ? 'Audio is required'
           : null,
       file:
@@ -50,50 +53,85 @@ const CreateCourseAddEditLessonModal = ({
           ? 'File is required'
           : null,
     }),
+    transformValues: values => {
+      let newValues = { ...values };
+      switch (values.lessonType) {
+        case 'textImage':
+          newValues.video = [];
+          newValues.audio = [];
+          newValues.file = [];
+          break;
+        case 'video':
+          newValues.textImage = null;
+          newValues.audio = [];
+          newValues.file = [];
+          break;
+        case 'audio':
+          newValues.textImage = null;
+          newValues.video = [];
+          newValues.file = [];
+          break;
+        case 'file':
+          newValues.textImage = null;
+          newValues.audio = [];
+          newValues.video = [];
+          break;
+      }
+      newValues.isSaved = true;
+      delete newValues.isSaveClickedAtleastOnce;
+    },
   });
 
   return (
     <Modal
       opened={opened}
+      lockScroll={false}
       title="Lesson"
+      trapFocus={false}
+      fullScreen
+      styles={{
+        body: {
+          padding: 0,
+        },
+      }}
       onClose={() => {
         onClose();
         updateLessonForm.reset();
       }}
-      trapFocus={false}
-      fullScreen
     >
-      <ScrollArea.Autosize
-        type="always"
-        className="max-h-[calc(100vh-80px)] pb-16 pt-2"
-        scrollbarSize={5}
-      >
-        <CreateCourseAddEditLesson
-          form={updateLessonForm}
-        />
-      </ScrollArea.Autosize>
-      <form
-        onSubmit={updateLessonForm.onSubmit(values => {
-          onEditLesson(undefined, undefined, true, values);
-          updateLessonForm.reset();
-          onClose();
-        })}
-        className="absolute bottom-0 w-full max-w-[calc(100vw-30px)] border-t border-gray-200 bg-white py-4"
-      >
-        <Button
-          type="submit"
-          fullWidth
-          onClick={() => {
-            updateLessonForm.setFieldValue(
-              'isSaveClickedAtleastOnce',
-              true
+      <div className="flex h-[calc(100vh-60px)] w-full flex-col">
+        <div className="flex w-full flex-1 flex-col overflow-y-auto p-3">
+          <CreateCourseAddEditLesson
+            form={updateLessonForm}
+          />
+        </div>
+        <form
+          onSubmit={updateLessonForm.onSubmit(values => {
+            onEditLesson(
+              undefined,
+              undefined,
+              true,
+              values
             );
-          }}
+            updateLessonForm.reset();
+            onClose();
+          })}
+          className="sticky bottom-0 mt-4 w-full border-t border-gray-200 bg-white px-2 py-3"
         >
-          {updateLessonForm.values.id ? 'Edit' : 'Add'}{' '}
-          Lesson{' '}
-        </Button>
-      </form>
+          <Button
+            type="submit"
+            fullWidth
+            onClick={() => {
+              updateLessonForm.setFieldValue(
+                'isSaveClickedAtleastOnce',
+                true
+              );
+            }}
+          >
+            Save Lesson
+          </Button>
+        </form>
+      </div>
     </Modal>
   );
 };

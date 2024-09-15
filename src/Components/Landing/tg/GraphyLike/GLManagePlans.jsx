@@ -59,6 +59,7 @@ const GLManagePlans = ({ data }) => {
       </div>
       <Drawer
         trapFocus={false}
+        lockScroll={false}
         className="tgd-add-plan"
         scrollAreaComponent={NewScrollArea}
         padding="0px"

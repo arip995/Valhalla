@@ -127,11 +127,10 @@ const UploadVideoStream = ({ onUpload, file = [] }) => {
                   { value: progress, color: 'violet' },
                 ]}
                 size={80}
-                autoContrast
                 thickness={3}
                 label={
                   <Text
-                    c="blue"
+                    c="violet"
                     fw={400}
                     ta="center"
                     size="sm"
@@ -208,7 +207,7 @@ const UploadVideoStream = ({ onUpload, file = [] }) => {
                 <IconBrandVimeo color="cyan" />
               </div>
             }
-            placeholder="Add a link"
+            placeholder="https://www.youtube.com/watch?v=ZK4-oAARvo4"
             onChange={e =>
               setCurrentUpload(() => [
                 {
@@ -225,14 +224,12 @@ const UploadVideoStream = ({ onUpload, file = [] }) => {
           position: 'relative',
           marginTop: '200px',
           aspectRatio: '16/9',
-          // maxHeight: '500px',
-          // maxWidth: '500px',
           height: '100%',
           width: '100%',
         }}
       >
         <iframe
-          src="https://iframe.mediadelivery.net/embed/305839/d7bf59f4-5702-483c-9298-f8edbcf26eb3?autoplay=false&loop=false&muted=false&preload=false&responsive=true"
+          src="https://iframe.mediadelivery.net/embed/305839/ddfd8601-e5e3-439d-b08d-7f576faef0cd?autoplay=false&loop=false&muted=false&preload=false&responsive=true"
           loading="lazy"
           style={{
             border: '0',

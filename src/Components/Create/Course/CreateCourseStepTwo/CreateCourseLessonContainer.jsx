@@ -26,7 +26,7 @@ const CreateCourseLessonContainer = ({
   length,
 }) => {
   return (
-    <div className="flex items-center justify-between gap-2 border-b border-solid border-b-neutral-200 bg-white px-2 py-4">
+    <div className="flex items-center justify-between gap-2 border-b border-solid border-b-neutral-200 bg-white py-4">
       <div className="flex w-full items-center gap-2">
         {!!showDrag && (
           <div

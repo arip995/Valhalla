@@ -25,81 +25,100 @@ const CreateCourseAddEditLesson = ({ form }) => {
         >
           {form.values.lessonType && (
             <>
-              {form.values.lessonType === 'textImage' ? (
-                <CustomTipTapEditor
-                  label="Add Text/Image"
-                  id={form.key('textImage')}
-                  value={form.values.textImage}
-                  onUpdate={html => {
-                    form.setValues({ textImage: html });
-                  }}
-                />
-              ) : form.values.lessonType === 'file' ? (
-                <ListFileOne
-                  uploadButtonText="Upload Files"
-                  maxSize={10}
-                  file={form.values.file}
-                  mimeTypes={['application/*']}
-                  onUpdate={value =>
-                    form.setFieldValue('file', value)
-                  }
-                  onChangeLink={value =>
-                    form.setFieldValue('file', value)
-                  }
-                />
-              ) : form.values.lessonType === 'audio' ? (
-                <ListFileOne
-                  uploadButtonText="Upload Audio"
-                  maxSize={100}
-                  file={
-                    form.values.audio?.length
-                      ? form.values.audio
-                      : []
-                  }
-                  onlyOne
-                  mimeTypes={['audio/*']}
-                  onUpdate={value =>
-                    form.setFieldValue('audio', value)
-                  }
-                />
-              ) : form.values.lessonType === 'video' ? (
-                <UploadVideoStream
-                  onUpload={value =>
-                    form.setFieldValue('video', value)
-                  }
-                  file={form.values.video}
-                />
-              ) : null}
-              {form.values.lessonType ? (
-                <div className="mt-2 flex justify-end gap-3">
-                  <Button
-                    size="xs"
-                    variant="default"
-                    onClick={() => {
-                      form.setValues({
-                        lessonType: null,
-                        // [form.values.lessonType]: null,
-                        isSaveClickedAtleastOnce: false,
-                        isSaved: false,
-                      });
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    size="xs"
-                    onClick={() => {
-                      form.setValues({
-                        isSaveClickedAtleastOnce: true,
-                        isSaved: true,
-                      });
-                      form.validate();
-                    }}
-                  >
-                    Save
-                  </Button>
-                </div>
-              ) : null}
+              {form.values.isSaved ? (
+                <></>
+              ) : (
+                <>
+                  {form.values.lessonType ===
+                  'textImage' ? (
+                    <CustomTipTapEditor
+                      label="Add Text/Image"
+                      id={form.key('textImage')}
+                      value={form.values.textImage}
+                      onUpdate={html => {
+                        form.setValues({ textImage: html });
+                      }}
+                    />
+                  ) : form.values.lessonType === 'file' ? (
+                    <ListFileOne
+                      uploadButtonText="Upload Files"
+                      maxSize={10}
+                      file={form.values.file}
+                      mimeTypes={['application/*']}
+                      onUpdate={value =>
+                        form.setFieldValue('file', value)
+                      }
+                      onChangeLink={value =>
+                        form.setFieldValue('file', value)
+                      }
+                    />
+                  ) : form.values.lessonType === 'audio' ? (
+                    <ListFileOne
+                      uploadButtonText="Upload Audio"
+                      maxSize={100}
+                      file={
+                        form.values.audio?.length
+                          ? form.values.audio
+                          : []
+                      }
+                      onlyOne
+                      mimeTypes={['audio/*']}
+                      onUpdate={value =>
+                        form.setFieldValue('audio', value)
+                      }
+                    />
+                  ) : form.values.lessonType === 'video' ? (
+                    <UploadVideoStream
+                      onUpload={value =>
+                        form.setFieldValue('video', value)
+                      }
+                      file={form.values.video}
+                    />
+                  ) : null}
+                  {form.values.lessonType ? (
+                    <div className="mt-2 flex justify-end gap-3">
+                      <Button
+                        size="xs"
+                        variant="default"
+                        onClick={() => {
+                          form.setValues({
+                            lessonType: null,
+                            // [form.values.lessonType]: null,
+                            isSaveClickedAtleastOnce: false,
+                            isSaved: false,
+                          });
+                        }}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        size="xs"
+                        onClick={() => {
+                          form.setValues({
+                            isSaveClickedAtleastOnce: true,
+                          });
+                          let { errors } = form.validate();
+                          console.log(errors);
+                          if (
+                            errors.video ||
+                            errors.audio ||
+                            errors.textImage ||
+                            errors.file
+                          ) {
+                            console.log();
+                          } else {
+                            form.setValues({
+                              isSaved: true,
+                            });
+                          }
+                        }}
+                      >
+                        Save
+                      </Button>
+                    </div>
+                  ) : null}
+                </>
+              )}
             </>
           )}
         </CreateCourseLessonType>

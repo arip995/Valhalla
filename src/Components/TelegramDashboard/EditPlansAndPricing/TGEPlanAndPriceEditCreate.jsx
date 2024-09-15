@@ -247,8 +247,9 @@ const TGEPlanAndPriceEditCreate = ({
   return (
     <>
       <Drawer
-        className="tgd-add-plan"
         trapFocus={false}
+        lockScroll={false}
+        className="tgd-add-plan"
         opened={openSideBar}
         onClose={() => resetTempData()}
         title={tempData?._id ? 'Edit Plan' : 'New Plan'}
