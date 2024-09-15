@@ -35,7 +35,7 @@ const UploadVideoStream = ({ onUpload, file = [] }) => {
 
     // If no previous upload found, create a new video ID
     response = await axiosInstance.post(
-      '/bunny/get_video_id',
+      '/bunny/create_video_id',
       {
         title: file.name,
       }
@@ -68,7 +68,6 @@ const UploadVideoStream = ({ onUpload, file = [] }) => {
         filename: file.name,
         filetype: file.type,
         title: file.name,
-        collection: '406ed803-d4f5-4757-b0df-a774f1c96401',
       },
       onError: error => {
         console.log(error);
