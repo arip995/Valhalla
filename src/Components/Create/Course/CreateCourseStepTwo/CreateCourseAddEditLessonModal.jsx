@@ -116,7 +116,7 @@ const CreateCourseAddEditLessonModal = ({
             updateLessonForm.reset();
             onClose();
           })}
-          className="sticky bottom-0 mt-4 w-full border-t border-gray-200 bg-white px-2 py-3"
+          className="sticky bottom-0 w-full border-t border-gray-200 bg-white px-2 py-3"
         >
           <Button
             type="submit"
