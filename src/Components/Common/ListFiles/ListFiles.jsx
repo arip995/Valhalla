@@ -1,6 +1,7 @@
 import { Text } from '@mantine/core';
 import {
   IconFileText,
+  IconLink,
   IconMusic,
   IconPhoto,
   IconTrash,
@@ -8,7 +9,11 @@ import {
 } from '@tabler/icons-react';
 import '../../../styles/common/list-files.css';
 
-const ListFiles = ({ files, onDelete = () => {} }) => {
+const ListFiles = ({
+  files,
+  onDelete = () => {},
+  showTrash = true,
+}) => {
   return (
     <div className="list-files-container">
       {files.map(item => {
@@ -27,6 +32,7 @@ const ListFiles = ({ files, onDelete = () => {} }) => {
           item.type.split('/')[0] === 'video'
             ? true
             : false;
+        const isLink = item.type === 'link' ? true : false;
 
         return (
           <>
@@ -58,6 +64,12 @@ const ListFiles = ({ files, onDelete = () => {} }) => {
                       className="list-files-image"
                       stroke={1}
                     />
+                  ) : isLink ? (
+                    <IconLink
+                      color="gray"
+                      className="list-files-image"
+                      stroke={1}
+                    />
                   ) : (
                     <IconFileText
                       color="gray"
@@ -66,20 +78,22 @@ const ListFiles = ({ files, onDelete = () => {} }) => {
                     />
                   )}
                   <div className="list-files-text">
-                    {item.name}
+                    {item.name || item.link}
                   </div>
                 </div>
-                <div className="list-files-text-container">
-                  <div
-                    className="list-files-delete"
-                    onClick={() => onDelete(item.url)}
-                  >
-                    <IconTrash
-                      className="list-files-delete-icon"
-                      size={18}
-                    />
+                {showTrash && (
+                  <div className="list-files-text-container">
+                    <div
+                      className="list-files-delete"
+                      onClick={() => onDelete(item.url)}
+                    >
+                      <IconTrash
+                        className="list-files-delete-icon"
+                        size={18}
+                      />
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             )}
           </>

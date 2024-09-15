@@ -1,9 +1,26 @@
-import { Button, Input, TextInput } from '@mantine/core';
+import {
+  ActionIcon,
+  Button,
+  Collapse,
+  Input,
+  Menu,
+  rem,
+  Textarea,
+  TextInput,
+} from '@mantine/core';
 import React from 'react';
 import CreateCourseLessonType from './CreateCourseLessonType';
 import CustomTipTapEditor from '@/Components/Common/Editor/CustomTipTapEditor';
 import ListFileOne from '@/Components/Common/ListFiles/ListFileOne';
 import UploadVideoStream from '@/Components/Common/Upload/UploadVideoStream';
+import ListFiles from '@/Components/Common/ListFiles/ListFiles';
+import {
+  IconChevronDown,
+  IconDotsVertical,
+  IconEdit,
+  IconTrash,
+} from '@tabler/icons-react';
+import { LessonTypeMapping } from './CreateModulesAndLessons';
 
 const CreateCourseAddEditLesson = ({ form }) => {
   return (
@@ -26,7 +43,89 @@ const CreateCourseAddEditLesson = ({ form }) => {
           {form.values.lessonType && (
             <>
               {form.values.isSaved ? (
-                <></>
+                <div className="flex flex-col gap-2 rounded-xl border border-gray-300 p-3">
+                  <div className="flex items-center justify-between">
+                    <div className="text-lg font-semibold text-gray-900">
+                      {
+                        LessonTypeMapping[
+                          form.values.lessonType
+                        ]
+                      }
+                    </div>
+                    <Menu width={150} position="bottom-end">
+                      <Menu.Target>
+                        <ActionIcon
+                          variant="subtle"
+                          color="rgba(199, 199, 199, 1)"
+                          size="sm"
+                        >
+                          <IconDotsVertical />
+                        </ActionIcon>
+                      </Menu.Target>
+                      <Menu.Dropdown>
+                        <Menu.Item
+                          onClick={() => {
+                            form.setValues({
+                              isSaved: false,
+                            });
+                          }}
+                          leftSection={
+                            <IconEdit
+                              style={{
+                                width: rem(14),
+                                height: rem(14),
+                              }}
+                            />
+                          }
+                        >
+                          Edit
+                        </Menu.Item>
+
+                        <Menu.Item
+                          onClick={() => {
+                            form.setValues({
+                              isSaved: false,
+                              lessonType: null,
+                            });
+                          }}
+                          color="red"
+                          leftSection={
+                            <IconTrash
+                              style={{
+                                width: rem(14),
+                                height: rem(14),
+                              }}
+                            />
+                          }
+                        >
+                          Delete
+                        </Menu.Item>
+                      </Menu.Dropdown>
+                    </Menu>
+                  </div>
+                  {form.values.lessonType ===
+                  'textImage' ? (
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: form.values?.textImage,
+                      }}
+                    />
+                  ) : form.values.lessonType === 'file' ||
+                    form.values.lessonType === 'video' ||
+                    form.values.lessonType === 'audio' ? (
+                    <ListFiles
+                      files={
+                        form.values.lessonType === 'file'
+                          ? form.values.file
+                          : form.values.lessonType ===
+                              'video'
+                            ? form.values.video
+                            : form.values.audio
+                      }
+                      showTrash={false}
+                    />
+                  ) : null}
+                </div>
               ) : (
                 <>
                   {form.values.lessonType ===
@@ -80,6 +179,7 @@ const CreateCourseAddEditLesson = ({ form }) => {
                       <Button
                         size="xs"
                         variant="default"
+                        color="red"
                         onClick={() => {
                           form.setValues({
                             lessonType: null,
@@ -89,7 +189,7 @@ const CreateCourseAddEditLesson = ({ form }) => {
                           });
                         }}
                       >
-                        Cancel
+                        Delete
                       </Button>
                       <Button
                         size="xs"
@@ -97,16 +197,16 @@ const CreateCourseAddEditLesson = ({ form }) => {
                           form.setValues({
                             isSaveClickedAtleastOnce: true,
                           });
-                          let { errors } = form.validate();
-                          console.log(errors);
-                          if (
-                            errors.video ||
-                            errors.audio ||
-                            errors.textImage ||
-                            errors.file
-                          ) {
-                            console.log();
-                          } else {
+                          const { errors } =
+                            form.validate();
+                          const hasErrors = [
+                            'video',
+                            'audio',
+                            'textImage',
+                            'file',
+                          ].some(field => errors[field]);
+
+                          if (!hasErrors) {
                             form.setValues({
                               isSaved: true,
                             });
@@ -134,21 +234,56 @@ const CreateCourseAddEditLesson = ({ form }) => {
                     ? form.errors.video
                     : form.errors.audio
                       ? form.errors.audio
-                      : null}
+                      : form.errors.isSaved
+                        ? form.errors.isSaved
+                        : null}
           </Input.Error>
         )}
       </div>
-
-      <TextInput
-        label="Description"
-        placeholder="Description"
-        {...form.getInputProps('description')}
-      />
-      <TextInput
-        label="Support Material"
-        placeholder="Support Material"
-        {...form.getInputProps('supportMaterial')}
-      />
+      <div>
+        <Button
+          variant="transparent"
+          className="!p-0"
+          onClick={() =>
+            form.setValues({
+              showAdvancedOptions:
+                !form.values.showAdvancedOptions,
+            })
+          }
+        >
+          Advanced Options
+          <IconChevronDown
+            className={`${
+              form.values.showAdvancedOptions
+                ? 'rotate-180'
+                : ''
+            } ml-1 h-5 w-5 transition-all duration-300`}
+          />
+        </Button>
+      </div>
+      <Collapse
+        in={form.values.showAdvancedOptions}
+        className="flex flex-col gap-4"
+      >
+        <Textarea
+          resize="vertical"
+          label="Description"
+          placeholder="Description"
+          {...form.getInputProps('description')}
+        />
+        <div className="flex w-full flex-col">
+          <Input.Label>Support Material</Input.Label>
+          <ListFileOne
+            uploadButtonText="Upload Files"
+            maxSize={10}
+            file={form.values.supportMaterial}
+            mimeTypes={['application/*']}
+            onUpdate={value =>
+              form.setFieldValue('supportMaterial', value)
+            }
+          />
+        </div>
+      </Collapse>
     </div>
   );
 };

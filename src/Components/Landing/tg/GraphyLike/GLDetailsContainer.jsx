@@ -38,7 +38,7 @@ const GLDetailsContainer = ({ data }) => {
                 dangerouslySetInnerHTML={{
                   __html: data?.description,
                 }}
-              ></div>
+              />
             )}
             <Disclaimer showTitle={false} />
             <div className="mb-16 mt-4 block md:hidden">

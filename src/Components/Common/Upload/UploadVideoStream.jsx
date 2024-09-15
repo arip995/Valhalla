@@ -156,7 +156,7 @@ const UploadVideoStream = ({ onUpload, file = [] }) => {
             )}
           </div>
           <ActionIcon
-            variant="subtle"
+            variant="transparent"
             color="gray"
             size={20}
             onClick={cancelUpload}
@@ -200,7 +200,7 @@ const UploadVideoStream = ({ onUpload, file = [] }) => {
               (currentUpload?.[0]?.type !== 'link' &&
                 currentUpload?.[0]?.type)
             }
-            value={currentUpload.link || ''}
+            value={currentUpload?.[0]?.link || ''}
             rightSection={
               <div className="flex items-center gap-1">
                 <IconBrandYoutubeFilled color="red" />

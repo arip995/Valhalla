@@ -18,6 +18,13 @@ import '../../../../styles/create/Course.css';
 import CreateCourseAddEditLessonModal from './CreateCourseAddEditLessonModal';
 import CreateCourseModuleContainer from './CreateCourseModuleContainer';
 
+export const LessonTypeMapping = {
+  textImage: 'Text/Image',
+  video: 'Video',
+  audio: 'Audio',
+  file: 'File',
+};
+
 const CreateModulesAndLessons = () => {
   const isBrowser = useIsBrowser();
   const [openAddModuleModal, setOpenAddModuleModal] =

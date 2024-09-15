@@ -52,6 +52,10 @@ const CreateCourseAddEditLessonModal = ({
         values.lessonType === 'file' && !values.file?.length
           ? 'File is required'
           : null,
+      isSaved:
+        !values.isSaved && values.isSaveClickedAtleastOnce
+          ? 'Save Lesson'
+          : null,
     }),
     transformValues: values => {
       let newValues = { ...values };
@@ -79,6 +83,9 @@ const CreateCourseAddEditLessonModal = ({
       }
       newValues.isSaved = true;
       delete newValues.isSaveClickedAtleastOnce;
+      delete newValues.showAdvancedOptions;
+      console.log(newValues);
+      return newValues;
     },
   });
 
@@ -105,32 +112,34 @@ const CreateCourseAddEditLessonModal = ({
             form={updateLessonForm}
           />
         </div>
-        <form
-          onSubmit={updateLessonForm.onSubmit(values => {
-            onEditLesson(
-              undefined,
-              undefined,
-              true,
-              values
-            );
-            updateLessonForm.reset();
-            onClose();
-          })}
-          className="sticky bottom-0 w-full border-t border-gray-200 bg-white px-2 py-3"
-        >
-          <Button
-            type="submit"
-            fullWidth
-            onClick={() => {
-              updateLessonForm.setFieldValue(
-                'isSaveClickedAtleastOnce',
-                true
+        <div className="flex w-full justify-center">
+          <form
+            onSubmit={updateLessonForm.onSubmit(values => {
+              onEditLesson(
+                undefined,
+                undefined,
+                true,
+                values
               );
-            }}
+              updateLessonForm.reset();
+              onClose();
+            })}
+            className="sticky bottom-0 w-full max-w-xl border-t border-gray-200 bg-white px-2 py-3"
           >
-            Save Lesson
-          </Button>
-        </form>
+            <Button
+              type="submit"
+              fullWidth
+              onClick={() => {
+                updateLessonForm.setFieldValue(
+                  'isSaveClickedAtleastOnce',
+                  true
+                );
+              }}
+            >
+              Save Lesson
+            </Button>
+          </form>
+        </div>
       </div>
     </Modal>
   );
