@@ -111,9 +111,7 @@ const UploadVideoStream = ({ onUpload, file = [] }) => {
   };
 
   useEffect(() => {
-    if (currentUpload.length) {
-      onUpload(currentUpload);
-    }
+    onUpload(currentUpload);
   }, [currentUpload]);
 
   return (
