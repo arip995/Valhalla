@@ -191,17 +191,17 @@ const CreateCourseAddEditLesson = ({ form }) => {
                         <Menu.Item
                           onClick={() => {
                             modals.openConfirmModal({
-                              title: 'Delete Lesson',
+                              title: 'Delete Lesson?',
                               children: (
-                                <div className="text-lg font-bold">
-                                  Delete this lesson ?
-                                  <br />
-                                  <span className="text-sm text-gray-500">
-                                    You will not be able to
-                                    undo this action.
-                                  </span>
+                                <div className="text-md my-2 font-semibold">
+                                  You will not be able to
+                                  undo this action.
                                 </div>
                               ),
+                              overlayProps: {
+                                backgroundOpacity: 0.55,
+                                blur: 20,
+                              },
                               labels: {
                                 confirm: 'Yes, Delete',
                                 cancel: 'Cancel',
