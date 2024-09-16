@@ -358,12 +358,12 @@ const CreateModulesAndLessons = () => {
             opened={showAddEditLesson}
             dataToEdit={dataToEdit}
             onClose={() => {
-              // Remove the 'modal' query parameter from the URL
               const currentUrl = new URL(
                 window.location.href
               );
-              currentUrl.searchParams.delete('modal');
-              window.history.pushState({}, '', currentUrl);
+              if (currentUrl.searchParams.get('modal')) {
+                window.history.back();
+              }
               setShowAddEditLesson(false);
               setDataToEdit({});
               setActiveModuleIndex(null);
