@@ -27,16 +27,46 @@ import toast from 'react-hot-toast';
 const CreateCourseModuleContainer = ({
   module,
   moduleIndex,
-  showDrag,
-  onDragLesson,
-  onEditLesson,
-  onAddLesson,
-  onDelete,
-  onUpdate,
-  length,
-  onEditModuleTitle,
+  moduleLength,
   dragHandleProps,
+  onDragLesson = () => {},
+  onAddOrEditLesson = () => {},
+  onUpdate = () => {},
+  onEditModuleTitle = () => {},
 }) => {
+  const onDelete = () => {
+    if (moduleLength === 1) {
+      toast.error('Need atleast 1 module');
+      return;
+    }
+    modals.openConfirmModal({
+      title: 'Delete',
+      children: (
+        <div className="pb-4 pt-8">
+          <Text size="md" fw={500}>
+            Are you sure you want to delete this module?
+          </Text>
+        </div>
+      ),
+      labels: {
+        confirm: 'Yes, Delete',
+        cancel: 'Cancel',
+      },
+      confirmProps: { color: 'red' },
+      onCancel: () => {},
+      onConfirm: () => {
+        onUpdate({
+          type: 'delete',
+          moduleIndex,
+        });
+      },
+    });
+  };
+
+  const onEdit = () => {
+    onEditModuleTitle(module.title, module.id);
+  };
+
   return (
     <Accordion.Item
       key={module.title}
@@ -47,7 +77,7 @@ const CreateCourseModuleContainer = ({
         <div className="flex items-center justify-center">
           <Accordion.Control className="!w-12"></Accordion.Control>
           <div className="text-truncate flex items-center gap-2 text-sm font-semibold">
-            {showDrag ? (
+            {moduleLength ? (
               <div
                 {...(dragHandleProps || {})}
                 className="cursor-grab"
@@ -82,12 +112,7 @@ const CreateCourseModuleContainer = ({
             </Menu.Target>
             <Menu.Dropdown>
               <Menu.Item
-                onClick={() => {
-                  onEditModuleTitle(
-                    module.title,
-                    module.id
-                  );
-                }}
+                onClick={onEdit}
                 leftSection={
                   <IconEdit
                     style={{
@@ -102,7 +127,6 @@ const CreateCourseModuleContainer = ({
               <Menu.Item
                 onClick={() => {
                   onUpdate({ moduleIndex });
-                  // onChangeStatus(module.id);
                 }}
                 leftSection={
                   <IconPlaystationCircle
@@ -118,36 +142,7 @@ const CreateCourseModuleContainer = ({
                   : 'Publish'}
               </Menu.Item>
               <Menu.Item
-                onClick={() => {
-                  if (length === 1) {
-                    toast.error('Need atleast 1 module');
-                    return;
-                  }
-                  modals.openConfirmModal({
-                    title: 'Delete',
-                    children: (
-                      <div className="pb-4 pt-8">
-                        <Text size="md" fw={500}>
-                          Are you sure you want to delete
-                          this module?
-                        </Text>
-                      </div>
-                    ),
-                    labels: {
-                      confirm: 'Yes, Delete',
-                      cancel: 'Cancel',
-                    },
-                    confirmProps: { color: 'red' },
-                    onCancel: () => {},
-                    onConfirm: () => {
-                      onUpdate({
-                        type: 'delete',
-                        moduleIndex,
-                      });
-                      onDelete(module.id);
-                    },
-                  });
-                }}
+                onClick={onDelete}
                 color="red"
                 leftSection={
                   <IconTrash
@@ -193,12 +188,8 @@ const CreateCourseModuleContainer = ({
                                   {...provided.draggableProps}
                                 >
                                   <CreateCourseLessonContainer
-                                    length={
+                                    lessonLength={
                                       module.lessons.length
-                                    }
-                                    showDrag={
-                                      module?.lessons
-                                        ?.length > 1
                                     }
                                     dragHandleProps={
                                       provided?.dragHandleProps
@@ -210,8 +201,8 @@ const CreateCourseModuleContainer = ({
                                       moduleIndex
                                     }
                                     lessonIndex={index}
-                                    onEditLesson={
-                                      onEditLesson
+                                    onAddOrEditLesson={
+                                      onAddOrEditLesson
                                     }
                                   />
                                 </div>
@@ -232,7 +223,7 @@ const CreateCourseModuleContainer = ({
           variant="default"
           className="mt-4 w-fit cursor-pointer font-medium"
           onClick={() => {
-            onAddLesson(moduleIndex);
+            onAddOrEditLesson(moduleIndex);
           }}
         >
           + Add Lesson

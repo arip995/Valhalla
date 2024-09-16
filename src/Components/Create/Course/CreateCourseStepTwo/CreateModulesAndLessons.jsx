@@ -24,6 +24,35 @@ export const LessonTypeMapping = {
   audio: 'Audio',
   file: 'File',
 };
+export const GenerateNewModule = (
+  title = 'Module 1: Introduction'
+) => {
+  return {
+    id: getUniqueId(),
+    title,
+    status: 1,
+    lessons: [],
+  };
+};
+export const GenerateNewLesson = (
+  title = 'Lesson 1',
+  status = 0
+) => {
+  return {
+    id: getUniqueId(),
+    title,
+    status,
+    description: '',
+    supportMaterial: [],
+    isPreview: false,
+    isSaved: false,
+    lessonType: '',
+    textImage: '',
+    video: [],
+    file: [],
+    audio: [],
+  };
+};
 
 const CreateModulesAndLessons = () => {
   const isBrowser = useIsBrowser();
@@ -43,24 +72,8 @@ const CreateModulesAndLessons = () => {
     {
       id: getUniqueId(),
       title: 'Module 1: Introduction',
-      dripTime: new Date(),
       status: 1,
-      lessons: [
-        {
-          id: getUniqueId(),
-          title: 'Lesson 1',
-          description: '',
-          supportMaterial: [],
-          isPreview: false,
-          isSaved: false,
-          status: 1,
-          lessonType: '',
-          textImage: '',
-          video: [],
-          file: [],
-          audio: [],
-        },
-      ],
+      lessons: [],
     },
   ]);
   const [showAddEditLesson, setShowAddEditLesson] =
@@ -92,65 +105,53 @@ const CreateModulesAndLessons = () => {
     }
   };
 
-  const onEditLesson = (
+  const onAddOrEditLesson = (
     moduleIndex,
     lessonIndex,
-    update = false,
+    update = false, //for checking to open the edit modal or to update the lesson
     updatedData
   ) => {
     if (update) {
       setCourseList(prevCourseList => {
         const newCourseList = [...prevCourseList];
-        newCourseList[activeModuleIndex].lessons =
-          newCourseList[activeModuleIndex].lessons.map(
-            lesson =>
-              lesson.id === updatedData.id
-                ? updatedData
-                : lesson
+        if (
+          newCourseList[activeModuleIndex].lessons.some(
+            lesson => lesson.id === updatedData.id
+          )
+        ) {
+          newCourseList[activeModuleIndex].lessons =
+            newCourseList[activeModuleIndex].lessons.map(
+              lesson =>
+                lesson.id === updatedData.id
+                  ? updatedData
+                  : lesson
+            );
+        } else {
+          newCourseList[activeModuleIndex].lessons.push(
+            updatedData
           );
+        }
+
         return newCourseList;
       });
+      setActiveModuleIndex(null);
+      setDataToEdit({});
     } else {
       setActiveModuleIndex(moduleIndex);
-      setDataToEdit(
-        courseList[moduleIndex].lessons[lessonIndex]
-      );
+      if (typeof lessonIndex === 'number') {
+        setDataToEdit(
+          courseList[moduleIndex].lessons[lessonIndex]
+        );
+      } else {
+        setDataToEdit(
+          GenerateNewLesson(
+            `Lesson ${courseList[moduleIndex].lessons.length + 1}`,
+            courseList[moduleIndex].status
+          )
+        );
+      }
       setShowAddEditLesson(true);
     }
-  };
-
-  const onUpdateCourseList = updatedLesson => {
-    setCourseList(prevCourseList => {
-      return prevCourseList.map(module => ({
-        ...module,
-        lessons: module.lessons.map(lesson =>
-          lesson.id === updatedLesson.id
-            ? updatedLesson
-            : lesson
-        ),
-      }));
-    });
-
-    setShowAddEditLesson(false);
-  };
-
-  const onAddLesson = moduleIndex => {
-    const newCourseList = [...courseList];
-    newCourseList[moduleIndex]?.lessons.push({
-      id: getUniqueId(),
-      title: `Lesson ${newCourseList[moduleIndex]?.lessons.length + 1}`,
-      description: '',
-      supportMaterial: [],
-      isPreview: false,
-      isSaved: false,
-      status: courseList[moduleIndex].status,
-      lessonType: '',
-      textImage: '',
-      video: [],
-      file: [],
-      audio: [],
-    });
-    setCourseList(() => [...newCourseList]);
   };
 
   const onAddUpdateModuleTitle = (
@@ -175,23 +176,7 @@ const CreateModulesAndLessons = () => {
           id: getUniqueId(),
           title: title,
           status: 1,
-          dripTime: new Date(),
-          lessons: [
-            {
-              id: getUniqueId(),
-              title: 'Lesson 1',
-              description: '',
-              supportMaterial: [],
-              isPreview: false,
-              isSaved: false,
-              status: 1,
-              lessonType: '',
-              textImage: '',
-              video: [],
-              file: [],
-              audio: [],
-            },
-          ],
+          lessons: [],
         },
       ];
     }
@@ -311,10 +296,7 @@ const CreateModulesAndLessons = () => {
                                   className="mb-4"
                                 >
                                   <CreateCourseModuleContainer
-                                    showDrag={
-                                      courseList?.length > 1
-                                    }
-                                    length={
+                                    moduleLength={
                                       courseList.length
                                     }
                                     onEditModuleTitle={(
@@ -333,11 +315,8 @@ const CreateModulesAndLessons = () => {
                                     onDragLesson={
                                       onDragModuleAndLesson
                                     }
-                                    onEditLesson={
-                                      onEditLesson
-                                    }
-                                    onAddLesson={
-                                      onAddLesson
+                                    onAddOrEditLesson={
+                                      onAddOrEditLesson
                                     }
                                     onUpdate={onUpdate}
                                     dragHandleProps={
@@ -369,16 +348,14 @@ const CreateModulesAndLessons = () => {
         </div>
         {!!showAddEditLesson && (
           <CreateCourseAddEditLessonModal
-            onEditLesson={onEditLesson}
+            onAddOrEditLesson={onAddOrEditLesson}
             opened={showAddEditLesson}
-            setOpened={setShowAddEditLesson}
+            dataToEdit={dataToEdit}
             onClose={() => {
               setShowAddEditLesson(false);
               setDataToEdit({});
               setActiveModuleIndex(null);
             }}
-            dataToEdit={dataToEdit}
-            onUpdate={onUpdateCourseList}
           />
         )}
       </div>

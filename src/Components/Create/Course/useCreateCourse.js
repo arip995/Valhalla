@@ -104,6 +104,7 @@ const useCreateCourse = () => {
       const response = await axiosInstance.get(
         `/course/get/${courseId}`
       );
+      console.log(response);
       if (!response.data?.ok) {
         toast.error('Check your internet connection');
         throw new Error('Check your internet connection');

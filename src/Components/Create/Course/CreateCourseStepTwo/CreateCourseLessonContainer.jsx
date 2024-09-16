@@ -14,22 +14,21 @@ import {
   IconPlaystationCircle,
   IconTrash,
 } from '@tabler/icons-react';
-import toast from 'react-hot-toast';
+// import toast from 'react-hot-toast';
 
 const CreateCourseLessonContainer = ({
   dragHandleProps,
   lesson,
   lessonIndex,
-  showDrag,
   moduleIndex,
-  onEditLesson,
+  onAddOrEditLesson,
   onUpdate,
-  length,
+  lessonLength,
 }) => {
   return (
     <div className="flex items-center justify-between gap-2 border-b border-solid border-b-neutral-200 bg-white py-4">
       <div className="flex w-full items-center gap-2">
-        {!!showDrag && (
+        {lessonLength ? (
           <div
             {...(dragHandleProps || {})}
             className="cursor-grab"
@@ -42,7 +41,7 @@ const CreateCourseLessonContainer = ({
               }}
             />
           </div>
-        )}
+        ) : null}
         <div className="flex items-center gap-2 text-sm font-medium">
           {lesson.title}
         </div>
@@ -81,7 +80,7 @@ const CreateCourseLessonContainer = ({
           <Menu.Dropdown>
             <Menu.Item
               onClick={() => {
-                onEditLesson(moduleIndex, lessonIndex);
+                onAddOrEditLesson(moduleIndex, lessonIndex);
               }}
               leftSection={
                 <IconEdit
@@ -141,12 +140,12 @@ const CreateCourseLessonContainer = ({
             {/* )} */}
             <Menu.Item
               onClick={() => {
-                if (length === 1) {
-                  toast.error(
-                    'Need atleast 1 lesson per module'
-                  );
-                  return;
-                }
+                // if (lessonLength === 1) {
+                //   toast.error(
+                //     'Need atleast 1 lesson per module'
+                //   );
+                //   return;
+                // }
                 modals.openConfirmModal({
                   title: 'Delete',
                   children: (
@@ -190,7 +189,7 @@ const CreateCourseLessonContainer = ({
         {/* <ActionIcon
           variant="subtle"
           color="rgba(199, 199, 199, 1)"
-          onClick={() => onEditLesson(moduleIndex, index)}
+          onClick={() => onAddOrEditLesson(moduleIndex, index)}
           size="sm"
         >
           <IconDotsVertical

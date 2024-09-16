@@ -93,3 +93,35 @@ export const getUniqueId = () => {
       Math.floor(Math.random() * 1000000)
   );
 };
+
+export const isValueChanged = (value1, value2) => {
+  return Object.keys(value1).some(key => {
+    const oldValue = value1[key];
+    const newValue = value2[key];
+
+    if (
+      Array.isArray(oldValue) &&
+      Array.isArray(newValue)
+    ) {
+      if (oldValue.length !== newValue.length) return true;
+      return oldValue.some((item, index) => {
+        if (typeof item === 'object' && item !== null) {
+          return Object.keys(item).some(
+            prop => item[prop] !== newValue[index][prop]
+          );
+        }
+        return item !== newValue[index];
+      });
+    } else if (
+      typeof oldValue === 'object' &&
+      oldValue !== null &&
+      typeof newValue === 'object' &&
+      newValue !== null
+    ) {
+      return Object.keys(oldValue).some(
+        prop => oldValue[prop] !== newValue[prop]
+      );
+    }
+    return oldValue !== newValue;
+  });
+};

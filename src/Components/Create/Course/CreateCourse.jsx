@@ -19,7 +19,7 @@ const CreateCourse = () => {
   return (
     <div className="flex h-screen w-full flex-col bg-gray-50">
       <div className="flex h-full w-full flex-col sm:flex-row">
-        <div className="flex h-screen w-full flex-col bg-white shadow-md lg:w-6/12">
+        <div className="flex h-screen w-full flex-col bg-white shadow-md lg:w-7/12">
           <div className="flex w-full flex-col gap-2 border-b border-gray-200 p-3">
             <div className="flex w-full items-center justify-between gap-4 text-sm text-gray-600">
               <div className="flex items-center gap-4">

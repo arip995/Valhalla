@@ -1,17 +1,15 @@
+import { isValueChanged } from '@/Utils/Common';
 import { validateEditorContent } from '@/Utils/Regex';
 import { Button, Modal } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import React from 'react';
+import React, { useEffect } from 'react';
 import CreateCourseAddEditLesson from './CreateCourseAddEditLesson';
-
-// import AddEditLesson from './AddEditLesson';
 
 const CreateCourseAddEditLessonModal = ({
   opened,
-  // setOpened,
   onClose,
   dataToEdit,
-  onEditLesson,
+  onAddOrEditLesson,
 }) => {
   const updateLessonForm = useForm({
     initialValues: {
@@ -84,16 +82,54 @@ const CreateCourseAddEditLessonModal = ({
       newValues.isSaved = true;
       delete newValues.isSaveClickedAtleastOnce;
       delete newValues.showAdvancedOptions;
-      console.log(newValues);
+      // console.log(newValues);
       return newValues;
     },
   });
 
+  useEffect(() => {
+    const handlePopState = event => {
+      // Prevent the default behavior
+      event.preventDefault();
+      const hasUnsavedChanges = isValueChanged(
+        dataToEdit,
+        updateLessonForm.values
+      );
+      if (hasUnsavedChanges) {
+        const confirmLeave = window.confirm(
+          'You have unsaved changes. Do you want to leave without saving?'
+        );
+        if (confirmLeave) {
+          onClose();
+          updateLessonForm.reset();
+        }
+      } else {
+        onClose();
+        updateLessonForm.reset();
+      }
+      window.history.pushState(
+        null,
+        '',
+        window.location.href
+      );
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener(
+        'popstate',
+        handlePopState
+      );
+    };
+  }, [updateLessonForm.values]);
+
   return (
     <Modal
       opened={opened}
-      lockScroll={false}
       title="Lesson"
+      lockScroll={false}
+      closeOnEscape={false}
       trapFocus={false}
       fullScreen
       styles={{
@@ -102,8 +138,22 @@ const CreateCourseAddEditLessonModal = ({
         },
       }}
       onClose={() => {
-        onClose();
-        updateLessonForm.reset();
+        const hasUnsavedChanges = isValueChanged(
+          dataToEdit,
+          updateLessonForm.values
+        );
+        if (hasUnsavedChanges) {
+          const confirmLeave = window.confirm(
+            'You have unsaved changes. Do you want to leave without saving?'
+          );
+          if (confirmLeave) {
+            onClose();
+            updateLessonForm.reset();
+          }
+        } else {
+          onClose();
+          updateLessonForm.reset();
+        }
       }}
     >
       <div className="flex h-[calc(100vh-60px)] w-full flex-col">
@@ -115,7 +165,7 @@ const CreateCourseAddEditLessonModal = ({
         <div className="flex w-full justify-center">
           <form
             onSubmit={updateLessonForm.onSubmit(values => {
-              onEditLesson(
+              onAddOrEditLesson(
                 undefined,
                 undefined,
                 true,
