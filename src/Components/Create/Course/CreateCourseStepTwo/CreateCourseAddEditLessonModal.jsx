@@ -87,29 +87,35 @@ const CreateCourseAddEditLessonModal = ({
   });
 
   useEffect(() => {
-    window.history.pushState(
-      null,
-      '',
-      window.location.href
-    );
     const handlePopState = event => {
-      // Prevent the default behavior
       event.preventDefault();
+      event.stopPropagation();
+
       const hasUnsavedChanges = isValueChanged(
         dataToEdit,
         updateLessonForm.values
       );
       if (hasUnsavedChanges) {
         const confirmLeave = window.confirm(
-          'You have unsaved changes. Do you want to leave without saving?'
+          'You have unsaved changes. Do you want to discard them?'
         );
         if (confirmLeave) {
           onClose();
           updateLessonForm.reset();
+          window.history.pushState(
+            null,
+            '',
+            window.location.href
+          );
         }
       } else {
         onClose();
         updateLessonForm.reset();
+        window.history.pushState(
+          null,
+          '',
+          window.location.href
+        );
       }
     };
 
