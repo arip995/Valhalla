@@ -142,7 +142,7 @@ const CreateCourseAddEditLesson = ({ form }) => {
       />
       <div className="rounded-lg transition-all duration-300">
         <CreateCourseLessonType
-          label="Create content with text, images, videos, and files"
+          label="Upload content with text, images, videos, and files"
           onSelect={value =>
             form.setValues({ lessonType: value })
           }

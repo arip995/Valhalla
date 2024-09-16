@@ -52,7 +52,7 @@ const CreateCourseAddEditLessonModal = ({
           : null,
       isSaved:
         !values.isSaved && values.isSaveClickedAtleastOnce
-          ? 'Save Lesson'
+          ? 'Save the content to continue'
           : null,
     }),
     transformValues: values => {
@@ -82,7 +82,6 @@ const CreateCourseAddEditLessonModal = ({
       newValues.isSaved = true;
       delete newValues.isSaveClickedAtleastOnce;
       delete newValues.showAdvancedOptions;
-      // console.log(newValues);
       return newValues;
     },
   });

@@ -117,7 +117,7 @@ const UploadVideoStream = ({ onUpload, file = [] }) => {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-4">
       {currentUpload?.[0]?.videoId || isUploading ? (
-        <div className="flex w-full items-center justify-between rounded-xl border border-gray-300 p-3">
+        <div className="flex w-full items-center justify-between rounded-xl border border-gray-300 bg-gray-50 p-3">
           <div className="flex gap-2">
             {isUploading ? (
               <RingProgress
