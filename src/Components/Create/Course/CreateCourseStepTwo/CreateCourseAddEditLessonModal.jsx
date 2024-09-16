@@ -102,20 +102,10 @@ const CreateCourseAddEditLessonModal = ({
         if (confirmLeave) {
           onClose();
           updateLessonForm.reset();
-          window.history.pushState(
-            null,
-            '',
-            window.location.href
-          );
         }
       } else {
         onClose();
         updateLessonForm.reset();
-        window.history.pushState(
-          null,
-          '',
-          window.location.href
-        );
       }
     };
 

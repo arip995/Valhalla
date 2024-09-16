@@ -111,6 +111,12 @@ const CreateModulesAndLessons = () => {
     update = false, //for checking to open the edit modal or to update the lesson
     updatedData
   ) => {
+    // Add query parameter to the URL when opening the modal
+    if (!update) {
+      const currentUrl = new URL(window.location.href);
+      currentUrl.searchParams.set('modal', 'true');
+      window.history.pushState({}, '', currentUrl);
+    }
     if (update) {
       setCourseList(prevCourseList => {
         const newCourseList = [...prevCourseList];
@@ -352,6 +358,12 @@ const CreateModulesAndLessons = () => {
             opened={showAddEditLesson}
             dataToEdit={dataToEdit}
             onClose={() => {
+              // Remove the 'modal' query parameter from the URL
+              const currentUrl = new URL(
+                window.location.href
+              );
+              currentUrl.searchParams.delete('modal');
+              window.history.pushState({}, '', currentUrl);
               setShowAddEditLesson(false);
               setDataToEdit({});
               setActiveModuleIndex(null);
