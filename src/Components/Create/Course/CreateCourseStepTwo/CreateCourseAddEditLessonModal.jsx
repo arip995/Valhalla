@@ -114,12 +114,31 @@ const CreateCourseAddEditLessonModal = ({
       );
     };
 
+    const handleBeforeUnload = event => {
+      const hasUnsavedChanges = isValueChanged(
+        dataToEdit,
+        updateLessonForm.values
+      );
+      if (hasUnsavedChanges) {
+        event.preventDefault();
+        event.returnValue = '';
+      }
+    };
+
     window.addEventListener('popstate', handlePopState);
+    window.addEventListener(
+      'beforeunload',
+      handleBeforeUnload
+    );
 
     return () => {
       window.removeEventListener(
         'popstate',
         handlePopState
+      );
+      window.removeEventListener(
+        'beforeunload',
+        handleBeforeUnload
       );
     };
   }, [updateLessonForm.values]);
