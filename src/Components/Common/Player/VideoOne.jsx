@@ -50,25 +50,12 @@ const VideoOne = ({
   }
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        aspectRatio: '16/9',
-        height: '100%',
-        width: '100%',
-      }}
-    >
+    <div className="relative aspect-video h-full w-full">
       {videoId ? (
         <iframe
           src={`https://iframe.mediadelivery.net/embed/${libraryId}/${videoId}?autoplay=false&loop=false&muted=false&preload=false&responsive=true`}
           loading="lazy"
-          style={{
-            border: '0',
-            position: 'absolute',
-            top: '0',
-            height: '100%',
-            width: '100%',
-          }}
+          className="absolute top-0 h-full w-full border-0"
           allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
           allowfullscreen="true"
         />
@@ -82,13 +69,7 @@ const VideoOne = ({
                 )
               : link.replace('watch?v=', 'embed/')
           }
-          style={{
-            border: '0',
-            position: 'absolute',
-            top: '0',
-            height: '100%',
-            width: '100%',
-          }}
+          className="absolute top-0 h-full w-full border-0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
