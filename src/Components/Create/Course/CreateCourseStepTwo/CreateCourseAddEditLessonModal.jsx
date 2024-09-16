@@ -87,6 +87,11 @@ const CreateCourseAddEditLessonModal = ({
   });
 
   useEffect(() => {
+    window.history.pushState(
+      null,
+      '',
+      window.location.href
+    );
     const handlePopState = event => {
       // Prevent the default behavior
       event.preventDefault();
@@ -106,11 +111,6 @@ const CreateCourseAddEditLessonModal = ({
         onClose();
         updateLessonForm.reset();
       }
-      window.history.pushState(
-        null,
-        '',
-        window.location.href
-      );
     };
 
     const handleBeforeUnload = event => {
