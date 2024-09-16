@@ -35,16 +35,29 @@ export const checkRestrictedChars = val => {
 
 export const validateEditorContent = content => {
   let textContent = content?.trim();
-  return !textContent ||
-    (!/^(?!<[^>]*>$)(?!.*<[^>]*><\/[^>]*>).*$/.test(
-      textContent
-    ) &&
-      (/<img[^>]+src=["'][^"']+["'][^>]*>/.test(
-        textContent
-      ) ||
-        !/^<[^>]*>$/.test(textContent)))
-    ? 'Text or Image content is required'
-    : null;
+
+  // Check if the content is empty
+  if (!textContent) {
+    return 'Text or Image content is required';
+  }
+
+  // Check for presence of an image
+  const hasImage = /<img[^>]+src=["'][^"']+["'][^>]*>/.test(
+    textContent
+  );
+
+  // Check for presence of text content (excluding empty tags)
+  const hasText = /<[^>]+>[^<]+<\/[^>]+>/.test(textContent);
+
+  // Check for presence of list items
+  const hasList = /<li>[^<]+<\/li>/.test(textContent);
+
+  // If there's an image, text content, or a list, consider it valid
+  if (hasImage || hasText || hasList) {
+    return null;
+  }
+
+  return 'Text or Image content is required';
 };
 
 export const isValidUrl = url => {

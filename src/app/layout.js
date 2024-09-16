@@ -59,6 +59,7 @@ import '@mantine/core/styles/Accordion.css';
 import '@mantine/core/styles/Alert.css';
 import '@mantine/core/styles/Tabs.css';
 import '@mantine/core/styles/Chip.css';
+import '@mantine/core/styles/Spoiler.css';
 import '@mantine/core/styles/Slider.css';
 import '@mantine/core/styles/Rating.css';
 import '@mantine/core/styles/Anchor.css';

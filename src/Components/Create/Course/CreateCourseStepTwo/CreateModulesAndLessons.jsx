@@ -48,9 +48,9 @@ export const GenerateNewLesson = (
     isSaved: false,
     lessonType: '',
     textImage: '',
-    video: [],
+    video: null,
     file: [],
-    audio: [],
+    audio: null,
   };
 };
 

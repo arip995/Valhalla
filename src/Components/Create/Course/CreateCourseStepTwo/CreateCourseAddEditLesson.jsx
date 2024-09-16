@@ -9,6 +9,7 @@ import {
   Input,
   Menu,
   rem,
+  Spoiler,
   Textarea,
   TextInput,
 } from '@mantine/core';
@@ -22,6 +23,9 @@ import React, { useMemo } from 'react';
 import CreateCourseLessonType from './CreateCourseLessonType';
 import { LessonTypeMapping } from './CreateModulesAndLessons';
 import { modals } from '@mantine/modals';
+import VideoOne from '@/Components/Common/Player/VideoOne';
+import AudioOne from '@/Components/Common/Player/AudioOne';
+import { Compact } from '@/Utils/Common';
 
 const LessonContent = ({ lessonType, form }) => {
   switch (lessonType) {
@@ -41,12 +45,9 @@ const LessonContent = ({ lessonType, form }) => {
         <ListFileOne
           uploadButtonText="Upload Files"
           maxSize={10}
-          file={form.values.file}
+          file={Compact(form.values.file)}
           mimeTypes={['application/*']}
           onUpdate={value =>
-            form.setFieldValue('file', value)
-          }
-          onChangeLink={value =>
             form.setFieldValue('file', value)
           }
         />
@@ -56,15 +57,11 @@ const LessonContent = ({ lessonType, form }) => {
         <ListFileOne
           uploadButtonText="Upload Audio"
           maxSize={100}
-          file={
-            form.values.audio?.length
-              ? form.values.audio
-              : []
-          }
+          file={Compact([form.values.audio])}
           onlyOne
           mimeTypes={['audio/*']}
           onUpdate={value =>
-            form.setFieldValue('audio', value)
+            form.setFieldValue('audio', value[0])
           }
         />
       );
@@ -72,9 +69,9 @@ const LessonContent = ({ lessonType, form }) => {
       return (
         <UploadVideoStream
           onUpload={value =>
-            form.setFieldValue('video', value)
+            form.setFieldValue('video', value?.[0])
           }
-          file={form.values.video}
+          file={Compact([form.values.video])}
         />
       );
     default:
@@ -86,15 +83,31 @@ const SavedLessonContent = ({ lessonType, form }) => {
   const content = useMemo(() => {
     if (lessonType === 'textImage') {
       return (
-        <div
-          dangerouslySetInnerHTML={{
-            __html: form.values?.textImage,
-          }}
+        <Spoiler
+          maxHeight={120}
+          showLabel="Show more"
+          hideLabel="Hide"
+        >
+          <div
+            dangerouslySetInnerHTML={{
+              __html: form.values?.textImage,
+            }}
+          />
+        </Spoiler>
+      );
+    } else if (lessonType === 'video') {
+      return (
+        <VideoOne
+          videoId={form.values.video?.videoId}
+          link={form.values.video?.link}
+          checkIfVideoIsReady={
+            form.values.video?.videoId && true
+          }
         />
       );
-    } else if (
-      ['file', 'video', 'audio'].includes(lessonType)
-    ) {
+    } else if (lessonType === 'audio') {
+      return <AudioOne src={form.values.audio.url} />;
+    } else if (lessonType === 'file') {
       return (
         <ListFiles
           files={form.values[lessonType]}

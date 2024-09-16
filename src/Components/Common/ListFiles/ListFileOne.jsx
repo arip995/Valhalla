@@ -138,7 +138,9 @@ const ListFileOne = ({
           accept={mimeTypes}
         />
       )}
-      <ListFiles files={files} onDelete={onFileDelete} />
+      {files.length > 0 && (
+        <ListFiles files={files} onDelete={onFileDelete} />
+      )}
 
       {!!showLink && (
         <>
