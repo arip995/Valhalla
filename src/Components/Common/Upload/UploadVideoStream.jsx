@@ -217,7 +217,7 @@ const UploadVideoStream = ({ onUpload, file = [] }) => {
           />
         </Tooltip>
       </div>
-      {/* <div
+      <div
         style={{
           position: 'relative',
           marginTop: '200px',
@@ -227,7 +227,7 @@ const UploadVideoStream = ({ onUpload, file = [] }) => {
         }}
       >
         <iframe
-          src="https://iframe.mediadelivery.net/embed/305839/ddfd8601-e5e3-439d-b08d-7f576faef0cd?autoplay=false&loop=false&muted=false&preload=false&responsive=true"
+          src="https://iframe.mediadelivery.net/embed/305839/1d156a2b-21e1-4bec-b531-a85fd0a0da34?autoplay=false&loop=false&muted=false&preload=false&responsive=true"
           loading="lazy"
           style={{
             border: '0',
@@ -239,7 +239,7 @@ const UploadVideoStream = ({ onUpload, file = [] }) => {
           allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
           allowfullscreen="true"
         ></iframe>
-      </div> */}
+      </div>
     </div>
   );
 };
