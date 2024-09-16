@@ -1,6 +1,6 @@
 import axiosInstance from '@/Utils/AxiosInstance';
-import { Loader } from '@mantine/core';
-import React, { useEffect, useState } from 'react';
+import { Box, LoadingOverlay } from '@mantine/core';
+import { useEffect, useState } from 'react';
 
 const VideoOne = ({
   videoId,
@@ -40,17 +40,18 @@ const VideoOne = ({
     return () => clearInterval(interval);
   }, [isVideoUploaded]);
 
-  if (!isVideoUploaded) {
-    return (
-      <div className="flex items-center justify-center gap-2">
-        Processing video
-        <Loader type="dots" />
-      </div>
-    );
-  }
-
   return (
-    <div className="relative aspect-video h-full w-full">
+    <Box className="relative aspect-video h-full w-full">
+      <LoadingOverlay
+        visible={!isVideoUploaded}
+        zIndex={1000}
+        overlayProps={{ blur: 8 }}
+        loaderProps={{
+          children: 'Processing video...',
+          color: 'violet',
+          type: 'dots',
+        }}
+      />
       {videoId ? (
         <iframe
           src={`https://iframe.mediadelivery.net/embed/${libraryId}/${videoId}?autoplay=false&loop=false&muted=false&preload=false&responsive=true`}
@@ -74,7 +75,7 @@ const VideoOne = ({
           allowFullScreen
         />
       )}
-    </div>
+    </Box>
   );
 };
 
