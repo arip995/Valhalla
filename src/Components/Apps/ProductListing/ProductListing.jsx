@@ -82,7 +82,7 @@ const ProductListing = () => {
         {data.totalQueryCount === 0 ? (
           <EmptyStateOne
             app={app}
-            isfilter
+            isFilter
             onClear={() => onUpdate('reset')}
           />
         ) : (
