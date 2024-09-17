@@ -126,7 +126,9 @@ const CreateCourseStepOne = ({
       />
       <Checkbox
         label="Offer discounted price"
-        {...courseForm.getInputProps('hasDiscountedPrice')}
+        {...courseForm.getInputProps('hasDiscountedPrice', {
+          type: 'checkbox',
+        })}
       />
       <Collapse in={courseForm.values.hasDiscountedPrice}>
         <NumberInput

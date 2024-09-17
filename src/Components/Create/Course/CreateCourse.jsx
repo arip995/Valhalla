@@ -24,7 +24,7 @@ const CreateCourse = () => {
             <div className="flex w-full items-center justify-between gap-4 text-sm text-gray-600">
               <div className="flex items-center gap-4">
                 <CloseButton
-                  onClick={() => router.back()}
+                  onClick={() => router.push('/app/course')}
                   className="transition-colors hover:bg-gray-100"
                 />
                 <Divider

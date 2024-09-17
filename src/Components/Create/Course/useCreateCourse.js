@@ -22,50 +22,69 @@ const useCreateCourse = () => {
     },
     validateInputOnChange: true,
     clearInputErrorOnChange: false,
-    validate: values => ({
-      content:
+    validate: values => {
+      const errors = {};
+
+      if (
         values.isSaveClickedAtleastOnce &&
-        values.stepsCompleted &&
-        !values.content.some(item => {
-          return item.lessons.length > 0;
-        })
-          ? 'Atleast one module & lesson is required to create course'
-          : null,
-      title: !values?.title
-        ? 'Title is required'
-        : values.title?.length > 100
-          ? 'Title should be less than 100 characters'
-          : null,
-      description:
-        values.isSaveClickedAtleastOnce &&
-        validateEditorContent(values?.description),
-      category: !values.isSaveClickedAtleastOnce
-        ? null
-        : !values?.category
-          ? 'Category is required'
-          : null,
-      cta: !values.isSaveClickedAtleastOnce
-        ? null
-        : !values?.cta
-          ? 'Cta is required'
-          : null,
-      price: !values.isSaveClickedAtleastOnce
-        ? null
-        : !values?.price
-          ? 'Price is required'
-          : values.price < 1
-            ? 'Price should be greater than 0'
-            : null,
-      discountedPrice: !values.hasDiscountedPrice
-        ? null
-        : !values?.discountedPrice
-          ? 'Discounted Price is required'
-          : values.discountedPrice >= values.price
-            ? 'Discounted Price should be less than price'
-            : values.discountedPrice < 0
-              ? 'Discounted Price should be greater than 0'
-              : null,
-    }),
+        values.stepsCompleted
+      ) {
+        if (
+          !values.content.some(
+            item => item.lessons.length > 0
+          )
+        ) {
+          errors.content =
+            'At least one module & lesson is required to create course';
+        }
+      }
+
+      if (values.isSaveClickedAtleastOnce) {
+        const descriptionError = validateEditorContent(
+          values.description
+        );
+
+        if (descriptionError) {
+          errors.description = descriptionError;
+        }
+
+        if (!values.title) {
+          errors.title = 'Title is required';
+        } else if (values.title.length > 100) {
+          errors.title =
+            'Title should be less than 100 characters';
+        }
+
+        if (!values.category) {
+          errors.category = 'Category is required';
+        }
+
+        if (!values.cta) {
+          errors.cta = 'CTA is required';
+        }
+
+        if (!values.price) {
+          errors.price = 'Price is required';
+        } else if (values.price < 1) {
+          errors.price = 'Price should be greater than 0';
+        }
+      }
+
+      if (values.hasDiscountedPrice) {
+        if (!values.discountedPrice) {
+          errors.discountedPrice =
+            'Discounted Price is required';
+        } else if (values.discountedPrice >= values.price) {
+          errors.discountedPrice =
+            'Discounted Price should be less than price';
+        } else if (values.discountedPrice < 0) {
+          errors.discountedPrice =
+            'Discounted Price should be greater than or equal to 0';
+        }
+      }
+
+      return errors;
+    },
     transformValues: values => {
       let data = { ...values };
       delete data.isSaveClickedAtleastOnce;
@@ -85,46 +104,32 @@ const useCreateCourse = () => {
   });
 
   const generateContentData = content => {
-    return content.map(module => {
-      return {
-        ...module,
-        id: module._id,
-        lessons: module.lessons.map(lesson => {
-          return {
-            ...lesson,
-            id: lesson._id,
-            supportMaterial: lesson.supportMaterial?.length
-              ? lesson.supportMaterial.map(material => {
-                  return {
-                    ...material,
-                    id: material._id,
-                  };
-                })
-              : [],
-            file: lesson.file?.length
-              ? lesson.file.map(file => {
-                  return {
-                    ...file,
-                    id: file._id,
-                  };
-                })
-              : [],
-            video: lesson.video?._id
-              ? {
-                  ...lesson.video,
-                  id: lesson.video._id,
-                }
-              : null,
-            audio: lesson.audio?._id
-              ? {
-                  ...lesson.audio,
-                  id: lesson.audio._id,
-                }
-              : null,
-          };
-        }),
-      };
-    });
+    return content.map(module => ({
+      ...module,
+      id: module._id,
+      lessons: module.lessons.map(lesson => ({
+        ...lesson,
+        id: lesson._id,
+        supportMaterial:
+          lesson.supportMaterial?.map(material => ({
+            ...material,
+            id: material._id,
+          })) || [],
+        file:
+          lesson.file?.map(file => ({
+            ...file,
+            id: file._id,
+          })) || [],
+        video: lesson.video && {
+          ...lesson.video,
+          id: lesson.video._id,
+        },
+        audio: lesson.audio && {
+          ...lesson.audio,
+          id: lesson.audio._id,
+        },
+      })),
+    }));
   };
   const calculateSections = sections => {
     if (!Array.isArray(sections)) {
@@ -151,42 +156,37 @@ const useCreateCourse = () => {
   const fetchProduct = async () => {
     courseForm.setValues({ loading: 1 });
     try {
-      const response = await axiosInstance.get(
+      const { data } = await axiosInstance.get(
         `/course/get/${courseId}`
       );
-      console.log(response);
-      if (!response.data?.ok) {
-        toast.error('Check your internet connection');
-        throw new Error('Check your internet connection');
-      }
-      const responseData = response.data.data;
-      courseForm.setValues(prevValues => {
-        const sections = calculateSections(
-          responseData.sections
-        );
 
-        return {
-          ...prevValues,
-          ...(responseData || {}),
-          sections: sections,
-          step: responseData.stepsCompleted === 1 ? 2 : 1,
-          content: responseData.content?.length
-            ? generateContentData(responseData.content)
-            : [],
-          loading: 0,
-        };
-      });
-      if (responseData.stepsCompleted === 1) {
-        setTab('content');
-      } else {
-        setTab('details');
+      if (!data?.ok) {
+        throw new Error('Failed to fetch course data');
       }
+
+      const { data: responseData } = data;
+
+      courseForm.setValues(prevValues => ({
+        ...prevValues,
+        ...responseData,
+        sections: calculateSections(responseData.sections),
+        step: responseData.stepsCompleted === 1 ? 2 : 1,
+        content: responseData.content?.length
+          ? generateContentData(responseData.content)
+          : [],
+        loading: 0,
+      }));
+
+      setTab(
+        responseData.stepsCompleted === 1
+          ? 'content'
+          : 'details'
+      );
     } catch (error) {
-      console.log(error);
+      console.error('Error fetching course:', error);
       toast.error(
-        typeof error?.response?.data?.message === 'string'
-          ? error?.response?.data?.message
-          : 'Check yout internet connection'
+        error?.response?.data?.message ||
+          'Failed to fetch course data. Please check your internet connection.'
       );
       courseForm.setValues(prevValues => ({
         ...prevValues,
@@ -195,49 +195,39 @@ const useCreateCourse = () => {
     }
   };
   const handleSubmit = async values => {
-    courseForm.setValues({ loading: 1 });
     try {
-      const response = await axiosInstance.post(
-        `/course/update`,
-        { ...values }
+      const { data } = await axiosInstance.post(
+        '/course/update',
+        values
       );
-      const responseData = response.data.data;
-      courseForm.setValues(prevValues => {
-        return {
-          ...prevValues,
-          ...(responseData || {}),
-          sections: calculateSections(
-            responseData.sections
-          ),
+      const { data: responseData, message } = data;
 
-          content: responseData.content?.length
-            ? generateContentData(responseData.content)
-            : [],
-          step: responseData.stepsCompleted === 1 ? 2 : 1,
-          loading: 0,
-        };
-      });
-      toast.success(
-        response.data.message || 'Updated successfully'
-      );
-    } catch (error) {
-      console.log(error);
-      toast.error(
-        typeof error?.response?.data?.message === 'string'
-          ? error?.response?.data?.message
-          : 'Check yout internet connection'
-      );
+      if (!data?.ok) {
+        throw new Error('Failed to update course data');
+      }
+
       courseForm.setValues(prevValues => ({
         ...prevValues,
-        loading: 0,
+        ...responseData,
+        sections: calculateSections(responseData.sections),
+        content: responseData.content?.length
+          ? generateContentData(responseData.content)
+          : [],
+        step: responseData.stepsCompleted === 1 ? 2 : 1,
       }));
+
+      toast.success(message || 'Updated successfully');
+    } catch (error) {
+      console.error('Error updating course:', error);
+      toast.error(
+        error?.response?.data?.message ||
+          'Check your internet connection'
+      );
     } finally {
       courseForm.setValues({
         isSaveClickedAtleastOnce: false,
       });
     }
-
-    // console.log('courseForm', values);
   };
 
   useEffect(() => {
