@@ -10,178 +10,156 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import CreateProductModal from '../Header/CreateProductModal';
 
+const APP_TYPES = {
+  TG: 'tg',
+  LC: 'lc',
+  COURSE: 'course',
+};
+
+const APP_ICONS = {
+  [APP_TYPES.TG]: IconBrandTelegram,
+  [APP_TYPES.LC]: IconLock,
+  [APP_TYPES.COURSE]: IconBook,
+};
+
+const APP_NAMES = {
+  [APP_TYPES.TG]: 'telegram community',
+  [APP_TYPES.LC]: 'locked content',
+  [APP_TYPES.COURSE]: 'course',
+};
+
 const EmptyStateOne = ({
-  app = 'tg', //tg,lc,course
-  isfilter = false,
+  app = APP_TYPES.TG,
+  isFilter = false,
   title,
   description,
   onClear = () => {},
 }) => {
-  const [opened, setOpened] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const AppIcon = APP_ICONS[app] || null;
+  const appName = APP_NAMES[app] || '';
+
+  const renderIcon = () => {
+    if (isFilter) {
+      return (
+        <IconFileSearch
+          style={{
+            strokeWidth: 1,
+            height: rem(42),
+            width: rem(42),
+          }}
+        />
+      );
+    }
+    return AppIcon ? (
+      <AppIcon
+        style={{
+          strokeWidth: 1,
+          height: rem(42),
+          width: rem(42),
+        }}
+      />
+    ) : null;
+  };
+
+  const renderTitle = () => {
+    if (title) return title;
+    return isFilter
+      ? 'No products found!'
+      : `No published ${appName}`;
+  };
+
+  const renderDescription = () => {
+    if (description) return description;
+    if (isFilter) {
+      return (
+        <>
+          Try changing your filters to
+          <br />
+          see products
+        </>
+      );
+    }
+    return (
+      <>
+        No {appName} yet? No problem! Create a new {appName}{' '}
+        and start earning.
+      </>
+    );
+  };
+
+  const renderButton = () => {
+    if (isFilter) {
+      return (
+        <Button
+          onClick={onClear}
+          variant="default"
+          radius="lg"
+        >
+          Clear filter
+        </Button>
+      );
+    }
+
+    const buttonProps = {
+      radius: 'lg',
+      variant: 'default',
+      leftSection: (
+        <IconPlus
+          style={{ height: rem(20), width: rem(20) }}
+        />
+      ),
+    };
+
+    if (app === APP_TYPES.COURSE) {
+      return (
+        <Button
+          {...buttonProps}
+          onClick={() => setIsModalOpen(true)}
+        >
+          Create Course
+        </Button>
+      );
+    }
+
+    const href = `/create/${app === APP_TYPES.TG ? 'telegram' : 'lockedcontent'}`;
+    return (
+      <Link href={href}>
+        <Button {...buttonProps}>
+          {app === APP_TYPES.TG
+            ? 'Create Telegram Community'
+            : 'Create Locked Content'}
+        </Button>
+      </Link>
+    );
+  };
 
   return (
     <>
       <div className="mx-auto flex min-h-[400px] w-full max-w-sm flex-col items-center justify-center px-6 py-4">
         <ActionIcon
-          color={'black'}
-          variant={'transparent'}
+          color="black"
+          variant="transparent"
           size={62}
           radius="xl"
         >
-          {isfilter ? (
-            <IconFileSearch
-              style={{
-                strokeWidth: 1,
-                height: rem(42),
-                width: rem(42),
-              }}
-            />
-          ) : (
-            <>
-              {app === 'tg' ? (
-                <IconBrandTelegram
-                  style={{
-                    strokeWidth: 1,
-                    height: rem(42),
-                    width: rem(42),
-                  }}
-                />
-              ) : app === 'lc' ? (
-                <IconLock
-                  style={{
-                    strokeWidth: 1,
-                    height: rem(42),
-                    width: rem(42),
-                  }}
-                />
-              ) : app === 'course' ? (
-                <IconBook
-                  style={{
-                    strokeWidth: 1,
-                    height: rem(42),
-                    width: rem(42),
-                  }}
-                />
-              ) : null}
-            </>
-          )}
+          {renderIcon()}
         </ActionIcon>
         <h2 className="mt-5 font-semibold text-gray-800">
-          {title ? (
-            title
-          ) : (
-            <>
-              {isfilter ? (
-                <>No products found!</>
-              ) : (
-                <>
-                  {' '}
-                  No published{' '}
-                  {app === 'tg'
-                    ? 'telegram community'
-                    : app === 'lc'
-                      ? 'locked content'
-                      : 'course'}
-                </>
-              )}
-            </>
-          )}
+          {renderTitle()}
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
-          {description ? (
-            description
-          ) : (
-            <>
-              {isfilter ? (
-                <>
-                  Try changing your filters to
-                  <br />
-                  see products
-                </>
-              ) : (
-                <>
-                  No{' '}
-                  {app === 'tg'
-                    ? 'telegram community'
-                    : app === 'lc'
-                      ? 'locked content'
-                      : 'course'}{' '}
-                  yet? No problem! Create a new{' '}
-                  {app === 'tg'
-                    ? 'telegram community'
-                    : app === 'lc'
-                      ? 'locked content'
-                      : 'course'}{' '}
-                  and start earning.
-                </>
-              )}
-            </>
-          )}
+          {renderDescription()}
         </p>
-
         <div className="mt-5 flex flex-col gap-2 sm:flex-row">
-          {isfilter ? (
-            <Button
-              onClick={onClear}
-              variant="default"
-              radius="lg"
-            >
-              Clear filter
-            </Button>
-          ) : (
-            <>
-              {app === 'course' ? (
-                <Button
-                  radius="lg"
-                  variant="default"
-                  onClick={() => {
-                    setOpened(true);
-                  }}
-                  leftSection={
-                    <IconPlus
-                      style={{
-                        height: rem(20),
-                        width: rem(20),
-                      }}
-                    />
-                  }
-                >
-                  Create Course
-                </Button>
-              ) : (
-                <Link
-                  href={`/create/${app === 'tg' ? 'telegram' : 'lockedcontent'}`}
-                >
-                  <Button
-                    radius="lg"
-                    variant="default"
-                    leftSection={
-                      <IconPlus
-                        style={{
-                          height: rem(20),
-                          width: rem(20),
-                        }}
-                      />
-                    }
-                  >
-                    {app === 'tg'
-                      ? 'Create Telegram Community'
-                      : app === 'lc'
-                        ? 'Create Locked Content'
-                        : 'Create Course'}
-                  </Button>
-                </Link>
-              )}
-            </>
-          )}
+          {renderButton()}
         </div>
       </div>
-      {!!opened && (
+      {isModalOpen && (
         <CreateProductModal
-          opened={opened}
-          onClose={() => {
-            setOpened(false);
-          }}
+          opened={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
         />
       )}
     </>
