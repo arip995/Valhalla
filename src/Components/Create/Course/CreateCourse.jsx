@@ -114,11 +114,11 @@ const CreateCourse = () => {
               <CreateCourseStepOne
                 courseForm={courseForm}
               />
-            ) : (
+            ) : tab === 'content' ? (
               <CreateCourseStepTwo
                 courseForm={courseForm}
               />
-            )}
+            ) : null}
           </div>
         </div>
         <Preview className="flex-1 bg-white p-4">
