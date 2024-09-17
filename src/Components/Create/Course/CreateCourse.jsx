@@ -13,9 +13,9 @@ import React from 'react';
 import { Toaster } from 'react-hot-toast';
 
 const CreateCourse = () => {
-  const { courseForm, handleSubmit, router } =
+  const { courseForm, handleSubmit, router, tab, setTab } =
     useCreateCourse();
-
+  console.log(courseForm.values.stepsCompleted);
   return (
     <div className="flex h-screen w-full flex-col bg-gray-50">
       <div className="flex h-full w-full flex-col sm:flex-row">
@@ -72,14 +72,14 @@ const CreateCourse = () => {
                   {courseForm.values.stepsCompleted === 1
                     ? 'Publish course'
                     : courseForm.values.stepsCompleted > 1
-                      ? 'Create Course'
-                      : 'Save and continue'}
+                      ? 'Publish Course'
+                      : 'Save and Continue'}
                 </Button>
               </form>
             </div>
           </div>
           {courseForm.values.stepsCompleted > 1 && (
-            <Tabs defaultValue="details" size="">
+            <Tabs value={tab} onChange={setTab}>
               <Tabs.List grow>
                 <Tabs.Tab
                   value="details"
@@ -98,14 +98,30 @@ const CreateCourse = () => {
           )}
 
           <div className="flex flex-1 flex-col overflow-y-auto">
-            {courseForm.values.step === 1 ? (
-              <CreateCourseStepOne
-                courseForm={courseForm}
-              />
+            {courseForm.values.stepsCompleted > 1 ? (
+              <>
+                {tab === 'details' ? (
+                  <CreateCourseStepOne
+                    courseForm={courseForm}
+                  />
+                ) : (
+                  <CreateCourseStepTwo
+                    courseForm={courseForm}
+                  />
+                )}
+              </>
             ) : (
-              <CreateCourseStepTwo
-                courseForm={courseForm}
-              />
+              <>
+                {courseForm.values.step === 1 ? (
+                  <CreateCourseStepOne
+                    courseForm={courseForm}
+                  />
+                ) : (
+                  <CreateCourseStepTwo
+                    courseForm={courseForm}
+                  />
+                )}
+              </>
             )}
           </div>
         </div>

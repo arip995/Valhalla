@@ -2,7 +2,7 @@ import axiosInstance from '@/Utils/AxiosInstance';
 import { validateEditorContent } from '@/Utils/Regex';
 import { useForm } from '@mantine/form';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { SectionTypes } from './CreateCourseStepOne/SectionDetails/Sections';
 import { getUniqueId } from '@/Utils/Common';
@@ -10,6 +10,7 @@ import { getUniqueId } from '@/Utils/Common';
 const useCreateCourse = () => {
   const router = useRouter();
   const courseId = usePathname().split('/')[3];
+  const [tab, setTab] = useState('details');
   const courseForm = useForm({
     initialValues: {
       isSaveClickedAtleastOnce: false,
@@ -190,7 +191,6 @@ const useCreateCourse = () => {
     }
   };
   const handleSubmit = async values => {
-    console.log(values);
     courseForm.setValues({ loading: 1 });
     try {
       const response = await axiosInstance.post(
@@ -198,7 +198,6 @@ const useCreateCourse = () => {
         { ...values }
       );
       const responseData = response.data.data;
-      console.log(responseData.content);
       courseForm.setValues(prevValues => {
         return {
           ...prevValues,
@@ -214,7 +213,9 @@ const useCreateCourse = () => {
           loading: 0,
         };
       });
-      toast.success('Updated successfully');
+      toast.success(
+        response.data.message || 'Updated successfully'
+      );
     } catch (error) {
       console.log(error);
       toast.error(
@@ -249,6 +250,8 @@ const useCreateCourse = () => {
     courseForm,
     handleSubmit,
     router,
+    tab,
+    setTab,
   };
 };
 
