@@ -7,7 +7,7 @@ import {
   IconTrash,
   IconVideo,
 } from '@tabler/icons-react';
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import '../../../styles/common/list-files.css';
 
 const ListFiles = ({
@@ -15,9 +15,8 @@ const ListFiles = ({
   onDelete = () => {},
   showTrash = true,
 }) => {
-  console.log(files);
   const ListOfItems = useCallback(({ item }) => {
-    if (!item) return null;
+    if (!item.type) return null;
     const isImage =
       !item.loading && item.type.split('/')[0] === 'image'
         ? true
@@ -108,4 +107,4 @@ const ListFiles = ({
   );
 };
 
-export default ListFiles;
+export default React.memo(ListFiles);

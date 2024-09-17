@@ -8,11 +8,12 @@ import {
 import {
   Accordion,
   Button,
+  Input,
   Modal,
   TextInput,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import '../../../../styles/create/Course.css';
 import CreateCourseAddEditLessonModal from './CreateCourseAddEditLessonModal';
@@ -44,7 +45,6 @@ export const GenerateNewLesson = (
     status,
     description: '',
     supportMaterial: [],
-    isPreview: false,
     isSaved: false,
     lessonType: '',
     textImage: '',
@@ -54,7 +54,11 @@ export const GenerateNewLesson = (
   };
 };
 
-const CreateModulesAndLessons = () => {
+const CreateModulesAndLessons = ({
+  content = [],
+  onUpdateContent = () => {},
+  error,
+}) => {
   const isBrowser = useIsBrowser();
   const [openAddModuleModal, setOpenAddModuleModal] =
     useState(false);
@@ -69,12 +73,7 @@ const CreateModulesAndLessons = () => {
     },
   });
   const [courseList, setCourseList] = useState([
-    {
-      id: getUniqueId(),
-      title: 'Module 1: Introduction',
-      status: 1,
-      lessons: [],
-    },
+    ...content,
   ]);
   const [showAddEditLesson, setShowAddEditLesson] =
     useState(false);
@@ -210,7 +209,6 @@ const CreateModulesAndLessons = () => {
               lesson => ({
                 ...lesson,
                 status: newModule.status,
-                isPreview: false,
               })
             );
           break;
@@ -258,6 +256,10 @@ const CreateModulesAndLessons = () => {
     setCourseList(newCourseList);
   };
 
+  useEffect(() => {
+    onUpdateContent(courseList);
+  }, [courseList]);
+
   if (!courseList || !isBrowser) return null;
 
   return (
@@ -267,6 +269,7 @@ const CreateModulesAndLessons = () => {
           <div className="mb-4 text-sm font-semibold">
             Add modules and lessons of your course
           </div>
+
           <DragDropContext
             onDragEnd={result =>
               onDragModuleAndLesson(result)
@@ -351,6 +354,7 @@ const CreateModulesAndLessons = () => {
             + New Module
           </Button>
         </div>
+        <Input.Error>{!!error && error}</Input.Error>
         {!!showAddEditLesson && (
           <CreateCourseAddEditLessonModal
             onAddOrEditLesson={onAddOrEditLesson}

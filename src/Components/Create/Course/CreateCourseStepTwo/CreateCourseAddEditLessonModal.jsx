@@ -15,6 +15,9 @@ const CreateCourseAddEditLessonModal = ({
     initialValues: {
       ...dataToEdit,
       isSaveClickedAtleastOnce: false,
+      showAdvancedOptions:
+        dataToEdit.description ||
+        dataToEdit.supportMaterial?.length,
     },
     validate: values => ({
       title: !values.title ? 'Title is required' : null,
@@ -55,24 +58,24 @@ const CreateCourseAddEditLessonModal = ({
       let newValues = { ...values };
       switch (values.lessonType) {
         case 'textImage':
-          newValues.video = [];
-          newValues.audio = [];
-          newValues.file = [];
+          delete newValues.video;
+          delete newValues.audio;
+          delete newValues.file;
           break;
         case 'video':
-          newValues.textImage = null;
-          newValues.audio = [];
-          newValues.file = [];
+          delete newValues.textImage;
+          delete newValues.audio;
+          delete newValues.file;
           break;
         case 'audio':
-          newValues.textImage = null;
-          newValues.video = [];
-          newValues.file = [];
+          delete newValues.textImage;
+          delete newValues.video;
+          delete newValues.file;
           break;
         case 'file':
-          newValues.textImage = null;
-          newValues.audio = [];
-          newValues.video = [];
+          delete newValues.textImage;
+          delete newValues.audio;
+          delete newValues.video;
           break;
       }
       newValues.isSaved = true;

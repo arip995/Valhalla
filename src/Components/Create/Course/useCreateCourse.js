@@ -18,10 +18,18 @@ const useCreateCourse = () => {
       cta: 'Buy Now',
       title: '',
       sections: SectionTypes,
+      content: [],
     },
     validateInputOnChange: true,
     clearInputErrorOnChange: false,
     validate: values => ({
+      content:
+        values.isSaveClickedAtleastOnce &&
+        !values.content.some(item => {
+          return item.lessons.length > 0;
+        })
+          ? 'Atleast one module & lesson is required to create course'
+          : null,
       title: !values?.title
         ? 'Title is required'
         : values.title?.length > 100
@@ -76,6 +84,48 @@ const useCreateCourse = () => {
     },
   });
 
+  const generateContentData = content => {
+    return content.map(module => {
+      return {
+        ...module,
+        id: module._id,
+        lessons: module.lessons.map(lesson => {
+          return {
+            ...lesson,
+            id: lesson._id,
+            supportMaterial: lesson.supportMaterial?.length
+              ? lesson.supportMaterial.map(material => {
+                  return {
+                    ...material,
+                    id: material._id,
+                  };
+                })
+              : [],
+            file: lesson.file?.length
+              ? lesson.file.map(file => {
+                  return {
+                    ...file,
+                    id: file._id,
+                  };
+                })
+              : [],
+            video: lesson.video?._id
+              ? {
+                  ...lesson.video,
+                  id: lesson.video._id,
+                }
+              : null,
+            audio: lesson.audio?._id
+              ? {
+                  ...lesson.audio,
+                  id: lesson.audio._id,
+                }
+              : null,
+          };
+        }),
+      };
+    });
+  };
   const calculateSections = sections => {
     if (!Array.isArray(sections)) {
       return SectionTypes;
@@ -120,6 +170,9 @@ const useCreateCourse = () => {
           ...(responseData || {}),
           sections: sections,
           step: responseData.stepsCompleted === 1 ? 2 : 1,
+          content: responseData.content?.length
+            ? generateContentData(responseData.content)
+            : [],
           loading: 0,
         };
       });
@@ -145,7 +198,7 @@ const useCreateCourse = () => {
         { ...values }
       );
       const responseData = response.data.data;
-      console.log(response);
+      console.log(responseData.content);
       courseForm.setValues(prevValues => {
         return {
           ...prevValues,
@@ -153,6 +206,10 @@ const useCreateCourse = () => {
           sections: calculateSections(
             responseData.sections
           ),
+
+          content: responseData.content?.length
+            ? generateContentData(responseData.content)
+            : [],
           step: responseData.stepsCompleted === 1 ? 2 : 1,
           loading: 0,
         };
