@@ -215,6 +215,9 @@ const useCreateCourse = () => {
           : [],
         step: responseData.stepsCompleted === 1 ? 2 : 1,
       }));
+      if (responseData.stepsCompleted === 1) {
+        setTab('content');
+      }
 
       toast.success(message || 'Updated successfully');
     } catch (error) {
