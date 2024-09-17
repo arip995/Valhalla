@@ -112,11 +112,7 @@ const CreateModulesAndLessons = () => {
     updatedData
   ) => {
     // Add query parameter to the URL when opening the modal
-    if (!update) {
-      const currentUrl = new URL(window.location.href);
-      currentUrl.searchParams.set('modal', 'true');
-      window.history.pushState({}, '', currentUrl);
-    }
+
     if (update) {
       setCourseList(prevCourseList => {
         const newCourseList = [...prevCourseList];
@@ -143,6 +139,9 @@ const CreateModulesAndLessons = () => {
       setActiveModuleIndex(null);
       setDataToEdit({});
     } else {
+      const currentUrl = new URL(window.location.href);
+      currentUrl.searchParams.set('modal', 'true');
+      window.history.pushState({}, '', currentUrl);
       setActiveModuleIndex(moduleIndex);
       if (typeof lessonIndex === 'number') {
         setDataToEdit(
