@@ -1,7 +1,7 @@
-import Course from '@/Components/Apps/Course/Course';
+import ProductListing from '@/Components/Apps/ProductListing/ProductListing';
 
-const Page = ({ data }) => {
-  return <Course {...data} />;
+const Page = () => {
+  return <ProductListing />;
 };
 
 export default Page;

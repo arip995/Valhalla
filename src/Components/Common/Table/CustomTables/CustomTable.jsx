@@ -23,6 +23,7 @@ import {
   IconPresentation,
   IconReceipt2,
   IconReportAnalytics,
+  IconSquareRoundedCheck,
   IconSquareRoundedX,
   IconTrash,
   IconUsers,
@@ -262,13 +263,23 @@ const CustomTable = ({
                                     );
                                   }}
                                   leftSection={
-                                    <IconSquareRoundedX
-                                      style={{
-                                        width: rem(16),
-                                        height: rem(16),
-                                      }}
-                                      stroke={1.5}
-                                    />
+                                    item.status === 1 ? (
+                                      <IconSquareRoundedX
+                                        style={{
+                                          width: rem(16),
+                                          height: rem(16),
+                                        }}
+                                        stroke={1.5}
+                                      />
+                                    ) : (
+                                      <IconSquareRoundedCheck
+                                        style={{
+                                          width: rem(16),
+                                          height: rem(16),
+                                        }}
+                                        stroke={1.5}
+                                      />
+                                    )
                                   }
                                 >
                                   {item.status === 1

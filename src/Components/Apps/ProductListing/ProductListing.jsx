@@ -33,9 +33,7 @@ const ProductListing = () => {
   if (!data?.totalCount && !loading) {
     return (
       <>
-        <EmptyStateOne
-          isTelegram={app === 'tg' ? true : false}
-        />
+        <EmptyStateOne app={app} />
         <Toaster />
       </>
     );
@@ -46,9 +44,16 @@ const ProductListing = () => {
       <div className="flex h-[calc(100vh-52px)] w-full flex-col md:h-screen">
         <Header
           title={
-            app === 'tg' ? 'Telegram' : 'Locked Content'
+            app === 'tg'
+              ? 'Telegram'
+              : app === 'lc'
+                ? 'Locked Content'
+                : app === 'course'
+                  ? 'Course'
+                  : null
           }
-          path={`/create/${app === 'tg' ? 'telegram' : 'lockedcontent'}`}
+          modal={app === 'course' ? true : false}
+          path={`/create/${app === 'tg' ? 'telegram' : app === 'lc' ? 'lockedcontent' : null}`}
         />
         <div className="flex flex-1 flex-col items-end gap-4 overflow-y-auto px-4 py-4">
           <Filters
@@ -58,7 +63,7 @@ const ProductListing = () => {
           />
           {data.totalQueryCount == 0 ? (
             <EmptyStateOne
-              isTelegram={app === 'tg' ? true : false}
+              app={app}
               isfilter
               onClear={() => {
                 onUpdate('reset');
