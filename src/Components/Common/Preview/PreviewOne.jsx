@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Preview = ({ children }) => {
+const PreviewOne = ({ children }) => {
   return (
     <div className="relative hidden h-full w-full overflow-hidden lg:block">
       <div className="absolute inset-0 flex flex-col">
@@ -42,4 +42,4 @@ const Preview = ({ children }) => {
   );
 };
 
-export default Preview;
+export default PreviewOne;

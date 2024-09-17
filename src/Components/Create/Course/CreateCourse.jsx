@@ -1,16 +1,16 @@
 'use client';
+import PreviewOne from '@/Components/Common/Preview/PreviewOne';
 import {
   Button,
   CloseButton,
   Divider,
   Tabs,
 } from '@mantine/core';
+import React from 'react';
+import { Toaster } from 'react-hot-toast';
 import CreateCourseStepOne from './CreateCourseStepOne/CreateCourseStepOne';
 import CreateCourseStepTwo from './CreateCourseStepTwo/CreateCourseStepTwo';
 import useCreateCourse from './useCreateCourse';
-import Preview from '@/Components/Common/Preview';
-import React from 'react';
-import { Toaster } from 'react-hot-toast';
 
 const CreateCourse = () => {
   const { courseForm, handleSubmit, router, tab, setTab } =
@@ -121,11 +121,16 @@ const CreateCourse = () => {
             ) : null}
           </div>
         </div>
-        <Preview className="flex-1 bg-white p-4">
+        {/* <PreviewTwo className="flex-1 bg-white p-4">
           <div className="text-lg font-semibold text-gray-700">
             Preview
           </div>
-        </Preview>
+        </PreviewTwo> */}
+        <PreviewOne className="flex-1 bg-white p-4">
+          <div className="text-lg font-semibold text-gray-700">
+            Preview
+          </div>
+        </PreviewOne>
       </div>
       <Toaster />
     </div>
