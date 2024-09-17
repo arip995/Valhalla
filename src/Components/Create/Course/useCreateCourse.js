@@ -136,22 +136,16 @@ const useCreateCourse = () => {
       return SectionTypes;
     }
 
-    const result = SectionTypes.map(
-      item =>
-        sections.find(val => val.type === item.type) || item
-    );
-
-    return result.map(item => {
-      if (item._id) {
-        return {
-          type: item.type,
-          value: item.value,
-          isEnabled: item.isEnabled,
-          id: item?._id || getUniqueId(),
-        };
-      }
-      return item;
-    });
+    return [
+      ...sections,
+      ...SectionTypes.filter(
+        item =>
+          !sections.some(val => val.type === item.type)
+      ).map(item => ({
+        ...item,
+        id: getUniqueId(),
+      })),
+    ];
   };
   const fetchProduct = async () => {
     courseForm.setValues({ loading: 1 });
