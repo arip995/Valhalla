@@ -10,12 +10,11 @@ import { getUniqueId } from '@/Utils/Common';
 const useCreateCourse = () => {
   const router = useRouter();
   const courseId = usePathname().split('/')[3];
-  const [tab, setTab] = useState('details');
+  const [tab, setTab] = useState(null);
   const courseForm = useForm({
     initialValues: {
       isSaveClickedAtleastOnce: false,
       loading: -1,
-      step: 1,
       cta: 'Buy Now',
       title: '',
       sections: SectionTypes,
@@ -26,6 +25,7 @@ const useCreateCourse = () => {
     validate: values => ({
       content:
         values.isSaveClickedAtleastOnce &&
+        values.stepsCompleted &&
         !values.content.some(item => {
           return item.lessons.length > 0;
         })
@@ -69,7 +69,6 @@ const useCreateCourse = () => {
     transformValues: values => {
       let data = { ...values };
       delete data.isSaveClickedAtleastOnce;
-      delete data.step;
       delete data.loading;
       delete data._id;
       let sections = data.sections.filter(
@@ -142,7 +141,7 @@ const useCreateCourse = () => {
         return {
           type: item.type,
           value: item.value,
-          isEnables: item.isEnabled,
+          isEnabled: item.isEnabled,
           id: item?._id || getUniqueId(),
         };
       }
@@ -177,6 +176,11 @@ const useCreateCourse = () => {
           loading: 0,
         };
       });
+      if (responseData.stepsCompleted === 1) {
+        setTab('content');
+      } else {
+        setTab('details');
+      }
     } catch (error) {
       console.log(error);
       toast.error(
@@ -227,6 +231,10 @@ const useCreateCourse = () => {
         ...prevValues,
         loading: 0,
       }));
+    } finally {
+      courseForm.setValues({
+        isSaveClickedAtleastOnce: false,
+      });
     }
 
     // console.log('courseForm', values);
