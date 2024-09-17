@@ -21,6 +21,7 @@
     "@mantine/notifications": "^7.12.2",
     "@mantine/tiptap": "^7.12.2",
     "@tabler/icons-react": "^3.2.0",
+    "@tailwindcss/typography": "^0.0.0-insiders.0339c42",
     "@tiptap/extension-highlight": "^2.5.5",
     "@tiptap/extension-image": "^2.6.6",
     "@tiptap/extension-link": "^2.5.5",

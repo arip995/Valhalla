@@ -40,10 +40,7 @@ ul {
   padding: 0;
   list-style: disc;
 }
-li {
-  margin-bottom: 10px;
-  margin-left: 20px;
-}
+
 ol {
   padding: 0;
   list-style: decimal;

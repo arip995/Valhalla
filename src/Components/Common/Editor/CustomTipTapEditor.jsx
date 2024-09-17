@@ -93,6 +93,7 @@ const CustomTipTapEditor = ({
       <RichTextEditor editor={editor}>
         <RichTextEditor.Toolbar sticky stickyOffset={0}>
           <RichTextEditor.ControlsGroup>
+            <RichTextEditor.H3 />
             <RichTextEditor.Bold />
             <RichTextEditor.Italic />
             <RichTextEditor.Underline />
@@ -105,7 +106,7 @@ const CustomTipTapEditor = ({
             <RichTextEditor.OrderedList />
             <RichTextEditor.Link />
             <RichTextEditor.Unlink />
-            {/* <label className="relative">
+            <label className="relative">
               <input
                 type="file"
                 accept="image/*"
@@ -132,7 +133,7 @@ const CustomTipTapEditor = ({
                   stroke={1.5}
                 />
               </RichTextEditor.Control>
-            </label> */}
+            </label>
             <RichTextEditor.Control
               onClick={addVideo}
               aria-label="Insert video"
@@ -154,7 +155,7 @@ const CustomTipTapEditor = ({
           </RichTextEditor.ControlsGroup>
         </RichTextEditor.Toolbar>
 
-        <RichTextEditor.Content className="min-h-32" />
+        <RichTextEditor.Content className="prose min-h-32" />
       </RichTextEditor>
     </div>
   );

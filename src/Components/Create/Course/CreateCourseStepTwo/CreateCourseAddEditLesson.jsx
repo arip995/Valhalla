@@ -88,7 +88,8 @@ const SavedLessonContent = ({ lessonType, form }) => {
           showLabel="Show more"
           hideLabel="Hide"
         >
-          <div
+          <article
+            className="prose"
             dangerouslySetInnerHTML={{
               __html: form.values?.textImage,
             }}
