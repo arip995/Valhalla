@@ -101,18 +101,14 @@ const ProductListing = () => {
                 app={app}
               />
             )}
-            {!loading &&
-              Math.ceil(data.totalQueryCount / 10) > 1 && (
-                <Pagination
-                  withEdges
-                  total={Math.ceil(
-                    data.totalQueryCount / 10
-                  )}
-                  onChange={value =>
-                    onUpdate('page', value)
-                  }
-                />
-              )}
+            <Pagination
+              withEdges
+              total={Math.ceil(data.totalQueryCount / 10)}
+              onChange={value => {
+                onUpdate('page', value);
+              }}
+              className={`${Math.ceil(data.totalQueryCount / 10) == 1 || loading ? 'hidden' : ''}`}
+            />
           </>
         )}
       </div>
