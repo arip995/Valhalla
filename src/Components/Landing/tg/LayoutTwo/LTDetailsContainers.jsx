@@ -8,7 +8,7 @@ const LTDetailsContainer = ({ data }) => {
   return (
     <>
       <div className="flex w-full justify-center">
-        <div className="flex w-full max-w-md flex-col gap-8 p-4">
+        <div className="flex w-full max-w-lg flex-col gap-8 p-6 shadow-lg">
           <div className="w-full">
             <ViewProfile
               profilePic={
@@ -54,6 +54,7 @@ const LTDetailsContainer = ({ data }) => {
           <Disclaimer showTitle={false} />
         </div>
       </div>
+      {/* <div className="mx-auto my-6 w-full max-w-lg"></div> */}
       <div className="mt-4 block md:hidden">
         <FooterTwo />
       </div>
