@@ -10,7 +10,7 @@ import {
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const GLProductheader = ({ data }) => {
+const ProductHeader = ({ data }) => {
   const router = useRouter();
   const { user, removeUser } = useUser(true);
   const [opened, setOpened] = useState(false);
@@ -123,4 +123,4 @@ const GLProductheader = ({ data }) => {
   );
 };
 
-export default GLProductheader;
+export default ProductHeader;

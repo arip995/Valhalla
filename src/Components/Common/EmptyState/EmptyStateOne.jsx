@@ -8,7 +8,7 @@ import {
 } from '@tabler/icons-react';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import CreateProductModal from '../Header/CreateProductModal';
+import CreateProductModal from '../Modal/CreateProductModal';
 
 const APP_TYPES = {
   TG: 'tg',

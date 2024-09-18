@@ -14,7 +14,7 @@ import {
 } from '@tabler/icons-react';
 import React from 'react';
 import { SocialTitleMapping } from './Sections';
-import ViewProductHeader from '@/Components/Common/Header/ViewProductHeader';
+import ViewProfile from '@/Components/Common/General/ViewProfile';
 import { modals } from '@mantine/modals';
 const Actions = [
   {
@@ -256,7 +256,7 @@ const ShowSectionsList = ({
         <div className="text-lg font-semibold">
           About me
         </div>
-        <ViewProductHeader
+        <ViewProfile
           profilePic={item?.image}
           name={item.name}
           description={item.description}

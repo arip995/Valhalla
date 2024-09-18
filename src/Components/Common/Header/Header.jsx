@@ -5,7 +5,7 @@ import { IconPlus } from '@tabler/icons-react';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { useState } from 'react';
-import CreateProductModal from './CreateProductModal';
+import CreateProductModal from '../Modal/CreateProductModal';
 
 const Header = ({
   title,

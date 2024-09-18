@@ -2,7 +2,7 @@ import { Avatar } from '@mantine/core';
 import React from 'react';
 import Image from 'next/image';
 
-const ViewProductHeader = ({
+const ViewProfile = ({
   profilePic,
   name,
   // username,
@@ -76,4 +76,4 @@ const ViewProductHeader = ({
   );
 };
 
-export default ViewProductHeader;
+export default ViewProfile;

@@ -1,5 +1,5 @@
 import Disclaimer from '@/Components/Common/Footer/Disclaimer';
-import ViewProductHeader from '@/Components/Common/Header/ViewProductHeader';
+import ViewProfile from '@/Components/Common/General/ViewProfile';
 import GLManagePlans from './GLManagePlans';
 import FooterTwo from '@/Components/Common/Footer/FooterTwo';
 
@@ -9,7 +9,7 @@ const GLDetailsContainer = ({ data }) => {
       <div className="flex w-full justify-center">
         <div className="block w-full max-w-[768px] gap-8 p-4 md:flex">
           <div className="w-full md:w-7/12">
-            <ViewProductHeader
+            <ViewProfile
               profilePic={
                 data.coverImage ||
                 data.creatorDetails.profilePic

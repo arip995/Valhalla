@@ -31,18 +31,19 @@ const CreateCourse = () => {
               <div className="flex items-center gap-4">
                 <CloseButton
                   onClick={() => router.push('/app/course')}
-                  className="transition-colors hover:bg-gray-100"
-                />
-                <Divider
-                  orientation="vertical"
-                  className="h-8"
                 />
                 {courseForm.values.stepsCompleted ===
                 2 ? null : (
-                  <span className="font-medium">
-                    Step {tab === 'details' ? 1 : 2 || 1}
-                    of 2
-                  </span>
+                  <>
+                    <Divider
+                      orientation="vertical"
+                      className="h-8"
+                    />
+                    <span className="font-medium">
+                      Step {tab === 'details' ? 1 : 2 || 1}
+                      of 2
+                    </span>
+                  </>
                 )}
               </div>
               <form

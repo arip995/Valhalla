@@ -1,6 +1,6 @@
 import FooterTwo from '@/Components/Common/Footer/FooterTwo';
-import Disclaimer from '../../Common/Footer/Disclaimer';
-import ViewProductHeader from '../../Common/Header/ViewProductHeader';
+import Disclaimer from '@/Components/Common/Footer/Disclaimer';
+import ViewProfile from '@/Components/Common/General/ViewProfile';
 import LockedContentDetails from './LockedContentDetails';
 
 const LockedContent = ({ data }) => {
@@ -8,7 +8,7 @@ const LockedContent = ({ data }) => {
     <div className="flex flex-1 flex-col justify-between">
       <div className="vlc-view-wrapper">
         <div className="vlc-view-container">
-          <ViewProductHeader
+          <ViewProfile
             profilePic={
               data.coverImage ||
               data.creatorDetails.profilePic
