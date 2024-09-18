@@ -166,7 +166,6 @@ const useCreateCourse = () => {
         content: responseData.content?.length
           ? generateContentData(responseData.content)
           : [],
-        step: responseData.stepsCompleted === 1 ? 2 : 1,
       }));
       if (responseData.stepsCompleted === 1) {
         setTab('content');
@@ -201,7 +200,6 @@ const useCreateCourse = () => {
         ...prevValues,
         ...responseData,
         sections: calculateSections(responseData.sections),
-        step: responseData.stepsCompleted === 1 ? 2 : 1,
         content: responseData.content?.length
           ? generateContentData(responseData.content)
           : [],

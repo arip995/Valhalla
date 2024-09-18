@@ -12,6 +12,7 @@ import CreateCourseStepOne from './CreateCourseStepOne/CreateCourseStepOne';
 import CreateCourseStepTwo from './CreateCourseStepTwo/CreateCourseStepTwo';
 import useCreateCourse from './useCreateCourse';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
+import { IconEye } from '@tabler/icons-react';
 
 const CreateCourse = () => {
   const { courseForm, handleSubmit, router, tab, setTab } =
@@ -36,9 +37,13 @@ const CreateCourse = () => {
                   orientation="vertical"
                   className="h-8"
                 />
-                <span className="font-medium">
-                  Step {courseForm.values.step || 1} of 2
-                </span>
+                {courseForm.values.stepsCompleted ===
+                2 ? null : (
+                  <span className="font-medium">
+                    Step {tab === 'details' ? 1 : 2 || 1}
+                    of 2
+                  </span>
+                )}
               </div>
               <form
                 onSubmit={courseForm.onSubmit(
@@ -62,6 +67,16 @@ const CreateCourse = () => {
                   }
                 )}
               >
+                <Button
+                  className="mr-2 lg:hidden"
+                  leftSection={<IconEye color="gray" />}
+                  variant="default"
+                  radius="xl"
+                  size="xs"
+                >
+                  Preview
+                </Button>
+
                 <Button
                   type="submit"
                   size="xs"
