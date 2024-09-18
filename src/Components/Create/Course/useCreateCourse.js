@@ -147,8 +147,45 @@ const useCreateCourse = () => {
       })),
     ];
   };
+  const handleSubmit = async values => {
+    try {
+      const { data } = await axiosInstance.post(
+        '/course/update',
+        values
+      );
+      const { data: responseData, message } = data;
+
+      if (!data?.ok) {
+        throw new Error('Failed to update course data');
+      }
+
+      courseForm.setValues(prevValues => ({
+        ...prevValues,
+        ...responseData,
+        sections: calculateSections(responseData.sections),
+        content: responseData.content?.length
+          ? generateContentData(responseData.content)
+          : [],
+        step: responseData.stepsCompleted === 1 ? 2 : 1,
+      }));
+      if (responseData.stepsCompleted === 1) {
+        setTab('content');
+      }
+
+      toast.success(message || 'Updated successfully');
+    } catch (error) {
+      console.error('Error updating course:', error);
+      toast.error(
+        error?.response?.data?.message ||
+          'Check your internet connection'
+      );
+    } finally {
+      courseForm.setValues({
+        isSaveClickedAtleastOnce: false,
+      });
+    }
+  };
   const fetchProduct = async () => {
-    courseForm.setValues({ loading: 1 });
     try {
       const { data } = await axiosInstance.get(
         `/course/get/${courseId}`
@@ -186,44 +223,6 @@ const useCreateCourse = () => {
         ...prevValues,
         loading: 0,
       }));
-    }
-  };
-  const handleSubmit = async values => {
-    try {
-      const { data } = await axiosInstance.post(
-        '/course/update',
-        values
-      );
-      const { data: responseData, message } = data;
-
-      if (!data?.ok) {
-        throw new Error('Failed to update course data');
-      }
-
-      courseForm.setValues(prevValues => ({
-        ...prevValues,
-        ...responseData,
-        sections: calculateSections(responseData.sections),
-        content: responseData.content?.length
-          ? generateContentData(responseData.content)
-          : [],
-        step: responseData.stepsCompleted === 1 ? 2 : 1,
-      }));
-      if (responseData.stepsCompleted === 1) {
-        setTab('content');
-      }
-
-      toast.success(message || 'Updated successfully');
-    } catch (error) {
-      console.error('Error updating course:', error);
-      toast.error(
-        error?.response?.data?.message ||
-          'Check your internet connection'
-      );
-    } finally {
-      courseForm.setValues({
-        isSaveClickedAtleastOnce: false,
-      });
     }
   };
 

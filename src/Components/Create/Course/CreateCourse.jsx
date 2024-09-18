@@ -11,10 +11,15 @@ import { Toaster } from 'react-hot-toast';
 import CreateCourseStepOne from './CreateCourseStepOne/CreateCourseStepOne';
 import CreateCourseStepTwo from './CreateCourseStepTwo/CreateCourseStepTwo';
 import useCreateCourse from './useCreateCourse';
+import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 
 const CreateCourse = () => {
   const { courseForm, handleSubmit, router, tab, setTab } =
     useCreateCourse();
+
+  if (courseForm.values.loading === -1) {
+    return <LayoutLoading />;
+  }
 
   return (
     <div className="flex h-screen w-full flex-col bg-gray-50">
