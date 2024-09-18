@@ -169,7 +169,7 @@ const CreateCourseAddEditLessonModal = ({
         }
       }}
     >
-      <div className="flex h-[calc(100vh-120px)] w-full flex-col">
+      <div className="flex h-[calc(100vh-60px)] w-full flex-col">
         <div className="flex w-full flex-1 flex-col overflow-y-auto p-3">
           <CreateCourseAddEditLesson
             form={updateLessonForm}
