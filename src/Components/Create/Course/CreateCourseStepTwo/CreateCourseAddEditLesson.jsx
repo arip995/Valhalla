@@ -8,6 +8,7 @@ import {
   Collapse,
   Input,
   Menu,
+  NumberInput,
   rem,
   Spoiler,
   Textarea,
@@ -288,6 +289,13 @@ const CreateCourseAddEditLesson = ({ form }) => {
           </Input.Error>
         )}
       </div>
+      <NumberInput
+        withAsterisk
+        allowNegative={false}
+        clampBehavior="strict"
+        label="Lesson Duration(in minutes)"
+        {...form.getInputProps('duration')}
+      />
 
       <div>
         <Button

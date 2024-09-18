@@ -53,6 +53,10 @@ const CreateCourseAddEditLessonModal = ({
         !values.isSaved && values.isSaveClickedAtleastOnce
           ? 'Save the content to continue'
           : null,
+      duration:
+        !values.duration && values.isSaveClickedAtleastOnce
+          ? 'Lesson duration is required'
+          : null,
     }),
     transformValues: values => {
       let newValues = { ...values };
