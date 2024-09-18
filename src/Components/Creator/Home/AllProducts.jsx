@@ -1,4 +1,4 @@
-import CreateProductModal from '@/Components/Common/Header/CreateProductModal';
+import CreateProductModal from '@/Components/Common/Modal/CreateProductModal';
 import {
   Paper,
   Text,
