@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import lockImage from '../../../../public/images/locked-content/lock.png';
-import LockedContentBuyButton from './LockedContentBuyButton';
+import ViewLockedContentBuyButton from './ViewLockedContentBuyButton';
 
-const LockedContentDetails = ({ data }) => {
+const ViewLockedContentDetails = ({ data }) => {
   return (
     <>
       <div className="vlc-view-product-container">
@@ -26,9 +26,9 @@ const LockedContentDetails = ({ data }) => {
           <div className="vlc-view-product-unlocked-state"></div>
         )}
       </div>
-      <LockedContentBuyButton data={data} />
+      <ViewLockedContentBuyButton data={data} />
     </>
   );
 };
 
-export default LockedContentDetails;
+export default ViewLockedContentDetails;

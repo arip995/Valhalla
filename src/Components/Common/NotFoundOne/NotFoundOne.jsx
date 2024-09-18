@@ -17,7 +17,7 @@ const NotFoundOne = () => {
             titleOne={
               <div className="flex select-none items-center gap-2 text-[30px] font-black text-black">
                 <img
-                  className="h-8 w-auto"
+                  className="h-12 w-auto"
                   src={Logo.src}
                   alt="Nexify"
                 />

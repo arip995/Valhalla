@@ -4,26 +4,26 @@ import NewScrollArea from '@/Components/Common/General/NewScrollArea';
 import ViewPlans1 from '@/Components/Common/General/ViewPlans1';
 import { statusErrorTextMapping } from '@/Constants/ProductListingContants';
 import { Drawer } from '@mantine/core';
-import { useEffect, useState } from 'react';
-import BuyButton from '../../lc/BuyButton';
+import { useState } from 'react';
+import BuyButton from '../../../Common/Buttons/BuyButton';
 
 const GLManagePlans = ({ data }) => {
   const [openBottomSheet, setOpenBottomSheet] =
     useState(false);
 
-  useEffect(() => {
-    if (
-      window.innerWidth < 768 &&
-      !openBottomSheet &&
-      data.status === 1
-    ) {
-      setOpenBottomSheet(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (
+  //     window.innerWidth < 768 &&
+  //     !openBottomSheet &&
+  //     data.status === 1
+  //   ) {
+  //     setOpenBottomSheet(true);
+  //   }
+  // }, []);
 
   return (
     <>
-      <div className="top-4 hidden flex-col gap-3 md:sticky md:flex">
+      <div className="top-4 flex-col gap-3 md:sticky md:flex">
         <ViewPlans1
           data={data}
           onPay={() => {}}
@@ -45,6 +45,7 @@ const GLManagePlans = ({ data }) => {
           </BuyButton>
         </div>
       </div>
+
       <Drawer
         trapFocus={false}
         lockScroll={false}

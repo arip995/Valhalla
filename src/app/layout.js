@@ -95,6 +95,9 @@ export const metadata = {
   title:
     'Nexify: all-in-one platform for your digital products and services',
   description: 'Monetize your content',
+  icons: {
+    icon: '/icon.png',
+  },
 };
 
 export default function RootLayout({ children }) {

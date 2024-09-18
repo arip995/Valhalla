@@ -1,9 +1,9 @@
 import FooterTwo from '@/Components/Common/Footer/FooterTwo';
 import Disclaimer from '@/Components/Common/Footer/Disclaimer';
 import ViewProfile from '@/Components/Common/General/ViewProfile';
-import LockedContentDetails from './LockedContentDetails';
+import ViewLockedContentDetails from './ViewLockedContentDetails';
 
-const LockedContent = ({ data }) => {
+const ViewLockedContentContainer = ({ data }) => {
   return (
     <div className="flex flex-1 flex-col justify-between">
       <div className="vlc-view-wrapper">
@@ -17,7 +17,7 @@ const LockedContent = ({ data }) => {
             username={data.creatorDetails.username}
             title={data.title}
           />
-          <LockedContentDetails data={data} />
+          <ViewLockedContentDetails data={data} />
 
           <Disclaimer />
         </div>
@@ -30,4 +30,4 @@ const LockedContent = ({ data }) => {
   );
 };
 
-export default LockedContent;
+export default ViewLockedContentContainer;

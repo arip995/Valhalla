@@ -72,6 +72,7 @@ const CreateLockedContent = ({ data }) => {
                 />
                 <Select
                   checkIconPosition="right"
+                  allowDeselect={false}
                   label="Category"
                   placeholder="Select Category"
                   data={CategoriesList}

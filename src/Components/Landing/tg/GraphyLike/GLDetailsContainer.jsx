@@ -7,7 +7,7 @@ const GLDetailsContainer = ({ data }) => {
   return (
     <>
       <div className="flex w-full justify-center">
-        <div className="block w-full max-w-[768px] gap-8 p-4 md:flex">
+        <div className="w-full max-w-[768px] gap-8 p-4 md:flex">
           <div className="w-full md:w-7/12">
             <ViewProfile
               profilePic={
@@ -47,7 +47,7 @@ const GLDetailsContainer = ({ data }) => {
             </div>
           </div>
 
-          <div className="w-full md:w-5/12">
+          <div className="hidden w-full md:w-5/12">
             <GLManagePlans data={data} />
           </div>
         </div>

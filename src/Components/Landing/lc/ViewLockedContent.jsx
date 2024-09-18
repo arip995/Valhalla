@@ -1,6 +1,6 @@
 import '../../../styles/view/locked-content.css';
 import ProductHeader from '../../Common/Header/Productheader';
-import LockedContent from './LockedContent';
+import ViewLockedContentContainer from './ViewLockedContentContainer';
 
 const ViewLockedContent = async ({ data, productId }) => {
   return (
@@ -9,8 +9,11 @@ const ViewLockedContent = async ({ data, productId }) => {
       suppressHydrationWarning
     >
       <ProductHeader data={data} />
-      <div className="flex flex-1 flex-col justify-between overflow-y-auto">
-        <LockedContent data={data} productId={productId} />
+      <div className="flex flex-1 flex-col justify-between">
+        <ViewLockedContentContainer
+          data={data}
+          productId={productId}
+        />
       </div>
     </div>
   );

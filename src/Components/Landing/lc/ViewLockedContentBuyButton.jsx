@@ -1,9 +1,9 @@
 'use client';
 
+import BuyButton from '@/Components/Common/Buttons/BuyButton';
 import { statusErrorTextMapping } from '@/Constants/ProductListingContants';
-import BuyButton from './BuyButton';
 
-const LockedContentBuyButton = ({ data }) => {
+const ViewLockedContentBuyButton = ({ data }) => {
   return (
     <BuyButton
       animate={data.status === 1 ? true : false}
@@ -17,4 +17,4 @@ const LockedContentBuyButton = ({ data }) => {
   );
 };
 
-export default LockedContentBuyButton;
+export default ViewLockedContentBuyButton;

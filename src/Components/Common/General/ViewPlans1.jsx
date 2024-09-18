@@ -1,5 +1,5 @@
 'use client';
-import BuyButton from '@/Components/Landing/lc/BuyButton';
+import BuyButton from '@/Components/Common/Buttons/BuyButton';
 import {
   CalculatePeriodString,
   CurrencySymbolMapping,
@@ -56,7 +56,6 @@ const ViewPlans1 = ({
                             plan.planType,
                             plan.days
                           )}`}
-                          {/* {plan.subscriptionPeriod} */}
                         </Text>
                         {plan.enableDiscountedPrice ? (
                           <Text

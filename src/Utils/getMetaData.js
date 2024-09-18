@@ -4,7 +4,7 @@ export const getProductData = async (path, tag) => {
     {
       next: {
         tags: [tag ? tag : path.split('/')[1]],
-        revalidate: 360000000,
+        revalidate: 36000000,
       },
     }
   );

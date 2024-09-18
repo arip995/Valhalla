@@ -1,4 +1,5 @@
 import ViewLockedContent from '@/Components/Landing/lc/ViewLockedContent';
+import ViewLockedContentClient from '@/Components/Landing/lc/ViewLockedContentClient';
 import { getMetaData } from '@/Utils/getMetaData';
 import { notFound } from 'next/navigation';
 
@@ -8,16 +9,21 @@ export async function generateMetadata({ params }, parent) {
   const previousImages =
     (await parent).openGraph?.images || [];
 
-  const pageUrl = `https://${process.env.NEXT_PUBLIC_HOST}/tg/${params.id}`;
+  const pageUrl = `https://${process.env.NEXT_PUBLIC_HOST}/lc/${params.id}`;
 
   return {
-    title: data.title,
-    description: data.description,
+    title:
+      data?.title ||
+      'Nexify: all-in-one platform for your digital products and services',
+    description:
+      data?.description || 'Monetize your content',
     keywords: [
       'Nexify',
       'Creator',
       'Course',
       'Telegram',
+      'Discord',
+      'Digital Product',
       'Payment',
     ],
     robots: {
@@ -34,21 +40,29 @@ export async function generateMetadata({ params }, parent) {
       },
     },
     openGraph: {
-      title: data.title,
-      description: data.description,
+      title:
+        data?.title ||
+        'Nexify: all-in-one platform for your digital products and services',
+      description:
+        data?.description || 'Monetize your content',
       domain: process.env.NEXT_PUBLIC_HOST,
       type: 'website',
       url: pageUrl,
-      author: data.creatorDetails.username,
+      author: data?.creatorDetails?.username || '',
       sitename: 'Nexify',
       images: [
         {
-          url: data.coverImage,
+          url: data?.coverImage,
           width: 500,
           height: 500,
         },
         {
-          url: data.creatorDetails?.profilePic,
+          url: data?.creatorDetails?.profilePic,
+          width: 500,
+          height: 500,
+        },
+        {
+          url: data?.creatorDetails?.profilePic,
           width: 500,
           height: 500,
         },
@@ -56,20 +70,23 @@ export async function generateMetadata({ params }, parent) {
       ],
     },
     twitter: {
-      title: data.title,
-      description: data.description,
+      title:
+        data?.title ||
+        'Nexify: all-in-one platform for your digital products and services',
+      description:
+        data?.description || 'Monetize your content',
       type: 'website',
       url: pageUrl,
-      author: data.creatorDetails.username,
+      author: data?.creatorDetails?.username || '',
       sitename: 'Nexify',
       images: [
         {
-          url: data.coverImage,
+          url: data?.coverImage,
           width: 500,
           height: 500,
         },
         {
-          url: data.creatorDetails?.profilePic,
+          url: data?.creatorDetails?.profilePic,
           width: 500,
           height: 500,
         },
@@ -80,11 +97,25 @@ export async function generateMetadata({ params }, parent) {
 }
 
 export default async function Page({ params }) {
-  const { data } = await getMetaData(params.id, 'lc');
-  if (!data?._id || data?.status === 5 || data.status === 2)
-    notFound();
+  try {
+    const { data } = await getMetaData(params.id, 'lc');
+    if (
+      !data?._id ||
+      data?.status === 5 ||
+      data?.status === 2
+    )
+      notFound();
 
-  return (
-    <ViewLockedContent data={data} productId={params.id} />
-  );
+    return (
+      <ViewLockedContent
+        data={data}
+        productId={params.id}
+      />
+    );
+  } catch (error) {
+    console.log(error);
+    return (
+      <ViewLockedContentClient productId={params.id} />
+    );
+  }
 }
