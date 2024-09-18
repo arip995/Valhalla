@@ -141,7 +141,7 @@ const CreateCourseAddEditLessonModal = ({
     <Modal
       opened={opened}
       title="Lesson"
-      lockScroll={false}
+      // lockScroll={false}
       closeOnEscape={false}
       trapFocus={false}
       fullScreen
