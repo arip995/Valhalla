@@ -7,11 +7,13 @@ import {
   IconLogout,
   IconShoppingCart,
 } from '@tabler/icons-react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import BannerOne from '../Banner/BannerOne';
 
 const ProductHeader = ({ data }) => {
   const router = useRouter();
+  const productType = usePathname().split('/');
   const { user, removeUser } = useUser(true);
   const [opened, setOpened] = useState(false);
 
@@ -109,6 +111,12 @@ const ProductHeader = ({ data }) => {
           )}
         </div>
       </div>
+      {data.creatorId === user._id ? (
+        <BannerOne
+          type="edit"
+          href={`/dashboard/${productType[1]}/${productType[2]}`}
+        />
+      ) : null}
       {!!opened && (
         <AuthModal
           signin

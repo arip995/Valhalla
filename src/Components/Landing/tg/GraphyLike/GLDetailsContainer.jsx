@@ -17,7 +17,7 @@ const GLDetailsContainer = ({ data }) => {
               name={`${data.creatorDetails.firstName} ${data.creatorDetails.lastName}`}
               username={data.creatorDetails.username}
             />
-            <div className="leading-title1 mb-8 mt-6 text-xl font-semibold text-black">
+            <div className="mb-8 mt-6 text-xl font-semibold text-black">
               {data.title}
             </div>
             <div className="flex-flex-col">

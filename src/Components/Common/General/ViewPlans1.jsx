@@ -20,7 +20,6 @@ const ViewPlans1 = ({
   data,
   onSelect = () => {},
   onPay = () => {},
-  isCreatorBuyer,
 }) => {
   const [selectedPlan, setSelectedPlan] = useState(
     data.subscriptionPlans?.[0]?._id
@@ -103,7 +102,7 @@ const ViewPlans1 = ({
         fullWidth
       >
         {data.status === 1
-          ? `${isCreatorBuyer ? 'Owner, Edit page' : 'Proceed to pay'}`
+          ? 'Proceed to pay'
           : statusErrorTextMapping[data.status]}
       </BuyButton>
     </div>

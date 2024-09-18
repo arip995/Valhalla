@@ -40,49 +40,11 @@ const TableHeaderItems = [
   { title: 'Sales', icon: IconReportAnalytics },
   { title: '', icon: '' },
 ];
-const TableBodyItems = [
-  {
-    src: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
-    title:
-      'Panda flex max-w-96 items-center gap-2 truncate truncate truncate truncate',
-    price: 999,
-    sales: 444,
-    revenue: 9876,
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
-    title: 'Arthur Melo',
-    price: 499,
-    sales: 198,
-    revenue: 65298,
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
-    title: 'Arthur Melo',
-    price: 799,
-    sales: 234,
-    revenue: 9784,
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1531590878845-12627191e687?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    title: 'Arthur Melo',
-    price: 9999,
-    sales: 221,
-    revenue: 88765,
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
-    title: 'Arthur Melo',
-    price: 8999,
-    sales: 435,
-    revenue: 99456,
-  },
-];
 
 const CustomTable = ({
   app = 'tg',
   tableHeaderItems = TableHeaderItems,
-  tableBodyItems = TableBodyItems,
+  tableBodyItems = [],
   onRowClick = () => {},
   showShare = true,
   showMenu = true,

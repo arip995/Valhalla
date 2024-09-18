@@ -3,17 +3,11 @@
 import NewScrollArea from '@/Components/Common/General/NewScrollArea';
 import ViewPlans1 from '@/Components/Common/General/ViewPlans1';
 import { statusErrorTextMapping } from '@/Constants/ProductListingContants';
-import useUser from '@/Utils/Hooks/useUser';
 import { Drawer } from '@mantine/core';
-import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import BuyButton from '../../lc/BuyButton';
 
 const GLManagePlans = ({ data }) => {
-  const { user } = useUser();
-  const router = useRouter();
-  const params = useParams();
-  const isCreatorBuyer = user?._id === data.creatorId;
   const [openBottomSheet, setOpenBottomSheet] =
     useState(false);
 
@@ -31,14 +25,8 @@ const GLManagePlans = ({ data }) => {
     <>
       <div className="top-4 hidden flex-col gap-3 md:sticky md:flex">
         <ViewPlans1
-          isCreatorBuyer={isCreatorBuyer}
           data={data}
-          onPay={() => {
-            if (isCreatorBuyer) {
-              router.push(`/dashboard/tg/${params.id}`);
-              return;
-            }
-          }}
+          onPay={() => {}}
           onSelect={plan => {
             console.log(plan);
           }}
@@ -71,14 +59,8 @@ const GLManagePlans = ({ data }) => {
       >
         <div className="flex flex-col gap-3 p-2">
           <ViewPlans1
-            isCreatorBuyer={isCreatorBuyer}
             data={data}
-            onPay={() => {
-              if (isCreatorBuyer) {
-                router.push(`/dashboard/tg/${params.id}`);
-                return;
-              }
-            }}
+            onPay={() => {}}
             onSelect={plan => {
               console.log(plan);
             }}

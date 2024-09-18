@@ -123,7 +123,7 @@ const EmptyStateOne = ({
       );
     }
 
-    const href = `/create/${app === APP_TYPES.TG ? 'telegram' : 'lockedcontent'}`;
+    const href = `/create/${app === APP_TYPES.TG ? 'tg' : 'lc'}`;
     return (
       <Link href={href}>
         <Button {...buttonProps}>

@@ -38,13 +38,13 @@ export const SidenavData = [
   {
     icon: IconLockDollar,
     label: 'Locked Content',
-    value: 'lockedcontent',
+    value: 'lc',
     path: '/app/lc',
   },
   {
     icon: IconBrandTelegram,
     label: 'Telegram',
-    value: 'telegram',
+    value: 'tg',
     path: '/app/tg',
   },
   {

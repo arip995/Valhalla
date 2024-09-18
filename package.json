@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "turbo": "next dev -H 0.0.0.0 -p 3000 --turbo",
-    "dev": "next dev -H 0.0.0.0 -p 3000",
+    "turbo": "next dev  --turbo",
+    "dev": "next dev ",
     "build": "next build",
     "start": "next start",
     "lint": "eslint ."

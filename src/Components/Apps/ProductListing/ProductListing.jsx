@@ -38,9 +38,9 @@ const ProductListing = () => {
   const createPath = useMemo(() => {
     switch (app) {
       case 'tg':
-        return '/create/telegram';
+        return '/create/tg';
       case 'lc':
-        return '/create/lockedcontent';
+        return '/create/lc';
       default:
         return null;
     }
