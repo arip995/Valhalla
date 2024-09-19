@@ -1,7 +1,7 @@
-import React from 'react';
-import { useForm } from '@mantine/form';
-import { Button, TextInput } from '@mantine/core';
 import { getUniqueId } from '@/Utils/Common';
+import { Button, Textarea } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import React from 'react';
 const Faq = ({ section, onSave = () => {} }) => {
   const faqForm = useForm({
     initialValues: {
@@ -35,12 +35,16 @@ const Faq = ({ section, onSave = () => {} }) => {
       onSubmit={faqForm.onSubmit(onSave)}
       className="mt-2 flex w-full flex-col gap-4"
     >
-      <TextInput
+      <Textarea
+        minRows={4}
+        resize="vertical"
         label="Question"
         name="question"
         {...faqForm.getInputProps('question')}
       />
-      <TextInput
+      <Textarea
+        minRows={4}
+        resize="vertical"
         label="Answer"
         name="answer"
         {...faqForm.getInputProps('answer')}
