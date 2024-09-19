@@ -80,16 +80,14 @@ const CreateCourseStepOne = ({
         id={courseForm.key('title')}
         {...courseForm.getInputProps('title')}
       />
-      {courseForm.values.description ? (
-        <CustomTipTapEditor
-          label="About your course"
-          id={courseForm.key('description')}
-          value={courseForm.values.description}
-          onUpdate={html => {
-            courseForm.setValues({ description: html });
-          }}
-        />
-      ) : null}
+      <CustomTipTapEditor
+        label="About your course"
+        id={courseForm.key('description')}
+        value={courseForm.values.description}
+        onUpdate={html => {
+          courseForm.setValues({ description: html });
+        }}
+      />
 
       {!!courseForm.errors?.description && (
         <Input.Error className="!mt-[-8px]">

@@ -75,7 +75,9 @@ const CreateCourse = () => {
                   radius="xl"
                   size="xs"
                 >
-                  Preview
+                  <span className="hidden lg:block">
+                    Preview
+                  </span>
                 </Button>
 
                 <Button

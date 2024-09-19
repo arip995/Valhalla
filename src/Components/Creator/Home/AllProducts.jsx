@@ -18,13 +18,13 @@ const ListData = [
     title: 'Locked Content',
     icon: IconLockDollar,
     color: 'violet',
-    path: '/app/lc',
+    path: '/create/lc',
   },
   {
     title: 'Telegram Community',
     icon: IconBrandTelegram,
     color: 'blue',
-    path: '/app/tg',
+    path: '/create/tg',
   },
   {
     title: 'Digital Products',
@@ -32,7 +32,6 @@ const ListData = [
     color: 'teal',
     path: '/app/dp',
   },
-
   {
     title: 'Courses',
     modal: true,
