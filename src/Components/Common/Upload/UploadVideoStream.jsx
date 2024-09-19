@@ -2,6 +2,7 @@ import axiosInstance from '@/Utils/AxiosInstance';
 import {
   ActionIcon,
   Divider,
+  Loader,
   RingProgress,
   Text,
   TextInput,
@@ -118,27 +119,34 @@ const UploadVideoStream = ({ onUpload, file = [] }) => {
     <div className="flex w-full flex-col items-center justify-center gap-4">
       {currentUpload?.[0]?.videoId || isUploading ? (
         <div className="flex w-full items-center justify-between rounded-xl border border-gray-300 bg-gray-50 p-3">
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2">
             {isUploading ? (
-              <RingProgress
-                sections={[
-                  { value: progress, color: 'violet' },
-                ]}
-                size={80}
-                thickness={3}
-                label={
-                  <Text
-                    c="violet"
-                    fw={400}
-                    ta="center"
-                    size="sm"
-                  >
-                    {`${progress}%`}
-                  </Text>
-                }
-                striped
-                animated
-              />
+              <>
+                <RingProgress
+                  sections={[
+                    { value: progress, color: 'violet' },
+                  ]}
+                  size={80}
+                  thickness={3}
+                  label={
+                    <Text
+                      c="violet"
+                      fw={400}
+                      ta="center"
+                      size="sm"
+                    >
+                      {progress == 100 ? (
+                        <Loader size="xs" />
+                      ) : (
+                        `${progress}%`
+                      )}
+                    </Text>
+                  }
+                  striped
+                  animated
+                />
+                {progress == 100 ? 'Saving video...' : null}
+              </>
             ) : (
               <div className="flex items-center gap-2">
                 <IconVideo

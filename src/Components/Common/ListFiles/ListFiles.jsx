@@ -43,7 +43,7 @@ const ListFiles = ({
                 <img
                   src={item.url}
                   color="gray"
-                  className="list-files-image h-10 w-10"
+                  className="list-files-image h-10 w-10 object-cover"
                   stroke={1}
                 />
               ) : (

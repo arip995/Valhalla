@@ -232,6 +232,10 @@ const useCreateCourse = () => {
   }, [courseForm.values.description]);
 
   useEffect(() => {
+    courseForm.validateField('coverImage');
+  }, [courseForm.values.coverImage]);
+
+  useEffect(() => {
     if (courseForm.values.hasDiscountedPrice) {
       courseForm.validateField('discountedPrice');
     }
