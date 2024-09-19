@@ -19,7 +19,9 @@ const RenderLesson = ({ lesson, index }) => {
       </div>
       <div className="flex items-center gap-2 text-xs">
         {lesson.status === 2 ? (
-          <Button variant="transparent">Preview</Button>
+          <Button size="xs" variant="transparent">
+            Preview
+          </Button>
         ) : null}
         {lesson.duration} min
       </div>

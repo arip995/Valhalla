@@ -1,5 +1,6 @@
 import { Accordion, Spoiler } from '@mantine/core';
 import RenderModulesAndLessons from './ViewCourseModuleAndLessons';
+import Image from 'next/image';
 
 const ViewCourseOne = ({ data }) => {
   console.log(data);
@@ -25,13 +26,14 @@ const ViewCourseOne = ({ data }) => {
         {data?.title}
       </h2>
       {!!data.coverImage && (
-        <div className="mx-auto mb-4 aspect-video w-full lg:max-w-2xl">
-          <img
-            src={data.coverImage}
-            className="h-auto w-full object-cover"
-            alt="Cover"
-          />
-        </div>
+        <Image
+          src={data.coverImage}
+          height={600}
+          width={800}
+          className="mx-auto mb-4 aspect-video w-full lg:max-w-xl"
+          alt=""
+          priority
+        />
       )}
       <div className="flex w-full flex-col items-center px-2">
         <div className="flex max-w-2xl flex-col">
@@ -50,7 +52,7 @@ const ViewCourseOne = ({ data }) => {
           )}
 
           <h3 className="mb-2 mt-4">Course content</h3>
-          <div className="gap1 mb-2 flex text-gray-700">
+          <div className="gap1 mb-2 flex text-sm text-gray-700">
             44 sections • 373 lectures • 61h 44m total
             length
           </div>
