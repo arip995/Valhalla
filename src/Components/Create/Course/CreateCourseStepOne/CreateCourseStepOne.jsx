@@ -132,6 +132,7 @@ const CreateCourseStepOne = ({
           }}
           uploadButtonText="Upload Image"
           showImagePreview
+          cropImage
           onlyOne
         />
         {!!courseForm.errors.coverImage && (
