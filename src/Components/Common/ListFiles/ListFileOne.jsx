@@ -27,6 +27,7 @@ const ListFileOne = ({
   link = '',
   showImagePreview = false,
   cropImage = false,
+  quality = 50,
   onChangeLink = () => {},
 }) => {
   const [files, setFiles] = useState(
@@ -46,7 +47,8 @@ const ListFileOne = ({
       const url = await handleFile(
         file,
         mimeTypes,
-        maxSize
+        maxSize,
+        quality
       );
       if (!url) {
         setFiles(prevFiles => {
