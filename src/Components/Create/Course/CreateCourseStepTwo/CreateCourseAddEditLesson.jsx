@@ -57,7 +57,7 @@ const LessonContent = ({ lessonType, form }) => {
       return (
         <ListFileOne
           uploadButtonText="Upload Audio"
-          maxSize={100}
+          maxSize={25}
           file={Compact([form.values.audio])}
           onlyOne
           mimeTypes={['audio/*']}

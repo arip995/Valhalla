@@ -24,7 +24,7 @@ const UploadButtonOne = ({
     setFileKey(prev => prev + 1);
     const data = await handleFile(
       file,
-      undefined,
+      mimeTypes,
       maxSize,
       undefined,
       true

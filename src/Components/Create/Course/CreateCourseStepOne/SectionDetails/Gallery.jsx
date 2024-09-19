@@ -6,7 +6,11 @@ const Gallery = ({ section, onSave = () => {} }) => {
   const [gallery, setGallery] = useState(section);
   return (
     <div className="mt-4 flex w-full flex-col gap-4">
-      <ListFileOne file={gallery} onUpdate={setGallery} />
+      <ListFileOne
+        file={gallery}
+        onUpdate={setGallery}
+        cropImage
+      />
       <div className="flex w-full justify-end">
         <Button
           color="black"

@@ -26,6 +26,7 @@ const ListFileOne = ({
   uploadButtonDescription,
   link = '',
   showImagePreview = false,
+  cropImage = false,
   onChangeLink = () => {},
 }) => {
   const [files, setFiles] = useState(
@@ -116,7 +117,7 @@ const ListFileOne = ({
               onUpload={onUpload}
               maxSize={maxSize}
               mimeTypes={mimeTypes}
-              crop
+              crop={cropImage}
             />
           )}
         </>

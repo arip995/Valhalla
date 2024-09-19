@@ -42,7 +42,7 @@ export const convertFileToBase64 = file => {
  */
 export const handleFile = async (
   file,
-  mimetypes = ['image'],
+  mimeTypes = ['image/'],
   maxFileSize = 1,
   quality = 50,
   validateOnly = false
@@ -50,12 +50,12 @@ export const handleFile = async (
   try {
     // Validate file type
     if (
-      !mimetypes.some(mime =>
+      !mimeTypes.some(mime =>
         file.type.startsWith(mime.slice(0, -1))
       )
     ) {
       throw new Error(
-        `Only ${mimetypes.map(item => item.slice(0, -1)).join(', ')} are allowed`
+        `Only ${mimeTypes.map(item => item.slice(0, -1)).join(', ')} are allowed`
       );
     }
 
