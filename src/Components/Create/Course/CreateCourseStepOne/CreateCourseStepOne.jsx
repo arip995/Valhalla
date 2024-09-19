@@ -114,13 +114,30 @@ const CreateCourseStepOne = ({
       <div className="flex flex-col">
         <Input.Label>Cover Image</Input.Label>
         <ListFileOne
+          file={
+            courseForm.values.coverImage
+              ? [
+                  {
+                    type: 'image',
+                    url: courseForm.values.coverImage,
+                  },
+                ]
+              : []
+          }
           onUpdate={files => {
-            console.log(files);
+            courseForm.setValues({
+              coverImage: files?.[0]?.url,
+            });
           }}
           uploadButtonText="Upload Image"
           showImagePreview
           onlyOne
         />
+        {!!courseForm.errors.coverImage && (
+          <Input.Error>
+            {courseForm.errors.coverImage}
+          </Input.Error>
+        )}
       </div>
       <Divider my="md" size="lg" />
       <div className="mb-2 text-xl font-bold">

@@ -62,6 +62,9 @@ const useCreateCourse = () => {
         if (!values.cta) {
           errors.cta = 'CTA is required';
         }
+        if (!values.coverImage) {
+          errors.coverImage = 'Cover image is required';
+        }
 
         if (!values.price) {
           errors.price = 'Price is required';

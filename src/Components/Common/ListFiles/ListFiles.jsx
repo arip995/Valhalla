@@ -34,7 +34,7 @@ const ListFiles = ({
     return (
       <div
         className="list-files-content-container"
-        key={item.name}
+        key={item.id || item.url || item.link || item.name}
       >
         <div className="list-files-image-container flex items-center gap-2">
           {isImage ? (
@@ -43,7 +43,7 @@ const ListFiles = ({
                 <img
                   src={item.url}
                   color="gray"
-                  className="list-files-image"
+                  className="list-files-image h-10 w-10"
                   stroke={1}
                 />
               ) : (

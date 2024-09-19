@@ -1,4 +1,3 @@
-import axiosInstance from '@/Utils/AxiosInstance';
 import { getUniqueId } from '@/Utils/Common';
 import { handleFile } from '@/Utils/HandleFiles';
 import {
@@ -90,25 +89,13 @@ const ListFileOne = ({
   };
 
   const onFileDelete = async url => {
-    const filteredFiles = files.filter(
-      item => item.url !== url
-    );
-    setFiles(filteredFiles);
-    try {
-      await axiosInstance.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/image/delete_image`,
-        {
-          key: url.replace(
-            'https://nexify-try.s3.ap-south-1.amazonaws.com/',
-            ''
-          ),
-        }
+    setFiles(prevFiles => {
+      const filteredFiles = prevFiles.filter(
+        item => item.url !== url
       );
-    } catch (error) {
-      toast.error(
-        'An error occurred while deleting the file'
-      );
-    }
+
+      return filteredFiles;
+    });
   };
 
   useEffect(() => {
