@@ -1,3 +1,12 @@
+import {
+  IconFileText,
+  IconFileTypography,
+  IconLink,
+  IconMusic,
+  IconPhoto,
+  IconVideo,
+} from '@tabler/icons-react';
+
 export const Categories = [
   {
     value: 'Finance',
@@ -255,4 +264,13 @@ export const CalculatePeriodString = (
 
 export const CurrencySymbolMapping = {
   rupees: '₹',
+};
+
+export const IconMapping = {
+  file: IconFileText,
+  image: IconPhoto,
+  video: IconVideo,
+  link: IconLink,
+  audio: IconMusic,
+  textImage: IconFileTypography,
 };

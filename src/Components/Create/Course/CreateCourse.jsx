@@ -14,6 +14,7 @@ import CreateCourseStepTwo from './CreateCourseStepTwo/CreateCourseStepTwo';
 import useCreateCourse from './useCreateCourse';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import { IconEye } from '@tabler/icons-react';
+import Link from 'next/link';
 
 const CreateCourse = () => {
   const { courseForm, handleSubmit, router, tab, setTab } =
@@ -70,14 +71,16 @@ const CreateCourse = () => {
                 )}
               >
                 <div className="flex gap-2">
-                  <ActionIcon
-                    size="md"
-                    variant="default"
-                    radius="xl"
-                    className="lg:hidden"
-                  >
-                    <IconEye color="gray" />
-                  </ActionIcon>
+                  <Link href="/course/66ebceddfe3bd3a96ac1e0b6">
+                    <ActionIcon
+                      size="md"
+                      variant="default"
+                      radius="xl"
+                      className="lg:hidden"
+                    >
+                      <IconEye color="gray" />
+                    </ActionIcon>
+                  </Link>
 
                   <Button
                     type="submit"

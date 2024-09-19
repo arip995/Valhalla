@@ -1,8 +1,8 @@
 import Disclaimer from '@/Components/Common/Footer/Disclaimer';
 import FooterTwo from '@/Components/Common/Footer/FooterTwo';
-import ViewProfile from '@/Components/Common/General/ViewProfile';
-import ClientSpoiler from './ClientSpoiler';
 import ViewPlans2 from '@/Components/Common/General/ViewPlans2';
+import ViewProfile from '@/Components/Common/General/ViewProfile';
+import { Spoiler } from '@mantine/core';
 
 const LTDetailsContainer = ({ data }) => {
   return (
@@ -39,14 +39,14 @@ const LTDetailsContainer = ({ data }) => {
                 Description
               </div> */}
               {!!data?.description && (
-                <ClientSpoiler>
+                <Spoiler>
                   <div
                     className="prose prose-sm prose-p:mx-0 [&>p]:my-4"
                     dangerouslySetInnerHTML={{
                       __html: data.description,
                     }}
                   ></div>
-                </ClientSpoiler>
+                </Spoiler>
               )}
             </div>
             <ViewPlans2 data={data} />
