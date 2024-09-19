@@ -14,6 +14,7 @@ const ListFiles = ({
   files,
   onDelete = () => {},
   showTrash = true,
+  showImagePreview = false,
 }) => {
   const ListOfItems = useCallback(({ item }) => {
     if (!item.type) return null;
@@ -37,11 +38,22 @@ const ListFiles = ({
       >
         <div className="list-files-image-container flex items-center gap-2">
           {isImage ? (
-            <IconPhoto
-              color="gray"
-              className="list-files-image"
-              stroke={1}
-            />
+            <>
+              {showImagePreview ? (
+                <img
+                  src={item.url}
+                  color="gray"
+                  className="list-files-image"
+                  stroke={1}
+                />
+              ) : (
+                <IconPhoto
+                  color="gray"
+                  className="list-files-image"
+                  stroke={1}
+                />
+              )}
+            </>
           ) : isVideo ? (
             <IconVideo
               color="gray"

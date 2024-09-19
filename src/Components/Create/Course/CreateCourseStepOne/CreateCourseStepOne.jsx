@@ -13,6 +13,7 @@ import Sections from './SectionDetails/Sections';
 import { discountPercentage } from '@/Utils/Common';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import CustomTipTapEditor from '@/Components/Common/Editor/CustomTipTapEditor';
+import ListFileOne from '@/Components/Common/ListFiles/ListFileOne';
 
 const CreateCourseStepOne = ({
   courseForm,
@@ -110,6 +111,17 @@ const CreateCourseStepOne = ({
         id={courseForm.key('cta')}
         {...courseForm.getInputProps('cta')}
       />
+      <div className="flex flex-col">
+        <Input.Label>Cover Image</Input.Label>
+        <ListFileOne
+          onUpdate={files => {
+            console.log(files);
+          }}
+          uploadButtonText="Upload Image"
+          showImagePreview
+          onlyOne
+        />
+      </div>
       <Divider my="md" size="lg" />
       <div className="mb-2 text-xl font-bold">
         Set Pricing

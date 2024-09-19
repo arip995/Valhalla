@@ -152,12 +152,13 @@ function CropModal({
       <Modal
         opened={open}
         onClose={onClose}
-        overlayProps={{
-          blur: 20,
-        }}
         size="lg"
         title={title}
         keepMounted={false}
+        trapFocus={false}
+        overlayProps={{
+          blur: 20,
+        }}
       >
         <div className="mt-4">
           <div className="flex w-full justify-center bg-black">
