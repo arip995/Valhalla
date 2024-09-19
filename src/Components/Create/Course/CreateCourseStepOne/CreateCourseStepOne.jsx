@@ -109,7 +109,10 @@ const CreateCourseStepOne = ({
         id={courseForm.key('cta')}
         {...courseForm.getInputProps('cta')}
       />
-      <div className="flex flex-col">
+      <div
+        className="flex flex-col"
+        id={courseForm.key('coverImage')}
+      >
         <Input.Label>Cover Image</Input.Label>
         <ListFileOne
           file={

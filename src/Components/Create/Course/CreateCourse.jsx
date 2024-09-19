@@ -1,6 +1,7 @@
 'use client';
 import PreviewOne from '@/Components/Common/Preview/PreviewOne';
 import {
+  ActionIcon,
   Button,
   CloseButton,
   Divider,
@@ -61,43 +62,42 @@ const CreateCourse = () => {
                           courseForm.key(firstErrorPath)
                         )
                         ?.scrollIntoView({
-                          block: 'center',
+                          block: 'start',
                           behavior: 'smooth',
                         });
                     }
                   }
                 )}
               >
-                <Button
-                  className="mr-2 lg:hidden"
-                  leftSection={<IconEye color="gray" />}
-                  variant="default"
-                  radius="xl"
-                  size="xs"
-                >
-                  <span className="hidden lg:block">
-                    Preview
-                  </span>
-                </Button>
+                <div className="flex gap-2">
+                  <ActionIcon
+                    size="md"
+                    variant="default"
+                    radius="xl"
+                    className="lg:hidden"
+                  >
+                    <IconEye color="gray" />
+                  </ActionIcon>
 
-                <Button
-                  type="submit"
-                  size="xs"
-                  radius="xl"
-                  color="black"
-                  className="transition-all hover:shadow-md"
-                  onClick={() => {
-                    courseForm.setValues({
-                      isSaveClickedAtleastOnce: true,
-                    });
-                  }}
-                >
-                  {courseForm.values.stepsCompleted === 1
-                    ? 'Publish course'
-                    : courseForm.values.stepsCompleted > 1
-                      ? 'Publish Course'
-                      : 'Save and Continue'}
-                </Button>
+                  <Button
+                    type="submit"
+                    size="xs"
+                    radius="xl"
+                    color="black"
+                    className="transition-all hover:shadow-md"
+                    onClick={() => {
+                      courseForm.setValues({
+                        isSaveClickedAtleastOnce: true,
+                      });
+                    }}
+                  >
+                    {courseForm.values.stepsCompleted === 1
+                      ? 'Publish course'
+                      : courseForm.values.stepsCompleted > 1
+                        ? 'Publish Course'
+                        : 'Save and Continue'}
+                  </Button>
+                </div>
               </form>
             </div>
           </div>
