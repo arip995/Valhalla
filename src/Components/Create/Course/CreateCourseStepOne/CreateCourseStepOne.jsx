@@ -88,7 +88,6 @@ const CreateCourseStepOne = ({
           courseForm.setValues({ description: html });
         }}
       />
-
       {!!courseForm.errors?.description && (
         <Input.Error className="!mt-[-8px]">
           {courseForm.errors?.description}
