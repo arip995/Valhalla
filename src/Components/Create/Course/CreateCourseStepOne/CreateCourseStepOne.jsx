@@ -62,9 +62,11 @@ const CreateCourseStepOne = ({
       sections: updatedSections,
     });
   };
+
   if (courseForm.values.loading === -1) {
     return <LayoutLoading />;
   }
+
   return (
     <form
       id="my-form"
