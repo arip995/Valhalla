@@ -10,7 +10,7 @@ const PreviewOne = ({
   setIsPreviewScreen,
   isPreviewScreen,
 }) => {
-  const [viewMode, setViewMode] = useState('desktop');
+  const [isDeskTop, setIsDesktop] = useState(false);
 
   return (
     <div
@@ -31,7 +31,7 @@ const PreviewOne = ({
       </div>
       <div
         className={`relative z-10 mx-auto p-4 md:p-10 ${
-          viewMode === 'mobile' ? 'max-w-[450px]' : 'w-full'
+          isDeskTop ? 'w-full' : 'max-w-[450px]'
         }`}
       >
         <div className="relative mx-auto w-full max-w-3xl overflow-hidden rounded-lg">
@@ -42,16 +42,16 @@ const PreviewOne = ({
             <div className="flex items-center space-x-4">
               {/* View Mode Icons */}
               <IconDeviceDesktop
-                onClick={() => setViewMode('desktop')}
+                onClick={() => setIsDesktop(true)}
                 className={`cursor-pointer text-gray-400 ${
-                  viewMode === 'desktop' ? 'text-white' : ''
+                  isDeskTop ? 'text-white' : ''
                 }`}
                 size={20}
               />
               <IconDeviceMobile
-                onClick={() => setViewMode('mobile')}
+                onClick={() => setIsDesktop(false)}
                 className={`cursor-pointer text-gray-400 ${
-                  viewMode === 'mobile' ? 'text-white' : ''
+                  !isDeskTop ? 'text-white' : ''
                 }`}
                 size={20}
               />
@@ -80,7 +80,7 @@ const PreviewOne = ({
             <div className="relative h-[calc(100vh-6rem)] overflow-y-auto overflow-x-hidden rounded-b-2xl border-b-8 border-l-8 border-r-8 border-gray-800 bg-white lg:h-[calc(100vh-16rem)]">
               <div
                 className={
-                  viewMode === 'desktop'
+                  isDeskTop
                     ? 'absolute left-1/2 top-[35%] h-[1080px] w-[1920px] origin-center -translate-x-1/2 -translate-y-1/2 scale-[0.52083]'
                     : ''
                 }
