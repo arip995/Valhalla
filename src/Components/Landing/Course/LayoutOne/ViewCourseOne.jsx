@@ -83,7 +83,7 @@ const ViewCourseOne = ({ data }) => {
         </div>
         <ViewSections sections={data.sections} />
       </div>
-      <FooterTwo className="mt-4" />
+      <FooterTwo className="mt-8" />
     </div>
   );
 };
