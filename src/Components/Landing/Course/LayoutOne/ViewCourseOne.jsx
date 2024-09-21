@@ -2,6 +2,7 @@ import { Accordion, Spoiler } from '@mantine/core';
 import RenderModulesAndLessons from './ViewCourseModuleAndLessons';
 import Image from 'next/image';
 import ViewSections from '@/Components/Common/ViewSections/ViewSections';
+import BuyButton from '@/Components/Common/Buttons/BuyButton';
 
 const ViewCourseOne = ({ data }) => {
   console.log(data);
@@ -23,7 +24,7 @@ const ViewCourseOne = ({ data }) => {
 
   return (
     <div className="flex w-full max-w-none flex-col items-center p-2 md:p-4">
-      <div className="flex max-w-2xl flex-col gap-4">
+      <div className="flex max-w-2xl flex-col gap-8">
         <h2 className="text-center">{data?.title}</h2>
         {!!data.coverImage && (
           <Image
@@ -35,6 +36,20 @@ const ViewCourseOne = ({ data }) => {
             priority
           />
         )}
+        <BuyButton size="md">
+          {!!data.discountedPrice && 'Actual Price'} ₹
+          <span
+            className={`${data.discountedPrice ? 'line-through' : ''} mr-2`}
+          >
+            {data.price ? data.price : ''}
+          </span>
+          {!!data.discountedPrice && (
+            <span className="mr-2 font-bold">
+              (₹{data.discountedPrice})
+            </span>
+          )}
+          {data.cta}
+        </BuyButton>
         <div className="flex w-full flex-col items-center">
           <div className="flex w-full flex-col">
             {!!data?.description && (
@@ -58,7 +73,7 @@ const ViewCourseOne = ({ data }) => {
             </div>
             <Accordion
               chevronPosition="right"
-              variant="separated"
+              variant="contained"
               multiple
               defaultValue={[
                 data.content[0]._id || data.content[0].id,

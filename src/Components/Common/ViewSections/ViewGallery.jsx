@@ -1,16 +1,31 @@
 import { Carousel } from '@mantine/carousel';
-import React from 'react';
 
-const ViewGallery = ({ values }) => {
-  if (!values?.length) return null;
+const ViewGallery = ({ value }) => {
+  if (!value?.length) return null;
 
   return (
-    <Carousel withIndicators height={200}>
-      <Carousel.Slide>1</Carousel.Slide>
-      <Carousel.Slide>2</Carousel.Slide>
-      <Carousel.Slide>3</Carousel.Slide>
-      {/* ...other slides */}
-    </Carousel>
+    <div className="flex w-full flex-col gap-4">
+      <h3>Gallery</h3>
+      <div className="overflow-hidden rounded-xl">
+        <Carousel
+          withIndicators
+          loop
+          className="aspect-video shadow-sm"
+        >
+          {value.map((item, index) => {
+            return (
+              <Carousel.Slide key={index}>
+                <img
+                  src={item.url}
+                  alt=""
+                  className="object-cover"
+                />
+              </Carousel.Slide>
+            );
+          })}
+        </Carousel>
+      </div>
+    </div>
   );
 };
 

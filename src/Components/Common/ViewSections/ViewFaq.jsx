@@ -9,8 +9,7 @@ const ViewFaq = ({ value }) => {
       <h3>FAQs</h3>
       <Accordion
         chevronPosition="right"
-        variant="separated"
-        multiple
+        variant="contained"
       >
         {value.map((item, index) => (
           <Accordion.Item

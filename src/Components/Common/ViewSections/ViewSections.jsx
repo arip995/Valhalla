@@ -7,11 +7,13 @@ import ViewAbout from './ViewAbout';
 import ViewFaq from './ViewFaq';
 import ViewGallery from './ViewGallery';
 import ViewTestimonial from './ViewTestimonial';
+import ViewSocial from './ViewSocial';
 
 export const SECTION_COMPONENT_MAPPING = {
-  //   benifit: ViewBenifit,
-  //   highlight: ViewHighlight,
-  //   about: ViewAbout,
+  benifit: ViewBenifit,
+  highlight: ViewHighlight,
+  social: ViewSocial,
+  about: ViewAbout,
   faq: ViewFaq,
   gallery: ViewGallery,
   testimonial: ViewTestimonial,
@@ -20,7 +22,7 @@ export const SECTION_COMPONENT_MAPPING = {
 const ViewSections = ({ sections }) => {
   if (!sections?.length) return null;
   return (
-    <div className="mt-8 flex w-full flex-col items-center gap-12">
+    <div className="flex w-full flex-col items-center gap-12">
       {sections.map((section, index) => {
         if (!section.isEnabled) return null;
         const Component =

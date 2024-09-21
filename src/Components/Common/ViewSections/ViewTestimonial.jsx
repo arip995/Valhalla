@@ -3,12 +3,13 @@ import React from 'react';
 
 const ViewTestimonial = ({ value }) => {
   if (!value?.length) return null;
+
   return (
     <div className="flex w-full flex-col gap-4">
       <h3>Testimonials</h3>
       <div className="flex flex-wrap gap-4">
         {value.map((item, index) => (
-          <Paper shadow="sm" p="md" key={index}>
+          <Paper withBorder shadow="sm" p="md" key={index}>
             <div className="flex items-center gap-2 font-semibold">
               <img
                 className="h-20 w-20 rounded-full"
