@@ -34,13 +34,13 @@ const ViewCourseOne = ({ data }) => {
           />
         )}
         <BuyButton size="md" animate={false}>
-          {!!data.discountedPrice && 'Actual Price'} ₹
+          {!!data.hasDiscountedPrice && 'Actual Price'} ₹
           <span
-            className={`${data.discountedPrice ? 'line-through' : ''} mr-2`}
+            className={`${data.hasDiscountedPrice ? 'line-through' : ''} mr-2`}
           >
             {data.price ? data.price : ''}
           </span>
-          {!!data.discountedPrice && (
+          {!!data.hasDiscountedPrice && (
             <span className="mr-2 font-bold">
               (₹{data.discountedPrice})
             </span>
