@@ -36,7 +36,7 @@ const ViewCourseOne = ({ data }) => {
             priority
           />
         )}
-        <BuyButton size="md">
+        <BuyButton size="md" animate={false}>
           {!!data.discountedPrice && 'Actual Price'} ₹
           <span
             className={`${data.discountedPrice ? 'line-through' : ''} mr-2`}
