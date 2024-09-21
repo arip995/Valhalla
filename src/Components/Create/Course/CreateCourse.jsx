@@ -1,5 +1,7 @@
 'use client';
+import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import PreviewOne from '@/Components/Common/Preview/PreviewOne';
+import ViewCourseOne from '@/Components/Landing/Course/LayoutOne/ViewCourseOne';
 import {
   ActionIcon,
   Button,
@@ -7,18 +9,23 @@ import {
   Divider,
   Tabs,
 } from '@mantine/core';
+import { IconEye } from '@tabler/icons-react';
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
 import CreateCourseStepOne from './CreateCourseStepOne/CreateCourseStepOne';
 import CreateCourseStepTwo from './CreateCourseStepTwo/CreateCourseStepTwo';
 import useCreateCourse from './useCreateCourse';
-import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
-import { IconEye } from '@tabler/icons-react';
-import Link from 'next/link';
 
 const CreateCourse = () => {
-  const { courseForm, handleSubmit, router, tab, setTab } =
-    useCreateCourse();
+  const {
+    courseForm,
+    handleSubmit,
+    router,
+    tab,
+    setTab,
+    isPreviewScreen,
+    setIsPreviewScreen,
+  } = useCreateCourse();
 
   if (courseForm.values.loading === -1) {
     return <LayoutLoading />;
@@ -27,7 +34,9 @@ const CreateCourse = () => {
   return (
     <div className="flex h-screen w-full flex-col bg-gray-50">
       <div className="flex h-full w-full flex-col sm:flex-row">
-        <div className="flex h-screen w-full flex-col bg-white shadow-md lg:w-7/12">
+        <div
+          className={`flex h-screen w-full flex-col bg-white shadow-md lg:w-7/12 ${isPreviewScreen ? 'hidden' : 'flex'}`}
+        >
           <div className="flex w-full flex-col gap-2 border-b border-gray-200 p-3">
             <div className="flex w-full items-center justify-between gap-4 text-sm text-gray-600">
               <div className="flex items-center gap-4">
@@ -71,16 +80,19 @@ const CreateCourse = () => {
                 )}
               >
                 <div className="flex gap-2">
-                  <Link href="/course/66ebceddfe3bd3a96ac1e0b6">
-                    <ActionIcon
-                      size="md"
-                      variant="default"
-                      radius="xl"
-                      // className="lg:hidden"
-                    >
-                      <IconEye color="gray" />
-                    </ActionIcon>
-                  </Link>
+                  {/* <Link href="/course/66ebceddfe3bd3a96ac1e0b6"> */}
+                  <ActionIcon
+                    size="md"
+                    variant="default"
+                    radius="xl"
+                    onClick={() => {
+                      setIsPreviewScreen(prev => !prev);
+                    }}
+                    // className="lg:hidden"
+                  >
+                    <IconEye color="gray" />
+                  </ActionIcon>
+                  {/* </Link> */}
                   <Button
                     type="submit"
                     size="xs"
@@ -151,10 +163,13 @@ const CreateCourse = () => {
             Preview
           </div>
         </PreviewTwo> */}
-        <PreviewOne className="flex-1 bg-white p-4">
-          <div className="text-lg font-semibold text-gray-700">
-            Preview
-          </div>
+
+        <PreviewOne
+          className="flex-1 bg-white p-4"
+          setIsPreviewScreen={setIsPreviewScreen}
+          isPreviewScreen={isPreviewScreen}
+        >
+          <ViewCourseOne data={courseForm.values} />
         </PreviewOne>
       </div>
       <Toaster />

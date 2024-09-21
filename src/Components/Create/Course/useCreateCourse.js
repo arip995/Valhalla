@@ -6,11 +6,15 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { SectionTypes } from './CreateCourseStepOne/SectionDetails/Sections';
 import { getUniqueId } from '@/Utils/Common';
+import { useMediaQuery } from '@mantine/hooks';
 
 const useCreateCourse = () => {
   const router = useRouter();
   const courseId = usePathname().split('/')[3];
+  const isDesktop = useMediaQuery('(min-width: 48em)');
   const [tab, setTab] = useState(null);
+  const [isPreviewScreen, setIsPreviewScreen] =
+    useState(false);
   const courseForm = useForm({
     initialValues: {
       isSaveClickedAtleastOnce: false,
@@ -242,6 +246,12 @@ const useCreateCourse = () => {
   }, [courseForm.values.price]);
 
   useEffect(() => {
+    if (isDesktop) {
+      setIsPreviewScreen(false);
+    }
+  }, [isDesktop]);
+
+  useEffect(() => {
     fetchProduct();
   }, []);
 
@@ -251,6 +261,8 @@ const useCreateCourse = () => {
     router,
     tab,
     setTab,
+    isPreviewScreen,
+    setIsPreviewScreen,
   };
 };
 

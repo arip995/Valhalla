@@ -1,8 +1,21 @@
-import React from 'react';
+import {
+  IconX,
+  IconDeviceDesktop,
+  IconDeviceMobile,
+} from '@tabler/icons-react';
+import React, { useState } from 'react';
 
-const PreviewOne = ({ children }) => {
+const PreviewOne = ({
+  children,
+  setIsPreviewScreen,
+  isPreviewScreen,
+}) => {
+  const [viewMode, setViewMode] = useState('desktop'); // State to track view mode
+
   return (
-    <div className="relative hidden h-full w-full overflow-hidden lg:block">
+    <div
+      className={`relative h-full w-full overflow-hidden lg:block ${isPreviewScreen ? 'block' : 'hidden'}`}
+    >
       <div className="absolute inset-0 flex flex-col">
         {[...Array(20)].map((_, rowIndex) => (
           <div key={rowIndex} className="flex flex-grow">
@@ -15,10 +28,44 @@ const PreviewOne = ({ children }) => {
           </div>
         ))}
       </div>
-      <div className="relative z-10 p-4 md:p-10">
+      <div
+        className={`relative z-10 mx-auto p-4 md:p-10 ${
+          viewMode === 'mobile' ? 'max-w-[450px]' : 'w-full'
+        }`}
+      >
         <div className="relative mx-auto w-full max-w-3xl overflow-hidden rounded-lg">
-          <div className="overflow-hidden rounded-lg">
-            {/* Browser toolbar */}
+          <div className="flex items-center justify-between bg-gray-800 px-2 py-1">
+            <div className="text-lg font-bold text-white">
+              Preview
+            </div>
+            <div className="flex items-center space-x-4">
+              {/* View Mode Icons */}
+              <IconDeviceDesktop
+                onClick={() => setViewMode('desktop')}
+                className={`cursor-pointer text-gray-400 ${
+                  viewMode === 'desktop' ? 'text-white' : ''
+                }`}
+                size={20}
+              />
+              <IconDeviceMobile
+                onClick={() => setViewMode('mobile')}
+                className={`cursor-pointer text-gray-400 ${
+                  viewMode === 'mobile' ? 'text-white' : ''
+                }`}
+                size={20}
+              />
+            </div>
+            <div className="lg:hidden">
+              <IconX
+                onClick={() => {
+                  setIsPreviewScreen(prev => !prev);
+                }}
+                className="cursor-pointer text-gray-400"
+                size={20}
+              />
+            </div>
+          </div>
+          <div className="relative w-full overflow-hidden rounded-b-lg">
             <div className="flex items-center bg-gray-800 px-2 py-1">
               <div className="mr-2 flex space-x-2">
                 <div className="h-2 w-2 rounded-full bg-red-500"></div>
@@ -29,10 +76,9 @@ const PreviewOne = ({ children }) => {
                 nexify.club/course/
               </div>
             </div>
-
-            {/* Content area */}
-            <div className="h-[calc(100vh-6rem)] rounded-b-2xl border-b-8 border-l-8 border-r-8 border-gray-800 bg-white p-4 md:h-[calc(100vh-18rem)]">
-              {/* Render your content here */}
+            <div
+              className={`h-[calc(100vh-6rem)] overflow-y-auto overflow-x-hidden rounded-b-2xl border-b-8 border-l-8 border-r-8 border-gray-800 bg-white p-4 md:h-[calc(100vh-18rem)]`}
+            >
               {children}
             </div>
           </div>
