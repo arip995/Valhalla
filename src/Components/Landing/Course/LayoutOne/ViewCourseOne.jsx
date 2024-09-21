@@ -58,7 +58,11 @@ const ViewCourseOne = ({ data }) => {
           </div>
           <Accordion
             chevronPosition="right"
-            variant="contained"
+            variant="separated"
+            multiple
+            defaultValue={[
+              data.content[0]._id || data.content[0].id,
+            ]}
           >
             <RenderModulesAndLessons
               content={data.content}

@@ -102,7 +102,6 @@ export default async function Page({ params }) {
     ) {
       notFound();
     }
-    console.log(data._id);
 
     return (
       <ViewTelegram

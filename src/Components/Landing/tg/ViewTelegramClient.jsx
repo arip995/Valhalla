@@ -30,7 +30,8 @@ const ViewTelegramClient = ({ productId }) => {
 
   if (loading) return <LayoutLoading />;
 
-  if (!data?._id) return <NotFound />;
+  if (!data?._id || data?.status === 5 || data.status === 2)
+    return <NotFound />;
 
   return (
     <div className="flex h-screen w-full flex-col bg-white">
