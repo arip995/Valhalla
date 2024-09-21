@@ -1,6 +1,7 @@
 import { Accordion, Spoiler } from '@mantine/core';
 import RenderModulesAndLessons from './ViewCourseModuleAndLessons';
 import Image from 'next/image';
+import ViewSections from '@/Components/Common/ViewSections/ViewSections';
 
 const ViewCourseOne = ({ data }) => {
   console.log(data);
@@ -21,54 +22,55 @@ const ViewCourseOne = ({ data }) => {
   // }
 
   return (
-    <div className="flex w-full max-w-none flex-col gap-4">
-      <h2 className="mx-auto mt-4 max-w-2xl px-2 text-center">
-        {data?.title}
-      </h2>
-      {!!data.coverImage && (
-        <Image
-          src={data.coverImage}
-          height={600}
-          width={800}
-          className="mx-auto mb-4 aspect-video w-full lg:max-w-xl"
-          alt=""
-          priority
-        />
-      )}
-      <div className="flex w-full flex-col items-center px-2">
-        <div className="flex max-w-2xl flex-col">
-          {!!data?.description && (
-            <>
-              <h3 className="mb-2">Description</h3>
-              <Spoiler maxHeight={300}>
-                <div
-                  className="prose"
-                  dangerouslySetInnerHTML={{
-                    __html: data.description,
-                  }}
-                ></div>
-              </Spoiler>
-            </>
-          )}
+    <div className="flex w-full max-w-none flex-col items-center p-2 md:p-4">
+      <div className="flex max-w-2xl flex-col gap-4">
+        <h2 className="text-center">{data?.title}</h2>
+        {!!data.coverImage && (
+          <Image
+            src={data.coverImage}
+            height={600}
+            width={800}
+            className="aspect-video w-screen md:w-full"
+            alt=""
+            priority
+          />
+        )}
+        <div className="flex w-full flex-col items-center">
+          <div className="flex w-full flex-col">
+            {!!data?.description && (
+              <>
+                <h3 className="mb-2">Description</h3>
+                <Spoiler maxHeight={300}>
+                  <div
+                    className="prose"
+                    dangerouslySetInnerHTML={{
+                      __html: data.description,
+                    }}
+                  ></div>
+                </Spoiler>
+              </>
+            )}
 
-          <h3 className="mb-2 mt-4">Course content</h3>
-          <div className="gap1 mb-2 flex text-sm text-gray-700">
-            44 sections • 373 lectures • 61h 44m total
-            length
+            <h3 className="mb-2 mt-4">Program Structure</h3>
+            <div className="gap1 mb-2 flex text-sm text-gray-700">
+              44 sections • 373 lectures • 61h 44m total
+              length
+            </div>
+            <Accordion
+              chevronPosition="right"
+              variant="separated"
+              multiple
+              defaultValue={[
+                data.content[0]._id || data.content[0].id,
+              ]}
+            >
+              <RenderModulesAndLessons
+                content={data.content}
+              />
+            </Accordion>
           </div>
-          <Accordion
-            chevronPosition="right"
-            variant="separated"
-            multiple
-            defaultValue={[
-              data.content[0]._id || data.content[0].id,
-            ]}
-          >
-            <RenderModulesAndLessons
-              content={data.content}
-            />
-          </Accordion>
         </div>
+        <ViewSections sections={data.sections} />
       </div>
     </div>
   );

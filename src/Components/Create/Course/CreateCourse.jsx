@@ -76,12 +76,11 @@ const CreateCourse = () => {
                       size="md"
                       variant="default"
                       radius="xl"
-                      className="lg:hidden"
+                      // className="lg:hidden"
                     >
                       <IconEye color="gray" />
                     </ActionIcon>
                   </Link>
-
                   <Button
                     type="submit"
                     size="xs"

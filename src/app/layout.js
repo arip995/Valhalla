@@ -8,6 +8,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { ModalsProvider } from '@mantine/modals';
 import './globals.css';
 import '@mantine/core/styles/global.css';
+import '@mantine/carousel/styles.css';
 import '@mantine/core/styles/UnstyledButton.css';
 import '@mantine/core/styles/Button.css';
 import '@mantine/core/styles/ScrollArea.css';
