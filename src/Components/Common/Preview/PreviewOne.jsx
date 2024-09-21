@@ -77,8 +77,16 @@ const PreviewOne = ({
                 nexify.club/course/
               </div>
             </div>
-            <div className="h-[calc(100vh-6rem)] overflow-y-auto overflow-x-hidden rounded-b-2xl border-b-8 border-l-8 border-r-8 border-gray-800 bg-white p-4 md:h-[calc(100vh-18rem)]">
-              {children}
+            <div className="relative h-[calc(100vh-6rem)] overflow-y-auto overflow-x-hidden rounded-b-2xl border-b-8 border-l-8 border-r-8 border-gray-800 bg-white lg:h-[calc(100vh-16rem)]">
+              <div
+                className={
+                  viewMode === 'desktop'
+                    ? 'absolute left-1/2 top-[35%] h-[1080px] w-[1920px] origin-center -translate-x-1/2 -translate-y-1/2 scale-[0.52083]'
+                    : ''
+                }
+              >
+                {children}
+              </div>
             </div>
           </div>
         </div>

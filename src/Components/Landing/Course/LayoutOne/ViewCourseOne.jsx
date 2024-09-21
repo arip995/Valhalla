@@ -28,7 +28,7 @@ const ViewCourseOne = ({ data }) => {
             src={data.coverImage}
             height={600}
             width={800}
-            className="aspect-video w-screen md:w-full"
+            className="aspect-video md:w-full"
             alt=""
             priority
           />
