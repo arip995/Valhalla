@@ -10,7 +10,7 @@ import React from 'react';
 
 const ViewHighlight = () => {
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <div className="grid grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-4">
       <div className="flex items-center space-x-3">
         <IconVideo className="h-6 w-6 min-w-max text-blue-500" />
         <p className="font-thin text-gray-700">
@@ -20,7 +20,7 @@ const ViewHighlight = () => {
       <div className="flex items-center space-x-3">
         <IconInfinity className="h-6 w-6 min-w-max text-green-500" />
         <p className="font-thin text-gray-700">
-          Lifietime access
+          Lifetime access
         </p>
       </div>
       <div className="flex items-center space-x-3">

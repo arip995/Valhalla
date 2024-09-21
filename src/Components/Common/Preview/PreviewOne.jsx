@@ -10,12 +10,13 @@ const PreviewOne = ({
   setIsPreviewScreen,
   isPreviewScreen,
 }) => {
-  const [viewMode, setViewMode] = useState('desktop'); // State to track view mode
+  const [viewMode, setViewMode] = useState('desktop');
 
   return (
     <div
       className={`relative h-full w-full overflow-hidden lg:block ${isPreviewScreen ? 'block' : 'hidden'}`}
     >
+      {/* For the background stripes */}
       <div className="absolute inset-0 flex flex-col">
         {[...Array(20)].map((_, rowIndex) => (
           <div key={rowIndex} className="flex flex-grow">
@@ -76,9 +77,7 @@ const PreviewOne = ({
                 nexify.club/course/
               </div>
             </div>
-            <div
-              className={`h-[calc(100vh-6rem)] overflow-y-auto overflow-x-hidden rounded-b-2xl border-b-8 border-l-8 border-r-8 border-gray-800 bg-white p-4 md:h-[calc(100vh-18rem)]`}
-            >
+            <div className="h-[calc(100vh-6rem)] overflow-y-auto overflow-x-hidden rounded-b-2xl border-b-8 border-l-8 border-r-8 border-gray-800 bg-white p-4 md:h-[calc(100vh-18rem)]">
               {children}
             </div>
           </div>

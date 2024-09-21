@@ -11,7 +11,7 @@ import { useMediaQuery } from '@mantine/hooks';
 const useCreateCourse = () => {
   const router = useRouter();
   const courseId = usePathname().split('/')[3];
-  const isDesktop = useMediaQuery('(min-width: 48em)');
+  const isDesktop = useMediaQuery('(min-width: 74em)');
   const [tab, setTab] = useState(null);
   const [isPreviewScreen, setIsPreviewScreen] =
     useState(false);

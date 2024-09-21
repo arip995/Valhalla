@@ -80,19 +80,17 @@ const CreateCourse = () => {
                 )}
               >
                 <div className="flex gap-2">
-                  {/* <Link href="/course/66ebceddfe3bd3a96ac1e0b6"> */}
                   <ActionIcon
+                    className="lg:hidden"
                     size="md"
                     variant="default"
                     radius="xl"
                     onClick={() => {
                       setIsPreviewScreen(prev => !prev);
                     }}
-                    // className="lg:hidden"
                   >
                     <IconEye color="gray" />
                   </ActionIcon>
-                  {/* </Link> */}
                   <Button
                     type="submit"
                     size="xs"
@@ -145,7 +143,6 @@ const CreateCourse = () => {
               </Tabs.List>
             </Tabs>
           )}
-
           <div className="flex flex-1 flex-col overflow-y-auto">
             {tab === 'details' ? (
               <CreateCourseStepOne
@@ -158,12 +155,6 @@ const CreateCourse = () => {
             ) : null}
           </div>
         </div>
-        {/* <PreviewTwo className="flex-1 bg-white p-4">
-          <div className="text-lg font-semibold text-gray-700">
-            Preview
-          </div>
-        </PreviewTwo> */}
-
         <PreviewOne
           className="flex-1 bg-white p-4"
           setIsPreviewScreen={setIsPreviewScreen}
