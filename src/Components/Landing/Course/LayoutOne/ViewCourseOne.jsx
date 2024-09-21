@@ -3,6 +3,7 @@ import RenderModulesAndLessons from './ViewCourseModuleAndLessons';
 import Image from 'next/image';
 import ViewSections from '@/Components/Common/ViewSections/ViewSections';
 import BuyButton from '@/Components/Common/Buttons/BuyButton';
+import FooterTwo from '@/Components/Common/Footer/FooterTwo';
 
 const ViewCourseOne = ({ data }) => {
   // const calculateModulesLessonsAndDuration = (content) =>{
@@ -82,6 +83,7 @@ const ViewCourseOne = ({ data }) => {
         </div>
         <ViewSections sections={data.sections} />
       </div>
+      <FooterTwo className="mt-4" />
     </div>
   );
 };

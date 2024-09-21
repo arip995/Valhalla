@@ -8,9 +8,11 @@ import PaytmIcon from '../../../../public/images/common/paytm.png';
 import PhonpeIcon from '../../../../public/images/common/phonepe.png';
 import VisacardIcon from '../../../../public/images/common/visacard.png';
 
-const FooterTwo = ({ description }) => {
+const FooterTwo = ({ description, className }) => {
   return (
-    <footer className="bg-gray-50 text-gray-600">
+    <footer
+      className={`w-screen bg-gray-50 text-gray-600 ${className}`}
+    >
       <div className="container mx-auto px-3 py-6">
         <p className="mb-4 w-full text-center text-sm font-medium text-gray-500">
           Guaranteed safe & secure payment
