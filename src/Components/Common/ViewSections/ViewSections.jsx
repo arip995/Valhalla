@@ -20,7 +20,7 @@ export const SECTION_COMPONENT_MAPPING = {
 };
 export const SECTION_TITLE_MAPPING = {
   benifit: 'Benifits',
-  highlight: 'Highlight',
+  highlight: 'Highlights',
   social: 'Follow me on',
   about: 'About me',
   faq: 'FAQs',
