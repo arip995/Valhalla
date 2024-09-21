@@ -3,15 +3,6 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
-      typography: {
-        DEFAULT: {
-          css: {
-            p: {
-              margin: '4px !important', // Optionally remove margins as well
-            },
-          },
-        },
-      },
       backgroundImage: {
         'gradient-radial':
           'radial-gradient(var(--tw-gradient-stops))',

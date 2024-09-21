@@ -5,21 +5,17 @@ import ViewSections from '@/Components/Common/ViewSections/ViewSections';
 import BuyButton from '@/Components/Common/Buttons/BuyButton';
 
 const ViewCourseOne = ({ data }) => {
-  console.log(data);
   // const calculateModulesLessonsAndDuration = (content) =>{
   //     let modules = content.length;
   //     let lessons = 0
   //     let duration = 0
-
   //     content.map((m)=>{
   //         lessons += m?.lessons?.length || 0
   //         m?.lessons?.length && m.lessons.map((l)=>{
   //             duration += l.duration || 0
   //         })
   //     });
-
   //     return { modules,lessons,duration}
-
   // }
 
   return (
@@ -57,11 +53,10 @@ const ViewCourseOne = ({ data }) => {
                 <h3 className="mb-2">Description</h3>
                 <Spoiler maxHeight={300}>
                   <div
-                    className="prose"
                     dangerouslySetInnerHTML={{
                       __html: data.description,
                     }}
-                  ></div>
+                  />
                 </Spoiler>
               </>
             )}

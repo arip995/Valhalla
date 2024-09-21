@@ -155,7 +155,7 @@ const CustomTipTapEditor = ({
           </RichTextEditor.ControlsGroup>
         </RichTextEditor.Toolbar>
 
-        <RichTextEditor.Content className="prose min-h-32" />
+        <RichTextEditor.Content className="min-h-32" />
       </RichTextEditor>
     </div>
   );

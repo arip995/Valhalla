@@ -35,7 +35,6 @@ const GLDetailsContainer = ({ data }) => {
             </div>
             {!!data?.description && (
               <div
-                className="prose prose-sm prose-p:mx-0 [&>p]:my-4"
                 dangerouslySetInnerHTML={{
                   __html: data.description,
                 }}

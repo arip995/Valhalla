@@ -18,6 +18,15 @@ export const SECTION_COMPONENT_MAPPING = {
   gallery: ViewGallery,
   testimonial: ViewTestimonial,
 };
+export const SECTION_TITLE_MAPPING = {
+  benifit: 'Benifits',
+  highlight: 'Highlight',
+  social: 'Follow me on',
+  about: 'About me',
+  faq: 'FAQs',
+  gallery: 'Gallery',
+  testimonial: 'Testimonials',
+};
 
 const ViewSections = ({ sections }) => {
   if (!sections?.length) return null;
@@ -29,7 +38,13 @@ const ViewSections = ({ sections }) => {
           SECTION_COMPONENT_MAPPING[section.type];
         if (!Component) return null;
         return (
-          <Component value={section.value} key={index} />
+          <div
+            className="flex w-full flex-col gap-4"
+            key={index}
+          >
+            <h3> {SECTION_TITLE_MAPPING[section.type]}</h3>
+            <Component value={section.value} />
+          </div>
         );
       })}
     </div>
