@@ -26,6 +26,7 @@ function centerAspectCrop(mediaWidth, mediaHeight, aspect) {
 function CropModal({
   open,
   imageSrc,
+  imageName,
   onClose,
   onCropComplete,
   aspect = 1,
@@ -135,7 +136,7 @@ function CropModal({
       const blob = await (await fetch(dataUrl)).blob();
 
       // Create a File object from the Blob
-      const fileName = 'cropped-image.png'; // You can change this to any desired filename
+      const fileName = imageName || 'cropped-image.png'; // You can change this to any desired filename
       const file = new File([blob], fileName, {
         type: mimeType,
       });

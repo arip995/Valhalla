@@ -17,10 +17,12 @@ const UploadButtonOne = ({
   crop = false,
 }) => {
   const [imageSrc, setImageSrc] = useState(null);
+  const [imageName, setImageName] = useState(null);
   const [fileKey, setFileKey] = useState(0);
   const [cropModalOpen, setCropModalOpen] = useState(false);
 
   const handleUpload = async file => {
+    setImageName(file.name);
     setFileKey(prev => prev + 1);
     const data = await handleFile(
       file,
@@ -114,6 +116,7 @@ const UploadButtonOne = ({
         <CropModal
           open={cropModalOpen}
           imageSrc={imageSrc}
+          imageName={imageName}
           circularCrop={false}
           onCropComplete={onUpload}
           aspect={16 / 9}
