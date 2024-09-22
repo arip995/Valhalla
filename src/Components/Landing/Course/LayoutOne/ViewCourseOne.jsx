@@ -56,7 +56,11 @@ const ViewCourseOne = ({ data }) => {
             {!!data?.description && (
               <>
                 <h3 className="mb-2">Description</h3>
-                <Spoiler maxHeight={300}>
+                <Spoiler
+                  maxHeight={300}
+                  showLabel="Show more"
+                  hideLabel="Hide"
+                >
                   <div
                     dangerouslySetInnerHTML={{
                       __html: data.description,
