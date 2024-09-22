@@ -80,17 +80,18 @@ const CreateCourse = () => {
                 )}
               >
                 <div className="flex gap-2">
-                  <ActionIcon
-                    className="lg:hidden"
-                    size="md"
-                    variant="default"
-                    radius="xl"
-                    onClick={() => {
-                      setIsPreviewScreen(prev => !prev);
-                    }}
-                  >
-                    <IconEye color="gray" />
-                  </ActionIcon>
+                  <div className="lg:hidden">
+                    <ActionIcon
+                      size="md"
+                      variant="default"
+                      radius="xl"
+                      onClick={() => {
+                        setIsPreviewScreen(prev => !prev);
+                      }}
+                    >
+                      <IconEye color="gray" />
+                    </ActionIcon>
+                  </div>
                   <Button
                     type="submit"
                     size="xs"

@@ -64,6 +64,7 @@ import '@mantine/core/styles/Slider.css';
 import '@mantine/core/styles/Rating.css';
 import '@mantine/core/styles/Anchor.css';
 import '@mantine/carousel/styles.css';
+import { Toaster } from 'react-hot-toast';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({
@@ -112,6 +113,7 @@ export default function RootLayout({ children }) {
           <ModalsProvider>{children}</ModalsProvider>
           <SpeedInsights />
         </MantineProvider>
+        <Toaster />
       </body>
     </html>
   );
