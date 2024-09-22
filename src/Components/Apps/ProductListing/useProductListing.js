@@ -86,6 +86,10 @@ const useProductListing = () => {
           setPageNo(1);
           setStatus(updateData);
           break;
+        case 'limit':
+          setPageNo(1);
+          setLimit(updateData);
+          break;
         case 'page':
           setPageNo(updateData);
           break;
@@ -183,7 +187,7 @@ const useProductListing = () => {
     searchText,
     status,
     limit,
-    setLimit,
+    pageNo,
   };
 };
 

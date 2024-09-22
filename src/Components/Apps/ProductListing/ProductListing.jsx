@@ -21,7 +21,7 @@ const ProductListing = () => {
     searchText,
     status,
     limit,
-    setLimit,
+    pageNo,
   } = useProductListing();
 
   const headerTitle = useMemo(() => {
@@ -112,8 +112,8 @@ const ProductListing = () => {
                 data={['10', '20', '50']}
                 value={limit.toString()}
                 onChange={(_, option) => {
-                  console.log(option);
-                  setLimit(Number(option.value));
+                  if (!option?.value) return;
+                  onUpdate('limit', Number(option.value));
                 }}
               />
               <Pagination
@@ -121,6 +121,7 @@ const ProductListing = () => {
                 total={Math.ceil(
                   data.totalQueryCount / limit
                 )}
+                value={pageNo}
                 onChange={value => {
                   onUpdate('page', value);
                 }}
