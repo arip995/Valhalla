@@ -34,7 +34,7 @@ const PreviewOne = ({
           isDeskTop ? 'w-full' : 'max-w-[450px]'
         }`}
       >
-        <div className="relative mx-auto w-full max-w-3xl overflow-hidden rounded-lg">
+        <div className="relative mx-auto w-full max-w-5xl overflow-hidden rounded-lg">
           <div className="flex items-center justify-between bg-gray-800 px-2 py-1">
             <div className="text-lg font-bold text-white">
               Preview
@@ -78,15 +78,15 @@ const PreviewOne = ({
               </div>
             </div>
             <div className="relative h-[calc(100vh-6rem)] overflow-y-auto overflow-x-hidden rounded-b-2xl border-b-8 border-l-8 border-r-8 border-gray-800 bg-white lg:h-[calc(100vh-16rem)]">
-              <div
+              {/* <div
                 className={
                   isDeskTop
                     ? 'absolute left-1/2 top-[35%] h-[1080px] w-[1920px] origin-center -translate-x-1/2 -translate-y-1/2 scale-[0.52083]'
                     : ''
                 }
-              >
-                {children}
-              </div>
+              > */}
+              {children}
+              {/* </div> */}
             </div>
           </div>
         </div>
