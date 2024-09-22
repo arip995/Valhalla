@@ -104,7 +104,12 @@ const ProductListing = () => {
               />
             )}
             <div
-              className={`flex flex-wrap-reverse items-center gap-2 ${Math.ceil(data.totalQueryCount / 10) == 1 || loading ? 'hidden' : ''}`}
+              className={`flex flex-wrap-reverse items-center gap-2 ${
+                Math.ceil(data.totalQueryCount / 10) == 1 ||
+                loading
+                  ? 'hidden'
+                  : ''
+              }`}
             >
               <Select
                 className="max-w-14"
