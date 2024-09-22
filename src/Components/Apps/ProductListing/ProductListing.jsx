@@ -1,7 +1,7 @@
 'use client';
 import React, { useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { Pagination } from '@mantine/core';
+import { Pagination, Select } from '@mantine/core';
 import { Toaster } from 'react-hot-toast';
 
 import EmptyStateOne from '@/Components/Common/EmptyState/EmptyStateOne';
@@ -20,6 +20,8 @@ const ProductListing = () => {
     loading,
     searchText,
     status,
+    limit,
+    setLimit,
   } = useProductListing();
 
   const headerTitle = useMemo(() => {
@@ -101,14 +103,29 @@ const ProductListing = () => {
                 app={app}
               />
             )}
-            <Pagination
-              withEdges
-              total={Math.ceil(data.totalQueryCount / 10)}
-              onChange={value => {
-                onUpdate('page', value);
-              }}
-              className={`${Math.ceil(data.totalQueryCount / 10) == 1 || loading ? 'hidden' : ''}`}
-            />
+            <div
+              className={`flex flex-wrap gap-2 ${Math.ceil(data.totalQueryCount / 10) == 1 || loading ? 'hidden' : ''}`}
+            >
+              <Select
+                className="max-w-16"
+                withCheckIcon={false}
+                data={['10', '20', '50']}
+                value={limit.toString()}
+                onChange={(_, option) => {
+                  console.log(option);
+                  setLimit(Number(option.value));
+                }}
+              />
+              <Pagination
+                withEdges
+                total={Math.ceil(
+                  data.totalQueryCount / limit
+                )}
+                onChange={value => {
+                  onUpdate('page', value);
+                }}
+              />
+            </div>
           </>
         )}
       </div>

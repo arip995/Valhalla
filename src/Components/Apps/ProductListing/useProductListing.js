@@ -19,6 +19,7 @@ const useProductListing = () => {
   const [status, setStatus] = useState([0, 1, 5, 6]);
   const [loading, setLoading] = useState(-1);
   const [pageNo, setPageNo] = useState(1);
+  const [limit, setLimit] = useState(10);
 
   const setListingData = async (showLoading = true) => {
     if (!isFirstRender && showLoading) setLoading(1);
@@ -31,6 +32,7 @@ const useProductListing = () => {
           pageNo: pageNo,
           status: status,
           searchText: searchText.trim(),
+          limit,
         }
       );
       setData(listingData.data.data);
@@ -167,7 +169,7 @@ const useProductListing = () => {
 
   useDidUpdate(() => {
     setListingData();
-  }, [searchText, status, pageNo]);
+  }, [searchText, status, pageNo, limit]);
 
   if (isFirstRender) {
     setListingData();
@@ -180,6 +182,8 @@ const useProductListing = () => {
     loading,
     searchText,
     status,
+    limit,
+    setLimit,
   };
 };
 
