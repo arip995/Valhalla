@@ -104,10 +104,11 @@ const ProductListing = () => {
               />
             )}
             <div
-              className={`flex flex-wrap gap-2 ${Math.ceil(data.totalQueryCount / 10) == 1 || loading ? 'hidden' : ''}`}
+              className={`flex flex-wrap-reverse items-center gap-2 ${Math.ceil(data.totalQueryCount / 10) == 1 || loading ? 'hidden' : ''}`}
             >
               <Select
-                className="max-w-16"
+                className="max-w-14"
+                size="xs"
                 withCheckIcon={false}
                 data={['10', '20', '50']}
                 value={limit.toString()}
