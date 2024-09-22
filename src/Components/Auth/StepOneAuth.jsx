@@ -21,7 +21,7 @@ import {
 } from '@tabler/icons-react';
 import Link from 'next/link';
 import React from 'react';
-import { Toaster } from 'react-hot-toast';
+
 import Logo from '../../app/icon.png';
 import GoogleButton from '../Common/Buttons/GoogleButton/GoogleButton';
 import HeaderWrapper from './HeaderWrapper';
@@ -237,7 +237,6 @@ const StepOneAuth = ({
           </>
         ) : null}
       </PaperWrapper>
-      <Toaster />
     </>
   );
 };

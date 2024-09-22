@@ -230,17 +230,15 @@ const AuthModal = ({
               An OTP has been sent to your{' '}
               {isEmail ? 'Email' : 'Phone Number'}
             </h2>
-            <div className="flex items-center text-center text-sm font-medium">
-              <p>
-                {isEmail
-                  ? `Please check your email ${authForm?.values?.email}.com. If you can't find the email, please check your spam folders.`
-                  : `Please check your phone number`}{' '}
-                {isEmail
-                  ? authForm?.values?.email
-                  : `+91 ${authForm?.values?.phoneNumber}`}
-              </p>
+            <div className="flex items-center text-center text-sm font-medium text-gray-700">
+              {isEmail
+                ? `Please check your email ${authForm?.values?.email}.com. If you can't find the email, please check your spam folders.`
+                : `Please check your phone number`}{' '}
+              {isEmail
+                ? authForm?.values?.email
+                : `+91 ${authForm?.values?.phoneNumber}`}
               <IconEdit
-                className="ml-2 cursor-pointer transition-colors duration-300 hover:text-gray-700"
+                className="ml-2 min-w-fit cursor-pointer transition-colors duration-300 hover:text-gray-700"
                 onClick={() => setStep(1)}
                 color="gray"
                 style={{

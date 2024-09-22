@@ -9,7 +9,7 @@ import {
 } from '@mantine/core';
 import { IconArrowLeft } from '@tabler/icons-react';
 import React from 'react';
-import { Toaster } from 'react-hot-toast';
+
 import '../../../styles/common/common-container.css';
 import '../../../styles/create/Telegram.css';
 import HeaderWrapper from '../../Auth/HeaderWrapper';
@@ -130,7 +130,6 @@ const CreateTelegram = ({ data }) => {
           </Box>
         </div>
       </div>
-      <Toaster />
     </>
   );
 };

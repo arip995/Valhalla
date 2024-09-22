@@ -1,8 +1,7 @@
 'use client';
-import React, { useMemo } from 'react';
-import { useRouter } from 'next/navigation';
 import { Pagination, Select } from '@mantine/core';
-import { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import React, { useMemo } from 'react';
 
 import EmptyStateOne from '@/Components/Common/EmptyState/EmptyStateOne';
 import Header from '@/Components/Common/Header/Header';
@@ -52,7 +51,6 @@ const ProductListing = () => {
     return (
       <>
         <LayoutLoading />
-        <Toaster />
       </>
     );
   }
@@ -61,7 +59,6 @@ const ProductListing = () => {
     return (
       <>
         <EmptyStateOne app={app} />
-        <Toaster />
       </>
     );
   }
@@ -136,7 +133,6 @@ const ProductListing = () => {
           </>
         )}
       </div>
-      <Toaster />
     </div>
   );
 };

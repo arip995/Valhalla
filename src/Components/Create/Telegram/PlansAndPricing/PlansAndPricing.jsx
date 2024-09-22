@@ -232,7 +232,6 @@ const PlansAndPricing = ({ stepThreeForm }) => {
           + Add another plan
         </Button>
       </div>
-      <Toaster />
     </>
   );
 };

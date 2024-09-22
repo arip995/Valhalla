@@ -11,7 +11,6 @@ import {
 } from '@mantine/core';
 import { IconEye } from '@tabler/icons-react';
 import React from 'react';
-import { Toaster } from 'react-hot-toast';
 import CreateCourseStepOne from './CreateCourseStepOne/CreateCourseStepOne';
 import CreateCourseStepTwo from './CreateCourseStepTwo/CreateCourseStepTwo';
 import useCreateCourse from './useCreateCourse';
@@ -164,7 +163,6 @@ const CreateCourse = () => {
           <ViewCourseOne data={courseForm.values} />
         </PreviewOne>
       </div>
-      <Toaster />
     </div>
   );
 };

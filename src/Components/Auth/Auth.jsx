@@ -1,6 +1,5 @@
 'use client';
 
-import { Toaster } from 'react-hot-toast';
 import StepOneAuth from './StepOneAuth';
 import StepTwoAuth from './StepTwoAuth';
 import useAuth from './useAuth';
@@ -48,7 +47,6 @@ const Auth = () => {
           )}
         </div>
       </div>
-      <Toaster />
     </>
   );
 };

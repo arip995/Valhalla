@@ -8,7 +8,7 @@ import {
   Text,
   TextInput,
 } from '@mantine/core';
-import { Toaster } from 'react-hot-toast';
+
 import classes from '../../../styles/creator/Account.module.css';
 import Header from '../../Common/Header/Header';
 import ContactInfo from './ContactInfo';
@@ -118,7 +118,6 @@ const Account = () => {
           <ContactInfo />
         </div>
       </div>
-      <Toaster />
     </>
   );
 };

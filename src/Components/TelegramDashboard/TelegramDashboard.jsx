@@ -1,6 +1,5 @@
 'use client';
 
-import { Toaster } from 'react-hot-toast';
 import '../../styles/dashboard/TelegramDashborad.css';
 import LayoutLoading from '../Common/Loading/LayoutLoading';
 import TGEPlansAndPricingContainer from './EditPlansAndPricing/TGEPlansAndPricingContainer';
@@ -49,7 +48,6 @@ const TelegramDashboard = ({ productId }) => {
           </div>
         </div>
       </div>
-      <Toaster />
     </>
   );
 };

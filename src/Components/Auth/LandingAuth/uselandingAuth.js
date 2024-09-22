@@ -77,7 +77,7 @@ const uselandingAuth = (signin, onAuthComplete, opened) => {
       if (step === 1) {
         setStep(2);
       }
-      // toast.success('Otp sent successfully!');
+      toast.success('Otp sent successfully!');
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {

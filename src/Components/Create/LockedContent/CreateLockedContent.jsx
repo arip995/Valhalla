@@ -17,7 +17,7 @@ import {
   IconExternalLink,
   IconUpload,
 } from '@tabler/icons-react';
-import { Toaster } from 'react-hot-toast';
+
 import '../../../styles/common/common-container.css';
 import HeaderWrapper from '../../Auth/HeaderWrapper';
 import PaperWrapper from '../../Auth/PaperWrapper';
@@ -172,7 +172,6 @@ const CreateLockedContent = ({ data }) => {
           </Box>
         </div>
       </div>
-      <Toaster />
     </>
   );
 };
