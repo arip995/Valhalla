@@ -7,7 +7,7 @@ const ViewTestimonial = ({ value }) => {
   return (
     <div className="flex flex-wrap gap-4">
       {value.map((item, index) => (
-        <Paper withBorder shadow="sm" p="md" key={index}>
+        <Paper withBorder p="md" key={index}>
           <div className="flex items-center gap-2 font-semibold">
             <img
               className="h-20 w-20 rounded-full"
