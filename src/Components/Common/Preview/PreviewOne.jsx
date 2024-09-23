@@ -10,7 +10,7 @@ const PreviewOne = ({
   setIsPreviewScreen,
   isPreviewScreen,
 }) => {
-  const [isDeskTop, setIsDesktop] = useState(false);
+  const [isDeskTop, setIsDesktop] = useState(true);
 
   return (
     <div

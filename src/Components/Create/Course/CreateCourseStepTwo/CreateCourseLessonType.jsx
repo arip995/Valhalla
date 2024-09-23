@@ -27,7 +27,9 @@ const CreateCourseLessonType = ({
                 <IconVideo color="#0d8db4" />
               </div>
               <div>
-                <h2 className="font-semibold">Video</h2>
+                <div className="text-md font-semibold">
+                  Video
+                </div>
                 <p className="text-sm text-gray-600">
                   Upload or embed a video
                 </p>
@@ -42,9 +44,9 @@ const CreateCourseLessonType = ({
                 <IconFileText color="#0d8db4" />
               </div>
               <div>
-                <h2 className="font-semibold">
+                <div className="text-md font-semibold">
                   Text/Image
-                </h2>
+                </div>
                 <p className="text-sm text-gray-600">
                   Add text and image
                 </p>
@@ -59,7 +61,9 @@ const CreateCourseLessonType = ({
                 <IconMusic color="#0d8db4" />
               </div>
               <div>
-                <h2 className="font-semibold">Audio</h2>
+                <div className="text-md font-semibold">
+                  Audio
+                </div>
                 <p className="text-sm text-gray-600">
                   Upload Audio files
                 </p>
@@ -74,7 +78,9 @@ const CreateCourseLessonType = ({
                 <IconFileUpload color="#0d8db4" />
               </div>
               <div>
-                <h2 className="font-semibold">File</h2>
+                <div className="text-md font-semibold">
+                  File
+                </div>
                 <p className="text-sm text-gray-600">
                   Upload PDF, ZIP or etc.
                 </p>
