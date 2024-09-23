@@ -8,8 +8,8 @@ import toast from 'react-hot-toast';
 const useCreateLockedContent = () => {
   const router = useRouter();
   const productId = usePathname().split('/')[3];
-  const [isEdititng, setisEditing] = useState(false);
-  const [editLoading, setEditLoading] = useState(false);
+  const [isEdititng, setIsEditing] = useState(false);
+  const [editLoading, setEditLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [
     isSaveClickedAtleastOnce,
@@ -237,8 +237,10 @@ const useCreateLockedContent = () => {
 
   useEffect(() => {
     if (productId) {
-      setisEditing(true);
+      setIsEditing(true);
       fetchLcData();
+    } else {
+      setEditLoading(false);
     }
   }, []);
 
