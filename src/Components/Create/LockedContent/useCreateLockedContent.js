@@ -54,7 +54,7 @@ const useCreateLockedContent = () => {
     },
   });
 
-  const onCreate = async () => {
+  const onCreateOrEdit = async () => {
     let payload = {};
     if (isEdititng) {
       payload = {
@@ -244,7 +244,7 @@ const useCreateLockedContent = () => {
 
   return {
     createLockedContentForm,
-    onCreate,
+    onCreateOrEdit,
     handleFileChange,
     convertFileToBase64,
     onFileDelete,

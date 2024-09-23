@@ -24,18 +24,23 @@ import PaperWrapper from '../../Auth/PaperWrapper';
 import ListFiles from '../../Common/ListFiles/ListFiles';
 import useCreateLockedContent from './useCreateLockedContent';
 import Link from 'next/link';
+import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 
 const CreateLockedContent = ({ data }) => {
   const {
     createLockedContentForm,
     loading,
-    onCreate,
+    onCreateOrEdit,
     handleFileChange,
     onFileDelete,
     productId,
     editLoading,
     setIsSaveClickedAtleastOnce,
   } = useCreateLockedContent(data);
+
+  if (editLoading) {
+    return <LayoutLoading />;
+  }
 
   return (
     <>
@@ -56,7 +61,7 @@ const CreateLockedContent = ({ data }) => {
             >
               <form
                 onSubmit={createLockedContentForm.onSubmit(
-                  onCreate
+                  onCreateOrEdit
                 )}
                 className="flex w-full flex-col gap-2"
               >

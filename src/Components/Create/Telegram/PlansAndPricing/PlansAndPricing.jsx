@@ -1,12 +1,12 @@
+import { PeriodTypeOptions } from '@/Constants/constants';
 import { Compact } from '@/Utils/Common';
 import { Button, Input } from '@mantine/core';
 import { randomId } from '@mantine/hooks';
 import React, { useEffect, useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import '../../../../styles/common/plan-and-pricing.css';
 import PlanCard from './PlanCard';
 import PlanEditCard from './PlanEditCard';
-import { PeriodTypeOptions } from '@/Constants/constants';
 
 const PlansAndPricing = ({ stepThreeForm }) => {
   const [plans, setPlans] = useState(
