@@ -80,7 +80,8 @@ const ViewCourseOne = ({ data }) => {
               variant="contained"
               multiple
               defaultValue={[
-                data.content[0]._id || data.content[0].id,
+                data.content?.[0]?._id ||
+                  data.content?.[0]?.id,
               ]}
             >
               <RenderModulesAndLessons
