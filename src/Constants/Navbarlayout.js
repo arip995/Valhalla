@@ -18,17 +18,17 @@ import {
 
 export const SidenavData = [
   {
-    icon: IconLayoutDashboard,
-    label: 'Dashboard',
-    value: 'dashboard',
+    icon: IconHome2,
+    label: 'Home',
+    value: 'Home',
     path: '/home',
   },
-  {
-    icon: IconArchive,
-    label: 'Products',
-    value: 'product',
-    path: '/product',
-  },
+  // {
+  //   icon: IconArchive,
+  //   label: 'Products',
+  //   value: 'product',
+  //   path: '/product',
+  // },
   {
     icon: IconCreditCardPay,
     label: 'Payment',
@@ -48,25 +48,25 @@ export const SidenavData = [
     path: '/audience',
   },
 
-  // { apps: true },
-  // {
-  //   icon: IconLockDollar,
-  //   label: 'Locked Content',
-  //   value: 'lc',
-  //   path: '/app/lc',
-  // },
-  // {
-  //   icon: IconBrandTelegram,
-  //   label: 'Telegram',
-  //   value: 'tg',
-  //   path: '/app/tg',
-  // },
-  // {
-  //   icon: IconSchool,
-  //   label: 'Course',
-  //   value: 'course',
-  //   path: '/app/course',
-  // },
+  { apps: true },
+  {
+    icon: IconLockDollar,
+    label: 'Locked Content',
+    value: 'lc',
+    path: '/app/lc',
+  },
+  {
+    icon: IconBrandTelegram,
+    label: 'Telegram',
+    value: 'tg',
+    path: '/app/tg',
+  },
+  {
+    icon: IconSchool,
+    label: 'Course',
+    value: 'course',
+    path: '/app/course',
+  },
   // {
   //   icon: IconCash,
   //   label: 'Digital Product',
