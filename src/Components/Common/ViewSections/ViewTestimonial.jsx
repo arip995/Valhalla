@@ -5,7 +5,7 @@ const ViewTestimonial = ({ value }) => {
   if (!value?.length) return null;
 
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex w-full flex-wrap gap-4">
       {value.map((item, index) => (
         <Paper withBorder p="md" key={index}>
           <div className="flex items-center gap-2 font-semibold">

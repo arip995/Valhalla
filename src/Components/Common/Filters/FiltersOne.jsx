@@ -104,7 +104,7 @@ const FiltersOne = ({
             />
           }
         />
-        <div className="flex items-center gap-1 rounded-sm border border-gray-200 p-1">
+        <div className="flex h-full items-center gap-1 rounded-sm border border-gray-200 p-1">
           <IconList
             onClick={e => {
               e.stopPropagation();
@@ -112,7 +112,6 @@ const FiltersOne = ({
             }}
             color="gray"
             stroke={1}
-            // size={12}
             className={classNames(
               'cursor-pointer rounded-sm hover:bg-gray-200',
               {
@@ -127,7 +126,6 @@ const FiltersOne = ({
             }}
             color="gray"
             stroke={1}
-            // size={12}
             className={classNames(
               'cursor-pointer rounded-sm hover:bg-gray-200',
               {

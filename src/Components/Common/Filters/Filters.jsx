@@ -17,6 +17,8 @@ import { useDebouncedCallback } from '@mantine/hooks';
 import {
   IconCheck,
   IconChevronDown,
+  IconLayout2,
+  IconList,
   IconSearch,
 } from '@tabler/icons-react';
 import classNames from 'classnames';
@@ -26,6 +28,8 @@ import classes from '../../../styles/creator/ProductListing/MenuDropdown.module.
 const Filters = ({
   searchText = '',
   onUpdate = () => {},
+  setIsGrid = () => {},
+  isGrid,
   status = [0, 1, 5, 6],
 }) => {
   const [opened, setOpened] = useState(false);
@@ -168,6 +172,36 @@ const Filters = ({
         </Menu.Target>
         <Menu.Dropdown>{items}</Menu.Dropdown>
       </Menu>
+      <div className="flex h-full items-center gap-1 rounded-sm border border-gray-200 p-1">
+        <IconList
+          onClick={e => {
+            e.stopPropagation();
+            setIsGrid(false);
+          }}
+          color="gray"
+          stroke={1}
+          className={classNames(
+            'cursor-pointer rounded-sm hover:bg-gray-200',
+            {
+              'bg-gray-200 text-black': !isGrid,
+            }
+          )}
+        />
+        <IconLayout2
+          onClick={e => {
+            e.stopPropagation();
+            setIsGrid(true);
+          }}
+          color="gray"
+          stroke={1}
+          className={classNames(
+            'cursor-pointer rounded-sm hover:bg-gray-200',
+            {
+              'bg-gray-200 text-black': isGrid,
+            }
+          )}
+        />
+      </div>
     </div>
   );
 };

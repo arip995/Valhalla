@@ -1,4 +1,8 @@
-import { Card } from '@mantine/core';
+import {
+  StatusColorMapping,
+  StatusMapping,
+} from '@/Constants/ProductListingContants';
+import { Badge, Card } from '@mantine/core';
 import EmptyProductImage2 from '../../../../public/images/common/emptystateproductimage2.jpeg';
 import ShareButton from '../Buttons/ShareButton';
 import ProductMenu from '../Menu/ProductMenu';
@@ -66,6 +70,16 @@ const ProductCard = ({
             <span className="font-normal text-gray-500">
               {item.totalSalesCount}
             </span>
+          </div>
+          <div className="flex justify-between text-sm font-semibold text-gray-600">
+            <span>Status</span>
+            <Badge
+              variant="dot"
+              color={StatusColorMapping[item.status]}
+              size="md"
+            >
+              {StatusMapping[item.status]}
+            </Badge>
           </div>
         </div>
       </Card>

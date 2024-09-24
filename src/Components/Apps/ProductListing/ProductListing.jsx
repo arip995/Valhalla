@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use client';
 import {
   Pagination,
@@ -15,6 +16,7 @@ import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import CustomTable from '@/Components/Common/Table/CustomTables/CustomTable';
 import useProductListing from './useProductListing';
 import classNames from 'classnames';
+import Filters from '@/Components/Common/Filters/Filters';
 
 const ProductListing = () => {
   const router = useRouter();
@@ -24,6 +26,7 @@ const ProductListing = () => {
     data,
     loading,
     searchText,
+    status,
     activeTab,
     limit,
     pageNo,
@@ -81,18 +84,20 @@ const ProductListing = () => {
         path={createPath}
       />
       <div className="flex flex-1 flex-col items-end gap-4 overflow-y-auto px-4 py-4">
-        {/* <Filters
+        <Filters
           onUpdate={onUpdate}
           searchText={searchText}
           status={status}
-        /> */}
-        <FiltersOne
+          isGrid={isGrid}
+          setIsGrid={setIsGrid}
+        />
+        {/* <FiltersOne
           isGrid={isGrid}
           setIsGrid={setIsGrid}
           activeTab={activeTab}
           onUpdate={onUpdate}
           searchText={searchText}
-        />
+        /> */}
         {data.totalQueryCount === 0 ? (
           <EmptyStateOne
             app={app}

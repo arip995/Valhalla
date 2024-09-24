@@ -9,38 +9,24 @@ import {
   StatusColorMapping,
   StatusMapping,
 } from '@/Constants/ProductListingContants';
-import {
-  ActionIcon,
-  Badge,
-  Menu,
-  rem,
-} from '@mantine/core';
+import { Badge, rem } from '@mantine/core';
 import {
   IconBrandRedux,
-  IconCreditCardOff,
-  IconDotsVertical,
-  IconEdit,
-  IconExternalLink,
   IconPresentation,
   IconReceipt2,
   IconReportAnalytics,
-  IconSquareRoundedCheck,
-  IconSquareRoundedX,
-  IconTrash,
   IconUsers,
 } from '@tabler/icons-react';
 import classNames from 'classnames';
-import Link from 'next/link';
 import EmptyProductImage2 from '../../../../../public/images/common/emptystateproductimage2.jpeg';
 import ProductMenu from '../../Menu/ProductMenu';
 
 const TableHeaderItems = [
   { title: 'Title', icon: IconUsers },
-  // { title: 'Status', icon: IconBrandRedux },
+  { title: 'Status', icon: IconBrandRedux },
   { title: 'Price', icon: IconReceipt2 },
   { title: 'Revenue', icon: IconPresentation },
   { title: 'Sales', icon: IconReportAnalytics },
-  { title: '', icon: '' },
 ];
 
 const CustomTable = ({
@@ -116,7 +102,7 @@ const CustomTable = ({
                     {item.title}
                   </div>
                 </td>
-                {/* <td className="min-w-40">
+                <td className="min-w-40">
                   <Badge
                     variant="dot"
                     color={StatusColorMapping[item.status]}
@@ -124,7 +110,7 @@ const CustomTable = ({
                   >
                     {StatusMapping[item.status]}
                   </Badge>
-                </td> */}
+                </td>
                 <td className="min-w-36">₹{item.price}</td>
                 <td className="min-w-36">
                   ₹{item.totalRevenue}
