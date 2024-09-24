@@ -1,14 +1,18 @@
 import { Card, Text } from '@mantine/core';
-import { IconDotsVertical } from '@tabler/icons-react';
 import EmptyProductImage2 from '../../../../public/images/common/emptystateproductimage2.jpeg';
 import ShareButton from '../Buttons/ShareButton';
+import ProductMenu from '../Menu/ProductMenu';
 
-const ProductCard = ({ item }) => {
+const ProductCard = ({
+  item,
+  app,
+  onUpdate = () => {},
+}) => {
   if (!item) return null;
 
   return (
     <>
-      <Card shadow="sm" padding="sm" radius="md" withBorder>
+      <Card padding="sm" radius="md" withBorder>
         <Card.Section className="relative overflow-hidden">
           <img
             src={item.coverImage || EmptyProductImage2.src}
@@ -16,10 +20,18 @@ const ProductCard = ({ item }) => {
             className="aspect-video h-full w-full cursor-pointer object-cover transition-all duration-300 hover:scale-110"
           />
           <div className="absolute right-2 top-2 flex gap-2">
-            <ShareButton onlyShareButton />
-            <span className="flex cursor-pointer items-center rounded-full border border-gray-300 bg-white p-1.5">
+            <ShareButton
+              link={`${process.env.NEXT_PUBLIC_HOST}${app}/${item._id}`}
+              onlyShareButton
+            />
+            <ProductMenu
+              app={app}
+              onUpdate={onUpdate}
+              item={item}
+            />
+            {/* <span className="flex cursor-pointer items-center rounded-full border border-gray-300 bg-white p-1.5">
               <IconDotsVertical color="black" size={12} />
-            </span>
+            </span> */}
           </div>
         </Card.Section>
 

@@ -5,13 +5,20 @@ import {
   TextInput,
 } from '@mantine/core';
 import { useDebouncedCallback } from '@mantine/hooks';
-import { IconSearch } from '@tabler/icons-react';
+import {
+  IconLayout2,
+  IconList,
+  IconSearch,
+} from '@tabler/icons-react';
+import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { TAB_OPTIONS } from '../Tabs/Tab';
 
 const FiltersOne = ({
   searchText = '',
   onUpdate = () => {},
+  isGrid,
+  setIsGrid = () => {},
   activeTab,
 }) => {
   const [searchValue, setSearchValue] =
@@ -51,53 +58,85 @@ const FiltersOne = ({
           })}
         </Tabs.List>
       </Tabs>
-      {/* <Tab
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        tabOptions={tabOptions}
-      /> */}
-      <TextInput
-        placeholder="Search title"
-        value={searchValue}
-        rightSectionPointerEvents="all"
-        styles={{
-          input: {
-            border: '1px solid #ececec',
-            // minHeight: '40px',
-          },
-        }}
-        onChange={event => {
-          if (event.currentTarget.value) {
-            if (event.currentTarget.value.trim() === '') {
-              return;
+      <div className="flex w-full gap-3">
+        <TextInput
+          placeholder="Search title"
+          value={searchValue}
+          rightSectionPointerEvents="all"
+          className="w-full"
+          styles={{
+            input: {
+              border: '1px solid #ececec',
+            },
+          }}
+          onChange={event => {
+            if (event.currentTarget.value) {
+              if (event.currentTarget.value.trim() === '') {
+                return;
+              }
             }
+            setSearchValue(event.currentTarget.value);
+            handleUpdate(
+              'search',
+              event.currentTarget.value
+            );
+          }}
+          leftSection={
+            <IconSearch
+              style={{
+                height: rem(20),
+                width: rem(20),
+              }}
+              onClick={() => setSearchValue('')}
+            />
           }
-          setSearchValue(event.currentTarget.value);
-          handleUpdate('search', event.currentTarget.value);
-        }}
-        leftSection={
-          <IconSearch
-            style={{
-              height: rem(20),
-              width: rem(20),
+          rightSection={
+            <CloseButton
+              variant="transparent"
+              aria-label="Clear input"
+              onClick={() => {
+                setSearchValue('');
+                handleUpdate('search', '');
+              }}
+              style={{
+                display: searchValue ? undefined : 'none',
+              }}
+            />
+          }
+        />
+        <div className="flex items-center gap-1 rounded-sm border border-gray-200 p-1">
+          <IconList
+            onClick={e => {
+              e.stopPropagation();
+              setIsGrid(false);
             }}
-            onClick={() => setSearchValue('')}
+            color="gray"
+            stroke={1}
+            // size={12}
+            className={classNames(
+              'cursor-pointer rounded-sm hover:bg-gray-200',
+              {
+                'bg-gray-200 text-black': !isGrid,
+              }
+            )}
           />
-        }
-        rightSection={
-          <CloseButton
-            variant="transparent"
-            aria-label="Clear input"
-            onClick={() => {
-              setSearchValue('');
-              handleUpdate('search', '');
+          <IconLayout2
+            onClick={e => {
+              e.stopPropagation();
+              setIsGrid(true);
             }}
-            style={{
-              display: searchValue ? undefined : 'none',
-            }}
+            color="gray"
+            stroke={1}
+            // size={12}
+            className={classNames(
+              'cursor-pointer rounded-sm hover:bg-gray-200',
+              {
+                'bg-gray-200 text-black': isGrid,
+              }
+            )}
           />
-        }
-      />
+        </div>
+      </div>
     </div>
   );
 };

@@ -21,6 +21,7 @@ const useProductListing = () => {
   const [loading, setLoading] = useState(-1);
   const [pageNo, setPageNo] = useState(1);
   const [limit, setLimit] = useState(10);
+  const [isGrid, setIsGrid] = useState(false);
 
   const setListingData = async (showLoading = true) => {
     if (!isFirstRender && showLoading) setLoading(1);
@@ -199,6 +200,8 @@ const useProductListing = () => {
     limit,
     pageNo,
     activeTab,
+    isGrid,
+    setIsGrid,
   };
 };
 

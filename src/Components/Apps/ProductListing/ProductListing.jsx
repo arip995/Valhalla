@@ -14,6 +14,7 @@ import Header from '@/Components/Common/Header/Header';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import CustomTable from '@/Components/Common/Table/CustomTables/CustomTable';
 import useProductListing from './useProductListing';
+import classNames from 'classnames';
 
 const ProductListing = () => {
   const router = useRouter();
@@ -26,7 +27,8 @@ const ProductListing = () => {
     activeTab,
     limit,
     pageNo,
-    isGrid = true,
+    isGrid,
+    setIsGrid,
   } = useProductListing();
 
   const headerTitle = useMemo(() => {
@@ -85,6 +87,8 @@ const ProductListing = () => {
           status={status}
         /> */}
         <FiltersOne
+          isGrid={isGrid}
+          setIsGrid={setIsGrid}
           activeTab={activeTab}
           onUpdate={onUpdate}
           searchText={searchText}
@@ -101,11 +105,16 @@ const ProductListing = () => {
               <LayoutLoading />
             ) : (
               <>
-                {isGrid ? (
+                <div
+                  className={classNames('hidden', {
+                    '!block w-full': isGrid,
+                  })}
+                >
                   <SimpleGrid
                     className="w-full"
                     cols={{
                       base: 1,
+                      xs: 2,
                       sm: 2,
                       md: 3,
                       lg: 4,
@@ -118,23 +127,33 @@ const ProductListing = () => {
                       return (
                         <ProductCard
                           item={item}
+                          app={app}
+                          onUpdate={onUpdate}
                           key={item._id}
                         />
                       );
                     })}
                   </SimpleGrid>
-                ) : (
-                  <CustomTable
-                    tableBodyItems={data.data || []}
-                    onUpdate={onUpdate}
-                    onRowClick={row =>
-                      router.push(
-                        `/dashboard/${app}/${row._id}`
-                      )
-                    }
-                    app={app}
-                  />
-                )}
+                </div>
+                {/* <div
+                  className={classNames('block', {
+                    hidden: isGrid,
+                  })}
+                > */}
+                <CustomTable
+                  tableBodyItems={data.data || []}
+                  onUpdate={onUpdate}
+                  onRowClick={row =>
+                    router.push(
+                      `/dashboard/${app}/${row._id}`
+                    )
+                  }
+                  className={classNames('block', {
+                    hidden: isGrid,
+                  })}
+                  app={app}
+                />
+                {/* </div> */}
               </>
             )}
             <div
