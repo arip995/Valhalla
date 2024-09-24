@@ -1,8 +1,13 @@
 'use client';
-import { Pagination, Select } from '@mantine/core';
+import {
+  Pagination,
+  Select,
+  SimpleGrid,
+} from '@mantine/core';
 import { useRouter } from 'next/navigation';
 import React, { useMemo } from 'react';
 
+import ProductCard from '@/Components/Common/Card/ProductCard';
 import EmptyStateOne from '@/Components/Common/EmptyState/EmptyStateOne';
 import FiltersOne from '@/Components/Common/Filters/FiltersOne';
 import Header from '@/Components/Common/Header/Header';
@@ -21,6 +26,7 @@ const ProductListing = () => {
     activeTab,
     limit,
     pageNo,
+    isGrid = true,
   } = useProductListing();
 
   const headerTitle = useMemo(() => {
@@ -94,16 +100,42 @@ const ProductListing = () => {
             {loading ? (
               <LayoutLoading />
             ) : (
-              <CustomTable
-                tableBodyItems={data.data || []}
-                onUpdate={onUpdate}
-                onRowClick={row =>
-                  router.push(
-                    `/dashboard/${app}/${row._id}`
-                  )
-                }
-                app={app}
-              />
+              <>
+                {isGrid ? (
+                  <SimpleGrid
+                    className="w-full"
+                    cols={{
+                      base: 1,
+                      sm: 2,
+                      md: 3,
+                      lg: 4,
+                      xl: 6,
+                    }}
+                    spacing={{ base: 10, sm: 'xl' }}
+                    verticalSpacing={{ base: 10, sm: 'xl' }}
+                  >
+                    {data.data.map(item => {
+                      return (
+                        <ProductCard
+                          item={item}
+                          key={item._id}
+                        />
+                      );
+                    })}
+                  </SimpleGrid>
+                ) : (
+                  <CustomTable
+                    tableBodyItems={data.data || []}
+                    onUpdate={onUpdate}
+                    onRowClick={row =>
+                      router.push(
+                        `/dashboard/${app}/${row._id}`
+                      )
+                    }
+                    app={app}
+                  />
+                )}
+              </>
             )}
             <div
               className={`flex flex-wrap-reverse items-center gap-2 ${
