@@ -129,6 +129,11 @@ const ProductListing = () => {
                           item={item}
                           app={app}
                           onUpdate={onUpdate}
+                          onItemClick={row =>
+                            router.push(
+                              `/dashboard/${app}/${row._id}`
+                            )
+                          }
                           key={item._id}
                         />
                       );

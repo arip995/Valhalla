@@ -1,4 +1,4 @@
-import { Card, Text } from '@mantine/core';
+import { Card } from '@mantine/core';
 import EmptyProductImage2 from '../../../../public/images/common/emptystateproductimage2.jpeg';
 import ShareButton from '../Buttons/ShareButton';
 import ProductMenu from '../Menu/ProductMenu';
@@ -7,12 +7,19 @@ const ProductCard = ({
   item,
   app,
   onUpdate = () => {},
+  onItemClick = () => {},
 }) => {
   if (!item) return null;
 
   return (
     <>
-      <Card padding="sm" radius="md" withBorder>
+      <Card
+        padding="sm"
+        radius="md"
+        withBorder
+        className="cursor-pointer hover:bg-gray-50"
+        onClick={() => onItemClick(item)}
+      >
         <Card.Section className="relative overflow-hidden">
           <img
             src={item.coverImage || EmptyProductImage2.src}
@@ -35,27 +42,31 @@ const ProductCard = ({
           </div>
         </Card.Section>
 
-        <Text fw={500} className="word-break break-all">
-          {item.title}
-        </Text>
+        <Card.Section className="border-b border-gray-200 p-2">
+          <div className="word-break break-all font-semibold text-gray-900">
+            {item.title}
+          </div>
+        </Card.Section>
 
-        <div className="flex justify-between text-sm font-semibold text-gray-700">
-          <span>Price</span>
-          <span className="font-normal text-gray-500">
-            ₹{item.price}
-          </span>
-        </div>
-        <div className="flex justify-between text-sm font-semibold text-gray-700">
-          <span>Revenue</span>
-          <span className="font-normal text-gray-500">
-            ₹{item.totalRevenue}
-          </span>
-        </div>
-        <div className="flex justify-between text-sm font-semibold text-gray-700">
-          <span>Sales</span>
-          <span className="font-normal text-gray-500">
-            {item.totalSalesCount}
-          </span>
+        <div className="mt-2 flex w-full flex-col gap-3">
+          <div className="flex justify-between text-sm font-semibold text-gray-600">
+            <span>Price</span>
+            <span className="font-normal text-gray-500">
+              ₹{item.price}
+            </span>
+          </div>
+          <div className="flex justify-between text-sm font-semibold text-gray-600">
+            <span>Revenue</span>
+            <span className="font-normal text-gray-500">
+              ₹{item.totalRevenue}
+            </span>
+          </div>
+          <div className="flex justify-between text-sm font-semibold text-gray-600">
+            <span>Sales</span>
+            <span className="font-normal text-gray-500">
+              {item.totalSalesCount}
+            </span>
+          </div>
         </div>
       </Card>
     </>
