@@ -16,7 +16,8 @@ const useProductListing = () => {
   const app = usePathname().split('/')[2];
   const [data, setData] = useState(null);
   const [searchText, setSearchText] = useState('');
-  const [status, setStatus] = useState([0, 1, 5, 6]);
+  const [activeTab, setActiveTab] = useState(1);
+  const [status, setStatus] = useState([1, 3, 4]);
   const [loading, setLoading] = useState(-1);
   const [pageNo, setPageNo] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -86,6 +87,15 @@ const useProductListing = () => {
           setPageNo(1);
           setStatus(updateData);
           break;
+        case 'tab':
+          setPageNo(1);
+          setActiveTab(updateData);
+          setStatus(prev => {
+            let newStatus = [...prev];
+            newStatus[0] = updateData;
+            return newStatus;
+          });
+          break;
         case 'limit':
           setPageNo(1);
           setLimit(updateData);
@@ -95,7 +105,7 @@ const useProductListing = () => {
           break;
         case 'reset':
           setSearchText('');
-          setStatus([0, 1, 5, 6]);
+          // setStatus([ 1, 3, 4]);
           break;
         case 'edit':
           if (updateData === 2) {
@@ -168,7 +178,7 @@ const useProductListing = () => {
           break;
       }
     },
-    500
+    400
   );
 
   useDidUpdate(() => {
@@ -188,6 +198,7 @@ const useProductListing = () => {
     status,
     limit,
     pageNo,
+    activeTab,
   };
 };
 

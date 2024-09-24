@@ -4,10 +4,10 @@ import { useRouter } from 'next/navigation';
 import React, { useMemo } from 'react';
 
 import EmptyStateOne from '@/Components/Common/EmptyState/EmptyStateOne';
+import FiltersOne from '@/Components/Common/Filters/FiltersOne';
 import Header from '@/Components/Common/Header/Header';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import CustomTable from '@/Components/Common/Table/CustomTables/CustomTable';
-import Filters from './Filters';
 import useProductListing from './useProductListing';
 
 const ProductListing = () => {
@@ -18,7 +18,7 @@ const ProductListing = () => {
     data,
     loading,
     searchText,
-    status,
+    activeTab,
     limit,
     pageNo,
   } = useProductListing();
@@ -73,10 +73,15 @@ const ProductListing = () => {
         path={createPath}
       />
       <div className="flex flex-1 flex-col items-end gap-4 overflow-y-auto px-4 py-4">
-        <Filters
+        {/* <Filters
           onUpdate={onUpdate}
           searchText={searchText}
           status={status}
+        /> */}
+        <FiltersOne
+          activeTab={activeTab}
+          onUpdate={onUpdate}
+          searchText={searchText}
         />
         {data.totalQueryCount === 0 ? (
           <EmptyStateOne

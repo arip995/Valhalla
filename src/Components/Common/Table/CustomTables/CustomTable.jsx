@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use client';
 import ShareButton from '@/Components/Common/Buttons/ShareButton';
 import Table from '@/Components/Common/Table/Table';
@@ -34,7 +35,7 @@ import EmptyProductImage2 from '../../../../../public/images/common/emptystatepr
 
 const TableHeaderItems = [
   { title: 'Title', icon: IconUsers },
-  { title: 'Status', icon: IconBrandRedux },
+  // { title: 'Status', icon: IconBrandRedux },
   { title: 'Price', icon: IconReceipt2 },
   { title: 'Revenue', icon: IconPresentation },
   { title: 'Sales', icon: IconReportAnalytics },
@@ -113,7 +114,7 @@ const CustomTable = ({
                     {item.title}
                   </div>
                 </td>
-                <td className="min-w-40">
+                {/* <td className="min-w-40">
                   <Badge
                     variant="dot"
                     color={StatusColorMapping[item.status]}
@@ -121,7 +122,7 @@ const CustomTable = ({
                   >
                     {StatusMapping[item.status]}
                   </Badge>
-                </td>
+                </td> */}
                 <td className="min-w-36">₹{item.price}</td>
                 <td className="min-w-36">
                   ₹{item.totalRevenue}

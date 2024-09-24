@@ -2,11 +2,20 @@ export const StatusArray = [0, 1, 5, 6, 4, 3];
 export const StatusMapping = {
   0: 'Draft',
   1: 'Published',
-  //   2: 'Deleted',
+  2: 'Deleted',
   5: 'Unpublished',
   6: 'Sale disabled',
   4: 'Under review',
   3: 'Rejected',
+};
+export const ReverseStatusMapping = {
+  draft: 0,
+  published: 1,
+  deleted: 2,
+  unpublished: 5,
+  sale_disabled: 6,
+  under_review: 4,
+  rejected: 3,
 };
 export const StatusColorMapping = {
   0: 'yellow',
