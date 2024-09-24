@@ -17,7 +17,7 @@ const useProductListing = () => {
   const [data, setData] = useState(null);
   const [searchText, setSearchText] = useState('');
   const [activeTab, setActiveTab] = useState(1);
-  const [status, setStatus] = useState([0, 1, 5, 6]);
+  const [status, setStatus] = useState([0, 1, 3, 4, 5, 6]);
   const [loading, setLoading] = useState(-1);
   const [pageNo, setPageNo] = useState(1);
   const [limit, setLimit] = useState(10);
