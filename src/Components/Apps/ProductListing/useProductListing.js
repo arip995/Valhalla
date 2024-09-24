@@ -106,7 +106,7 @@ const useProductListing = () => {
           break;
         case 'reset':
           setSearchText('');
-          // setStatus([ 1, 3, 4]);
+          setStatus([0, 1, 3, 4, 5, 6]);
           break;
         case 'edit':
           if (updateData === 2) {
