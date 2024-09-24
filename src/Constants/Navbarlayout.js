@@ -1,20 +1,33 @@
+/* eslint-disable no-unused-vars */
 import {
   IconBrandTelegram,
   IconCash,
-  IconCertificate,
+  IconLockDollar,
+  IconSchool,
+  IconBrandDiscord,
+  IconBrandWhatsapp,
+  IconBrandMeta,
+  IconCalendarEvent,
+  IconArchive,
   IconCreditCardPay,
   IconHome2,
-  IconLockDollar,
   IconShoppingBag,
   IconUser,
+  IconLayoutDashboard,
 } from '@tabler/icons-react';
 
 export const SidenavData = [
   {
-    icon: IconHome2,
-    label: 'Home',
-    value: 'home',
+    icon: IconLayoutDashboard,
+    label: 'Dashboard',
+    value: 'dashboard',
     path: '/home',
+  },
+  {
+    icon: IconArchive,
+    label: 'Products',
+    value: 'product',
+    path: '/product',
   },
   {
     icon: IconCreditCardPay,
@@ -34,31 +47,32 @@ export const SidenavData = [
     value: 'audience',
     path: '/audience',
   },
-  { apps: true },
-  {
-    icon: IconLockDollar,
-    label: 'Locked Content',
-    value: 'lc',
-    path: '/app/lc',
-  },
-  {
-    icon: IconBrandTelegram,
-    label: 'Telegram',
-    value: 'tg',
-    path: '/app/tg',
-  },
-  {
-    icon: IconCash,
-    label: 'Digital Product',
-    value: 'digitalproduct',
-    path: '/app/dp',
-  },
-  {
-    icon: IconCertificate,
-    label: 'Course',
-    value: 'course',
-    path: '/app/course',
-  },
+
+  // { apps: true },
+  // {
+  //   icon: IconLockDollar,
+  //   label: 'Locked Content',
+  //   value: 'lc',
+  //   path: '/app/lc',
+  // },
+  // {
+  //   icon: IconBrandTelegram,
+  //   label: 'Telegram',
+  //   value: 'tg',
+  //   path: '/app/tg',
+  // },
+  // {
+  //   icon: IconSchool,
+  //   label: 'Course',
+  //   value: 'course',
+  //   path: '/app/course',
+  // },
+  // {
+  //   icon: IconCash,
+  //   label: 'Digital Product',
+  //   value: 'digitalproduct',
+  //   path: '/app/dp',
+  // },
   // {
   //   icon: IconBrandDiscord,
   //   label: 'Discord',

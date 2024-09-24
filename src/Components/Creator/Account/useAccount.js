@@ -32,7 +32,7 @@ const useAccount = () => {
   const onPersonalInfoSubmit = async () => {
     try {
       const payload = {
-        type: 'personalInfo',
+        type: 'name',
         firstName: personInfoForm.values.firstName,
         lastName: personInfoForm.values.lastName,
       };

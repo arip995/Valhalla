@@ -9,6 +9,7 @@ import {
   ActionIcon,
   AppShell,
   Burger,
+  Button,
   Group,
   Menu,
   NavLink,
@@ -20,6 +21,7 @@ import { useMediaQuery } from '@mantine/hooks';
 import { modals } from '@mantine/modals';
 import {
   IconChevronUp,
+  IconEdit,
   IconLogout,
   IconMenu2,
   IconSettings,
@@ -73,7 +75,7 @@ export function NavbarLayout({ children }) {
   }, [isMobile]);
 
   return (
-    <div suppressHydrationWarning={true}>
+    <div>
       <AppShell
         header={{ height: { base: 52, sm: 0 } }}
         navbar={{
@@ -171,6 +173,20 @@ export function NavbarLayout({ children }) {
               {!!isBrowser && Links}
             </div>
           </AppShell.Section>
+          {!!showLabel && !user.isCreator && (
+            <AppShell.Section className={classes.footer}>
+              <div className="flex w-full flex-col gap-3 border border-gray-200 p-2 font-semibold">
+                Become a creator
+                <Button
+                  size="xs"
+                  variant="default"
+                  leftSection={<IconEdit size={16} />}
+                >
+                  Creator
+                </Button>
+              </div>
+            </AppShell.Section>
+          )}
           <AppShell.Section className={classes.footer}>
             <Menu shadow="md" width={190}>
               <Menu.Target>
