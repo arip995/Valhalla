@@ -24,7 +24,7 @@ const TelegramDashboardProfilepic = ({
         </Text>
         <ProfilePic
           avatarImage={
-            data?.coverImage ||
+            data?.coverImage?.url ||
             data?.creatorDetails?.profilePic
           }
           loading={loadingImage}
@@ -32,7 +32,7 @@ const TelegramDashboardProfilepic = ({
             data?.creatorDetails?.lastName || ''
           }`}
           handleAvatarChange={handleFileChange}
-          showRemoveButton={data?.coverImage}
+          showRemoveButton={data?.coverImage?.url}
           onRemoveAvatar={() => {
             onUpdate('cover_image', '');
           }}

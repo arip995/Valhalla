@@ -19,7 +19,7 @@ export default async function Icon({ params }) {
         alt=""
         style={{ objectFit: 'cover' }}
         src={
-          data.coverImage ||
+          data.coverImage?.url ||
           data.creatorDetails?.profilePic ||
           'https://nexify-try.s3.ap-south-1.amazonaws.com/499766c5-b634-4ec9-a0f6-1a2bc19a591a.png'
         }

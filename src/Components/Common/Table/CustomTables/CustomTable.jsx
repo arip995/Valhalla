@@ -84,16 +84,16 @@ const CustomTable = ({
                       width={40}
                       className={classNames(
                         'h-10 rounded-md object-cover transition duration-300 ease-in-out hover:scale-110',
-                        { hidden: !item.coverImage }
+                        { hidden: !item.coverImage?.url }
                       )}
-                      src={item.coverImage}
+                      src={item.coverImage?.url}
                     />
                     <img
                       height={40}
                       width={40}
                       className={classNames(
                         'h-10 rounded-md transition duration-300 ease-in-out hover:scale-110',
-                        { hidden: item.coverImage }
+                        { hidden: item.coverImage?.url }
                       )}
                       src={EmptyProductImage2.src}
                     />

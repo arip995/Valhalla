@@ -26,7 +26,9 @@ const ProductCard = ({
       >
         <Card.Section className="relative overflow-hidden">
           <img
-            src={item.coverImage || EmptyProductImage2.src}
+            src={
+              item.coverImage?.url || EmptyProductImage2.src
+            }
             alt=""
             className="aspect-video h-full w-full cursor-pointer object-cover transition-all duration-300 hover:scale-110"
           />

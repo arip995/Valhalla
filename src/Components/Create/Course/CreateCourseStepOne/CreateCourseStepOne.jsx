@@ -117,18 +117,18 @@ const CreateCourseStepOne = ({
         <Input.Label>Cover Image</Input.Label>
         <ListFileOne
           file={
-            courseForm.values.coverImage
+            courseForm.values.coverImage?.url
               ? [
                   {
                     type: 'image',
-                    url: courseForm.values.coverImage,
+                    url: courseForm.values.coverImage?.url,
                   },
                 ]
               : []
           }
           onUpdate={files => {
             courseForm.setValues({
-              coverImage: files?.[0]?.url,
+              coverImage: { url: files?.[0]?.url },
             });
           }}
           uploadButtonText="Upload Image"

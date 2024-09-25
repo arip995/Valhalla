@@ -11,7 +11,7 @@ const GLDetailsContainer = ({ data }) => {
           <div className="w-full md:w-7/12">
             <ViewProfile
               profilePic={
-                data.coverImage ||
+                data.coverImage?.url ||
                 data.creatorDetails.profilePic
               }
               name={`${data.creatorDetails.firstName} ${data.creatorDetails.lastName}`}

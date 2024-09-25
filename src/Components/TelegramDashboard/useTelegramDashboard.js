@@ -47,7 +47,7 @@ const useTelegramDashboard = productId => {
           updateObjectStates(
             {
               name: 'coverImage',
-              value: value,
+              value: { url: value?.url },
             },
             setTgData
           );
@@ -96,7 +96,7 @@ const useTelegramDashboard = productId => {
       setLoadingImage(false);
       return;
     }
-    updateData('cover_image', url);
+    updateData('cover_image', { url });
   };
 
   useEffect(() => {

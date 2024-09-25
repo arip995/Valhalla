@@ -52,7 +52,7 @@ export async function generateMetadata({ params }, parent) {
       sitename: 'Nexify',
       images: [
         {
-          url: data?.coverImage,
+          url: data?.coverImage?.url,
           width: 500,
           height: 500,
         },
@@ -81,7 +81,7 @@ export async function generateMetadata({ params }, parent) {
       sitename: 'Nexify',
       images: [
         {
-          url: data?.coverImage,
+          url: data?.coverImage?.url,
           width: 500,
           height: 500,
         },

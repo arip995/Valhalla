@@ -66,7 +66,7 @@ const useCreateCourse = () => {
         if (!values.cta) {
           errors.cta = 'CTA is required';
         }
-        if (!values.coverImage) {
+        if (!values.coverImage?.url) {
           errors.coverImage = 'Cover image is required';
         }
 
