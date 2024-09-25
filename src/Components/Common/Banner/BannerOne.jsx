@@ -9,7 +9,7 @@ import React from 'react';
 
 const Banner = ({ type }) => {
   return (
-    <div className="sticky top-0 z-[200] cursor-pointer bg-gradient-to-r from-purple-600 to-blue-400">
+    <div className="z-[200] cursor-pointer bg-gradient-to-r from-purple-600 to-blue-400">
       <div className="flex w-full items-center justify-center gap-2 py-2 text-center text-sm font-semibold text-white">
         {type === 'kyc' ? (
           <>

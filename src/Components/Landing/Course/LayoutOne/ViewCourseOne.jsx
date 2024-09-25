@@ -4,6 +4,7 @@ import Image from 'next/image';
 import ViewSections from '@/Components/Common/ViewSections/ViewSections';
 import BuyButton from '@/Components/Common/Buttons/BuyButton';
 import FooterTwo from '@/Components/Common/Footer/FooterTwo';
+import ProductHeader from '@/Components/Common/Header/Productheader';
 
 const ViewCourseOne = ({ data }) => {
   // const calculateModulesLessonsAndDuration = (content) =>{
@@ -20,6 +21,8 @@ const ViewCourseOne = ({ data }) => {
   // }
 
   return (
+    <>
+    <ProductHeader data={data} />
     <div className="flex w-full max-w-none flex-col items-center px-2 pt-2 md:px-4 md:pt-4">
       <div className="flex max-w-2xl flex-col gap-8">
         <h2 className="text-center">{data?.title}</h2>
@@ -110,6 +113,7 @@ const ViewCourseOne = ({ data }) => {
         </BuyButton>
       </div>
     </div>
+    </>
   );
 };
 
