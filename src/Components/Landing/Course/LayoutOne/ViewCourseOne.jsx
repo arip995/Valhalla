@@ -25,7 +25,9 @@ const ViewCourseOne = ({ data, isPreview }) => {
       {isPreview ? null : <ProductHeader data={data} />}
       <div className="flex w-full max-w-none flex-col items-center px-2 pt-2 md:px-4 md:pt-4">
         <div className="flex max-w-2xl flex-col gap-8">
-          <h2 className="text-center">{data?.title}</h2>
+          <h2 className="break-all text-center">
+            {data?.title}
+          </h2>
           {!!data.coverImage?.url && (
             <Image
               src={data.coverImage?.url}
