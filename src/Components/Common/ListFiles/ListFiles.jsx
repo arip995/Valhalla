@@ -46,7 +46,7 @@ const ListFiles = ({
                   <img
                     src={item.url}
                     color="gray"
-                    className="list-files-image h-10 w-10 object-cover"
+                    className="list-files-image h-10 min-h-10 w-10 min-w-10 object-cover"
                     stroke={1}
                   />
                 ) : (
