@@ -6,7 +6,7 @@ import BuyButton from '@/Components/Common/Buttons/BuyButton';
 import FooterTwo from '@/Components/Common/Footer/FooterTwo';
 import ProductHeader from '@/Components/Common/Header/Productheader';
 
-const ViewCourseOne = ({ data }) => {
+const ViewCourseOne = ({ data, isPreview }) => {
   // const calculateModulesLessonsAndDuration = (content) =>{
   //     let modules = content.length;
   //     let lessons = 0
@@ -22,7 +22,7 @@ const ViewCourseOne = ({ data }) => {
 
   return (
     <>
-      <ProductHeader data={data} />
+      {isPreview ? null : <ProductHeader data={data} />}
       <div className="flex w-full max-w-none flex-col items-center px-2 pt-2 md:px-4 md:pt-4">
         <div className="flex max-w-2xl flex-col gap-8">
           <h2 className="text-center">{data?.title}</h2>

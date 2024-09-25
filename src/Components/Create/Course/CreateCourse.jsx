@@ -160,7 +160,10 @@ const CreateCourse = () => {
           setIsPreviewScreen={setIsPreviewScreen}
           isPreviewScreen={isPreviewScreen}
         >
-          <ViewCourseOne data={courseForm.values} />
+          <ViewCourseOne
+            data={courseForm.values}
+            isPreview
+          />
         </PreviewOne>
       </div>
     </div>

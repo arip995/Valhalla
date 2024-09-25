@@ -121,14 +121,14 @@ const CreateCourseStepOne = ({
               ? [
                   {
                     type: 'image',
-                    url: courseForm.values.coverImage?.url,
+                    ...courseForm.values.coverImage,
                   },
                 ]
               : []
           }
           onUpdate={files => {
             courseForm.setValues({
-              coverImage: { url: files?.[0]?.url },
+              coverImage: files?.[0],
             });
           }}
           uploadButtonText="Upload Image"
