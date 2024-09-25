@@ -1,5 +1,4 @@
-import { Paper, Rating, Spoiler } from '@mantine/core';
-import React from 'react';
+import { Rating, Spoiler } from '@mantine/core';
 
 const ViewTestimonial = ({ value }) => {
   if (!value?.length) return null;
@@ -7,7 +6,10 @@ const ViewTestimonial = ({ value }) => {
   return (
     <div className="flex w-full flex-wrap gap-4">
       {value.map((item, index) => (
-        <Paper withBorder p="md" key={index}>
+        <div
+          className="w-full rounded-md border border-gray-300"
+          key={index}
+        >
           <div className="flex items-center gap-2 font-semibold">
             <img
               className="h-20 w-20 rounded-full"
@@ -30,7 +32,7 @@ const ViewTestimonial = ({ value }) => {
               {item.description}
             </Spoiler>
           </div>
-        </Paper>
+        </div>
       ))}
     </div>
   );
