@@ -7,7 +7,7 @@ const ViewTestimonial = ({ value }) => {
     <div className="flex w-full flex-wrap gap-4">
       {value.map((item, index) => (
         <div
-          className="w-full rounded-md border border-gray-300 p-4"
+          className="w-full rounded-md border border-gray-300 px-4 pt-4"
           key={index}
         >
           <div className="flex items-center gap-2 font-semibold">
