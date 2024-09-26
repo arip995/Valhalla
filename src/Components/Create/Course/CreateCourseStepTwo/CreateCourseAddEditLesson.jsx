@@ -100,6 +100,7 @@ const SavedLessonContent = ({ lessonType, form }) => {
       return (
         <VideoOne
           videoId={form.values.video?.videoId}
+          libraryId={form.values.video?.libraryId}
           link={form.values.video?.link}
           checkIfVideoIsReady={
             form.values.video?.videoId && true

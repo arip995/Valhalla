@@ -8,9 +8,6 @@ const VideoOne = ({
   link,
   checkIfVideoIsReady = false,
 }) => {
-  console.log(
-    `https://iframe.mediadelivery.net/embed/${libraryId}/${videoId}?autoplay=false&loop=false&muted=false&preload=false&responsive=true`
-  );
   const [isVideoUploaded, setIsVideoUploaded] =
     useState(true);
 
