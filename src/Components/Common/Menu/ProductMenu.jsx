@@ -78,7 +78,9 @@ const ProductMenu = ({
 
         {
           // !item.isKycDone ||
-          item.status === 3 || item.status === 4 ? null : (
+          item.status === 0 ||
+          item.status === 3 ||
+          item.status === 4 ? null : (
             <>
               <Menu.Item
                 className="my-1"
