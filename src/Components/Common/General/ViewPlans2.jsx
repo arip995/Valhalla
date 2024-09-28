@@ -44,7 +44,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
                   : plan.cost}
               </div>
             </div>
-            <div className="text-md text-gray-900">
+            <div className="text-md font-semibold text-gray-900">
               {`${CalculatePeriodString(
                 plan.planType,
                 plan.days
