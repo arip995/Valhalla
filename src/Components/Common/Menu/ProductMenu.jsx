@@ -24,19 +24,6 @@ const ProductMenu = ({
         >
           <IconDotsVertical color="black" size={12} />
         </span>
-        {/* <ActionIcon
-          variant="subtle"
-          color="gray"
-          onClick={e => e.stopPropagation()}
-        >
-          <IconDotsVertical
-            style={{
-              width: rem(12),
-              height: rem(12),
-            }}
-            stroke={1.5}
-          />
-        </ActionIcon> */}
       </Menu.Target>
       <Menu.Dropdown>
         <Link href={`/dashboard/${app}/${item._id}`}>
