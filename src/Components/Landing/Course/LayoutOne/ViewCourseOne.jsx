@@ -1,10 +1,10 @@
-import { Accordion, Spoiler } from '@mantine/core';
-import RenderModulesAndLessons from './ViewCourseModuleAndLessons';
-import Image from 'next/image';
-import ViewSections from '@/Components/Common/ViewSections/ViewSections';
 import BuyButton from '@/Components/Common/Buttons/BuyButton';
 import FooterTwo from '@/Components/Common/Footer/FooterTwo';
 import ProductHeader from '@/Components/Common/Header/Productheader';
+import ViewSections from '@/Components/Common/ViewSections/ViewSections';
+import { Accordion, Spoiler } from '@mantine/core';
+import Image from 'next/image';
+import RenderModulesAndLessons from './ViewCourseModuleAndLessons';
 
 const ViewCourseOne = ({ data, isPreview }) => {
   // const calculateModulesLessonsAndDuration = (content) =>{
