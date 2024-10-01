@@ -38,10 +38,12 @@ html {
 }
 ul {
   padding: 0;
+  margin: 10px;
   list-style: disc;
 }
 ol {
   padding: 0;
+  margin: 10px;
   list-style: decimal;
 }
 h2 {

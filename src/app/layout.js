@@ -65,6 +65,7 @@ import '@mantine/core/styles/Slider.css';
 import '@mantine/core/styles/Rating.css';
 import '@mantine/core/styles/Card.css';
 import '@mantine/core/styles/Anchor.css';
+import '@mantine/core/styles/Stepper.css';
 import '@mantine/carousel/styles.css';
 
 // const inter = Inter({ subsets: ["latin"] });
