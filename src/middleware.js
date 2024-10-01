@@ -7,7 +7,7 @@ export function middleware(req) {
   let isCreator = getCookie('isCreator', { req });
   isCreator = isCreator == 'true';
   const accessToken = getCookie('accesstoken', { req });
-
+  console.log(username, isCreator);
   const redirectPaths = [
     { path: '/', redirect: '/home' },
     { path: '/app', redirect: '/app/lc' },
@@ -29,23 +29,11 @@ export function middleware(req) {
     { path: '/account', next: true },
     { path: '/lc', next: true },
     { path: '/tg', next: true },
+    { path: '/course', next: true },
+    { path: '/dashboard', next: true },
   ];
 
   if (accessToken) {
-    if (!username) {
-      if (
-        !nonCreatorAllowedPaths.some(({ path }) =>
-          req.nextUrl.pathname.startsWith(path)
-        )
-      ) {
-        if (isCreator) return;
-        console.log('first');
-        return NextResponse.redirect(
-          new URL('/purchase', req.url)
-        );
-      }
-    }
-
     if (
       req.nextUrl.pathname.startsWith('/signin') ||
       req.nextUrl.pathname.startsWith('/signup')
@@ -65,6 +53,19 @@ export function middleware(req) {
       }
     }
 
+    if (!username) {
+      if (
+        !nonCreatorAllowedPaths.some(({ path }) =>
+          req.nextUrl.pathname.startsWith(path)
+        )
+      ) {
+        if (isCreator) new URL('/signup', req.url);
+        return NextResponse.redirect(
+          new URL('/purchase', req.url)
+        );
+      }
+    }
+
     for (const { path, redirect } of redirectPaths) {
       if (req.nextUrl.pathname === path) {
         if (username) {
@@ -75,6 +76,7 @@ export function middleware(req) {
       }
     }
   }
+
   for (const { path, redirect } of authRequiredPaths) {
     if (req.nextUrl.pathname.startsWith(path)) {
       if (!accessToken) {
