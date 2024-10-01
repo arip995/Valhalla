@@ -3,10 +3,13 @@ import { handleFile } from '@/Utils/HandleFiles';
 import useUser from '@/Utils/Hooks/useUser';
 import { useForm } from '@mantine/form';
 import { useToggle } from '@mantine/hooks';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useAccount = () => {
+  const searchParams = useSearchParams();
+  const tab = searchParams.get('tab');
   const { user, setUserData, setCurrentUser } =
     useUser(true);
   const [loading, setLoading] = useState({
@@ -145,6 +148,7 @@ const useAccount = () => {
     handleFileChange,
     onRemoveImage,
     loadingImage,
+    tab,
   };
 };
 

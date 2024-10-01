@@ -1,9 +1,13 @@
 'use client';
 
-import { Button } from '@mantine/core';
+import { Button, Tabs } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 import classNames from 'classnames';
 import Link from 'next/link';
+import {
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 import { useState } from 'react';
 import CreateProductModal from '../Modal/CreateProductModal';
 
@@ -11,8 +15,12 @@ const Header = ({
   title,
   path,
   modal = false,
+  withTab = false,
   className,
 }) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const tab = searchParams.get('tab');
   const [opened, setOpened] = useState(false);
 
   return (
@@ -57,6 +65,22 @@ const Header = ({
           {/* <ThemeToggle /> */}
         </div>
       </div>
+      {withTab ? (
+        <Tabs
+          radius="xs"
+          defaultValue={tab || 'profile'}
+          className="bg-white"
+          onChange={val => {
+            router.push(`/account?tab=${val}`);
+          }}
+        >
+          <Tabs.List>
+            <Tabs.Tab value="profile">Profile</Tabs.Tab>
+            <Tabs.Tab value="payment">Payment</Tabs.Tab>
+            <Tabs.Tab value="billing">Billing</Tabs.Tab>
+          </Tabs.List>
+        </Tabs>
+      ) : null}
       {!!opened && (
         <CreateProductModal
           opened={opened}
