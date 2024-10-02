@@ -68,7 +68,7 @@ const Header = ({
       {withTab ? (
         <Tabs
           radius="xs"
-          defaultValue={tab || 'profile'}
+          value={tab || 'profile'}
           className="bg-white"
           onChange={val => {
             router.push(`/account?tab=${val}`);
