@@ -350,8 +350,9 @@ const useCreateTelegram = () => {
     } catch (error) {
       setLoading(false);
       toast.error(
-        error?.response?.data?.message ||
-          'something went wrong try again'
+        typeof error?.response?.data?.message === 'string'
+          ? error?.response?.data?.message === 'string'
+          : 'something went wrong try again'
       );
     }
   };
