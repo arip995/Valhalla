@@ -4,35 +4,18 @@ import Header from '@/Components/Common/Header/Header';
 import { AllProducts } from './AllProducts';
 import HomeCards from './HomeCards';
 import HomeChart from './HomeChart';
-import { Button } from '@mantine/core';
-import { useState } from 'react';
-import CompleteProfileModal from '@/Components/Common/Modal/CompleteProfileModal';
 
 const Home = () => {
-  const [opened, setOpened] = useState(false);
   return (
     <>
       <div className="flex h-[calc(100vh-52px)] w-full flex-col md:h-screen">
         <Header title="Home" />
         <div className="flex flex-1 flex-col gap-12 overflow-y-auto p-4 md:p-8">
           <HomeCards />
-          <Button
-            onClick={() => {
-              setOpened(prev => !prev);
-            }}
-          >
-            Complete your profile
-          </Button>
           <HomeChart />
           <AllProducts />
         </div>
       </div>
-      {!!opened && (
-        <CompleteProfileModal
-          opened={opened}
-          onClose={() => setOpened(false)}
-        />
-      )}
     </>
   );
 };

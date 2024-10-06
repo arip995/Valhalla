@@ -65,7 +65,7 @@ const Hero = () => (
               src={HeroImg.src}
               quality={100}
               className="rounded-2xl shadow-lg"
-              alt="Mailgo"
+              alt="Nexify"
             />
           </GradientWrapper>
         </div>

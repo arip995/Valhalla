@@ -119,7 +119,6 @@ const Account = () => {
                   showRemoveButton
                 />
               ) : null}
-
               <form
                 className="flex flex-col gap-6"
                 onSubmit={personInfoForm.onSubmit(

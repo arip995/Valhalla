@@ -4,7 +4,7 @@ import MailImage from '../../../../../../public/images/main/mailgo.png';
 const Brand = ({ ...props }) => (
   <Image
     src={MailImage.src}
-    alt="Mailgo logo"
+    alt="Nexify logo"
     {...props}
     width={110}
     height={50}

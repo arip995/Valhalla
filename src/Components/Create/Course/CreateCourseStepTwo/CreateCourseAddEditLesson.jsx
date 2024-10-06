@@ -1,7 +1,10 @@
 import CustomTipTapEditor from '@/Components/Common/Editor/CustomTipTapEditor';
 import ListFileOne from '@/Components/Common/ListFiles/ListFileOne';
 import ListFiles from '@/Components/Common/ListFiles/ListFiles';
+import AudioOne from '@/Components/Common/Player/AudioOne';
+import VideoOne from '@/Components/Common/Player/VideoOne';
 import UploadVideoStream from '@/Components/Common/Upload/UploadVideoStream';
+import { Compact } from '@/Utils/Common';
 import {
   ActionIcon,
   Button,
@@ -14,6 +17,7 @@ import {
   Textarea,
   TextInput,
 } from '@mantine/core';
+import { modals } from '@mantine/modals';
 import {
   IconChevronDown,
   IconDotsVertical,
@@ -23,10 +27,6 @@ import {
 import React, { useMemo } from 'react';
 import CreateCourseLessonType from './CreateCourseLessonType';
 import { LessonTypeMapping } from './CreateModulesAndLessons';
-import { modals } from '@mantine/modals';
-import VideoOne from '@/Components/Common/Player/VideoOne';
-import AudioOne from '@/Components/Common/Player/AudioOne';
-import { Compact } from '@/Utils/Common';
 
 const LessonContent = ({ lessonType, form }) => {
   switch (lessonType) {

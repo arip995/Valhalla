@@ -26,10 +26,10 @@ const VisualFeatures = () => {
         <div className="mx-auto max-w-xl text-center">
           <h2 className="text-3xl font-semibold text-gray-50 sm:text-4xl">
             Take your email marketing to the next level with
-            Mailgo
+            Nexify
           </h2>
           <p className="mt-3">
-            {`With Mailgo's powerful features, you can easily
+            {`With Nexify's powerful features, you can easily
             create and send beautiful emails that will
             engage your customers and drive more sales.`}
           </p>

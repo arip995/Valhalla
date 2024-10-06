@@ -41,16 +41,25 @@ const useContactSupportDetails = () => {
   };
   const onSendOtp = async () => {
     setLoading(true);
+    let payload = {};
     if (editEntity === 'email') {
       if (!email || !validateEmail(email)) {
         toast.error('Enter a valid email');
         return;
       }
+      payload = {
+        email,
+        isSignUp: true,
+      };
     } else if (editEntity === 'supportEmail') {
-      if (!supportEmail || !validateEmail(email)) {
+      if (!supportEmail || !validateEmail(supportEmail)) {
         toast.error('Enter a valid email');
         return;
       }
+      payload = {
+        email: supportEmail,
+        isSignUp: true,
+      };
     } else if (editEntity === 'phoneNumber') {
       if (
         !phoneNumber ||
@@ -59,6 +68,10 @@ const useContactSupportDetails = () => {
         toast.error('Enter a valid phone number');
         return;
       }
+      payload = {
+        phoneNumber,
+        isSignUp: true,
+      };
     } else if (editEntity === 'supportPhoneNumber') {
       if (
         !supportPhoneNumber ||
@@ -67,24 +80,6 @@ const useContactSupportDetails = () => {
         toast.error('Enter a valid phone number');
         return;
       }
-    }
-    let payload = {};
-    if (editEntity === 'email') {
-      payload = {
-        email,
-        isSignUp: true,
-      };
-    } else if (editEntity === 'supportEmail') {
-      payload = {
-        email: supportEmail,
-        isSignUp: true,
-      };
-    } else if (editEntity === 'phoneNumber') {
-      payload = {
-        phoneNumber,
-        isSignUp: true,
-      };
-    } else if (editEntity === 'supportPhoneNumber') {
       payload = {
         phoneNumber: supportPhoneNumber,
         isSignUp: true,

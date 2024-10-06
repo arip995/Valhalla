@@ -19,6 +19,9 @@ const useUser = (fetch = false) => {
   const setCurrentUser = data => {
     localStorage.removeItem('user');
     localStorage.setItem('user', JSON.stringify(data));
+    setUser(
+      JSON.parse(localStorage.getItem('user') || '{}')
+    );
   };
 
   const removeUser = () => {

@@ -1,8 +1,11 @@
 export const restrictedChars = /[^a-zA-Z0-9]/;
+export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+export const ifscRegex = /^[A-Z]{4}0[A-Z0-9]{6}$/;
+export const bankAccountNumberRegex = /^\d{9,18}$/;
 
 export const validateEmail = email => {
   // Regular expression for email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   // Check if the email is defined and not too long
   if (!email || email.length > 254) return false;
@@ -67,4 +70,16 @@ export const isValidUrl = url => {
   } catch (error) {
     return false;
   }
+};
+
+export const isValidPan = value => {
+  if (panRegex.test(value)) return true;
+};
+
+export const isValidIFSC = value => {
+  if (ifscRegex.test(value)) return true;
+};
+
+export const isValidBankAccountNumber = value => {
+  if (bankAccountNumberRegex.test(value)) return true;
 };
