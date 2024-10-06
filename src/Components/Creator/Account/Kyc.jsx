@@ -48,20 +48,19 @@ const Kyc = ({ onSuccess = () => {} }) => {
         key={kycForm.key('bankAccountNumber')}
         {...kycForm.getInputProps('bankAccountNumber')}
       />
-      {/* {!user.isKycDone ? ( */}
-      <Button
-        type="submit"
-        loading={loading}
-        disabled={user?.isKycDone}
-        onClick={() => {
-          kycForm.setValues({
-            isCliskedSaveAtleastOnce: true,
-          });
-        }}
-      >
-        Verify Kyc
-      </Button>
-      {/* ) : null} */}
+      {!user.isKycDone ? (
+        <Button
+          type="submit"
+          loading={loading}
+          onClick={() => {
+            kycForm.setValues({
+              isCliskedSaveAtleastOnce: true,
+            });
+          }}
+        >
+          Verify Kyc
+        </Button>
+      ) : null}
     </form>
   );
 };
