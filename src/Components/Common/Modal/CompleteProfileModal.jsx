@@ -19,6 +19,7 @@ import { AllProducts } from '@/Components/Creator/Home/AllProducts';
 
 const CompleteProfileModal = ({
   opened,
+  showCreate = true,
   onClose = () => {},
 }) => {
   // eslint-disable-next-line no-unused-vars
@@ -105,11 +106,11 @@ const CompleteProfileModal = ({
         title={
           <>
             {completeProfileForm.values.activeStep == 0
-              ? 'Step 1:Username'
+              ? 'Step 1:Username(KYC)'
               : completeProfileForm.values.activeStep == 1
-                ? 'Step 2:Contact Details'
+                ? 'Step 2:Contact Details(KYC)'
                 : completeProfileForm.values.activeStep == 2
-                  ? 'Step 3:Bank Details'
+                  ? 'Step 3:Bank Details(KYC)'
                   : completeProfileForm.values.activeStep ==
                       3
                     ? 'Congrajulations'
@@ -119,6 +120,7 @@ const CompleteProfileModal = ({
         opened={opened}
         onClose={onClose}
         size="lg"
+        onClick={e => e.stopPropagation()}
       >
         <div className="px-4 pt-4">
           {completeProfileForm.values.activeStep == 0 ? (
@@ -157,7 +159,7 @@ const CompleteProfileModal = ({
                     'Congrajulations, profile completed successfully'
                   );
                   nextStep();
-                }, 1500);
+                }, 2000);
               }}
             />
           ) : completeProfileForm.values.activeStep == 3 ? (
@@ -171,7 +173,7 @@ const CompleteProfileModal = ({
                   Profile Completed Sucessfully.
                 </div>
               </div>
-              <AllProducts />
+              {showCreate ? <AllProducts /> : null}
             </>
           ) : null}
 

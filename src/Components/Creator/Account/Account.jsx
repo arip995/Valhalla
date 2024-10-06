@@ -21,6 +21,7 @@ import {
   IconInfoCircle,
   IconRosetteDiscountCheck,
 } from '@tabler/icons-react';
+import Kyc from './Kyc';
 
 const Account = () => {
   const {
@@ -104,7 +105,7 @@ const Account = () => {
               </div>
             </>
           ) : tab === 'payment' ? (
-            <div></div>
+            <Kyc />
           ) : (
             <>
               {user?.isCreator ? (
