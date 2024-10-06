@@ -76,6 +76,9 @@ const CreateProductModal = ({
       opened={opened}
       onClose={loading ? () => {} : onClose}
       title="Create new Course"
+      overlayProps={{
+        blur: 20,
+      }}
     >
       <form
         onSubmit={onSubmit}

@@ -266,6 +266,9 @@ export function NavbarLayout({ children }) {
                   onClick={() => {
                     modals.openConfirmModal({
                       title: 'Sign Out',
+                      overlayProps: {
+                        blur: 20,
+                      },
                       children: (
                         <div className="pb-4 pt-8">
                           <Text size="md" fw={500}>

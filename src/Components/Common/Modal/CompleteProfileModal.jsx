@@ -15,6 +15,7 @@ import { IconCircleCheckFilled } from '@tabler/icons-react';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import AddUpdateContactDetails from '../General/AddUpdateContactDetails';
+import { AllProducts } from '@/Components/Creator/Home/AllProducts';
 
 const CompleteProfileModal = ({
   opened,
@@ -155,19 +156,23 @@ const CompleteProfileModal = ({
                   toast.success(
                     'Congrajulations, profile completed successfully'
                   );
-                }, 2000);
+                  nextStep();
+                }, 1500);
               }}
             />
           ) : completeProfileForm.values.activeStep == 3 ? (
-            <div className="flex w-full items-center justify-center gap-3">
-              <IconCircleCheckFilled
-                size={30}
-                color="green"
-              />
-              <div className="text-center text-xl font-bold">
-                Profile Completed Sucessfully
+            <>
+              <div className="mb-4 flex w-full items-center gap-3">
+                <IconCircleCheckFilled
+                  size={30}
+                  color="green"
+                />
+                <div className="text-center text-xl font-bold">
+                  Profile Completed Sucessfully.
+                </div>
               </div>
-            </div>
+              <AllProducts />
+            </>
           ) : null}
 
           <Group justify="center" mt="xl">

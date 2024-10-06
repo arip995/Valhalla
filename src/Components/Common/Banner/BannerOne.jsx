@@ -39,7 +39,6 @@ const Banner = ({ type }) => {
 };
 
 const BannerOne = ({ type = 'kyc', href = '' }) => {
-  console.log(href);
   return (
     <>
       {type === 'kyc' ? (
