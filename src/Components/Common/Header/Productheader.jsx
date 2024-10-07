@@ -114,7 +114,7 @@ const ProductHeader = ({ data }) => {
           )}
         </div>
       </div>
-      {data.creatorId === user._id ? (
+      {data.creatorId === user?._id ? (
         <BannerOne
           type="edit"
           href={`/dashboard/${productType[1]}/${productType[2]}`}

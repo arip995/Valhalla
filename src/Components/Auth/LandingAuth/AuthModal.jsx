@@ -1,11 +1,8 @@
 import Timer from '@/Components/Common/Timer';
-import GoogleButton from '@/Components/Common/Buttons/GoogleButton/GoogleButton';
-import { googleOauth } from '@/Utils/Common';
 import {
   ActionIcon,
   Anchor,
   Button,
-  Divider,
   Modal,
   NumberInput,
   PinInput,
@@ -34,7 +31,7 @@ const AuthModal = ({
     step,
     setStep,
     isEmail,
-    setIsEmail,
+    // setIsEmail,
     authForm,
     otpForm,
     sendOtp,
@@ -81,7 +78,7 @@ const AuthModal = ({
                 ? 'Log in and continue'
                 : 'Create an account'}
             </h2>
-            <GoogleButton onClick={googleOauth} />
+            {/* <GoogleButton onClick={googleOauth} />
             <Button
               variant="default"
               justify="space-between"
@@ -110,12 +107,12 @@ const AuthModal = ({
               className="transition-all duration-300 hover:bg-gray-100"
             >
               {isEmail ? 'Phone Number' : 'Email'}
-            </Button>
-            <Divider
+            </Button> */}
+            {/* <Divider
               label="or"
               labelPosition="center"
               className="my-4"
-            />
+            /> */}
             <form
               className="flex w-full flex-col gap-4"
               onSubmit={authForm?.onSubmit(sendOtp)}

@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@cashfreepayments/cashfree-js": "^1.0.5",
     "@hello-pangea/dnd": "^16.6.0",
     "@mantine/carousel": "^7.13.2",
     "@mantine/charts": "^7.13.2",
