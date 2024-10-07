@@ -26,7 +26,7 @@ const PaymentButton = async () => {
       .checkout(checkoutOptions)
       .then(function (result) {
         if (result.error) {
-          alert(result.error.message);
+          console.log(result.error.message);
         }
         if (result.redirect) {
           console.log('Redirection');
