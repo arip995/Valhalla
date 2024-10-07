@@ -98,6 +98,9 @@ const ViewPlans1 = ({
         onClick={() => onPay(selectedPlan)}
         disabled={!selectedPlan || data.status !== 1}
         animate={data.status === 1 ? true : false}
+        price={
+          selectedPlan?.discountedCost || selectedPlan.cost
+        }
         fullWidth
       >
         {data.status === 1
