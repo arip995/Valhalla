@@ -19,6 +19,7 @@ const PaymentButton = async () => {
     const { data: responseData } = data;
     let checkoutOptions = {
       paymentSessionId: responseData.payment_session_id,
+      redirectTarget: '_modal',
       returnUrl: window.location.href,
     };
     cashfree
