@@ -1,5 +1,5 @@
 'use client';
-import BuyButton from '@/Components/Common/Buttons/BuyButton';
+import BuyButton from '@/Components/Common/Payment/BuyButton';
 import {
   CalculatePeriodString,
   CurrencySymbolMapping,

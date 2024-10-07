@@ -5,7 +5,7 @@ import ViewPlans1 from '@/Components/Common/General/ViewPlans1';
 import { statusErrorTextMapping } from '@/Constants/ProductListingContants';
 import { Drawer } from '@mantine/core';
 import { useState } from 'react';
-import BuyButton from '../../../Common/Buttons/BuyButton';
+import BuyButton from '../../../Common/Payment/BuyButton';
 
 const GLManagePlans = ({ data }) => {
   const [openBottomSheet, setOpenBottomSheet] =
