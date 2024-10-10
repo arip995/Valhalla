@@ -77,7 +77,7 @@ const useKyc = (onSuccess = () => {}) => {
         pan: user.kycDetails.panDetails.pan,
         ifsc: user.kycDetails.bankDetails.ifsc,
         bankAccountNumber:
-          user.kycDetails.bankDetails.account_number,
+          user.kycDetails.bankDetails.accountNumber,
       });
     }
   }, [user?.kycDetails]);
