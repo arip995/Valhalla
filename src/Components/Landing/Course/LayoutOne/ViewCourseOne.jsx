@@ -24,7 +24,7 @@ const ViewCourseOne = ({ data, isPreview }) => {
     <>
       {isPreview ? null : <ProductHeader data={data} />}
       <div className="flex w-full max-w-none flex-col items-center px-2 pt-2 md:px-4 md:pt-4">
-        <div className="flex max-w-2xl flex-col gap-8">
+        <div className="flex max-w-2xl flex-1 flex-col gap-8">
           <h2 className="break-all text-center">
             {data?.title}
           </h2>
@@ -100,7 +100,7 @@ const ViewCourseOne = ({ data, isPreview }) => {
           <ViewSections sections={data.sections} />
         </div>
         <FooterTwo className="mt-8" />
-        <div className="sticky bottom-0 z-50 w-full border-t border-t-gray-200 bg-white p-4 md:hidden">
+        <div className="fixed bottom-0 z-50 w-full border-t border-t-gray-200 bg-white p-4 md:hidden">
           <BuyButton size="md" animate={false}>
             {!!data.hasDiscountedPrice && 'Actual Price'} ₹
             <span

@@ -5,7 +5,7 @@ import useUser from '@/Utils/Hooks/useUser';
 import { Button } from '@mantine/core';
 import classNames from 'classnames';
 import { useState } from 'react';
-import usePayment from './usePayment';
+import usePayment from './usePayments';
 
 const BuyButton = ({
   className,
