@@ -1,6 +1,6 @@
-import BuyButton from '@/Components/Common/Payment/BuyButton';
 import FooterTwo from '@/Components/Common/Footer/FooterTwo';
 import ProductHeader from '@/Components/Common/Header/Productheader';
+import BuyButton from '@/Components/Common/Payment/BuyButton';
 import ViewSections from '@/Components/Common/ViewSections/ViewSections';
 import { Accordion, Spoiler } from '@mantine/core';
 import Image from 'next/image';
