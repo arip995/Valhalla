@@ -20,7 +20,6 @@ const usePayment = (
       }
     );
     const { data: responseData } = data;
-    console.log(responseData);
     let checkoutOptions = {
       paymentSessionId: responseData.payment_session_id,
       redirectTarget: '_modal',
