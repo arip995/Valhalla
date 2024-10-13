@@ -17,7 +17,7 @@ const BuyButton = ({
 }) => {
   const { user } = useUser();
   const [opened, setOpened] = useState(false);
-  const { onPay } = usePayment(
+  const { onPay, loading } = usePayment(
     () => {
       onClick();
     },
@@ -29,6 +29,7 @@ const BuyButton = ({
   return (
     <>
       <Button
+        loading={loading}
         onClick={() => {
           if (!user?._id) {
             setOpened(true);
