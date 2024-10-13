@@ -10,7 +10,7 @@ const usePayment = (
     if (!amount || !phoneNumber) return;
 
     const cashfree = await load({
-      mode: isDevEnv() ? 'sandbox' : 'production', //or production
+      mode: isDevEnv() ? 'sandbox' : 'sandbox', //or production
     });
     const { data } = await axiosInstance.post(
       '/payment/create_order',
