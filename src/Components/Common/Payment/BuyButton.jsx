@@ -22,7 +22,7 @@ const BuyButton = ({
       onClick();
     },
     () => {
-      console.log('error');
+      console.log('first');
     }
   );
 
