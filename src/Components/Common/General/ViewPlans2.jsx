@@ -13,7 +13,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
 
   return (
     <div
-      className="flex w-full cursor-pointer flex-col gap-3"
+      className="flex w-full flex-col gap-3"
       onClick={onPay}
     >
       {data.subscriptionPlans.map(plan => {
