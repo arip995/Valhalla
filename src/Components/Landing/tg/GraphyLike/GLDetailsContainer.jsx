@@ -46,14 +46,14 @@ const GLDetailsContainer = ({ data }) => {
             </div>
           </div>
 
-          <div className="hidden w-full md:w-5/12">
+          <div className="hidden w-full md:block md:w-5/12">
             <GLManagePlans data={data} />
           </div>
         </div>
       </div>
-      {/* <div className="sticky bottom-0 md:hidden">
+      <div className="sticky bottom-0 md:hidden">
         <GLManagePlans data={data} />
-      </div> */}
+      </div>
     </>
   );
 };

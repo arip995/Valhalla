@@ -3,9 +3,8 @@
 import NewScrollArea from '@/Components/Common/General/NewScrollArea';
 import ViewPlans1 from '@/Components/Common/General/ViewPlans1';
 import { statusErrorTextMapping } from '@/Constants/ProductListingContants';
-import { Drawer } from '@mantine/core';
+import { Button, Drawer } from '@mantine/core';
 import { useState } from 'react';
-import BuyButton from '../../../Common/Payment/BuyButton';
 
 const GLManagePlans = ({ data }) => {
   const [openBottomSheet, setOpenBottomSheet] =
@@ -23,7 +22,7 @@ const GLManagePlans = ({ data }) => {
 
   return (
     <>
-      <div className="top-4 flex-col gap-3 md:sticky md:flex">
+      <div className="top-4 hidden flex-col gap-3 md:sticky md:flex">
         <ViewPlans1
           data={data}
           onPay={() => {}}
@@ -35,14 +34,15 @@ const GLManagePlans = ({ data }) => {
 
       <div className="fixed bottom-0 left-0 w-full border-t-2 border-gray-100 bg-white px-2 py-4 shadow-md md:hidden">
         <div className="flex w-full max-w-[768px] items-center gap-8">
-          <BuyButton
+          <Button
             onClick={() => setOpenBottomSheet(true)}
             disabled={data.status !== 1}
+            fullWidth
           >
             {data.status === 1
               ? 'Select a plan'
               : statusErrorTextMapping[data.status]}
-          </BuyButton>
+          </Button>
         </div>
       </div>
 
