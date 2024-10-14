@@ -5,7 +5,8 @@ import {
   CurrencySymbolMapping,
 } from '@/Constants/constants';
 import { discountPercentage } from '@/Utils/Common';
-import { Badge, Button } from '@mantine/core';
+import { Badge } from '@mantine/core';
+import BuyButton from '../Payment/BuyButton';
 
 const ViewPlans2 = ({ data, onPay = () => {} }) => {
   if (!data.subscriptionPlans?.length) return null;
@@ -51,9 +52,18 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
               )}`}
             </div>
 
-            <Button className="mt-2" color="teal">
+            <BuyButton
+              className="mt-2 w-fit"
+              color="teal"
+              animate={false}
+              price={
+                plan.enableDiscountedPrice
+                  ? plan.discountedCost
+                  : plan.cost
+              }
+            >
               BUY NOW
-            </Button>
+            </BuyButton>
           </div>
         );
       })}
