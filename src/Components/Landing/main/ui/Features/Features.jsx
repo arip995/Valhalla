@@ -214,13 +214,13 @@ const Features = () => {
               Transform your content into cash with our
               integrated solutions
             </h2>
-            <p className="mt-3">
+            <div className="mt-3 text-gray-400">
               {` Turn your content into cash with our seamless,
               integrated solution. Whether you're creating
               courses or managing webinars, our platform
               provides everything you need to monetize your
               work efficiently.`}
-            </p>
+            </div>
           </div>
         </LayoutEffect>
         <LayoutEffect
@@ -231,9 +231,9 @@ const Features = () => {
           }}
         >
           <div className="relative mt-12">
-            <ul className="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               {featuresList.map((item, idx) => (
-                <li
+                <div
                   key={idx}
                   className="space-y-3 rounded-xl border border-gray-800 p-4"
                   style={{
@@ -247,10 +247,12 @@ const Features = () => {
                   <h3 className="text-lg font-semibold text-gray-50">
                     {item.title}
                   </h3>
-                  <p>{item.desc}</p>
-                </li>
+                  <p className="text-gray-200">
+                    {item.desc}
+                  </p>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </LayoutEffect>
       </div>

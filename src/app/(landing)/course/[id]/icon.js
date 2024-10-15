@@ -12,12 +12,14 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Icon({ params }) {
-  const { data } = await getMetaData(params.id, 'lc');
+  const { data } = await getMetaData(params.id, 'course');
   return new ImageResponse(
     (
       <img
         alt=""
-        style={{ objectFit: 'cover' }}
+        style={{
+          objectFit: 'cover',
+        }}
         src={
           data.coverImage?.url ||
           data.creatorDetails?.profilePic ||

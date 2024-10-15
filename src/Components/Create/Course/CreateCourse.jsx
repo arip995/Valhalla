@@ -97,6 +97,10 @@ const CreateCourse = () => {
                     radius="xl"
                     color="black"
                     className="transition-all hover:shadow-md"
+                    loading={
+                      courseForm.values.loading === 1
+                    }
+                    loaderProps={{ color: 'white' }}
                     onClick={() => {
                       courseForm.setValues({
                         isSaveClickedAtleastOnce: true,

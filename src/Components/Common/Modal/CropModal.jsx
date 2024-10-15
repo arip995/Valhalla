@@ -190,7 +190,7 @@ function CropModal({
                 onClose();
               }}
             >
-              Crop
+              Upload
             </Button>
           </div>
         </div>

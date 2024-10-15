@@ -80,9 +80,9 @@ const Testimonial = () => {
               falseState: 'opacity-0 translate-y-12',
             }}
           >
-            <ul className="grid gap-6 delay-300 duration-1000 ease-in-out sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 delay-300 duration-1000 ease-in-out sm:grid-cols-2 lg:grid-cols-3">
               {testimonials.map((item, idx) => (
-                <li
+                <div
                   key={idx}
                   className="rounded-xl border border-gray-800 p-4"
                   style={{
@@ -92,7 +92,9 @@ const Testimonial = () => {
                 >
                   <figure className="flex h-full flex-col justify-between gap-y-6">
                     <blockquote className="">
-                      <p className="">{item.quote}</p>
+                      <p className="text-gray-200">
+                        {item.quote}
+                      </p>
                     </blockquote>
                     <div className="flex items-center gap-x-4">
                       <Image
@@ -110,9 +112,9 @@ const Testimonial = () => {
                       </div>
                     </div>
                   </figure>
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </LayoutEffect>
         </GradientWrapper>
       </div>

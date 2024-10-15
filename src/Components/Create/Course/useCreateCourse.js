@@ -156,6 +156,7 @@ const useCreateCourse = () => {
   };
   const handleSubmit = async values => {
     try {
+      courseForm.setValues({ loading: 1 });
       const { data } = await axiosInstance.post(
         '/course/update',
         values
@@ -188,6 +189,7 @@ const useCreateCourse = () => {
     } finally {
       courseForm.setValues({
         isSaveClickedAtleastOnce: false,
+        loading: 0,
       });
     }
   };
