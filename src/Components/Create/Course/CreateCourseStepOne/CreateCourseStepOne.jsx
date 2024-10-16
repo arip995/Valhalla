@@ -1,4 +1,8 @@
+import CustomTipTapEditor from '@/Components/Common/Editor/CustomTipTapEditor';
+import ListFileOne from '@/Components/Common/ListFiles/ListFileOne';
+import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import { CategoriesList } from '@/Constants/constants';
+import { discountPercentage } from '@/Utils/Common';
 import {
   Checkbox,
   Collapse,
@@ -10,10 +14,6 @@ import {
 } from '@mantine/core';
 import React from 'react';
 import Sections from './SectionDetails/Sections';
-import { discountPercentage } from '@/Utils/Common';
-import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
-import CustomTipTapEditor from '@/Components/Common/Editor/CustomTipTapEditor';
-import ListFileOne from '@/Components/Common/ListFiles/ListFileOne';
 
 const CreateCourseStepOne = ({
   courseForm,
