@@ -92,6 +92,7 @@ const useAuth = () => {
       }
       toast.success('Otp sent successfully!');
     } catch (error) {
+      console.log(error);
       toast.error(error.response.data.message);
     } finally {
       setLoading(false);
