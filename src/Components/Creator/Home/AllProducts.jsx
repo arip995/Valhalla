@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import CreateProductModal from '@/Components/Common/Modal/CreateProductModal';
 import {
   Paper,
@@ -14,24 +15,12 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 const ListData = [
-  {
-    title: 'Locked Content',
-    icon: IconLockDollar,
-    color: 'violet',
-    path: '/create/lc',
-  },
-  {
-    title: 'Telegram Community',
-    icon: IconBrandTelegram,
-    color: 'blue',
-    path: '/create/tg',
-  },
-  {
-    title: 'Digital Products',
-    icon: IconCreditCard,
-    color: 'teal',
-    path: '/app/dp',
-  },
+  // {
+  //   title: 'Locked Content',
+  //   icon: IconLockDollar,
+  //   color: 'violet',
+  //   path: '/create/lc',
+  // },
   {
     title: 'Courses',
     modal: true,
@@ -39,6 +28,18 @@ const ListData = [
     color: 'indigo',
     path: '/app/courses',
   },
+  {
+    title: 'Telegram Community',
+    icon: IconBrandTelegram,
+    color: 'blue',
+    path: '/create/tg',
+  },
+  // {
+  //   title: 'Digital Products',
+  //   icon: IconCreditCard,
+  //   color: 'teal',
+  //   path: '/app/dp',
+  // },
 ];
 
 export function AllProducts() {

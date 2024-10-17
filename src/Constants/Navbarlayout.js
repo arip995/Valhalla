@@ -49,23 +49,23 @@ export const SidenavData = [
   },
 
   { apps: true },
+  // {
+  //   icon: IconLockDollar,
+  //   label: 'Locked Content',
+  //   value: 'lc',
+  //   path: '/app/lc',
+  // },
   {
-    icon: IconLockDollar,
-    label: 'Locked Content',
-    value: 'lc',
-    path: '/app/lc',
+    icon: IconSchool,
+    label: 'Course',
+    value: 'course',
+    path: '/app/course',
   },
   {
     icon: IconBrandTelegram,
     label: 'Telegram',
     value: 'tg',
     path: '/app/tg',
-  },
-  {
-    icon: IconSchool,
-    label: 'Course',
-    value: 'course',
-    path: '/app/course',
   },
   // {
   //   icon: IconCash,
