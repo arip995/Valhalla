@@ -13,13 +13,14 @@ const Disclaimer = ({ showTitle = true }) => {
       <div className="disclaimer">
         <div className="disclaimer-header">Disclaimer</div>
         <div className="disclaimer-description">
-          This disclaimer outlines that NEXIFY TECHNOLOGY
-          PRIVATE LIMITED, as an organization, shall not be
-          held accountable for any content or materials
-          disseminated by a content creator on or via any
-          app or website affiliated with us. By utilizing
-          our services, you acknowledge and agree to the
-          terms set forth in this disclaimer.
+          This disclaimer outlines that POLMI SOFTWARE
+          SERVICES TECHNOLOGIES PRIVATE LIMITED, as an
+          organization, shall not be held accountable for
+          any content or materials disseminated by a content
+          creator on or via any app or website affiliated
+          with us. By utilizing our services, you
+          acknowledge and agree to the terms set forth in
+          this disclaimer.
           <LearnMoreButton />
         </div>
       </div>
