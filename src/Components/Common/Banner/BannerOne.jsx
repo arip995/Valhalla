@@ -5,7 +5,6 @@ import {
   IconEdit,
 } from '@tabler/icons-react';
 import Link from 'next/link';
-import React from 'react';
 
 const Banner = ({ type }) => {
   return (
