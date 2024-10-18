@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 'use client';
 
 import SectionWrapper from '../../SectionWrapper';
@@ -56,6 +57,8 @@ const Testimonial = () => {
         'Nexify is definitely the way to go when it comes to monetization + I highly recommend it as an monetization tool with AI support.',
     },
   ];
+
+  return null;
 
   return (
     <SectionWrapper>

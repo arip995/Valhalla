@@ -4,6 +4,7 @@ import { IconCheck, IconX } from '@tabler/icons-react';
 import { useState } from 'react';
 import SectionWrapper from '../../SectionWrapper';
 import LayoutEffect from '../../LayoutEffect';
+import Link from 'next/link';
 const Plans = [
   {
     name: 'Basic plan',
@@ -101,15 +102,17 @@ const PricingCard = ({ plan, isAnnual }) => {
           </li>
         ))}
       </ul>
-      <Button
-        className={`mt-auto w-full rounded-full text-white ring-offset-2 focus:ring ${
-          plan.isMostPop
-            ? 'bg-violet-600 hover:bg-violet-500 focus:bg-violet-700'
-            : 'bg-gray-700 hover:bg-gray-600 focus:bg-gray-800'
-        }`}
-      >
-        Get Started
-      </Button>
+      <Link href="/signup">
+        <Button
+          className={`mt-auto w-full rounded-full text-white ring-offset-2 focus:ring ${
+            plan.isMostPop
+              ? 'bg-violet-600 hover:bg-violet-500 focus:bg-violet-700'
+              : 'bg-gray-700 hover:bg-gray-600 focus:bg-gray-800'
+          }`}
+        >
+          Get Started
+        </Button>
+      </Link>
     </div>
   );
 };

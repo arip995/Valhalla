@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use client';
 
 import Image from 'next/image';
@@ -28,11 +29,13 @@ const Hero = () => (
               The all-in-one platform for your
               <br />
               <span className="bg-gradient-to-r from-[#9867F0] to-[#ED4E50] bg-clip-text text-transparent">
-                digital products and services
+                teaching solutions
+                {/* digital products and services */}
               </span>
             </div>
             <p className="mx-auto max-w-xl text-gray-300">
-              {`Consolidate all your digital products, coaching, subscriptions, courses, and email marketing into one link-in-bio store`}
+              {/* {`Consolidate all your digital products, coaching, subscriptions, courses, and email marketing into one link-in-bio store`} */}
+              {`Consolidate all your coaching, subscriptions, courses into one link-in-bio store`}
             </p>
             <div className="flex justify-center text-sm font-medium">
               <NavLink
@@ -55,7 +58,7 @@ const Hero = () => (
               </NavLink>
             </div>
           </div>
-          <GradientWrapper
+          {/* <GradientWrapper
             className="mt-16 sm:mt-28"
             wrapperClassName="max-w-3xl h-[250px] top-12 inset-0 sm:h-[300px] lg:h-[650px]"
           >
@@ -67,7 +70,7 @@ const Hero = () => (
               className="rounded-2xl shadow-lg"
               alt="Nexify"
             />
-          </GradientWrapper>
+          </GradientWrapper> */}
         </div>
       </LayoutEffect>
     </div>
