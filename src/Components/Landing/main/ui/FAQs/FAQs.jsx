@@ -78,7 +78,7 @@ const FAQs = () => {
     },
     {
       q: 'What content can I monetize?',
-      a: 'Courses, webinars, events, and community interactions.',
+      a: 'Courses, webinars, events,one-on-one interaction , and community interactions.',
     },
     {
       q: 'How do I receive payments?',
