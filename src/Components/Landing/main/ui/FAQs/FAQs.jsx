@@ -82,7 +82,7 @@ const FAQs = () => {
     },
     {
       q: 'How do I receive payments?',
-      a: 'Choose from various payment methods including stripe and bank transfers.',
+      a: 'Connect your bank account and request for a withdrawl.',
     },
     {
       q: 'Can I offer discounts?',

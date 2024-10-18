@@ -15,12 +15,12 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 const ListData = [
-  // {
-  //   title: 'Locked Content',
-  //   icon: IconLockDollar,
-  //   color: 'violet',
-  //   path: '/create/lc',
-  // },
+  {
+    title: 'Locked Content',
+    icon: IconLockDollar,
+    color: 'violet',
+    path: '/create/lc',
+  },
   {
     title: 'Courses',
     modal: true,

@@ -50,10 +50,10 @@ const Navbar = () => {
               state ? 'block' : 'hidden'
             } `}
           >
-            <ul className="flex-1 items-center justify-center space-y-6 md:flex md:space-x-6 md:space-y-0">
+            <div className="flex-1 items-center justify-center space-y-6 md:flex md:space-x-6 md:space-y-0">
               {navigation.map((item, idx) => {
                 return (
-                  <li
+                  <div
                     key={idx}
                     className="hover:text-gray-50"
                   >
@@ -64,10 +64,10 @@ const Navbar = () => {
                     >
                       {item.name}
                     </Link>
-                  </li>
+                  </div>
                 );
               })}
-            </ul>
+            </div>
             <div className="mt-6 items-center justify-end gap-x-6 space-y-6 md:mt-0 md:flex md:space-y-0">
               <NavLink
                 href="/signup"

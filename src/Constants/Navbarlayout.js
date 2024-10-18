@@ -49,12 +49,12 @@ export const SidenavData = [
   },
 
   { apps: true },
-  // {
-  //   icon: IconLockDollar,
-  //   label: 'Locked Content',
-  //   value: 'lc',
-  //   path: '/app/lc',
-  // },
+  {
+    icon: IconLockDollar,
+    label: 'Locked Content',
+    value: 'lc',
+    path: '/app/lc',
+  },
   {
     icon: IconSchool,
     label: 'Course',
