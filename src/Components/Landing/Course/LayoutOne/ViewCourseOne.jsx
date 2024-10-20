@@ -43,7 +43,7 @@ const ViewCourseOne = ({ data, isPreview }) => {
             animate={false}
             className="hidden md:block"
           >
-            {!!data.hasDiscountedPrice && 'Actual Price'} ₹
+            {data.cta || 'Enroll for'} ₹
             <span
               className={`${data.hasDiscountedPrice ? 'line-through' : ''} mr-2`}
             >
@@ -54,7 +54,6 @@ const ViewCourseOne = ({ data, isPreview }) => {
                 (₹{data.discountedPrice})
               </span>
             )}
-            {data.cta}
           </BuyButton>
           <div className="flex w-full flex-col items-center">
             <div className="flex w-full flex-col">
@@ -102,7 +101,7 @@ const ViewCourseOne = ({ data, isPreview }) => {
         <FooterTwo className="mt-8" />
         <div className="fixed bottom-0 z-50 w-full border-t border-t-gray-200 bg-white p-4 md:hidden">
           <BuyButton size="md" animate={false}>
-            {!!data.hasDiscountedPrice && 'Actual Price'} ₹
+            {data.cta || 'Enroll for'}
             <span
               className={`${data.hasDiscountedPrice ? 'line-through' : ''} mr-2`}
             >
@@ -113,7 +112,6 @@ const ViewCourseOne = ({ data, isPreview }) => {
                 (₹{data.discountedPrice})
               </span>
             )}
-            {data.cta}
           </BuyButton>
         </div>
       </div>
