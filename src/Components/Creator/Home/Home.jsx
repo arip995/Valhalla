@@ -20,6 +20,8 @@ const Home = () => {
     }
   }, [opened]);
 
+  if (!user?._id) return null;
+
   return (
     <>
       <div className="flex h-[calc(100vh-52px)] w-full flex-col md:h-screen">

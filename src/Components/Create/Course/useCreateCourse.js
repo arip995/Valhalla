@@ -63,9 +63,9 @@ const useCreateCourse = () => {
           errors.category = 'Category is required';
         }
 
-        if (!values.cta) {
-          errors.cta = 'CTA is required';
-        }
+        // if (!values.cta) {
+        //   errors.cta = 'CTA is required';
+        // }
         if (!values.coverImage?.url) {
           errors.coverImage = 'Cover image is required';
         }
