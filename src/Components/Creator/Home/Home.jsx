@@ -1,14 +1,14 @@
 'use client';
 
 import Header from '@/Components/Common/Header/Header';
+import CompleteProfileModal from '@/Components/Common/Modal/CompleteProfileModal';
+import useUser from '@/Utils/Hooks/useUser';
+import { Button } from '@mantine/core';
+import { IconUser } from '@tabler/icons-react';
+import { useEffect, useState } from 'react';
 import { AllProducts } from './AllProducts';
 import HomeCards from './HomeCards';
 import HomeChart from './HomeChart';
-import useUser from '@/Utils/Hooks/useUser';
-import { IconUser } from '@tabler/icons-react';
-import { useEffect, useState } from 'react';
-import CompleteProfileModal from '@/Components/Common/Modal/CompleteProfileModal';
-import { Button } from '@mantine/core';
 
 const Home = () => {
   const { user, setUserData } = useUser();

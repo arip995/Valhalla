@@ -1,15 +1,12 @@
-import {
-  IconX,
-  IconDeviceDesktop,
-  IconDeviceMobile,
-} from '@tabler/icons-react';
-import React, { useState } from 'react';
+import { IconX } from '@tabler/icons-react';
+import { useState } from 'react';
 
 const PreviewOne = ({
   children,
   setIsPreviewScreen,
   isPreviewScreen,
 }) => {
+  // eslint-disable-next-line no-unused-vars
   const [isDeskTop, setIsDesktop] = useState(false);
 
   return (
@@ -39,8 +36,7 @@ const PreviewOne = ({
             <div className="text-lg font-bold text-white">
               Preview
             </div>
-            <div className="flex items-center space-x-4">
-              {/* View Mode Icons */}
+            {/* <div className="flex items-center space-x-4">
               <IconDeviceDesktop
                 onClick={() => setIsDesktop(true)}
                 className={`cursor-pointer text-gray-400 ${
@@ -55,7 +51,7 @@ const PreviewOne = ({
                 }`}
                 size={20}
               />
-            </div>
+            </div> */}
             <div className="lg:hidden">
               <IconX
                 onClick={() => {

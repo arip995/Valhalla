@@ -12,13 +12,13 @@ const ViewTestimonial = ({ value }) => {
         >
           <div className="flex items-center gap-2 font-semibold">
             <img
-              className="h-20 w-20 rounded-full"
+              className="h-16 w-16 rounded-full"
               src={item.image}
               alt={
                 'https://nexify-try.s3.ap-south-1.amazonaws.com/219cb777-86b3-4e63-8051-bfb85242cc12.svg'
               }
             />
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 text-sm">
               {item.name}
               <Rating value={item.rating} />
             </div>
