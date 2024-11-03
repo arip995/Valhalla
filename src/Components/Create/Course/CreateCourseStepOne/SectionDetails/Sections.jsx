@@ -215,98 +215,108 @@ const Sections = ({ updateSection, form }) => {
         variant="default"
         chevronPosition="left"
       >
-        <Accordion.Item
-          key={item.type}
-          value={item.type}
-          className="flex flex-col gap-2 rounded-lg border border-solid border-neutral-200 bg-white p-2 md:p-4"
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center justify-center">
-              {(item.value?.length ||
-                item.type === 'highlight') && (
-                <Accordion.Control className="!w-12" />
-              )}
-              <div className="text-truncate flex items-center gap-2 text-sm font-semibold">
-                {showDrag && (
-                  <div
-                    {...provided?.dragHandleProps}
-                    className="cursor-grab"
-                  >
-                    <IconGripVertical color="rgba(199, 199, 199, 1)" />
-                  </div>
+        {form.values.stepsCompleted < 2 &&
+        item.type === 'highlight' ? null : (
+          <Accordion.Item
+            key={item.type}
+            value={item.type}
+            className="flex flex-col gap-2 rounded-lg border border-solid border-neutral-200 bg-white p-2 md:p-4"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center justify-center">
+                {(item.value?.length ||
+                  item.type === 'highlight') && (
+                  <Accordion.Control className="!w-12" />
                 )}
-                {SectionTitleMapping[item.type]}
+                <div className="text-truncate flex items-center gap-2 text-sm font-semibold">
+                  {showDrag && (
+                    <div
+                      {...provided?.dragHandleProps}
+                      className="cursor-grab"
+                    >
+                      <IconGripVertical color="rgba(199, 199, 199, 1)" />
+                    </div>
+                  )}
+                  {SectionTitleMapping[item.type]}
+                </div>
               </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <Badge
-                variant="transparent"
-                radius="sm"
-                className="min-w-max !cursor-pointer text-xs font-semibold"
-                onClick={() =>
-                  onAddOrEditSection(item.type, item.value)
-                }
-              >
-                {item.type === 'highlight'
-                  ? null
-                  : item.type === 'about'
-                    ? 'Edit'
-                    : item.value?.length &&
-                        [
-                          'social',
-                          'benifit',
-                          'gallery',
-                        ].includes(item.type)
-                      ? '+Add/Edit'
-                      : '+Add'}
-              </Badge>
-              {(item?.value?.length ||
-                item.type === 'highlight') && (
-                <Switch
-                  color="teal"
-                  checked={item.isEnabled}
-                  onChange={() =>
-                    onToggleSection(item.type)
+              <div className="flex items-center gap-2">
+                <Badge
+                  variant="transparent"
+                  radius="sm"
+                  className="min-w-max !cursor-pointer text-xs font-semibold"
+                  onClick={() =>
+                    onAddOrEditSection(
+                      item.type,
+                      item.value
+                    )
                   }
-                />
-              )}
-            </div>
-          </div>
-          {item.type === 'highlight' ? (
-            <Accordion.Panel className="flex flex-col gap-4">
-              <ShowSectionsList type={item.type} />
-            </Accordion.Panel>
-          ) : item.value?.length ? (
-            <Accordion.Panel className="flex flex-col gap-4">
-              <DragAndDrop
-                array={item.value}
-                onDrag={result =>
-                  onDragSectionItems(result, item.type)
-                }
-              >
-                {({
-                  provided,
-                  item: itemValue,
-                  showDrag,
-                }) => (
-                  <ShowSectionsList
-                    type={item.type}
-                    showDrag={showDrag}
-                    item={itemValue}
-                    dragHandleProps={
-                      provided?.dragHandleProps
+                >
+                  {item.type === 'highlight'
+                    ? null
+                    : item.type === 'about'
+                      ? 'Edit'
+                      : item.value?.length &&
+                          [
+                            'social',
+                            'benifit',
+                            'gallery',
+                          ].includes(item.type)
+                        ? '+Add/Edit'
+                        : '+Add'}
+                </Badge>
+                {(item?.value?.length ||
+                  item.type === 'highlight') && (
+                  <Switch
+                    color="teal"
+                    checked={item.isEnabled}
+                    onChange={() =>
+                      onToggleSection(item.type)
                     }
-                    onDeleteSectionItems={
-                      onDeleteSectionItems
-                    }
-                    onDragSectionItems={onDragSectionItems}
-                    onAddOrEditSection={onAddOrEditSection}
                   />
                 )}
-              </DragAndDrop>
-            </Accordion.Panel>
-          ) : null}
-        </Accordion.Item>
+              </div>
+            </div>
+            {item.type === 'highlight' ? (
+              <Accordion.Panel className="flex flex-col gap-4">
+                <ShowSectionsList type={item.type} />
+              </Accordion.Panel>
+            ) : item.value?.length ? (
+              <Accordion.Panel className="flex flex-col gap-4">
+                <DragAndDrop
+                  array={item.value}
+                  onDrag={result =>
+                    onDragSectionItems(result, item.type)
+                  }
+                >
+                  {({
+                    provided,
+                    item: itemValue,
+                    showDrag,
+                  }) => (
+                    <ShowSectionsList
+                      type={item.type}
+                      showDrag={showDrag}
+                      item={itemValue}
+                      dragHandleProps={
+                        provided?.dragHandleProps
+                      }
+                      onDeleteSectionItems={
+                        onDeleteSectionItems
+                      }
+                      onDragSectionItems={
+                        onDragSectionItems
+                      }
+                      onAddOrEditSection={
+                        onAddOrEditSection
+                      }
+                    />
+                  )}
+                </DragAndDrop>
+              </Accordion.Panel>
+            ) : null}
+          </Accordion.Item>
+        )}
       </Accordion>
     ),
     [

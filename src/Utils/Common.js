@@ -125,3 +125,7 @@ export const isValueChanged = (value1, value2) => {
     return oldValue !== newValue;
   });
 };
+
+export const calculateCourseContentHighlights = val => {
+  console.log(val);
+};
