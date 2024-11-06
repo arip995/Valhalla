@@ -51,6 +51,7 @@ const LessonContent = ({ lessonType, form }) => {
           onUpdate={value =>
             form.setFieldValue('file', value)
           }
+          isPresigned
         />
       );
     case 'audio':
@@ -64,6 +65,7 @@ const LessonContent = ({ lessonType, form }) => {
           onUpdate={value =>
             form.setFieldValue('audio', value[0])
           }
+          isPresigned
         />
       );
     case 'video':
@@ -338,6 +340,7 @@ const CreateCourseAddEditLesson = ({ form }) => {
             onUpdate={value =>
               form.setFieldValue('supportMaterial', value)
             }
+            isPresigned
           />
         </div>
       </Collapse>

@@ -1,5 +1,6 @@
 import toast from 'react-hot-toast';
 import axiosInstance from './AxiosInstance';
+import axios from 'axios';
 
 /**
  * Converts a file to a base64 encoded string.
@@ -45,7 +46,8 @@ export const handleFile = async (
   mimeTypes = ['image/'],
   maxFileSize = 1,
   quality = 50,
-  validateOnly = false
+  validateOnly = false,
+  isPresigned = false
 ) => {
   try {
     // Validate file type
@@ -72,12 +74,20 @@ export const handleFile = async (
     const data = await axiosInstance.post(
       `${process.env.NEXT_PUBLIC_BASE_URL}/image/save_image`,
       {
-        file: { ...payload, quality },
+        file: { ...payload, quality, isPresigned },
       }
     );
+    let url = data.data.data.url;
 
+    if (isPresigned) {
+      await axios.put(data.data.data.signedUrl, file, {
+        headers: {
+          'Content-Type': file.type,
+        },
+      });
+    }
     // Return uploaded file URL
-    return data.data.data.url;
+    return url;
   } catch (error) {
     // Handle errors
     console.error('Error handling file:', error);

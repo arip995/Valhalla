@@ -29,6 +29,7 @@ const ListFileOne = ({
   cropImage = false,
   quality = 50,
   onChangeLink = () => {},
+  isPresigned,
 }) => {
   const [files, setFiles] = useState(
     file.length ? file : []
@@ -48,7 +49,9 @@ const ListFileOne = ({
         file,
         mimeTypes,
         maxSize,
-        quality
+        quality,
+        false,
+        isPresigned
       );
       if (!url) {
         setFiles(prevFiles => {

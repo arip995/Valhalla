@@ -135,6 +135,7 @@ const CreateCourseStepOne = ({
           showImagePreview
           cropImage
           onlyOne
+          isPresigned
         />
         {!!courseForm.errors.coverImage && (
           <Input.Error>

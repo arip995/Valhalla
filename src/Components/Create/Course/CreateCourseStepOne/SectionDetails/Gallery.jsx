@@ -10,6 +10,7 @@ const Gallery = ({ section, onSave = () => {} }) => {
         file={gallery}
         onUpdate={setGallery}
         cropImage
+        isPresigned
       />
       <div className="flex w-full justify-end">
         <Button
