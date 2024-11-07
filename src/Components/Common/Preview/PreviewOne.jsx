@@ -73,7 +73,7 @@ const PreviewOne = ({
                 nexify.club/course/
               </div>
             </div>
-            <div className="relative h-[calc(100vh-6rem)] overflow-y-auto overflow-x-hidden rounded-b-2xl border-b-8 border-l-8 border-r-8 border-gray-800 bg-white lg:h-[calc(100vh-16rem)]">
+            <div className="relative h-[calc(100vh-8rem)] overflow-y-auto overflow-x-hidden rounded-b-2xl border-b-8 border-l-8 border-r-8 border-gray-800 bg-white lg:h-[calc(100vh-8rem)]">
               {/* <div
                 className={
                   isDeskTop

@@ -1,15 +1,16 @@
 import { Loader } from '@mantine/core';
+import classNames from 'classnames';
 import React from 'react';
 
-const LayoutLoading = () => {
+const LayoutLoading = ({ overlay = false, ...props }) => {
   return (
-    <div className="fixed flex h-svh w-full items-center justify-center">
-      {/* <div
-        className="inline-block size-8 animate-spin rounded-full border-[4px] border-current border-t-transparent text-violet-600 dark:text-violet-500"
-        role="status"
-        aria-label="loading"
-      ></div> */}
-      <Loader />
+    <div
+      className={classNames(
+        'fixed left-0 top-0 flex h-svh w-full items-center justify-center',
+        { 'z-[10000000] bg-white': overlay }
+      )}
+    >
+      <Loader {...props} />
     </div>
   );
 };

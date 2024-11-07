@@ -1,50 +1,201 @@
 import axiosInstance from '@/Utils/AxiosInstance';
 import { isDevEnv } from '@/Utils/Common';
+import useUser from '@/Utils/Hooks/useUser';
 import { load } from '@cashfreepayments/cashfree-js';
-import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+
+const MAX_ATTEMPTS = 3;
+const POLL_INTERVAL = 5000; // 5 seconds
 
 const usePayment = (
   onSuccess = () => {},
-  onFailure = () => {}
+  onFailure = () => {},
+  payInPayload,
+  paymentProvider = 'cashfree'
 ) => {
-  const [loading, setLoading] = useState(false);
-  const onPay = async (phoneNumber, amount = 1) => {
-    if (!amount || !phoneNumber) return;
-    try {
-      setLoading(true);
-      const { data } = await axiosInstance.post(
-        '/payment/create_order',
-        {
-          phoneNumber: phoneNumber,
-          amount: amount,
+  const { user } = useUser();
+  const searchParams = useSearchParams();
+
+  const [paymentState, setPaymentState] = useState({
+    payinLoading: false,
+    paymentSessionId: null,
+    orderId: null,
+    paymentDone: false,
+    loading: false,
+    paymentCompleted: false,
+  });
+
+  // Display a toast notification based on payment result
+  const displayToastNotification = isSuccessful => {
+    setTimeout(() => {
+      if (isSuccessful) {
+        toast.success('Payment made successfully', {
+          position: 'top-center',
+        });
+      } else {
+        toast.error(
+          'There was a problem. If your payment was deducted, it will be resolved within 24 hours.',
+          {
+            position: 'top-center',
+            duration: 10000,
+          }
+        );
+      }
+      onSuccess(isSuccessful);
+    }, 100);
+  };
+
+  // Polling function to check order status
+  const pollOrderStatus = ({
+    sessionId,
+    onPollSuccess,
+    onPollFailure,
+  }) => {
+    let attemptCount = 0;
+
+    const timer = setInterval(async () => {
+      if (attemptCount >= MAX_ATTEMPTS) {
+        clearInterval(timer);
+        onPollFailure('Maximum polling attempts reached.');
+        return;
+      }
+
+      try {
+        const { data } = await axiosInstance.post(
+          '/muneem/order_details',
+          { sessionId }
+        );
+        if (data?.data?.ok) {
+          clearInterval(timer);
+          onPollSuccess();
+        } else {
+          attemptCount += 1;
         }
-      );
-      const { data: responseData } = data;
-      const cashfree = await load({
-        mode: isDevEnv() ? 'sandbox' : 'sandbox', //or production
-      });
-      let checkoutOptions = {
-        paymentSessionId: responseData.payment_session_id,
-        redirectTarget: '_modal',
-      };
-      cashfree
-        .checkout(checkoutOptions)
-        .then(function (result) {
-          console.log(result);
+      } catch (error) {
+        clearInterval(timer);
+        onPollFailure(error);
+      }
+    }, POLL_INTERVAL);
+  };
+
+  // Opens the Cashfree or Razorpay modal for payment
+  const openPaymentModal = async () => {
+    switch (paymentProvider) {
+      case 'cashfree':
+        var cashfree = await load({
+          mode: isDevEnv() ? 'sandbox' : 'production',
+        });
+        var checkoutOptions = {
+          paymentSessionId: paymentState.paymentSessionId,
+          redirectTarget: '_modal',
+        };
+
+        cashfree.checkout(checkoutOptions).then(result => {
           if (result.error) {
             onFailure();
             return;
           }
-          onSuccess();
-          return;
+
+          setPaymentState(prev => ({
+            ...prev,
+            loading: true,
+            paymentCompleted: true,
+          }));
+
+          pollOrderStatus({
+            sessionId: paymentState.paymentSessionId,
+            onPollSuccess: () => {
+              setPaymentState(prev => ({
+                ...prev,
+                loading: false,
+                paymentDone: true,
+              }));
+              displayToastNotification(true);
+            },
+            onPollFailure: error => {
+              setPaymentState(prev => ({
+                ...prev,
+                loading: false,
+                paymentDone: false,
+              }));
+              displayToastNotification(false);
+              console.error(error);
+            },
+          });
         });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
+        break;
+
+      case 'razorpay':
+        // Handle Razorpay implementation here
+        break;
+
+      default:
+        break;
     }
   };
-  return { onPay, loading };
+
+  // Creates an order by making a POST request
+  const onCreateOrder = async (amount = 1) => {
+    if (!amount) return;
+
+    setPaymentState(prev => ({
+      ...prev,
+      payinLoading: true,
+    }));
+
+    try {
+      const { data } = await axiosInstance.post(
+        '/payment/create_order',
+        {
+          email: user.email || '',
+          phoneNumber: user.phoneNumber || '',
+          amount,
+          bookingData: {
+            ...payInPayload,
+            paymentProvider,
+            query: {
+              referrer: document.referrer,
+              ...Object.fromEntries(
+                searchParams.entries() || {}
+              ),
+            },
+          },
+        }
+      );
+
+      if (!data.ok) {
+        toast.error('Order not created. Please try again.');
+        return;
+      }
+
+      setPaymentState(prev => ({
+        ...prev,
+        paymentSessionId: data.data.payment_session_id,
+        orderId: data.data.order_id,
+      }));
+    } catch (error) {
+      console.error(error);
+      toast.error(
+        'An error occurred while creating the order.'
+      );
+    } finally {
+      setPaymentState(prev => ({
+        ...prev,
+        payinLoading: false,
+      }));
+    }
+  };
+
+  // Trigger openPaymentModal when paymentSessionId is set
+  useEffect(() => {
+    if (paymentState.paymentSessionId) {
+      openPaymentModal();
+    }
+  }, [paymentState.paymentSessionId]);
+
+  return { onCreateOrder, paymentState };
 };
 
 export default usePayment;
@@ -68,11 +219,11 @@ export default usePayment;
 //   ...rest
 // }) => {
 //   const [paymentState, setPaymentState] = useState({
-//     payinLoading: false,
-//     orderCreationId: null,
-//     paymentDone: false,
-//     loading: false,
-//     paymentCompleted:false
+// payinLoading: false,
+// orderCreationId: null,
+// paymentDone: false,
+// loading: false,
+// paymentCompleted:false
 //   })
 
 //   const currentUser = useSelector((state) => state.user.currentUser) || {}
@@ -94,8 +245,8 @@ export default usePayment;
 //         bookingData: {
 //           ...payInPayload?.bookingData,
 //           paymentProvider,
-//           email:currentUser.Email || rest.email,
-//           phone:currentUser.PhoneNumber || rest.phone,
+// email:currentUser.Email || rest.email,
+// phone:currentUser.PhoneNumber || rest.phone,
 //           queryParams: {
 //             referrer: document.referrer,
 //             ...(router?.query || {}),
@@ -185,29 +336,29 @@ export default usePayment;
 
 //   }
 
-//   const pollOrderStatus = ({ orderId, onSuccess, onFailure }) => {
-//     let timesRun = 0
-//     const timer = setInterval(async () => {
-//       if (timesRun >= MAX_ATTEMPTS) {
-//         clearInterval(timer)
-//         onFailure('Maximum attempts reached')
-//         return
-//       }
+// const pollOrderStatus = ({ orderId, onSuccess, onFailure }) => {
+//   let timesRun = 0
+//   const timer = setInterval(async () => {
+//     if (timesRun >= MAX_ATTEMPTS) {
+//       clearInterval(timer)
+//       onFailure('Maximum attempts reached')
+//       return
+//     }
 
-//       try {
-//         const response = await post('/muneem/order_details', { orderId })
-//         if (response.data?.data?.success) {
-//           clearInterval(timer)
-//           onSuccess()
-//         } else {
-//           timesRun += 1
-//         }
-//       } catch (error) {
+//     try {
+//       const response = await post('/muneem/order_details', { orderId })
+//       if (response.data?.data?.success) {
 //         clearInterval(timer)
-//         onFailure(error)
+//         onSuccess()
+//       } else {
+//         timesRun += 1
 //       }
-//     }, POLL_INTERVAL)
-//   }
+//     } catch (error) {
+//       clearInterval(timer)
+//       onFailure(error)
+//     }
+//   }, POLL_INTERVAL)
+// }
 
 //   const onCheckoutSuccess = async () => {
 //     const orderId = paymentState.orderCreationId;
@@ -232,43 +383,43 @@ export default usePayment;
 //       await post(endpoints[paymentProvider].path,endpoints[paymentProvider].body)
 //     }
 
-//     pollOrderStatus({
-//       orderId,
-//       onSuccess: () => {
-//         setPaymentState((prev) => ({ ...prev, loading: false,paymentDone: true }))
-//         callBackHandler(null, true)
-//       },
-//       onFailure: (error) => {
-//         setPaymentState((prev) => ({ ...prev, loading: false,paymentDone: true }))
-//         callBackHandler(error, false)
-//       },
-//     })
+// pollOrderStatus({
+//   orderId,
+//   onSuccess: () => {
+//     setPaymentState((prev) => ({ ...prev, loading: false,paymentDone: true }))
+//     callBackHandler(null, true)
+//   },
+//   onFailure: (error) => {
+//     setPaymentState((prev) => ({ ...prev, loading: false,paymentDone: true }))
+//     callBackHandler(error, false)
+//   },
+// })
 //   }
 
-//   const callBackHandler = (e, paymentDone) => {
-//     setTimeout(() => {
-//       if (paymentDone) {
-//         cogoToast.success('Payment made successfully', {
+// const callBackHandler = (e, paymentDone) => {
+//   setTimeout(() => {
+//     if (paymentDone) {
+//       cogoToast.success('Payment made successfully', {
+//         position: 'top-center',
+//       })
+//     } else {
+//       cogoToast.error(
+//         'There was some problem if your payment is deducted we will resolve within 24 hours',
+//         {
 //           position: 'top-center',
-//         })
-//       } else {
-//         cogoToast.error(
-//           'There was some problem if your payment is deducted we will resolve within 24 hours',
-//           {
-//             position: 'top-center',
-//             hideAfter: 10,
-//           },
-//         )
-//       }
+//           hideAfter: 10,
+//         },
+//       )
+//     }
 
-//       if (document.getElementById(closeId || 'mdismissc')) {
-//         document.getElementById(closeId || 'mdismissc').click()
-//       }
-//       if (callBack) {
-//         callBack(paymentDone, e)
-//       }
-//     }, 100)
-//   }
+//     if (document.getElementById(closeId || 'mdismissc')) {
+//       document.getElementById(closeId || 'mdismissc').click()
+//     }
+//     if (callBack) {
+//       callBack(paymentDone, e)
+//     }
+//   }, 100)
+// }
 
 //   useEffect(() => {
 //     if(paymentState.paymentCompleted){

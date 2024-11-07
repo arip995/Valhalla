@@ -215,7 +215,7 @@ const Sections = ({ updateSection, form }) => {
         variant="default"
         chevronPosition="left"
       >
-        {form.values.stepsCompleted < 2 &&
+        {form.values.stepsCompleted != 2 &&
         item.type === 'highlight' ? null : (
           <Accordion.Item
             key={item.type}

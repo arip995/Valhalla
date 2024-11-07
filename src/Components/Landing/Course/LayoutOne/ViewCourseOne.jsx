@@ -47,6 +47,8 @@ const ViewCourseOne = ({ data, isPreview }) => {
             <span
               className={`${data.hasDiscountedPrice ? 'line-through' : ''} mr-2`}
             >
+              {' '}
+              {data.hasDiscountedPrice ? '' : '₹'}
               {data.price ? data.price : ''}
             </span>
             {!!data.hasDiscountedPrice && (

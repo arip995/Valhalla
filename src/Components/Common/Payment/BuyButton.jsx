@@ -6,6 +6,7 @@ import { Button } from '@mantine/core';
 import classNames from 'classnames';
 import { useState } from 'react';
 import usePayment from './usePayments';
+import LayoutLoading from '../Loading/LayoutLoading';
 
 const BuyButton = ({
   className,
@@ -17,7 +18,7 @@ const BuyButton = ({
 }) => {
   const { user } = useUser();
   const [opened, setOpened] = useState(false);
-  const { onPay, loading } = usePayment(
+  const { onCreateOrder, paymentState } = usePayment(
     () => {
       onClick();
     },
@@ -26,15 +27,19 @@ const BuyButton = ({
     }
   );
 
+  if (paymentState.loading) {
+    return <LayoutLoading overlay type="bars" />;
+  }
+
   return (
     <>
       <Button
-        loading={loading}
+        loading={paymentState?.payinLoading}
         onClick={() => {
           if (!user?._id) {
             setOpened(true);
           } else {
-            onPay(user?.phoneNumber, price);
+            onCreateOrder(price);
           }
         }}
         className={classNames(
