@@ -68,15 +68,18 @@ const TGEPlansAndPricing = ({
                         )}
                       </Draggable>
                     ) : (
-                      <TGESinglePlan
-                        key={obj._id}
-                        planObj={obj}
-                        numOfPlans={plans?.length}
-                        onEdit={onEditPlan}
-                        onToggleStatus={onTogglePlanStatus}
-                        index={index}
-                        plansLength={plans.length}
-                      />
+                      <div className="mb-3" key={obj._id}>
+                        <TGESinglePlan
+                          planObj={obj}
+                          numOfPlans={plans?.length}
+                          onEdit={onEditPlan}
+                          onToggleStatus={
+                            onTogglePlanStatus
+                          }
+                          index={index}
+                          plansLength={plans.length}
+                        />
+                      </div>
                     )
                   )}
                   {provided.placeholder}
