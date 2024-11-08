@@ -2,7 +2,10 @@ import axiosInstance from '@/Utils/AxiosInstance';
 import { isDevEnv } from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
 import { load } from '@cashfreepayments/cashfree-js';
-import { useSearchParams } from 'next/navigation';
+import {
+  usePathname,
+  useSearchParams,
+} from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -16,8 +19,9 @@ const usePayment = (
   paymentProvider = 'cashfree'
 ) => {
   const { user } = useUser();
+  const productId = usePathname().split('/')[2];
+  const productType = usePathname().split('/')[1];
   const searchParams = useSearchParams();
-
   const [paymentState, setPaymentState] = useState({
     payinLoading: false,
     paymentSessionId: null,
@@ -27,8 +31,7 @@ const usePayment = (
     paymentCompleted: false,
   });
 
-  // Display a toast notification based on payment result
-  const displayToastNotification = isSuccessful => {
+  const callBackHandler = isSuccessful => {
     setTimeout(() => {
       if (isSuccessful) {
         toast.success('Payment made successfully', {
@@ -47,7 +50,6 @@ const usePayment = (
     }, 100);
   };
 
-  // Polling function to check order status
   const pollOrderStatus = ({
     sessionId,
     onPollSuccess,
@@ -80,7 +82,6 @@ const usePayment = (
     }, POLL_INTERVAL);
   };
 
-  // Opens the Cashfree or Razorpay modal for payment
   const openPaymentModal = async () => {
     switch (paymentProvider) {
       case 'cashfree':
@@ -112,7 +113,7 @@ const usePayment = (
                 loading: false,
                 paymentDone: true,
               }));
-              displayToastNotification(true);
+              callBackHandler(true);
             },
             onPollFailure: error => {
               setPaymentState(prev => ({
@@ -120,7 +121,7 @@ const usePayment = (
                 loading: false,
                 paymentDone: false,
               }));
-              displayToastNotification(false);
+              callBackHandler(false);
               console.error(error);
             },
           });
@@ -136,7 +137,6 @@ const usePayment = (
     }
   };
 
-  // Creates an order by making a POST request
   const onCreateOrder = async (amount = 1) => {
     if (!amount) return;
 
@@ -149,8 +149,10 @@ const usePayment = (
       const { data } = await axiosInstance.post(
         '/payment/create_order',
         {
-          email: user.email || '',
-          phoneNumber: user.phoneNumber || '',
+          user,
+          productId,
+          productType,
+          paymentProvider,
           amount,
           bookingData: {
             ...payInPayload,
@@ -165,7 +167,7 @@ const usePayment = (
         }
       );
 
-      if (!data.ok) {
+      if (!data.ok || !data?.data) {
         toast.error('Order not created. Please try again.');
         return;
       }
@@ -188,7 +190,6 @@ const usePayment = (
     }
   };
 
-  // Trigger openPaymentModal when paymentSessionId is set
   useEffect(() => {
     if (paymentState.paymentSessionId) {
       openPaymentModal();

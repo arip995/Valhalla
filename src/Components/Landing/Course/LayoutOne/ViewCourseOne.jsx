@@ -48,12 +48,11 @@ const ViewCourseOne = ({ data, isPreview }) => {
               className={`${data.hasDiscountedPrice ? 'line-through' : ''} mr-2`}
             >
               {' '}
-              {data.hasDiscountedPrice ? '' : '₹'}
-              {data.price ? data.price : ''}
+              {data.price}
             </span>
             {!!data.hasDiscountedPrice && (
               <span className="mr-2 font-bold">
-                (₹{data.discountedPrice})
+                {data.discountedPrice}
               </span>
             )}
           </BuyButton>
@@ -103,7 +102,7 @@ const ViewCourseOne = ({ data, isPreview }) => {
         <FooterTwo className="mt-8" />
         <div className="fixed bottom-0 z-50 w-full border-t border-t-gray-200 bg-white p-4 md:hidden">
           <BuyButton size="md" animate={false}>
-            {data.cta || 'Enroll for'}
+            {data.cta || 'Enroll for'} ₹
             <span
               className={`${data.hasDiscountedPrice ? 'line-through' : ''} mr-2`}
             >
