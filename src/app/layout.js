@@ -67,7 +67,6 @@ import '@mantine/core/styles/Card.css';
 import '@mantine/core/styles/Anchor.css';
 import '@mantine/core/styles/Stepper.css';
 import '@mantine/carousel/styles.css';
-import Head from 'next/head';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({
@@ -108,34 +107,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-              {
-                '@type': 'ListItem',
-                position: 1,
-                name: 'Home',
-                item: 'https://nexify.club',
-              },
-              {
-                '@type': 'ListItem',
-                position: 2,
-                name: 'About Us',
-                item: 'https://nexify.club/about',
-              },
-              {
-                '@type': 'ListItem',
-                position: 2,
-                name: 'About Us',
-                item: 'https://nexify.club/privacy-policy',
-              },
-            ],
-          })}
-        </script>
-      </Head>
+      <head></head>
       <body>
         <ColorSchemeScript forceColorScheme="light" />
         <MantineProvider theme={theme}>
