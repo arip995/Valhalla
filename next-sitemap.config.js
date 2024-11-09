@@ -3,4 +3,5 @@ module.exports = {
   generateRobotsTxt: true,
   changefreq: 'daily',
   priority: 1,
+  exclude: ['/privacy-policy', '/about-us'],
 };
