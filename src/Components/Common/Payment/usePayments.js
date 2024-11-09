@@ -29,6 +29,7 @@ const usePayment = (
     paymentDone: false,
     loading: false,
     paymentCompleted: false,
+    purchaseSuccessful: false,
   });
 
   const callBackHandler = isSuccessful => {
@@ -51,7 +52,7 @@ const usePayment = (
   };
 
   const pollOrderStatus = ({
-    sessionId,
+    // sessionId,
     onPollSuccess,
     onPollFailure,
   }) => {
@@ -66,10 +67,10 @@ const usePayment = (
 
       try {
         const { data } = await axiosInstance.post(
-          '/muneem/order_details',
-          { sessionId }
+          '/purchase/details',
+          { productId, userId: user._id }
         );
-        if (data?.data?.ok) {
+        if (data?.ok) {
           clearInterval(timer);
           onPollSuccess();
         } else {
@@ -108,12 +109,18 @@ const usePayment = (
           pollOrderStatus({
             sessionId: paymentState.paymentSessionId,
             onPollSuccess: () => {
+              setTimeout(() => {
+                setPaymentState(prev => ({
+                  ...prev,
+                  loading: false,
+                }));
+                callBackHandler(true);
+              }, 3500);
               setPaymentState(prev => ({
                 ...prev,
-                loading: false,
                 paymentDone: true,
+                purchaseSuccessful: true,
               }));
-              callBackHandler(true);
             },
             onPollFailure: error => {
               setPaymentState(prev => ({

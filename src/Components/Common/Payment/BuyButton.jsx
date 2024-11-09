@@ -4,9 +4,11 @@ import AuthModal from '@/Components/Auth/LandingAuth/AuthModal';
 import useUser from '@/Utils/Hooks/useUser';
 import { Button } from '@mantine/core';
 import classNames from 'classnames';
-import { useState } from 'react';
-import usePayment from './usePayments';
+import { useRef, useState } from 'react';
+import Lottie from 'react-lottie-player';
+import lottieJson from '../../../../public/lottie/tick.json';
 import LayoutLoading from '../Loading/LayoutLoading';
+import usePayment from './usePayments';
 
 const BuyButton = ({
   className,
@@ -16,6 +18,7 @@ const BuyButton = ({
   price,
   ...props
 }) => {
+  const lottieRef = useRef();
   const { user } = useUser();
   const [opened, setOpened] = useState(false);
   const { onCreateOrder, paymentState } = usePayment(
@@ -28,7 +31,26 @@ const BuyButton = ({
   );
 
   if (paymentState.loading) {
-    return <LayoutLoading overlay type="bars" />;
+    return (
+      <>
+        {paymentState.purchaseSuccessful ? (
+          <div
+            className="fixed left-0 top-0 z-[10000000] flex h-svh w-full items-center justify-center bg-white"
+            ref={lottieRef}
+          >
+            <Lottie
+              loop
+              play
+              speed={0.5}
+              animationData={lottieJson}
+              style={{ width: 120, height: 120 }}
+            />
+          </div>
+        ) : (
+          <LayoutLoading overlay type="bars" />
+        )}
+      </>
+    );
   }
 
   return (
