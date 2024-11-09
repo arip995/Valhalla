@@ -87,7 +87,7 @@ const usePayment = (
     switch (paymentProvider) {
       case 'cashfree':
         var cashfree = await load({
-          mode: isDevEnv() ? 'sandbox' : 'production',
+          mode: isDevEnv() ? 'sandbox' : 'sandbox',
         });
         var checkoutOptions = {
           paymentSessionId: paymentState.paymentSessionId,
