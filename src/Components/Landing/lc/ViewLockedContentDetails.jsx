@@ -57,7 +57,7 @@ const ViewLockedContentDetails = ({ data }) => {
             ) : null}
           </div>
         ) : (
-          <div className="vlc-view-product-locked-state bg-gradient-to-r from-teal-100 via-fuchsia-200 to-slate-100">
+          <div className="vlc-view-product-locked-state h-full bg-gradient-to-r from-teal-100 via-fuchsia-200 to-slate-100">
             <img
               src={lockImage.src}
               alt=""
@@ -79,7 +79,7 @@ const ViewLockedContentDetails = ({ data }) => {
           animate={data.status === 1 ? true : false}
           disabled={data.status !== 1}
           price={data?.price}
-          onSuccess={() => {}}
+          onSuccess={onSuccess}
         >
           {data.status === 1
             ? `${`Unlock for ₹${data?.price}`}`

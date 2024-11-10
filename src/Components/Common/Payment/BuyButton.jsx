@@ -21,9 +21,8 @@ const BuyButton = ({
   const lottieRef = useRef();
   const { user } = useUser();
   const [opened, setOpened] = useState(false);
-  const { onCreateOrder, paymentState } = usePayment(() => {
-    onSuccess();
-  });
+  const { onCreateOrder, paymentState } =
+    usePayment(onSuccess);
 
   if (paymentState.loading) {
     return (

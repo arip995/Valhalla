@@ -38,7 +38,7 @@ const usePayment = (
         toast.success('Payment made successfully', {
           position: 'top-center',
         });
-        onSuccess(true);
+        onSuccess();
       } else {
         toast.error(
           'There was a problem. If your payment was deducted, it will be resolved within 24 hours.',
