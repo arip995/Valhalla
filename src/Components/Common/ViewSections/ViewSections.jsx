@@ -1,13 +1,13 @@
 'use client';
 
-import React from 'react';
-import ViewBenifit from './ViewBenifit';
-import ViewHighlight from './ViewHighlight';
+import { calculateCourseContentHighlights } from '@/Utils/Common';
 import ViewAbout from './ViewAbout';
+import ViewBenifit from './ViewBenifit';
 import ViewFaq from './ViewFaq';
 import ViewGallery from './ViewGallery';
-import ViewTestimonial from './ViewTestimonial';
+import ViewHighlight from './ViewHighlight';
 import ViewSocial from './ViewSocial';
+import ViewTestimonial from './ViewTestimonial';
 
 export const SECTION_COMPONENT_MAPPING = {
   benifit: ViewBenifit,
@@ -28,8 +28,9 @@ export const SECTION_TITLE_MAPPING = {
   testimonial: 'Testimonials',
 };
 
-const ViewSections = ({ sections }) => {
+const ViewSections = ({ sections, content }) => {
   if (!sections?.length) return null;
+
   return (
     <div className="flex w-full flex-col items-center gap-12">
       {sections.map((section, index) => {
@@ -43,7 +44,15 @@ const ViewSections = ({ sections }) => {
             key={index}
           >
             <h3> {SECTION_TITLE_MAPPING[section.type]}</h3>
-            <Component value={section.value} />
+            <Component
+              value={
+                section.type === 'highlight'
+                  ? calculateCourseContentHighlights(
+                      content
+                    )
+                  : section.value
+              }
+            />
           </div>
         );
       })}

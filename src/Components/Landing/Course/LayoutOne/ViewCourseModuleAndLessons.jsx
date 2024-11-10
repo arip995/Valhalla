@@ -1,10 +1,15 @@
 'use client';
 
 import { IconMapping } from '@/Constants/constants';
+import {
+  calculateModuleHighlights,
+  convertMinutesToHours,
+} from '@/Utils/Common';
 import { Accordion, Button } from '@mantine/core';
 
 const RenderLesson = ({ lesson, index }) => {
   const Icon = IconMapping[lesson.lessonType];
+
   return (
     <div
       className={`${index === 0 ? '' : 'mt-2'} flex w-full items-center justify-between gap-4 text-sm`}
@@ -23,7 +28,7 @@ const RenderLesson = ({ lesson, index }) => {
             Preview
           </Button>
         ) : null}
-        {lesson.duration} min
+        {convertMinutesToHours(lesson.duration || 0, 3)}
       </div>
     </div>
   );
@@ -32,34 +37,42 @@ const RenderLesson = ({ lesson, index }) => {
 const RenderModulesAndLessons = ({ content }) => {
   return (
     <>
-      {content.map((module, index) => (
-        <>
-          {!!module.lessons.length && (
-            <Accordion.Item
-              key={index}
-              value={module._id || module.id}
-            >
-              <Accordion.Control>
-                <div className="text-md flex w-full items-center justify-between gap-4 font-semibold">
-                  {module.title}
-                  <div className="text-xs font-thin text-gray-700">
-                    37 lectures • 61h
+      {content.map((module, index) => {
+        const { totalDuration = 0, lessons } =
+          calculateModuleHighlights(module);
+        return (
+          <>
+            {!!module.lessons.length && (
+              <Accordion.Item
+                key={index}
+                value={module._id || module.id}
+              >
+                <Accordion.Control>
+                  <div className="text-md flex w-full items-center justify-between gap-4 font-semibold">
+                    {module.title}
+                    <div className="text-xs font-thin text-gray-700">
+                      {lessons} lectures •{' '}
+                      {convertMinutesToHours(
+                        totalDuration,
+                        2
+                      )}
+                    </div>
                   </div>
-                </div>
-              </Accordion.Control>
-              <Accordion.Panel>
-                {module.lessons.map((lesson, index) => (
-                  <RenderLesson
-                    lesson={lesson}
-                    index={index}
-                    key={index}
-                  />
-                ))}
-              </Accordion.Panel>
-            </Accordion.Item>
-          )}
-        </>
-      ))}
+                </Accordion.Control>
+                <Accordion.Panel>
+                  {module.lessons.map((lesson, index) => (
+                    <RenderLesson
+                      lesson={lesson}
+                      index={index}
+                      key={index}
+                    />
+                  ))}
+                </Accordion.Panel>
+              </Accordion.Item>
+            )}
+          </>
+        );
+      })}
     </>
   );
 };

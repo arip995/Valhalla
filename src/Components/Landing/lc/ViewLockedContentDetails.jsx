@@ -45,7 +45,7 @@ const ViewLockedContentDetails = ({ data }) => {
     <>
       <div className="vlc-view-product-container">
         {showLockedItems ? (
-          <div className="vlc-view-product-unlocked-state overflow-y-auto rounded-md border border-gray-200 p-2 shadow-lg">
+          <div className="vlc-view-product-unlocked-state h-full overflow-y-auto rounded-md border border-gray-200 p-2 shadow-lg">
             {data.message ? (
               <div className="mb-2">{data.message}</div>
             ) : null}

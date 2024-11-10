@@ -2,6 +2,10 @@ import FooterTwo from '@/Components/Common/Footer/FooterTwo';
 import ProductHeader from '@/Components/Common/Header/Productheader';
 import BuyButton from '@/Components/Common/Payment/BuyButton';
 import ViewSections from '@/Components/Common/ViewSections/ViewSections';
+import {
+  calculateCourseContentHighlights,
+  convertMinutesToHours,
+} from '@/Utils/Common';
 import { Accordion, Spoiler } from '@mantine/core';
 import Image from 'next/image';
 import RenderModulesAndLessons from './ViewCourseModuleAndLessons';
@@ -19,6 +23,8 @@ const ViewCourseOne = ({ data, isPreview }) => {
   //     });
   //     return { modules,lessons,duration}
   // }
+  const { totalDuration, modules, lessons } =
+    calculateCourseContentHighlights(data.content);
 
   return (
     <>
@@ -79,8 +85,9 @@ const ViewCourseOne = ({ data, isPreview }) => {
                 Program Structure
               </h3>
               <div className="gap1 mb-2 flex text-sm text-gray-700">
-                44 sections • 373 lectures • 61h 44m total
-                length
+                {modules} Sections • {lessons} Lectures •{' '}
+                {convertMinutesToHours(totalDuration, 2)}{' '}
+                total length
               </div>
               <Accordion
                 chevronPosition="right"
@@ -97,7 +104,10 @@ const ViewCourseOne = ({ data, isPreview }) => {
               </Accordion>
             </div>
           </div>
-          <ViewSections sections={data.sections} />
+          <ViewSections
+            sections={data.sections}
+            content={data.content}
+          />
         </div>
         <FooterTwo className="mt-8" />
         <div className="fixed bottom-0 z-50 w-full border-t border-t-gray-200 bg-white p-4 md:hidden">

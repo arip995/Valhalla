@@ -31,7 +31,7 @@ const PreviewOne = ({
           isDeskTop ? 'w-full' : 'max-w-[450px]'
         }`}
       >
-        <div className="relative mx-auto w-full max-w-5xl overflow-hidden rounded-lg">
+        <div className="relative mx-auto w-full max-w-5xl transform overflow-hidden rounded-lg">
           <div className="flex items-center justify-between bg-gray-800 px-2 py-1">
             <div className="text-lg font-bold text-white">
               Preview
@@ -57,7 +57,7 @@ const PreviewOne = ({
                 onClick={() => {
                   setIsPreviewScreen(prev => !prev);
                 }}
-                className="cursor-pointer text-gray-400"
+                className="cursor-pointer text-gray-400 hover:text-gray-100"
                 size={20}
               />
             </div>

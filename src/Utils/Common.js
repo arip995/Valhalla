@@ -126,6 +126,89 @@ export const isValueChanged = (value1, value2) => {
   });
 };
 
-export const calculateCourseContentHighlights = val => {
-  console.log(val);
+export const calculateCourseContentHighlights = content => {
+  let totalDuration = 0;
+  let downlodableResources = 0;
+  let articles = 0;
+  let lessons = 0;
+  let modules = 0;
+
+  content.map(module => {
+    modules += 1;
+    module?.lessons?.map(lesson => {
+      totalDuration += Number(lesson.duration) || 0;
+      lessons += 1;
+      if (lesson.lessonType === 'video') {
+        downlodableResources += lesson.file.length;
+      }
+      if (lesson.lessonType === 'textImage') {
+        articles += 1;
+      }
+      if (
+        lesson.supportMaterial?.length ||
+        lesson.lessonType === 'file'
+      ) {
+        downlodableResources +=
+          lesson.supportMaterial.length;
+      }
+    });
+  });
+  return {
+    totalDuration,
+    downlodableResources,
+    articles,
+    modules,
+    lessons,
+  };
 };
+
+export const calculateModuleHighlights = module => {
+  let totalDuration = 0;
+  let downlodableResources = 0;
+  let articles = 0;
+  let lessons = 0;
+
+  module?.lessons?.map(lesson => {
+    totalDuration += Number(lesson.duration) || 0;
+    lessons += 1;
+    if (lesson.lessonType === 'video') {
+      downlodableResources += lesson.file.length;
+    }
+    if (lesson.lessonType === 'textImage') {
+      articles += 1;
+    }
+    if (
+      lesson.supportMaterial?.length ||
+      lesson.lessonType === 'file'
+    ) {
+      downlodableResources += lesson.supportMaterial.length;
+    }
+  });
+  return {
+    totalDuration,
+    downlodableResources,
+    articles,
+    lessons,
+  };
+};
+
+export function convertMinutesToHours(minutes, type = 1) {
+  if (!minutes) return 0;
+  let hours = Math.floor(minutes / 60);
+  let remainingMinutes = (minutes % 60).toFixed(0);
+  if (remainingMinutes == 60) {
+    hours += 1;
+    remainingMinutes = 0;
+  }
+
+  switch (type) {
+    case 1:
+      return `${hours ? `${hours} hours and` : ''} ${remainingMinutes ? `${remainingMinutes} minutes` : ''}`;
+    case 2:
+      return `${hours ? `${hours}h ` : ''} ${remainingMinutes ? `${remainingMinutes}min ` : ''}`;
+    case 3:
+      return `${hours || '00'}:${remainingMinutes || '00'}${hours && ':00'}`;
+    default:
+      return { hours, minutes: remainingMinutes };
+  }
+}

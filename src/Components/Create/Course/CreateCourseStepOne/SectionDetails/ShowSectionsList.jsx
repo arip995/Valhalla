@@ -261,7 +261,7 @@ const ShowSectionsList = ({
     );
   }
   if (type == 'highlight') {
-    return <ViewHighlight />;
+    return <ViewHighlight value={item} />;
   }
   if (type === 'social') {
     return (

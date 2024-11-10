@@ -1,4 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import DragAndDrop from '@/Components/Common/DragAndDrop';
+import {
+  calculateCourseContentHighlights,
+  onDrag,
+} from '@/Utils/Common';
 import { Accordion, Badge, Switch } from '@mantine/core';
 import {
   IconBlockquote,
@@ -10,8 +14,7 @@ import {
   IconMessage2,
   IconPhoto,
 } from '@tabler/icons-react';
-import DragAndDrop from '@/Components/Common/DragAndDrop';
-import { onDrag } from '@/Utils/Common';
+import React, { useCallback, useState } from 'react';
 import SectionsModal from './SectionsModal';
 import ShowSectionsList from './ShowSectionsList';
 
@@ -279,7 +282,12 @@ const Sections = ({ updateSection, form }) => {
             </div>
             {item.type === 'highlight' ? (
               <Accordion.Panel className="flex flex-col gap-4">
-                <ShowSectionsList type={item.type} />
+                <ShowSectionsList
+                  type={item.type}
+                  item={calculateCourseContentHighlights(
+                    form.values.content
+                  )}
+                />
               </Accordion.Panel>
             ) : item.value?.length ? (
               <Accordion.Panel className="flex flex-col gap-4">
