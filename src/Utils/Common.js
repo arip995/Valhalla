@@ -193,21 +193,29 @@ export const calculateModuleHighlights = module => {
 };
 
 export function convertMinutesToHours(minutes, type = 1) {
-  if (!minutes) return 0;
+  if (!minutes) return '00:00';
   let hours = Math.floor(minutes / 60);
   let remainingMinutes = (minutes % 60).toFixed(0);
+
   if (remainingMinutes == 60) {
     hours += 1;
     remainingMinutes = 0;
   }
 
+  // Pad hours and minutes with leading zero if necessary
+  const paddedHours = String(hours).padStart(2, '0');
+  const paddedMinutes = String(remainingMinutes).padStart(
+    2,
+    '0'
+  );
+
   switch (type) {
     case 1:
-      return `${hours ? `${hours} hours and` : ''} ${remainingMinutes ? `${remainingMinutes} minutes` : ''}`;
+      return `${hours ? `${hours} hours and ` : ''}${remainingMinutes ? `${remainingMinutes} minutes` : ''}`;
     case 2:
-      return `${hours ? `${hours}h ` : ''} ${remainingMinutes ? `${remainingMinutes}min ` : ''}`;
+      return `${hours ? `${hours}h ` : ''}${remainingMinutes ? `${remainingMinutes}min ` : ''}`;
     case 3:
-      return `${hours || '00'}:${remainingMinutes || '00'}${hours && ':00'}`;
+      return `${paddedHours}:${paddedMinutes}:00`;
     default:
       return { hours, minutes: remainingMinutes };
   }

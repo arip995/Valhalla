@@ -45,9 +45,14 @@ const ViewCourseOne = ({ data, isPreview }) => {
             />
           )}
           <BuyButton
+            className="hidden md:block"
             size="md"
             animate={false}
-            className="hidden md:block"
+            price={
+              data.hasDiscountedPrice
+                ? Number(data.discountedPrice)
+                : data.price
+            }
           >
             {data.cta || 'Enroll for'} ₹
             <span
@@ -111,7 +116,15 @@ const ViewCourseOne = ({ data, isPreview }) => {
         </div>
         <FooterTwo className="mt-8" />
         <div className="fixed bottom-0 z-50 w-full border-t border-t-gray-200 bg-white p-4 md:hidden">
-          <BuyButton size="md" animate={false}>
+          <BuyButton
+            size="md"
+            animate={false}
+            price={
+              data.hasDiscountedPrice
+                ? Number(data.discountedPrice)
+                : data.price
+            }
+          >
             {data.cta || 'Enroll for'} ₹
             <span
               className={`${data.hasDiscountedPrice ? 'line-through' : ''} mr-2`}
