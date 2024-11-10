@@ -13,22 +13,17 @@ import usePayment from './usePayments';
 const BuyButton = ({
   className,
   children,
-  onClick = () => {},
-  animate = true,
   price,
+  animate = true,
+  onSuccess = () => {},
   ...props
 }) => {
   const lottieRef = useRef();
   const { user } = useUser();
   const [opened, setOpened] = useState(false);
-  const { onCreateOrder, paymentState } = usePayment(
-    () => {
-      onClick();
-    },
-    () => {
-      console.log('first');
-    }
-  );
+  const { onCreateOrder, paymentState } = usePayment(() => {
+    onSuccess();
+  });
 
   if (paymentState.loading) {
     return (

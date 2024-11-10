@@ -1,5 +1,6 @@
 import { Text } from '@mantine/core';
 import {
+  IconDownload,
   IconFileText,
   IconLink,
   IconMusic,
@@ -13,8 +14,8 @@ import '../../../styles/common/list-files.css';
 const ListFiles = ({
   files,
   onDelete = () => {},
-  showTrash = true,
   showImagePreview = false,
+  showDownloadButton = false,
 }) => {
   const ListOfItems = useCallback(
     ({ item }) => {
@@ -39,66 +40,80 @@ const ListFiles = ({
             item.id || item.url || item.link || item.name
           }
         >
-          <div className="list-files-image-container flex items-center gap-2">
-            {isImage ? (
-              <>
-                {showImagePreview ? (
-                  <img
-                    src={item.url}
-                    color="gray"
-                    className="list-files-image h-10 min-h-10 w-10 min-w-10 object-cover"
-                    stroke={1}
-                  />
-                ) : (
-                  <IconPhoto
-                    color="gray"
-                    className="list-files-image"
-                    stroke={1}
-                  />
-                )}
-              </>
-            ) : isVideo ? (
-              <IconVideo
-                color="gray"
-                className="list-files-image"
-                stroke={1}
-              />
-            ) : isAudio ? (
-              <IconMusic
-                color="gray"
-                className="list-files-image"
-                stroke={1}
-              />
-            ) : isLink ? (
-              <IconLink
-                color="gray"
-                className="list-files-image"
-                stroke={1}
-              />
-            ) : (
-              <IconFileText
-                color="gray"
-                className="list-files-image"
-                stroke={1}
-              />
-            )}
-            <div className="list-files-text">
-              {item.name || item.link}
-            </div>
-          </div>
-          {showTrash && (
-            <div className="list-files-text-container">
-              <div
-                className="list-files-delete"
-                onClick={() => onDelete(item.url)}
-              >
-                <IconTrash
-                  className="list-files-delete-icon"
-                  size={18}
+          <div className="list-files-image-container flex w-full items-center justify-between gap-2">
+            <div className="items-center-gap-2 flex w-full">
+              {isImage ? (
+                <>
+                  {showImagePreview ? (
+                    <img
+                      src={item.url}
+                      color="gray"
+                      className="list-files-image h-10 min-h-10 w-10 min-w-10 object-cover"
+                      stroke={1}
+                    />
+                  ) : (
+                    <IconPhoto
+                      color="gray"
+                      className="list-files-image"
+                      stroke={1}
+                    />
+                  )}
+                </>
+              ) : isVideo ? (
+                <IconVideo
+                  color="gray"
+                  className="list-files-image"
+                  stroke={1}
                 />
+              ) : isAudio ? (
+                <IconMusic
+                  color="gray"
+                  className="list-files-image"
+                  stroke={1}
+                />
+              ) : isLink ? (
+                <IconLink
+                  color="gray"
+                  className="list-files-image"
+                  stroke={1}
+                />
+              ) : (
+                <IconFileText
+                  color="gray"
+                  className="list-files-image"
+                  stroke={1}
+                />
+              )}
+              <div className="list-files-text">
+                {item.name || item.link}
               </div>
             </div>
-          )}
+            {showDownloadButton ? (
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <IconDownload
+                  color="gray"
+                  className="list-files-image"
+                  stroke={1}
+                />
+              </a>
+            ) : (
+              <div className="list-files-text-container">
+                <div
+                  className="list-files-delete"
+                  onClick={() => onDelete(item.url)}
+                >
+                  <IconTrash
+                    className="list-files-delete-icon"
+                    size={18}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       );
     },
