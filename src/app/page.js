@@ -8,6 +8,7 @@ import Testimonial from '@/Components/Landing/main/ui/Testimonial';
 import VisualFeatures from '@/Components/Landing/main/ui/VisualFeatures';
 import '@mantine/notifications/styles.css';
 import '../styles/landing/main.css';
+import ContactUs from '@/Components/Common/ContactUs/ContactUs';
 
 export async function generateMetadata(
   // { params, searchParams },
@@ -62,6 +63,7 @@ export default function Page() {
         <Testimonial />
         {/* <Pricing /> */}
         <FAQs />
+        <ContactUs />
         <Footer />
       </div>
     </div>
