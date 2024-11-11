@@ -105,7 +105,8 @@ const Footer = () => {
         </div>
         <div className="mt-10 items-center justify-between border-t border-gray-800 py-8 sm:flex">
           <p className="text-center text-gray-400">
-            © 2024 Nexify Inc. All rights reserved.
+            © 2024 Polmi Software Services Technologies
+            Private Limited All rights reserved.
           </p>
           <div className="mt-6 flex items-center justify-center gap-x-6 text-gray-500 sm:mt-0">
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4 sm:mt-0 sm:text-sm">

@@ -4,7 +4,6 @@ import Features from '@/Components/Landing/main/ui/Features';
 import Footer from '@/Components/Landing/main/ui/Footer';
 import Hero from '@/Components/Landing/main/ui/Hero';
 import Navbar from '@/Components/Landing/main/ui/Navbar';
-import Pricing from '@/Components/Landing/main/ui/Pricing';
 import Testimonial from '@/Components/Landing/main/ui/Testimonial';
 import VisualFeatures from '@/Components/Landing/main/ui/VisualFeatures';
 import '@mantine/notifications/styles.css';
@@ -61,7 +60,7 @@ export default function Page() {
         <Features />
         <CTA />
         <Testimonial />
-        <Pricing />
+        {/* <Pricing /> */}
         <FAQs />
         <Footer />
       </div>

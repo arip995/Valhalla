@@ -37,7 +37,7 @@ const Hero = () => (
             </p>
             <div className="flex justify-center text-sm font-medium">
               <NavLink
-                href="/#pricing"
+                href="/signup"
                 className="flex items-center bg-purple-600 text-white hover:bg-purple-500 active:bg-purple-700"
               >
                 Get Started
