@@ -1,4 +1,8 @@
-import { IconX } from '@tabler/icons-react';
+import {
+  IconExternalLink,
+  IconX,
+} from '@tabler/icons-react';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 const PreviewOne = ({
@@ -8,6 +12,7 @@ const PreviewOne = ({
 }) => {
   // eslint-disable-next-line no-unused-vars
   const [isDeskTop, setIsDesktop] = useState(false);
+  const productId = usePathname().split('/')[3];
 
   return (
     <div
@@ -33,8 +38,20 @@ const PreviewOne = ({
       >
         <div className="relative mx-auto w-full max-w-5xl transform overflow-hidden rounded-lg">
           <div className="flex items-center justify-between bg-gray-800 px-2 py-1">
-            <div className="text-lg font-bold text-white">
+            <div className="flex items-center gap-2 text-lg font-bold text-white">
               Preview
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href={`${process.env.NEXT_PUBLIC_HOST}/course/${productId}`}
+              >
+                <IconExternalLink
+                  className={`cursor-pointer text-gray-400 ${
+                    !isDeskTop ? 'text-white' : ''
+                  }`}
+                  size={20}
+                />
+              </a>
             </div>
             {/* <div className="flex items-center space-x-4">
               <IconDeviceDesktop

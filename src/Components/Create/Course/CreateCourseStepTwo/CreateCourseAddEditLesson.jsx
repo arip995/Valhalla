@@ -82,9 +82,10 @@ const LessonContent = ({ lessonType, form }) => {
   }
 };
 
-const SavedLessonContent = ({ lessonType, form }) => {
+export const SavedLessonContent = ({ value }) => {
+  if (!value) return null;
   const content = useMemo(() => {
-    if (lessonType === 'textImage') {
+    if (value.lessonType === 'textImage') {
       return (
         <Spoiler
           maxHeight={120}
@@ -93,34 +94,32 @@ const SavedLessonContent = ({ lessonType, form }) => {
         >
           <div
             dangerouslySetInnerHTML={{
-              __html: form.values?.textImage,
+              __html: value?.textImage,
             }}
           />
         </Spoiler>
       );
-    } else if (lessonType === 'video') {
+    } else if (value.lessonType === 'video') {
       return (
         <VideoOne
-          videoId={form.values.video?.videoId}
-          libraryId={form.values.video?.libraryId}
-          link={form.values.video?.link}
-          checkIfVideoIsReady={
-            form.values.video?.videoId && true
-          }
+          videoId={value.video?.videoId}
+          libraryId={value.video?.libraryId}
+          link={value.video?.link}
+          checkIfVideoIsReady={value.video?.videoId && true}
         />
       );
-    } else if (lessonType === 'audio') {
-      return <AudioOne src={form.values.audio.url} />;
-    } else if (lessonType === 'file') {
+    } else if (value.lessonType === 'audio') {
+      return <AudioOne src={value.audio.url} />;
+    } else if (value.lessonType === 'file') {
       return (
         <ListFiles
-          files={form.values[lessonType]}
-          showTrash={false}
+          files={value[value.lessonType]}
+          showDownloadButton={true}
         />
       );
     }
     return null;
-  }, [lessonType, form.values]);
+  }, [value]);
 
   return content;
 };
@@ -247,10 +246,7 @@ const CreateCourseAddEditLesson = ({ form }) => {
                       </Menu.Dropdown>
                     </Menu>
                   </div>
-                  <SavedLessonContent
-                    lessonType={form.values.lessonType}
-                    form={form}
-                  />
+                  <SavedLessonContent form={form} />
                 </div>
               ) : (
                 <>

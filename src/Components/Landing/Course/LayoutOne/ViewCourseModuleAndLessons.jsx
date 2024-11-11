@@ -5,9 +5,15 @@ import {
   calculateModuleHighlights,
   convertMinutesToHours,
 } from '@/Utils/Common';
-import { Accordion, Button } from '@mantine/core';
+import { Accordion, Button, Modal } from '@mantine/core';
+import { useEffect, useState } from 'react';
+import ViewCourseOnePreviewLessons from './ViewCourseOnePreviewLesson';
 
-const RenderLesson = ({ lesson, index }) => {
+const RenderLesson = ({
+  lesson,
+  index,
+  onPreviewClick,
+}) => {
   const Icon = IconMapping[lesson.lessonType];
 
   return (
@@ -24,7 +30,11 @@ const RenderLesson = ({ lesson, index }) => {
       </div>
       <div className="flex items-center gap-2 text-xs">
         {lesson.status === 2 ? (
-          <Button size="xs" variant="transparent">
+          <Button
+            size="xs"
+            variant="transparent"
+            onClick={() => onPreviewClick(lesson)}
+          >
             Preview
           </Button>
         ) : null}
@@ -35,6 +45,28 @@ const RenderLesson = ({ lesson, index }) => {
 };
 
 const RenderModulesAndLessons = ({ content }) => {
+  const [opened, setOpened] = useState(false);
+  const [previewList, setPreviewList] = useState([]);
+  const [currentPreview, setCurrentPreview] = useState();
+  const onPreviewClick = lesson => {
+    setCurrentPreview(lesson);
+    setOpened(true);
+  };
+
+  useEffect(() => {
+    let list = [];
+    content.map(module => {
+      if (!module?.lessons?.length) return;
+      module.lessons?.map(lesson => {
+        if (!lesson) return;
+        if (lesson.status === 2) {
+          list.push(lesson);
+        }
+      });
+    });
+    setPreviewList(prev => [...prev, ...list]);
+  }, []);
+
   return (
     <>
       {content.map((module, index) => {
@@ -65,6 +97,7 @@ const RenderModulesAndLessons = ({ content }) => {
                       lesson={lesson}
                       index={index}
                       key={index}
+                      onPreviewClick={onPreviewClick}
                     />
                   ))}
                 </Accordion.Panel>
@@ -73,6 +106,33 @@ const RenderModulesAndLessons = ({ content }) => {
           </>
         );
       })}
+      <Modal
+        opened={opened}
+        title={
+          <div className="my-2 text-wrap text-lg font-bold text-gray-900">
+            {currentPreview?.title}
+          </div>
+        }
+        lockScroll={false}
+        closeOnEscape={false}
+        trapFocus={false}
+        size="xl"
+        styles={{
+          body: {
+            padding: 0,
+          },
+        }}
+        onClose={() => {
+          setOpened(false);
+          setCurrentPreview(null);
+        }}
+      >
+        <ViewCourseOnePreviewLessons
+          activeLesson={currentPreview}
+          setActiveLesson={setCurrentPreview}
+          previewList={previewList}
+        />
+      </Modal>
     </>
   );
 };

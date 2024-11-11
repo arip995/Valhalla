@@ -134,13 +134,12 @@ export const calculateCourseContentHighlights = content => {
   let modules = 0;
 
   content.map(module => {
+    if (!module?.lessons?.length) return;
     modules += 1;
     module?.lessons?.map(lesson => {
+      if (!lesson) return;
       totalDuration += Number(lesson.duration) || 0;
       lessons += 1;
-      if (lesson.lessonType === 'video') {
-        downlodableResources += lesson.file.length;
-      }
       if (lesson.lessonType === 'textImage') {
         articles += 1;
       }
@@ -168,12 +167,11 @@ export const calculateModuleHighlights = module => {
   let articles = 0;
   let lessons = 0;
 
-  module?.lessons?.map(lesson => {
+  if (!module?.lessons?.length) return;
+  module.lessons.map(lesson => {
+    if (!lesson) return;
     totalDuration += Number(lesson.duration) || 0;
     lessons += 1;
-    if (lesson.lessonType === 'video') {
-      downlodableResources += lesson.file.length;
-    }
     if (lesson.lessonType === 'textImage') {
       articles += 1;
     }

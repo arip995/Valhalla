@@ -41,7 +41,7 @@ const ListFiles = ({
           }
         >
           <div className="list-files-image-container flex w-full items-center justify-between gap-2">
-            <div className="items-center-gap-2 flex w-full">
+            <div className="flex w-full items-center gap-2">
               {isImage ? (
                 <>
                   {showImagePreview ? (
