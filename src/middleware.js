@@ -5,9 +5,7 @@ export function middleware(req) {
   let username = getCookie('username', { req });
   username = username !== 'undefined';
   let isCreator = getCookie('isCreator', { req });
-  isCreator = isCreator == 'true';
   const accessToken = getCookie('accesstoken', { req });
-  console.log(username, isCreator);
   const redirectPaths = [
     { path: '/', redirect: '/home' },
     { path: '/app', redirect: '/app/lc' },
@@ -30,7 +28,7 @@ export function middleware(req) {
     { path: '/lc', next: true },
     { path: '/tg', next: true },
     { path: '/course', next: true },
-    { path: '/dashboard', next: true },
+    { path: '/home', next: true },
   ];
 
   if (accessToken) {
@@ -51,6 +49,10 @@ export function middleware(req) {
           new URL('/purchase', req.url)
         );
       }
+    }
+
+    if (req.nextUrl.pathname.startsWith('/')) {
+      return;
     }
 
     if (!username) {
