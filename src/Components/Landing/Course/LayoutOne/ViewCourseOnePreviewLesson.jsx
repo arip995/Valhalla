@@ -18,7 +18,7 @@ const ViewCourseOnePreviewLessons = ({
         {previewList.map((item, i) => {
           return (
             <div
-              className="flex w-full cursor-pointer items-center gap-2 p-2 hover:bg-gray-50"
+              className="flex w-full cursor-pointer items-center gap-2 py-2 hover:bg-gray-50"
               onClick={() => {
                 setActiveLesson(item);
               }}
