@@ -213,7 +213,13 @@ const CreateModulesAndLessons = ({
             );
           break;
         case 'delete':
-          newCourseList.splice(moduleIndex, 1);
+          console.log('first');
+          newCourseList[moduleIndex] = {
+            ...newCourseList[moduleIndex],
+            status: 3,
+          };
+
+          // newCourseList.splice(moduleIndex, 1);
           break;
         default:
           break;
@@ -232,10 +238,13 @@ const CreateModulesAndLessons = ({
           }
           break;
         case 'delete':
-          newCourseList[moduleIndex].lessons?.splice(
-            lessonIndex,
-            1
-          );
+          newCourseList[moduleIndex].lessons[
+            lessonIndex
+          ].status = 3;
+          // newCourseList[moduleIndex].lessons?.splice(
+          //   lessonIndex,
+          //   1
+          // );
           break;
         case 'preview':
           if (newModule.status === 0) {
@@ -285,6 +294,9 @@ const CreateModulesAndLessons = ({
                   {courseList.length > 0 && (
                     <>
                       {courseList.map((module, index) => {
+                        if (!module || module.status === 3)
+                          return null;
+
                         return (
                           <Accordion
                             key={module.id}

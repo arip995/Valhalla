@@ -176,6 +176,11 @@ const CreateCourseModuleContainer = ({
                     <>
                       {module.lessons?.map(
                         (lesson, index) => {
+                          if (
+                            !lesson ||
+                            lesson.status === 3
+                          )
+                            return null;
                           return (
                             <Draggable
                               key={lesson.id}

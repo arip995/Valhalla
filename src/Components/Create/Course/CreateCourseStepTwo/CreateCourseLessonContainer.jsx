@@ -15,7 +15,7 @@ import {
   IconTrash,
 } from '@tabler/icons-react';
 // import toast from 'react-hot-toast';
-
+//status: 0->draft,1->published,2->preview,3->deleted
 const CreateCourseLessonContainer = ({
   dragHandleProps,
   lesson,
