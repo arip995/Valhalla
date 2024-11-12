@@ -213,7 +213,10 @@ const CreateModulesAndLessons = ({
             );
           break;
         case 'delete':
-          if (newCourseList.length === 1) {
+          var activeModules = newCourseList.filter(
+            item => item?.status != 3
+          );
+          if (activeModules.length === 1) {
             toast.error('Atleast one module required');
             return;
           }
