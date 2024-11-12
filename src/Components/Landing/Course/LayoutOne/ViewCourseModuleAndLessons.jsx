@@ -70,8 +70,7 @@ const RenderModulesAndLessons = ({ content }) => {
   return (
     <>
       {content.map((module, index) => {
-        const { totalDuration = 0, lessons } =
-          calculateModuleHighlights(module);
+        const data = calculateModuleHighlights(module);
         return (
           <>
             {!!module.lessons.length && (
@@ -83,9 +82,9 @@ const RenderModulesAndLessons = ({ content }) => {
                   <div className="text-md flex w-full items-center justify-between gap-4 font-semibold">
                     {module.title}
                     <div className="text-xs font-thin text-gray-700">
-                      {lessons} lectures •{' '}
+                      {data?.lessons} lectures •{' '}
                       {convertMinutesToHours(
-                        totalDuration,
+                        data?.totalDuration,
                         2
                       )}
                     </div>

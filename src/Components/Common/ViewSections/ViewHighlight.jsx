@@ -8,6 +8,7 @@ import {
 } from '@tabler/icons-react';
 
 const ViewHighlight = ({ value }) => {
+  if (!value) return null;
   return (
     <div className="grid grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-4">
       {value.totalDuration ? (
