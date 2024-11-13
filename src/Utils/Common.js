@@ -1,3 +1,11 @@
+import {
+  IconFile,
+  IconFileText,
+  IconMusic,
+  IconPhoto,
+  IconVideo,
+} from '@tabler/icons-react';
+
 export function Compact(arr) {
   return arr.filter(Boolean);
 }
@@ -218,3 +226,23 @@ export function convertMinutesToHours(minutes, type = 1) {
       return { hours, minutes: remainingMinutes };
   }
 }
+
+export const contentTypeIconMapping = ({
+  type = 'file',
+  ...props
+}) => {
+  switch (type) {
+    case 'file':
+      return <IconFile {...props} />;
+    case 'video':
+      return <IconVideo {...props} />;
+    case 'textImage':
+      return <IconFileText {...props} />;
+    case 'audio':
+      return <IconMusic {...props} />;
+    case 'image':
+      return <IconPhoto {...props} />;
+    default:
+      break;
+  }
+};
