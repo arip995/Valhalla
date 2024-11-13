@@ -50,7 +50,7 @@ const CreateCourse = () => {
                       className="h-8"
                     />
                     <span className="font-medium">
-                      Step {' '} {tab === 'details' ? 1 : 2 || 1}
+                      Step {tab === 'details' ? 1 : 2 || 1}{' '}
                       of 2
                     </span>
                   </>
