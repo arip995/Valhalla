@@ -187,7 +187,7 @@ const CourseConsume = ({ productId }) => {
         </div>
         <div
           className={classNames(
-            'hide-scrollbar h-full w-3/4 overflow-y-auto'
+            'hide-scrollbar h-full w-full overflow-y-auto lg:w-3/4'
           )}
         >
           <div className="mb-3 hidden text-wrap text-xl font-semibold lg:block">
