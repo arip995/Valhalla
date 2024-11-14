@@ -195,6 +195,7 @@ const CourseConsume = ({ productId }) => {
           </div>
           <Popover
             position="bottom"
+            width={300}
             withArrow
             shadow="md"
             classNames="lg:hidden block"
