@@ -13,15 +13,14 @@ import {
   IconTriangleInverted,
 } from '@tabler/icons-react';
 import classNames from 'classnames';
-import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import CourseContentList from './CourseContentList';
 
 const CourseConsume = ({ productId }) => {
-  const searchParams = useSearchParams();
-  const moduleId = searchParams.get('moduleId');
-  const lessonId = searchParams.get('lessonId');
+  // const searchParams = useSearchParams();
+  // const moduleId = searchParams.get('moduleId');
+  // const lessonId = searchParams.get('lessonId');
   const [loading, setLoading] = useState(false);
   const [courseData, setCourseData] = useState(false);
   const [activeLesson, setActiveLesson] = useState(false);
@@ -150,7 +149,7 @@ const CourseConsume = ({ productId }) => {
     return <LayoutLoading />;
   }
 
-  if (!productId ) return null;
+  if (!productId) return null;
 
   return (
     <div className="flex w-full justify-center">
