@@ -150,7 +150,7 @@ const CourseConsume = ({ productId }) => {
     return <LayoutLoading />;
   }
 
-  if (!productId || !moduleId || !lessonId) return null;
+  if (!productId ) return null;
 
   return (
     <div className="flex w-full justify-center">
