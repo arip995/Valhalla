@@ -28,7 +28,7 @@ const RenderLesson = ({
         />
         {lesson.title}
       </div>
-      <div className="flex items-center gap-2 text-xs">
+      <div className="flex min-w-fit items-center gap-2 text-xs">
         {lesson.status === 2 ? (
           <Button
             size="xs"

@@ -79,6 +79,7 @@ const ViewLockedContentDetails = ({ data }) => {
           animate={data.status === 1 ? true : false}
           disabled={data.status !== 1}
           price={data?.price}
+          creatorId={data.creatorId}
           onSuccess={onSuccess}
         >
           {data.status === 1

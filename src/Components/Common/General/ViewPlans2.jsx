@@ -56,6 +56,8 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
               className="mt-2 w-fit"
               color="teal"
               animate={false}
+              creatorId={data.creatorId}
+              creatorDetails={data.creatorDetails}
               price={
                 plan.enableDiscountedPrice
                   ? plan.discountedCost

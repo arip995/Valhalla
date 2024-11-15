@@ -48,6 +48,8 @@ const ViewCourseOne = ({ data, isPreview }) => {
             className="hidden md:block"
             size="md"
             animate={false}
+            creatorId={data.creatorId}
+            creatorDetails={data.creatorDetails}
             price={
               data.hasDiscountedPrice
                 ? Number(data.discountedPrice)
@@ -119,6 +121,8 @@ const ViewCourseOne = ({ data, isPreview }) => {
           <BuyButton
             size="md"
             animate={false}
+            creatorId={data.creatorId}
+            creatorDetails={data.creatorDetails}
             price={
               data.hasDiscountedPrice
                 ? Number(data.discountedPrice)

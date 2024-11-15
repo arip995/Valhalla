@@ -144,7 +144,11 @@ const usePayment = (
     }
   };
 
-  const onCreateOrder = async (amount = 1) => {
+  const onCreateOrder = async (
+    amount = 1,
+    creatorId,
+    creatorDetails
+  ) => {
     if (!amount) return;
 
     setPaymentState(prev => ({
@@ -161,6 +165,8 @@ const usePayment = (
           productType,
           paymentProvider,
           amount,
+          creatorId,
+          creatorDetails,
           bookingData: {
             ...payInPayload,
             paymentProvider,

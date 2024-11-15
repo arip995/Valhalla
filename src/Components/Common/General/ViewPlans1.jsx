@@ -96,6 +96,8 @@ const ViewPlans1 = ({
       </Radio.Group>
       <BuyButton
         onClick={() => onPay(selectedPlan)}
+        creatorId={data.creatorId}
+        creatorDetails={data.creatorDetails}
         disabled={!selectedPlan || data.status !== 1}
         animate={data.status === 1 ? true : false}
         price={
