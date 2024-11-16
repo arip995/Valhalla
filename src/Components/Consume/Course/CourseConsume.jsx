@@ -24,18 +24,19 @@ const CourseConsume = ({ productId }) => {
   // const searchParams = useSearchParams();
   // const moduleId = searchParams.get('moduleId');
   // const lessonId = searchParams.get('lessonId');
-  const { user } = useUser();
   const router = useRouter();
+  const { user } = useUser();
   const [opened, setOpened] = useState(false);
   const [loading, setLoading] = useState(false);
   const [courseData, setCourseData] = useState(false);
+  const [completedList, setCompletedList] = useState([]);
   const [activeLesson, setActiveLesson] = useState(false);
   const [activeModule, setActiveModule] = useState(false);
 
   const redirectToBuyPage = () => {
     const host = process.env.NEXT_PUBLIC_HOST;
     const url = `${host}/course/${productId}`;
-    router.push(url); // Use push for client-side navigation
+    router.push(url);
   };
 
   const fetchProductData = async () => {
@@ -56,14 +57,23 @@ const CourseConsume = ({ productId }) => {
         productId,
         'course'
       );
+
+      const { data: completedData } =
+        await axiosInstance.post('/course/completed', {
+          productId,
+          userId: user._id,
+        });
+      setCompletedList(prev => {
+        return [
+          ...prev,
+          ...(completedData?.data?.contentCompleted || []),
+        ];
+      });
       setCourseData(data);
       setActiveLesson(data.content[0].lessons[0]);
       setActiveModule(data.content[0]);
     } catch (error) {
-      toast.error(
-        error?.response?.data?.message ||
-          'Check your internet connection'
-      );
+      toast.error(error?.response?.data?.message || '');
       console.log(error);
     } finally {
       setLoading(false);
@@ -164,6 +174,40 @@ const CourseConsume = ({ productId }) => {
     }
   };
 
+  const updatedCompletedCourse = async isCompleted => {
+    try {
+      const { data } = await axiosInstance.post(
+        '/course/update/purchased',
+        {
+          productId,
+          userId: user._id,
+          lessonId: activeLesson?._id,
+          isCompleted,
+        }
+      );
+
+      if (data?.ok) {
+        if (isCompleted) {
+          toast.success('Lesson completed');
+        } else {
+          toast.success('Lesson marked uncompleted');
+        }
+        setCompletedList(() => {
+          return [...(data?.data?.contentCompleted || [])];
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message || '');
+    }
+  };
+
+  const isCompleted = completedList.some(
+    item => item === activeLesson?._id
+  );
+  console.log(completedList);
+  console.log(activeLesson?._id);
+
   useEffect(() => {
     if (user === -1) return;
     fetchProductData();
@@ -251,6 +295,10 @@ const CourseConsume = ({ productId }) => {
               className="w-fit rounded-md border border-gray-300 p-2 hover:bg-gray-50"
               color="black"
               size="md"
+              checked={isCompleted}
+              onChange={e =>
+                updatedCompletedCourse(e.target.checked)
+              }
               label={
                 <div className="font-semibold">
                   Complete
