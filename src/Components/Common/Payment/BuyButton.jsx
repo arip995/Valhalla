@@ -23,7 +23,7 @@ const BuyButton = ({
   const lottieRef = useRef();
   const { user } = useUser();
   const [opened, setOpened] = useState(false);
-  const { onCreateOrder, paymentState } =
+  const { onCreateOrder, paymentState, purchased } =
     usePayment(onSuccess);
 
   if (paymentState.loading) {
@@ -67,7 +67,7 @@ const BuyButton = ({
         fullWidth
         {...props}
       >
-        {children}
+        {purchased ? 'Start Learning' : children}
       </Button>
       {!!opened && (
         <AuthModal

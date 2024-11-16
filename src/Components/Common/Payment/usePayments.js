@@ -1,5 +1,7 @@
 import axiosInstance from '@/Utils/AxiosInstance';
 import { isDevEnv } from '@/Utils/Common';
+import { checkIfPurchased } from '@/Utils/Common';
+import { useRedirectAfterPurchased } from '@/Utils/Hooks/hooks';
 import useUser from '@/Utils/Hooks/useUser';
 import { load } from '@cashfreepayments/cashfree-js';
 import {
@@ -18,11 +20,14 @@ const usePayment = (
   payInPayload,
   paymentProvider = 'cashfree'
 ) => {
-  const { user } = useUser();
   const productId = usePathname().split('/')[2];
   const productType = usePathname().split('/')[1];
   const isDashboard =
     usePathname().split('/')[1] === 'dashboard';
+  const redirectAfterPurchased =
+    useRedirectAfterPurchased();
+
+  const { user } = useUser();
   const searchParams = useSearchParams();
   const [paymentState, setPaymentState] = useState({
     payinLoading: false,
@@ -33,6 +38,7 @@ const usePayment = (
     paymentCompleted: false,
     purchaseSuccessful: false,
   });
+  const [purchased, setPurchased] = useState(false);
 
   const callBackHandler = isSuccessful => {
     setTimeout(() => {
@@ -152,6 +158,10 @@ const usePayment = (
     creatorDetails
   ) => {
     if (!amount || isDashboard) return;
+    if (purchased) {
+      redirectAfterPurchased();
+      return;
+    }
 
     setPaymentState(prev => ({
       ...prev,
@@ -205,13 +215,21 @@ const usePayment = (
     }
   };
 
+  const checkOnLoad = async () => {
+    setPurchased(await checkIfPurchased(productId, user));
+  };
+
   useEffect(() => {
     if (paymentState.paymentSessionId) {
       openPaymentModal();
     }
   }, [paymentState.paymentSessionId]);
 
-  return { onCreateOrder, paymentState };
+  useEffect(() => {
+    if (user === -1) return;
+    checkOnLoad();
+  }, [user?._id]);
+  return { onCreateOrder, paymentState, purchased };
 };
 
 export default usePayment;

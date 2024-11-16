@@ -5,6 +5,7 @@ import {
   IconPhoto,
   IconVideo,
 } from '@tabler/icons-react';
+import axiosInstance from './AxiosInstance';
 
 export function Compact(arr) {
   return arr.filter(Boolean);
@@ -244,5 +245,17 @@ export const contentTypeIconMapping = ({
       return <IconPhoto {...props} />;
     default:
       break;
+  }
+};
+
+export const checkIfPurchased = async (productId, user) => {
+  try {
+    const { data } = await axiosInstance.post(
+      '/purchase/details',
+      { productId, userId: user._id }
+    );
+    return data?.ok;
+  } catch (error) {
+    console.log(error);
   }
 };

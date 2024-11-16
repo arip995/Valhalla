@@ -19,6 +19,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import CourseContentList from './CourseContentList';
+import ProductHeader from '@/Components/Common/Header/Productheader';
 
 const CourseConsume = ({ productId }) => {
   // const searchParams = useSearchParams();
@@ -266,114 +267,116 @@ const CourseConsume = ({ productId }) => {
   if (loading) {
     return <LayoutLoading />;
   }
-
-  if (!productId || !user?._id) return null;
+  if (!productId || !user?._id || !courseData) return null;
 
   return (
-    <div className="flex w-full justify-center">
-      <div className="m-4 flex h-full w-full max-w-7xl justify-center gap-4">
-        <div className="hide-scrollbar hidden max-h-screen w-1/4 overflow-y-auto lg:block">
-          <BasicDetails />
-          <div className="hidden lg:block">
-            <CourseContentList
-              content={courseData?.content}
-              activeLesson={activeLesson}
-              onChange={onChangeActiveLeson}
-            />
-          </div>
-        </div>
-        <div
-          className={classNames(
-            'hide-scrollbar h-full w-full overflow-y-auto lg:w-3/4'
-          )}
-        >
-          <div className="mb-3 hidden text-wrap text-xl font-semibold lg:block">
-            {activeLesson?.title}
-          </div>
-          <Popover
-            opened={opened}
-            onChange={setOpened}
-            position="bottom"
-            width={300}
-            withArrow
-            shadow="md"
-            classNames="lg:hidden block"
-          >
-            <Popover.Target>
-              <div
-                className="mb-3 flex cursor-pointer items-center gap-2 text-wrap text-xl font-semibold lg:hidden"
-                onClick={() => setOpened(o => !o)}
-              >
-                {activeLesson?.title}{' '}
-                <IconTriangleInverted size={15} />
-              </div>
-            </Popover.Target>
-            <Popover.Dropdown
-              onClick={() => setOpened(o => !o)}
-            >
-              <BasicDetails />
+    <>
+      <ProductHeader data={courseData} />
+      <div className="flex w-full justify-center">
+        <div className="m-4 flex h-full w-full max-w-7xl justify-center gap-4">
+          <div className="hide-scrollbar hidden max-h-screen w-1/4 overflow-y-auto lg:block">
+            <BasicDetails />
+            <div className="hidden lg:block">
               <CourseContentList
                 content={courseData?.content}
                 activeLesson={activeLesson}
                 onChange={onChangeActiveLeson}
               />
-            </Popover.Dropdown>
-          </Popover>
-
-          <SavedLessonContent value={activeLesson} />
-          <div className="mt-4 flex gap-6">
-            <Checkbox
-              className="w-fit rounded-md border border-gray-300 p-2 hover:bg-gray-50"
-              color="black"
-              size="md"
-              checked={isCompleted}
-              onChange={e =>
-                updatedCompletedCourse(e.target.checked)
-              }
-              label={
-                <div className="font-semibold">
-                  Complete
+            </div>
+          </div>
+          <div
+            className={classNames(
+              'hide-scrollbar h-full w-full overflow-y-auto lg:w-3/4'
+            )}
+          >
+            <div className="mb-3 hidden text-wrap text-xl font-semibold lg:block">
+              {activeLesson?.title}
+            </div>
+            <Popover
+              opened={opened}
+              onChange={setOpened}
+              position="bottom"
+              width={300}
+              withArrow
+              shadow="md"
+              classNames="lg:hidden block"
+            >
+              <Popover.Target>
+                <div
+                  className="mb-3 flex cursor-pointer items-center gap-2 text-wrap text-xl font-semibold lg:hidden"
+                  onClick={() => setOpened(o => !o)}
+                >
+                  {activeLesson?.title}{' '}
+                  <IconTriangleInverted size={15} />
                 </div>
-              }
-            />
-            <div className="flex h-full gap-2">
-              <IconArrowLeft
-                className={classNames(
-                  'h-full w-fit cursor-pointer rounded-md border border-gray-300 p-2 hover:bg-gray-50',
-                  {
-                    'opacity-30 hover:cursor-default hover:bg-white':
-                      checkActionButtonDisabled(false),
-                  }
-                )}
-                onClick={() => {
-                  if (checkActionButtonDisabled(false))
-                    return;
-                  onChangeActiveLeson(
-                    null,
-                    null,
-                    'previous'
-                  );
-                }}
+              </Popover.Target>
+              <Popover.Dropdown
+                onClick={() => setOpened(o => !o)}
+              >
+                <BasicDetails />
+                <CourseContentList
+                  content={courseData?.content}
+                  activeLesson={activeLesson}
+                  onChange={onChangeActiveLeson}
+                />
+              </Popover.Dropdown>
+            </Popover>
+
+            <SavedLessonContent value={activeLesson} />
+            <div className="mt-4 flex gap-6">
+              <Checkbox
+                className="w-fit rounded-md border border-gray-300 p-2 hover:bg-gray-50"
+                color="black"
+                size="md"
+                checked={isCompleted}
+                onChange={e =>
+                  updatedCompletedCourse(e.target.checked)
+                }
+                label={
+                  <div className="font-semibold">
+                    Complete
+                  </div>
+                }
               />
-              <IconArrowRight
-                className={classNames(
-                  'h-full w-fit cursor-pointer rounded-md border border-gray-300 p-2 hover:bg-gray-50',
-                  {
-                    'opacity-30 hover:cursor-default hover:bg-white':
-                      checkActionButtonDisabled(true),
-                  }
-                )}
-                onClick={() => {
-                  if (checkActionButtonDisabled(true))
-                    return;
-                  onChangeActiveLeson(null, null, 'next');
-                }}
-              />
+              <div className="flex h-full gap-2">
+                <IconArrowLeft
+                  className={classNames(
+                    'h-full w-fit cursor-pointer rounded-md border border-gray-300 p-2 hover:bg-gray-50',
+                    {
+                      'opacity-30 hover:cursor-default hover:bg-white':
+                        checkActionButtonDisabled(false),
+                    }
+                  )}
+                  onClick={() => {
+                    if (checkActionButtonDisabled(false))
+                      return;
+                    onChangeActiveLeson(
+                      null,
+                      null,
+                      'previous'
+                    );
+                  }}
+                />
+                <IconArrowRight
+                  className={classNames(
+                    'h-full w-fit cursor-pointer rounded-md border border-gray-300 p-2 hover:bg-gray-50',
+                    {
+                      'opacity-30 hover:cursor-default hover:bg-white':
+                        checkActionButtonDisabled(true),
+                    }
+                  )}
+                  onClick={() => {
+                    if (checkActionButtonDisabled(true))
+                      return;
+                    onChangeActiveLeson(null, null, 'next');
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
