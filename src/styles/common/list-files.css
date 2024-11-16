@@ -20,7 +20,7 @@
     );
   }
   .list-files-image {
-    min-width: 24px;
+    min-width: 40px;
     min-height: 24px;
     border-radius: 8px;
   }
