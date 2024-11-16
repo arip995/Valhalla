@@ -16,7 +16,7 @@ import {
 } from '@tabler/icons-react';
 import classNames from 'classnames';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import CourseContentList from './CourseContentList';
 
@@ -26,7 +26,6 @@ const CourseConsume = ({ productId }) => {
   // const lessonId = searchParams.get('lessonId');
   const { user } = useUser();
   const router = useRouter();
-  const ref = useRef();
   const [opened, setOpened] = useState(false);
   const [loading, setLoading] = useState(false);
   const [courseData, setCourseData] = useState(false);
@@ -166,8 +165,7 @@ const CourseConsume = ({ productId }) => {
   };
 
   useEffect(() => {
-    ref.current = 1;
-    if (!user?._id && ref.current != 1) return;
+    if (!user === -1) return;
     fetchProductData();
   }, [user?._id]);
 
