@@ -229,12 +229,15 @@ const CourseConsume = ({ productId }) => {
     <div className="flex w-full justify-center">
       <div className="m-4 flex h-full w-full max-w-7xl justify-center gap-4">
         <div className="hide-scrollbar hidden max-h-screen w-1/4 overflow-y-auto lg:block">
-          <div className="flex min-w-fit gap-2">
+          <div className="object flex min-w-fit gap-2">
             <img
               src={courseData?.coverImage?.url}
               alt=""
-              className="rounded-md object-cover"
-              style={{ height: '100px', width: '100px' }}
+              className="aspect-video rounded-md"
+              style={{
+                maxHeight: '100px',
+                maxWidth: '100px',
+              }}
             />
             <div className="font-semibold text-gray-900">
               {courseData?.title}
