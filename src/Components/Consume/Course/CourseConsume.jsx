@@ -214,6 +214,50 @@ const CourseConsume = ({ productId }) => {
     }
   };
 
+  const BasicDetails = () => {
+    if (!courseData) return null;
+    return (
+      <div className="object flex min-w-fit gap-2">
+        <img
+          src={courseData?.coverImage?.url}
+          alt=""
+          className="aspect-video rounded-md"
+          style={{
+            maxHeight: '100px',
+            maxWidth: '100px',
+          }}
+        />
+        <div className="font-semibold text-gray-900">
+          {courseData?.title}
+          <div className="flex">
+            <RingProgress
+              size={25}
+              thickness={3}
+              roundCaps
+              sections={[
+                {
+                  value: completedList?.length
+                    ? (completedList?.length /
+                        totalLessons) *
+                      100
+                    : 0,
+                  color:
+                    completedList?.length == totalLessons
+                      ? 'green'
+                      : 'gray',
+                },
+              ]}
+            />
+            <span className="font-normal text-gray-600">
+              {completedList?.length || 0}/{totalLessons}{' '}
+              completed
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   useEffect(() => {
     if (user === -1) return;
     fetchProductData();
@@ -229,45 +273,7 @@ const CourseConsume = ({ productId }) => {
     <div className="flex w-full justify-center">
       <div className="m-4 flex h-full w-full max-w-7xl justify-center gap-4">
         <div className="hide-scrollbar hidden max-h-screen w-1/4 overflow-y-auto lg:block">
-          <div className="object flex min-w-fit gap-2">
-            <img
-              src={courseData?.coverImage?.url}
-              alt=""
-              className="aspect-video rounded-md"
-              style={{
-                maxHeight: '100px',
-                maxWidth: '100px',
-              }}
-            />
-            <div className="font-semibold text-gray-900">
-              {courseData?.title}
-              <div className="flex">
-                <RingProgress
-                  size={25}
-                  thickness={3}
-                  roundCaps
-                  sections={[
-                    {
-                      value: completedList?.length
-                        ? (completedList?.length /
-                            totalLessons) *
-                          100
-                        : 0,
-                      color:
-                        completedList?.length ==
-                        totalLessons
-                          ? 'green'
-                          : 'gray',
-                    },
-                  ]}
-                />
-                <span className="font-normal">
-                  {completedList?.length || 0}/
-                  {totalLessons} completed
-                </span>
-              </div>
-            </div>
-          </div>
+          <BasicDetails />
           <div className="hidden lg:block">
             <CourseContentList
               content={courseData?.content}
@@ -305,6 +311,7 @@ const CourseConsume = ({ productId }) => {
             <Popover.Dropdown
               onClick={() => setOpened(o => !o)}
             >
+              <BasicDetails />
               <CourseContentList
                 content={courseData?.content}
                 activeLesson={activeLesson}
