@@ -165,7 +165,7 @@ const CourseConsume = ({ productId }) => {
   };
 
   useEffect(() => {
-    if (!user === -1) return;
+    if (user === -1) return;
     fetchProductData();
   }, [user?._id]);
 
