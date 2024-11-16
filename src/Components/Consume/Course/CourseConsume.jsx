@@ -16,7 +16,7 @@ import {
 } from '@tabler/icons-react';
 import classNames from 'classnames';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import CourseContentList from './CourseContentList';
 
@@ -32,6 +32,18 @@ const CourseConsume = ({ productId }) => {
   const [completedList, setCompletedList] = useState([]);
   const [activeLesson, setActiveLesson] = useState(false);
   const [activeModule, setActiveModule] = useState(false);
+  const isCompleted = useMemo(
+    () =>
+      completedList.some(
+        item => item === activeLesson?._id
+      ),
+    [completedList, activeLesson?._id]
+  );
+  const totalLessons = useMemo(() => {
+    return courseData?.content?.reduce((total, module) => {
+      return total + (module?.lessons?.length || 0);
+    }, 0);
+  }, [courseData]);
 
   const redirectToBuyPage = () => {
     const host = process.env.NEXT_PUBLIC_HOST;
@@ -202,10 +214,6 @@ const CourseConsume = ({ productId }) => {
     }
   };
 
-  const isCompleted = completedList.some(
-    item => item === activeLesson?._id
-  );
-
   useEffect(() => {
     if (user === -1) return;
     fetchProductData();
@@ -236,9 +244,25 @@ const CourseConsume = ({ productId }) => {
                   size={25}
                   thickness={3}
                   roundCaps
-                  sections={[{ value: 40, color: 'gray' }]}
+                  sections={[
+                    {
+                      value: completedList?.length
+                        ? (completedList?.length /
+                            totalLessons) *
+                          100
+                        : 0,
+                      color:
+                        completedList?.length ==
+                        totalLessons
+                          ? 'green'
+                          : 'gray',
+                    },
+                  ]}
                 />
-                <span>1/79 completed</span>
+                <span>
+                  {completedList?.length || 0}/
+                  {totalLessons} completed
+                </span>
               </div>
             </div>
           </div>

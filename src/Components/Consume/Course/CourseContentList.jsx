@@ -11,7 +11,8 @@ const CourseContentList = ({
   return (
     <div className="hide-scrollbar flex w-full flex-col gap-2">
       {content.map((module, i) => {
-        if (!module?.lessons?.length) return null;
+        if (!module?.lessons?.length || module?.status == 0)
+          return null;
         return (
           <div
             className="flex w-full flex-col gap-2"
@@ -21,7 +22,8 @@ const CourseContentList = ({
               {module.title}
             </div>
             {module.lessons.map((lesson, i) => {
-              if (!lesson) return null;
+              if (!lesson || lesson?.status == 0)
+                return null;
               return (
                 <div
                   className={classNames(
