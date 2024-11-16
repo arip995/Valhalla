@@ -21,6 +21,8 @@ const usePayment = (
   const { user } = useUser();
   const productId = usePathname().split('/')[2];
   const productType = usePathname().split('/')[1];
+  const isDashboard =
+    usePathname().split('/')[1] === 'dashboard';
   const searchParams = useSearchParams();
   const [paymentState, setPaymentState] = useState({
     payinLoading: false,
@@ -149,7 +151,7 @@ const usePayment = (
     creatorId,
     creatorDetails
   ) => {
-    if (!amount) return;
+    if (!amount || isDashboard) return;
 
     setPaymentState(prev => ({
       ...prev,
