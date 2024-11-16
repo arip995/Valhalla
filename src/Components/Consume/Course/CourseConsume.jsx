@@ -223,7 +223,7 @@ const CourseConsume = ({ productId }) => {
     return <LayoutLoading />;
   }
 
-  if (!productId) return null;
+  if (!productId || !user?._id) return null;
 
   return (
     <div className="flex w-full justify-center">
@@ -233,9 +233,8 @@ const CourseConsume = ({ productId }) => {
             <img
               src={courseData?.coverImage?.url}
               alt=""
-              className="overflow-hidden rounded-md"
-              height={100}
-              width={100}
+              className="rounded-md object-cover"
+              style={{ height: '100px', width: '100px' }}
             />
             <div className="font-semibold text-gray-900">
               {courseData?.title}
@@ -259,7 +258,7 @@ const CourseConsume = ({ productId }) => {
                     },
                   ]}
                 />
-                <span>
+                <span className="font-normal">
                   {completedList?.length || 0}/
                   {totalLessons} completed
                 </span>
