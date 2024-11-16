@@ -1,7 +1,9 @@
 'use client';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import { SavedLessonContent } from '@/Components/Create/Course/CreateCourseStepTwo/CreateCourseAddEditLesson';
+import axiosInstance from '@/Utils/AxiosInstance';
 import { getMetaData } from '@/Utils/getMetaData';
+import useUser from '@/Utils/Hooks/useUser';
 import {
   Checkbox,
   Popover,
@@ -13,6 +15,7 @@ import {
   IconTriangleInverted,
 } from '@tabler/icons-react';
 import classNames from 'classnames';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import CourseContentList from './CourseContentList';
@@ -21,14 +24,34 @@ const CourseConsume = ({ productId }) => {
   // const searchParams = useSearchParams();
   // const moduleId = searchParams.get('moduleId');
   // const lessonId = searchParams.get('lessonId');
+  const { user } = useUser();
+  const router = useRouter();
+  const [opened, setOpened] = useState(false);
   const [loading, setLoading] = useState(false);
   const [courseData, setCourseData] = useState(false);
   const [activeLesson, setActiveLesson] = useState(false);
   const [activeModule, setActiveModule] = useState(false);
 
+  const redirectToBuyPage = () => {
+    const host = process.env.NEXT_PUBLIC_HOST;
+    const url = `${host}/course/${productId}`;
+    router.push(url); // Use push for client-side navigation
+  };
+
   const fetchProductData = async () => {
     try {
       setLoading(true);
+      if (!user?._id) {
+        redirectToBuyPage();
+      }
+      const { data: checkIfBougthData } =
+        await axiosInstance.post('/purchase/details', {
+          productId,
+          userId: user._id,
+        });
+      if (!checkIfBougthData?.ok) {
+        redirectToBuyPage();
+      }
       const { data } = await getMetaData(
         productId,
         'course'
@@ -142,8 +165,9 @@ const CourseConsume = ({ productId }) => {
   };
 
   useEffect(() => {
+    if (!user._id) return;
     fetchProductData();
-  }, []);
+  }, [user?._id]);
 
   if (loading) {
     return <LayoutLoading />;
@@ -155,7 +179,7 @@ const CourseConsume = ({ productId }) => {
     <div className="flex w-full justify-center">
       <div className="m-4 flex h-full w-full max-w-7xl justify-center gap-4">
         <div className="hide-scrollbar hidden max-h-screen w-1/4 overflow-y-auto lg:block">
-          <div className="flex gap-2">
+          <div className="flex min-w-fit gap-2">
             <img
               src={courseData?.coverImage?.url}
               alt=""
@@ -193,6 +217,8 @@ const CourseConsume = ({ productId }) => {
             {activeLesson?.title}
           </div>
           <Popover
+            opened={opened}
+            onChange={setOpened}
             position="bottom"
             width={300}
             withArrow
@@ -200,12 +226,17 @@ const CourseConsume = ({ productId }) => {
             classNames="lg:hidden block"
           >
             <Popover.Target>
-              <div className="mb-3 flex cursor-pointer items-center gap-2 text-wrap text-xl font-semibold lg:hidden">
+              <div
+                className="mb-3 flex cursor-pointer items-center gap-2 text-wrap text-xl font-semibold lg:hidden"
+                onClick={() => setOpened(o => !o)}
+              >
                 {activeLesson?.title}{' '}
                 <IconTriangleInverted size={15} />
               </div>
             </Popover.Target>
-            <Popover.Dropdown>
+            <Popover.Dropdown
+              onClick={() => setOpened(o => !o)}
+            >
               <CourseContentList
                 content={courseData?.content}
                 activeLesson={activeLesson}
