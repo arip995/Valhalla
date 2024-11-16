@@ -1,6 +1,6 @@
+import BuyButtonClient from '@/Components/Common/Buttons/BuyButtonClient';
 import FooterTwo from '@/Components/Common/Footer/FooterTwo';
 import ProductHeader from '@/Components/Common/Header/Productheader';
-import BuyButton from '@/Components/Common/Payment/BuyButton';
 import ViewSections from '@/Components/Common/ViewSections/ViewSections';
 import {
   calculateCourseContentHighlights,
@@ -44,7 +44,7 @@ const ViewCourseOne = ({ data, isPreview }) => {
               priority
             />
           )}
-          <BuyButton
+          <BuyButtonClient
             className="hidden md:block"
             size="md"
             animate={false}
@@ -68,7 +68,7 @@ const ViewCourseOne = ({ data, isPreview }) => {
                 {data.discountedPrice}
               </span>
             )}
-          </BuyButton>
+          </BuyButtonClient>
           <div className="flex w-full flex-col items-center">
             <div className="flex w-full flex-col">
               {!!data?.description && (
@@ -118,7 +118,7 @@ const ViewCourseOne = ({ data, isPreview }) => {
         </div>
         <FooterTwo className="mt-8" />
         <div className="fixed bottom-0 z-50 w-full border-t border-t-gray-200 bg-white p-4 md:hidden">
-          <BuyButton
+          <BuyButtonClient
             size="md"
             animate={false}
             creatorId={data.creatorId}
@@ -140,7 +140,7 @@ const ViewCourseOne = ({ data, isPreview }) => {
                 (₹{data.discountedPrice})
               </span>
             )}
-          </BuyButton>
+          </BuyButtonClient>
         </div>
       </div>
     </>

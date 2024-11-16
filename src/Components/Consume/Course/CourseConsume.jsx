@@ -205,8 +205,6 @@ const CourseConsume = ({ productId }) => {
   const isCompleted = completedList.some(
     item => item === activeLesson?._id
   );
-  console.log(completedList);
-  console.log(activeLesson?._id);
 
   useEffect(() => {
     if (user === -1) return;
