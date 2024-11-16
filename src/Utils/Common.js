@@ -143,11 +143,20 @@ export const calculateCourseContentHighlights = content => {
   let modules = 0;
 
   content.map(module => {
-    if (!module?.lessons?.length) return;
+    if (
+      !module?.lessons?.length ||
+      module.status === 0 ||
+      module.status === 3
+    )
+      return;
     modules += 1;
     module?.lessons?.map(lesson => {
-      if (!lesson) return;
-      totalDuration += Number(lesson.duration) || 0;
+      if (
+        !lesson ||
+        lesson.status === 0 ||
+        lesson.status === 3
+      )
+        totalDuration += Number(lesson.duration) || 0;
       lessons += 1;
       if (lesson.lessonType === 'textImage') {
         articles += 1;
@@ -178,7 +187,12 @@ export const calculateModuleHighlights = module => {
 
   if (!module?.lessons?.length) return;
   module.lessons.map(lesson => {
-    if (!lesson) return;
+    if (
+      !lesson ||
+      lesson.status === 0 ||
+      lesson.status === 3
+    )
+      return;
     totalDuration += Number(lesson.duration) || 0;
     lessons += 1;
     if (lesson.lessonType === 'textImage') {

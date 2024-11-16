@@ -70,6 +70,8 @@ const RenderModulesAndLessons = ({ content }) => {
   return (
     <>
       {content.map((module, index) => {
+        if (module.status === 0 || module.status === 3)
+          return;
         const data = calculateModuleHighlights(module);
         return (
           <>
@@ -91,14 +93,21 @@ const RenderModulesAndLessons = ({ content }) => {
                   </div>
                 </Accordion.Control>
                 <Accordion.Panel>
-                  {module.lessons.map((lesson, index) => (
-                    <RenderLesson
-                      lesson={lesson}
-                      index={index}
-                      key={index}
-                      onPreviewClick={onPreviewClick}
-                    />
-                  ))}
+                  {module.lessons.map((lesson, index) => {
+                    if (
+                      lesson.status === 0 ||
+                      lesson.status === 3
+                    )
+                      return;
+                    return (
+                      <RenderLesson
+                        lesson={lesson}
+                        index={index}
+                        key={index}
+                        onPreviewClick={onPreviewClick}
+                      />
+                    );
+                  })}
                 </Accordion.Panel>
               </Accordion.Item>
             )}
