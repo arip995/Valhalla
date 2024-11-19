@@ -22,11 +22,10 @@ const usePayment = (
 ) => {
   const productId = usePathname().split('/')[2];
   const productType = usePathname().split('/')[1];
-  const isDashboard =
+  const isPreview =
     usePathname().split('/')[1] === 'dashboard';
   const redirectAfterPurchased =
     useRedirectAfterPurchased();
-
   const { user } = useUser();
   const searchParams = useSearchParams();
   const [paymentState, setPaymentState] = useState({
@@ -47,6 +46,7 @@ const usePayment = (
           position: 'top-center',
         });
         onSuccess();
+        checkOnLoad();
       } else {
         toast.error(
           'There was a problem. If your payment was deducted, it will be resolved within 24 hours.',
@@ -157,7 +157,7 @@ const usePayment = (
     creatorId,
     creatorDetails
   ) => {
-    if (!amount || isDashboard) return;
+    if (!amount || isPreview) return;
     if (purchased) {
       redirectAfterPurchased();
       return;
@@ -216,6 +216,7 @@ const usePayment = (
   };
 
   const checkOnLoad = async () => {
+    if (isPreview) return;
     setPurchased(await checkIfPurchased(productId, user));
   };
 

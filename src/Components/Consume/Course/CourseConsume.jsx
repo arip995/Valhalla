@@ -200,11 +200,7 @@ const CourseConsume = ({ productId }) => {
       );
 
       if (data?.ok) {
-        if (isCompleted) {
-          toast.success('Lesson completed');
-        } else {
-          toast.success('Lesson marked uncompleted');
-        }
+        toast.success(data?.message || '');
         setCompletedList(() => {
           return [...(data?.data?.contentCompleted || [])];
         });
@@ -329,8 +325,8 @@ const CourseConsume = ({ productId }) => {
                 color="black"
                 size="md"
                 checked={isCompleted}
-                onChange={e =>
-                  updatedCompletedCourse(e.target.checked)
+                onChange={() =>
+                  updatedCompletedCourse(isCompleted)
                 }
                 label={
                   <div className="font-semibold">
