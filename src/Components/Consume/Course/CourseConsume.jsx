@@ -1,4 +1,5 @@
 'use client';
+import ProductHeader from '@/Components/Common/Header/Productheader';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import { SavedLessonContent } from '@/Components/Create/Course/CreateCourseStepTwo/CreateCourseAddEditLesson';
 import axiosInstance from '@/Utils/AxiosInstance';
@@ -19,7 +20,6 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import CourseContentList from './CourseContentList';
-import ProductHeader from '@/Components/Common/Header/Productheader';
 
 const CourseConsume = ({ productId }) => {
   // const searchParams = useSearchParams();
@@ -187,7 +187,7 @@ const CourseConsume = ({ productId }) => {
     }
   };
 
-  const updatedCompletedCourse = async isCompleted => {
+  const updatedCompletedCourse = async () => {
     try {
       const { data } = await axiosInstance.post(
         '/course/update/purchased',
@@ -325,9 +325,7 @@ const CourseConsume = ({ productId }) => {
                 color="black"
                 size="md"
                 checked={isCompleted}
-                onChange={() =>
-                  updatedCompletedCourse(isCompleted)
-                }
+                onChange={() => updatedCompletedCourse()}
                 label={
                   <div className="font-semibold">
                     Complete
