@@ -17,7 +17,6 @@ const POLL_INTERVAL = 5000; // 5 seconds
 const usePayment = (
   onSuccess = () => {},
   onFailure = () => {},
-  payInPayload,
   paymentProvider = 'cashfree'
 ) => {
   const productId = usePathname().split('/')[2];
@@ -155,7 +154,8 @@ const usePayment = (
   const onCreateOrder = async (
     amount = 1,
     creatorId,
-    creatorDetails
+    creatorDetails,
+    bookingData
   ) => {
     if (!amount || isPreview) return;
     if (purchased) {
@@ -169,6 +169,15 @@ const usePayment = (
     }));
 
     try {
+      const subscription =
+        productType === 'tg'
+          ? { ...bookingData.subscription }
+          : {};
+      const newBookingData = { ...bookingData };
+      if (productType === 'tg') {
+        delete newBookingData.subscription;
+      }
+
       const { data } = await axiosInstance.post(
         '/payment/create_order',
         {
@@ -179,9 +188,9 @@ const usePayment = (
           amount,
           creatorId,
           creatorDetails,
+          subscription,
           bookingData: {
-            ...payInPayload,
-            paymentProvider,
+            ...newBookingData,
             query: {
               referrer: document.referrer,
               ...Object.fromEntries(

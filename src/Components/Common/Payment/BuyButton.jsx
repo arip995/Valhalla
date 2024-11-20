@@ -18,6 +18,7 @@ const BuyButton = ({
   onSuccess = () => {},
   creatorId,
   creatorDetails,
+  bookingData,
   ...props
 }) => {
   const lottieRef = useRef();
@@ -57,7 +58,12 @@ const BuyButton = ({
           if (!user?._id) {
             setOpened(true);
           } else {
-            onCreateOrder(price, creatorId, creatorDetails);
+            onCreateOrder(
+              price,
+              creatorId,
+              creatorDetails,
+              bookingData
+            );
           }
         }}
         className={classNames(

@@ -10,13 +10,13 @@ import BuyButton from '../Payment/BuyButton';
 
 const ViewPlans2 = ({ data, onPay = () => {} }) => {
   if (!data.subscriptionPlans?.length) return null;
-
   return (
     <div
       className="flex w-full flex-col gap-3"
       onClick={onPay}
     >
       {data.subscriptionPlans.map(plan => {
+        console.log(plan);
         return (
           <div
             className="flex w-full flex-col items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 p-4"
@@ -58,6 +58,11 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
               animate={false}
               creatorId={data.creatorId}
               creatorDetails={data.creatorDetails}
+              bookingData={{
+                subscription: {
+                  ...plan,
+                },
+              }}
               price={
                 plan.enableDiscountedPrice
                   ? plan.discountedCost
