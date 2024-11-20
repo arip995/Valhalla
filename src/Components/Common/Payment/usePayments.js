@@ -11,7 +11,7 @@ import {
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-const MAX_ATTEMPTS = 3;
+const MAX_ATTEMPTS = 5;
 const POLL_INTERVAL = 5000; // 5 seconds
 
 const usePayment = (
@@ -115,7 +115,7 @@ const usePayment = (
 
           pollOrderStatus({
             sessionId: paymentState.paymentSessionId,
-            onPollSuccess: () => {
+            onPollSuccess: async () => {
               setTimeout(() => {
                 setPaymentState(prev => ({
                   ...prev,
@@ -157,6 +157,55 @@ const usePayment = (
     creatorDetails,
     bookingData
   ) => {
+    // await axiosInstance.post(
+    //   `${process.env.NEXT_PUBLIC_BASE_URL}/webhook/payment`,
+    //   {
+    //     data: {
+    //       order: {
+    //         order_id: '673d663dbc85647aeef23d5d',
+    //         order_amount: 222,
+    //         order_currency: 'INR',
+    //         order_tags: null,
+    //       },
+    //       payment: {
+    //         cf_payment_id: 5114915060586,
+    //         payment_status: 'SUCCESS',
+    //         payment_amount: 222,
+    //         payment_currency: 'INR',
+    //         payment_message: null,
+    //         payment_time: '2024-11-20T10:03:38+05:30',
+    //         bank_reference: null,
+    //         auth_id: null,
+    //         payment_method: {
+    //           netbanking: {
+    //             channel: null,
+    //             netbanking_bank_code: '3022',
+    //             netbanking_bank_name: 'ICICI Bank',
+    //           },
+    //         },
+    //         payment_group: 'net_banking',
+    //       },
+    //       customer_details: {
+    //         customer_name: 'Arindam Pandasx',
+    //         customer_id: '6656ace66a7d6213c7b78ea7',
+    //         customer_email: 'panda@gmail.coms',
+    //         customer_phone: '8888888888',
+    //       },
+    //       payment_gateway_details: {
+    //         gateway_name: 'CASHFREE',
+    //         gateway_order_id: '2188135133',
+    //         gateway_payment_id: '5114915060586',
+    //         gateway_status_code: null,
+    //         gateway_order_reference_id: 'null',
+    //         gateway_settlement: 'CASHFREE',
+    //       },
+    //       payment_offers: null,
+    //     },
+    //     event_time: '2024-11-20T10:03:43+05:30',
+    //     type: 'PAYMENT_SUCCESS_WEBHOOK',
+    //   }
+    // );
+    // return;
     if (!amount || isPreview) return;
     if (purchased) {
       redirectAfterPurchased();
@@ -225,7 +274,7 @@ const usePayment = (
   };
 
   const checkOnLoad = async () => {
-    if (isPreview) return;
+    if (isPreview || productType !== 'course') return;
     setPurchased(await checkIfPurchased(productId, user));
   };
 
