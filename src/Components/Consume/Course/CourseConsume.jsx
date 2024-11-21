@@ -269,7 +269,7 @@ const CourseConsume = ({ productId }) => {
     <>
       <ProductHeader data={courseData} />
       <div className="flex w-full justify-center">
-        <div className="m-4 flex h-full w-full max-w-7xl justify-center gap-4">
+        <div className="m-2 flex h-full w-full max-w-7xl justify-center gap-4 lg:m-4">
           <div className="hide-scrollbar hidden max-h-screen w-1/4 overflow-y-auto lg:block">
             <BasicDetails />
             <div className="hidden lg:block">
