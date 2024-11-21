@@ -75,7 +75,11 @@ const BuyButton = ({
         fullWidth
         {...props}
       >
-        {purchased ? 'Start Learning' : children}
+        {purchased
+          ? 'Start Learning'
+          : productDetails.status == 6
+            ? 'Sale Ended'
+            : children}
       </Button>
       {!!opened && (
         <AuthModal
