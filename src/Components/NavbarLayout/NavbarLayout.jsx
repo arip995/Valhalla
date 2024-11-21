@@ -33,6 +33,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Logo from '../../app/icon.png';
 import classes from '../../styles/Navbar/NavbarMinimal.module.css';
 import NavbarLink from './NavbarLink';
+import CompleteProfileModal from '../Common/Modal/CompleteProfileModal';
 
 export function NavbarLayout({ children }) {
   const router = useRouter();
@@ -41,6 +42,10 @@ export function NavbarLayout({ children }) {
   const isMobile = useMediaQuery('(max-width: 48em)');
   const { user } = useUser(true);
   const [opened, setOpened] = useState(false);
+  const [
+    openedBecomeCretorModal,
+    setOpenedBecomeCretorModal,
+  ] = useState(false);
   const [showLabel, setShowLabel] = useState(false);
 
   const Links = useMemo(() => {
@@ -181,6 +186,9 @@ export function NavbarLayout({ children }) {
                   size="xs"
                   variant="default"
                   leftSection={<IconEdit size={16} />}
+                  onClick={() =>
+                    setOpenedBecomeCretorModal(true)
+                  }
                 >
                   Creator
                 </Button>
@@ -299,6 +307,12 @@ export function NavbarLayout({ children }) {
           {children}
         </AppShell.Main>
       </AppShell>
+      {!!opened && (
+        <CompleteProfileModal
+          opened={openedBecomeCretorModal}
+          onClose={() => setOpenedBecomeCretorModal(false)}
+        />
+      )}
       {/* <OfflineOverlay /> */}
     </div>
   );

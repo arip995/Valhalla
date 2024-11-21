@@ -19,10 +19,10 @@ const Header = ({
   withTab = false,
   className,
 }) => {
-  const { user } = useUser();
   const router = useRouter();
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab');
+  const { user } = useUser();
   const [opened, setOpened] = useState(false);
 
   useEffect(() => {
