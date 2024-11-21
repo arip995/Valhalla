@@ -80,6 +80,7 @@ const ViewLockedContentDetails = ({ data }) => {
           disabled={data.status !== 1}
           price={data?.price}
           creatorId={data.creatorId}
+          productDetails={data}
           onSuccess={onSuccess}
         >
           {data.status === 1

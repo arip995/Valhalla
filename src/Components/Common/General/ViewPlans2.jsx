@@ -120,6 +120,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
                   ? plan.discountedCost
                   : plan.cost
               }
+              productDetails={data}
               onSuccess={onSuccess}
             >
               BUY NOW

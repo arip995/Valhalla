@@ -50,6 +50,7 @@ const ViewCourseOne = ({ data, isPreview }) => {
             animate={false}
             creatorId={data.creatorId}
             creatorDetails={data.creatorDetails}
+            productDetails={data}
             price={
               data.hasDiscountedPrice
                 ? Number(data.discountedPrice)
@@ -123,6 +124,7 @@ const ViewCourseOne = ({ data, isPreview }) => {
             animate={false}
             creatorId={data.creatorId}
             creatorDetails={data.creatorDetails}
+            productDetails={data}
             price={
               data.hasDiscountedPrice
                 ? Number(data.discountedPrice)

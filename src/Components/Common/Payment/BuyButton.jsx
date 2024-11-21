@@ -15,10 +15,11 @@ const BuyButton = ({
   children,
   price,
   animate = true,
-  onSuccess = () => {},
   creatorId,
   creatorDetails,
   bookingData,
+  productDetails,
+  onSuccess = () => {},
   ...props
 }) => {
   const lottieRef = useRef();
@@ -54,6 +55,7 @@ const BuyButton = ({
     <>
       <Button
         loading={paymentState?.payinLoading}
+        disabled={!purchased && productDetails.status == 6}
         onClick={() => {
           if (!user?._id) {
             setOpened(true);

@@ -103,6 +103,7 @@ const ViewPlans1 = ({
         price={
           selectedPlan?.discountedCost || selectedPlan.cost
         }
+        productDetails={data}
         fullWidth
       >
         {data.status === 1
