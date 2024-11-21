@@ -20,7 +20,7 @@ const Home = () => {
     }
   }, [opened]);
 
-  if (!user?._id) return null;
+  if (!user?._id || user === -1) return null;
 
   return (
     <>

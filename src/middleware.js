@@ -5,6 +5,7 @@ export function middleware(req) {
   let username = getCookie('username', { req });
   username = username !== 'undefined';
   let isCreator = getCookie('isCreator', { req });
+  isCreator = isCreator === 'true';
   const accessToken = getCookie('accesstoken', { req });
   const redirectPaths = [
     { path: '/', redirect: '/home' },
@@ -32,6 +33,15 @@ export function middleware(req) {
   ];
 
   if (accessToken) {
+    if (
+      req.nextUrl.pathname.startsWith('/home') &&
+      !isCreator
+    ) {
+      return NextResponse.redirect(
+        new URL('/purchase', req.url)
+      );
+    }
+
     if (
       req.nextUrl.pathname.startsWith('/signin') ||
       req.nextUrl.pathname.startsWith('/signup')

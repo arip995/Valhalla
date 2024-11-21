@@ -102,6 +102,7 @@ const uselandingAuth = (signin, onAuthComplete, opened) => {
           otp: otpForm.values.otp,
           firstName,
           lastName,
+          isCreator: false,
           isSignUp: !isSignin,
           ...(!isSignin ? { isCreator: false } : {}),
         },
