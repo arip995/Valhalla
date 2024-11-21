@@ -5,10 +5,60 @@ import {
   CurrencySymbolMapping,
 } from '@/Constants/constants';
 import { discountPercentage } from '@/Utils/Common';
-import { Badge } from '@mantine/core';
+import { Badge, Button } from '@mantine/core';
 import BuyButton from '../Payment/BuyButton';
+import { useEffect, useState } from 'react';
+import axiosInstance from '@/Utils/AxiosInstance';
+import useUser from '@/Utils/Hooks/useUser';
+import { usePathname } from 'next/navigation';
 
 const ViewPlans2 = ({ data, onPay = () => {} }) => {
+  const { user } = useUser();
+  const productId = usePathname().split('/')[2];
+  const [purchasedData, setPurchasedData] = useState(false);
+
+  const onSuccess = async () => {
+    try {
+      const { data } = await axiosInstance.post(
+        '/purchase/details',
+        { productId, userId: user._id, productType: 'tg' }
+      );
+      if (data?.ok) {
+        setPurchasedData(data.data);
+      }
+      console.log(data.data);
+    } catch (error) {
+      console.log();
+    }
+    return;
+  };
+
+  useEffect(() => {
+    if (user?._id) {
+      onSuccess();
+    }
+  }, [user?._id]);
+
+  if (purchasedData?.inviteLink) {
+    return (
+      <div className="flex items-center justify-center p-4">
+        <a
+          href={`https://t.me/${purchasedData.inviteLink}`}
+          rel="noopener noreferrer"
+        >
+          <Button
+            variant="filled"
+            size="md"
+            radius="xl"
+            fullWidth
+          >
+            Join Now
+          </Button>
+        </a>
+      </div>
+    );
+  }
+
   if (!data.subscriptionPlans?.length) return null;
   return (
     <div
@@ -16,7 +66,6 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
       onClick={onPay}
     >
       {data.subscriptionPlans.map(plan => {
-        console.log(plan);
         return (
           <div
             className="flex w-full flex-col items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 p-4"
@@ -68,6 +117,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
                   ? plan.discountedCost
                   : plan.cost
               }
+              onSuccess={onSuccess}
             >
               BUY NOW
             </BuyButton>
