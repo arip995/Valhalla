@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import axiosInstance from '@/Utils/AxiosInstance';
 import useUser from '@/Utils/Hooks/useUser';
 import { usePathname } from 'next/navigation';
+import { IconBrandTelegram } from '@tabler/icons-react';
 
 const ViewPlans2 = ({ data, onPay = () => {} }) => {
   const { user } = useUser();
@@ -48,9 +49,11 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
         >
           <Button
             variant="filled"
+            color="blue"
             size="md"
             radius="xl"
             fullWidth
+            leftSection={<IconBrandTelegram />}
           >
             Join Now
           </Button>
