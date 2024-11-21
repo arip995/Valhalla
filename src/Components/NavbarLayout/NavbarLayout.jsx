@@ -307,7 +307,7 @@ export function NavbarLayout({ children }) {
           {children}
         </AppShell.Main>
       </AppShell>
-      {!!opened && (
+      {!!openedBecomeCretorModal && (
         <CompleteProfileModal
           opened={openedBecomeCretorModal}
           onClose={() => setOpenedBecomeCretorModal(false)}
