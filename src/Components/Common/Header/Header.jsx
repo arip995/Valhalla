@@ -8,8 +8,9 @@ import {
   useRouter,
   useSearchParams,
 } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CreateProductModal from '../Modal/CreateProductModal';
+import useUser from '@/Utils/Hooks/useUser';
 
 const Header = ({
   title,
@@ -18,10 +19,18 @@ const Header = ({
   withTab = false,
   className,
 }) => {
+  const { user } = useUser();
   const router = useRouter();
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab');
   const [opened, setOpened] = useState(false);
+
+  useEffect(() => {
+    if (user === -1) return;
+    if (tab !== 'profile' && !user.isCreator) {
+      router.push(`/account?tab=profile`);
+    }
+  }, [tab, user]);
 
   return (
     <>
@@ -76,8 +85,12 @@ const Header = ({
         >
           <Tabs.List>
             <Tabs.Tab value="profile">Profile</Tabs.Tab>
-            <Tabs.Tab value="payment">Payment</Tabs.Tab>
-            <Tabs.Tab value="billing">Billing</Tabs.Tab>
+            {user.isCreator ? (
+              <>
+                <Tabs.Tab value="payment">Payment</Tabs.Tab>
+                <Tabs.Tab value="billing">Billing</Tabs.Tab>
+              </>
+            ) : null}
           </Tabs.List>
         </Tabs>
       ) : null}
