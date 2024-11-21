@@ -149,18 +149,24 @@ export const calculateCourseContentHighlights = content => {
       module.status === 3
     )
       return;
+
     modules += 1;
+
     module?.lessons?.map(lesson => {
       if (
         !lesson ||
         lesson.status === 0 ||
         lesson.status === 3
       )
-        totalDuration += Number(lesson.duration) || 0;
+        return;
+
+      totalDuration += Number(lesson.duration) || 0;
       lessons += 1;
+
       if (lesson.lessonType === 'textImage') {
         articles += 1;
       }
+
       if (
         lesson.supportMaterial?.length ||
         lesson.lessonType === 'file'
@@ -170,6 +176,7 @@ export const calculateCourseContentHighlights = content => {
       }
     });
   });
+
   return {
     totalDuration,
     downlodableResources,
