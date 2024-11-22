@@ -7,6 +7,10 @@ import {
   convertMinutesToHours,
 } from '@/Utils/Common';
 import { Accordion, Spoiler } from '@mantine/core';
+import {
+  IconChevronDown,
+  IconChevronUp,
+} from '@tabler/icons-react';
 import Image from 'next/image';
 import RenderModulesAndLessons from './ViewCourseModuleAndLessons';
 
@@ -77,8 +81,16 @@ const ViewCourseOne = ({ data, isPreview }) => {
                   <h3 className="mb-2">Description</h3>
                   <Spoiler
                     maxHeight={300}
-                    showLabel="Show more"
-                    hideLabel="Hide"
+                    showLabel={
+                      <div className="flex items-center gap-1">
+                        Show more <IconChevronDown />
+                      </div>
+                    }
+                    hideLabel={
+                      <div className="flex items-center gap-1">
+                        Hide <IconChevronUp />
+                      </div>
+                    }
                   >
                     <div
                       dangerouslySetInnerHTML={{
