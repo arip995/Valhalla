@@ -20,7 +20,7 @@ const ProductHeader = ({ data }) => {
   return (
     <>
       <div className="flex w-full justify-center border-2 border-b-gray-100 bg-white px-2 py-2 md:px-0">
-        <div className="flex w-full items-center justify-between gap-8 px-4">
+        <div className="flex w-full max-w-2xl items-center justify-between gap-8 px-2 md:px-0">
           <div className="flex items-center gap-2 font-semibold">
             <Avatar
               color="gray"
