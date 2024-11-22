@@ -45,7 +45,7 @@ const BuyButton = ({
             />
           </div>
         ) : (
-          <LayoutLoading overlay size="lg" />
+          <LayoutLoading overlay size="xl" />
         )}
       </>
     );
