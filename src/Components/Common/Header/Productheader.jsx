@@ -14,13 +14,16 @@ import BannerOne from '../Banner/BannerOne';
 const ProductHeader = ({ data }) => {
   const router = useRouter();
   const productType = usePathname().split('/');
+  const isPreview =
+    usePathname().split('/')[1] === 'dashboard' ||
+    usePathname().split('/')[1] === 'consume';
   const { user, removeUser } = useUser(true);
   const [opened, setOpened] = useState(false);
 
   return (
     <>
       <div className="flex w-full justify-center border-2 border-b-gray-100 bg-white px-2 py-2 md:px-0">
-        <div className="flex w-full max-w-2xl items-center justify-between gap-8 px-2 md:px-0">
+        <div className="flex w-full items-center justify-between gap-8 px-2 md:px-4">
           <div className="flex items-center gap-2 font-semibold">
             <Avatar
               color="gray"
@@ -117,7 +120,7 @@ const ProductHeader = ({ data }) => {
       {data.creatorId === user?._id ? (
         <BannerOne
           type="edit"
-          href={`/dashboard/${productType[1]}/${productType[2]}`}
+          href={`/dashboard/${isPreview ? productType[2] : productType[1]}/${isPreview ? productType[3] : productType[2]}`}
         />
       ) : null}
       {!!opened && (
