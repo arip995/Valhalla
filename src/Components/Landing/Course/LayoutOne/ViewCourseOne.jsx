@@ -83,12 +83,13 @@ const ViewCourseOne = ({ data, isPreview }) => {
                     maxHeight={300}
                     showLabel={
                       <div className="flex items-center gap-1">
-                        Show more <IconChevronDown />
+                        Show more{' '}
+                        <IconChevronDown stroke={0.9} />
                       </div>
                     }
                     hideLabel={
                       <div className="flex items-center gap-1">
-                        Hide <IconChevronUp />
+                        Hide <IconChevronUp stroke={0.9} />
                       </div>
                     }
                   >
