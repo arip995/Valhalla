@@ -7,7 +7,72 @@ const Page = () => {
       <div className="h-36 w-screen bg-violet-600"></div>
 
       <div className="flex max-w-[750px] flex-col gap-4 p-8 md:p-16">
-        <div className="text-2xl font-bold">
+        <h1 className="mb-4 text-center text-3xl font-bold">
+          Refund and Cancellation Policy
+        </h1>
+        <p className="mb-6 text-lg text-gray-700">
+          At{' '}
+          <strong>
+            POLMI SOFTWARE SERVICES TECHNOLOGIES PRIVATE
+            LIMITED
+          </strong>
+          , we are committed to providing high-quality
+          products and services to our customers. Please
+          note the following policy regarding refunds and
+          cancellations:
+        </p>
+
+        <div className="mb-6">
+          <h2 className="mb-2 text-2xl font-semibold text-gray-800">
+            Refund Policy
+          </h2>
+          <ul className="ml-6 list-disc text-gray-700">
+            <li>
+              <strong>No Refunds:</strong> Once a purchase
+              is made, it is considered final. We do not
+              offer refunds for any product or service under
+              any circumstances.
+            </li>
+            <li>
+              This policy applies to all transactions
+              completed on our platform.
+            </li>
+          </ul>
+        </div>
+
+        <div className="mb-6">
+          <h2 className="mb-2 text-2xl font-semibold text-gray-800">
+            Cancellation Policy
+          </h2>
+          <ul className="ml-6 list-disc text-gray-700">
+            <li>
+              <strong>No Cancellations:</strong> Orders or
+              subscriptions cannot be canceled once they
+              have been processed or confirmed.
+            </li>
+            <li>
+              We encourage you to review your purchase
+              carefully before completing the transaction.
+            </li>
+          </ul>
+        </div>
+
+        <div className="mb-6">
+          <h2 className="mb-2 text-2xl font-semibold text-gray-800">
+            Why No Refunds or Cancellations?
+          </h2>
+          <p className="text-gray-700">
+            Our products and services are digital in nature,
+            and access is granted immediately upon purchase.
+            This ensures the delivery of value but makes it
+            impossible to reverse the transaction.
+          </p>
+          <p className="text-gray-700">
+            This policy helps us maintain fairness and
+            consistency across all customer interactions.
+          </p>
+        </div>
+        {/* <div className="text-2xl font-bold">
           Terms and Conditions
         </div>
         <div className="">
@@ -123,7 +188,7 @@ const Page = () => {
           available <a href="terms-and-conditions">here</a>.
           All terms defined therein carry the same meaning
           as stated in the Terms and Conditions document.
-        </div>
+        </div> */}
       </div>
       <Footer />
     </div>
