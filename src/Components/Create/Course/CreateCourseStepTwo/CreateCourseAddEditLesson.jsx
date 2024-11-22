@@ -246,7 +246,7 @@ const CreateCourseAddEditLesson = ({ form }) => {
                       </Menu.Dropdown>
                     </Menu>
                   </div>
-                  <SavedLessonContent form={form} />
+                  <SavedLessonContent value={form.values} />
                 </div>
               ) : (
                 <>

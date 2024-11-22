@@ -20,6 +20,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import CourseContentList from './CourseContentList';
+import ListFiles from '@/Components/Common/ListFiles/ListFiles';
 
 const CourseConsume = ({ productId }) => {
   // const searchParams = useSearchParams();
@@ -319,6 +320,17 @@ const CourseConsume = ({ productId }) => {
             </Popover>
 
             <SavedLessonContent value={activeLesson} />
+            {!!activeLesson.description && (
+              <div className="my-2">
+                {activeLesson.description}
+              </div>
+            )}
+            {!!activeLesson.supportMaterial?.length && (
+              <ListFiles
+                files={activeLesson.supportMaterial}
+                showDownloadButton={true}
+              />
+            )}
             <div className="mt-4 flex gap-6">
               <Checkbox
                 className="w-fit rounded-md border border-gray-300 p-2 hover:bg-gray-50"
