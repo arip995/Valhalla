@@ -74,7 +74,7 @@ const usePayment = (
 
       try {
         const { data } = await axiosInstance.post(
-          '/purchase/details',
+          '/purchase/check',
           { productId, userId: user._id }
         );
         if (data?.ok) {

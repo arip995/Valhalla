@@ -61,7 +61,7 @@ const CourseConsume = ({ productId }) => {
         redirectToBuyPage();
       }
       const { data: checkIfBougthData } =
-        await axiosInstance.post('/purchase/details', {
+        await axiosInstance.post('/purchase/check', {
           productId,
           userId: user._id,
         });

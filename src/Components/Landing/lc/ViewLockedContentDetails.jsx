@@ -21,7 +21,7 @@ const ViewLockedContentDetails = ({ data }) => {
     if (fetch) {
       try {
         const { data } = await axiosInstance.post(
-          '/purchase/details',
+          '/purchase/check',
           { productId, userId: user._id }
         );
         if (data?.ok) {

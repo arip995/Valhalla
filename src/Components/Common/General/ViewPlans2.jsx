@@ -21,7 +21,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
   const onSuccess = async () => {
     try {
       const { data } = await axiosInstance.post(
-        '/purchase/details',
+        '/purchase/check',
         { productId, userId: user._id, productType: 'tg' }
       );
       if (data?.ok) {
