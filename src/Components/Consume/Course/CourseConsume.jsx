@@ -13,6 +13,7 @@ import {
 import {
   IconArrowLeft,
   IconArrowRight,
+  IconCheck,
   IconTriangleInverted,
 } from '@tabler/icons-react';
 import classNames from 'classnames';
@@ -228,24 +229,28 @@ const CourseConsume = ({ productId }) => {
         <div className="font-semibold text-gray-900">
           {courseData?.title}
           <div className="flex">
-            <RingProgress
-              size={25}
-              thickness={3}
-              roundCaps
-              sections={[
-                {
-                  value: completedList?.length
-                    ? (completedList?.length /
-                        totalLessons) *
-                      100
-                    : 0,
-                  color:
-                    completedList?.length == totalLessons
-                      ? 'green'
-                      : 'gray',
-                },
-              ]}
-            />
+            {completedList?.length == totalLessons ? (
+              <IconCheck color="green" />
+            ) : (
+              <RingProgress
+                size={25}
+                thickness={3}
+                roundCaps
+                sections={[
+                  {
+                    value: completedList?.length
+                      ? (completedList?.length /
+                          totalLessons) *
+                        100
+                      : 0,
+                    color:
+                      completedList?.length == totalLessons
+                        ? 'green'
+                        : 'gray',
+                  },
+                ]}
+              />
+            )}
             <span className="font-normal text-gray-600">
               {completedList?.length || 0}/{totalLessons}{' '}
               completed
