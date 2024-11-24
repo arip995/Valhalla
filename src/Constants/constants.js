@@ -1,7 +1,11 @@
+import { Badge } from '@mantine/core';
 import {
+  IconBrandTelegram,
+  IconCertificate,
   IconFileText,
   IconFileTypography,
   IconLink,
+  IconLock,
   IconMusic,
   IconPhoto,
   IconVideo,
@@ -273,4 +277,37 @@ export const IconMapping = {
   link: IconLink,
   audio: IconMusic,
   textImage: IconFileTypography,
+};
+
+export const ProductTypeBadgeMapping = {
+  tg: (
+    <Badge
+      leftSection={<IconBrandTelegram size={12} />}
+      color="blue"
+      variant="light"
+      size="xs"
+    >
+      Telegram
+    </Badge>
+  ),
+  lc: (
+    <Badge
+      leftSection={<IconLock size={12} />}
+      color="violet"
+      variant="light"
+      size="xs"
+    >
+      Locked Content
+    </Badge>
+  ),
+  course: (
+    <Badge
+      leftSection={<IconCertificate size={12} />}
+      color="yellow"
+      variant="light"
+      size="xs"
+    >
+      Course
+    </Badge>
+  ),
 };
