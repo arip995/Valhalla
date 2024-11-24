@@ -40,7 +40,7 @@ const PurchasedCard = ({
         </div>
         <div className="word-break break-all text-xs font-normal text-gray-600">
           {item.creatorDetails.firstName}{' '}
-          {item.creatorDetails.firstName}
+          {item.creatorDetails.lastName}
         </div>
       </Card.Section>
     </Card>
