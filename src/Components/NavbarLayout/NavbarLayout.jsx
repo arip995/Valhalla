@@ -196,7 +196,7 @@ export function NavbarLayout({ children }) {
             </AppShell.Section>
           )}
           <AppShell.Section className={classes.footer}>
-            <Menu shadow="md" width={190}>
+            <Menu shadow="md" width={190} trigger="hover">
               <Menu.Target>
                 <NavLink
                   variant="subtle"
