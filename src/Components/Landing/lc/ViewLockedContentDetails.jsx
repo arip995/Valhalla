@@ -3,7 +3,7 @@
 
 import ListFiles from '@/Components/Common/ListFiles/ListFiles';
 import BuyButton from '@/Components/Common/Payment/BuyButton';
-import { statusErrorTextMapping } from '@/Constants/ProductListingContants';
+import { StatusErrorTextMapping } from '@/Constants/ProductListingContants';
 import axiosInstance from '@/Utils/AxiosInstance';
 import useUser from '@/Utils/Hooks/useUser';
 import { usePathname } from 'next/navigation';
@@ -85,7 +85,7 @@ const ViewLockedContentDetails = ({ data }) => {
         >
           {data.status === 1
             ? `${`Unlock for ₹${data?.price}`}`
-            : statusErrorTextMapping[data.status]}{' '}
+            : StatusErrorTextMapping[data.status]}{' '}
         </BuyButton>
       )}
       {/* <ViewLockedContentBuyButton data={data} /> */}

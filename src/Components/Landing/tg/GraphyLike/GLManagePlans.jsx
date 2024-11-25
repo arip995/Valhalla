@@ -2,7 +2,7 @@
 
 import NewScrollArea from '@/Components/Common/General/NewScrollArea';
 import ViewPlans1 from '@/Components/Common/General/ViewPlans1';
-import { statusErrorTextMapping } from '@/Constants/ProductListingContants';
+import { StatusErrorTextMapping } from '@/Constants/ProductListingContants';
 import { Button, Drawer } from '@mantine/core';
 import { useState } from 'react';
 
@@ -41,7 +41,7 @@ const GLManagePlans = ({ data }) => {
           >
             {data.status === 1
               ? 'Select a plan'
-              : statusErrorTextMapping[data.status]}
+              : StatusErrorTextMapping[data.status]}
           </Button>
         </div>
       </div>

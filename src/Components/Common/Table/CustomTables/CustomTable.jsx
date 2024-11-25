@@ -22,20 +22,89 @@ import EmptyProductImage2 from '../../../../../public/images/common/emptystatepr
 import ProductMenu from '../../Menu/ProductMenu';
 
 const TableHeaderItems = [
-  { title: 'Title', icon: IconUsers },
-  { title: 'Status', icon: IconBrandRedux },
-  { title: 'Price', icon: IconReceipt2 },
-  { title: 'Revenue', icon: IconPresentation },
-  { title: 'Sales', icon: IconReportAnalytics },
+  { title: 'Title', icon: IconUsers, value: 'title' },
+  {
+    title: 'Status',
+    icon: IconBrandRedux,
+    value: 'status',
+  },
+  { title: 'Price', icon: IconReceipt2, value: 'price' },
+  {
+    title: 'Revenue',
+    icon: IconPresentation,
+    value: 'revenue',
+  },
+  {
+    title: 'Sales',
+    icon: IconReportAnalytics,
+    value: 'sales',
+  },
 ];
+
+const renderTableDataCell = ({ type, item }) => {
+  switch (type) {
+    case 'title':
+      return (
+        <td className="flex max-w-96 items-center gap-2">
+          <div className="h-10 min-h-max w-10 min-w-max overflow-hidden rounded-md">
+            <img
+              height={40}
+              width={40}
+              className={classNames(
+                'h-10 rounded-md object-cover transition duration-300 ease-in-out hover:scale-110',
+                { hidden: !item.coverImage?.url }
+              )}
+              src={item.coverImage?.url}
+            />
+            <img
+              height={40}
+              width={40}
+              className={classNames(
+                'h-10 rounded-md transition duration-300 ease-in-out hover:scale-110',
+                { hidden: item.coverImage?.url }
+              )}
+              src={EmptyProductImage2.src}
+            />
+          </div>
+          <div className="truncate">{item.title}</div>
+        </td>
+      );
+    case 'status':
+      return (
+        <td className="min-w-40">
+          <Badge
+            variant="dot"
+            color={StatusColorMapping[item.status]}
+            size="md"
+          >
+            {StatusMapping[item.status]}
+          </Badge>
+        </td>
+      );
+    case 'price':
+      return <td className="min-w-36">₹{item.price}</td>;
+    case 'revenue':
+      return (
+        <td className="min-w-36">₹{item.totalRevenue}</td>
+      );
+    case 'sales':
+      return (
+        <td className="min-w-36">{item.totalSalesCount}</td>
+      );
+    default:
+      return <div className=""></div>;
+  }
+};
 
 const CustomTable = ({
   app = 'tg',
   tableHeaderItems = TableHeaderItems,
+  RenderTableDataCell = renderTableDataCell,
   tableBodyItems = [],
   onRowClick = () => {},
   showShare = true,
   showMenu = true,
+  showActions = true,
   onUpdate = () => {},
   className,
 }) => {
@@ -77,63 +146,33 @@ const CustomTable = ({
                 onClick={() => onRowClick(item)}
                 className="cursor-pointer hover:bg-gray-50 [&>td]:whitespace-nowrap [&>td]:px-4 [&>td]:py-4 [&>td]:text-sm [&>td]:text-gray-500"
               >
-                <td className="flex max-w-96 items-center gap-2">
-                  <div className="h-10 min-h-max w-10 min-w-max overflow-hidden rounded-md">
-                    <img
-                      height={40}
-                      width={40}
-                      className={classNames(
-                        'h-10 rounded-md object-cover transition duration-300 ease-in-out hover:scale-110',
-                        { hidden: !item.coverImage?.url }
-                      )}
-                      src={item.coverImage?.url}
+                {tableHeaderItems.map((h, i) => {
+                  return (
+                    <RenderTableDataCell
+                      key={i}
+                      type={h.value}
+                      item={item}
                     />
-                    <img
-                      height={40}
-                      width={40}
-                      className={classNames(
-                        'h-10 rounded-md transition duration-300 ease-in-out hover:scale-110',
-                        { hidden: item.coverImage?.url }
+                  );
+                })}
+                {!!showActions && (
+                  <td className="min-w-36">
+                    <div className="flex items-center gap-2">
+                      {!!showShare && (
+                        <ShareButton
+                          link={`${process.env.NEXT_PUBLIC_HOST}${app}/${item._id}`}
+                        />
                       )}
-                      src={EmptyProductImage2.src}
-                    />
-                  </div>
-                  <div className="truncate">
-                    {item.title}
-                  </div>
-                </td>
-                <td className="min-w-40">
-                  <Badge
-                    variant="dot"
-                    color={StatusColorMapping[item.status]}
-                    size="md"
-                  >
-                    {StatusMapping[item.status]}
-                  </Badge>
-                </td>
-                <td className="min-w-36">₹{item.price}</td>
-                <td className="min-w-36">
-                  ₹{item.totalRevenue}
-                </td>
-                <td className="min-w-36">
-                  {item.totalSalesCount}
-                </td>
-                <td className="min-w-36">
-                  <div className="flex items-center gap-2">
-                    {!!showShare && (
-                      <ShareButton
-                        link={`${process.env.NEXT_PUBLIC_HOST}${app}/${item._id}`}
-                      />
-                    )}
-                    {!!showMenu && (
-                      <ProductMenu
-                        app={app}
-                        onUpdate={onUpdate}
-                        item={item}
-                      />
-                    )}
-                  </div>
-                </td>
+                      {!!showMenu && (
+                        <ProductMenu
+                          app={app}
+                          onUpdate={onUpdate}
+                          item={item}
+                        />
+                      )}
+                    </div>
+                  </td>
+                )}
               </tr>
             );
           })}

@@ -1,5 +1,7 @@
+import Transaction from '@/Components/Creator/Transaction/Transaction';
+
 const Page = () => {
-  return <div className=""></div>;
+  return <Transaction />;
 };
 
 export default Page;

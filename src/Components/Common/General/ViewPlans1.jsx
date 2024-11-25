@@ -14,7 +14,7 @@ import {
 } from '@mantine/core';
 import React, { useState } from 'react';
 import classes from '../../../styles/common/RadioCardTwo.module.css';
-import { statusErrorTextMapping } from '@/Constants/ProductListingContants';
+import { StatusErrorTextMapping } from '@/Constants/ProductListingContants';
 
 const ViewPlans1 = ({
   data,
@@ -108,7 +108,7 @@ const ViewPlans1 = ({
       >
         {data.status === 1
           ? 'Proceed to pay'
-          : statusErrorTextMapping[data.status]}
+          : StatusErrorTextMapping[data.status]}
       </BuyButton>
     </div>
   );

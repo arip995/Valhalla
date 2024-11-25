@@ -27,7 +27,6 @@ const ProductListing = () => {
     loading,
     searchText,
     status,
-    activeTab,
     limit,
     pageNo,
     isGrid,
@@ -90,6 +89,7 @@ const ProductListing = () => {
           status={status}
           isGrid={isGrid}
           setIsGrid={setIsGrid}
+          menuType={1}
         />
         {/* <FiltersOne
           isGrid={isGrid}

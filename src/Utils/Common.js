@@ -280,3 +280,30 @@ export const checkIfPurchased = async (productId, user) => {
     console.log(error);
   }
 };
+
+export const formatDate = date => {
+  if (!date) return null;
+  const newDate = new Date(date);
+  const dateOptions = {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+  };
+
+  const timeOptions = {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true,
+  };
+
+  const formattedDate = newDate.toLocaleDateString(
+    'en-US',
+    dateOptions
+  );
+  const formattedTime = newDate.toLocaleTimeString(
+    'en-US',
+    timeOptions
+  );
+  return `${formattedDate}, ${formattedTime}`;
+};

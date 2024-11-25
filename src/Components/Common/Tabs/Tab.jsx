@@ -1,4 +1,9 @@
 import { Button } from '@mantine/core';
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 import React from 'react';
 export const TAB_OPTIONS = [
   {
@@ -19,7 +24,18 @@ const Tab = ({
   activeTab,
   setActiveTab = () => {},
   tabsOptions = TAB_OPTIONS,
+  pushToRouter,
 }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const handlePushQuery = tab => {
+    const currentParams = new URLSearchParams(searchParams);
+    currentParams.set('tab', tab);
+    router.push(`${pathname}?${currentParams.toString()}`);
+  };
+
   return (
     <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
       {tabsOptions.map((item, index) => {
@@ -33,6 +49,9 @@ const Tab = ({
                 : 'default'
             }
             onClick={() => {
+              if (pushToRouter) {
+                handlePushQuery(item.value);
+              }
               setActiveTab(item.value);
             }}
           >

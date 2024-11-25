@@ -7,17 +7,24 @@ import {
 } from '@mantine/hooks';
 import { modals } from '@mantine/modals';
 import { IconAlertOctagonFilled } from '@tabler/icons-react';
-import { usePathname } from 'next/navigation';
+import {
+  usePathname,
+  useSearchParams,
+} from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
-const useProductListing = () => {
+const useProductListing = (
+  baseUrl = '/product/get_listing_data',
+  initialStatus = [0, 1, 3, 4, 5, 6]
+) => {
   const isFirstRender = useIsFirstRender();
+  const searchParams = useSearchParams();
   const app = usePathname().split('/')[2];
+  const tab = searchParams.get('tab') || 'trasaction';
   const [data, setData] = useState(null);
   const [searchText, setSearchText] = useState('');
-  const [activeTab, setActiveTab] = useState(1);
-  const [status, setStatus] = useState([0, 1, 3, 4, 5, 6]);
+  const [status, setStatus] = useState(initialStatus);
   const [loading, setLoading] = useState(-1);
   const [pageNo, setPageNo] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -28,12 +35,13 @@ const useProductListing = () => {
 
     try {
       const listingData = await axiosInstance.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/product/get_listing_data`,
+        baseUrl,
         {
           productType: app,
-          pageNo: pageNo,
-          status: status,
           searchText: searchText.trim(),
+          tab,
+          pageNo,
+          status,
           limit,
         }
       );
@@ -50,14 +58,11 @@ const useProductListing = () => {
 
   const updateProducts = async (productId, status) => {
     try {
-      await axiosInstance.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/product/update`,
-        {
-          productType: app,
-          productId,
-          status: Number(status),
-        }
-      );
+      await axiosInstance.post(`/product/update`, {
+        productType: app,
+        productId,
+        status: Number(status),
+      });
       toast.success('Updated Successfully');
     } catch (error) {
       console.log(error);
@@ -90,7 +95,6 @@ const useProductListing = () => {
           break;
         case 'tab':
           setPageNo(1);
-          setActiveTab(updateData);
           setStatus(prev => {
             let newStatus = [...prev];
             newStatus[0] = updateData;
@@ -106,7 +110,7 @@ const useProductListing = () => {
           break;
         case 'reset':
           setSearchText('');
-          setStatus([0, 1, 3, 4, 5, 6]);
+          setStatus(initialStatus);
           break;
         case 'edit':
           if (updateData === 2) {
@@ -184,7 +188,7 @@ const useProductListing = () => {
 
   useDidUpdate(() => {
     setListingData();
-  }, [searchText, status, pageNo, limit]);
+  }, [searchText, status, pageNo, limit, tab]);
 
   if (isFirstRender) {
     setListingData();
@@ -199,7 +203,6 @@ const useProductListing = () => {
     status,
     limit,
     pageNo,
-    activeTab,
     isGrid,
     setIsGrid,
   };
