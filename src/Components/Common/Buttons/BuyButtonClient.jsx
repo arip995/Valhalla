@@ -1,9 +1,11 @@
 'use client';
 
-import { redirectAfterPurchased } from '@/Utils/CommonClient';
+import { useRedirectAfterPurchased } from '@/Utils/Hooks/hooks';
 import BuyButton from '../Payment/BuyButton';
 
 const BuyButtonClient = ({ children, ...props }) => {
+  const redirectAfterPurchased =
+    useRedirectAfterPurchased();
   return (
     <BuyButton
       onSuccess={redirectAfterPurchased}
