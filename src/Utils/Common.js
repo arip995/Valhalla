@@ -72,6 +72,13 @@ export const convertFullNameToFirstNameLastName =
     }
   };
 
+export const getFullName = (
+  firstName = '',
+  lastName = ''
+) => {
+  return `${firstName} ${lastName}`;
+};
+
 export const onDrag = (
   result,
   arrray,

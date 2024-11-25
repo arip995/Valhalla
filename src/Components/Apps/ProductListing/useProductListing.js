@@ -19,9 +19,9 @@ const useProductListing = (
   initialStatus = [0, 1, 3, 4, 5, 6]
 ) => {
   const isFirstRender = useIsFirstRender();
-  const searchParams = useSearchParams();
   const app = usePathname().split('/')[2];
-  const tab = searchParams.get('tab') || 'trasaction';
+  const searchParams = useSearchParams();
+  const tab = searchParams.get('tab');
   const [data, setData] = useState(null);
   const [searchText, setSearchText] = useState('');
   const [status, setStatus] = useState(initialStatus);
@@ -39,7 +39,6 @@ const useProductListing = (
         {
           productType: app,
           searchText: searchText.trim(),
-          tab,
           pageNo,
           status,
           limit,
@@ -188,7 +187,7 @@ const useProductListing = (
 
   useDidUpdate(() => {
     setListingData();
-  }, [searchText, status, pageNo, limit, tab]);
+  }, [searchText, status, pageNo, limit]);
 
   if (isFirstRender) {
     setListingData();
@@ -197,6 +196,7 @@ const useProductListing = (
   return {
     app,
     data,
+    tab,
     onUpdate,
     loading,
     searchText,

@@ -22,6 +22,11 @@ import {
   IconRosetteDiscountCheck,
 } from '@tabler/icons-react';
 import Kyc from './Kyc';
+import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
+import {
+  AccountCreatorTabOptions,
+  AccountTabOptions,
+} from '@/Constants/constants';
 
 const Account = () => {
   const {
@@ -44,9 +49,18 @@ const Account = () => {
     onUpdateUsername,
   } = useUsername();
 
+  const TabOptions = !user?.isCreator
+    ? AccountTabOptions
+    : AccountCreatorTabOptions;
+  if (user === -1) return <LayoutLoading />;
+
   return (
     <>
-      <Header title="Account Details" withTab />
+      <Header
+        title="Account Details"
+        tabOptions={TabOptions}
+        withTab
+      />
       <div className="flex justify-center">
         <div
           className={`${classes.accountFormContainer} mt-6 w-full rounded-sm shadow-sm`}

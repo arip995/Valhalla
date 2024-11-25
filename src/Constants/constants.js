@@ -311,3 +311,28 @@ export const ProductTypeBadgeMapping = {
     </Badge>
   ),
 };
+
+export const AccountTabOptions = [
+  { label: 'Profile', value: 'profile' },
+];
+
+export const AccountCreatorTabOptions = [
+  { label: 'Profile', value: 'profile' },
+  { label: 'Payment', value: 'payment' },
+  { label: 'Billing', value: 'billing' },
+];
+export const PaymentTabOptions = [
+  { label: 'Transaction', value: 'transaction' },
+  { label: 'Wallet', value: 'wallet' },
+];
+
+export const PAYMENT_METHOD_MAPPING = {
+  nb: 'Net Banking',
+  upi: 'UPI',
+  cc: 'Credit Card',
+  wallet: 'Wallet',
+  cce: 'Credit Card EMI',
+  dce: 'Debit Card EMI',
+  ce: 'Cardless EMI',
+  pl: 'Pay Later',
+};

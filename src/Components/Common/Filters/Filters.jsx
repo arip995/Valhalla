@@ -37,8 +37,8 @@ const Filters = ({
   status = [0, 1, 5, 6],
   showSearch = true,
   showStatus = true,
+  showLayoutChange = true,
   showTab,
-  showLayoutChange,
   menuType, //undefined for transaction and 1 for PL
 }) => {
   const [opened, setOpened] = useState(false);

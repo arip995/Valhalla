@@ -1,18 +1,24 @@
 'use client';
 
+import useProductListing from '@/Components/Apps/ProductListing/useProductListing';
+import EmptyStateOne from '@/Components/Common/EmptyState/EmptyStateOne';
 import EmptyStateTwo from '@/Components/Common/EmptyState/EmptyStateTwo';
+import Filters from '@/Components/Common/Filters/Filters';
+import Header from '@/Components/Common/Header/Header';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import CustomTable from '@/Components/Common/Table/CustomTables/CustomTable';
+import { PaymentTabOptions } from '@/Constants/constants';
 import {
   PaymentStatusMapping,
   StatusPaymentColorMapping,
 } from '@/Constants/ProductListingContants';
-import { Badge, Pagination, Select } from '@mantine/core';
-import useProductListing from '@/Components/Apps/ProductListing/useProductListing';
-import EmptyStateOne from '@/Components/Common/EmptyState/EmptyStateOne';
-import Filters from '@/Components/Common/Filters/Filters';
-import Header from '@/Components/Common/Header/Header';
 import { formatDate } from '@/Utils/Common';
+import {
+  Badge,
+  Drawer,
+  Pagination,
+  Select,
+} from '@mantine/core';
 import {
   IconBrandProducthunt,
   IconBrandRedux,
@@ -20,6 +26,9 @@ import {
   IconCoinRupee,
   IconMail,
 } from '@tabler/icons-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import TransactionDetails from './TransactionDetails';
 
 const TableHeaderItems = [
   { title: 'Date', icon: IconCalendar, value: 'date' },
@@ -51,32 +60,6 @@ const renderTableDataCell = ({ type, item }) => {
     case 'product':
       return (
         <td className="flex max-w-72 items-center gap-2">
-          {/* <div className="h-10 min-h-max w-10 min-w-max overflow-hidden rounded-md">
-            <img
-              height={40}
-              width={40}
-              className={classNames(
-                'h-10 rounded-md object-cover transition duration-300 ease-in-out hover:scale-110',
-                {
-                  hidden:
-                    !item.productDetails?.coverImage?.url,
-                }
-              )}
-              src={item.productDetails?.coverImage?.url}
-            />
-            <img
-              height={40}
-              width={40}
-              className={classNames(
-                'h-10 rounded-md transition duration-300 ease-in-out hover:scale-110',
-                {
-                  hidden:
-                    item.productDetails?.coverImage?.url,
-                }
-              )}
-              src={EmptyProductImage2.src}
-            />
-          </div> */}
           <div className="truncate">
             {item.productDetails?.title}
           </div>
@@ -116,8 +99,24 @@ const renderTableDataCell = ({ type, item }) => {
 };
 
 const Transaction = () => {
-  const { data, loading, status, limit, pageNo, onUpdate } =
-    useProductListing('/transaction/list', [0, 1, 2, 3]);
+  const pathName = usePathname();
+  const router = useRouter();
+  const {
+    data,
+    loading,
+    status,
+    limit,
+    pageNo,
+    onUpdate,
+    tab,
+  } = useProductListing('/transaction/list', [1, 2, 3]);
+  const [activeTransaction, setActiveTransaction] =
+    useState(null);
+  const [opened, setOpened] = useState(false);
+
+  useEffect(() => {
+    router.push(`${pathName}?tab=transaction`);
+  }, []);
 
   if (loading === -1) {
     return (
@@ -138,65 +137,96 @@ const Transaction = () => {
   if (!data?.totalCount) return null;
 
   return (
-    <div className="flex h-[calc(100vh-52px)] w-full flex-col md:h-screen">
-      <Header title={'Payments'} />
-      <div className="flex flex-1 flex-col items-end gap-4 overflow-y-auto px-4 py-4">
-        <Filters
-          onUpdate={onUpdate}
-          status={status}
-          showSearch={false}
-          showLayoutChange={false}
+    <>
+      <div className="flex h-[calc(100vh-52px)] w-full flex-col md:h-screen">
+        <Header
+          title={'Payments'}
+          tabOptions={PaymentTabOptions}
         />
-        {data.totalQueryCount === 0 ? (
-          <EmptyStateOne
-            isFilter
-            onClear={() => onUpdate('reset')}
-          />
-        ) : (
-          <>
-            {loading ? (
-              <LayoutLoading />
-            ) : (
-              <CustomTable
-                tableHeaderItems={TableHeaderItems}
-                RenderTableDataCell={renderTableDataCell}
-                tableBodyItems={data.data}
-                showActions={false}
-              />
-            )}
-          </>
-        )}
-
         <div
-          className={`flex flex-wrap-reverse items-center gap-2 ${
-            Math.ceil(data.totalQueryCount / 10) == 1 ||
-            loading
-              ? 'hidden'
-              : ''
-          }`}
+          className={
+            'flex flex-1 flex-col items-end gap-4 overflow-y-auto p-4'
+          }
         >
-          <Select
-            className="max-w-14"
-            size="xs"
-            withCheckIcon={false}
-            data={['10', '20', '50']}
-            value={limit.toString()}
-            onChange={(_, option) => {
-              if (!option?.value) return;
-              onUpdate('limit', Number(option.value));
-            }}
-          />
-          <Pagination
-            withEdges
-            total={Math.ceil(data.totalQueryCount / limit)}
-            value={pageNo}
-            onChange={value => {
-              onUpdate('page', value);
-            }}
-          />
+          {tab === 'transaction' ? (
+            <>
+              <Filters
+                onUpdate={onUpdate}
+                status={status}
+                showSearch={false}
+                showLayoutChange={false}
+              />
+              {data.totalQueryCount === 0 ? (
+                <EmptyStateOne
+                  isFilter
+                  onClear={() => onUpdate('reset')}
+                />
+              ) : (
+                <>
+                  {loading ? (
+                    <LayoutLoading />
+                  ) : (
+                    <CustomTable
+                      tableHeaderItems={TableHeaderItems}
+                      RenderTableDataCell={
+                        renderTableDataCell
+                      }
+                      tableBodyItems={data.data}
+                      showActions={false}
+                      onRowClick={item => {
+                        setActiveTransaction(item);
+                        setOpened(true);
+                      }}
+                    />
+                  )}
+                </>
+              )}
+
+              <div
+                className={`flex flex-wrap-reverse items-center gap-2 ${
+                  Math.ceil(data.totalQueryCount / 10) ==
+                    1 || loading
+                    ? 'hidden'
+                    : ''
+                }`}
+              >
+                <Select
+                  className="max-w-14"
+                  size="xs"
+                  withCheckIcon={false}
+                  data={['10', '20', '50']}
+                  value={limit.toString()}
+                  onChange={(_, option) => {
+                    if (!option?.value) return;
+                    onUpdate('limit', Number(option.value));
+                  }}
+                />
+                <Pagination
+                  withEdges
+                  total={Math.ceil(
+                    data.totalQueryCount / limit
+                  )}
+                  value={pageNo}
+                  onChange={value => {
+                    onUpdate('page', value);
+                  }}
+                />
+              </div>
+            </>
+          ) : null}
         </div>
       </div>
-    </div>
+      <Drawer
+        trapFocus={false}
+        lockScroll={false}
+        opened={opened}
+        onClose={() => setOpened(false)}
+        position="right"
+        title="Transaction Details"
+      >
+        <TransactionDetails data={activeTransaction} />
+      </Drawer>
+    </>
   );
 };
 

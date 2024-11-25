@@ -5,32 +5,25 @@ import { IconPlus } from '@tabler/icons-react';
 import classNames from 'classnames';
 import Link from 'next/link';
 import {
+  usePathname,
   useRouter,
   useSearchParams,
 } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import CreateProductModal from '../Modal/CreateProductModal';
-import useUser from '@/Utils/Hooks/useUser';
 
 const Header = ({
   title,
   path,
   modal = false,
-  withTab = false,
+  tabOptions = [],
   className,
 }) => {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab');
-  const { user } = useUser();
   const [opened, setOpened] = useState(false);
-
-  useEffect(() => {
-    if (user === -1) return;
-    if (tab !== 'profile' && !user.isCreator) {
-      router.push(`/account?tab=profile`);
-    }
-  }, [tab, user]);
 
   return (
     <>
@@ -74,23 +67,23 @@ const Header = ({
           {/* <ThemeToggle /> */}
         </div>
       </div>
-      {withTab ? (
+      {tabOptions?.length ? (
         <Tabs
           radius="xs"
           value={tab || 'profile'}
           className="bg-white"
           onChange={val => {
-            router.push(`/account?tab=${val}`);
+            router.push(`${pathname}?tab=${val}`);
           }}
         >
           <Tabs.List>
-            <Tabs.Tab value="profile">Profile</Tabs.Tab>
-            {user.isCreator ? (
-              <>
-                <Tabs.Tab value="payment">Payment</Tabs.Tab>
-                <Tabs.Tab value="billing">Billing</Tabs.Tab>
-              </>
-            ) : null}
+            {tabOptions.map((item, i) => {
+              return (
+                <Tabs.Tab value={item.value} key={i}>
+                  {item.label}
+                </Tabs.Tab>
+              );
+            })}
           </Tabs.List>
         </Tabs>
       ) : null}

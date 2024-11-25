@@ -82,7 +82,7 @@ const ProductListing = () => {
         modal={app === 'course'}
         path={createPath}
       />
-      <div className="flex flex-1 flex-col items-end gap-4 overflow-y-auto px-4 py-4">
+      <div className="flex flex-1 flex-col items-end gap-4 overflow-y-auto p-4">
         <Filters
           onUpdate={onUpdate}
           searchText={searchText}

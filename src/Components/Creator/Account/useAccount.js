@@ -3,11 +3,17 @@ import { handleFile } from '@/Utils/HandleFiles';
 import useUser from '@/Utils/Hooks/useUser';
 import { useForm } from '@mantine/form';
 import { useToggle } from '@mantine/hooks';
-import { useSearchParams } from 'next/navigation';
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useAccount = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab');
   const { user, setUserData, setCurrentUser } =
@@ -105,6 +111,23 @@ const useAccount = () => {
   };
 
   useEffect(() => {
+    if (user === -1) return;
+    if (tab !== 'profile' && !user.isCreator) {
+      //if not a creator then not allowed to visit payment or billing page
+      router.push(`${pathname}?tab=profile`);
+    }
+    let isVisitedTab = [
+      'profile',
+      'payment',
+      'billing',
+    ].some(item => item === tab);
+
+    if (!isVisitedTab) {
+      router.push(`${pathname}?tab=profile`);
+    }
+  }, [tab, user]);
+
+  +useEffect(() => {
     if (
       (personInfoForm.values.firstName &&
         personInfoForm.values.firstName !==

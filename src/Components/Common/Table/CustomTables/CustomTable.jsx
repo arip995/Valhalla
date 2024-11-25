@@ -101,10 +101,10 @@ const CustomTable = ({
   tableHeaderItems = TableHeaderItems,
   RenderTableDataCell = renderTableDataCell,
   tableBodyItems = [],
-  onRowClick = () => {},
   showShare = true,
   showMenu = true,
   showActions = true,
+  onRowClick = () => {},
   onUpdate = () => {},
   className,
 }) => {

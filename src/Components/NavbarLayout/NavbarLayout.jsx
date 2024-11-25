@@ -119,7 +119,7 @@ export function NavbarLayout({ children }) {
             {showLabel ? (
               <div className="flex w-full items-center justify-between gap-2">
                 <Link
-                  href="/"
+                  href="/home"
                   prefetch={false}
                   className="flex select-none items-center gap-1"
                 >
