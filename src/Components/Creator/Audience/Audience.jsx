@@ -7,7 +7,6 @@ import Filters from '@/Components/Common/Filters/Filters';
 import Header from '@/Components/Common/Header/Header';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import CustomTable from '@/Components/Common/Table/CustomTables/CustomTable';
-import { PaymentTabOptions } from '@/Constants/constants';
 import { formatDate } from '@/Utils/Common';
 import { Drawer, Pagination, Select } from '@mantine/core';
 import {
@@ -98,10 +97,7 @@ const Audience = () => {
   return (
     <>
       <div className="flex h-[calc(100vh-52px)] w-full flex-col md:h-screen">
-        <Header
-          title={'Payments'}
-          tabOptions={PaymentTabOptions}
-        />
+        <Header title={'Audience'} />
         <div
           className={
             'flex flex-1 flex-col items-end gap-4 overflow-y-auto p-4'
