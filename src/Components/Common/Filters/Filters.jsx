@@ -34,6 +34,7 @@ const Filters = ({
   onUpdate = () => {},
   setIsGrid = () => {},
   isGrid,
+  searchPlaceholder = 'Search title',
   status = [0, 1, 5, 6],
   showSearch = true,
   showStatus = true,
@@ -112,7 +113,7 @@ const Filters = ({
 
       {!!showSearch && (
         <TextInput
-          placeholder="Search title"
+          placeholder={searchPlaceholder}
           value={searchValue}
           className="w-full md:w-max md:min-w-80"
           rightSectionPointerEvents="all"

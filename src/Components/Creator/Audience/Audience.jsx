@@ -8,115 +8,74 @@ import Header from '@/Components/Common/Header/Header';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import CustomTable from '@/Components/Common/Table/CustomTables/CustomTable';
 import { PaymentTabOptions } from '@/Constants/constants';
-import {
-  PaymentStatusMapping,
-  StatusPaymentColorMapping,
-} from '@/Constants/ProductListingContants';
 import { formatDate } from '@/Utils/Common';
+import { Drawer, Pagination, Select } from '@mantine/core';
 import {
-  Badge,
-  Drawer,
-  Pagination,
-  Select,
-} from '@mantine/core';
-import {
-  IconBrandProducthunt,
-  IconBrandRedux,
   IconCalendar,
-  IconCoinRupee,
   IconMail,
+  IconPhone,
+  IconUser,
 } from '@tabler/icons-react';
-import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import TransactionDetails from './TransactionDetails';
+import { useState } from 'react';
+import AudienceDetails from './AudienceDetails';
 
 const TableHeaderItems = [
-  { title: 'Date', icon: IconCalendar, value: 'date' },
+  { title: 'Name', icon: IconUser, value: 'name' },
   {
-    title: 'Product',
-    icon: IconBrandProducthunt,
-    value: 'product',
-  },
-  {
-    title: 'Status',
-    icon: IconBrandRedux,
-    value: 'status',
-  },
-  {
-    title: 'Amount',
-    icon: IconCoinRupee,
-    value: 'amount',
-  },
-  {
-    title: 'Customer Email',
+    title: 'Email',
     icon: IconMail,
     value: 'email',
+  },
+  {
+    title: 'Phone Number',
+    icon: IconPhone,
+    value: 'phoneNumber',
+  },
+  {
+    title: 'Created on',
+    icon: IconCalendar,
+    value: 'createdOn',
   },
 ];
 
 const renderTableDataCell = ({ type, item }) => {
   if (!item) return null;
   switch (type) {
-    case 'product':
+    case 'name':
       return (
         <td className="flex max-w-72 items-center gap-2">
           <div className="truncate">
-            {item.productDetails?.title}
+            {item.name || '---'}
           </div>
-        </td>
-      );
-    case 'status':
-      return (
-        <td className="min-w-40">
-          <Badge
-            variant="dot"
-            color={StatusPaymentColorMapping[item.status]}
-            size="md"
-          >
-            {PaymentStatusMapping[item.status]}
-          </Badge>
         </td>
       );
     case 'email':
       return (
+        <td className="min-w-36">{item.email || '---'}</td>
+      );
+    case 'phoneNumber':
+      return (
         <td className="min-w-36">
-          {item.userDetails?.email || '---'}
+          {item.phoneNumber || '---'}
         </td>
       );
-    case 'date':
+    case 'createdOn':
       return (
         <td className="min-w-36">
           {formatDate(item.createdAt)}
         </td>
-      );
-    case 'amount':
-      return (
-        <td className="min-w-36">₹{item.amountPaid}</td>
       );
     default:
       return null;
   }
 };
 
-const Transaction = () => {
-  const pathName = usePathname();
-  const router = useRouter();
-  const {
-    data,
-    loading,
-    status,
-    limit,
-    pageNo,
-    onUpdate,
-    tab,
-  } = useProductListing('/transaction/list', [1, 2, 3]);
-  const [activeTransaction, setActiveTransaction] =
+const Audience = () => {
+  const { data, loading, limit, pageNo, onUpdate, tab } =
+    useProductListing('/audience/list');
+  const [activeAudience, setActiveAudience] =
     useState(null);
   const [opened, setOpened] = useState(false);
-
-  useEffect(() => {
-    router.push(`${pathName}?tab=transaction`);
-  }, []);
 
   if (loading === -1) {
     return (
@@ -152,9 +111,9 @@ const Transaction = () => {
             <>
               <Filters
                 onUpdate={onUpdate}
-                status={status}
-                showSearch={false}
+                showStatus={false}
                 showLayoutChange={false}
+                searchPlaceholder={'Search Name or Email'}
               />
               {data.totalQueryCount === 0 ? (
                 <EmptyStateOne
@@ -174,7 +133,7 @@ const Transaction = () => {
                       tableBodyItems={data.data}
                       showActions={false}
                       onRowClick={item => {
-                        setActiveTransaction(item);
+                        setActiveAudience(item);
                         setOpened(true);
                       }}
                     />
@@ -224,10 +183,10 @@ const Transaction = () => {
         position="right"
         title="Transaction Details"
       >
-        <TransactionDetails data={activeTransaction} />
+        <AudienceDetails data={activeAudience} />
       </Drawer>
     </>
   );
 };
 
-export default Transaction;
+export default Audience;

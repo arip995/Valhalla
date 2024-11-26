@@ -27,7 +27,6 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
       if (data?.ok) {
         setPurchasedData(data.data);
       }
-      console.log(data.data);
     } catch (error) {
       console.log();
     }
