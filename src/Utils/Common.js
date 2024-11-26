@@ -276,12 +276,16 @@ export const contentTypeIconMapping = ({
   }
 };
 
-export const checkIfPurchased = async (productId, user) => {
+export const checkIfPurchased = async (
+  productId,
+  userId
+) => {
   try {
     const { data } = await axiosInstance.post(
       '/purchase/check',
-      { productId, userId: user._id }
+      { productId, userId }
     );
+    console.log(data.ok);
     return data?.ok;
   } catch (error) {
     console.log(error);

@@ -275,7 +275,9 @@ const usePayment = (
 
   const checkOnLoad = async () => {
     if (isPreview || productType !== 'course') return;
-    setPurchased(await checkIfPurchased(productId, user));
+    setPurchased(
+      await checkIfPurchased(productId, user._id)
+    );
   };
 
   useEffect(() => {
