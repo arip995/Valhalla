@@ -31,6 +31,7 @@ const APP_NAMES = {
 const EmptyStateOne = ({
   app = APP_TYPES.TG,
   isFilter = false,
+  isAudience = false,
   title,
   description,
   onClear = () => {},
@@ -65,9 +66,11 @@ const EmptyStateOne = ({
 
   const renderTitle = () => {
     if (title) return title;
-    return isFilter
-      ? 'No products found!'
-      : `No published ${appName}`;
+    return isAudience
+      ? 'No audience found!'
+      : isFilter
+        ? 'No products found!'
+        : `No published ${appName}`;
   };
 
   const renderDescription = () => {
@@ -77,7 +80,7 @@ const EmptyStateOne = ({
         <>
           Try changing your filters to
           <br />
-          see products
+          see {isAudience ? 'audience' : 'products'}
         </>
       );
     }

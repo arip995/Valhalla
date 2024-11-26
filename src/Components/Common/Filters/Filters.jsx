@@ -103,8 +103,14 @@ const Filters = ({
   );
 
   useEffect(() => {
-    setSelected(status);
-    setSearchValue(searchText);
+    if (
+      JSON.stringify(selected) !== JSON.stringify(status)
+    ) {
+      setSelected(status);
+    }
+    if (searchValue !== searchText) {
+      setSearchValue(searchText);
+    }
   }, [searchText, status]);
 
   return (

@@ -70,12 +70,18 @@ const renderTableDataCell = ({ type, item }) => {
 };
 
 const Audience = () => {
-  const { data, loading, limit, pageNo, onUpdate } =
-    useProductListing('/audience/list');
+  const {
+    data,
+    loading,
+    limit,
+    pageNo,
+    onUpdate,
+    searchText,
+    status,
+  } = useProductListing('/audience/list');
   const [activeAudience, setActiveAudience] =
     useState(null);
   const [opened, setOpened] = useState(false);
-
   if (loading === -1) {
     return (
       <>
@@ -87,7 +93,10 @@ const Audience = () => {
   if (!data?.totalCount && !loading) {
     return (
       <>
-        <EmptyStateTwo />
+        <EmptyStateTwo
+          title="No Audience Yet"
+          description="No one have purchased tou product yet. Start selling."
+        />
       </>
     );
   }
@@ -105,13 +114,16 @@ const Audience = () => {
         >
           <Filters
             onUpdate={onUpdate}
+            searchText={searchText}
             showStatus={false}
+            status={status}
             showLayoutChange={false}
             searchPlaceholder={'Search Name or Email'}
           />
           {data.totalQueryCount === 0 ? (
             <EmptyStateOne
               isFilter
+              isAudience
               onClear={() => onUpdate('reset')}
             />
           ) : (
@@ -135,6 +147,7 @@ const Audience = () => {
 
           <div
             className={`flex flex-wrap-reverse items-center gap-2 ${
+              !data.totalQueryCount ||
               Math.ceil(data.totalQueryCount / 10) == 1 ||
               loading
                 ? 'hidden'
@@ -171,7 +184,7 @@ const Audience = () => {
         opened={opened}
         onClose={() => setOpened(false)}
         position="right"
-        title="Transaction Details"
+        title="Audience Details"
       >
         <AudienceDetails data={activeAudience} />
       </Drawer>

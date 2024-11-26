@@ -168,6 +168,7 @@ const ProductListing = () => {
             )}
             <div
               className={`flex flex-wrap-reverse items-center gap-2 ${
+                !data.totalQueryCount ||
                 Math.ceil(data.totalQueryCount / 10) == 1 ||
                 loading
                   ? 'hidden'
