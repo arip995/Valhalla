@@ -20,7 +20,7 @@ import React, { useMemo } from 'react';
 const TransactionDetails = ({ data = {} }) => {
   // Destructure data with default values
   const {
-    userDetails = {},
+    buyerDetails = {},
     status = 'PENDING',
     amountPaid = '0',
     payoutAmount = '0',
@@ -39,8 +39,8 @@ const TransactionDetails = ({ data = {} }) => {
           {
             label: 'Name',
             value: getFullName(
-              userDetails.firstName,
-              userDetails.lastName
+              buyerDetails.firstName,
+              buyerDetails.lastName
             ),
             icon: (
               <IconUser className="h-4 w-4 text-gray-500" />
@@ -48,15 +48,15 @@ const TransactionDetails = ({ data = {} }) => {
           },
           {
             label: 'Email',
-            value: userDetails?.email || '---',
+            value: buyerDetails?.email || '---',
             icon: (
               <IconMail className="h-4 w-4 text-gray-500" />
             ),
           },
           {
             label: 'Phone Number',
-            value: userDetails?.phoneNumber
-              ? `+91 ${userDetails.phoneNumber}`
+            value: buyerDetails?.phoneNumber
+              ? `+91 ${buyerDetails.phoneNumber}`
               : '---',
             icon: (
               <IconPhone className="h-4 w-4 text-gray-500" />
