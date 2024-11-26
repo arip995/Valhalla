@@ -22,6 +22,7 @@ import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import CourseContentList from './CourseContentList';
 import ListFiles from '@/Components/Common/ListFiles/ListFiles';
+import { checkIfPurchased } from '@/Utils/Common';
 
 const CourseConsume = ({ productId }) => {
   // const searchParams = useSearchParams();
@@ -60,12 +61,11 @@ const CourseConsume = ({ productId }) => {
       if (!user?._id) {
         redirectToBuyPage();
       }
-      const { data: checkIfBougthData } =
-        await axiosInstance.post('/purchase/check', {
-          productId,
-          userId: user._id,
-        });
-      if (!checkIfBougthData?.ok) {
+      const hasPurchased = await checkIfPurchased(
+        productId,
+        user._id
+      );
+      if (!hasPurchased) {
         redirectToBuyPage();
       }
       const { data } = await getMetaData(
@@ -88,7 +88,7 @@ const CourseConsume = ({ productId }) => {
       setActiveLesson(data.content[0].lessons[0]);
       setActiveModule(data.content[0]);
     } catch (error) {
-      toast.error(error?.response?.data?.message || '');
+      // toast.error(error?.response?.data?.message || '');
       console.log(error);
     } finally {
       setLoading(false);
