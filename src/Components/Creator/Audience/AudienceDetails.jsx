@@ -1,153 +1,158 @@
-import React from 'react';
+import { formatDate } from '@/Utils/Common';
 import {
-  IconUser,
+  IconCalendar,
+  IconCurrencyDollar,
   IconMail,
   IconPhone,
   IconShoppingCart,
-  IconCurrencyDollar,
+  IconUser,
 } from '@tabler/icons-react';
+import React, { useMemo } from 'react';
 
-const AudienceDetails = ({ audience }) => {
-  if (!audience) {
-    return <div>No data available</div>;
-  }
-
+const AudienceDetails = ({ data = {} }) => {
+  // Destructure data with default values
   const {
-    name,
-    email,
-    phoneNumber,
+    name = '---',
+    email = '---',
+    phoneNumber = '---',
     adDetails = {},
-    products = [],
     purchaseCount = {},
     amountSpent = {},
-  } = audience;
+    dateJoined = null, // Assuming this field is part of the data
+  } = data;
+
+  // Format date in a more readable format
+  const formattedDate = dateJoined
+    ? formatDate(dateJoined)
+    : '---';
+
+  const sections = useMemo(
+    () => [
+      {
+        title: 'Customer Details',
+        icon: <IconUser className="h-5 w-5" />,
+        items: [
+          {
+            label: 'Name',
+            value: name,
+            icon: (
+              <IconUser className="h-4 w-4 text-gray-500" />
+            ),
+          },
+          {
+            label: 'Email',
+            value: email,
+            icon: (
+              <IconMail className="h-4 w-4 text-gray-500" />
+            ),
+          },
+          {
+            label: 'Phone Number',
+            value: phoneNumber,
+            icon: (
+              <IconPhone className="h-4 w-4 text-gray-500" />
+            ),
+          },
+        ],
+      },
+      {
+        title: 'Purchase Details',
+        icon: <IconShoppingCart className="h-5 w-5" />,
+        items: [
+          {
+            label: 'Total Purchases',
+            value: purchaseCount.total || '0',
+          },
+          {
+            label: 'Total Spent',
+            value: `₹${amountSpent.total || '0'}`,
+            icon: (
+              <IconCurrencyDollar className="h-4 w-4 text-gray-500" />
+            ),
+          },
+        ],
+      },
+      {
+        title: 'Ad Details',
+        icon: <IconCurrencyDollar className="h-5 w-5" />,
+        items: [
+          {
+            label: 'Source',
+            value: adDetails.source || '---',
+          },
+          {
+            label: 'Medium',
+            value: adDetails.medium || '---',
+          },
+          {
+            label: 'Campaign',
+            value: adDetails.campaign || '---',
+          },
+        ],
+      },
+      {
+        title: 'Additional Information',
+        icon: <IconCurrencyDollar className="h-5 w-5" />,
+        items: [
+          {
+            label: 'Date Joined',
+            value: formattedDate,
+            icon: (
+              <IconCalendar className="h-4 w-4 text-gray-500" />
+            ),
+          },
+        ],
+      },
+    ],
+    [data]
+  );
+
+  // If no data is provided, show a message
+  if (!data || Object.keys(data).length === 0) {
+    return (
+      <div className="rounded-lg border border-gray-200 bg-white p-6 text-center text-gray-500 shadow-sm">
+        No audience details available
+      </div>
+    );
+  }
 
   return (
-    <div
-      style={{
-        maxWidth: '600px',
-        margin: '0 auto',
-        padding: '1rem',
-        border: '1px solid #eaeaea',
-        borderRadius: '8px',
-      }}
-    >
-      <h2
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-        }}
-      >
-        <IconUser size={24} />
-        Audience Details
-      </h2>
-
-      <div style={{ marginTop: '1rem', lineHeight: '1.5' }}>
-        <p>
-          <IconUser
-            size={18}
-            style={{
-              marginRight: '8px',
-              verticalAlign: 'middle',
-            }}
-          />
-          <strong>Name:</strong> {name || 'N/A'}
-        </p>
-        <p>
-          <IconMail
-            size={18}
-            style={{
-              marginRight: '8px',
-              verticalAlign: 'middle',
-            }}
-          />
-          <strong>Email:</strong> {email || 'N/A'}
-        </p>
-        <p>
-          <IconPhone
-            size={18}
-            style={{
-              marginRight: '8px',
-              verticalAlign: 'middle',
-            }}
-          />
-          <strong>Phone:</strong> {phoneNumber || 'N/A'}
-        </p>
-      </div>
-
-      <div style={{ marginTop: '1.5rem' }}>
-        <h3
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-          }}
+    <div className="mt-4 space-y-4">
+      {sections.map(section => (
+        <div
+          key={section.title}
+          className="rounded-lg border border-gray-200 bg-white shadow-sm"
         >
-          <IconShoppingCart size={20} />
-          Purchase Details
-        </h3>
-        <p>
-          <strong>Total Purchases:</strong>{' '}
-          {purchaseCount.total || 0}
-        </p>
-        <p>
-          <strong>Total Spent:</strong> $
-          {amountSpent.total || 0}
-        </p>
-      </div>
-
-      <div style={{ marginTop: '1.5rem' }}>
-        <h3
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-          }}
-        >
-          <IconCurrencyDollar size={20} />
-          Ad Details
-        </h3>
-        <p>
-          <strong>Source:</strong>{' '}
-          {adDetails.source || 'N/A'}
-        </p>
-        <p>
-          <strong>Medium:</strong>{' '}
-          {adDetails.medium || 'N/A'}
-        </p>
-        <p>
-          <strong>Campaign:</strong>{' '}
-          {adDetails.campaign || 'N/A'}
-        </p>
-      </div>
-
-      <div style={{ marginTop: '1.5rem' }}>
-        <h3
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-          }}
-        >
-          <IconShoppingCart size={20} />
-          Products
-        </h3>
-        {products.length > 0 ? (
-          <ul style={{ paddingLeft: '20px' }}>
-            {products.map((product, index) => (
-              <li key={index}>
-                <strong>{product.title}</strong> (Type:{' '}
-                {product.productType || 'N/A'})
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No products available</p>
-        )}
-      </div>
+          <div className="border-b border-gray-200 px-6 py-4">
+            <div className="flex items-center gap-2 text-lg font-semibold text-gray-900">
+              {section.icon}
+              {section.title}
+            </div>
+          </div>
+          <div className="p-6">
+            <div className="space-y-4">
+              {section.items.map(item => (
+                <div
+                  key={item.label}
+                  className="flex items-center justify-between py-1"
+                >
+                  <div className="flex items-center gap-2">
+                    {item.icon}
+                    <span className="text-sm font-medium text-gray-600">
+                      {item.label}
+                    </span>
+                  </div>
+                  <div className="text-sm text-gray-900">
+                    {item.value}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default AudienceDetails;
+export default React.memo(AudienceDetails);

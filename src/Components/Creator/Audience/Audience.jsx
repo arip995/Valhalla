@@ -70,7 +70,7 @@ const renderTableDataCell = ({ type, item }) => {
 };
 
 const Audience = () => {
-  const { data, loading, limit, pageNo, onUpdate, tab } =
+  const { data, loading, limit, pageNo, onUpdate } =
     useProductListing('/audience/list');
   const [activeAudience, setActiveAudience] =
     useState(null);
@@ -103,72 +103,66 @@ const Audience = () => {
             'flex flex-1 flex-col items-end gap-4 overflow-y-auto p-4'
           }
         >
-          {tab === 'transaction' ? (
+          <Filters
+            onUpdate={onUpdate}
+            showStatus={false}
+            showLayoutChange={false}
+            searchPlaceholder={'Search Name or Email'}
+          />
+          {data.totalQueryCount === 0 ? (
+            <EmptyStateOne
+              isFilter
+              onClear={() => onUpdate('reset')}
+            />
+          ) : (
             <>
-              <Filters
-                onUpdate={onUpdate}
-                showStatus={false}
-                showLayoutChange={false}
-                searchPlaceholder={'Search Name or Email'}
-              />
-              {data.totalQueryCount === 0 ? (
-                <EmptyStateOne
-                  isFilter
-                  onClear={() => onUpdate('reset')}
-                />
+              {loading ? (
+                <LayoutLoading />
               ) : (
-                <>
-                  {loading ? (
-                    <LayoutLoading />
-                  ) : (
-                    <CustomTable
-                      tableHeaderItems={TableHeaderItems}
-                      RenderTableDataCell={
-                        renderTableDataCell
-                      }
-                      tableBodyItems={data.data}
-                      showActions={false}
-                      onRowClick={item => {
-                        setActiveAudience(item);
-                        setOpened(true);
-                      }}
-                    />
-                  )}
-                </>
+                <CustomTable
+                  tableHeaderItems={TableHeaderItems}
+                  RenderTableDataCell={renderTableDataCell}
+                  tableBodyItems={data.data}
+                  showActions={false}
+                  onRowClick={item => {
+                    setActiveAudience(item);
+                    setOpened(true);
+                  }}
+                />
               )}
-
-              <div
-                className={`flex flex-wrap-reverse items-center gap-2 ${
-                  Math.ceil(data.totalQueryCount / 10) ==
-                    1 || loading
-                    ? 'hidden'
-                    : ''
-                }`}
-              >
-                <Select
-                  className="max-w-14"
-                  size="xs"
-                  withCheckIcon={false}
-                  data={['10', '20', '50']}
-                  value={limit.toString()}
-                  onChange={(_, option) => {
-                    if (!option?.value) return;
-                    onUpdate('limit', Number(option.value));
-                  }}
-                />
-                <Pagination
-                  withEdges
-                  total={Math.ceil(
-                    data.totalQueryCount / limit
-                  )}
-                  value={pageNo}
-                  onChange={value => {
-                    onUpdate('page', value);
-                  }}
-                />
-              </div>
             </>
-          ) : null}
+          )}
+
+          <div
+            className={`flex flex-wrap-reverse items-center gap-2 ${
+              Math.ceil(data.totalQueryCount / 10) == 1 ||
+              loading
+                ? 'hidden'
+                : ''
+            }`}
+          >
+            <Select
+              className="max-w-14"
+              size="xs"
+              withCheckIcon={false}
+              data={['10', '20', '50']}
+              value={limit.toString()}
+              onChange={(_, option) => {
+                if (!option?.value) return;
+                onUpdate('limit', Number(option.value));
+              }}
+            />
+            <Pagination
+              withEdges
+              total={Math.ceil(
+                data.totalQueryCount / limit
+              )}
+              value={pageNo}
+              onChange={value => {
+                onUpdate('page', value);
+              }}
+            />
+          </div>
         </div>
       </div>
       <Drawer
