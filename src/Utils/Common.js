@@ -285,7 +285,6 @@ export const checkIfPurchased = async (
       '/purchase/check',
       { productId, userId }
     );
-    console.log(data.ok);
     return data?.ok;
   } catch (error) {
     console.log(error);
