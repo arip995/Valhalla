@@ -31,7 +31,7 @@ const APP_NAMES = {
 const EmptyStateOne = ({
   app = APP_TYPES.TG,
   isFilter = false,
-  isAudience = false,
+  isApp = false,
   title,
   description,
   onClear = () => {},
@@ -42,7 +42,7 @@ const EmptyStateOne = ({
   const appName = APP_NAMES[app] || '';
 
   const renderIcon = () => {
-    if (isFilter) {
+    if (isFilter || isApp) {
       return (
         <IconFileSearch
           style={{
@@ -66,11 +66,9 @@ const EmptyStateOne = ({
 
   const renderTitle = () => {
     if (title) return title;
-    return isAudience
-      ? 'No audience found!'
-      : isFilter
-        ? 'No products found!'
-        : `No published ${appName}`;
+    return isFilter
+      ? 'No products found!'
+      : `No published ${appName}`;
   };
 
   const renderDescription = () => {
@@ -80,7 +78,7 @@ const EmptyStateOne = ({
         <>
           Try changing your filters to
           <br />
-          see {isAudience ? 'audience' : 'products'}
+          see products
         </>
       );
     }
@@ -149,7 +147,7 @@ const EmptyStateOne = ({
         >
           {renderIcon()}
         </ActionIcon>
-        <h2 className="mt-5 font-semibold text-gray-800">
+        <h2 className="mt-5 text-center font-semibold text-gray-800">
           {renderTitle()}
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">

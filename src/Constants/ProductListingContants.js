@@ -34,7 +34,7 @@ export const StatusErrorTextMapping = {
   3: 'Page is fraudlent',
 };
 
-export const PaymentStatusMapping = {
+export const StatusPaymentMapping = {
   1: 'Success',
   2: 'Failed',
   3: 'Dropped',

@@ -1,24 +1,12 @@
 'use client';
 
-import useProductListing from '@/Components/Apps/ProductListing/useProductListing';
-import EmptyStateOne from '@/Components/Common/EmptyState/EmptyStateOne';
-import EmptyStateTwo from '@/Components/Common/EmptyState/EmptyStateTwo';
-import Filters from '@/Components/Common/Filters/Filters';
-import Header from '@/Components/Common/Header/Header';
-import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
-import CustomTable from '@/Components/Common/Table/CustomTables/CustomTable';
-import { PaymentTabOptions } from '@/Constants/constants';
+import ProductListing from '@/Components/Apps/ProductListing/ProductListing';
 import {
-  PaymentStatusMapping,
+  StatusPaymentMapping,
   StatusPaymentColorMapping,
 } from '@/Constants/ProductListingContants';
 import { formatDate } from '@/Utils/Common';
-import {
-  Badge,
-  Drawer,
-  Pagination,
-  Select,
-} from '@mantine/core';
+import { Badge, Drawer } from '@mantine/core';
 import {
   IconBrandProducthunt,
   IconBrandRedux,
@@ -73,14 +61,14 @@ const renderTableDataCell = ({ type, item }) => {
             color={StatusPaymentColorMapping[item.status]}
             size="md"
           >
-            {PaymentStatusMapping[item.status]}
+            {StatusPaymentMapping[item.status]}
           </Badge>
         </td>
       );
     case 'email':
       return (
         <td className="min-w-36">
-          {item.userDetails?.email || '---'}
+          {item.buyerDetails?.email || '---'}
         </td>
       );
     case 'date':
@@ -101,15 +89,6 @@ const renderTableDataCell = ({ type, item }) => {
 const Transaction = () => {
   const pathName = usePathname();
   const router = useRouter();
-  const {
-    data,
-    loading,
-    status,
-    limit,
-    pageNo,
-    onUpdate,
-    tab,
-  } = useProductListing('/transaction/list', [1, 2, 3]);
   const [activeTransaction, setActiveTransaction] =
     useState(null);
   const [opened, setOpened] = useState(false);
@@ -118,106 +97,22 @@ const Transaction = () => {
     router.push(`${pathName}?tab=transaction`);
   }, []);
 
-  if (loading === -1) {
-    return (
-      <>
-        <LayoutLoading />
-      </>
-    );
-  }
-
-  if (!data?.totalCount && !loading) {
-    return (
-      <>
-        <EmptyStateTwo />
-      </>
-    );
-  }
-
-  if (!data?.totalCount) return null;
-
   return (
     <>
-      <div className="flex h-[calc(100vh-52px)] w-full flex-col md:h-screen">
-        <Header
-          title={'Payments'}
-          tabOptions={PaymentTabOptions}
-        />
-        <div
-          className={
-            'flex flex-1 flex-col items-end gap-4 overflow-y-auto p-4'
-          }
-        >
-          {tab === 'transaction' ? (
-            <>
-              <Filters
-                onUpdate={onUpdate}
-                status={status}
-                showSearch={false}
-                showLayoutChange={false}
-              />
-              {data.totalQueryCount === 0 ? (
-                <EmptyStateOne
-                  isFilter
-                  onClear={() => onUpdate('reset')}
-                />
-              ) : (
-                <>
-                  {loading ? (
-                    <LayoutLoading />
-                  ) : (
-                    <CustomTable
-                      tableHeaderItems={TableHeaderItems}
-                      RenderTableDataCell={
-                        renderTableDataCell
-                      }
-                      tableBodyItems={data.data}
-                      showActions={false}
-                      onRowClick={item => {
-                        setActiveTransaction(item);
-                        setOpened(true);
-                      }}
-                    />
-                  )}
-                </>
-              )}
-
-              <div
-                className={`flex flex-wrap-reverse items-center gap-2 ${
-                  !data.totalQueryCount ||
-                  Math.ceil(data.totalQueryCount / 10) ==
-                    1 ||
-                  loading
-                    ? 'hidden'
-                    : ''
-                }`}
-              >
-                <Select
-                  className="max-w-14"
-                  size="xs"
-                  withCheckIcon={false}
-                  data={['10', '20', '50']}
-                  value={limit.toString()}
-                  onChange={(_, option) => {
-                    if (!option?.value) return;
-                    onUpdate('limit', Number(option.value));
-                  }}
-                />
-                <Pagination
-                  withEdges
-                  total={Math.ceil(
-                    data.totalQueryCount / limit
-                  )}
-                  value={pageNo}
-                  onChange={value => {
-                    onUpdate('page', value);
-                  }}
-                />
-              </div>
-            </>
-          ) : null}
-        </div>
-      </div>
+      <ProductListing
+        renderTableDataCell={renderTableDataCell}
+        TableHeaderItems={TableHeaderItems}
+        baseUrl="/transaction/list"
+        initialStatus={[1, 2, 3]}
+        showSearch={false}
+        showStatus={true}
+        showLayoutChange={false}
+        menuType={0}
+        onRowClick={item => {
+          setActiveTransaction(item);
+          setOpened(true);
+        }}
+      />
       <Drawer
         trapFocus={false}
         lockScroll={false}

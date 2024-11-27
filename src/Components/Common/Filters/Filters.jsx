@@ -1,5 +1,5 @@
 import {
-  PaymentStatusMapping,
+  StatusPaymentMapping,
   StatusArray,
   StatusColorMapping,
   StatusMapping,
@@ -47,6 +47,9 @@ const Filters = ({
   const menuItems = menuType
     ? StatusArray
     : StatusPaymentArray;
+  const menuItemsColor = menuType
+    ? StatusColorMapping
+    : StatusPaymentColorMapping;
   const [searchValue, setSearchValue] =
     useState(searchText);
   const handleUpdate = useDebouncedCallback(
@@ -90,7 +93,7 @@ const Filters = ({
               >
                 {menuType
                   ? StatusMapping[item]
-                  : PaymentStatusMapping[item]}
+                  : StatusPaymentMapping[item]}
               </Badge>
               {selected.includes(item) ? (
                 <IconCheck size="1rem" stroke={1} />
@@ -188,7 +191,7 @@ const Filters = ({
                     variant="filled"
                     className="hidden:svg"
                     size="xs"
-                    color={StatusColorMapping[Number(item)]}
+                    color={menuItemsColor[Number(item)]}
                   >
                     {' '}
                   </Avatar>

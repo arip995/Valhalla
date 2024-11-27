@@ -5,7 +5,7 @@ import {
   Select,
   SimpleGrid,
 } from '@mantine/core';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useMemo } from 'react';
 
 import ProductCard from '@/Components/Common/Card/ProductCard';
@@ -17,9 +17,21 @@ import CustomTable from '@/Components/Common/Table/CustomTables/CustomTable';
 import useProductListing from './useProductListing';
 import classNames from 'classnames';
 import Filters from '@/Components/Common/Filters/Filters';
+import EmptyStateTwo from '@/Components/Common/EmptyState/EmptyStateTwo';
 
-const ProductListing = () => {
+const ProductListing = ({
+  renderTableDataCell,
+  TableHeaderItems,
+  baseUrl = '/product/get_listing_data',
+  initialStatus = [0, 1, 3, 4, 5, 6],
+  showSearch = true,
+  showStatus = true,
+  showLayoutChange = true,
+  menuType = 1,
+  onRowClick,
+}) => {
   const router = useRouter();
+  const routeName = usePathname().split('/')[1];
   const {
     app,
     onUpdate,
@@ -31,7 +43,10 @@ const ProductListing = () => {
     pageNo,
     isGrid,
     setIsGrid,
-  } = useProductListing();
+  } = useProductListing(baseUrl, initialStatus);
+  const onDefaultRowClick = row => {
+    router.push(`/dashboard/${app}/${row._id}`);
+  };
 
   const headerTitle = useMemo(() => {
     switch (app) {
@@ -68,7 +83,21 @@ const ProductListing = () => {
   if (!data?.totalCount && !loading) {
     return (
       <>
-        <EmptyStateOne app={app} />
+        <EmptyStateOne
+          app={app}
+          title={
+            routeName === 'app'
+              ? null
+              : `No ${routeName} Yet`
+          }
+          description={
+            routeName === 'app'
+              ? null
+              : routeName === 'payment'
+                ? `You have no transactions yet!`
+                : 'You have not sold any products yet!'
+          }
+        />
       </>
     );
   }
@@ -78,7 +107,12 @@ const ProductListing = () => {
   return (
     <div className="flex h-[calc(100vh-52px)] w-full flex-col md:h-screen">
       <Header
-        title={headerTitle}
+        title={
+          routeName === 'app'
+            ? headerTitle
+            : routeName.charAt(0).toUpperCase() +
+              routeName.slice(1)
+        }
         modal={app === 'course'}
         path={createPath}
       />
@@ -89,18 +123,22 @@ const ProductListing = () => {
           status={status}
           isGrid={isGrid}
           setIsGrid={setIsGrid}
-          menuType={1}
+          showSearch={showSearch}
+          showStatus={showStatus}
+          showLayoutChange={showLayoutChange}
+          menuType={menuType}
         />
-        {/* <FiltersOne
-          isGrid={isGrid}
-          setIsGrid={setIsGrid}
-          activeTab={activeTab}
-          onUpdate={onUpdate}
-          searchText={searchText}
-        /> */}
         {data.totalQueryCount === 0 ? (
           <EmptyStateOne
             app={app}
+            isApp={routeName === 'app'}
+            title={
+              routeName === 'payment'
+                ? 'No transactions yet!'
+                : routeName === 'audience'
+                  ? 'No audience yet!'
+                  : null
+            }
             isFilter
             onClear={() => onUpdate('reset')}
           />
@@ -145,25 +183,19 @@ const ProductListing = () => {
                     })}
                   </SimpleGrid>
                 </div>
-                {/* <div
-                  className={classNames('block', {
-                    hidden: isGrid,
-                  })}
-                > */}
                 <CustomTable
                   tableBodyItems={data.data || []}
+                  RenderTableDataCell={renderTableDataCell}
+                  tableHeaderItems={TableHeaderItems}
                   onUpdate={onUpdate}
-                  onRowClick={row =>
-                    router.push(
-                      `/dashboard/${app}/${row._id}`
-                    )
+                  onRowClick={
+                    onRowClick || onDefaultRowClick
                   }
                   className={classNames('block', {
                     hidden: isGrid,
                   })}
                   app={app}
                 />
-                {/* </div> */}
               </>
             )}
             <div

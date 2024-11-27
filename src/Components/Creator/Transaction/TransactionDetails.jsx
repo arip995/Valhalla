@@ -1,9 +1,9 @@
 import { PAYMENT_METHOD_MAPPING } from '@/Constants/constants';
 import {
-  PaymentStatusMapping,
+  StatusPaymentMapping,
   StatusPaymentColorMapping,
 } from '@/Constants/ProductListingContants';
-import { formatDate, getFullName } from '@/Utils/Common';
+import { formatDate } from '@/Utils/Common';
 import { Badge, Tooltip } from '@mantine/core';
 import {
   IconBuilding,
@@ -18,7 +18,6 @@ import {
 import React, { useMemo } from 'react';
 
 const TransactionDetails = ({ data = {} }) => {
-  // Destructure data with default values
   const {
     buyerDetails = {},
     status = 'PENDING',
@@ -38,10 +37,7 @@ const TransactionDetails = ({ data = {} }) => {
         items: [
           {
             label: 'Name',
-            value: getFullName(
-              buyerDetails.firstName,
-              buyerDetails.lastName
-            ),
+            value: buyerDetails.name,
             icon: (
               <IconUser className="h-4 w-4 text-gray-500" />
             ),
@@ -76,7 +72,7 @@ const TransactionDetails = ({ data = {} }) => {
                 color={StatusPaymentColorMapping[status]}
                 size="md"
               >
-                {PaymentStatusMapping[status]}
+                {StatusPaymentMapping[status]}
               </Badge>
             ),
           },
