@@ -99,6 +99,7 @@ export async function generateMetadata({ params }, parent) {
 export default async function Page({ params }) {
   try {
     const { data } = await getMetaData(params.id, 'course');
+
     if (
       !data?._id ||
       data?.status === 5 ||

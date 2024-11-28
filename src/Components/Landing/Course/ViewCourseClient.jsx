@@ -5,7 +5,6 @@ import { getMetaData } from '@/Utils/getMetaData';
 import NotFound from '@/app/not-found';
 import { useEffect, useState } from 'react';
 import '../../../styles/view/locked-content.css';
-import ProductHeader from '../../Common/Header/Productheader';
 import ViewCourseOne from './LayoutOne/ViewCourseOne';
 
 const ViewCourseClient = ({ productId }) => {
@@ -40,9 +39,8 @@ const ViewCourseClient = ({ productId }) => {
       className="vlc-container flex h-screen w-full flex-col overflow-auto"
       suppressHydrationWarning
     >
-      <ProductHeader data={data} />
       <div className="flex flex-1 flex-col justify-between">
-        <ViewCourseOne data={data} productId={productId} />
+        <ViewCourseOne data={data} />
       </div>
     </div>
   );
