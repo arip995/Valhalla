@@ -101,9 +101,9 @@ export default async function Page({ params }) {
     const { data } = await getMetaData(params.id, 'lc');
     if (
       !data?._id ||
+      !data.status ||
       data?.status === 5 ||
-      data?.status === 2 ||
-      data?.status === 0
+      data?.status === 2
     )
       notFound();
 
