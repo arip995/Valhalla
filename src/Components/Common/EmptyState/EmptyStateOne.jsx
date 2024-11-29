@@ -91,6 +91,8 @@ const EmptyStateOne = ({
   };
 
   const renderButton = () => {
+    if (isApp) return null;
+
     if (isFilter) {
       return (
         <Button
