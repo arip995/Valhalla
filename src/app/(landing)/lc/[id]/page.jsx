@@ -99,13 +99,14 @@ export async function generateMetadata({ params }, parent) {
 export default async function Page({ params }) {
   try {
     const { data } = await getMetaData(params.id, 'lc');
+
     if (
-      !data?._id ||
-      !data.status ||
-      data?.status === 5 ||
-      data?.status === 2
-    )
-      notFound();
+      !data ||
+      !data._id ||
+      [0, 2, 5].includes(data.status)
+    ) {
+      throw new Error('notFound');
+    }
 
     return (
       <ViewLockedContent
@@ -114,7 +115,11 @@ export default async function Page({ params }) {
       />
     );
   } catch (error) {
-    console.log(error);
+    if (error.message === 'notFound') {
+      notFound();
+    }
+
+    console.error(error);
     return (
       <ViewLockedContentClient productId={params.id} />
     );

@@ -101,16 +101,20 @@ export default async function Page({ params }) {
     const { data } = await getMetaData(params.id, 'course');
 
     if (
-      !data?._id ||
-      !data.status ||
-      data?.status === 5 ||
-      data?.status === 2
-    )
-      notFound();
+      !data ||
+      !data._id ||
+      [0, 2, 5].includes(data.status)
+    ) {
+      throw new Error('notFound');
+    }
 
     return <ViewCourse data={data} productId={params.id} />;
   } catch (error) {
-    console.log(error);
+    if (error.message === 'notFound') {
+      notFound();
+    }
+
+    console.error(error);
     return <ViewCourseClient productId={params.id} />;
   }
 }

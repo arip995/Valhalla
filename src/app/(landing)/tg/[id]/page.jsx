@@ -96,25 +96,22 @@ export default async function Page({ params }) {
     const { data } = await getMetaData(params.id, 'tg');
 
     if (
-      !data?._id ||
-      !data.status ||
-      data?.status === 5 ||
-      data?.status === 2
+      !data ||
+      !data._id ||
+      [0, 2, 5].includes(data.status)
     ) {
-      notFound();
+      throw new Error('notFound');
     }
 
     return (
-      <ViewTelegram
-        prefetchedData={data}
-        productId={params.id}
-      />
+      <ViewTelegram data={data} productId={params.id} />
     );
   } catch (error) {
-    console.error('Error fetching metadata:', error);
-    // notFound();
-    // You can choose to render an error component or throw an error to be caught by the nearest error boundary
-    // throw new Error('Failed to fetch metadata');
+    if (error.message === 'notFound') {
+      notFound();
+    }
+
+    console.error(error);
     return <ViewTelegramClient productId={params.id} />;
   }
 }
