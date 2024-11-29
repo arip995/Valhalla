@@ -3,15 +3,15 @@ import ProductHeader from '../../Common/Header/Productheader';
 import GLDetailsContainer from './GraphyLike/GLDetailsContainer';
 import LTDetailsContainer from './LayoutTwo/LTDetailsContainers';
 
-const ViewTelegram = ({ prefetchedData }) => {
+const ViewTelegram = ({ data }) => {
   return (
     <div className="flex h-screen w-full flex-col bg-white">
-      <ProductHeader data={prefetchedData} />
+      <ProductHeader data={data} />
       <div className="flex flex-1 flex-col justify-between">
-        {prefetchedData.layout ? (
-          <GLDetailsContainer data={prefetchedData} />
+        {data.layout ? (
+          <GLDetailsContainer data={data} />
         ) : (
-          <LTDetailsContainer data={prefetchedData} />
+          <LTDetailsContainer data={data} />
         )}
         <div className="hidden md:block">
           <FooterTwo />
