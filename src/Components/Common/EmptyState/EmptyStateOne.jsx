@@ -29,7 +29,7 @@ const APP_NAMES = {
 };
 
 const EmptyStateOne = ({
-  app = APP_TYPES.TG,
+  app,
   isFilter = false,
   isApp = false,
   title,
@@ -91,7 +91,7 @@ const EmptyStateOne = ({
   };
 
   const renderButton = () => {
-    if (isApp) return null;
+    if (!isApp) return null;
 
     if (isFilter) {
       return (
