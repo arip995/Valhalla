@@ -29,7 +29,7 @@ const ViewLockedContentClient = ({ productId }) => {
 
   if (loading) return <LayoutLoading />;
 
-  if (!data?._id || data?.status === 5 || data.status === 2)
+  if (!data || !data._id || [0, 2, 5].includes(data.status))
     return <NotFound />;
 
   return (
