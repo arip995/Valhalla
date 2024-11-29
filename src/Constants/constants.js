@@ -321,6 +321,7 @@ export const AccountCreatorTabOptions = [
   { label: 'Payment', value: 'payment' },
   { label: 'Billing', value: 'billing' },
 ];
+
 export const PaymentTabOptions = [
   { label: 'Transaction', value: 'transaction' },
   { label: 'Wallet', value: 'wallet' },

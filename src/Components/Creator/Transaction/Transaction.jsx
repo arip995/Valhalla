@@ -14,9 +14,17 @@ import {
   IconCoinRupee,
   IconMail,
 } from '@tabler/icons-react';
-import { usePathname, useRouter } from 'next/navigation';
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 import { useEffect, useState } from 'react';
 import TransactionDetails from './TransactionDetails';
+import Header from '@/Components/Common/Header/Header';
+import { PaymentTabOptions } from '@/Constants/constants';
+import classNames from 'classnames';
+import Wallet from './Wallet';
 
 const TableHeaderItems = [
   { title: 'Date', icon: IconCalendar, value: 'date' },
@@ -89,30 +97,54 @@ const renderTableDataCell = ({ type, item }) => {
 const Transaction = () => {
   const pathName = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const tab = searchParams.get('tab');
   const [activeTransaction, setActiveTransaction] =
     useState(null);
   const [opened, setOpened] = useState(false);
 
   useEffect(() => {
-    router.push(`${pathName}?tab=transaction`);
-  }, []);
+    if (!tab) router.push(`${pathName}?tab=transaction`);
+  }, [tab]);
+
+  if (!tab) return null;
 
   return (
     <>
-      <ProductListing
-        renderTableDataCell={renderTableDataCell}
-        TableHeaderItems={TableHeaderItems}
-        baseUrl="/transaction/list"
-        initialStatus={[1, 2, 3]}
-        showSearch={false}
-        showStatus={true}
-        showLayoutChange={false}
-        menuType={0}
-        onRowClick={item => {
-          setActiveTransaction(item);
-          setOpened(true);
-        }}
-      />
+      <div className="flex h-[calc(100vh-52px)] w-full flex-col md:h-screen">
+        <Header
+          title={'Transactions'}
+          tabOptions={PaymentTabOptions}
+        />
+        <div
+          className={classNames({
+            hidden: tab === 'transaction',
+          })}
+        >
+          <Wallet />
+        </div>
+        <div
+          className={classNames({
+            hidden: tab === 'wallet',
+          })}
+        >
+          <ProductListing
+            renderTableDataCell={renderTableDataCell}
+            TableHeaderItems={TableHeaderItems}
+            baseUrl="/transaction/list"
+            initialStatus={[1, 2, 3]}
+            showSearch={false}
+            showStatus={true}
+            showLayoutChange={false}
+            showHeader={false}
+            menuType={0}
+            onRowClick={item => {
+              setActiveTransaction(item);
+              setOpened(true);
+            }}
+          />
+        </div>
+      </div>
       <Drawer
         trapFocus={false}
         lockScroll={false}

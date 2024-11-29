@@ -27,6 +27,7 @@ const ProductListing = ({
   showSearch = true,
   showStatus = true,
   showLayoutChange = true,
+  showHeader = true,
   menuType = 1,
   onRowClick,
 }) => {
@@ -85,6 +86,7 @@ const ProductListing = ({
       <>
         <EmptyStateOne
           app={app}
+          isApp={routeName === 'app'}
           title={
             routeName === 'app'
               ? null
@@ -105,18 +107,20 @@ const ProductListing = ({
   if (!data?.totalCount) return null;
 
   return (
-    <div className="flex h-[calc(100vh-52px)] w-full flex-col md:h-screen">
-      <Header
-        title={
-          routeName === 'app'
-            ? headerTitle
-            : routeName.charAt(0).toUpperCase() +
-              routeName.slice(1)
-        }
-        modal={app === 'course'}
-        path={createPath}
-      />
-      <div className="flex flex-1 flex-col items-end gap-4 overflow-y-auto p-4">
+    <>
+      {!!showHeader && (
+        <Header
+          title={
+            routeName === 'app'
+              ? headerTitle
+              : routeName.charAt(0).toUpperCase() +
+                routeName.slice(1)
+          }
+          modal={app === 'course'}
+          path={createPath}
+        />
+      )}
+      <div className="flex w-full flex-1 flex-col items-end gap-4 overflow-y-auto p-4">
         <Filters
           onUpdate={onUpdate}
           searchText={searchText}
@@ -232,7 +236,7 @@ const ProductListing = ({
           </>
         )}
       </div>
-    </div>
+    </>
   );
 };
 
