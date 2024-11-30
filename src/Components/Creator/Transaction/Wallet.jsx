@@ -30,6 +30,7 @@ const TransactionCard = ({
   transferId,
   status,
   createdAt,
+  settlementTime,
 }) => {
   const getStatusColor = () => {
     switch (status) {
@@ -99,7 +100,7 @@ const TransactionCard = ({
           >
             {getStatusIcon()}
           </ThemeIcon>
-          <div>
+          <div className="flex flex-col gap-1">
             <Text weight={500} size="sm">
               Withdrawal - {getStatusText()}
             </Text>
@@ -107,6 +108,7 @@ const TransactionCard = ({
               {description} • ID: {transferId}
             </Text>
             <Text size="xs" c="dimmed">
+              CreatedAt:-{' '}
               {new Date(createdAt).toLocaleDateString(
                 'en-IN',
                 {
@@ -118,6 +120,20 @@ const TransactionCard = ({
                 }
               )}
             </Text>
+            {!!settlementTime && (
+              <Text size="xs" c="dimmed">
+                SettledAt:-{' '}
+                {new Date(
+                  settlementTime
+                ).toLocaleDateString('en-IN', {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
+              </Text>
+            )}
           </div>
         </Group>
         <Text weight={500} c={getStatusColor()} size="sm">
