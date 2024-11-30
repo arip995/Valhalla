@@ -277,7 +277,7 @@ const Wallet = () => {
                     Active Payout Request
                   </Text>
                   <Group position="apart">
-                    <Text size="sm">
+                    <Text size="sm" fw={700}>
                       Amount: ₹{activePayoutRequest.amount}
                     </Text>
                     <Button
