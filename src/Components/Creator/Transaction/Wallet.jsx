@@ -11,56 +11,122 @@ import {
   ThemeIcon,
   Title,
 } from '@mantine/core';
-import { useForm } from '@mantine/form';
 import {
-  IconArrowDown,
+  IconAlertCircle,
   IconArrowUp,
+  IconCheck,
+  IconCircleDot,
+  IconHelpCircle,
   IconWallet,
+  IconX,
 } from '@tabler/icons-react';
+import classNames from 'classnames';
+import React from 'react';
 import useWallet from './useWallet';
 
 const TransactionCard = ({
-  type,
   description,
   amount,
-  icon: Icon,
-}) => (
-  <Paper
-    withBorder
-    p="md"
-    radius="md"
-    className="transition-all hover:bg-gray-50"
-  >
-    <Group position="apart" spacing="xl">
-      <Group spacing="lg">
-        <ThemeIcon
-          size="xl"
-          radius="xl"
-          color={type === 'deposit' ? 'teal' : 'red'}
-          variant="light"
-        >
-          <Icon size={20} />
-        </ThemeIcon>
-        <div>
-          <Text weight={500} size="sm">
-            {type === 'deposit' ? 'Deposit' : 'Withdrawal'}
-          </Text>
-          <Text size="xs" color="dimmed">
-            {description}
-          </Text>
-        </div>
+  transferId,
+  status,
+  createdAt,
+}) => {
+  const getStatusColor = () => {
+    switch (status) {
+      case 0:
+        return 'yellow'; // Pending
+      case 1:
+        return 'blue'; // Processing
+      case 2:
+        return 'green'; // Completed
+      case 3:
+        return 'red'; // Failed
+      case 4:
+        return 'red'; // Cancelled
+      default:
+        return 'gray';
+    }
+  };
+
+  const getStatusText = () => {
+    switch (status) {
+      case 0:
+        return 'Pending';
+      case 1:
+        return 'Processing';
+      case 2:
+        return 'Completed';
+      case 3:
+        return 'Failed';
+      case 4:
+        return 'Cancelled';
+      default:
+        return 'Unknown';
+    }
+  };
+
+  const getStatusIcon = () => {
+    switch (status) {
+      case 0:
+        return <IconAlertCircle size={20} />;
+      case 1:
+        return <IconCircleDot size={20} />;
+      case 2:
+        return <IconCheck size={20} />;
+      case 3:
+        return <IconX size={20} />;
+      case 4:
+        return <IconX size={20} />;
+      default:
+        return <IconHelpCircle size={20} />;
+    }
+  };
+
+  return (
+    <Paper
+      withBorder
+      p="md"
+      radius="md"
+      className="transition-all hover:bg-gray-50"
+    >
+      <Group justify="space-between" spacing="xl">
+        <Group spacing="lg">
+          <ThemeIcon
+            size="xl"
+            radius="xl"
+            color={getStatusColor()}
+            variant="light"
+          >
+            {getStatusIcon()}
+          </ThemeIcon>
+          <div>
+            <Text weight={500} size="sm">
+              Withdrawal - {getStatusText()}
+            </Text>
+            <Text size="xs" c="dimmed">
+              {description} • ID: {transferId}
+            </Text>
+            <Text size="xs" c="dimmed">
+              {new Date(createdAt).toLocaleDateString(
+                'en-IN',
+                {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                }
+              )}
+            </Text>
+          </div>
+        </Group>
+        <Text weight={500} c={getStatusColor()} size="sm">
+          ₹{Math.abs(amount).toLocaleString()}
+        </Text>
       </Group>
-      <Text
-        weight={500}
-        color={type === 'deposit' ? 'teal' : 'red'}
-        size="sm"
-      >
-        {type === 'deposit' ? '+' : '-'}₹
-        {Math.abs(amount).toLocaleString()}
-      </Text>
-    </Group>
-  </Paper>
-);
+    </Paper>
+  );
+};
 
 const SummaryCard = ({ title, value, icon: Icon }) => (
   <Paper withBorder p="md" radius="md">
@@ -90,28 +156,18 @@ const SummaryCard = ({ title, value, icon: Icon }) => (
 );
 
 const Wallet = () => {
-  const { walletDetails, loading } = useWallet();
-
-  const form = useForm({
-    initialValues: {
-      withdrawAmount: '',
-    },
-    validate: {
-      withdrawAmount: value =>
-        value <= 0 ||
-        value > walletDetails?.withdrawableBalance
-          ? 'Amount should be less than current balance'
-          : null,
-    },
-  });
+  const {
+    walletDetails,
+    loading,
+    cancelPayout,
+    activePayoutRequest,
+    payoutList,
+    form,
+    handleWithdraw,
+  } = useWallet();
 
   if (loading === -1) return <LayoutLoading />;
   if (!walletDetails) return null;
-
-  const handleWithdraw = () => {
-    console.log(`Withdraw ₹${form.values.withdrawAmount}`);
-    form.reset();
-  };
 
   return (
     <div className="flex w-full justify-center">
@@ -161,7 +217,14 @@ const Wallet = () => {
             </div>
 
             {/* Withdrawal Form */}
-            <Paper withBorder p="md" radius="md">
+            <Paper
+              withBorder
+              p="md"
+              radius="md"
+              className={classNames({
+                hidden: activePayoutRequest,
+              })}
+            >
               <form
                 onSubmit={form.onSubmit(handleWithdraw)}
               >
@@ -178,6 +241,9 @@ const Wallet = () => {
                       allowNegative={false}
                       decimalScale={2}
                       placeholder="Enter amount"
+                      disabled={
+                        !!(activePayoutRequest || loading)
+                      }
                       type="number"
                       min={0}
                       icon="₹"
@@ -186,29 +252,60 @@ const Wallet = () => {
                       type="submit"
                       color="green"
                       className="w-fit"
+                      disabled={
+                        !!(activePayoutRequest || loading)
+                      }
                     >
                       Withdraw
                     </Button>
                   </Stack>
+                  {!!activePayoutRequest && (
+                    <Text size="sm" c="dimmed">
+                      You have an active payout request in
+                      process
+                    </Text>
+                  )}
                 </Stack>
               </form>
             </Paper>
 
+            {/* Active Payout Request */}
+            {!!activePayoutRequest && (
+              <Paper withBorder p="md" radius="md">
+                <Stack spacing="xs">
+                  <Text weight={500}>
+                    Active Payout Request
+                  </Text>
+                  <Group position="apart">
+                    <Text size="sm">
+                      Amount: ₹{activePayoutRequest.amount}
+                    </Text>
+                    <Button
+                      variant="light"
+                      color="red"
+                      size="sm"
+                      onClick={() =>
+                        cancelPayout(
+                          activePayoutRequest.transferId
+                        )
+                      }
+                      disabled={!!loading}
+                    >
+                      Cancel Request
+                    </Button>
+                  </Group>
+                </Stack>
+              </Paper>
+            )}
+
             {/* Transactions */}
             <Stack spacing="md">
-              <Text weight={500}>Recent Transactions</Text>
-              <TransactionCard
-                type="deposit"
-                description="Successful transfer from bank"
-                amount={1500}
-                icon={IconArrowDown}
-              />
-              <TransactionCard
-                type="withdrawal"
-                description="Bank transfer withdrawal"
-                amount={500}
-                icon={IconArrowUp}
-              />
+              <Text weight={500}>Recent Withdrawls</Text>
+              {payoutList?.map((item, i) => {
+                return (
+                  <TransactionCard key={i} {...item} />
+                );
+              })}
             </Stack>
           </Stack>
         </Paper>
@@ -217,4 +314,4 @@ const Wallet = () => {
   );
 };
 
-export default Wallet;
+export default React.memo(Wallet);
