@@ -19,7 +19,7 @@ import React, { useMemo } from 'react';
 
 const TransactionDetails = ({ data = {} }) => {
   const {
-    buyerDetails = {},
+    userDetails = {},
     status = 'PENDING',
     amountPaid = '0',
     payoutAmount = '0',
@@ -37,22 +37,22 @@ const TransactionDetails = ({ data = {} }) => {
         items: [
           {
             label: 'Name',
-            value: buyerDetails.name,
+            value: userDetails.name,
             icon: (
               <IconUser className="h-4 w-4 text-gray-500" />
             ),
           },
           {
             label: 'Email',
-            value: buyerDetails?.email || '---',
+            value: userDetails?.email || '---',
             icon: (
               <IconMail className="h-4 w-4 text-gray-500" />
             ),
           },
           {
             label: 'Phone Number',
-            value: buyerDetails?.phoneNumber
-              ? `+91 ${buyerDetails.phoneNumber}`
+            value: userDetails?.phoneNumber
+              ? `+91 ${userDetails.phoneNumber}`
               : '---',
             icon: (
               <IconPhone className="h-4 w-4 text-gray-500" />

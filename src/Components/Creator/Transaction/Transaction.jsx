@@ -76,7 +76,7 @@ const renderTableDataCell = ({ type, item }) => {
     case 'email':
       return (
         <td className="min-w-36">
-          {item.buyerDetails?.email || '---'}
+          {item.userDetails?.email || '---'}
         </td>
       );
     case 'date':
