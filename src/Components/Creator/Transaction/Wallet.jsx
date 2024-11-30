@@ -245,6 +245,7 @@ const Wallet = () => {
                         !!(activePayoutRequest || loading)
                       }
                       type="number"
+                      hideControls
                       min={0}
                       icon="₹"
                     />
@@ -273,8 +274,14 @@ const Wallet = () => {
             {!!activePayoutRequest && (
               <Paper withBorder p="md" radius="md">
                 <Stack spacing="xs">
-                  <Text weight={500}>
-                    Active Payout Request
+                  <Text
+                    weight={500}
+                    className="flex items-center gap-2"
+                  >
+                    Active Payout Request{' '}
+                    <Text c="dimmed" size="xs">
+                      (Settlement (T+2) days)
+                    </Text>
                   </Text>
                   <Group position="apart">
                     <Text size="sm" fw={700}>
