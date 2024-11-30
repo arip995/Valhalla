@@ -26,15 +26,6 @@ const useWallet = () => {
     },
   });
 
-  const handleWithdraw = async values => {
-    const response = await requestPayout(
-      values.withdrawAmount
-    );
-    if (response?.success) {
-      form.reset();
-    }
-  };
-
   const fetchWalletDetails = async () => {
     try {
       const { data } = await axiosInstance.get(
@@ -60,20 +51,16 @@ const useWallet = () => {
           amount: Number(amount),
         }
       );
-      fetchWalletDetails();
+      await fetchWalletDetails();
+      form.reset();
       toast.success(
         data?.message || 'Payout initiated successfully'
       );
-      return { success: true, message: data.message };
     } catch (error) {
       setPayoutError(
         error.response?.data?.message ||
           'Failed to process payout request'
       );
-      return {
-        success: false,
-        message: error.response?.data?.message,
-      };
     } finally {
       setLoading(0);
     }
@@ -93,15 +80,15 @@ const useWallet = () => {
       toast.success(
         data?.message || 'Payout cancelled successfully'
       );
-      return { success: true, message: data.message };
     } catch (error) {
-      return {
-        success: false,
-        message: error.response?.data?.message,
-      };
+      console.log(error);
     } finally {
       setLoading(0);
     }
+  };
+
+  const handleWithdraw = async values => {
+    await requestPayout(values.withdrawAmount);
   };
 
   useEffect(() => {
