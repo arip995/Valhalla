@@ -44,6 +44,8 @@ const TransactionCard = ({
         return 'red'; // Failed
       case 4:
         return 'red'; // Cancelled
+      case 5:
+        return 'red'; // Cancelled
       default:
         return 'gray';
     }
@@ -61,6 +63,8 @@ const TransactionCard = ({
         return 'Failed';
       case 4:
         return 'Cancelled';
+      case 5:
+        return 'Cancelled by bank';
       default:
         return 'Unknown';
     }
@@ -77,6 +81,8 @@ const TransactionCard = ({
       case 3:
         return <IconX size={20} />;
       case 4:
+        return <IconX size={20} />;
+      case 5:
         return <IconX size={20} />;
       default:
         return <IconHelpCircle size={20} />;
