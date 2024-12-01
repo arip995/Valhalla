@@ -312,7 +312,12 @@ const Wallet = () => {
                           activePayoutRequest.transferId
                         )
                       }
-                      disabled={!!loading}
+                      disabled={
+                        !!(
+                          loading ||
+                          activePayoutRequest.status === 1
+                        )
+                      }
                     >
                       Cancel Request
                     </Button>
