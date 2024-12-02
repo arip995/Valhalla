@@ -104,7 +104,7 @@ const Transaction = () => {
   const [opened, setOpened] = useState(false);
 
   useEffect(() => {
-    if (!tab) router.push(`${pathName}?tab=transaction`);
+    if (!tab) router.replace(`${pathName}?tab=transaction`);
   }, [tab]);
 
   if (!tab) return null;

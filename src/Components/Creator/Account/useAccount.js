@@ -114,7 +114,7 @@ const useAccount = () => {
     if (user === -1) return;
     if (tab !== 'profile' && !user.isCreator) {
       //if not a creator then not allowed to visit payment or billing page
-      router.push(`${pathname}?tab=profile`);
+      router.replace(`${pathname}?tab=profile`);
     }
     let isVisitedTab = [
       'profile',
@@ -123,7 +123,7 @@ const useAccount = () => {
     ].some(item => item === tab);
 
     if (!isVisitedTab) {
-      router.push(`${pathname}?tab=profile`);
+      router.replace(`${pathname}?tab=profile`);
     }
   }, [tab, user]);
 

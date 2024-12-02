@@ -165,23 +165,13 @@ const usePayment = (
           alert('Razropay failed to load!!');
           return;
         }
-
+        console.log(user);
         const options = {
           key: process.env.RAZORPAY_PG_CLIENT_ID,
-          amount: paymentState.amount,
-          currency: 'INR',
           name: getFullName(user.firstName, user.lastName),
           order_id: paymentState.id,
           config: {
             display: {
-              banks: {
-                name: 'Most Used Methods',
-                instruments: [
-                  {
-                    method: 'upi',
-                  },
-                ],
-              },
               sequence: [
                 'method.upi',
                 'method.card',
@@ -194,27 +184,18 @@ const usePayment = (
                 {
                   method: 'wallet',
                 },
+                {
+                  method: 'card',
+                },
+                {
+                  method: 'netbanking',
+                },
               ],
             },
           },
           handler: function (response) {
             console.log(response);
             alert(response.razorpay_payment_id);
-          },
-          modal: {
-            ondismiss: function () {
-              if (
-                confirm(
-                  'Are you sure, you want to close the form?'
-                )
-              ) {
-                console.log(
-                  'Checkout form closed by the user'
-                );
-              } else {
-                console.log('Complete the Payment');
-              }
-            },
           },
         };
 
