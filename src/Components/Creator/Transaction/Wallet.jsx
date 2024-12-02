@@ -62,9 +62,9 @@ const TransactionCard = ({
       case 3:
         return 'Failed';
       case 4:
-        return 'Cancelled';
-      case 5:
         return 'Cancelled by bank';
+      case 5:
+        return 'Cancelled';
       default:
         return 'Unknown';
     }

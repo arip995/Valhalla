@@ -1,5 +1,5 @@
 import axiosInstance from '@/Utils/AxiosInstance';
-import { isDevEnv } from '@/Utils/Common';
+import { getFullName, isDevEnv } from '@/Utils/Common';
 import { checkIfPurchased } from '@/Utils/Common';
 import { useRedirectAfterPurchased } from '@/Utils/Hooks/hooks';
 import useUser from '@/Utils/Hooks/useUser';
@@ -14,10 +14,24 @@ import toast from 'react-hot-toast';
 const MAX_ATTEMPTS = 5;
 const POLL_INTERVAL = 5000; // 5 seconds
 
+function loadRazorpayScript(src) {
+  return new Promise(resolve => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = () => {
+      resolve(true);
+    };
+    script.onerror = () => {
+      resolve(false);
+    };
+    document.body.appendChild(script);
+  });
+}
+
 const usePayment = (
   onSuccess = () => {},
   onFailure = () => {},
-  paymentProvider = 'cashfree'
+  paymentProvider = 'rp'
 ) => {
   const productId = usePathname().split('/')[2];
   const productType = usePathname().split('/')[1];
@@ -92,8 +106,8 @@ const usePayment = (
 
   const openPaymentModal = async () => {
     switch (paymentProvider) {
-      case 'cashfree':
-        var cashfree = await load({
+      case 'cf': {
+        var cf = await load({
           mode: isDevEnv() ? 'sandbox' : 'sandbox',
         });
         var checkoutOptions = {
@@ -101,7 +115,7 @@ const usePayment = (
           redirectTarget: '_modal',
         };
 
-        cashfree.checkout(checkoutOptions).then(result => {
+        cf.checkout(checkoutOptions).then(result => {
           if (result.error) {
             onFailure();
             return;
@@ -141,10 +155,74 @@ const usePayment = (
           });
         });
         break;
+      }
+      case 'rp': {
+        const res = await loadRazorpayScript(
+          'https://checkout.razorpay.com/v1/checkout.js'
+        );
 
-      case 'razorpay':
-        // Handle Razorpay implementation here
+        if (!res) {
+          alert('Razropay failed to load!!');
+          return;
+        }
+
+        const options = {
+          key: process.env.RAZORPAY_PG_CLIENT_ID,
+          amount: paymentState.amount,
+          currency: 'INR',
+          name: getFullName(user.firstName, user.lastName),
+          order_id: paymentState.id,
+          config: {
+            display: {
+              banks: {
+                name: 'Most Used Methods',
+                instruments: [
+                  {
+                    method: 'upi',
+                  },
+                ],
+              },
+              sequence: [
+                'method.upi',
+                'method.card',
+                'method.netbanking',
+              ],
+              preferences: {
+                show_default_blocks: true,
+              },
+              hide: [
+                {
+                  method: 'wallet',
+                },
+              ],
+            },
+          },
+          handler: function (response) {
+            console.log(response);
+            alert(response.razorpay_payment_id);
+          },
+          modal: {
+            ondismiss: function () {
+              if (
+                confirm(
+                  'Are you sure, you want to close the form?'
+                )
+              ) {
+                console.log(
+                  'Checkout form closed by the user'
+                );
+              } else {
+                console.log('Complete the Payment');
+              }
+            },
+          },
+        };
+
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+
         break;
+      }
 
       default:
         break;
@@ -257,8 +335,7 @@ const usePayment = (
 
       setPaymentState(prev => ({
         ...prev,
-        paymentSessionId: data.data.payment_session_id,
-        orderId: data.data.order_id,
+        ...data.data,
       }));
     } catch (error) {
       console.error(error);
@@ -281,10 +358,10 @@ const usePayment = (
   };
 
   useEffect(() => {
-    if (paymentState.paymentSessionId) {
+    if (paymentState.paymentSessionId || paymentState.id) {
       openPaymentModal();
     }
-  }, [paymentState.paymentSessionId]);
+  }, [paymentState.paymentSessionId, paymentState.id]);
 
   useEffect(() => {
     if (user === -1) return;
