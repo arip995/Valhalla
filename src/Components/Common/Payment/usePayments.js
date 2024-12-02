@@ -192,13 +192,12 @@ const usePayment = (
               ],
             },
           },
-          handler: function () {
+          handler: async response => {
             setPaymentState(prev => ({
               ...prev,
               loading: true,
               paymentCompleted: true,
             }));
-
             pollOrderStatus({
               sessionId: paymentState.paymentSessionId,
               onPollSuccess: async () => {
@@ -225,6 +224,14 @@ const usePayment = (
                 console.error(error);
               },
             });
+            try {
+              await axiosInstance.post(
+                '/payment/update_order',
+                { ...response }
+              );
+            } catch (error) {
+              console.log(error);
+            }
           },
         };
 
