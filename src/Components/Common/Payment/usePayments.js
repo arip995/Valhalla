@@ -181,15 +181,15 @@ const usePayment = (
                 show_default_blocks: true,
               },
               hide: [
-                {
-                  method: 'wallet',
-                },
-                {
-                  method: 'card',
-                },
-                {
-                  method: 'netbanking',
-                },
+                // {
+                //   method: 'wallet',
+                // },
+                // {
+                //   method: 'card',
+                // },
+                // {
+                //   method: 'netbanking',
+                // },
               ],
             },
           },
