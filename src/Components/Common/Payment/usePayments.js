@@ -165,7 +165,6 @@ const usePayment = (
           alert('Razropay failed to load!!');
           return;
         }
-        console.log(user);
         const options = {
           key: process.env.RAZORPAY_PG_CLIENT_ID,
           name: getFullName(user.firstName, user.lastName),
@@ -193,9 +192,39 @@ const usePayment = (
               ],
             },
           },
-          handler: function (response) {
-            console.log(response);
-            alert(response.razorpay_payment_id);
+          handler: function () {
+            setPaymentState(prev => ({
+              ...prev,
+              loading: true,
+              paymentCompleted: true,
+            }));
+
+            pollOrderStatus({
+              sessionId: paymentState.paymentSessionId,
+              onPollSuccess: async () => {
+                setTimeout(() => {
+                  setPaymentState(prev => ({
+                    ...prev,
+                    loading: false,
+                  }));
+                  callBackHandler(true);
+                }, 3500);
+                setPaymentState(prev => ({
+                  ...prev,
+                  paymentDone: true,
+                  purchaseSuccessful: true,
+                }));
+              },
+              onPollFailure: error => {
+                setPaymentState(prev => ({
+                  ...prev,
+                  loading: false,
+                  paymentDone: false,
+                }));
+                callBackHandler(false);
+                console.error(error);
+              },
+            });
           },
         };
 
