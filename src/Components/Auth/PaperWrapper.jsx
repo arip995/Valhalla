@@ -4,8 +4,8 @@ import {
   rem,
   Tooltip,
 } from '@mantine/core';
-import { IconArrowBackUp } from '@tabler/icons-react';
-import { useRouter } from 'next/navigation';
+import { IconX } from '@tabler/icons-react';
+import { usePathname, useRouter } from 'next/navigation';
 
 const PaperWrapper = ({
   children,
@@ -13,6 +13,7 @@ const PaperWrapper = ({
   showBackButton = false,
 }) => {
   const router = useRouter();
+  const productType = usePathname().split('/')[2];
   return (
     <>
       {!!showBackButton && (
@@ -22,11 +23,11 @@ const PaperWrapper = ({
             className="!fixed left-2 top-2"
             size="lg"
             radius="lg"
-            onClick={() => {
-              router.back();
-            }}
+            onClick={() =>
+              router.push(`/app/${productType}`)
+            }
           >
-            <IconArrowBackUp
+            <IconX
               stroke={1}
               color="black"
               style={{ width: rem(20), height: rem(20) }}
