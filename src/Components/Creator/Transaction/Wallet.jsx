@@ -1,5 +1,6 @@
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import {
+  Alert,
   Badge,
   Button,
   Container,
@@ -23,6 +24,7 @@ import {
 import classNames from 'classnames';
 import React from 'react';
 import useWallet from './useWallet';
+import { useRouter } from 'next/navigation';
 
 const TransactionCard = ({
   description,
@@ -178,6 +180,7 @@ const SummaryCard = ({ title, value, icon: Icon }) => (
 );
 
 const Wallet = () => {
+  const router = useRouter();
   const {
     walletDetails,
     loading,
@@ -255,6 +258,30 @@ const Wallet = () => {
                     Request Withdrawal
                   </Text>
                   <Stack grow>
+                    {!walletDetails.beneficiaryId && (
+                      <Alert
+                        icon={<IconAlertCircle size={16} />}
+                        title="Bank Details Missing"
+                        color="yellow"
+                      >
+                        You need to add your bank details
+                        first.
+                        <Group mt="xs">
+                          <Button
+                            size="xs"
+                            variant="outline"
+                            color="black"
+                            onClick={() =>
+                              router.push(
+                                '/account?tab=payment'
+                              )
+                            }
+                          >
+                            Go to Payment Settings
+                          </Button>
+                        </Group>
+                      </Alert>
+                    )}
                     <NumberInput
                       {...form.getInputProps(
                         'withdrawAmount'
@@ -264,7 +291,12 @@ const Wallet = () => {
                       decimalScale={2}
                       placeholder="Enter amount"
                       disabled={
-                        !!(activePayoutRequest || loading)
+                        !!(
+                          activePayoutRequest ||
+                          loading ||
+                          !walletDetails.beneficiaryId ||
+                          !walletDetails.withdrawableBalance
+                        )
                       }
                       type="number"
                       hideControls
@@ -276,7 +308,12 @@ const Wallet = () => {
                       color="green"
                       className="w-fit"
                       disabled={
-                        !!(activePayoutRequest || loading)
+                        !!(
+                          activePayoutRequest ||
+                          loading ||
+                          !walletDetails.beneficiaryId ||
+                          !walletDetails.withdrawableBalance
+                        )
                       }
                     >
                       Withdraw
