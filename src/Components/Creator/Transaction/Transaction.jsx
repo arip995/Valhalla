@@ -132,7 +132,7 @@ const Transaction = () => {
             renderTableDataCell={renderTableDataCell}
             TableHeaderItems={TableHeaderItems}
             baseUrl="/transaction/list"
-            initialStatus={[1, 2, 3]}
+            initialStatus={[1, 2]}
             showSearch={false}
             showStatus={true}
             showLayoutChange={false}
