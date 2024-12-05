@@ -125,7 +125,6 @@ const ProductHeader = ({ data }) => {
       ) : null}
       {!!opened && (
         <AuthModal
-          signin
           opened={opened}
           onClose={() => setOpened(false)}
           onAuthComplete={() => {

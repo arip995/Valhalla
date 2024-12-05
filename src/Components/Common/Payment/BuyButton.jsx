@@ -83,7 +83,6 @@ const BuyButton = ({
       </Button>
       {!!opened && (
         <AuthModal
-          signin
           opened={opened}
           onClose={() => setOpened(false)}
           onAuthComplete={() => {
