@@ -1,23 +1,72 @@
+import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
+import { ProductTypemapping } from '@/Constants/ProductListingContants';
+import axiosInstance from '@/Utils/AxiosInstance';
 import {
   Group,
   Paper,
+  SimpleGrid,
   Text,
   ThemeIcon,
-  SimpleGrid,
 } from '@mantine/core';
 import {
-  IconArrowUpRight,
   IconArrowDownRight,
+  IconArrowUpRight,
 } from '@tabler/icons-react';
-
-const Data = [
-  { title: 'Revenue', value: '$13,456', diff: 34 },
-  { title: 'Profit', value: '$4,145', diff: -13 },
-  { title: 'Coupons usage', value: '745', diff: 18 },
-];
+import { useEffect, useState } from 'react';
 
 const HomeCards = () => {
-  const stats = Data.map(stat => {
+  const [data, setData] = useState({}); // State to hold API data
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const { data } = await axiosInstance.post(
+          '/analytics/home'
+        );
+        setData(data.data); // Assuming the response contains sales, revenue, and product type analytics
+      } catch (err) {
+        setError('Failed to fetch analytics data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <LayoutLoading overlay />;
+  }
+
+  if (error) {
+    return <Text color="red">{error}</Text>;
+  }
+
+  // Destructure the fetched data
+  const { totalSales, totalRevenue, productTypeDetails } =
+    data;
+
+  const stats = [
+    {
+      title: 'Total Revenue',
+      value: `₹${totalRevenue.toFixed(2)}`,
+      diff: 34,
+    }, // Example diff value
+    { title: 'Total Sales', value: totalSales, diff: 18 }, // Example diff value
+  ];
+
+  const productStats = productTypeDetails.map(product => ({
+    title: `${ProductTypemapping[product.productType]} Sales`,
+    value: `₹${product.revenue}`,
+    diff: 12, // Example diff value for each product
+  }));
+
+  const allStats = [...stats, ...productStats];
+
+  const renderedStats = allStats.map(stat => {
     const DiffIcon =
       stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
 
@@ -51,7 +100,7 @@ const HomeCards = () => {
             <DiffIcon size="1.8rem" stroke={1.5} />
           </ThemeIcon>
         </Group>
-        <Text c="dimmed" fz="sm" mt="md">
+        {/* <Text c="dimmed" fz="sm" mt="md">
           <Text
             component="span"
             c={stat.diff > 0 ? 'teal' : 'red'}
@@ -61,7 +110,7 @@ const HomeCards = () => {
           </Text>{' '}
           {stat.diff > 0 ? 'increase' : 'decrease'} compared
           to last month
-        </Text>
+        </Text> */}
       </Paper>
     );
   });
@@ -69,7 +118,7 @@ const HomeCards = () => {
   return (
     <div>
       <SimpleGrid cols={{ base: 1, sm: 3 }}>
-        {stats}
+        {renderedStats}
       </SimpleGrid>
     </div>
   );

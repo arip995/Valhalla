@@ -46,3 +46,9 @@ export const StatusPaymentColorMapping = {
   3: 'blue',
   0: 'yellow',
 };
+
+export const ProductTypemapping = {
+  tg: 'Telegram',
+  lc: 'Locked content',
+  course: 'Course',
+};

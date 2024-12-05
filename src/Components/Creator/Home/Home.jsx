@@ -8,7 +8,6 @@ import { IconUser } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { AllProducts } from './AllProducts';
 import HomeCards from './HomeCards';
-import HomeChart from './HomeChart';
 
 const Home = () => {
   const { user, setUserData } = useUser();
@@ -30,7 +29,7 @@ const Home = () => {
           {user?.isKycDone ? (
             <>
               <HomeCards />
-              <HomeChart />
+              {/* <HomeChart /> */}
             </>
           ) : (
             <div className="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-lg">
