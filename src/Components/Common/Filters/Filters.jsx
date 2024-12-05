@@ -117,7 +117,7 @@ const Filters = ({
   }, [searchText, status]);
 
   return (
-    <div className="flex w-full items-end gap-2 md:flex-row md:justify-end">
+    <div className="flex w-full flex-wrap items-end justify-end gap-2 md:flex-row md:flex-nowrap">
       {!!showTab && <Tab />}
 
       {!!showSearch && (
@@ -212,7 +212,7 @@ const Filters = ({
       )}
 
       {!!showLayoutChange && (
-        <div className="flex h-full items-center gap-1 rounded-sm border border-gray-200 p-1">
+        <div className="flex h-[40px] items-center gap-1 rounded-sm border border-gray-200 p-1">
           <IconList
             onClick={e => {
               e.stopPropagation();
