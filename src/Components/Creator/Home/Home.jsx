@@ -6,7 +6,6 @@ import useUser from '@/Utils/Hooks/useUser';
 import { Button } from '@mantine/core';
 import { IconUser } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
-import { AllProducts } from './AllProducts';
 import HomeCards from './HomeCards';
 
 const Home = () => {
@@ -60,7 +59,6 @@ const Home = () => {
               </Button>
             </div>
           )}
-          <AllProducts />
         </div>
       </div>
       {!!opened && (
