@@ -64,9 +64,9 @@ const HomeAnalytics = () => {
   return (
     <>
       <div className="space-y-6">
-        {/* Time Period Selector */}
         <div className="flex justify-end">
           <Select
+            checkIconPosition="right"
             data={TIME_PERIODS}
             value={selectedPeriod}
             onChange={(_, option) => {
