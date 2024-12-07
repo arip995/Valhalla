@@ -326,15 +326,25 @@ const CourseConsume = ({ productId }) => {
 
             <SavedLessonContent value={activeLesson} />
             {!!activeLesson.description && (
-              <div className="my-2">
-                {activeLesson.description}
-              </div>
+              <>
+                <div className="my-2 text-lg font-bold">
+                  Notes
+                </div>
+                <div className="my-2">
+                  {activeLesson.description}
+                </div>
+              </>
             )}
             {!!activeLesson.supportMaterial?.length && (
-              <ListFiles
-                files={activeLesson.supportMaterial}
-                showDownloadButton={true}
-              />
+              <>
+                <div className="my-2 text-lg font-bold">
+                  Resources
+                </div>
+                <ListFiles
+                  files={activeLesson.supportMaterial}
+                  showDownloadButton={true}
+                />
+              </>
             )}
             <div className="mt-4 flex gap-6">
               <Checkbox
