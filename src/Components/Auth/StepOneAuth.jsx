@@ -71,7 +71,7 @@ const StepOneAuth = ({
                 onSubmit={otpForm.onSubmit(handleSubmit)}
                 className="space-y-6"
               >
-                <div className="space-y-4 text-center">
+                <div className="flex flex-col items-center gap-4 text-center">
                   <div className="flex items-center justify-center gap-2 text-gray-600">
                     <Text size="sm">
                       Enter verification code sent to
@@ -91,7 +91,6 @@ const StepOneAuth = ({
                     length={5}
                     size="md"
                     type="number"
-                    className="justify-center"
                     {...otpForm.getInputProps('otp')}
                   />
                 </div>
