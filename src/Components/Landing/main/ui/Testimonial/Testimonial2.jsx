@@ -25,28 +25,28 @@ const testimonials = [
   {
     image: user3,
     name: 'Sahil Sharma',
-    title: 'Finance Creator',
+    title: 'Life Coach',
     quote:
       "I highly recommend Nexify for anyone looking for an easy-to-use and reliable monetization tool! It's simple to use and has been a great help.",
   },
   {
     image: user4,
     name: 'Rahul Arya',
-    title: 'Educator',
+    title: 'Musician',
     quote:
       "I've been using Nexify for the past few months and I'm extremely impressed. The user interface is very intuitive, and I love the automated features .",
   },
   {
     image: user5,
     name: 'Ana Singh',
-    title: 'Content Creator',
+    title: 'Nutritionist',
     quote:
       "Nexify is the best creator monetization tool I've ever used. It's incredibly simple and intuitive to use, yet it offers a wide range of features and options.",
   },
   {
     image: user6,
     name: 'Sonu Anand',
-    title: 'Content Creator',
+    title: 'Fitness Creator',
     quote:
       'Nexify is definitely the way to go when it comes to monetization + I highly recommend it as an monetization tool with AI support.',
   },
