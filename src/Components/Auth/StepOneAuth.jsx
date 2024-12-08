@@ -1,31 +1,21 @@
-/* eslint-disable @next/next/no-img-element */
 import Timer from '@/Components/Common/Timer.jsx';
-import { googleOauth } from '@/Utils/Common';
 import {
-  Anchor,
   Button,
   Divider,
-  Group,
   NumberInput,
   PinInput,
-  Stack,
   Text,
   TextInput,
-  rem,
 } from '@mantine/core';
 import { upperFirst } from '@mantine/hooks';
 import {
+  IconArrowRight,
   IconEdit,
   IconMail,
   IconPhone,
 } from '@tabler/icons-react';
 import Link from 'next/link';
 import React from 'react';
-
-import Logo from '../../app/icon.png';
-import GoogleButton from '../Common/Buttons/GoogleButton/GoogleButton';
-import HeaderWrapper from './HeaderWrapper';
-import PaperWrapper from './PaperWrapper';
 
 const StepOneAuth = ({
   pathname,
@@ -40,204 +30,190 @@ const StepOneAuth = ({
   loading,
 }) => {
   return (
-    <>
-      <HeaderWrapper
-        titleOne={
-          <div className="flex select-none items-center text-gray-800">
+    <div className="w-full max-w-md">
+      <div className="rounded-2xl bg-white p-8 shadow-xl">
+        {/* Logo Section */}
+        <div className="mb-8 flex justify-center">
+          <div className="flex items-center gap-2">
             <img
-              className="h-12 w-auto"
-              src={Logo.src}
+              className="h-10 w-auto"
+              src="/icon.png"
               alt="Nexify"
             />
-            Nexify
+            <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-2xl font-bold text-transparent">
+              Nexify
+            </span>
           </div>
-        }
-      />
-      <PaperWrapper>
-        {showOtp ? null : (
-          <HeaderWrapper
-            titleOneAlternative={
-              pathname === 'signin'
-                ? 'Log in'
-                : 'Create your account'
-            }
-            titleTwo={
-              <div className="flex w-full flex-wrap justify-center gap-2">
-                {pathname === 'signin'
-                  ? 'Do not have an account yet?  '
-                  : 'Already have an account?  '}
-                <div className="text-sm font-normal text-violet-500">
-                  {pathname === 'signin' ? (
-                    <Link size="sm" href="/signup" prefetch>
-                      Create account
-                    </Link>
-                  ) : (
-                    <Link size="sm" href="/signin" prefetch>
-                      Sign in
-                    </Link>
-                  )}
-                  .
-                </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="space-y-6">
+          {!showOtp && (
+            <>
+              <div className="space-y-2 text-center">
+                <h2 className="text-2xl font-semibold text-gray-900">
+                  {pathname === 'signin'
+                    ? 'Welcome back'
+                    : 'Create account'}
+                </h2>
+                <p className="text-gray-500">
+                  {pathname === 'signin'
+                    ? 'Sign in to continue to Nexify'
+                    : 'Join Nexify to get started'}
+                </p>
               </div>
-            }
-          />
-        )}
-        {showOtp ? (
-          <>
-            <form onSubmit={otpForm.onSubmit(handleSubmit)}>
-              <Stack justify="center" align="center">
-                <div className="flex gap-1">
-                  <Text size="sm" ta="center">
-                    Enter Otp sent to
-                  </Text>
-                  <Text size="sm" ta="center" c={'dimmed'}>
-                    {emailOrPhoneNumber === 'email'
-                      ? authForm?.values?.email
-                      : `+91 ${authForm?.values?.phoneNumber}`}
-                  </Text>
-                  <IconEdit
-                    className="cursor-pointer text-gray-600"
-                    onClick={() => toggleShowOtp()}
-                    style={{
-                      width: rem(16),
-                      height: rem(16),
-                    }}
-                    stroke={1.5}
+            </>
+          )}
+
+          {showOtp ? (
+            <div className="space-y-6">
+              <form
+                onSubmit={otpForm.onSubmit(handleSubmit)}
+                className="space-y-6"
+              >
+                <div className="space-y-4 text-center">
+                  <div className="flex items-center justify-center gap-2 text-gray-600">
+                    <Text size="sm">
+                      Enter verification code sent to
+                    </Text>
+                    <Text size="sm" className="font-medium">
+                      {emailOrPhoneNumber === 'email'
+                        ? authForm?.values?.email
+                        : `+91 ${authForm?.values?.phoneNumber}`}
+                    </Text>
+                    <IconEdit
+                      className="h-4 w-4 cursor-pointer text-gray-400 transition-colors hover:text-gray-600"
+                      onClick={toggleShowOtp}
+                    />
+                  </div>
+
+                  <PinInput
+                    length={5}
+                    size="md"
+                    type="number"
+                    className="justify-center"
+                    {...otpForm.getInputProps('otp')}
                   />
                 </div>
 
-                <PinInput
-                  autoFocus
-                  size="lg"
-                  length={5}
-                  type="number"
-                  {...otpForm.getInputProps('otp')}
-                />
-              </Stack>
-
-              <Group justify="space-between" mt="xl">
                 <Button
                   type="submit"
-                  radius="xl"
                   fullWidth
                   loading={loading}
-                  onClick={() => {
-                    setIsClickedAtleastOnce(true);
-                  }}
+                  className="bg-violet-600 transition-colors hover:bg-violet-700"
+                  onClick={() =>
+                    setIsClickedAtleastOnce(true)
+                  }
+                  rightSection={
+                    !loading && <IconArrowRight size={16} />
+                  }
                 >
-                  Verify OTP
+                  Verify Code
                 </Button>
-              </Group>
-            </form>
-            <Text size="sm" ta="center" mt={20}>
-              Resend otp in{' '}
-              <Anchor size="sm" component="button">
+              </form>
+
+              <div className="text-center text-sm text-gray-500">
+                {`Didn't`} receive the code?{' '}
                 <Timer
-                  onClick={() => {
-                    handleSubmit('resend');
-                  }}
-                  completedContent="Resend"
+                  onClick={() => handleSubmit('resend')}
+                  completedContent={
+                    <button className="font-medium text-violet-600 hover:text-violet-700">
+                      Resend
+                    </button>
+                  }
                 />
-              </Anchor>
-            </Text>
-          </>
-        ) : (
-          <form onSubmit={authForm.onSubmit(handleSubmit)}>
-            <Stack>
+              </div>
+            </div>
+          ) : (
+            <form
+              onSubmit={authForm.onSubmit(handleSubmit)}
+              className="space-y-6"
+            >
               {emailOrPhoneNumber === 'email' ? (
                 <TextInput
-                  label="Email"
-                  autoFocus
-                  placeholder="hello@panda.dev"
-                  value={authForm.values.email}
+                  label="Email address"
+                  placeholder="hello@example.com"
                   autoComplete="email"
+                  radius="md"
                   {...authForm.getInputProps('email')}
                 />
               ) : (
                 <NumberInput
                   hideControls
-                  autoFocus
-                  clampBehavior="strict"
-                  max={9999999999}
                   label="Phone Number"
                   placeholder="6345325643"
                   autoComplete="tel"
-                  value={authForm.values.phoneNumber}
                   leftSection={<Text size="sm">+91</Text>}
+                  radius="md"
                   {...authForm.getInputProps('phoneNumber')}
                 />
               )}
-            </Stack>
 
-            <Group justify="space-between" mt="xl">
               <Button
                 type="submit"
-                radius="xl"
                 fullWidth
                 loading={loading}
-                onClick={() => {
-                  setIsClickedAtleastOnce(true);
-                }}
+                className="bg-violet-600 transition-colors hover:bg-violet-700"
+                onClick={() =>
+                  setIsClickedAtleastOnce(true)
+                }
+                rightSection={
+                  !loading && <IconArrowRight size={16} />
+                }
               >
                 {upperFirst(pathname)}
               </Button>
-            </Group>
-          </form>
-        )}
-        {!showOtp ? (
-          <>
-            <Divider
-              label={`Or continue with`}
-              labelPosition="center"
-              my="lg"
-            />
-            <div className="flex w-full flex-col gap-2 md:flex-row">
+            </form>
+          )}
+
+          {!showOtp && (
+            <>
+              <Divider
+                label="Or continue with"
+                labelPosition="center"
+              />
+
               <Button
-                radius="xl"
                 variant="default"
-                justify="space-between"
                 fullWidth
-                rightSection={<span />}
                 leftSection={
                   emailOrPhoneNumber === 'email' ? (
-                    <IconPhone
-                      style={{
-                        width: rem(20),
-                        height: rem(20),
-                      }}
-                      stroke={1.5}
-                    />
+                    <IconPhone size={18} />
                   ) : (
-                    <IconMail
-                      style={{
-                        width: rem(20),
-                        height: rem(20),
-                      }}
-                      stroke={1.5}
-                    />
+                    <IconMail size={18} />
                   )
                 }
-                onClick={() => toggleEmailOrPhoneNumber()}
+                className="border border-gray-200 transition-colors hover:bg-gray-50"
+                onClick={toggleEmailOrPhoneNumber}
               >
+                Continue with{' '}
                 {emailOrPhoneNumber === 'email'
-                  ? 'Phone Number'
+                  ? 'Phone'
                   : 'Email'}
               </Button>
-              <GoogleButton
-                radius="lg"
-                onClick={() =>
-                  googleOauth(
-                    `${pathname === 'signin' && 'isSignin=true'}&fromAuthPage=true`
-                  )
-                }
-              >
-                Continue with Google
-              </GoogleButton>
-            </div>
-          </>
-        ) : null}
-      </PaperWrapper>
-    </>
+
+              <div className="text-center text-sm text-gray-500">
+                {pathname === 'signin'
+                  ? "Don't have an account? "
+                  : 'Already have an account? '}
+                <Link
+                  href={
+                    pathname === 'signin'
+                      ? '/signup'
+                      : '/signin'
+                  }
+                  className="font-medium text-violet-600 hover:text-violet-700"
+                >
+                  {pathname === 'signin'
+                    ? 'Sign up'
+                    : 'Sign in'}
+                </Link>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 
