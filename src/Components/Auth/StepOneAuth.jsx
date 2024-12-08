@@ -76,11 +76,11 @@ const StepOneAuth = ({
                     <Text size="sm">
                       Enter verification code sent to
                     </Text>
-                    <Text size="sm" className="font-medium">
+                    <div className="text-sm font-semibold">
                       {emailOrPhoneNumber === 'email'
                         ? authForm?.values?.email
                         : `+91 ${authForm?.values?.phoneNumber}`}
-                    </Text>
+                    </div>
                     <IconEdit
                       className="h-4 w-4 cursor-pointer text-gray-400 transition-colors hover:text-gray-600"
                       onClick={toggleShowOtp}
