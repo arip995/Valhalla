@@ -12,7 +12,6 @@ import React from 'react';
 
 import '../../../styles/common/common-container.css';
 import '../../../styles/create/Telegram.css';
-import HeaderWrapper from '../../Auth/HeaderWrapper';
 import PaperWrapper from '../../Auth/PaperWrapper';
 import StepOneCreateTelegram from './StepOneCreateTelegram';
 import StepThreeCreateTelegram from './StepThreeCreateTelegram';
@@ -40,9 +39,9 @@ const CreateTelegram = ({ data }) => {
     <>
       <div className="top-container">
         <div className="flex w-11/12 max-w-[600px] flex-col items-center gap-2 md:w-1/2">
-          <HeaderWrapper
-            titleOne={'Create Telegram Community'}
-          />
+          <div className="text-3xl font-semibold text-gray-900">
+            Create Telegram Community
+          </div>
           <Box pos="relative" className="w-full">
             <LoadingOverlay
               visible={loading}

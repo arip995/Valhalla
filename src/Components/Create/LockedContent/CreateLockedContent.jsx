@@ -18,13 +18,12 @@ import {
   IconUpload,
 } from '@tabler/icons-react';
 
+import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
+import Link from 'next/link';
 import '../../../styles/common/common-container.css';
-import HeaderWrapper from '../../Auth/HeaderWrapper';
 import PaperWrapper from '../../Auth/PaperWrapper';
 import ListFiles from '../../Common/ListFiles/ListFiles';
 import useCreateLockedContent from './useCreateLockedContent';
-import Link from 'next/link';
-import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 
 const CreateLockedContent = ({ data }) => {
   const {
@@ -46,9 +45,9 @@ const CreateLockedContent = ({ data }) => {
     <>
       <div className="top-container">
         <div className="flex w-11/12 max-w-[600px] flex-col items-center gap-3 md:w-1/2">
-          <HeaderWrapper
-            titleOne={'Create Locked Content'}
-          />
+          <div className="text-3xl font-semibold text-gray-900">
+            Create Locked Content
+          </div>
           <Box pos="relative" className="w-full">
             <LoadingOverlay
               visible={loading}

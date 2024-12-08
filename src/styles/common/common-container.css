@@ -23,15 +23,4 @@
   @media only screen and (max-width: 767px) {
     padding-top: 75px;
   }
-  .container-wrapper-title {
-    font-family:
-      Greycliff CF,
-      var(--mantine-font-family);
-    font-size: 30px;
-    font-weight: 900;
-  }
-  .container-wrapper-title-alter {
-    font-size: 26px;
-    font-weight: 700;
-  }
 }

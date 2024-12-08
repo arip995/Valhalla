@@ -22,7 +22,6 @@ import { useDebouncedCallback } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import HeaderWrapper from './HeaderWrapper';
 import PaperWrapper from './PaperWrapper';
 
 const UserTypeCards = UserTypes.map(item => (
@@ -135,9 +134,9 @@ const StepTwoAuth = () => {
 
   return (
     <>
-      <HeaderWrapper
-        titleOne={'Tell us a bit about yourself'}
-      />
+      <div className="text-3xl font-semibold text-gray-900">
+        Tell us a bit about yourself
+      </div>
       <PaperWrapper className="relative">
         <Stack>
           <TextInput

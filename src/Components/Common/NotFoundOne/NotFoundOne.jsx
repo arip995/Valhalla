@@ -1,6 +1,5 @@
 'use client';
 
-import HeaderWrapper from '@/Components/Auth/HeaderWrapper';
 import { Button } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 import Logo from '../../../../public/icons/neifyiconsmall.png';
@@ -13,18 +12,16 @@ const NotFoundOne = () => {
     <div className="mx-auto flex h-screen max-w-screen-xl items-center justify-start bg-white px-4 md:px-8">
       <div className="mx-auto max-w-lg text-gray-600">
         <div className="flex w-full flex-col items-center gap-8">
-          <HeaderWrapper
-            titleOne={
-              <div className="flex select-none items-center gap-2 text-[30px] font-black text-black">
-                <img
-                  className="h-12 w-auto"
-                  src={Logo.src}
-                  alt="Nexify"
-                />
-                Nexify
-              </div>
-            }
-          />
+          <div>
+            <div className="flex select-none items-center gap-2 text-[30px] font-black text-black">
+              <img
+                className="h-12 w-auto"
+                src={Logo.src}
+                alt="Nexify"
+              />
+              Nexify
+            </div>
+          </div>
           <img
             src={IconPageNotFound.src}
             alt=""
