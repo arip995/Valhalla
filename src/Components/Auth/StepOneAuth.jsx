@@ -72,7 +72,7 @@ const StepOneAuth = ({
                 className="space-y-6"
               >
                 <div className="flex flex-col items-center gap-4 text-center">
-                  <div className="flex items-center justify-center gap-2 text-gray-600">
+                  <div className="flex flex-wrap items-center justify-center gap-2 text-gray-600">
                     <Text size="sm">
                       Enter verification code sent to
                     </Text>
