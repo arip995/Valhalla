@@ -1,14 +1,7 @@
-import CTA from '@/Components/Landing/main/ui/CTA';
-import FAQs from '@/Components/Landing/main/ui/FAQs';
-import Features from '@/Components/Landing/main/ui/Features';
-import Footer from '@/Components/Landing/main/ui/Footer';
-import Hero from '@/Components/Landing/main/ui/Hero';
-import Navbar from '@/Components/Landing/main/ui/Navbar';
-import Testimonial from '@/Components/Landing/main/ui/Testimonial';
-import VisualFeatures from '@/Components/Landing/main/ui/VisualFeatures';
+/* eslint-disable no-unused-vars */
+import LandingPage from '@/Components/Landing/main/NewUi/LandingPage';
 import '@mantine/notifications/styles.css';
 import '../styles/landing/main.css';
-import ContactUs from '@/Components/Common/ContactUs/ContactUs';
 
 export async function generateMetadata(
   // { params, searchParams },
@@ -50,24 +43,25 @@ export async function generateMetadata(
 }
 
 export default function Page() {
-  return (
-    <div className="relative flex flex-col bg-gray-900">
-      <div className="fixed top-0 z-50 w-full bg-gray-900">
-        <Navbar />
-      </div>
-      <div className="flex flex-col">
-        <Hero />
-        <VisualFeatures />
-        <Features />
-        <CTA />
-        <Testimonial />
-        {/* <Pricing /> */}
-        <FAQs />
-        <ContactUs />
-        <Footer />
-      </div>
-    </div>
-  );
+  return <LandingPage />;
+  // return (
+  //   <div className="relative flex flex-col bg-gray-900">
+  //     <div className="fixed top-0 z-50 w-full bg-gray-900">
+  //       <Navbar />
+  //     </div>
+  //     <div className="flex flex-col">
+  //       <Hero />
+  //       <VisualFeatures />
+  //       <Features />
+  //       <CTA />
+  //       <Testimonial />
+  //       {/* <Pricing /> */}
+  //       <FAQs />
+  //       <ContactUs />
+  //       <Footer />
+  //     </div>
+  //   </div>
+  // );
 }
 
 // import React from 'react';

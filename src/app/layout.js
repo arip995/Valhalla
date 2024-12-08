@@ -77,7 +77,7 @@ const theme = createTheme({
   // fontFamilyMonospace: 'Monaco, Courier, monospace',
   // headings: { fontFamily: 'Greycliff CF, sans-serif' },
   primaryColor: 'violet',
-  // primaryColor: 'bright-blue',
+  // primaryColor: 'nexify-purple',
   // colors: {
   //   'bright-blue': [
   //     '#e5f4ff',
@@ -90,6 +90,18 @@ const theme = createTheme({
   //     '#0058e4',
   //     '#004ecc',
   //     '#0043b5',
+  //   ],
+  //   'nexify-purple': [
+  //     '#faf5ff',
+  //     '#f3e8ff',
+  //     '#e9d5ff',
+  //     '#d8b4fe',
+  //     '#c084fc',
+  //     '#a855f7',
+  //     '#9333ea',
+  //     '#7e22ce',
+  //     '#6b21a8',
+  //     '#581c87',
   //   ],
   // },
 
