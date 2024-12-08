@@ -10,6 +10,7 @@ const uselandingAuth = (signin, onAuthComplete, opened) => {
   const [isSignin, setIsSignin] = useState(signin);
   const { setCurrentUser } = useUser();
   const [step, setStep] = useState(1);
+  const [otpRefId, setOtpRefId] = useState(null);
   const [isEmail, setIsEmail] = useState(false);
   const [loading, setLoading] = useState(0);
   const authForm = useForm({
@@ -67,13 +68,17 @@ const uselandingAuth = (signin, onAuthComplete, opened) => {
   const sendOtp = async () => {
     try {
       setLoading(1);
-      await axiosInstance.post(`/auth/send_otp`, {
-        [isEmail ? 'email' : 'phoneNumber']: isEmail
-          ? authForm.values.email
-          : authForm.values.phoneNumber,
-        isSignUp: !isSignin,
-        isAuth: true,
-      });
+      const { data } = await axiosInstance.post(
+        `/auth/send_otp`,
+        {
+          [isEmail ? 'email' : 'phoneNumber']: isEmail
+            ? authForm.values.email
+            : authForm.values.phoneNumber,
+          isSignUp: !isSignin,
+          isAuth: true,
+        }
+      );
+      setOtpRefId(data?.data?._id);
       if (step === 1) {
         setStep(2);
       }
@@ -103,6 +108,7 @@ const uselandingAuth = (signin, onAuthComplete, opened) => {
           firstName,
           lastName,
           isCreator: false,
+          refId: otpRefId,
           isSignUp: !isSignin,
           ...(!isSignin ? { isCreator: false } : {}),
         },

@@ -25,6 +25,7 @@ const AddUpdateContactDetails = ({
   const [loading, setLoading] = useState(value);
   const [isOtpScreen, setIsOtpScreen] = useState(value);
   const [otp, setOtp] = useState(value);
+  const [otpRefId, setOtpRefId] = useState(null);
 
   const checkDisabled = () => {
     if (
@@ -79,10 +80,11 @@ const AddUpdateContactDetails = ({
     }
 
     try {
-      await axios.post(
+      const { data } = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/send_otp`,
         payload
       );
+      setOtpRefId(data?.data?._id);
       toast.success('Otp sent successfully');
       setIsOtpScreen(true);
     } catch (error) {
@@ -100,6 +102,7 @@ const AddUpdateContactDetails = ({
           : 'phoneNumber']: contactValue,
         updateEntity: type,
         otp: otp,
+        refId: otpRefId,
       };
       const data = await axiosInstance.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/update_verify_otp`,

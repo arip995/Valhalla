@@ -20,6 +20,7 @@ const useContactSupportDetails = () => {
   const [isOtpScreen, setIsOtpScreen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [otp, setOtp] = useState('');
+  const [otpRefId, setOtpRefId] = useState(null);
 
   const onClickEdit = type => {
     setEditEntity(type);
@@ -87,10 +88,12 @@ const useContactSupportDetails = () => {
     }
 
     try {
-      await axios.post(
+      const { data } = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/send_otp`,
         payload
       );
+      setOtpRefId(data?.data?._id);
+
       toast.success('Otp sent successfully');
       setIsOtpScreen(true);
     } catch (error) {
@@ -117,6 +120,7 @@ const useContactSupportDetails = () => {
               : '',
         updateEntity: editEntity,
         otp: otp,
+        refId: otpRefId,
       };
       const data = await axiosInstance.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/update_verify_otp`,

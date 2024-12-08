@@ -19,6 +19,7 @@ const useAuth = () => {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [otpRefId, setOtpRefId] = useState(null);
   const [emailOrPhoneNumber, toggleEmailOrPhoneNumber] =
     useToggle(['phoneNumber', 'email']);
   const [showOtp, toggleShowOtp] = useToggle([false, true]);
@@ -74,7 +75,7 @@ const useAuth = () => {
   const sendOtp = async () => {
     try {
       setLoading(true);
-      await axios.post(
+      const { data } = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/send_otp`,
         {
           [emailOrPhoneNumber === 'email'
@@ -87,6 +88,7 @@ const useAuth = () => {
           isAuth: true,
         }
       );
+      setOtpRefId(data?.data?._id);
       if (!showOtp) {
         toggleShowOtp();
       }
@@ -112,6 +114,7 @@ const useAuth = () => {
               ? authForm.values.email
               : authForm.values.phoneNumber,
           otp: otpForm.values.otp,
+          refId: otpRefId,
           isSignUp: pathname === 'signup' ? true : false,
         },
         {
