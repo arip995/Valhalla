@@ -19,8 +19,7 @@ const ContactUs = () => {
       SUNDERPADA ROAD, SUNDARPADA, BHUBANESWAR, KHORDHA,
       ODISHA, 751002, BHUBANESWAR, Odisha, PIN: 751002{' '}
       <br />
-      Telephone No: 7327039736 <br />
-      E-Mail ID: arindam@nexify.club
+      E-Mail ID: support@nexify.club
     </div>
   );
 };
