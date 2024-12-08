@@ -143,6 +143,8 @@ const StepOneAuth = ({
                   label="Phone Number"
                   placeholder="6345325643"
                   autoComplete="tel"
+                  clampBehavior="strict"
+                  max={9999999999}
                   leftSection={<Text size="sm">+91</Text>}
                   radius="md"
                   {...authForm.getInputProps('phoneNumber')}
