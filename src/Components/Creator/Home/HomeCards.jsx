@@ -6,7 +6,6 @@ import {
   IconShoppingBag,
 } from '@tabler/icons-react';
 import { useCallback, useEffect, useState } from 'react';
-import { AllProducts } from './AllProducts';
 
 const PRODUCT_TYPE_NAMES = {
   course: 'Course',
@@ -49,17 +48,17 @@ const HomeAnalytics = () => {
     }
   }, []);
 
-  useEffect(() => {
-    fetchAnalytics(selectedPeriod);
-  }, [selectedPeriod, fetchAnalytics]);
-
-  if (loading) return <LayoutLoading />;
-
   const formatCurrency = amount =>
     `₹${amount.toLocaleString('en-IN', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     })}`;
+
+  useEffect(() => {
+    fetchAnalytics(selectedPeriod);
+  }, [selectedPeriod, fetchAnalytics]);
+
+  if (loading) return <LayoutLoading />;
 
   return (
     <>
@@ -146,7 +145,6 @@ const HomeAnalytics = () => {
           </div>
         </div>
       </div>
-      <AllProducts />
     </>
   );
 };
