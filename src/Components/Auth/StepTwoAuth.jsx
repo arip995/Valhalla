@@ -114,14 +114,6 @@ const StepTwoAuth = () => {
   }, [firstName, lastName, usertype, category]);
 
   useEffect(() => {
-    if (isFirstRender.current < 3) {
-      isFirstRender.current += 1;
-      return;
-    }
-    validateUsername();
-  }, [username]);
-
-  useEffect(() => {
     if (user) {
       if (user.firstName) {
         setFirstName(user.firstName);
@@ -132,119 +124,129 @@ const StepTwoAuth = () => {
     }
   }, [user?.firstName, user?.lastName]);
 
-  return (
-    <>
-      <div className="text-3xl font-semibold text-gray-900">
-        Tell us a bit about yourself
-      </div>
-      <PaperWrapper className="relative">
-        <Stack>
-          <TextInput
-            required
-            autoFocus
-            label="First Name"
-            placeholder="Jacob"
-            value={firstName}
-            onChange={e => {
-              if (e.target.value > 60) return;
-              setFirstName(e.target.value);
-            }}
-            radius="md"
-          />
-          <TextInput
-            required
-            label="Last Name"
-            placeholder="Jones"
-            value={lastName}
-            onChange={e => {
-              if (e.target.value > 60) return;
-              setLastName(e.target.value);
-            }}
-            radius="md"
-          />
-          <TextInput
-            required
-            label="Username"
-            placeholder="pandaop"
-            value={username}
-            onChange={e => {
-              if (!checkRestrictedChars(e.target.value))
-                return;
-              setUsername(e.target.value);
-            }}
-            radius="md"
-            leftSection={<Text size="sm">@</Text>}
-            rightSection={
-              !!loading && <Loader size={'sm'} />
-            }
-            error={errors?.username}
-          />
-        </Stack>
-        <div className="text-md mt-4 w-full text-left font-semibold">
-          I am
-        </div>
-        <Chip.Group
-          value={usertype}
-          onChange={setUsertype}
-          className="w-full"
-        >
-          <Flex
-            mih={50}
-            pt={'md'}
-            gap="md"
-            justify="flex-start"
-            align="flex-start"
-            direction="row"
-            wrap="wrap"
-          >
-            {UserTypeCards}
-          </Flex>
-        </Chip.Group>
-        <Collapse in={usertype}>
-          <Divider
-            label={`What category best describes my product.`}
-            labelPosition="center"
-            my="md"
-          />
+  useEffect(() => {
+    if (isFirstRender.current < 3) {
+      isFirstRender.current += 1;
+      return;
+    }
+    validateUsername();
+  }, [username]);
 
+  return (
+    <div className="min-w-screen top-container flex min-h-screen justify-center bg-gray-50 py-8">
+      <div className="flex w-full flex-col items-center gap-2">
+        <div className="text-3xl font-semibold text-gray-900">
+          Tell us a bit about yourself
+        </div>
+        <PaperWrapper className="relative">
+          <Stack>
+            <TextInput
+              required
+              autoFocus
+              label="First Name"
+              placeholder="Jacob"
+              value={firstName}
+              onChange={e => {
+                if (e.target.value > 60) return;
+                setFirstName(e.target.value);
+              }}
+              radius="md"
+            />
+            <TextInput
+              required
+              label="Last Name"
+              placeholder="Jones"
+              value={lastName}
+              onChange={e => {
+                if (e.target.value > 60) return;
+                setLastName(e.target.value);
+              }}
+              radius="md"
+            />
+            <TextInput
+              required
+              label="Username"
+              placeholder="pandaop"
+              value={username}
+              onChange={e => {
+                if (!checkRestrictedChars(e.target.value))
+                  return;
+                setUsername(e.target.value);
+              }}
+              radius="md"
+              leftSection={<Text size="sm">@</Text>}
+              rightSection={
+                !!loading && <Loader size={'sm'} />
+              }
+              error={errors?.username}
+            />
+          </Stack>
+          <div className="text-md mt-4 w-full text-left font-semibold">
+            I am
+          </div>
           <Chip.Group
-            value={category}
-            onChange={setCategory}
+            value={usertype}
+            onChange={setUsertype}
+            className="w-full"
           >
             <Flex
               mih={50}
+              pt={'md'}
               gap="md"
               justify="flex-start"
               align="flex-start"
               direction="row"
               wrap="wrap"
             >
-              {CategoryCards}
+              {UserTypeCards}
             </Flex>
           </Chip.Group>
-        </Collapse>
-        {usertype && (
-          <div className="sticky bottom-5 mt-4">
-            <Button
-              radius="xl"
-              variant="filled"
-              loading={createLoading}
-              disabled={
-                Object.keys(errors || {}).length ||
-                !username.length ||
-                loading
-              }
-              onClick={() => {
-                handleOnboard();
-              }}
-              fullWidth
+          <Collapse in={usertype}>
+            <Divider
+              label={`What category best describes my product.`}
+              labelPosition="center"
+              my="md"
+            />
+
+            <Chip.Group
+              value={category}
+              onChange={setCategory}
             >
-              Start Earning
-            </Button>
-          </div>
-        )}
-      </PaperWrapper>
-    </>
+              <Flex
+                mih={50}
+                gap="md"
+                justify="flex-start"
+                align="flex-start"
+                direction="row"
+                wrap="wrap"
+              >
+                {CategoryCards}
+              </Flex>
+            </Chip.Group>
+          </Collapse>
+          {usertype && (
+            <div className="sticky bottom-5 mt-4">
+              <Button
+                radius="xl"
+                variant="filled"
+                loading={createLoading}
+                disabled={
+                  Object.keys(errors || {}).length ||
+                  !username.length ||
+                  loading
+                }
+                onClick={() => {
+                  handleOnboard();
+                }}
+                fullWidth
+              >
+                Start Earning
+              </Button>
+            </div>
+          )}
+        </PaperWrapper>
+      </div>
+    </div>
   );
 };
 

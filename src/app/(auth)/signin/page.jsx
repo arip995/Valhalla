@@ -2,7 +2,7 @@ import Auth from '@/Components/Auth/Auth';
 import React from 'react';
 
 const page = () => {
-  return <Auth tabName="login" />;
+  return <Auth />;
 };
 
 export default page;

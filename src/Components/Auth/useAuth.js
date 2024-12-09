@@ -17,7 +17,6 @@ const useAuth = () => {
   const pathname = usePathname().substring(1);
   const params = useSearchParams();
   const router = useRouter();
-  const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [otpRefId, setOtpRefId] = useState(null);
   const [emailOrPhoneNumber, toggleEmailOrPhoneNumber] =
@@ -127,10 +126,10 @@ const useAuth = () => {
       }
       if (data?.data?.data?.user.username) {
         setTimeout(() => {
-          router.push('/home');
+          router.replace('/home');
         }, 3000);
       } else {
-        setStep(2);
+        router.replace('/onboarding');
       }
     } catch (error) {
       setLoading(false);
@@ -144,9 +143,15 @@ const useAuth = () => {
 
   useEffect(() => {
     if (user?.isCreator && !user?.username) {
-      setStep(2);
+      router.replace('/onboarding');
     }
   }, [user?._id]);
+
+  useEffect(() => {
+    router.prefetch('/onboarding');
+    router.prefetch('/signin');
+    router.prefetch('/signup');
+  }, [router]);
 
   useEffect(() => {
     if (params.get('success') === 'false') {
@@ -181,7 +186,6 @@ const useAuth = () => {
   }, []);
 
   return {
-    step,
     pathname,
     emailOrPhoneNumber,
     toggleEmailOrPhoneNumber,

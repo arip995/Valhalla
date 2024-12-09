@@ -1,7 +1,7 @@
 import Auth from '@/Components/Auth/Auth';
 
 const page = () => {
-  return <Auth tabName="register" />;
+  return <Auth />;
 };
 
 export default page;

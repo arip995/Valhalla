@@ -1,4 +1,5 @@
 import axiosInstance from '@/Utils/AxiosInstance';
+import { capitalizeFirstLetter } from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
 import { validateEmail } from '@/Utils/Regex';
 import {
@@ -125,7 +126,7 @@ const AddUpdateContactDetails = ({
         return (
           <TextInput
             autoFocus
-            label={type}
+            label={capitalizeFirstLetter(type)}
             placeholder="hello@panda.dev"
             value={contactValue}
             radius="sm"
@@ -143,7 +144,7 @@ const AddUpdateContactDetails = ({
             clampBehavior="strict"
             autoComplete="tel"
             max={9999999999}
-            label={type}
+            label={capitalizeFirstLetter(type)}
             placeholder={'6345325643'}
             value={contactValue}
             radius="sm"
