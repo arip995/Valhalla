@@ -2,12 +2,6 @@ import toast from 'react-hot-toast';
 import axiosInstance from './AxiosInstance';
 import axios from 'axios';
 
-/**
- * Converts a file to a base64 encoded string.
- *
- * @param {File} file - The file to convert.
- * @returns {Promise<{ base64: string, type: string, name: string }>} A promise resolving to an object containing the base64 encoded string, file type, and file name.
- */
 export const convertFileToBase64 = file => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -32,15 +26,6 @@ export const convertFileToBase64 = file => {
   });
 };
 
-/**
- * Handles file upload with validation for mime types and file sizes.
- *
- * @param {File} file - The file to upload.
- * @param {string[]} [mimetypes=['image']] - An array of allowed mime types.
- * @param {number} [maxFileSize=1] - The maximum file size in megabytes.
- * @param {number} [quality=50] - The image quality (1-100).
- * @returns {Promise<string>} A promise resolving to the uploaded file URL.
- */
 export const handleFile = async (
   file,
   mimeTypes = ['image/'],
@@ -67,15 +52,19 @@ export const handleFile = async (
     }
     if (validateOnly) return 'validated';
 
-    const fileData = await convertFileToBase64(file);
+    const type =
+      file.type === 'image/svg+xml'
+        ? 'image/svg'
+        : file.type;
     let payload = {
-      type: fileData.type,
+      type,
       quality,
       isPresigned,
     };
 
     if (!isPresigned) {
       // Convert file to base64
+      const fileData = await convertFileToBase64(file);
       payload = {
         ...payload,
         ...fileData,
