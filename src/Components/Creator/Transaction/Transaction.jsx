@@ -137,6 +137,7 @@ const Transaction = () => {
             showStatus={true}
             showLayoutChange={false}
             showHeader={false}
+            showActions={false}
             menuType={0}
             onRowClick={item => {
               setActiveTransaction(item);

@@ -28,6 +28,7 @@ const ProductListing = ({
   showStatus = true,
   showLayoutChange = true,
   showHeader = true,
+  showActions = true,
   menuType = 1,
   onRowClick,
 }) => {
@@ -199,6 +200,7 @@ const ProductListing = ({
                     hidden: isGrid,
                   })}
                   app={app}
+                  showActions={showActions}
                 />
               </>
             )}

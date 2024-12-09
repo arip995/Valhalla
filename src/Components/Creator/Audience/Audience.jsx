@@ -78,6 +78,7 @@ const Audience = () => {
         showSearch={true}
         showStatus={false}
         showLayoutChange={false}
+        showActions={false}
         menuType={0}
         onRowClick={item => {
           setActiveAudience(item);
