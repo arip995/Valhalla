@@ -63,6 +63,7 @@ const ShareButton = ({
       ) : (
         <Tooltip
           label={clipboard.copied ? 'Copied' : 'Copy link'}
+          events={{ hover: true, focus: true, touch: true }}
         >
           <div
             className={classNames(

@@ -75,7 +75,7 @@ const features = [
 const CompareTable = () => {
   return (
     <div className="flex w-full justify-center">
-      <div className="max-w-2xl bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 py-16">
+      <div className="max-w-2xl bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 py-12">
         <div className="container mx-auto px-6 text-center">
           <div className="mb-6 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text pb-1 text-4xl font-bold text-transparent">
             Save Big with Nexify!
@@ -130,12 +130,15 @@ const CompareTable = () => {
           <div className="mt-8 text-center">
             <p className="text-lg font-semibold text-gray-700">
               What all of this usually costs:{' '}
-              <span className="text-green-600">
-                ₹50,000/year
+              <span className="text-red-600 line-through">
+                ₹10,000/month
               </span>
             </p>
             <p className="mt-4 text-xl font-extrabold text-gray-800">
-              With Nexify, it costs you 10 times less!
+              With Nexify, it costs you{' '}
+              <span className="text-green-600">
+                ₹1,000/month
+              </span>
             </p>
             <Link href={'/signup'}>
               <div className="mt-6 cursor-pointer rounded-lg bg-gradient-to-r from-purple-600 to-pink-500 px-6 py-3 text-white shadow-lg hover:bg-gradient-to-l">

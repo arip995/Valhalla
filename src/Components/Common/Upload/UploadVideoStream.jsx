@@ -197,6 +197,7 @@ const UploadVideoStream = ({ onUpload, file = [] }) => {
             currentUpload?.[0]?.type === 'link'
           }
           label="Delete the uploaded video above to enable this field."
+          events={{ hover: true, focus: true, touch: true }}
         >
           <TextInput
             label="Video Link"

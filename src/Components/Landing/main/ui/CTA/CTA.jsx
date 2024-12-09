@@ -9,7 +9,7 @@ import LayoutEffect from '../../LayoutEffect';
 const CTA = () => (
   <section>
     <GradientWrapper wrapperClassName="max-w-xs h-[13rem] top-12 inset-0">
-      <div className="custom-screen relative py-12 sm:py-16">
+      <div className="custom-screen relative py-12 sm:py-12">
         <LayoutEffect
           className="delay-300 duration-1000"
           isInviewState={{

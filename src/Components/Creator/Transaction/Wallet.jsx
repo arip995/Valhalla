@@ -1,4 +1,5 @@
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
+import CompleteProfileModal from '@/Components/Common/Modal/CompleteProfileModal';
 import {
   Alert,
   Badge,
@@ -24,7 +25,63 @@ import {
 import classNames from 'classnames';
 import React from 'react';
 import useWallet from './useWallet';
-import { useRouter } from 'next/navigation';
+
+const GetStatusColor = status => {
+  switch (status) {
+    case 0:
+      return 'yellow'; // Pending
+    case 1:
+      return 'blue'; // Processing
+    case 2:
+      return 'green'; // Completed
+    case 3:
+      return 'red'; // Failed
+    case 4:
+      return 'red'; // Cancelled
+    case 5:
+      return 'red'; // Cancelled
+    default:
+      return 'gray';
+  }
+};
+
+const GetStatusText = status => {
+  switch (status) {
+    case 0:
+      return 'Pending';
+    case 1:
+      return 'Processing';
+    case 2:
+      return 'Completed';
+    case 3:
+      return 'Failed';
+    case 4:
+      return 'Cancelled by bank';
+    case 5:
+      return 'Cancelled';
+    default:
+      return 'Unknown';
+  }
+};
+
+const GetStatusIcon = status => {
+  switch (status) {
+    case 0:
+      return <IconAlertCircle size={20} />;
+    case 1:
+      return <IconCircleDot size={20} />;
+    case 2:
+      return <IconCheck size={20} />;
+    case 3:
+      return <IconX size={20} />;
+    case 4:
+      return <IconX size={20} />;
+    case 5:
+      return <IconX size={20} />;
+    default:
+      return <IconHelpCircle size={20} />;
+  }
+};
 
 const TransactionCard = ({
   description,
@@ -34,63 +91,6 @@ const TransactionCard = ({
   createdAt,
   settlementTime,
 }) => {
-  const getStatusColor = () => {
-    switch (status) {
-      case 0:
-        return 'yellow'; // Pending
-      case 1:
-        return 'blue'; // Processing
-      case 2:
-        return 'green'; // Completed
-      case 3:
-        return 'red'; // Failed
-      case 4:
-        return 'red'; // Cancelled
-      case 5:
-        return 'red'; // Cancelled
-      default:
-        return 'gray';
-    }
-  };
-
-  const getStatusText = () => {
-    switch (status) {
-      case 0:
-        return 'Pending';
-      case 1:
-        return 'Processing';
-      case 2:
-        return 'Completed';
-      case 3:
-        return 'Failed';
-      case 4:
-        return 'Cancelled by bank';
-      case 5:
-        return 'Cancelled';
-      default:
-        return 'Unknown';
-    }
-  };
-
-  const getStatusIcon = () => {
-    switch (status) {
-      case 0:
-        return <IconAlertCircle size={20} />;
-      case 1:
-        return <IconCircleDot size={20} />;
-      case 2:
-        return <IconCheck size={20} />;
-      case 3:
-        return <IconX size={20} />;
-      case 4:
-        return <IconX size={20} />;
-      case 5:
-        return <IconX size={20} />;
-      default:
-        return <IconHelpCircle size={20} />;
-    }
-  };
-
   return (
     <Paper
       withBorder
@@ -103,14 +103,14 @@ const TransactionCard = ({
           <ThemeIcon
             size="xl"
             radius="xl"
-            color={getStatusColor()}
+            color={GetStatusColor(status)}
             variant="light"
           >
-            {getStatusIcon()}
+            {GetStatusIcon(status)}
           </ThemeIcon>
           <div className="flex flex-col gap-1">
             <Text weight={500} size="sm">
-              Withdrawal - {getStatusText()}
+              Withdrawal - {GetStatusText(status)}
             </Text>
             <Text size="xs" c="dimmed">
               {description} • ID: {transferId}
@@ -144,7 +144,11 @@ const TransactionCard = ({
             )}
           </div>
         </Group>
-        <Text weight={500} c={getStatusColor()} size="sm">
+        <Text
+          weight={500}
+          c={GetStatusColor(status)}
+          size="sm"
+        >
           ₹{Math.abs(amount).toLocaleString()}
         </Text>
       </Group>
@@ -180,7 +184,6 @@ const SummaryCard = ({ title, value, icon: Icon }) => (
 );
 
 const Wallet = () => {
-  const router = useRouter();
   const {
     walletDetails,
     loading,
@@ -189,6 +192,8 @@ const Wallet = () => {
     payoutList,
     form,
     handleWithdraw,
+    opened,
+    setOpened,
   } = useWallet();
 
   if (loading === -1) return <LayoutLoading />;
@@ -271,13 +276,9 @@ const Wallet = () => {
                             size="xs"
                             variant="outline"
                             color="black"
-                            onClick={() =>
-                              router.push(
-                                '/account?tab=payment'
-                              )
-                            }
+                            onClick={() => setOpened(true)}
                           >
-                            Go to Payment Settings
+                            Verify KYC
                           </Button>
                         </Group>
                       </Alert>
@@ -381,6 +382,12 @@ const Wallet = () => {
           </Stack>
         </Paper>
       </Container>
+      {!!opened && (
+        <CompleteProfileModal
+          opened={opened}
+          onClose={() => setOpened(false)}
+        />
+      )}
     </div>
   );
 };

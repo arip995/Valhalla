@@ -14,7 +14,7 @@ const Hero2 = () => {
       <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-purple-200 opacity-30 blur-3xl" />
       <div className="absolute -left-12 -top-12 h-72 w-72 rounded-full bg-pink-200 opacity-30 blur-3xl" />
 
-      <div className="container relative mx-auto px-4 pb-24 pt-16 sm:px-6">
+      <div className="container relative mx-auto px-4 pb-12 pt-16 sm:px-6">
         {/* Main Hero Content */}
         <div className="mx-auto max-w-4xl text-center">
           <div className="mb-6 inline-flex items-center rounded-full border border-purple-100 bg-white/90 px-4 py-2 backdrop-blur-sm">

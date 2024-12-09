@@ -42,7 +42,7 @@ const FAQs2 = () => {
   return (
     <div
       id="faq"
-      className="container mx-auto px-4 py-16 sm:px-6"
+      className="container mx-auto px-4 py-12 sm:px-6"
     >
       <h2 className="mb-8 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-center text-2xl font-bold text-transparent sm:text-3xl">
         Frequently Asked Questions

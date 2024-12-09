@@ -148,6 +148,11 @@ const ListFileOne = ({
             <Tooltip
               disabled={files?.length < 1}
               label="Delete the uploaded video above to enable this field."
+              events={{
+                hover: true,
+                focus: true,
+                touch: true,
+              }}
             >
               <TextInput
                 label="Video Link"

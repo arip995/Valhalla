@@ -117,6 +117,11 @@ const TransactionDetails = ({ data = {} }) => {
                     %
                   </div>
                 }
+                events={{
+                  hover: true,
+                  focus: true,
+                  touch: true,
+                }}
               >
                 <div className="flex items-center gap-2">
                   <IconInfoCircle className="h-4 w-4 text-gray-500" />

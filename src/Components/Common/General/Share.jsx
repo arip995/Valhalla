@@ -194,6 +194,11 @@ const Share = ({
                 {({ copied, copy }) => (
                   <Tooltip
                     label={copied ? 'Copied' : 'Copy'}
+                    events={{
+                      hover: true,
+                      focus: true,
+                      touch: true,
+                    }}
                   >
                     <ActionIcon
                       color={copied ? 'teal' : 'gray'}

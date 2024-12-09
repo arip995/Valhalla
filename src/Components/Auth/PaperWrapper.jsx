@@ -17,7 +17,11 @@ const PaperWrapper = ({
   return (
     <>
       {!!showBackButton && (
-        <Tooltip label="Exit" position="right">
+        <Tooltip
+          label="Exit"
+          position="right"
+          events={{ hover: true, focus: true, touch: true }}
+        >
           <ActionIcon
             variant="default"
             className="!fixed left-2 top-2"

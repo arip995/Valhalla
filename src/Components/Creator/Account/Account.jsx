@@ -73,6 +73,11 @@ const Account = () => {
                   multiline
                   w={220}
                   label="View and manage yout nexify subscription here"
+                  events={{
+                    hover: true,
+                    focus: true,
+                    touch: true,
+                  }}
                 >
                   <IconInfoCircle
                     size={12}

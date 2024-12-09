@@ -10,6 +10,7 @@ const useWallet = () => {
   const [activePayoutRequest, setActivePayoutRequest] =
     useState(null);
   const [payoutList, setPayoutList] = useState(null);
+  const [opened, setOpened] = useState(null);
   const [payoutError, setPayoutError] = useState(null);
   const form = useForm({
     initialValues: {
@@ -105,6 +106,8 @@ const useWallet = () => {
     activePayoutRequest,
     handleWithdraw,
     form,
+    opened,
+    setOpened,
   };
 };
 
