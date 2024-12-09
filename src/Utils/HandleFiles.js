@@ -67,14 +67,25 @@ export const handleFile = async (
     }
     if (validateOnly) return 'validated';
 
-    // Convert file to base64
-    const payload = await convertFileToBase64(file);
+    let payload = {
+      quality,
+      isPresigned,
+    };
+
+    if (!isPresigned) {
+      // Convert file to base64
+      const fileData = await convertFileToBase64(file);
+      payload = {
+        ...payload,
+        ...fileData,
+      };
+    }
 
     // Upload file
     const data = await axiosInstance.post(
       `${process.env.NEXT_PUBLIC_BASE_URL}/image/save_image`,
       {
-        file: { ...payload, quality, isPresigned },
+        file: { ...payload },
       }
     );
     let url = data.data.data.url;
