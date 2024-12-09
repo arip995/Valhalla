@@ -67,14 +67,15 @@ export const handleFile = async (
     }
     if (validateOnly) return 'validated';
 
+    const fileData = await convertFileToBase64(file);
     let payload = {
+      type: fileData.type,
       quality,
       isPresigned,
     };
 
     if (!isPresigned) {
       // Convert file to base64
-      const fileData = await convertFileToBase64(file);
       payload = {
         ...payload,
         ...fileData,
