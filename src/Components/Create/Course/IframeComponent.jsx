@@ -142,9 +142,11 @@ const IframeComponent = ({ children }) => {
     };
 
     iframe.addEventListener('load', handleLoad);
+    iframe.addEventListener('error', handleLoad);
 
     return () => {
       iframe.removeEventListener('load', handleLoad);
+      iframe.removeEventListener('error', handleLoad);
     };
   }, []);
 

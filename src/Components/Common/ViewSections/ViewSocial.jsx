@@ -5,7 +5,7 @@ const ViewSocial = ({ value }) => {
   if (!value?.length) return null;
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="mx-auto flex flex-wrap gap-2">
       {value.map((item, index) => {
         return (
           <a
