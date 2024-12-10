@@ -11,6 +11,7 @@ const ViewAbout = ({ value }) => {
         name={value[0]?.name}
         description={value[0]?.description}
         inViewPage={false}
+        type
       />
     </div>
   );

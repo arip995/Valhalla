@@ -65,8 +65,8 @@ const ProfilePic = ({
             className="h-[88px] w-[88px] overflow-hidden rounded-full object-cover"
             alt=""
             src={avatarImage}
-            width={112}
-            height={112}
+            width={88}
+            height={88}
             // quality={100}
           />
         ) : (
