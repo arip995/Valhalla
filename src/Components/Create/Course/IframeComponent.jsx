@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 const IframeComponent = ({ children }) => {
-  const iframeRef = useRef < HTMLIFrameElement > null;
+  const iframeRef = useRef(null);
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [loadingTimeout, setLoadingTimeout] =
     useState(false);
