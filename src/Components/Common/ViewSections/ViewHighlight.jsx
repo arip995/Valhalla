@@ -14,7 +14,7 @@ const ViewHighlight = ({ value }) => {
 
   return (
     <div className="grid grid-cols-1 gap-4 rounded-2xl bg-white p-4 shadow-md ring-1 ring-gray-100 sm:grid-cols-2 md:p-8 lg:grid-cols-3">
-      {value.totalDuration && (
+      {!!value.totalDuration && (
         <div className="group flex items-center gap-4 rounded-xl bg-blue-50/50 p-4 transition-all hover:bg-blue-50">
           <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 text-blue-600 transition-all group-hover:scale-110">
             <IconVideo className="h-6 w-6" />
@@ -27,6 +27,38 @@ const ViewHighlight = ({ value }) => {
             </p>
             <p className="text-sm text-blue-600">
               On-demand video
+            </p>
+          </div>
+        </div>
+      )}
+
+      {!!value.articles && (
+        <div className="group flex items-center gap-4 rounded-xl bg-purple-50/50 p-4 transition-all hover:bg-purple-50">
+          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-purple-100 text-purple-600 transition-all group-hover:scale-110">
+            <IconFileText className="h-6 w-6" />
+          </div>
+          <div>
+            <p className="font-semibold text-purple-900">
+              {value.articles} Articles
+            </p>
+            <p className="text-sm text-purple-600">
+              Additional reading
+            </p>
+          </div>
+        </div>
+      )}
+
+      {!!value.downlodableResources && (
+        <div className="group flex items-center gap-4 rounded-xl bg-yellow-50/50 p-4 transition-all hover:bg-yellow-50">
+          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-yellow-100 text-yellow-600 transition-all group-hover:scale-110">
+            <IconDownload className="h-6 w-6" />
+          </div>
+          <div>
+            <p className="font-semibold text-yellow-900">
+              {value.downlodableResources} Resources
+            </p>
+            <p className="text-sm text-yellow-600">
+              Downloadable content
             </p>
           </div>
         </div>
@@ -45,38 +77,6 @@ const ViewHighlight = ({ value }) => {
           </p>
         </div>
       </div>
-
-      {value.articles && (
-        <div className="group flex items-center gap-4 rounded-xl bg-purple-50/50 p-4 transition-all hover:bg-purple-50">
-          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-purple-100 text-purple-600 transition-all group-hover:scale-110">
-            <IconFileText className="h-6 w-6" />
-          </div>
-          <div>
-            <p className="font-semibold text-purple-900">
-              {value.articles} Articles
-            </p>
-            <p className="text-sm text-purple-600">
-              Additional reading
-            </p>
-          </div>
-        </div>
-      )}
-
-      {value.downlodableResources && (
-        <div className="group flex items-center gap-4 rounded-xl bg-yellow-50/50 p-4 transition-all hover:bg-yellow-50">
-          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-yellow-100 text-yellow-600 transition-all group-hover:scale-110">
-            <IconDownload className="h-6 w-6" />
-          </div>
-          <div>
-            <p className="font-semibold text-yellow-900">
-              {value.downlodableResources} Resources
-            </p>
-            <p className="text-sm text-yellow-600">
-              Downloadable content
-            </p>
-          </div>
-        </div>
-      )}
 
       <div className="group flex items-center gap-4 rounded-xl bg-red-50/50 p-4 transition-all hover:bg-red-50">
         <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-red-100 text-red-600 transition-all group-hover:scale-110">
