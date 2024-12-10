@@ -5,74 +5,63 @@ import Image from 'next/image';
 const ViewProfile = ({
   profilePic,
   name,
-  // username,
   title,
   description,
   inViewPage = true,
 }) => {
   return (
-    <>
-      <div className="flex items-center gap-3">
+    <div className="mx-auto w-full rounded-lg bg-white p-6 shadow-md">
+      <div className="flex items-center gap-4">
         {profilePic ? (
-          <>
+          <div className="relative h-[90px] w-[90px] overflow-hidden rounded-full">
             {inViewPage ? (
               <Image
-                className="h-[80px] w-[80px] overflow-hidden rounded-full object-cover"
+                className="object-cover"
                 src={profilePic}
-                width={80}
-                height={80}
+                width={90}
+                height={90}
                 quality={100}
                 priority
               />
             ) : (
               <img
-                className="h-[80px] w-[80px] overflow-hidden rounded-full object-cover"
+                className="object-cover"
                 src={profilePic}
-                width={80}
-                height={80}
+                width={90}
+                height={90}
               />
             )}
-          </>
+          </div>
         ) : (
           <Avatar
-            className="h-[80px] w-[80px]"
+            className="h-[90px] w-[90px]"
             color="initials"
             size="lg"
             name={name}
-            key={name || ''}
           />
         )}
-        <div className="flex flex-col justify-start">
+        <div className="flex flex-col justify-center">
           {!!inViewPage && (
-            <div className="text-sm">Created by</div>
+            <div className="text-sm text-gray-500">
+              Created by
+            </div>
           )}
-          <div className="text-sm font-semibold">
+          <div className="text-xl font-semibold text-gray-900">
             {name?.toUpperCase()}
           </div>
-          {/* <div className="text-sm">@{username}</div> */}
         </div>
       </div>
       {!!title && (
-        <div
-          className="mt-2 text-lg font-bold text-black"
-          style={{
-            overflowWrap: 'anywhere',
-          }}
-        >
+        <div className="mt-4 text-2xl font-semibold text-gray-800">
           {title}
         </div>
       )}
       {!!description && (
-        <div
-          className="mt-2 text-sm font-normal text-gray-700"
-          style={{
-            overflowWrap: 'anywhere',
-          }}
-        >
+        <div className="mt-4 text-sm leading-relaxed text-gray-600">
           {description}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

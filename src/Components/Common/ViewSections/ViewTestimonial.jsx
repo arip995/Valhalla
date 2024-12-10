@@ -1,4 +1,5 @@
 import { Rating, Spoiler } from '@mantine/core';
+import React from 'react';
 
 const ViewTestimonial = ({ value }) => {
   if (!value?.length) return null;
@@ -7,27 +8,34 @@ const ViewTestimonial = ({ value }) => {
     <div className="flex w-full flex-wrap gap-4">
       {value.map((item, index) => (
         <div
-          className="w-full rounded-md border border-gray-300 px-4 pt-4"
+          className="w-full rounded-lg bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
           key={index}
         >
-          <div className="flex items-center gap-2 font-semibold">
+          <div className="flex items-center gap-4">
             <img
-              className="h-16 w-16 rounded-full"
+              className="h-16 w-16 rounded-full border-2 border-gray-300 shadow-md"
               src={item.image}
-              alt={
-                'https://nexify-try.s3.ap-south-1.amazonaws.com/219cb777-86b3-4e63-8051-bfb85242cc12.svg'
-              }
+              alt={item.name || 'User'}
             />
-            <div className="flex flex-col gap-2 text-sm">
-              {item.name}
-              <Rating value={item.rating} />
+            <div className="flex flex-col gap-1">
+              <p className="text-lg font-semibold text-gray-800">
+                {item.name}
+              </p>
+              <Rating
+                value={item.rating}
+                className="text-sm"
+              />
             </div>
           </div>
-          <div className="my-4 font-normal text-gray-500">
+          <div className="my-4 text-gray-600">
             <Spoiler
-              maxHeight={200}
+              maxHeight={150}
               showLabel="Show more"
               hideLabel="Hide"
+              sx={theme => ({
+                color: theme.colors.gray[600],
+                fontSize: theme.fontSizes.md,
+              })}
             >
               {item.description}
             </Spoiler>

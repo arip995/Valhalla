@@ -18,6 +18,7 @@ export const SECTION_COMPONENT_MAPPING = {
   gallery: ViewGallery,
   testimonial: ViewTestimonial,
 };
+
 export const SECTION_TITLE_MAPPING = {
   benifit: 'Benifits',
   highlight: 'Highlights',

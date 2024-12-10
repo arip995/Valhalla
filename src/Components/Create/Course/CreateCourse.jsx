@@ -1,7 +1,7 @@
 'use client';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import PreviewOne from '@/Components/Common/Preview/PreviewOne';
-import ViewCourseOne from '@/Components/Landing/Course/LayoutOne/ViewCourseOne';
+import ViewCourseTwo from '@/Components/Landing/Course/LayoutTwo/ViewCourseTwo';
 import {
   ActionIcon,
   Button,
@@ -164,7 +164,7 @@ const CreateCourse = () => {
           setIsPreviewScreen={setIsPreviewScreen}
           isPreviewScreen={isPreviewScreen}
         >
-          <ViewCourseOne
+          <ViewCourseTwo
             data={courseForm.values}
             isPreview
           />

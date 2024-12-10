@@ -12,7 +12,7 @@ import {
   IconChevronUp,
 } from '@tabler/icons-react';
 import Image from 'next/image';
-import RenderModulesAndLessons from './ViewCourseModuleAndLessons';
+import RenderModulesAndLessons from './ViewCourseOneModuleAndLessons';
 
 const ViewCourseOne = ({ data, isPreview }) => {
   // const calculateModulesLessonsAndDuration = (content) =>{
