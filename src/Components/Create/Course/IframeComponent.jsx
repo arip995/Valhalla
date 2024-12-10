@@ -134,23 +134,12 @@ const IframeComponent = ({ children }) => {
 
   useEffect(() => {
     const iframe = iframeRef.current;
-    // if (iframe) {
-    //   iframe.onload = () => setIframeLoaded(true);
-    // }
+    if (iframe) {
+      iframe.onload = () => setIframeLoaded(true);
+    }
     setTimeout(() => {
       setIframeLoaded(true);
-    }, 5000);
-    const handleLoad = () => {
-      setIframeLoaded(true);
-    };
-
-    iframe.addEventListener('load', handleLoad);
-    iframe.addEventListener('error', handleLoad);
-
-    return () => {
-      iframe.removeEventListener('load', handleLoad);
-      iframe.removeEventListener('error', handleLoad);
-    };
+    }, 10000);
   }, []);
 
   return (

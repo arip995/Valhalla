@@ -43,12 +43,42 @@ const ViewCourseTwo = ({ data, isPreview }) => {
         <div className="relative px-4 py-16 md:py-24">
           <div className="mx-auto max-w-6xl">
             <div className="grid gap-12 md:grid-cols-2">
+              {data?.coverImage?.url && (
+                <div className="relative">
+                  <div className="aspect-video overflow-hidden rounded-2xl shadow-2xl">
+                    <Image
+                      src={data.coverImage.url}
+                      height={600}
+                      width={800}
+                      className="object-cover transition duration-700 hover:scale-105"
+                      alt={data.title}
+                      priority
+                    />
+                  </div>
+                  <div className="absolute -bottom-6 left-6 right-6 rounded-xl bg-white p-4 shadow-lg backdrop-blur-sm">
+                    <div className="flex items-center justify-between text-sm md:text-base">
+                      <div className="flex items-center gap-2">
+                        <IconStarFilled className="h-5 w-5 text-yellow-500" />
+                        <span className="font-medium text-gray-900">
+                          4.9 Rating
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <IconCertificate className="h-5 w-5 text-blue-600" />
+                        <span className="font-medium text-gray-900">
+                          Certificate Included
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
               <div className="flex flex-col justify-center space-y-8">
                 <div className="space-y-4">
                   {/* <div className="inline-flex items-center rounded-full bg-blue-100 px-4 py-1 text-sm font-medium text-blue-800">
                     {data.category}
                   </div> */}
-                  <h1 className="text-2xl font-bold leading-tight text-white md:text-3xl lg:text-6xl">
+                  <h1 className="text-2xl font-bold leading-tight text-white md:text-3xl">
                     {data?.title}
                   </h1>
                 </div>
@@ -59,7 +89,7 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                       <IconLayoutGrid className="h-6 w-6 text-blue-300" />
                       <div>
                         <p className="text-sm text-blue-200">
-                          Sections
+                          Modules
                         </p>
                         <p className="text-xl font-bold text-white">
                           {modules}
@@ -72,7 +102,7 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                       <IconBook className="h-6 w-6 text-blue-300" />
                       <div>
                         <p className="text-sm text-blue-200">
-                          Lectures
+                          Lessons
                         </p>
                         <p className="text-xl font-bold text-white">
                           {lessons}
@@ -136,37 +166,6 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                   </button> */}
                 </div>
               </div>
-
-              {data?.coverImage?.url && (
-                <div className="relative">
-                  <div className="aspect-video overflow-hidden rounded-2xl shadow-2xl">
-                    <Image
-                      src={data.coverImage.url}
-                      height={600}
-                      width={800}
-                      className="object-cover transition duration-700 hover:scale-105"
-                      alt={data.title}
-                      priority
-                    />
-                  </div>
-                  <div className="absolute -bottom-6 left-6 right-6 rounded-xl bg-white p-4 shadow-lg backdrop-blur-sm">
-                    <div className="flex items-center justify-between text-sm md:text-base">
-                      <div className="flex items-center gap-2">
-                        <IconStarFilled className="h-5 w-5 text-yellow-500" />
-                        <span className="font-medium text-gray-900">
-                          4.9 Course Rating
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <IconCertificate className="h-5 w-5 text-blue-600" />
-                        <span className="font-medium text-gray-900">
-                          Certificate Included
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>
