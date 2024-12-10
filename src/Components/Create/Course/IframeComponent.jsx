@@ -137,6 +137,9 @@ const IframeComponent = ({ children }) => {
     // if (iframe) {
     //   iframe.onload = () => setIframeLoaded(true);
     // }
+    setTimeout(() => {
+      setIframeLoaded(true);
+    }, 5000);
     const handleLoad = () => {
       setIframeLoaded(true);
     };
