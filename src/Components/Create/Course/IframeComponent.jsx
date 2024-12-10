@@ -1,18 +1,17 @@
-import React, { useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
+import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import {
-  MantineProvider,
   ColorSchemeScript,
   createTheme,
+  MantineProvider,
 } from '@mantine/core';
-import { Notifications } from '@mantine/notifications';
 import { ModalsProvider } from '@mantine/modals';
-import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
+import { Notifications } from '@mantine/notifications';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 const IframeComponent = ({ children }) => {
   const iframeRef = useRef(null);
-  const [iframeLoaded, setIframeLoaded] =
-    React.useState(false);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
 
   const renderChildInIframe = () => {
     if (!iframeLoaded) return null;
@@ -126,9 +125,7 @@ const IframeComponent = ({ children }) => {
         <ModalsProvider>
           <Notifications />
           <ColorSchemeScript />
-          <div className="mantine-content tailwind-namespace">
-            {children}
-          </div>
+          {children}
         </ModalsProvider>
       </MantineProvider>,
       iframeBody
@@ -143,16 +140,13 @@ const IframeComponent = ({ children }) => {
   }, []);
 
   return (
-    <div className="relative h-full w-full">
+    <div className="relative h-full w-full transform">
       <iframe
         ref={iframeRef}
         className="h-full w-full border-0"
-        style={{ height: '100%' }}
       />
       {!iframeLoaded ? (
-        <div className="absolute inset-0 bg-white">
-          <LayoutLoading />
-        </div>
+        <LayoutLoading />
       ) : (
         renderChildInIframe()
       )}

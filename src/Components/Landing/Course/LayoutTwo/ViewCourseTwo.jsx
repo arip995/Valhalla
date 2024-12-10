@@ -101,6 +101,7 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                 <div className="hidden max-h-12 flex-col gap-4 sm:flex-row md:flex">
                   <BuyButtonClient
                     className="py-auto group relative h-[50px] overflow-hidden rounded-xl bg-white px-8 text-lg font-semibold text-blue-900 shadow-lg transition hover:bg-white hover:text-blue-900 hover:shadow-xl"
+                    loaderProps={{ color: 'violet' }}
                     style={{
                       backgroundColor: 'white',
                     }}
@@ -149,7 +150,7 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                     />
                   </div>
                   <div className="absolute -bottom-6 left-6 right-6 rounded-xl bg-white p-4 shadow-lg backdrop-blur-sm">
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between text-sm md:text-base">
                       <div className="flex items-center gap-2">
                         <IconStarFilled className="h-5 w-5 text-yellow-500" />
                         <span className="font-medium text-gray-900">
@@ -175,59 +176,67 @@ const ViewCourseTwo = ({ data, isPreview }) => {
       <div className="mx-auto max-w-4xl px-4 py-24">
         {/* Description Section */}
         {data?.description && (
-          <div className="mb-16 overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100">
-            <div className="p-4 md:p-8">
-              <h2 className="mb-4 text-xl font-bold text-gray-900 md:mb-6 md:text-2xl">
-                Course Description
-              </h2>
-              <Spoiler
-                maxHeight={300}
-                showLabel={
-                  <div className="mt-4 flex items-center gap-2 font-medium text-blue-600 transition hover:text-blue-700 hover:underline">
-                    Show more{' '}
-                    <IconChevronDown className="h-4 w-4" />
-                  </div>
-                }
-                hideLabel={
-                  <div className="mt-4 flex items-center gap-2 font-medium text-blue-600 transition hover:text-blue-700 hover:underline">
-                    Show less{' '}
-                    <IconChevronUp className="h-4 w-4" />
-                  </div>
-                }
-              >
-                <div
-                  className="prose prose-lg prose-headings:font-bold prose-a:text-blue-600 max-w-none"
-                  dangerouslySetInnerHTML={{
-                    __html: data.description,
-                  }}
-                />
-              </Spoiler>
+          <>
+            {/* <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-yellow-50">
+            <IconStars className="h-8 w-8 text-yellow-600" />
+          </div> */}
+            <h2 className="mb-2 text-center text-xl font-bold text-gray-900 md:text-3xl">
+              Course Description
+            </h2>
+            <div className="mb-16 overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100">
+              <div className="p-4 md:p-8">
+                <h2 className="mb-4 text-xl font-bold text-gray-900 md:mb-6 md:text-2xl"></h2>
+                <Spoiler
+                  maxHeight={300}
+                  showLabel={
+                    <div className="mt-4 flex items-center gap-2 font-medium text-blue-600 transition hover:text-blue-700 hover:underline">
+                      Show more{' '}
+                      <IconChevronDown className="h-4 w-4" />
+                    </div>
+                  }
+                  hideLabel={
+                    <div className="mt-4 flex items-center gap-2 font-medium text-blue-600 transition hover:text-blue-700 hover:underline">
+                      Show less{' '}
+                      <IconChevronUp className="h-4 w-4" />
+                    </div>
+                  }
+                >
+                  <div
+                    className="prose prose-lg prose-headings:font-bold prose-a:text-blue-600 max-w-none"
+                    dangerouslySetInnerHTML={{
+                      __html: data.description,
+                    }}
+                  />
+                </Spoiler>
+              </div>
             </div>
-          </div>
+          </>
         )}
 
         {/* Course Content Section */}
-        <div className="overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100">
-          <div className="p-4 md:p-8">
-            <h2 className="mb-4 text-xl font-bold text-gray-900 md:mb-6 md:text-2xl">
-              Course Content
-            </h2>
-            <Accordion
-              chevronPosition="right"
-              variant="separated"
-              multiple
-              defaultValue={[
-                data.content?.[0]?._id ||
-                  data.content?.[0]?.id,
-              ]}
-              className="divide-y divide-gray-100"
-            >
-              <RenderModulesAndLessons
-                content={data?.content}
-              />
-            </Accordion>
+        <>
+          <h2 className="mb-2 text-center text-xl font-bold text-gray-900 md:text-3xl">
+            Course Content
+          </h2>
+          <div className="overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100">
+            <div className="p-4 md:p-8">
+              <Accordion
+                chevronPosition="right"
+                variant="separated"
+                multiple
+                defaultValue={[
+                  data.content?.[0]?._id ||
+                    data.content?.[0]?.id,
+                ]}
+                className="divide-y divide-gray-100"
+              >
+                <RenderModulesAndLessons
+                  content={data?.content}
+                />
+              </Accordion>
+            </div>
           </div>
-        </div>
+        </>
 
         {/* Additional Sections */}
         <div className="mt-16">
@@ -245,6 +254,7 @@ const ViewCourseTwo = ({ data, isPreview }) => {
         <BuyButtonClient
           className="py-auto group relative h-[50px] overflow-hidden rounded-xl bg-white px-8 text-lg font-semibold text-blue-900 shadow-lg transition hover:bg-white hover:text-blue-900 hover:shadow-xl"
           size="lg"
+          loaderProps={{ color: 'violet' }}
           style={{
             backgroundColor: 'white',
           }}

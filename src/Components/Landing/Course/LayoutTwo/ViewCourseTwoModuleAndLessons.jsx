@@ -39,7 +39,7 @@ const RenderLesson = ({
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1 md:gap-3">
         {lesson.status === 2 ? (
           <Button
             onClick={() => onPreviewClick(lesson)}
@@ -52,9 +52,11 @@ const RenderLesson = ({
             Preview
           </Button>
         ) : (
-          <div className="flex items-center gap-2 text-sm text-gray-400">
-            <IconLock size={16} />
-            <span>Locked</span>
+          <div className="flex min-w-fit items-center gap-2 text-sm text-gray-400">
+            <IconLock size={16} className="min-w-max" />
+            <span className="min-w-max break-keep">
+              Locked
+            </span>
           </div>
         )}
       </div>

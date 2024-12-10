@@ -10,13 +10,13 @@ const ViewProfile = ({
   inViewPage = true,
 }) => {
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-white p-8 shadow-xl ring-1 ring-gray-100">
+    <div className="relative overflow-hidden rounded-2xl bg-white p-4 shadow-md ring-1 ring-gray-100 md:p-8">
       {/* Background Pattern */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-50 to-transparent opacity-50" />
 
-      <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+      <div className="flex flex-col items-center text-center">
         {profilePic ? (
-          <div className="relative h-24 w-24 overflow-hidden rounded-2xl border-4 border-white shadow-lg sm:h-28 sm:w-28">
+          <div className="relative mb-4 h-24 w-24 overflow-hidden rounded-2xl border-4 border-white shadow-lg">
             {inViewPage ? (
               <Image
                 className="h-full w-full object-cover transition duration-300 hover:scale-110"
@@ -39,14 +39,14 @@ const ViewProfile = ({
           </div>
         ) : (
           <Avatar
-            className="h-24 w-24 rounded-2xl border-4 border-white shadow-lg sm:h-28 sm:w-28"
+            className="mb-4 h-24 w-24 rounded-2xl border-4 border-white shadow-lg"
             color="blue"
             size="xl"
             name={name}
           />
         )}
 
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
           {!!inViewPage && (
             <div className="mb-1 flex items-center gap-2 text-sm font-medium text-blue-600">
               <IconBadge className="h-4 w-4" />
@@ -59,7 +59,7 @@ const ViewProfile = ({
           </h3>
 
           {!!title && (
-            <p className="mt-2 text-base font-medium text-gray-600">
+            <p className="mt-1 text-base font-medium text-gray-600">
               {title}
             </p>
           )}
@@ -69,17 +69,6 @@ const ViewProfile = ({
               {description}
             </p>
           )}
-
-          {/* <div className="mt-6 flex items-center gap-4">
-            <button className="flex items-center gap-2 rounded-lg bg-blue-50 px-4 py-2 text-sm font-medium text-blue-600 transition hover:bg-blue-100">
-              <IconWorld className="h-4 w-4" />
-              View Profile
-            </button>
-            <button className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-gray-50">
-              <IconBrandTwitter className="h-4 w-4" />
-              Follow
-            </button>
-          </div> */}
         </div>
       </div>
     </div>
