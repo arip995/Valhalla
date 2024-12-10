@@ -1,5 +1,4 @@
 import BuyButtonClient from '@/Components/Common/Buttons/BuyButtonClient';
-import FooterTwo from '@/Components/Common/Footer/FooterTwo';
 import ProductHeader from '@/Components/Common/Header/Productheader';
 import ViewSections from '@/Components/Common/ViewSections/ViewSections';
 import {
@@ -41,21 +40,21 @@ const ViewCourseTwo = ({ data, isPreview }) => {
           />
         </div>
 
-        <div className="relative px-4 py-24">
+        <div className="relative px-4 py-16 md:py-24">
           <div className="mx-auto max-w-6xl">
             <div className="grid gap-12 md:grid-cols-2">
               <div className="flex flex-col justify-center space-y-8">
                 <div className="space-y-4">
-                  <div className="inline-flex items-center rounded-full bg-blue-100 px-4 py-1 text-sm font-medium text-blue-800">
-                    New Course
-                  </div>
+                  {/* <div className="inline-flex items-center rounded-full bg-blue-100 px-4 py-1 text-sm font-medium text-blue-800">
+                    {data.category}
+                  </div> */}
                   <h1 className="text-2xl font-bold leading-tight text-white md:text-3xl lg:text-6xl">
                     {data?.title}
                   </h1>
                 </div>
 
                 <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
-                  <div className="rounded-xl bg-white/10 p-4 backdrop-blur-sm">
+                  <div className="rounded-xl bg-white bg-opacity-10 p-4 backdrop-blur-sm">
                     <div className="flex items-center gap-3">
                       <IconLayoutGrid className="h-6 w-6 text-blue-300" />
                       <div>
@@ -68,7 +67,7 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="rounded-xl bg-white/10 p-4 backdrop-blur-sm">
+                  <div className="rounded-xl bg-white bg-opacity-10 p-4 backdrop-blur-sm">
                     <div className="flex items-center gap-3">
                       <IconBook className="h-6 w-6 text-blue-300" />
                       <div>
@@ -81,7 +80,7 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="rounded-xl bg-white/10 p-4 backdrop-blur-sm">
+                  <div className="rounded-xl bg-white bg-opacity-10 p-4 backdrop-blur-sm">
                     <div className="flex items-center gap-3">
                       <IconClock className="h-6 w-6 text-blue-300" />
                       <div>
@@ -102,6 +101,9 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                 <div className="hidden max-h-12 flex-col gap-4 sm:flex-row md:flex">
                   <BuyButtonClient
                     className="py-auto group relative h-[50px] overflow-hidden rounded-xl bg-white px-8 text-lg font-semibold text-blue-900 shadow-lg transition hover:bg-white hover:text-blue-900 hover:shadow-xl"
+                    style={{
+                      backgroundColor: 'white',
+                    }}
                     size="lg"
                     animate={false}
                     creatorId={data?.creatorId}
@@ -113,7 +115,7 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                         : data?.price
                     }
                   >
-                    <span className="relative z-10">
+                    <span className="relative z-10 text-gray-700">
                       {data?.cta || 'Enroll for'} ₹
                       <span
                         className={`${data?.hasDiscountedPrice ? 'line-through' : ''} mr-2`}
@@ -126,10 +128,9 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                         </span>
                       )}
                     </span>
-                    <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform group-hover:translate-x-full" />
                   </BuyButtonClient>
 
-                  {/* <button className="py-auto h-[50px] rounded-xl border-2 border-white/30 bg-white/10 px-8 font-semibold text-white backdrop-blur-sm transition hover:bg-white/20">
+                  {/* <button className="py-auto h-[50px] rounded-xl border-2 border-white/30 bg-white bg-opacity-10 px-8 font-semibold text-white backdrop-blur-sm transition hover:bg-white/20">
                     Preview
                   </button> */}
                 </div>
@@ -147,7 +148,7 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                       priority
                     />
                   </div>
-                  <div className="absolute -bottom-6 left-6 right-6 rounded-xl bg-white/95 p-4 shadow-lg backdrop-blur-sm">
+                  <div className="absolute -bottom-6 left-6 right-6 rounded-xl bg-white p-4 shadow-lg backdrop-blur-sm">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <IconStarFilled className="h-5 w-5 text-yellow-500" />
@@ -175,8 +176,8 @@ const ViewCourseTwo = ({ data, isPreview }) => {
         {/* Description Section */}
         {data?.description && (
           <div className="mb-16 overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100">
-            <div className="p-8">
-              <h2 className="mb-6 text-2xl font-bold text-gray-900">
+            <div className="p-4 md:p-8">
+              <h2 className="mb-4 text-xl font-bold text-gray-900 md:mb-6 md:text-2xl">
                 Course Description
               </h2>
               <Spoiler
@@ -207,8 +208,8 @@ const ViewCourseTwo = ({ data, isPreview }) => {
 
         {/* Course Content Section */}
         <div className="overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100">
-          <div className="p-8">
-            <h2 className="mb-6 text-2xl font-bold text-gray-900">
+          <div className="p-4 md:p-8">
+            <h2 className="mb-4 text-xl font-bold text-gray-900 md:mb-6 md:text-2xl">
               Course Content
             </h2>
             <Accordion
@@ -237,13 +238,16 @@ const ViewCourseTwo = ({ data, isPreview }) => {
         </div>
       </div>
 
-      <FooterTwo />
+      {/* <FooterTwo /> */}
 
       {/* Mobile CTA */}
       <div className="fixed bottom-0 z-50 flex w-full gap-4 border-t border-gray-200 bg-gradient-to-br from-blue-900 via-indigo-900 to-blue-800 p-4 shadow-xl md:hidden">
         <BuyButtonClient
           className="py-auto group relative h-[50px] overflow-hidden rounded-xl bg-white px-8 text-lg font-semibold text-blue-900 shadow-lg transition hover:bg-white hover:text-blue-900 hover:shadow-xl"
           size="lg"
+          style={{
+            backgroundColor: 'white',
+          }}
           animate={false}
           creatorId={data?.creatorId}
           creatorDetails={data?.creatorDetails}
@@ -254,7 +258,7 @@ const ViewCourseTwo = ({ data, isPreview }) => {
               : data?.price
           }
         >
-          <span className="relative z-10">
+          <span className="relative z-10 text-gray-700">
             {data?.cta || 'Enroll for'} ₹
             <span
               className={`${data?.hasDiscountedPrice ? 'line-through' : ''} mr-2`}
@@ -267,9 +271,9 @@ const ViewCourseTwo = ({ data, isPreview }) => {
               </span>
             )}
           </span>
-          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform group-hover:translate-x-full" />
+          {/* <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform group-hover:translate-x-full" /> */}
         </BuyButtonClient>
-        {/* <button className="py-auto h-[50px] rounded-xl border-2 border-white/30 bg-white/10 px-8 font-semibold text-white backdrop-blur-sm transition hover:bg-white/20">
+        {/* <button className="py-auto h-[50px] rounded-xl border-2 border-white/30 bg-white bg-opacity-10 px-8 font-semibold text-white backdrop-blur-sm transition hover:bg-white/20">
           Preview
         </button> */}
       </div>

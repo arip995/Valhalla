@@ -14,6 +14,7 @@ import React from 'react';
 import CreateCourseStepOne from './CreateCourseStepOne/CreateCourseStepOne';
 import CreateCourseStepTwo from './CreateCourseStepTwo/CreateCourseStepTwo';
 import useCreateCourse from './useCreateCourse';
+import IframeComponent from './IframeComponent';
 
 const CreateCourse = () => {
   const {
@@ -164,10 +165,12 @@ const CreateCourse = () => {
           setIsPreviewScreen={setIsPreviewScreen}
           isPreviewScreen={isPreviewScreen}
         >
-          <ViewCourseTwo
-            data={courseForm.values}
-            isPreview
-          />
+          <IframeComponent>
+            <ViewCourseTwo
+              data={courseForm.values}
+              isPreview
+            />
+          </IframeComponent>
         </PreviewOne>
       </div>
     </div>

@@ -1,4 +1,6 @@
 import {
+  IconDeviceDesktop,
+  IconDeviceMobile,
   IconExternalLink,
   IconX,
 } from '@tabler/icons-react';
@@ -33,7 +35,7 @@ const PreviewOne = ({
       </div>
       <div
         className={`relative z-10 mx-auto p-4 md:p-10 ${
-          isDeskTop ? 'w-full' : 'max-w-[450px]'
+          isDeskTop ? 'w-full' : 'max-w-[550px]'
         }`}
       >
         <div className="relative mx-auto w-full max-w-5xl transform overflow-hidden rounded-lg">
@@ -53,7 +55,7 @@ const PreviewOne = ({
                 />
               </a>
             </div>
-            {/* <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4">
               <IconDeviceDesktop
                 onClick={() => setIsDesktop(true)}
                 className={`cursor-pointer text-gray-400 ${
@@ -68,7 +70,7 @@ const PreviewOne = ({
                 }`}
                 size={20}
               />
-            </div> */}
+            </div>
             <div className="lg:hidden">
               <IconX
                 onClick={() => {

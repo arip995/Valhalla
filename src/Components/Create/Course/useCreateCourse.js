@@ -19,7 +19,7 @@ const useCreateCourse = () => {
     initialValues: {
       isSaveClickedAtleastOnce: false,
       loading: -1,
-      cta: 'Buy Now',
+      cta: 'Enroll for',
       title: '',
       sections: SectionTypes,
       content: [],

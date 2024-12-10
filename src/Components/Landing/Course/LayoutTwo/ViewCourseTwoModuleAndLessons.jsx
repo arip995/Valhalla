@@ -43,7 +43,8 @@ const RenderLesson = ({
         {lesson.status === 2 ? (
           <Button
             onClick={() => onPreviewClick(lesson)}
-            variant="subtle"
+            color="black"
+            variant="light"
             // className="opacity-0 transition-opacity group-hover:opacity-100"
             leftIcon={<IconPlayerPlay size={16} />}
             size="sm"
