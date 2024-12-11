@@ -30,9 +30,8 @@ export const handleFile = async (
   file,
   mimeTypes = ['image/'],
   maxFileSize = 1,
-  quality = 50,
-  validateOnly = false,
-  isPresigned = false
+  // quality = 50,
+  validateOnly = false
 ) => {
   try {
     // Validate file type
@@ -58,18 +57,14 @@ export const handleFile = async (
         : file.type;
     let payload = {
       type,
-      quality,
-      isPresigned,
+      // quality,
     };
 
-    if (!isPresigned) {
-      // Convert file to base64
-      const fileData = await convertFileToBase64(file);
-      payload = {
-        ...payload,
-        ...fileData,
-      };
-    }
+    // const fileData = await convertFileToBase64(file);
+    // payload = {
+    //   ...payload,
+    //   ...fileData,
+    // };
 
     // Upload file
     const data = await axiosInstance.post(
@@ -78,15 +73,16 @@ export const handleFile = async (
         file: { ...payload },
       }
     );
+    //url of the image
     let url = data.data.data.url;
 
-    if (isPresigned) {
-      await axios.put(data.data.data.signedUrl, file, {
-        headers: {
-          'Content-Type': file.type,
-        },
-      });
-    }
+    //upload it in s3
+    await axios.put(data.data.data.signedUrl, file, {
+      headers: {
+        'Content-Type': file.type,
+      },
+    });
+
     // Return uploaded file URL
     return url;
   } catch (error) {

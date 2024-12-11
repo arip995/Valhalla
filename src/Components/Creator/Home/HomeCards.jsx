@@ -14,9 +14,9 @@ const PRODUCT_TYPE_NAMES = {
 };
 
 const TIME_PERIODS = [
-  { value: 'day', label: 'Today' },
-  { value: 'week', label: 'This Week' },
-  { value: 'month', label: 'This Month' },
+  { value: 'day', label: 'Last 24 hours' },
+  { value: 'week', label: 'Last 7 days' },
+  { value: 'month', label: 'Last 30 days' },
   { value: 'year', label: 'This Year' },
   { value: 'lifetime', label: 'Lifetime' },
 ];
