@@ -30,7 +30,8 @@ export const handleFile = async (
   file,
   mimeTypes = ['image/'],
   maxFileSize = 1,
-  // quality = 50,
+  // eslint-disable-next-line no-unused-vars
+  quality = 50,
   validateOnly = false
 ) => {
   try {
