@@ -226,7 +226,7 @@ const CourseConsume = ({ productId }) => {
             maxWidth: '100px',
           }}
         />
-        <div className="font-semibold text-gray-900">
+        <div className="border-b-2 pb-2 font-semibold text-gray-900">
           {courseData?.title}
           <div className="flex">
             {completedList?.length == totalLessons ? (
