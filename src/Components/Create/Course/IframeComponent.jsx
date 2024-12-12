@@ -139,7 +139,7 @@ const IframeComponent = ({ children }) => {
     }
     setTimeout(() => {
       setIframeLoaded(true);
-    }, 10000);
+    }, 5000);
   }, []);
 
   return (

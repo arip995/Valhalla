@@ -80,11 +80,11 @@ const useCreateTelegram = () => {
     },
     validateInputOnChange: true,
     validate: {
-      title: (value, values) => {
-        return values?.isSaveClickedAtleastOnce && !value
-          ? 'Title is required'
-          : null;
-      },
+      // title: (value, values) => {
+      //   return values?.isSaveClickedAtleastOnce && !value
+      //     ? 'Title is required'
+      //     : null;
+      // },
       subscriptionPlans: (value, values) => {
         if (!values?.isSaveClickedAtleastOnce) return null;
         if (value?.length) {
@@ -100,9 +100,10 @@ const useCreateTelegram = () => {
               !plan.subscriptionPeriodLabel
             ) {
               return 'Please provide a subscription period';
-            } else if (!plan.planTitle) {
-              return 'Please provide a title for your plan';
             }
+            // else if (!plan.planTitle) {
+            //   return 'Please provide a title for your plan';
+            // }
           }
         } else {
           return 'Please add a plan';
@@ -166,12 +167,16 @@ const useCreateTelegram = () => {
         Number(selectedPeriod?.days || 0) *
         Number(val.subscriptionPeriodValue);
 
-      const subscriptionPeriod = val?.planTitle;
+      // const subscriptionPeriod = val?.planTitle;
       const cost = val?.subscriptionCost;
-      if (days && subscriptionPeriod && cost)
+      if (
+        days &&
+        cost
+        // && subscriptionPeriod
+      )
         formattedPlans.push({
           days,
-          subscriptionPeriod,
+          // subscriptionPeriod,
           cost,
           periodQuantity: val.subscriptionPeriodValue,
           planType: selectedPeriod.value,
@@ -319,7 +324,7 @@ const useCreateTelegram = () => {
   const onStepTwoSubmit = async () => {
     setStep(3);
   };
-
+  console.log(stepThreeForm.errors);
   const onStepThreeSubmit = async () => {
     setLoading(true);
     const payload = {

@@ -14,14 +14,13 @@ import {
   NumberInput,
   Select,
   Text,
-  TextInput,
 } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import { IconX } from '@tabler/icons-react';
 import React, { useEffect, useState } from 'react';
 
-const MAX_TITLE_LENGTH = 60;
-const MIN_TITLE_LENGTH = 0;
+// const MAX_TITLE_LENGTH = 60;
+// const MIN_TITLE_LENGTH = 0;
 
 const TGEPlanAndPriceEditCreate = ({
   openSideBar,
@@ -42,7 +41,7 @@ const TGEPlanAndPriceEditCreate = ({
 
   const saveChanges = () => {
     let {
-      title,
+      // title,
       price,
       enableDiscountedPrice,
       discountedPrice,
@@ -51,7 +50,7 @@ const TGEPlanAndPriceEditCreate = ({
     } = tempData;
 
     let updateData = {
-      subscriptionPeriod: title,
+      // subscriptionPeriod: title,
       cost: price,
       enableDiscountedPrice,
       discountedCost: discountedPrice,
@@ -107,32 +106,32 @@ const TGEPlanAndPriceEditCreate = ({
 
   const validateData = () => {
     let {
-      title,
+      // title,
       price,
       enableDiscountedPrice,
       discountedPrice,
       periodQuantity,
       planType,
     } = tempData;
-    title = title?.trim();
+    // title = title?.trim();
     const canShowErrors = isSaveClickedAtleastOnce;
     let errorObj = {};
-    if (title) {
-      if (
-        MIN_TITLE_LENGTH &&
-        title.length < MIN_TITLE_LENGTH
-      ) {
-        errorObj.title = canShowErrors
-          ? `Plan name should be atleast ${MIN_TITLE_LENGTH} characters`
-          : null;
-      } else if (title.length > MAX_TITLE_LENGTH) {
-        errorObj.title = `Plan name cannot exceed ${MAX_TITLE_LENGTH} characters`;
-      }
-    } else {
-      errorObj.title = canShowErrors
-        ? `Plan name is required`
-        : null;
-    }
+    // if (title) {
+    //   if (
+    //     MIN_TITLE_LENGTH &&
+    //     title.length < MIN_TITLE_LENGTH
+    //   ) {
+    //     errorObj.title = canShowErrors
+    //       ? `Plan name should be atleast ${MIN_TITLE_LENGTH} characters`
+    //       : null;
+    //   } else if (title.length > MAX_TITLE_LENGTH) {
+    //     errorObj.title = `Plan name cannot exceed ${MAX_TITLE_LENGTH} characters`;
+    //   }
+    // } else {
+    //   errorObj.title = canShowErrors
+    //     ? `Plan name is required`
+    //     : null;
+    // }
 
     if (planType?.toLowerCase() !== 'lifetime') {
       if (periodQuantity) {
@@ -232,7 +231,7 @@ const TGEPlanAndPriceEditCreate = ({
       return;
     }
     setTempData({
-      title: plan.subscriptionPeriod,
+      // title: plan.subscriptionPeriod,
       price: plan.cost,
       enableDiscountedPrice: plan.enableDiscountedPrice,
       discountedPrice: plan.discountedCost,
@@ -261,7 +260,7 @@ const TGEPlanAndPriceEditCreate = ({
       >
         <div className="flex h-full flex-col justify-between">
           <div className="mb-14 flex flex-1 flex-col gap-2 overflow-y-auto px-4 py-2">
-            <div className="tgd-add-plan-block">
+            {/* <div className="tgd-add-plan-block">
               <div className="tgd-add-plan-block-body">
                 <TextInput
                   label="Plan Name"
@@ -280,7 +279,7 @@ const TGEPlanAndPriceEditCreate = ({
                   error={errors?.title}
                 ></TextInput>
               </div>
-            </div>
+            </div> */}
             {!tempData?._id ? (
               <div className="tgd-add-plan-block">
                 <Input.Label className="mb-1">

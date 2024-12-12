@@ -8,6 +8,7 @@ import {
 } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 import PricingTypeSelector from './PricingTypeSelector';
+import { discountPercentage } from '@/Utils/Common';
 
 function PlanEditCard({
   originalState,
@@ -25,9 +26,9 @@ function PlanEditCard({
   const [cost, setCost] = useState(
     originalState?.subscriptionCost || 0
   );
-  const [planTitle, setPlanTitle] = useState(
-    originalState?.planTitle || ''
-  );
+  // const [planTitle, setPlanTitle] = useState(
+  //   originalState?.planTitle || ''
+  // );
   const [enableDiscountedPrice, setEnableDiscountedPrice] =
     useState(originalState.enableDiscountedPrice || false);
   const [discountedPrice, setDiscountedPrice] = useState(
@@ -43,8 +44,9 @@ function PlanEditCard({
   const edited =
     periodLabel !== originalState.subscriptionPeriodLabel ||
     periodValue !== originalState.subscriptionPeriodValue ||
-    cost !== originalState.subscriptionCost ||
-    planTitle !== originalState.planTitle;
+    cost !== originalState.subscriptionCost;
+  // ||
+  // planTitle !== originalState.planTitle;
 
   const onSetLifetime = bool => {
     if (bool) {
@@ -65,7 +67,7 @@ function PlanEditCard({
         subscriptionPeriodLabel: periodLabel,
         subscriptionPeriodValue: periodValue,
         subscriptionCost: cost,
-        planTitle: planTitle,
+        // planTitle,
         enableDiscountedPrice: enableDiscountedPrice,
         discountedPrice: discountedPrice || null,
       });
@@ -80,8 +82,8 @@ function PlanEditCard({
     let isValid =
       periodLabel &&
       Number(periodValue || '0') &&
-      Number(cost || '0') &&
-      planTitle;
+      Number(cost || '0');
+    // && planTitle;
 
     if (
       enableDiscountedPrice &&
@@ -98,7 +100,7 @@ function PlanEditCard({
     periodLabel,
     periodValue,
     cost,
-    planTitle,
+    // planTitle,
     discountedPrice,
     enableDiscountedPrice,
   ]);
@@ -208,11 +210,10 @@ function PlanEditCard({
             clampBehavior="strict"
             max={cost}
             value={discountedPrice || ''}
-            rightSection={`${
-              Number(
-                Math.trunc((discountedPrice / cost) * 100)
-              ) || 0
-            }%`}
+            rightSection={discountPercentage(
+              cost,
+              discountedPrice
+            )}
             onChange={e => {
               if (e.target.value > cost) return;
               setDiscountedPrice(Number(e.target.value));
@@ -225,7 +226,7 @@ function PlanEditCard({
             }
           />
         ) : null}
-        <TextInput
+        {/* <TextInput
           label="Plan Name"
           type="text"
           value={planTitle}
@@ -235,7 +236,7 @@ function PlanEditCard({
             setPlanTitle(value || '');
           }}
           maxLength={75}
-        />
+        /> */}
         <div
           className="w-100 flex"
           style={{
