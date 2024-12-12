@@ -18,6 +18,7 @@ export function middleware(req) {
     '/audience',
     '/app',
     '/account',
+    '/dashboard',
     '/onboarding',
   ];
 
@@ -26,6 +27,7 @@ export function middleware(req) {
     '/signup',
     '/home',
     '/payment',
+    '/dashboard',
     '/purchase',
     '/audience',
     '/app',
@@ -37,6 +39,7 @@ export function middleware(req) {
     '/signup',
     '/home',
     '/payment',
+    '/dashboard',
     '/audience',
     '/app',
     '/onboarding',
@@ -51,7 +54,11 @@ export function middleware(req) {
   if (accessToken) {
     if (isCreator) {
       if (username) {
-        if (currentPath.startsWith('/onboarding')) {
+        if (
+          currentPath.startsWith('/onboarding') ||
+          currentPath.startsWith('/signin') ||
+          currentPath.startsWith('/signup')
+        ) {
           return redirectTo('/home', req);
         }
         return;
@@ -80,7 +87,7 @@ export function middleware(req) {
         currentPath.startsWith(item)
       )
     ) {
-      return redirectTo('/signup', req);
+      return redirectTo('/signin', req);
     }
   }
 }
