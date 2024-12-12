@@ -16,9 +16,10 @@ const ViewCourseTwoPreviewLessons = ({
     return (
       <div className="w-fill flex flex-col gap-2 font-semibold text-gray-800">
         {previewList.map((item, i) => {
+          if (!item) return null;
           return (
             <div
-              className="flex w-full cursor-pointer items-center gap-2 py-2 hover:bg-gray-50"
+              className={`flex w-full cursor-pointer items-center gap-2 rounded-md p-2 hover:bg-gray-100 ${item._id === activeLesson?._id ? 'bg-gray-100' : ''}`}
               onClick={() => {
                 setActiveLesson(item);
               }}
@@ -51,7 +52,7 @@ const ViewCourseTwoPreviewLessons = ({
         })}
       </div>
     );
-  }, [previewList]);
+  }, [activeLesson]);
 
   if (!activeLesson || !previewList?.length) return null;
   return (

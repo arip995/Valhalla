@@ -184,7 +184,6 @@ const ViewCourseTwo = ({ data, isPreview }) => {
             </h2>
             <div className="mb-16 overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100">
               <div className="p-4 md:p-8">
-                <h2 className="mb-4 text-xl font-bold text-gray-900 md:mb-6 md:text-2xl"></h2>
                 <Spoiler
                   maxHeight={300}
                   showLabel={
