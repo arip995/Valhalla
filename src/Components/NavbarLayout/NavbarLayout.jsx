@@ -102,7 +102,9 @@ export function NavbarLayout({ children }) {
               }}
               size="md"
             />
-            Nexify
+            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-xl font-bold text-transparent">
+              Nexify
+            </span>
           </Group>
         </AppShell.Header>
         <AppShell.Navbar
@@ -123,15 +125,17 @@ export function NavbarLayout({ children }) {
                   prefetch={false}
                   className="flex select-none items-center gap-1"
                 >
-                  <img
-                    height={24}
-                    width={24}
+                  {/* <img
+                    height={28}
+                    width={28}
                     src={Logo.src}
                     onClick={() => {
                       setOpened(false);
                     }}
-                  />
-                  Nexify
+                  /> */}
+                  <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-xl font-bold text-transparent">
+                    Nexify
+                  </span>
                 </Link>
                 <ActionIcon
                   variant="subtle"
@@ -156,10 +160,10 @@ export function NavbarLayout({ children }) {
                 >
                   <IconMenu2 stroke={1} color="black" />
                 </ActionIcon>
-                <Link href="/" prefetch={false}>
+                <Link href="/home" prefetch={false}>
                   <img
-                    height={24}
-                    width={24}
+                    height={28}
+                    width={28}
                     src={Logo.src}
                     onClick={() => {
                       setOpened(false);
