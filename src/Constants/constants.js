@@ -380,3 +380,11 @@ export const validateLink = link => {
     /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/[^\s]*)?$/;
   return regex.test(link);
 };
+
+export const RegistrationQuestionTypes = [
+  { value: 'text', label: 'Text' },
+  { value: 'largeText', label: 'Large Text' },
+  { value: 'dropdown', label: 'Dropdown' },
+  { value: 'number', label: 'Number' },
+  { value: 'date', label: 'Date Picker' },
+];

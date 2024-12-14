@@ -7,6 +7,7 @@ import { SectionTitleMapping } from './Sections';
 import Gallery from './Gallery';
 import Social from './Social';
 import About from './About';
+import RegistrationQuestion from './RgistrationQuestion/RegistrationQuestion';
 
 const SectionsModal = ({
   opened,
@@ -41,6 +42,11 @@ const SectionsModal = ({
           <Social section={section} onSave={onSave} />
         ) : type === 'about' ? (
           <About section={section} onSave={onSave} />
+        ) : type === 'registrationQuestion' ? (
+          <RegistrationQuestion
+            section={section}
+            onSave={onSave}
+          />
         ) : null}
       </Modal>
     </ScrollArea.Autosize>

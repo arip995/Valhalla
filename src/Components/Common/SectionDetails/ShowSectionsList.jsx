@@ -25,7 +25,10 @@ const Actions = [
   },
 ];
 
-const ActionMenu = ({ onClick = () => {}, type }) => {
+export const ActionMenu = ({
+  onClick = () => {},
+  type,
+}) => {
   return (
     <Menu shadow="md" width={100} position="bottom-end">
       <Menu.Target>

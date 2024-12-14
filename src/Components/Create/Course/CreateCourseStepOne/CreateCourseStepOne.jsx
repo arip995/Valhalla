@@ -3,7 +3,7 @@ import Pricing from '@/Components/Common/CreationFlow/Pricing';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import { Divider } from '@mantine/core';
 import React from 'react';
-import Sections from './SectionDetails/Sections';
+import Sections from '../../../Common/SectionDetails/Sections';
 
 const CreateCourseStepOne = ({
   form,

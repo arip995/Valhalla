@@ -81,6 +81,7 @@ export const SectionTitleMapping = {
   about: 'About',
   benifit: 'Benifit',
   gallery: 'Gallery',
+  registrationQuestion: 'Registration Question',
 };
 
 export const SectionArrray = [

@@ -1,9 +1,9 @@
 import BasicDetails from '@/Components/Common/CreationFlow/BasicDetails';
 import Pricing from '@/Components/Common/CreationFlow/Pricing';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
+import Sections from '@/Components/Common/SectionDetails/Sections';
 import { Divider } from '@mantine/core';
 import React from 'react';
-import Sections from '../../Course/CreateCourseStepOne/SectionDetails/Sections';
 
 const CreateDPStepOne = ({
   form,

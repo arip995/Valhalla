@@ -1,4 +1,4 @@
-import { socialIconsMapping } from '@/Components/Create/Course/CreateCourseStepOne/SectionDetails/Sections';
+import { socialIconsMapping } from '@/Components/Common/SectionDetails/Sections';
 import React from 'react';
 
 const ViewSocial = ({ value }) => {
