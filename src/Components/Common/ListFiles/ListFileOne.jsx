@@ -1,18 +1,11 @@
-import { validateLink } from '@/Constants/constants';
 import { getUniqueId } from '@/Utils/Common';
 import { handleFile } from '@/Utils/HandleFiles';
-import {
-  Button,
-  Divider,
-  FileButton,
-  TextInput,
-  Tooltip,
-} from '@mantine/core';
+import { FileButton } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import UploadButtonOne from '../Upload/UploadButtonOne';
-import ListFiles from './ListFiles';
 import useUploadVideo from '../Upload/useUploadVideo';
+import ListFiles from './ListFiles';
 const ListFileOne = ({
   onUpdate = () => {},
   maxSize = 5,
@@ -26,7 +19,6 @@ const ListFileOne = ({
   showImagePreview = false,
   cropImage = false,
   quality = 50,
-  onChangeLink = () => {},
   isUploadOnBunny,
   showMaxSize = true,
   showButton = true,
@@ -34,8 +26,6 @@ const ListFileOne = ({
   const [files, setFiles] = useState(
     file.length ? file : []
   );
-  const [link, setLink] = useState('');
-  const [linkError, setLinkError] = useState('');
 
   const addLoading = () => {
     setFiles([
@@ -182,72 +172,22 @@ const ListFileOne = ({
               crop={cropImage}
               showMaxSize={showMaxSize}
               showButton={showButton}
+              showLink={showLink}
+              onChangeLink={val => {
+                if (!val.link) return null;
+                setFiles(prev => {
+                  return [...prev, { ...val }];
+                });
+              }}
             />
           )}
         </>
       ) : (
         <FileButton
-          disabled={link}
+          // disabled={link}
           onChange={onUpload}
           accept={mimeTypes}
         />
-      )}
-
-      {!!showLink && (
-        <>
-          <Divider position="center" label="OR" />
-          <div className="flex w-full flex-col gap-4">
-            <Tooltip
-              disabled={files?.length < 1}
-              label="Delete the uploaded video above to enable this field."
-              events={{
-                hover: true,
-                focus: true,
-                touch: true,
-              }}
-            >
-              <TextInput
-                label="Video Link"
-                rightSectionWidth={65}
-                rightSection={
-                  <Button
-                    radius={'md'}
-                    onClick={() => {
-                      if (!validateLink(link)) {
-                        setLinkError('Enter a valid link');
-                      } else {
-                        onChangeLink(link);
-                        setFiles(prev => {
-                          return [
-                            ...prev,
-                            { type: 'link', link },
-                          ];
-                        });
-                        setLink('');
-                      }
-                    }}
-                  >
-                    Add
-                  </Button>
-                }
-                // rightSection={
-                //   <div className="flex items-center gap-1">
-                //     <IconBrandYoutubeFilled color="red" />
-                //     <IconBrandVimeo color="cyan" />
-                //   </div>
-                // }
-                error={linkError}
-                placeholder="Link"
-                value={link}
-                // disabled={files.length >= 1}
-                onChange={e => {
-                  setLink(e.target.value);
-                  setLinkError('');
-                }}
-              />
-            </Tooltip>
-          </div>
-        </>
       )}
 
       {files.length > 0 && (
