@@ -28,6 +28,8 @@ const ListFileOne = ({
   quality = 50,
   onChangeLink = () => {},
   isUploadOnBunny,
+  showMaxSize = true,
+  showButton = true,
 }) => {
   const [files, setFiles] = useState(
     file.length ? file : []
@@ -178,6 +180,8 @@ const ListFileOne = ({
               maxSize={maxSize}
               mimeTypes={mimeTypes}
               crop={cropImage}
+              showMaxSize={showMaxSize}
+              showButton={showButton}
             />
           )}
         </>

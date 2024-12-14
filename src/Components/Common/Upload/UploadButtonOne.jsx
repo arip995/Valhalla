@@ -1,8 +1,17 @@
 import { handleFile } from '@/Utils/HandleFiles';
-import { Button, Divider, TextInput } from '@mantine/core';
+import {
+  ActionIcon,
+  Button,
+  Divider,
+  TextInput,
+} from '@mantine/core';
 import classNames from 'classnames';
 import { useState } from 'react';
 import CropModal from '../Modal/CropModal';
+import {
+  IconFileUpload,
+  IconUpload,
+} from '@tabler/icons-react';
 // import React, { useState } from 'react';
 
 const UploadButtonOne = ({
@@ -10,6 +19,7 @@ const UploadButtonOne = ({
   description = '(16:9) recommended',
   maxSize = 5,
   showMaxSize = true,
+  showButton = true,
   mimeTypes = 'image/*',
   onUpload = () => {},
   allowVideoLinks = false,
@@ -52,9 +62,32 @@ const UploadButtonOne = ({
           )}
         >
           <div className="upload-option upload-option-file">
-            <div className="flex w-full cursor-pointer items-center justify-center rounded-full bg-black/10 p-2 text-sm font-medium leading-4">
-              {buttonText}
-            </div>
+            {showButton ? (
+              <Button
+                color="black"
+                leftSection={<IconUpload />}
+              >
+                {buttonText}
+              </Button>
+            ) : (
+              <div className="flex flex-col items-center justify-center gap-2">
+                <ActionIcon
+                  variant="light"
+                  size={50}
+                  radius="xl"
+                >
+                  <IconFileUpload />
+                </ActionIcon>
+                <div className="flex gap-2">
+                  <span className="text-violet-800">
+                    {' '}
+                    Browse
+                  </span>{' '}
+                  files from your system
+                </div>
+              </div>
+            )}
+
             <div className="mt-4 text-center">
               {description ? `${description},` : ''}
               {showMaxSize &&

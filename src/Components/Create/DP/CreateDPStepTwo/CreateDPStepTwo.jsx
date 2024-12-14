@@ -6,10 +6,12 @@ const CreateDPStepTwo = () => {
       <ListFileOne
         showLink
         maxSize={2000}
+        showMaxSize={false}
         uploadButtonDescription={''}
         mimeTypes={['image/*', 'application/*', 'video/*']}
         uploadButtonText="Browse files from your system"
         isUploadOnBunny={true}
+        showButton={false}
       />
     </div>
   );
