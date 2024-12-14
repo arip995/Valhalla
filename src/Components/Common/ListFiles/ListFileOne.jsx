@@ -167,9 +167,7 @@ const ListFileOne = ({
         <>
           {onlyOne && files?.length > 0 ? null : (
             <>
-              {!!labelText && (
-                <Input.Label>{labelText}</Input.Label>
-              )}
+              {!!labelText && labelText}
               <UploadButtonOne
                 buttonText={uploadButtonText}
                 description={uploadButtonDescription}

@@ -15,7 +15,7 @@ import CreateDPStepOne from './CreateDPStepOne/CreateDPStepOne';
 import CreateDPStepTwo from './CreateDPStepTwo/CreateDPStepTwo';
 import useCreateDP from './useCreateDP';
 
-const CreateCourse = () => {
+const CreateDp = () => {
   const {
     dpForm,
     handleSubmit,
@@ -24,6 +24,7 @@ const CreateCourse = () => {
     setTab,
     isPreviewScreen,
     setIsPreviewScreen,
+    productType,
   } = useCreateDP();
 
   if (dpForm.values.loading === -1) {
@@ -40,7 +41,9 @@ const CreateCourse = () => {
             <div className="flex w-full items-center justify-between gap-4 text-sm text-gray-600">
               <div className="flex items-center gap-4">
                 <CloseButton
-                  onClick={() => router.push('/app/course')}
+                  onClick={() =>
+                    router.push(`/app/${productType}`)
+                  }
                 />
                 {dpForm.values.stepsCompleted ===
                 2 ? null : (
@@ -106,9 +109,9 @@ const CreateCourse = () => {
                     }}
                   >
                     {dpForm.values.stepsCompleted === 1
-                      ? 'Publish course'
+                      ? 'Publish'
                       : dpForm.values.stepsCompleted > 1
-                        ? 'Publish Course'
+                        ? 'Publish'
                         : 'Save and Continue'}
                   </Button>
                 </div>
@@ -165,4 +168,4 @@ const CreateCourse = () => {
   );
 };
 
-export default React.memo(CreateCourse);
+export default React.memo(CreateDp);

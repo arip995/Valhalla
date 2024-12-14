@@ -1,4 +1,3 @@
-import { Button, Input } from '@mantine/core';
 import { useState } from 'react';
 import SectionsModal from '../SectionsModal';
 import ShowRegisTrationQuestion from './ShowRegisTrationQuestion';
@@ -66,15 +65,28 @@ const RenderRgistrationQuestion = ({ form }) => {
     updateSection(section);
   };
 
+  const onDelete = (_, value) => {
+    let updatedSections = registrationQuestions;
+    console.log(value);
+    updatedSections = updatedSections.filter(
+      item => item.id !== value.id
+    );
+    form.setValues({
+      registrationQuestions: updatedSections,
+    });
+  };
+
   return (
     <div>
-      <Input.Label>Registration Questions</Input.Label>
-      <Input.Description className="">
+      <div className="mb-2 text-xl font-bold">
+        Registration Question
+      </div>
+      <div className="text-sm text-gray-700">
         We collect{' '}
         <span className="font-semibold">email</span> and{' '}
         <span className="font-semibold">phone number</span>{' '}
         by default from buyers at checkout
-      </Input.Description>
+      </div>
       {registrationQuestions?.length
         ? registrationQuestions.map(item => {
             return (
@@ -82,12 +94,13 @@ const RenderRgistrationQuestion = ({ form }) => {
                 key={item.id}
                 onAddOrEditSection={onAddOrEditSection}
                 item={item}
+                onDelete={onDelete}
               />
             );
           })
         : null}
-      <Button
-        variant="transparent"
+      <div
+        className="mt-2 cursor-pointer font-semibold text-violet-700"
         onClick={() => {
           setType('registrationQuestion');
           setOpened(true);
@@ -95,7 +108,7 @@ const RenderRgistrationQuestion = ({ form }) => {
         }}
       >
         + Add Question
-      </Button>
+      </div>
       <SectionsModal
         type={type}
         section={section}

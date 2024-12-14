@@ -12,18 +12,17 @@ const LimitQuantity = ({ form }) => {
       </div>
       <div className="flex justify-between">
         Limit total number of purchases?
+        <Switch
+          checked={form.values.isLimitQuantityEnabled}
+          onChange={e =>
+            form.setFieldValue(
+              'isLimitQuantityEnabled',
+              e.currentTarget.checked
+            )
+          }
+          color="green"
+        />
       </div>
-      <Switch
-        checked={form.values.isLimitQuantityEnabled}
-        onChange={e =>
-          form.setFieldValue(
-            'isLimitQuantityEnabled',
-            e.currentTarget.checked
-          )
-        }
-        color="green"
-        label="I agree to sell my privacy"
-      />
       <Collapse
         in={form.values.isLimitQuantityEnabled}
         className="flex flex-col gap-4"

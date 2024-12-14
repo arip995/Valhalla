@@ -11,6 +11,7 @@ import { sectionTypes } from '@/Constants/constants';
 const useCreateDP = () => {
   const router = useRouter();
   const productId = usePathname().split('/')[3];
+  const productType = usePathname().split('/')[2];
   const isDesktop = useMediaQuery('(min-width: 74em)');
   const [tab, setTab] = useState(null);
   const [isPreviewScreen, setIsPreviewScreen] =
@@ -34,6 +35,15 @@ const useCreateDP = () => {
         values.stepsCompleted
       ) {
         //Check if added digital product or not
+        if (!values.files?.length) {
+          errors.files = 'Digital files are required';
+        }
+        if (
+          values.isLimitQuantityEnabled &&
+          !values.quantity
+        ) {
+          errors.quantity = 'Quantity is required';
+        }
       }
 
       if (values.isSaveClickedAtleastOnce) {
@@ -244,6 +254,7 @@ const useCreateDP = () => {
     setTab,
     isPreviewScreen,
     setIsPreviewScreen,
+    productType,
   };
 };
 
