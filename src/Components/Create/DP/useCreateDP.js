@@ -139,6 +139,15 @@ const useCreateDP = () => {
         })),
     ];
   };
+  const modifyRegistrationQuestions = value => {
+    if (!value?.length) return value;
+    return value.map(item => {
+      return {
+        ...item,
+        id: getUniqueId(),
+      };
+    });
+  };
   const handleSubmit = async values => {
     try {
       dpForm.setValues({ loading: 1 });
@@ -158,6 +167,9 @@ const useCreateDP = () => {
         ...prevValues,
         ...responseData,
         sections: calculateSections(responseData.sections),
+        registrationQuestions: modifyRegistrationQuestions(
+          responseData.registrationQuestions
+        ),
       }));
       if (responseData.stepsCompleted === 1) {
         setTab('content');
@@ -198,6 +210,9 @@ const useCreateDP = () => {
         ...prevValues,
         ...responseData,
         sections: calculateSections(responseData.sections),
+        registrationQuestions: modifyRegistrationQuestions(
+          responseData.registrationQuestions
+        ),
         loading: 0,
       }));
 

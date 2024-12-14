@@ -3,7 +3,9 @@ import { getUniqueId } from '@/Utils/Common';
 import {
   Button,
   Checkbox,
+  Collapse,
   Select,
+  TagsInput,
   TextInput,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
@@ -20,22 +22,32 @@ const RegistrationQuestion = ({
     },
     validateInputOnChange: true,
     clearInputErrorOnChange: false,
-    validate: values => ({
-      question:
-        values.isClickedSaveAtleastOnce &&
-        !values.question?.length
-          ? 'Question is required'
-          : null,
-      type:
-        values.isClickedSaveAtleastOnce && !values.type
-          ? 'Type is required'
-          : null,
-    }),
+
+    validate: values => {
+      let errors = {};
+      if (!values) return {};
+      if (values.isClickedSaveAtleastOnce) {
+        if (!values.question?.length) {
+          errors.question = 'Question is required';
+        }
+        if (!values.type) {
+          errors.question = 'Field type is required';
+        }
+        if (
+          values.type === 'dropdown' &&
+          !values.options?.length
+        ) {
+          errors.options = 'Options are required';
+        }
+      }
+      return errors;
+    },
     transformValues: values => ({
       id: values.id,
       type: values.type.trim(),
       isRequired: values.isRequired,
       question: values.question.trim(),
+      options: values.options,
     }),
   });
 
@@ -62,6 +74,17 @@ const RegistrationQuestion = ({
         name="question"
         {...faqForm.getInputProps('question')}
       />
+
+      <Collapse
+        in={faqForm.values.type === 'dropdown'}
+        className="flex flex-col gap-4"
+      >
+        <TagsInput
+          label="Options"
+          {...faqForm.getInputProps('options')}
+        />
+      </Collapse>
+
       <Checkbox
         label="Field is compulsory"
         {...faqForm.getInputProps('isRequired', {

@@ -7,7 +7,7 @@ const RenderRgistrationQuestion = ({ form }) => {
   const [type, setType] = useState(null);
   const [section, setSection] = useState();
   const registrationQuestions =
-    form.values.registrationQuestions;
+    form.values.registrationQuestions || [];
 
   const updateSection = updatedSection => {
     let updatedSections = [];
