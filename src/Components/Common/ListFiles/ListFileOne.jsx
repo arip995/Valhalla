@@ -1,19 +1,18 @@
+import { validateLink } from '@/Constants/constants';
 import { getUniqueId } from '@/Utils/Common';
 import { handleFile } from '@/Utils/HandleFiles';
 import {
+  Button,
   Divider,
   FileButton,
   TextInput,
   Tooltip,
 } from '@mantine/core';
-import {
-  IconBrandVimeo,
-  IconBrandYoutubeFilled,
-} from '@tabler/icons-react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import UploadButtonOne from '../Upload/UploadButtonOne';
 import ListFiles from './ListFiles';
+import useUploadVideo from '../Upload/useUploadVideo';
 const ListFileOne = ({
   onUpdate = () => {},
   maxSize = 5,
@@ -24,61 +23,97 @@ const ListFileOne = ({
   showLink = false,
   uploadButtonText,
   uploadButtonDescription,
-  link = '',
   showImagePreview = false,
   cropImage = false,
   quality = 50,
   onChangeLink = () => {},
-  isPresigned,
+  isUploadOnBunny,
 }) => {
   const [files, setFiles] = useState(
     file.length ? file : []
   );
+  const [link, setLink] = useState('');
+  const [linkError, setLinkError] = useState('');
 
-  const addLoadingImage = () => {
+  const addLoading = () => {
     setFiles([
       ...files,
       { id: getUniqueId(), loading: true },
     ]);
   };
 
+  const handleAfterBunnyUpload = uploadedFiles => {
+    if (!uploadedFiles.length) return null;
+
+    setFiles(prevFiles => {
+      const updatedFiles = [...prevFiles];
+      const loadingIndex = updatedFiles.findIndex(
+        f => f.loading
+      );
+      if (loadingIndex !== -1) {
+        updatedFiles[loadingIndex] = {
+          id: updatedFiles[loadingIndex].id,
+          ...uploadedFiles[0],
+        };
+      }
+      return updatedFiles;
+    });
+  };
+
+  const { uploadFile: uploadBunny } = useUploadVideo(
+    handleAfterBunnyUpload,
+    file
+  );
+
   const onUpload = async file => {
     try {
-      addLoadingImage();
-      const url = await handleFile(
-        file,
-        mimeTypes,
-        maxSize,
-        quality,
-        false,
-        isPresigned
-      );
-      if (!url) {
+      addLoading();
+      if (
+        isUploadOnBunny &&
+        file.type.startsWith('video')
+      ) {
+        await handleFile(
+          file,
+          mimeTypes,
+          maxSize,
+          quality,
+          true
+        );
+        uploadBunny(file);
+      } else {
+        const url = await handleFile(
+          file,
+          mimeTypes,
+          maxSize,
+          quality
+        );
+        if (!url) {
+          setFiles(prevFiles => {
+            const loadingIndex = prevFiles.findIndex(
+              f => f.loading
+            );
+            return prevFiles.filter(
+              (_, index) => index !== loadingIndex
+            );
+          });
+          return;
+        }
         setFiles(prevFiles => {
-          const loadingIndex = prevFiles.findIndex(
+          const updatedFiles = [...prevFiles];
+          const loadingIndex = updatedFiles.findIndex(
             f => f.loading
           );
-          return prevFiles.filter(
-            (_, index) => index !== loadingIndex
-          );
+          if (loadingIndex !== -1) {
+            updatedFiles[loadingIndex] = {
+              id: updatedFiles[loadingIndex].id,
+              url,
+              type: file.type,
+              name: file.name,
+            };
+          }
+          return updatedFiles;
         });
-        return;
       }
-      setFiles(prevFiles => {
-        const updatedFiles = [...prevFiles];
-        const loadingIndex = updatedFiles.findIndex(
-          f => f.loading
-        );
-        if (loadingIndex !== -1) {
-          updatedFiles[loadingIndex] = {
-            id: updatedFiles[loadingIndex].id,
-            url,
-            type: file.type,
-            name: file.name,
-          };
-        }
-        return updatedFiles;
-      });
     } catch (error) {
       setFiles(prevFiles => {
         const loadingIndex = prevFiles.findIndex(
@@ -133,13 +168,6 @@ const ListFileOne = ({
           accept={mimeTypes}
         />
       )}
-      {files.length > 0 && (
-        <ListFiles
-          files={files}
-          onDelete={onFileDelete}
-          showImagePreview={showImagePreview}
-        />
-      )}
 
       {!!showLink && (
         <>
@@ -156,23 +184,57 @@ const ListFileOne = ({
             >
               <TextInput
                 label="Video Link"
-                rightSectionWidth={60}
+                rightSectionWidth={65}
                 rightSection={
-                  <div className="flex items-center gap-1">
-                    <IconBrandYoutubeFilled color="red" />
-                    <IconBrandVimeo color="cyan" />
-                  </div>
+                  <Button
+                    radius={'md'}
+                    onClick={() => {
+                      if (!validateLink(link)) {
+                        setLinkError('Enter a valid link');
+                      } else {
+                        onChangeLink(link);
+                        setFiles(prev => {
+                          return [
+                            ...prev,
+                            { type: 'link', link },
+                          ];
+                        });
+                        setLink('');
+                      }
+                    }}
+                  >
+                    Add
+                  </Button>
                 }
+                // rightSection={
+                //   <div className="flex items-center gap-1">
+                //     <IconBrandYoutubeFilled color="red" />
+                //     <IconBrandVimeo color="cyan" />
+                //   </div>
+                // }
+                error={linkError}
                 placeholder="Link"
-                disabled={files.length >= 1}
-                onChange={e => onChangeLink(e.target.value)}
+                value={link}
+                // disabled={files.length >= 1}
+                onChange={e => {
+                  setLink(e.target.value);
+                  setLinkError('');
+                }}
               />
             </Tooltip>
           </div>
         </>
       )}
+
+      {files.length > 0 && (
+        <ListFiles
+          files={files}
+          onDelete={onFileDelete}
+          showImagePreview={showImagePreview}
+        />
+      )}
     </div>
   );
 };
 
-export default ListFileOne;
+export default React.memo(ListFileOne);

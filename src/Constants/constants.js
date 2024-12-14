@@ -374,3 +374,9 @@ export const PRICE_TYPES = [
     description: 'Let customers pay any price',
   },
 ];
+
+export const validateLink = link => {
+  const regex =
+    /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/[^\s]*)?$/;
+  return regex.test(link);
+};

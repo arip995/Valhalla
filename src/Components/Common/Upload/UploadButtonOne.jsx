@@ -55,9 +55,10 @@ const UploadButtonOne = ({
             <div className="flex w-full cursor-pointer items-center justify-center rounded-full bg-black/10 p-2 text-sm font-medium leading-4">
               {buttonText}
             </div>
-            <div className="mt-4">
-              {`${description} `}
-              {showMaxSize && `, max size - ${maxSize}MB`}
+            <div className="mt-4 text-center">
+              {description ? `${description},` : ''}
+              {showMaxSize &&
+                ` max size - ${maxSize > 1000 ? maxSize / 1000 : maxSize}${maxSize > 1000 ? 'GB' : 'MB'}`}
             </div>
             <input
               id="upload-trigger"
