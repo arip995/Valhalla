@@ -17,7 +17,7 @@ const CreateDPStepOne = ({
     <form
       id="my-form"
       onSubmit={form.onSubmit(handleSubmit)}
-      className="flex flex-1 flex-col gap-3 p-4"
+      className="flex flex-1 flex-col gap-3"
     >
       <BasicDetails form={form} />
       <Divider my="md" size="lg" />

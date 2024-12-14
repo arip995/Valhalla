@@ -91,6 +91,9 @@ const IframeComponent = ({ children }) => {
       '@mantine/core/styles/Stepper.css',
       '@mantine/core/styles/ThemeIcon.css',
       '@mantine/carousel/styles.css',
+      '@mantine/core/styles/ColorSwatch.css',
+      '@mantine/core/styles/ColorPicker.css',
+      '@mantine/core/styles/ColorInput.css',
     ];
 
     mantineStyles.forEach(style => {

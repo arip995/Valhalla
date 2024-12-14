@@ -6,7 +6,7 @@ import React from 'react';
 
 const CreateDPStepTwo = ({ form }) => {
   return (
-    <div className="flex w-full flex-col gap-3 p-4">
+    <div className="flex w-full flex-col gap-3">
       <ListFileOne
         showLink
         maxSize={2000}

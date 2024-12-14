@@ -5,7 +5,7 @@ import React from 'react';
 
 const CreateDPStepThree = ({ form }) => {
   return (
-    <div className="flex w-full flex-col gap-3 p-4">
+    <div className="flex w-full flex-col gap-3">
       <Customize form={form} />
       <Divider my="md" size="lg" />
       <Theme form={form} />

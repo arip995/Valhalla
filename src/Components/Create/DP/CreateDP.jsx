@@ -155,7 +155,7 @@ const CreateDp = () => {
               </Tabs.List>
             </Tabs>
           )}
-          <div className="flex flex-1 flex-col overflow-y-auto">
+          <div className="flex flex-1 flex-col overflow-y-auto px-4 py-4 lg:px-8">
             {tab === 'details' ? (
               <CreateDPStepOne form={dpForm} />
             ) : tab === 'content' ? (
