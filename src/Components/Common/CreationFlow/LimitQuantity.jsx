@@ -13,10 +13,10 @@ const LimitQuantity = ({ form }) => {
       <div className="flex justify-between">
         Limit total number of purchases?
         <Switch
-          checked={form.values.isLimitQuantityEnabled}
+          checked={form.values.isLimitedQuantityEnabled}
           onChange={e =>
             form.setFieldValue(
-              'isLimitQuantityEnabled',
+              'isLimitedQuantityEnabled',
               e.currentTarget.checked
             )
           }
@@ -24,7 +24,7 @@ const LimitQuantity = ({ form }) => {
         />
       </div>
       <Collapse
-        in={form.values.isLimitQuantityEnabled}
+        in={form.values.isLimitedQuantityEnabled}
         className="flex flex-col gap-4"
       >
         <NumberInput

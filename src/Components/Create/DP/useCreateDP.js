@@ -39,7 +39,7 @@ const useCreateDP = () => {
           errors.files = 'Digital files are required';
         }
         if (
-          values.isLimitQuantityEnabled &&
+          values.isLimitedQuantityEnabled &&
           !values.quantity
         ) {
           errors.quantity = 'Quantity is required';
