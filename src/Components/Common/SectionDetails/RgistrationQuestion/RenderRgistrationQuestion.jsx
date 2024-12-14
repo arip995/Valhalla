@@ -28,7 +28,6 @@ const RenderRgistrationQuestion = ({ form }) => {
           }
         );
       } else {
-        console.log('first');
         updatedSections = [
           ...registrationQuestions,
           { ...updatedSection },
@@ -67,7 +66,6 @@ const RenderRgistrationQuestion = ({ form }) => {
 
   const onDelete = (_, value) => {
     let updatedSections = registrationQuestions;
-    console.log(value);
     updatedSections = updatedSections.filter(
       item => item.id !== value.id
     );
