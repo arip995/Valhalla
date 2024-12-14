@@ -20,6 +20,7 @@ const CreateDPStepTwo = ({ form }) => {
             Upload your Digital Files
           </div>
         }
+        file={form.values.files}
         id={form.key('files')}
         error={form.errors.files}
         onUpdate={value =>
