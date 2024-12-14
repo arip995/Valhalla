@@ -197,6 +197,7 @@ const Sections = ({ form }) => {
         const about = {
           name:
             value?.[0]?.name ||
+            form.values.creatorDetails.name ||
             (form.values.creatorDetails.firstName
               ? `${form.values.creatorDetails.firstName} ${form.values.creatorDetails.lastName}`
               : ''),

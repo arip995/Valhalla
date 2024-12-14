@@ -70,6 +70,9 @@ import '@mantine/core/styles/Anchor.css';
 import '@mantine/core/styles/Stepper.css';
 import '@mantine/carousel/styles.css';
 import '@mantine/core/styles/ThemeIcon.css';
+import '@mantine/core/styles/ColorSwatch.css';
+import '@mantine/core/styles/ColorPicker.css';
+import '@mantine/core/styles/ColorInput.css';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({

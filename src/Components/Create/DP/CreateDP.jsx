@@ -14,6 +14,7 @@ import React from 'react';
 import CreateDPStepOne from './CreateDPStepOne/CreateDPStepOne';
 import CreateDPStepTwo from './CreateDPStepTwo/CreateDPStepTwo';
 import useCreateDP from './useCreateDP';
+import CreateDPStepThree from './CreateDPStepThree/CreateDPStepThree';
 
 const CreateDp = () => {
   const {
@@ -145,6 +146,12 @@ const CreateDp = () => {
                 >
                   Content
                 </Tabs.Tab>
+                <Tabs.Tab
+                  value="customize"
+                  className="font-medium"
+                >
+                  Customize
+                </Tabs.Tab>
               </Tabs.List>
             </Tabs>
           )}
@@ -153,7 +160,9 @@ const CreateDp = () => {
               <CreateDPStepOne form={dpForm} />
             ) : tab === 'content' ? (
               <CreateDPStepTwo form={dpForm} />
-            ) : null}
+            ) : (
+              <CreateDPStepThree form={dpForm} />
+            )}
           </div>
         </div>
         <PreviewOne

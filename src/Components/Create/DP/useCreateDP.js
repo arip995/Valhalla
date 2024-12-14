@@ -32,7 +32,15 @@ const useCreateDP = () => {
 
       if (
         values.isSaveClickedAtleastOnce &&
-        values.stepsCompleted
+        values.stepsCompleted == 2
+      ) {
+        if (!values.name) {
+          errors.name = 'Name is required';
+        }
+      }
+      if (
+        values.isSaveClickedAtleastOnce &&
+        values.stepsCompleted == 1
       ) {
         //Check if added digital product or not
         if (!values.files?.length) {
@@ -112,11 +120,16 @@ const useCreateDP = () => {
         item =>
           item.value?.length || item.type === 'highlight'
       );
+      let creatorDetails = {
+        ...(values.creatorDetails || {}),
+        name: values.name || values.creatorDetails.name,
+      };
 
       return {
         ...data,
         productId,
         sections,
+        creatorDetails,
       };
     },
   });
@@ -166,6 +179,7 @@ const useCreateDP = () => {
       dpForm.setValues(prevValues => ({
         ...prevValues,
         ...responseData,
+        name: responseData.creatorDetails?.name,
         sections: calculateSections(responseData.sections),
         registrationQuestions: modifyRegistrationQuestions(
           responseData.registrationQuestions
@@ -209,6 +223,7 @@ const useCreateDP = () => {
       dpForm.setValues(prevValues => ({
         ...prevValues,
         ...responseData,
+        name: responseData.creatorDetails?.name,
         sections: calculateSections(responseData.sections),
         registrationQuestions: modifyRegistrationQuestions(
           responseData.registrationQuestions
