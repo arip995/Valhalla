@@ -15,6 +15,7 @@ const PreviewOne = ({
   // eslint-disable-next-line no-unused-vars
   const [isDeskTop, setIsDesktop] = useState(false);
   const productId = usePathname().split('/')[3];
+  const productType = usePathname().split('/')[2];
 
   return (
     <div
@@ -45,7 +46,7 @@ const PreviewOne = ({
               <a
                 target="_blank"
                 rel="noreferrer"
-                href={`${process.env.NEXT_PUBLIC_HOST}/course/${productId}`}
+                href={`${process.env.NEXT_PUBLIC_HOST}/${productType}/${productId}`}
               >
                 <IconExternalLink
                   className={`cursor-pointer text-gray-400 ${
@@ -89,7 +90,7 @@ const PreviewOne = ({
                 <div className="h-2 w-2 rounded-full bg-green-500"></div>
               </div>
               <div className="mx-auto w-full rounded-md bg-gray-500 px-4 py-1 text-center text-[10px] text-gray-50 md:w-6/12">
-                nexify.club/course/
+                nexify.club/{productType}/
               </div>
             </div>
             <div className="hide-scrollbar relative h-[calc(100vh-8rem)] overflow-y-auto overflow-x-hidden rounded-b-2xl border-b-8 border-l-8 border-r-8 border-gray-800 bg-white lg:h-[calc(100vh-8rem)]">

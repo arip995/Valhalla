@@ -3,9 +3,9 @@ import Pricing from '@/Components/Common/CreationFlow/Pricing';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import { Divider } from '@mantine/core';
 import React from 'react';
-import Sections from './SectionDetails/Sections';
+import Sections from '../../Course/CreateCourseStepOne/SectionDetails/Sections';
 
-const CreateCourseStepOne = ({
+const CreateDPStepOne = ({
   form,
   handleSubmit = () => {},
 }) => {
@@ -21,11 +21,11 @@ const CreateCourseStepOne = ({
     >
       <BasicDetails form={form} />
       <Divider my="md" size="lg" />
-      <Pricing form={form} />
+      <Pricing form={form} type={1} />
       <Divider my="md" size="lg" />
       <Sections form={form} />
     </form>
   );
 };
 
-export default React.memo(CreateCourseStepOne);
+export default CreateDPStepOne;

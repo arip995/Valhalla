@@ -83,16 +83,6 @@ export const SectionTitleMapping = {
   gallery: 'Gallery',
 };
 
-export const SectionTypes = [
-  { type: 'testimonial', isEnabled: false },
-  { type: 'faq', isEnabled: false },
-  { type: 'benifit', isEnabled: false },
-  { type: 'social', isEnabled: false },
-  { type: 'gallery', isEnabled: false },
-  { type: 'about', isEnabled: false },
-  { type: 'highlight', isEnabled: false },
-];
-
 export const SectionArrray = [
   'testimonial',
   'faq',
@@ -102,12 +92,56 @@ export const SectionArrray = [
   'highlight',
 ];
 
-const Sections = ({ updateSection, form }) => {
+const Sections = ({ form }) => {
   const [opened, setOpened] = useState(false);
   const [type, setType] = useState(null);
   const [section, setSection] = useState([]);
 
   const sections = form.values.sections;
+
+  const updateSection = (updatedSection, sectionType) => {
+    const updatedSections = form.values.sections.map(
+      existingSection => {
+        if (existingSection.type === sectionType) {
+          if (Array.isArray(updatedSection)) {
+            // If updatedSection is an array, update it directly
+            return {
+              ...existingSection,
+              value: [...updatedSection],
+            };
+          } else if (
+            updatedSection.id &&
+            Array.isArray(existingSection.value) &&
+            existingSection.value.some(
+              item => item.id === updatedSection.id
+            )
+          ) {
+            // Update existing section
+            return {
+              ...existingSection,
+              value: existingSection.value.map(item =>
+                item.id === updatedSection.id
+                  ? { ...item, ...updatedSection }
+                  : item
+              ),
+            };
+          } else {
+            // Add new section
+            return {
+              ...existingSection,
+              value: Array.isArray(existingSection.value)
+                ? [...existingSection.value, updatedSection]
+                : [updatedSection],
+            };
+          }
+        }
+        return existingSection;
+      }
+    );
+    form.setValues({
+      sections: updatedSections,
+    });
+  };
 
   const onSave = useCallback(
     section => {
@@ -338,7 +372,8 @@ const Sections = ({ updateSection, form }) => {
   if (!sections?.length) return null;
 
   return (
-    <div>
+    <div className="flex flex-1 flex-col gap-3">
+      <div className="mb-2 text-xl font-bold">Sections</div>
       {sections?.length && (
         <DragAndDrop
           array={sections}

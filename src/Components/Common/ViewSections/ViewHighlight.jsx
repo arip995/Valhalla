@@ -13,7 +13,13 @@ const ViewHighlight = ({ value }) => {
   if (!value) return null;
 
   return (
-    <div className="grid grid-cols-1 gap-4 rounded-2xl bg-white p-4 shadow-md ring-1 ring-gray-100 sm:grid-cols-2 md:p-8 lg:grid-cols-3">
+    <div
+      className="grid gap-4 rounded-2xl bg-white p-4 shadow-md ring-1 ring-gray-100 md:p-8"
+      style={{
+        gridTemplateColumns:
+          'repeat(auto-fit, minmax(200px, 1fr))',
+      }}
+    >
       {!!value.totalDuration && (
         <div className="group flex items-center gap-4 rounded-xl bg-blue-50/50 p-4 transition-all hover:bg-blue-50">
           <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 text-blue-600 transition-all group-hover:scale-110">

@@ -8,21 +8,21 @@ import { getUniqueId } from '@/Utils/Common';
 import { useMediaQuery } from '@mantine/hooks';
 import { sectionTypes } from '@/Constants/constants';
 
-const useCreateCourse = () => {
+const useCreateDP = () => {
   const router = useRouter();
-  const courseId = usePathname().split('/')[3];
+  const productId = usePathname().split('/')[3];
   const isDesktop = useMediaQuery('(min-width: 74em)');
   const [tab, setTab] = useState(null);
   const [isPreviewScreen, setIsPreviewScreen] =
     useState(false);
-  const courseForm = useForm({
+  const dpForm = useForm({
     initialValues: {
       isSaveClickedAtleastOnce: false,
+      priceType: 'fixed',
       loading: -1,
-      cta: 'Enroll for',
+      cta: 'Buy now',
       title: '',
-      sections: sectionTypes(),
-      content: [],
+      sections: sectionTypes('dp'),
     },
     validateInputOnChange: true,
     clearInputErrorOnChange: false,
@@ -33,14 +33,7 @@ const useCreateCourse = () => {
         values.isSaveClickedAtleastOnce &&
         values.stepsCompleted
       ) {
-        if (
-          !values.content.some(
-            item => item.lessons.length > 0
-          )
-        ) {
-          errors.content =
-            'At least one module & lesson is required to create course';
-        }
+        //Check if added digital product or not
       }
 
       if (values.isSaveClickedAtleastOnce) {
@@ -63,17 +56,25 @@ const useCreateCourse = () => {
           errors.category = 'Category is required';
         }
 
-        // if (!values.cta) {
-        //   errors.cta = 'CTA is required';
-        // }
+        if (!values.cta) {
+          errors.cta = 'CTA is required';
+        }
         if (!values.coverImage?.url) {
           errors.coverImage = 'Cover image is required';
         }
-
-        if (!values.price) {
-          errors.price = 'Price is required';
-        } else if (values.price < 1) {
-          errors.price = 'Price should be greater than 0';
+        if (values.priceType === 'customerDecided') {
+          if (!values.minimumPrice) {
+            errors.minimumPrice = 'Price is required';
+          } else if (values.minimumPrice < 1) {
+            errors.minimumPrice =
+              'Price should be greater than 0';
+          }
+        } else {
+          if (!values.price) {
+            errors.price = 'Price is required';
+          } else if (values.price < 1) {
+            errors.price = 'Price should be greater than 0';
+          }
         }
       }
 
@@ -104,48 +105,20 @@ const useCreateCourse = () => {
 
       return {
         ...data,
-        courseId,
+        productId,
         sections,
       };
     },
   });
 
-  const generateContentData = content => {
-    return content.map(module => ({
-      ...module,
-      id: module._id,
-      lessons: module.lessons.map(lesson => ({
-        ...lesson,
-        id: lesson._id,
-        supportMaterial:
-          lesson.supportMaterial?.map(material => ({
-            ...material,
-            id: material._id,
-          })) || [],
-        file:
-          lesson.file?.map(file => ({
-            ...file,
-            id: file._id,
-          })) || [],
-        video: lesson.video && {
-          ...lesson.video,
-          id: lesson.video._id,
-        },
-        audio: lesson.audio && {
-          ...lesson.audio,
-          id: lesson.audio._id,
-        },
-      })),
-    }));
-  };
   const calculateSections = sections => {
     if (!Array.isArray(sections)) {
-      return sectionTypes();
+      return sectionTypes('dp');
     }
 
     return [
       ...sections,
-      ...sectionTypes()
+      ...sectionTypes('dp')
         .filter(
           item =>
             !sections.some(val => val.type === item.type)
@@ -158,24 +131,23 @@ const useCreateCourse = () => {
   };
   const handleSubmit = async values => {
     try {
-      courseForm.setValues({ loading: 1 });
+      dpForm.setValues({ loading: 1 });
       const { data } = await axiosInstance.post(
-        '/course/update',
+        '/dp/update',
         values
       );
       const { data: responseData, message } = data;
 
       if (!data?.ok) {
-        throw new Error('Failed to update course data');
+        throw new Error(
+          'Failed to update digital product data'
+        );
       }
 
-      courseForm.setValues(prevValues => ({
+      dpForm.setValues(prevValues => ({
         ...prevValues,
         ...responseData,
         sections: calculateSections(responseData.sections),
-        content: responseData.content?.length
-          ? generateContentData(responseData.content)
-          : [],
       }));
       if (responseData.stepsCompleted === 1) {
         setTab('content');
@@ -183,13 +155,16 @@ const useCreateCourse = () => {
 
       toast.success(message || 'Updated successfully');
     } catch (error) {
-      console.error('Error updating course:', error);
+      console.error(
+        'Error updating digital product:',
+        error
+      );
       toast.error(
         error?.response?.data?.message ||
           'Check your internet connection'
       );
     } finally {
-      courseForm.setValues({
+      dpForm.setValues({
         isSaveClickedAtleastOnce: false,
         loading: 0,
       });
@@ -198,22 +173,21 @@ const useCreateCourse = () => {
   const fetchProduct = async () => {
     try {
       const { data } = await axiosInstance.get(
-        `/course/get/${courseId}`
+        `/dp/get/${productId}`
       );
 
       if (!data?.ok) {
-        throw new Error('Failed to fetch course data');
+        throw new Error(
+          'Failed to fetch digital product data'
+        );
       }
 
       const { data: responseData } = data;
 
-      courseForm.setValues(prevValues => ({
+      dpForm.setValues(prevValues => ({
         ...prevValues,
         ...responseData,
         sections: calculateSections(responseData.sections),
-        content: responseData.content?.length
-          ? generateContentData(responseData.content)
-          : [],
         loading: 0,
       }));
 
@@ -223,12 +197,15 @@ const useCreateCourse = () => {
           : 'details'
       );
     } catch (error) {
-      console.error('Error fetching course:', error);
+      console.error(
+        'Error fetching digital product:',
+        error
+      );
       toast.error(
         error?.response?.data?.message ||
-          'Failed to fetch course data. Please check your internet connection.'
+          'Failed to fetch digital product data. Please check your internet connection.'
       );
-      courseForm.setValues(prevValues => ({
+      dpForm.setValues(prevValues => ({
         ...prevValues,
         loading: 0,
       }));
@@ -236,18 +213,18 @@ const useCreateCourse = () => {
   };
 
   useEffect(() => {
-    courseForm.validateField('description');
-  }, [courseForm.values.description]);
+    dpForm.validateField('description');
+  }, [dpForm.values.description]);
 
   useEffect(() => {
-    courseForm.validateField('coverImage');
-  }, [courseForm.values.coverImage]);
+    dpForm.validateField('coverImage');
+  }, [dpForm.values.coverImage]);
 
   useEffect(() => {
-    if (courseForm.values.hasDiscountedPrice) {
-      courseForm.validateField('discountedPrice');
+    if (dpForm.values.hasDiscountedPrice) {
+      dpForm.validateField('discountedPrice');
     }
-  }, [courseForm.values.price]);
+  }, [dpForm.values.price]);
 
   useEffect(() => {
     if (isDesktop) {
@@ -260,7 +237,7 @@ const useCreateCourse = () => {
   }, []);
 
   return {
-    courseForm,
+    dpForm,
     handleSubmit,
     router,
     tab,
@@ -270,4 +247,4 @@ const useCreateCourse = () => {
   };
 };
 
-export default useCreateCourse;
+export default useCreateDP;

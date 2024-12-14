@@ -1,7 +1,7 @@
 'use client';
+import IframeComponent from '@/Components/Common/CreationFlow/IframeComponent';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import PreviewOne from '@/Components/Common/Preview/PreviewOne';
-import ViewCourseTwo from '@/Components/Landing/Course/LayoutTwo/ViewCourseTwo';
 import {
   ActionIcon,
   Button,
@@ -11,23 +11,22 @@ import {
 } from '@mantine/core';
 import { IconEye } from '@tabler/icons-react';
 import React from 'react';
-import CreateCourseStepOne from './CreateCourseStepOne/CreateCourseStepOne';
-import CreateCourseStepTwo from './CreateCourseStepTwo/CreateCourseStepTwo';
-import useCreateCourse from './useCreateCourse';
-import IframeComponent from '../../Common/CreationFlow/IframeComponent';
+import CreateDPStepOne from './CreateDPStepOne/CreateDPStepOne';
+import CreateDPStepTwo from './CreateDPStepTwo/CreateDPStepTwo';
+import useCreateDP from './useCreateDP';
 
 const CreateCourse = () => {
   const {
-    courseForm,
+    dpForm,
     handleSubmit,
     router,
     tab,
     setTab,
     isPreviewScreen,
     setIsPreviewScreen,
-  } = useCreateCourse();
+  } = useCreateDP();
 
-  if (courseForm.values.loading === -1) {
+  if (dpForm.values.loading === -1) {
     return <LayoutLoading />;
   }
 
@@ -43,7 +42,7 @@ const CreateCourse = () => {
                 <CloseButton
                   onClick={() => router.push('/app/course')}
                 />
-                {courseForm.values.stepsCompleted ===
+                {dpForm.values.stepsCompleted ===
                 2 ? null : (
                   <>
                     <Divider
@@ -58,18 +57,18 @@ const CreateCourse = () => {
                 )}
               </div>
               <form
-                onSubmit={courseForm.onSubmit(
+                onSubmit={dpForm.onSubmit(
                   handleSubmit,
                   errors => {
                     if (Object.keys(errors || {}).length) {
                       const firstErrorPath =
                         Object.keys(errors)?.[0];
-                      courseForm
+                      dpForm
                         .getInputNode(firstErrorPath)
                         ?.focus();
                       document
                         .getElementById(
-                          courseForm.key(firstErrorPath)
+                          dpForm.key(firstErrorPath)
                         )
                         ?.scrollIntoView({
                           block: 'start',
@@ -98,19 +97,17 @@ const CreateCourse = () => {
                     radius="xl"
                     color="black"
                     className="transition-all hover:shadow-md"
-                    loading={
-                      courseForm.values.loading === 1
-                    }
+                    loading={dpForm.values.loading === 1}
                     loaderProps={{ color: 'white' }}
                     onClick={() => {
-                      courseForm.setValues({
+                      dpForm.setValues({
                         isSaveClickedAtleastOnce: true,
                       });
                     }}
                   >
-                    {courseForm.values.stepsCompleted === 1
+                    {dpForm.values.stepsCompleted === 1
                       ? 'Publish course'
-                      : courseForm.values.stepsCompleted > 1
+                      : dpForm.values.stepsCompleted > 1
                         ? 'Publish Course'
                         : 'Save and Continue'}
                   </Button>
@@ -118,14 +115,14 @@ const CreateCourse = () => {
               </form>
             </div>
           </div>
-          {courseForm.values.stepsCompleted > 1 && (
+          {dpForm.values.stepsCompleted > 1 && (
             <Tabs
               value={tab}
               onChange={value => {
-                courseForm.setValues({
+                dpForm.setValues({
                   isSaveClickedAtleastOnce: true,
                 });
-                const { errors } = courseForm.validate();
+                const { errors } = dpForm.validate();
                 if (Object.keys(errors || {}).length) {
                   return;
                 }
@@ -150,11 +147,9 @@ const CreateCourse = () => {
           )}
           <div className="flex flex-1 flex-col overflow-y-auto">
             {tab === 'details' ? (
-              <CreateCourseStepOne form={courseForm} />
+              <CreateDPStepOne form={dpForm} />
             ) : tab === 'content' ? (
-              <CreateCourseStepTwo
-                courseForm={courseForm}
-              />
+              <CreateDPStepTwo dpForm={dpForm} />
             ) : null}
           </div>
         </div>
@@ -163,12 +158,7 @@ const CreateCourse = () => {
           setIsPreviewScreen={setIsPreviewScreen}
           isPreviewScreen={isPreviewScreen}
         >
-          <IframeComponent>
-            <ViewCourseTwo
-              data={courseForm.values}
-              isPreview
-            />
-          </IframeComponent>
+          <IframeComponent>Panda</IframeComponent>
         </PreviewOne>
       </div>
     </div>

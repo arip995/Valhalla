@@ -51,4 +51,5 @@ export const ProductTypemapping = {
   tg: 'Telegram',
   lc: 'Locked content',
   course: 'Course',
+  dp: 'Digital product',
 };
