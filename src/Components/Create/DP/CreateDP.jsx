@@ -149,7 +149,7 @@ const CreateCourse = () => {
             {tab === 'details' ? (
               <CreateDPStepOne form={dpForm} />
             ) : tab === 'content' ? (
-              <CreateDPStepTwo dpForm={dpForm} />
+              <CreateDPStepTwo form={dpForm} />
             ) : null}
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { getUniqueId } from '@/Utils/Common';
 import { handleFile } from '@/Utils/HandleFiles';
-import { FileButton } from '@mantine/core';
+import { FileButton, Input } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import UploadButtonOne from '../Upload/UploadButtonOne';
@@ -22,6 +22,9 @@ const ListFileOne = ({
   isUploadOnBunny,
   showMaxSize = true,
   showButton = true,
+  labelText = '',
+  error = '',
+  id,
 }) => {
   const [files, setFiles] = useState(
     file.length ? file : []
@@ -159,27 +162,32 @@ const ListFileOne = ({
   }, [files]);
 
   return (
-    <div className="flex w-full flex-col gap-2">
+    <div className="flex w-full flex-col gap-2" id={id}>
       {type === 'upload' ? (
         <>
           {onlyOne && files?.length > 0 ? null : (
-            <UploadButtonOne
-              buttonText={uploadButtonText}
-              description={uploadButtonDescription}
-              onUpload={onUpload}
-              maxSize={maxSize}
-              mimeTypes={mimeTypes}
-              crop={cropImage}
-              showMaxSize={showMaxSize}
-              showButton={showButton}
-              showLink={showLink}
-              onChangeLink={val => {
-                if (!val.link) return null;
-                setFiles(prev => {
-                  return [...prev, { ...val }];
-                });
-              }}
-            />
+            <>
+              {!!labelText && (
+                <Input.Label>{labelText}</Input.Label>
+              )}
+              <UploadButtonOne
+                buttonText={uploadButtonText}
+                description={uploadButtonDescription}
+                onUpload={onUpload}
+                maxSize={maxSize}
+                mimeTypes={mimeTypes}
+                crop={cropImage}
+                showMaxSize={showMaxSize}
+                showButton={showButton}
+                showLink={showLink}
+                onChangeLink={val => {
+                  if (!val.link) return null;
+                  setFiles(prev => {
+                    return [...prev, { ...val }];
+                  });
+                }}
+              />
+            </>
           )}
         </>
       ) : (
@@ -189,6 +197,7 @@ const ListFileOne = ({
           accept={mimeTypes}
         />
       )}
+      {!!error && <Input.Error>{error}</Input.Error>}
 
       {files.length > 0 && (
         <ListFiles
