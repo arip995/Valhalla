@@ -129,7 +129,17 @@ const ListFileOne = ({
     }
   };
 
-  const onFileDelete = async url => {
+  const onFileDelete = async (url, id) => {
+    if (id) {
+      setFiles(prevFiles => {
+        const filteredFiles = prevFiles.filter(
+          item => item.id !== id
+        );
+
+        return filteredFiles;
+      });
+      return;
+    }
     setFiles(prevFiles => {
       const filteredFiles = prevFiles.filter(
         item => item.url !== url

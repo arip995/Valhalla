@@ -104,7 +104,9 @@ const ListFiles = ({
               <div className="list-files-text-container">
                 <div
                   className="list-files-delete"
-                  onClick={() => onDelete(item.url)}
+                  onClick={() =>
+                    onDelete(item.url, item.id || item._id)
+                  }
                 >
                   <IconTrash
                     className="list-files-delete-icon"
