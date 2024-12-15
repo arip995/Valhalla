@@ -137,11 +137,11 @@ const ViewDPOne = ({ data }) => {
                 </div>
 
                 {/* Terms and Conditions */}
-                <div className="rounded-lg bg-gray-50 p-4">
-                  <h3 className="mb-2 font-medium text-gray-800">
+                <div className="rounded-lg bg-gray-50 p-2">
+                  <h3 className="mb-2 text-sm font-medium text-gray-800">
                     Terms and Conditions
                   </h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-xs text-gray-600">
                     You agree to share information entered
                     on this page with{' '}
                     {data.creatorDetails.name} (owner of
@@ -151,11 +151,11 @@ const ViewDPOne = ({ data }) => {
                 </div>
 
                 {/* Disclaimer */}
-                <div className="rounded-lg bg-gray-50 p-4">
-                  <h3 className="mb-2 font-medium text-gray-800">
+                <div className="rounded-lg bg-gray-50 p-2">
+                  <h3 className="mb-2 text-sm font-medium text-gray-800">
                     Disclaimer
                   </h3>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-xs text-gray-600">
                     Polmi Software Services Technologies
                     Pvt. Ltd. shall not be held liable for
                     any content or materials published,

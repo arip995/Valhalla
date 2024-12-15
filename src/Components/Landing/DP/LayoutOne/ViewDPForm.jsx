@@ -4,8 +4,11 @@ import MastercardIcon from '../../../../../public/images/common/mastercard.png';
 import PaytmIcon from '../../../../../public/images/common/paytm.png';
 import PhonpeIcon from '../../../../../public/images/common/phonepe.png';
 import VisacardIcon from '../../../../../public/images/common/visacard.png';
+import ViewRegistrationQuestions from '@/Components/Common/SectionDetails/RgistrationQuestion/ViewRegistrationQuestions';
 
 const ViewDPForm = ({ formatPrice, data }) => {
+  if (!data.registrationQuestions.length) return null;
+
   return (
     <div className="space-y-6 rounded-none border border-gray-100 bg-white p-6 shadow-lg">
       <h2 className="text-xl font-medium text-gray-800">
@@ -14,26 +17,9 @@ const ViewDPForm = ({ formatPrice, data }) => {
 
       {/* Payment Form */}
       <div className="space-y-4">
-        <div>
-          <label className="mb-1 block text-sm text-gray-600">
-            Email
-          </label>
-          <input
-            type="email"
-            className="w-full rounded-lg bg-gray-100 p-2"
-            placeholder="Enter your email"
-          />
-        </div>
-        <div>
-          <label className="mb-1 block text-sm text-gray-600">
-            Phone
-          </label>
-          <input
-            type="tel"
-            className="w-full rounded-lg bg-gray-100 p-2"
-            placeholder="Enter your phone number"
-          />
-        </div>
+        <ViewRegistrationQuestions
+          registrationQuestions={data.registrationQuestions}
+        />
 
         {/* Amount */}
         <div className="pt-4">

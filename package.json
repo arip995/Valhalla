@@ -36,7 +36,7 @@
     "axios": "^1.7.2",
     "classnames": "^2.5.1",
     "cookies-next": "^4.2.1",
-    "dayjs": "^1.11.10",
+    "dayjs": "^1.11.13",
     "disable-devtool": "^0.3.7",
     "embla-carousel-react": "^7.1.0",
     "framer-motion": "^11.2.11",
