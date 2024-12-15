@@ -20,19 +20,10 @@ const RegistrationForm = ({
 }) => {
   const { user } = useUser();
 
-  // Setup initial values
-  const initialValues = {
-    isFormTouched: false,
-    email: user?.email || '',
-    phoneNumber: user?.phoneNumber || '',
-  };
-
-  registrationQuestions.forEach(question => {
-    initialValues[question._id] = '';
-  });
-
   const form = useForm({
-    initialValues,
+    initialValues: {
+      isFormTouched: false,
+    },
     validateInputOnChange: true,
     clearInputErrorOnChange: false,
     validate: values => {
