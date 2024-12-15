@@ -112,6 +112,9 @@ const RegistrationForm = ({
     const commonProps = {
       key: question._id,
       size: 'sm',
+      autosize: true,
+      resize: 'vertical',
+      maxRows: 2,
       label: question.question,
       hideControls: true,
       withAsterisk: question.isRequired,
