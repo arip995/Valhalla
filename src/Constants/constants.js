@@ -347,7 +347,6 @@ export const sectionTypes = app => {
         { type: 'benifit', isEnabled: false },
         { type: 'social', isEnabled: false },
         { type: 'gallery', isEnabled: false },
-        { type: 'about', isEnabled: false },
       ];
     default:
       return [

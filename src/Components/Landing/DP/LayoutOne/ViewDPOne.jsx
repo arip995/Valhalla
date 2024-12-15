@@ -1,6 +1,8 @@
-'use client';
-
+import ViewProfile from '@/Components/Common/General/ViewProfile';
+import ViewSections2 from '@/Components/Common/ViewSections/ViewSection2';
 import { IconMail, IconPhone } from '@tabler/icons-react';
+import Image from 'next/image';
+import ViewDPForm from './ViewDPForm';
 
 const ViewDPOne = ({ data }) => {
   const formatPrice = price => {
@@ -41,33 +43,19 @@ const ViewDPOne = ({ data }) => {
               {/* Creator Info */}
               <div className="space-y-6 p-6">
                 <div className="flex items-center space-x-3">
-                  {data.creatorDetails.profilePic ? (
-                    <img
-                      src={data.creatorDetails.profilePic}
-                      alt={data.creatorDetails.username}
-                      className="h-12 w-12 rounded-full"
-                    />
-                  ) : (
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100">
-                      <span className="text-xl font-medium text-gray-600">
-                        {data.creatorDetails.username?.charAt(
-                          0
-                        )}
-                      </span>
-                    </div>
-                  )}
-                  <span className="font-medium text-gray-800">
-                    {data.creatorDetails.username}
-                  </span>
+                  <ViewProfile
+                    name={
+                      data.creatorDetails.name ||
+                      `${data.creatorDetails.firstName} ${data.creatorDetails.lastName}`
+                    }
+                    profilePic={
+                      data.creatorDetails.profilePic
+                    }
+                  />
                 </div>
 
-                {/* Product Title */}
-                <h1 className="text-2xl font-medium text-gray-800">
-                  {data.title}
-                </h1>
-
                 {/* Success Message */}
-                <div className="border-l-4 border-green-400 bg-green-50 p-4">
+                <div className="border-l-4 border-green-400 bg-green-50 px-4 py-2">
                   <div className="flex">
                     <div className="flex-1">
                       Your last purchase was successful!
@@ -78,28 +66,56 @@ const ViewDPOne = ({ data }) => {
                   </div>
                 </div>
 
-                {/* Description */}
-                <div>
-                  <h2 className="mb-2 text-lg font-medium text-gray-800">
-                    Description
-                  </h2>
-                  <p className="text-gray-600">
-                    {data.description}
-                  </p>
+                {/* Product Title */}
+                <h1 className="text-2xl font-medium text-gray-900">
+                  {data.title}
+                </h1>
+
+                {/* Cover Image */}
+                <div className="aspect-video overflow-hidden rounded-md">
+                  <Image
+                    src={data.coverImage.url}
+                    height={600}
+                    width={800}
+                    className="object-cover"
+                    alt={data.title}
+                    priority
+                  />
                 </div>
 
+                {/* Description */}
+                <div>
+                  <h2 className="mb-2 text-lg font-medium text-gray-900">
+                    Description
+                  </h2>
+                  <div
+                    className="prose prose-lg prose-headings:font-bold prose-a:text-blue-600 max-w-none"
+                    dangerouslySetInnerHTML={{
+                      __html: data.description,
+                    }}
+                  />
+                </div>
+
+                {/* Sections */}
+                {data?.sections?.length ? (
+                  <ViewSections2
+                    sections={data?.sections}
+                    content={data?.content}
+                  />
+                ) : null}
+
                 {/* Refund Policy */}
-                <div className="border-t pt-4">
+                {/* <div className="border-t pt-4">
                   <button className="flex items-center text-gray-800 hover:text-gray-600">
                     <span className="mr-2 text-xl">+</span>
                     Refund policy
                   </button>
-                </div>
+                </div> */}
 
                 {/* Contact Info */}
-                <div className="space-y-4">
-                  <h2 className="text-lg font-medium text-gray-800">
-                    Contact {data.creatorDetails.username}
+                <div className="border-t pt-4">
+                  <h2 className="mb-2 text-lg font-medium text-gray-800">
+                    Contact {data.creatorDetails.name}
                   </h2>
                   <div className="space-y-2">
                     <div className="flex items-center space-x-2 text-gray-600">
@@ -121,11 +137,17 @@ const ViewDPOne = ({ data }) => {
                 </div>
 
                 {/* Terms and Conditions */}
-                <div className="border-t pt-4">
-                  <button className="flex items-center text-gray-800 hover:text-gray-600">
-                    <span className="mr-2 text-xl">+</span>
-                    Terms and conditions
-                  </button>
+                <div className="rounded-lg bg-gray-50 p-4">
+                  <h3 className="mb-2 font-medium text-gray-800">
+                    Terms and Conditions
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    You agree to share information entered
+                    on this page with{' '}
+                    {data.creatorDetails.name} (owner of
+                    this page) and Cosmofeed, adhering to
+                    applicable laws.
+                  </p>
                 </div>
 
                 {/* Disclaimer */}
@@ -134,14 +156,38 @@ const ViewDPOne = ({ data }) => {
                     Disclaimer
                   </h3>
                   <p className="text-sm text-gray-600">
-                    Connectpro Technologies Pvt. Ltd. shall
-                    not be held liable for any content or
-                    materials published, sold, or
-                    distributed by content creators on our
-                    associated apps or websites.
-                    <button className="ml-1 text-blue-600 hover:text-blue-700">
+                    Polmi Software Services Technologies
+                    Pvt. Ltd. shall not be held liable for
+                    any content or materials published,
+                    sold, or distributed by content creators
+                    on our associated apps or websites.
+                    <a
+                      href="/disclaimer"
+                      className="ml-1 text-blue-600 hover:text-blue-700"
+                    >
                       Learn more
-                    </button>
+                    </a>
+                  </p>
+                </div>
+
+                {/* Disclaimer */}
+                <div className="border-t pt-4">
+                  <div className="flex items-center gap-1">
+                    <img src="/icon.png" className="h-8" />
+                    <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-lg font-semibold text-transparent">
+                      Nexify
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm text-gray-600">
+                    Want to create your own payment page?
+                    Experience hassle-free payouts and
+                    premium support.
+                    <a
+                      href="/home"
+                      className="ml-1 text-blue-600 hover:text-blue-700"
+                    >
+                      Get started now!
+                    </a>
                   </p>
                 </div>
               </div>
@@ -151,87 +197,13 @@ const ViewDPOne = ({ data }) => {
           {/* Right Column - Payment Details */}
           <div className="lg:relative lg:col-span-5">
             <div className="lg:sticky lg:top-8">
-              <div className="space-y-6 rounded-xl bg-white p-6 shadow-lg">
-                <h2 className="text-xl font-medium text-gray-800">
-                  Payment Details
-                </h2>
-
-                {/* Payment Form */}
-                <div className="space-y-4">
-                  <div>
-                    <label className="mb-1 block text-sm text-gray-600">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      className="w-full rounded-lg bg-gray-100 p-2"
-                      placeholder="Enter your email"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-1 block text-sm text-gray-600">
-                      Phone
-                    </label>
-                    <input
-                      type="tel"
-                      className="w-full rounded-lg bg-gray-100 p-2"
-                      placeholder="Enter your phone number"
-                    />
-                  </div>
-
-                  {/* Amount */}
-                  <div className="pt-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-gray-600">
-                        Amount total
-                      </span>
-                      <span className="text-xl font-medium">
-                        {formatPrice(
-                          data.hasDiscountedPrice
-                            ? data.discountedPrice
-                            : data.price
-                        )}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Payment Button */}
-                  <button className="w-full rounded-lg bg-purple-600 py-3 text-white transition-colors hover:bg-purple-700">
-                    Make Payment →
-                  </button>
-
-                  {/* Security Badge */}
-                  <div className="text-center text-sm text-gray-600">
-                    Guaranteed safe & secure payment
-                  </div>
-
-                  {/* Payment Methods */}
-                  <div className="flex justify-center space-x-4">
-                    <img
-                      src="/api/placeholder/40/24"
-                      alt="Visa"
-                      className="h-6"
-                    />
-                    <img
-                      src="/api/placeholder/40/24"
-                      alt="Mastercard"
-                      className="h-6"
-                    />
-                    <img
-                      src="/api/placeholder/40/24"
-                      alt="UPI"
-                      className="h-6"
-                    />
-                    <img
-                      src="/api/placeholder/40/24"
-                      alt="PayTM"
-                      className="h-6"
-                    />
-                  </div>
-                </div>
-              </div>
+              <ViewDPForm
+                formatPrice={formatPrice}
+                data={data}
+              />
             </div>
           </div>
+
           <div className="fixed bottom-0 left-0 right-0 border-t bg-white p-4 shadow-lg lg:hidden">
             <div className="mb-4 flex items-center justify-between">
               <span className="text-gray-600">

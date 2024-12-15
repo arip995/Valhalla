@@ -9,7 +9,7 @@ const ViewBenefit = ({ value }) => {
       {value.map((item, index) => (
         <div
           key={index}
-          className="flex items-start gap-3 rounded-lg bg-white p-4 shadow-sm transition-all hover:shadow-md"
+          className="flex items-start gap-3 rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition-all hover:shadow-md"
         >
           <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-green-100">
             <IconCheck
