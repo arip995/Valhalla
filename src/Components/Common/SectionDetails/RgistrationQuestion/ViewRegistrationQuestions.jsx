@@ -132,7 +132,11 @@ const RegistrationForm = ({
       autosize: true,
       resize: 'vertical',
       maxRows: 2,
-      label: question.question,
+      label: (
+        <spam className="text-sm font-normal !text-gray-700">
+          {question.question}
+        </spam>
+      ),
       hideControls: true,
       withAsterisk: question.isRequired,
       ...form.getInputProps(question._id),
@@ -183,7 +187,11 @@ const RegistrationForm = ({
           {/* Mandatory Email and Phone fields */}
           {!!data.minimumPrice && (
             <NumberInput
-              label="Enter a custom amount"
+              label={
+                <spam className="text-sm font-normal !text-gray-700">
+                  Enter a custom amount
+                </spam>
+              }
               description={`Min amount ₹${data.minimumPrice}`}
               size="sm"
               hideControls
@@ -192,14 +200,22 @@ const RegistrationForm = ({
             />
           )}
           <TextInput
-            label="Email"
+            label={
+              <spam className="text-sm font-normal !text-gray-700">
+                Email
+              </spam>
+            }
             size="sm"
             withAsterisk
             disabled={!!user?.email}
             {...form.getInputProps('email')}
           />
           <TextInput
-            label="Phone Number"
+            label={
+              <spam className="text-sm font-normal !text-gray-700">
+                PhoneNumber
+              </spam>
+            }
             size="sm"
             withAsterisk
             disabled={!!user?.phoneNumber}
