@@ -185,7 +185,7 @@ const RegistrationForm = ({
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           {/* Mandatory Email and Phone fields */}
-          {!!data.minimumPrice && (
+          {!!data.priceType === 'customerDecided' && (
             <NumberInput
               label={
                 <spam className="text-sm font-normal !text-gray-700">

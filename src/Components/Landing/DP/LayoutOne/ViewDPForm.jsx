@@ -7,8 +7,6 @@ import VisacardIcon from '../../../../../public/images/common/visacard.png';
 import ViewRegistrationQuestions from '@/Components/Common/SectionDetails/RgistrationQuestion/ViewRegistrationQuestions';
 
 const ViewDPForm = ({ data }) => {
-  if (!data.registrationQuestions.length) return null;
-
   return (
     <div className="space-y-6 rounded-none border border-gray-100 bg-white p-6 shadow-lg">
       <h2 className="text-xl font-medium text-gray-800">
