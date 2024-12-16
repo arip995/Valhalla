@@ -163,12 +163,27 @@ const CreateCourse = () => {
           setIsPreviewScreen={setIsPreviewScreen}
           isPreviewScreen={isPreviewScreen}
         >
-          <IframeComponent>
-            <ViewCourseTwo
-              data={courseForm.values}
-              isPreview
-            />
-          </IframeComponent>
+          <div className="relative flex h-full w-full items-center justify-center">
+            <div
+              className="origin-center scale-75 transform"
+              style={{
+                width: '133.33%',
+                height: '133.33%',
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                transform:
+                  'translate(-50%, -50%) scale(0.75)',
+              }}
+            >
+              <IframeComponent>
+                <ViewCourseTwo
+                  data={courseForm.values}
+                  isPreview
+                />
+              </IframeComponent>
+            </div>
+          </div>
         </PreviewOne>
       </div>
     </div>

@@ -322,3 +322,11 @@ export const capitalizeFirstLetter = string => {
   if (!string) return '';
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
+
+export const formatPrice = price => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0,
+  }).format(price);
+};

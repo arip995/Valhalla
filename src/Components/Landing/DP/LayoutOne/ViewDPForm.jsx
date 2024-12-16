@@ -6,7 +6,7 @@ import PhonpeIcon from '../../../../../public/images/common/phonepe.png';
 import VisacardIcon from '../../../../../public/images/common/visacard.png';
 import ViewRegistrationQuestions from '@/Components/Common/SectionDetails/RgistrationQuestion/ViewRegistrationQuestions';
 
-const ViewDPForm = ({ formatPrice, data }) => {
+const ViewDPForm = ({ data }) => {
   if (!data.registrationQuestions.length) return null;
 
   return (
@@ -19,28 +19,13 @@ const ViewDPForm = ({ formatPrice, data }) => {
       <div className="space-y-4">
         <ViewRegistrationQuestions
           registrationQuestions={data.registrationQuestions}
+          minimumPrice={
+            data.priceType === 'customerDecided'
+              ? data.minimumPrice
+              : ''
+          }
+          data={data}
         />
-
-        {/* Amount */}
-        <div className="pt-4">
-          <div className="flex items-center justify-between">
-            <span className="text-gray-600">
-              Amount total
-            </span>
-            <span className="text-xl font-medium">
-              {formatPrice(
-                data.hasDiscountedPrice
-                  ? data.discountedPrice
-                  : data.price
-              )}
-            </span>
-          </div>
-        </div>
-
-        {/* Payment Button */}
-        <button className="w-full rounded-lg bg-purple-600 py-3 text-white transition-colors hover:bg-purple-700">
-          Make Payment →
-        </button>
 
         {/* Security Badge */}
         <div className="text-center text-sm text-gray-600">

@@ -15,6 +15,7 @@ import CreateDPStepOne from './CreateDPStepOne/CreateDPStepOne';
 import CreateDPStepTwo from './CreateDPStepTwo/CreateDPStepTwo';
 import useCreateDP from './useCreateDP';
 import CreateDPStepThree from './CreateDPStepThree/CreateDPStepThree';
+import ViewDPOne from '@/Components/Landing/DP/LayoutOne/ViewDPOne';
 
 const CreateDp = () => {
   const {
@@ -170,7 +171,27 @@ const CreateDp = () => {
           setIsPreviewScreen={setIsPreviewScreen}
           isPreviewScreen={isPreviewScreen}
         >
-          <IframeComponent>Panda</IframeComponent>
+          <div
+            className="relative flex h-full w-full items-center justify-center"
+            id="sdfasfasf"
+          >
+            <div
+              className="origin-center scale-100 transform"
+              style={{
+                width: '133.33%',
+                height: '133.33%',
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                transform:
+                  'translate(-50%, -50%) scale(0.75)',
+              }}
+            >
+              <IframeComponent>
+                <ViewDPOne data={dpForm.values} />
+              </IframeComponent>
+            </div>
+          </div>
         </PreviewOne>
       </div>
     </div>

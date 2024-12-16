@@ -1,36 +1,52 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import { formatPrice } from '@/Utils/Common';
+import useUser from '@/Utils/Hooks/useUser';
 import {
+  Box,
+  NumberInput,
+  Select,
+  Stack,
   TextInput,
   Textarea,
-  Select,
-  NumberInput,
-  Box,
-  Stack,
-  Button,
 } from '@mantine/core';
-import { useForm } from '@mantine/form';
 import { DateInput } from '@mantine/dates';
-import useUser from '@/Utils/Hooks/useUser';
+import { useForm } from '@mantine/form';
+import { useEffect, useMemo } from 'react';
 
 const RegistrationForm = ({
-  registrationQuestions,
-  onSubmit,
+  data,
+  onSubmit = () => {},
 }) => {
   const { user } = useUser();
+  const registrationQuestions = useMemo(
+    () => data.registrationQuestions,
+    []
+  );
 
   const form = useForm({
     initialValues: {
       isFormTouched: false,
+      minimumPrice: data.minimumPrice,
     },
     validateInputOnChange: true,
-    clearInputErrorOnChange: false,
     validate: values => {
       const errors = {};
 
       // Only validate if form has been touched
       if (values.isFormTouched) {
+        //validate if minimum price is there
+        if (data.priceType === 'customerDecided') {
+          if (isNaN(values.minimumPrice)) {
+            errors['minimumPrice'] =
+              `Price must be more than ${data.minimumPrice}`;
+          }
+          if (data.minimumPrice > values.minimumPrice) {
+            errors['minimumPrice'] =
+              `Price must be more than ${data.minimumPrice}`;
+          }
+        }
+
         // Validate email
         if (!values.email) {
           errors.email = 'Email is required';
@@ -98,6 +114,7 @@ const RegistrationForm = ({
           }
         });
       }
+      console.log(errors);
 
       return errors;
     },
@@ -164,6 +181,16 @@ const RegistrationForm = ({
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           {/* Mandatory Email and Phone fields */}
+          {!!data.minimumPrice && (
+            <NumberInput
+              label="Enter a custom amount"
+              description={`Min amount ₹${data.minimumPrice}`}
+              size="sm"
+              hideControls
+              withAsterisk
+              {...form.getInputProps('minimumPrice')}
+            />
+          )}
           <TextInput
             label="Email"
             size="sm"
@@ -184,15 +211,33 @@ const RegistrationForm = ({
             renderField(question)
           )}
 
-          <Button
+          {/* Amount */}
+          <div className="pt-4">
+            <div className="flex items-center justify-between">
+              <span className="text-gray-600">
+                Amount total
+              </span>
+              <span className="text-xl font-medium">
+                {formatPrice(
+                  data.hasDiscountedPrice
+                    ? data.discountedPrice
+                    : data.price
+                )}
+              </span>
+            </div>
+          </div>
+
+          {/* Payment Button */}
+          <button
+            className={`w-full rounded-lg bg-opacity-90 py-3 text-white transition-colors hover:bg-opacity-100`}
+            style={{ backgroundColor: data.themeColor }}
             type="submit"
-            mt="md"
             onClick={() =>
               form.setFieldValue('isFormTouched', true)
             }
           >
-            Submit
-          </Button>
+            {data?.cta || 'Make Payment'} →
+          </button>
         </Stack>
       </form>
     </Box>

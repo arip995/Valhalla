@@ -3,20 +3,19 @@ import ViewSections2 from '@/Components/Common/ViewSections/ViewSection2';
 import { IconMail, IconPhone } from '@tabler/icons-react';
 import Image from 'next/image';
 import ViewDPForm from './ViewDPForm';
+import { formatPrice } from '@/Utils/Common';
+import NotFoundOne from '@/Components/Common/NotFoundOne/NotFoundOne';
 
 const ViewDPOne = ({ data }) => {
-  const formatPrice = price => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'INR',
-      maximumFractionDigits: 0,
-    }).format(price);
-  };
+  if (!data) return <NotFoundOne />;
 
   return (
     <div className="relative min-h-screen bg-white">
       {/* Purple section with pattern */}
-      <div className="absolute right-0 top-0 hidden h-full min-h-screen w-[23%] overflow-hidden bg-violet-600 lg:block xl:w-[26%] 2xl:w-[31%]">
+      <div
+        className={`absolute right-0 top-0 hidden h-full min-h-screen w-[23%] overflow-hidden lg:block xl:w-[26%] 2xl:w-[31%]`}
+        style={{ backgroundColor: data.themeColor }}
+      >
         <div className="absolute inset-0 opacity-20">
           <div
             className="absolute inset-0"
@@ -35,13 +34,13 @@ const ViewDPOne = ({ data }) => {
       </div>
 
       {/* Main content */}
-      <div className="relative mx-auto max-w-6xl px-4 py-8">
+      <div className="relative mx-auto max-w-6xl px-2 py-4 md:px-4 md:py-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
           {/* Left Column - Product Details */}
           <div className="lg:col-span-7">
             <div className="rounded-xl bg-white shadow-sm">
               {/* Creator Info */}
-              <div className="space-y-6 p-6">
+              <div className="space-y-6 p-3 md:p-6">
                 <div className="flex items-center space-x-3">
                   <ViewProfile
                     name={
@@ -195,7 +194,7 @@ const ViewDPOne = ({ data }) => {
           </div>
 
           {/* Right Column - Payment Details */}
-          <div className="lg:relative lg:col-span-5">
+          <div className="hidden lg:relative lg:col-span-5 lg:block">
             <div className="lg:sticky lg:top-8">
               <ViewDPForm
                 formatPrice={formatPrice}
@@ -217,7 +216,10 @@ const ViewDPOne = ({ data }) => {
                 )}
               </span>
             </div>
-            <button className="w-full rounded-lg bg-purple-600 py-3 text-white transition-colors hover:bg-purple-700">
+            <button
+              className="w-full rounded-lg py-3 text-white transition-colors"
+              style={{ backgroundColor: data.themeColor }}
+            >
               Make Payment →
             </button>
           </div>

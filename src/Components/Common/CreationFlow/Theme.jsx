@@ -1,7 +1,7 @@
 import { ColorPicker } from '@mantine/core';
-import classNames from 'classnames';
-import DarkThemeImage from '../../../../public/icons/dark.svg';
-import LightThemeImage from '../../../../public/icons/light.svg';
+// import classNames from 'classnames';
+// import DarkThemeImage from '../../../../public/icons/dark.svg';
+// import LightThemeImage from '../../../../public/icons/light.svg';
 import { useDebouncedCallback } from '@mantine/hooks';
 
 const Theme = ({ form }) => {
@@ -15,7 +15,7 @@ const Theme = ({ form }) => {
         Select Template
       </div>
 
-      <div className="mb-3 flex cursor-pointer gap-4">
+      {/* <div className="mb-3 flex cursor-pointer gap-4">
         <div
           onClick={() => {
             form.setFieldValue('isDarkTheme', false);
@@ -46,7 +46,7 @@ const Theme = ({ form }) => {
           <img src={DarkThemeImage.src} />
           Dark
         </div>
-      </div>
+      </div> */}
 
       <ColorPicker
         format="hex"

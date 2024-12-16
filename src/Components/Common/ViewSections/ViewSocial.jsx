@@ -2,7 +2,6 @@
 
 import { socialIconsMapping } from '@/Components/Common/SectionDetails/Sections';
 import { usePathname } from 'next/navigation';
-import React from 'react';
 
 const ViewSocial = ({ value }) => {
   const productType = usePathname().split('/')[1];
