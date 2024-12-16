@@ -173,70 +173,72 @@
 
 // export default IframeComponent;
 
-import { useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { MantineProvider } from '@mantine/core';
+import { useEffect, useRef } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 
-const IframeComponent = ({
-  children,
-  productId,
-  productType,
-}) => {
+const IframeComponent = ({ children }) => {
   const iframeRef = useRef(null);
-  const [mountNode, setMountNode] = useState(null);
 
   useEffect(() => {
     const iframe = iframeRef.current;
-    const iframeDocument = iframe.contentDocument;
+    if (iframe?.contentDocument) {
+      const iframeDocument = iframe.contentDocument;
 
-    // Reset and prepare iframe document
-    iframeDocument.documentElement.style.height = '100%';
-    iframeDocument.body.style.height = '100%';
-    iframeDocument.body.style.margin = '0';
+      // Reset iframe's styles
+      iframeDocument.documentElement.style.height = '100%';
+      iframeDocument.body.style.height = '100%';
+      iframeDocument.body.style.margin = '0';
 
-    // Copy styles from parent document to iframe
-    const parentStyles = Array.from(
-      document.head.querySelectorAll(
-        'style, link[rel="stylesheet"]'
-      )
-    );
-    parentStyles.forEach(style => {
-      const clonedStyle = style.cloneNode(true);
-      iframeDocument.head.appendChild(clonedStyle);
-    });
+      // Copy styles (Mantine + Tailwind + Other global styles) to iframe
+      const parentStyles = Array.from(
+        document.head.querySelectorAll(
+          'style, link[rel="stylesheet"]'
+        )
+      );
+      parentStyles.forEach(style => {
+        iframeDocument.head.appendChild(
+          style.cloneNode(true)
+        );
+      });
 
-    // Create and set up the container
-    const container = iframeDocument.createElement('div');
-    container.style.height = '100%';
-    container.style.width = '100%';
-    container.style.position = 'relative';
-    container.style.overflow = 'auto';
+      // Clear iframe content
+      iframeDocument.body.innerHTML = '';
 
-    // Clear existing content and append new container
-    iframeDocument.body.innerHTML = '';
-    iframeDocument.body.appendChild(container);
+      // Render React components into the iframe
+      const container = iframeDocument.createElement('div');
+      container.style.height = '100%';
+      container.style.width = '100%';
+      container.style.position = 'relative';
+      container.style.overflow = 'auto';
+      iframeDocument.body.appendChild(container);
 
-    // Set the mount node for the portal
-    setMountNode(container);
-
-    return () => {
-      setMountNode(null);
-    };
-  }, []);
+      // Server-side render the children into the iframe's body
+      const renderedHTML = renderToStaticMarkup(
+        <MantineProvider withGlobalStyles withNormalizeCSS>
+          {children}
+        </MantineProvider>
+      );
+      container.innerHTML = renderedHTML;
+    }
+  }, [children]);
 
   return (
-    <>
-      <iframe
-        // src={`${process.env.NEXT_PUBLIC_HOST}/${productType}/${productId}`}
-        ref={iframeRef}
-        className="h-full w-full border-0"
-        title="content-frame"
-      />
-      {mountNode && createPortal(children, mountNode)}
-    </>
+    <iframe
+      ref={iframeRef}
+      className="h-full w-full border-0"
+      title="content-frame"
+    />
   );
 };
 
-export default IframeComponent;
+export default function App({ children }) {
+  return (
+    <MantineProvider withNormalizeCSS withGlobalStyles>
+      <IframeComponent>{children}</IframeComponent>
+    </MantineProvider>
+  );
+}
 
 // import React, { useRef } from 'react';
 
