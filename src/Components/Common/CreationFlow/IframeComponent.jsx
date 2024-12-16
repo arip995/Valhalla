@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 // import {
 //   ColorSchemeScript,
@@ -175,7 +176,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-const IframeComponent = ({ children }) => {
+const IframeComponent = ({
+  children,
+  productId,
+  productType,
+}) => {
   const iframeRef = useRef(null);
   const [mountNode, setMountNode] = useState(null);
 
@@ -221,6 +226,7 @@ const IframeComponent = ({ children }) => {
   return (
     <>
       <iframe
+        // src={`${process.env.NEXT_PUBLIC_HOST}/${productType}/${productId}`}
         ref={iframeRef}
         className="h-full w-full border-0"
         title="content-frame"

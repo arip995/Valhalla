@@ -286,6 +286,7 @@ const useCreateDP = () => {
     isPreviewScreen,
     setIsPreviewScreen,
     productType,
+    productId,
   };
 };
 

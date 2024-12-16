@@ -27,6 +27,7 @@ const CreateDp = () => {
     isPreviewScreen,
     setIsPreviewScreen,
     productType,
+    productId,
   } = useCreateDP();
 
   if (dpForm.values.loading === -1) {
@@ -187,7 +188,10 @@ const CreateDp = () => {
                   'translate(-50%, -50%) scale(0.75)',
               }}
             >
-              <IframeComponent>
+              <IframeComponent
+                productId={productId}
+                productType={productType}
+              >
                 <ViewDPOne data={dpForm.values} />
               </IframeComponent>
             </div>
