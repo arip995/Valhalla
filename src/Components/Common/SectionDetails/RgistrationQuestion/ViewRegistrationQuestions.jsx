@@ -12,13 +12,21 @@ import {
 } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
+import Lottie from 'react-lottie-player';
+import lottieJson from '../../../../../public/lottie/tick.json';
+import LayoutLoading from '../../Loading/LayoutLoading';
+import usePayment from '../../Payment/usePayments';
 
 const RegistrationForm = ({
   data,
-  onSubmit = () => {},
+  // onSubmit = () => {},
 }) => {
+  const lottieRef = useRef();
   const { user } = useUser();
+  const { onCreateOrder, paymentState } = usePayment(
+    () => {}
+  );
   const registrationQuestions = useMemo(
     () => data.registrationQuestions,
     []
@@ -114,7 +122,6 @@ const RegistrationForm = ({
           }
         });
       }
-      console.log(errors);
 
       return errors;
     },
@@ -122,7 +129,34 @@ const RegistrationForm = ({
 
   const handleSubmit = values => {
     const { ...submissionValues } = values;
-    onSubmit(submissionValues);
+    let transformedRegisTrationQuestions = [];
+    if (data.registrationQuestions?.length) {
+      data.registrationQuestions.map(item => {
+        for (const [key, value] of Object.entries(
+          submissionValues
+        )) {
+          if (item._id === key) {
+            transformedRegisTrationQuestions.push({
+              question: item.question,
+              answer: value,
+            });
+          }
+        }
+      });
+    }
+
+    onCreateOrder(
+      data.price,
+      data.creatorId,
+      data.creatorDetails,
+      {
+        registrationQuestions:
+          transformedRegisTrationQuestions,
+      },
+      submissionValues.phoneNumber,
+      submissionValues.email
+    );
+    // onSubmit(submissionValues);
   };
 
   const renderField = question => {
@@ -180,6 +214,33 @@ const RegistrationForm = ({
     }
   }, [user?._id]);
 
+  if (paymentState.loading) {
+    return (
+      <>
+        {paymentState.purchaseSuccessful ? (
+          <div
+            className="fixed left-0 top-0 z-[10000000] flex h-svh w-full items-center justify-center bg-white"
+            ref={lottieRef}
+          >
+            <Lottie
+              loop
+              play
+              speed={0.5}
+              animationData={lottieJson}
+              style={{ width: 120, height: 120 }}
+            />
+          </div>
+        ) : (
+          <LayoutLoading
+            overlay
+            size="xl"
+            loadingText="Please wait we are validating your payment...."
+          />
+        )}
+      </>
+    );
+  }
+
   return (
     <Box>
       <form onSubmit={form.onSubmit(handleSubmit)}>
@@ -210,13 +271,16 @@ const RegistrationForm = ({
             disabled={!!user?.email}
             {...form.getInputProps('email')}
           />
-          <TextInput
+          <NumberInput
             label={
               <spam className="text-sm font-normal !text-gray-700">
                 PhoneNumber
               </spam>
             }
             size="sm"
+            hideControls
+            max={9999999999}
+            clampBehavior="strict"
             withAsterisk
             disabled={!!user?.phoneNumber}
             {...form.getInputProps('phoneNumber')}
