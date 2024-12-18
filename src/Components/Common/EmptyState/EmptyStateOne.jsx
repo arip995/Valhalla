@@ -14,6 +14,7 @@ const APP_TYPES = {
   TG: 'tg',
   LC: 'lc',
   COURSE: 'course',
+  DP: 'dp',
 };
 
 const APP_ICONS = {
@@ -26,6 +27,7 @@ const APP_NAMES = {
   [APP_TYPES.TG]: 'telegram community',
   [APP_TYPES.LC]: 'locked content',
   [APP_TYPES.COURSE]: 'course',
+  [APP_TYPES.DP]: 'digital product',
 };
 
 const EmptyStateOne = ({
@@ -115,13 +117,13 @@ const EmptyStateOne = ({
       ),
     };
 
-    if (app === APP_TYPES.COURSE) {
+    if (app === APP_TYPES.COURSE || app === APP_TYPES.DP) {
       return (
         <Button
           {...buttonProps}
           onClick={() => setIsModalOpen(true)}
         >
-          Create Course
+          Create {APP_NAMES[app]}
         </Button>
       );
     }
@@ -130,9 +132,7 @@ const EmptyStateOne = ({
     return (
       <Link href={href}>
         <Button {...buttonProps}>
-          {app === APP_TYPES.TG
-            ? 'Create Telegram Community'
-            : 'Create Locked Content'}
+          Create {APP_NAMES[app]}
         </Button>
       </Link>
     );
@@ -161,6 +161,7 @@ const EmptyStateOne = ({
       </div>
       {isModalOpen && (
         <CreateProductModal
+          productType={app}
           opened={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         />

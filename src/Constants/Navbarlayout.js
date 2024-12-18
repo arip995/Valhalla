@@ -67,12 +67,12 @@ export const SidenavData = [
     value: 'tg',
     path: '/app/tg',
   },
-  // {
-  //   icon: IconCash,
-  //   label: 'Digital Product',
-  //   value: 'digitalproduct',
-  //   path: '/app/dp',
-  // },
+  {
+    icon: IconCash,
+    label: 'Digital Product',
+    value: 'digitalproduct',
+    path: '/app/dp',
+  },
   // {
   //   icon: IconBrandDiscord,
   //   label: 'Discord',

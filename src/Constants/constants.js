@@ -337,3 +337,53 @@ export const PAYMENT_METHOD_MAPPING = {
   ce: 'Cardless EMI',
   pl: 'Pay Later',
 };
+
+export const sectionTypes = app => {
+  switch (app) {
+    case 'dp':
+      return [
+        { type: 'testimonial', isEnabled: false },
+        { type: 'faq', isEnabled: false },
+        { type: 'benifit', isEnabled: false },
+        { type: 'social', isEnabled: false },
+        { type: 'gallery', isEnabled: false },
+      ];
+    default:
+      return [
+        { type: 'testimonial', isEnabled: false },
+        { type: 'faq', isEnabled: false },
+        { type: 'benifit', isEnabled: false },
+        { type: 'social', isEnabled: false },
+        { type: 'gallery', isEnabled: false },
+        { type: 'about', isEnabled: false },
+        { type: 'highlight', isEnabled: false },
+      ];
+  }
+};
+
+export const PRICE_TYPES = [
+  {
+    value: 'fixed',
+    title: 'Fixed price',
+    description: 'Charge a one-time fixed pay',
+  },
+  {
+    value: 'customerDecided',
+    title: 'Customers decide price',
+    description: 'Let customers pay any price',
+  },
+];
+
+export const validateLink = link => {
+  const regex =
+    /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/[^\s]*)?$/;
+  return regex.test(link);
+};
+
+export const RegistrationQuestionTypes = [
+  { value: 'text', label: 'Text' },
+  { value: 'largeText', label: 'Large Text' },
+  { value: 'dropdown', label: 'Dropdown' },
+  { value: 'number', label: 'Number' },
+  { value: 'date', label: 'Date Picker' },
+];

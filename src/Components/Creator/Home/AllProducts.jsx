@@ -7,8 +7,8 @@ import {
 } from '@mantine/core';
 import {
   IconBrandTelegram,
+  IconCash,
   IconCertificate,
-  IconCreditCard,
   IconLockDollar,
 } from '@tabler/icons-react';
 import Link from 'next/link';
@@ -20,6 +20,7 @@ const ListData = [
     icon: IconLockDollar,
     color: 'violet',
     path: '/create/lc',
+    productType: 'lc',
   },
   {
     title: 'Courses',
@@ -27,24 +28,29 @@ const ListData = [
     icon: IconCertificate,
     color: 'indigo',
     path: '/app/courses',
+    productType: 'course',
   },
   {
     title: 'Telegram Community',
     icon: IconBrandTelegram,
     color: 'blue',
     path: '/create/tg',
+    productType: 'tg',
   },
-  // {
-  //   title: 'Digital Products',
-  //   icon: IconCreditCard,
-  //   color: 'teal',
-  //   path: '/app/dp',
-  // },
+  {
+    title: 'Digital Products',
+    modal: true,
+    icon: IconCash,
+    color: 'teal',
+    path: '/app/dp',
+    productType: 'dp',
+  },
 ];
 
 export function AllProducts() {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+  const [productType, setProductType] = useState(null);
 
   return (
     <>
@@ -65,6 +71,7 @@ export function AllProducts() {
                   className="flex transform cursor-pointer flex-col items-center justify-center p-4"
                   onClick={() => {
                     setOpened(true);
+                    setProductType(item.productType);
                   }}
                 >
                   <item.icon
@@ -99,6 +106,7 @@ export function AllProducts() {
       </div>
       {!!opened && (
         <CreateProductModal
+          productType={productType}
           opened={opened}
           onClose={() => {
             setOpened(false);

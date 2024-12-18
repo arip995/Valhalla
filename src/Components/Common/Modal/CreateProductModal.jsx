@@ -1,3 +1,4 @@
+import { ProductTypemapping } from '@/Constants/ProductListingContants';
 import axiosInstance from '@/Utils/AxiosInstance';
 import {
   Button,
@@ -12,6 +13,7 @@ import toast from 'react-hot-toast';
 const CreateProductModal = ({
   opened,
   onClose = () => {},
+  productType = 'course',
 }) => {
   const [title, setTitle] = useState('');
   const [
@@ -32,6 +34,7 @@ const CreateProductModal = ({
       setError(null);
     }
   };
+
   const onTitleChange = e => {
     setTitle(e.target.value);
 
@@ -53,7 +56,7 @@ const CreateProductModal = ({
     try {
       setLoading(true);
       const response = await axiosInstance.post(
-        '/course/create',
+        `/${productType}/create`,
         {
           title,
         }
@@ -62,7 +65,7 @@ const CreateProductModal = ({
         toast.success('Product created successfully');
         setSuccess(true);
         router.push(
-          `/dashboard/course/${response.data.data._id}`
+          `/dashboard/${productType}/${response.data.data._id}`
         );
       }
     } catch (error) {
@@ -75,7 +78,7 @@ const CreateProductModal = ({
     <Modal
       opened={opened}
       onClose={loading ? () => {} : onClose}
-      title="Create new Course"
+      title={`Create new ${ProductTypemapping[productType]}`}
       overlayProps={{
         blur: 20,
       }}
@@ -90,7 +93,8 @@ const CreateProductModal = ({
               Product created successfully
             </span>
             <span className="mt-3 flex gap-2">
-              Redirecting to course page
+              Redirecting to{' '}
+              {ProductTypemapping[productType]} page
               <Loader type="dots" color="teal" />
             </span>
           </div>

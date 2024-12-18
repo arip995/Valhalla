@@ -45,7 +45,11 @@ const BuyButton = ({
             />
           </div>
         ) : (
-          <LayoutLoading overlay size="xl" />
+          <LayoutLoading
+            overlay
+            size="xl"
+            loadingText="Please wait we are validating your payment...."
+          />
         )}
       </>
     );
