@@ -5,6 +5,7 @@ import Image from 'next/image';
 import ViewDPForm from './ViewDPForm';
 import { formatPrice } from '@/Utils/Common';
 import NotFoundOne from '@/Components/Common/NotFoundOne/NotFoundOne';
+import ViewOrLoginDPOne from './ViewOrLoginDPOne';
 
 const ViewDPOne = ({ data }) => {
   if (!data) return <NotFoundOne />;
@@ -53,18 +54,6 @@ const ViewDPOne = ({ data }) => {
                   />
                 </div>
 
-                {/* Success Message */}
-                <div className="border-l-4 border-green-400 bg-green-50 px-4 py-2">
-                  <div className="flex">
-                    <div className="flex-1">
-                      Your last purchase was successful!
-                      <button className="ml-1 text-blue-600 hover:text-blue-700">
-                        View details
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Product Title */}
                 <h1 className="text-2xl font-medium text-gray-900">
                   {data.title}
@@ -81,6 +70,9 @@ const ViewDPOne = ({ data }) => {
                     priority
                   />
                 </div>
+
+                {/* Success Message */}
+                <ViewOrLoginDPOne productId={data._id} />
 
                 {/* Description */}
                 <div>
@@ -217,7 +209,7 @@ const ViewDPOne = ({ data }) => {
               </span>
             </div>
             <button
-              className="w-full rounded-lg py-3 text-white transition-colors"
+              className="w-full rounded-md py-3 text-white transition-colors"
               style={{ backgroundColor: data.themeColor }}
             >
               Make Payment →
