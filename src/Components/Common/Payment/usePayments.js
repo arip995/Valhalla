@@ -170,10 +170,15 @@ const usePayment = (
 
         const options = {
           key: process.env.RAZORPAY_PG_CLIENT_ID,
-          name: getFullName(user.firstName, user.lastName),
+          name: 'Nexify',
           order_id: paymentState.id,
           prefill: {
             //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
+            name: getFullName(
+              user.firstName,
+              user.lastName
+            ),
+
             email,
             contact: `+ 91${phoneNumber}`, //Provide the customer's phone number for better conversion rates
           },
@@ -187,7 +192,6 @@ const usePayment = (
               preferences: {
                 show_default_blocks: true,
               },
-
               hide: [
                 {
                   method: 'wallet',

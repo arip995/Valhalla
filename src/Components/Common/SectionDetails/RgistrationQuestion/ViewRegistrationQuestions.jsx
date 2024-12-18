@@ -4,6 +4,7 @@ import { formatPrice } from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
 import {
   Box,
+  Button,
   NumberInput,
   Select,
   Stack,
@@ -146,12 +147,15 @@ const RegistrationForm = ({
     }
 
     onCreateOrder(
-      data.price,
+      data.priceType === 'customerDecided'
+        ? values.minimumPrice
+        : data.price,
       data.creatorId,
       data.creatorDetails,
       {
         registrationQuestions:
           transformedRegisTrationQuestions,
+        priceType: data.priceType,
       },
       submissionValues.phoneNumber,
       submissionValues.email
@@ -308,16 +312,17 @@ const RegistrationForm = ({
           </div>
 
           {/* Payment Button */}
-          <button
+          <Button
             className={`w-full rounded-lg bg-opacity-90 py-3 text-white transition-colors hover:bg-opacity-100`}
             style={{ backgroundColor: data.themeColor }}
             type="submit"
+            loading={paymentState?.payinLoading}
             onClick={() =>
               form.setFieldValue('isFormTouched', true)
             }
           >
             {data?.cta || 'Make Payment'} →
-          </button>
+          </Button>
         </Stack>
       </form>
     </Box>
