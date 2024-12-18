@@ -4,9 +4,9 @@ import { useForm } from '@mantine/form';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { SectionTypes } from './CreateCourseStepOne/SectionDetails/Sections';
 import { getUniqueId } from '@/Utils/Common';
 import { useMediaQuery } from '@mantine/hooks';
+import { sectionTypes } from '@/Constants/constants';
 
 const useCreateCourse = () => {
   const router = useRouter();
@@ -21,7 +21,7 @@ const useCreateCourse = () => {
       loading: -1,
       cta: 'Enroll for',
       title: '',
-      sections: SectionTypes,
+      sections: sectionTypes(),
       content: [],
     },
     validateInputOnChange: true,
@@ -140,18 +140,20 @@ const useCreateCourse = () => {
   };
   const calculateSections = sections => {
     if (!Array.isArray(sections)) {
-      return SectionTypes;
+      return sectionTypes();
     }
 
     return [
       ...sections,
-      ...SectionTypes.filter(
-        item =>
-          !sections.some(val => val.type === item.type)
-      ).map(item => ({
-        ...item,
-        id: getUniqueId(),
-      })),
+      ...sectionTypes()
+        .filter(
+          item =>
+            !sections.some(val => val.type === item.type)
+        )
+        .map(item => ({
+          ...item,
+          id: getUniqueId(),
+        })),
     ];
   };
   const handleSubmit = async values => {

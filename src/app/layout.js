@@ -16,6 +16,7 @@ import '@mantine/core/styles/UnstyledButton.css';
 import '@mantine/core/styles/Paper.css';
 import '@mantine/core/styles/Popover.css';
 import '@mantine/core/styles/CloseButton.css';
+import '@mantine/core/styles/PillsInput.css';
 import '@mantine/core/styles/Loader.css';
 import '@mantine/core/styles/Overlay.css';
 import '@mantine/core/styles/ModalBase.css';
@@ -60,6 +61,7 @@ import '@mantine/core/styles/Accordion.css';
 import '@mantine/core/styles/Alert.css';
 import '@mantine/core/styles/Tabs.css';
 import '@mantine/core/styles/Chip.css';
+import '@mantine/core/styles/Pill.css';
 import '@mantine/core/styles/Spoiler.css';
 import '@mantine/core/styles/Slider.css';
 import '@mantine/core/styles/Rating.css';
@@ -68,6 +70,10 @@ import '@mantine/core/styles/Anchor.css';
 import '@mantine/core/styles/Stepper.css';
 import '@mantine/carousel/styles.css';
 import '@mantine/core/styles/ThemeIcon.css';
+import '@mantine/core/styles/ColorSwatch.css';
+import '@mantine/core/styles/ColorPicker.css';
+import '@mantine/core/styles/ColorInput.css';
+import '@mantine/dates/styles.css';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({

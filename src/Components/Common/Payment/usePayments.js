@@ -41,6 +41,8 @@ const usePayment = (
     useRedirectAfterPurchased();
   const { user } = useUser();
   const searchParams = useSearchParams();
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
   const [paymentState, setPaymentState] = useState({
     payinLoading: false,
     paymentSessionId: null,
@@ -165,10 +167,21 @@ const usePayment = (
           alert('Razropay failed to load!!');
           return;
         }
+
         const options = {
           key: process.env.RAZORPAY_PG_CLIENT_ID,
-          name: getFullName(user.firstName, user.lastName),
+          name: 'Nexify',
           order_id: paymentState.id,
+          prefill: {
+            //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
+            name: getFullName(
+              user.firstName,
+              user.lastName
+            ),
+
+            email,
+            contact: `+ 91${phoneNumber}`, //Provide the customer's phone number for better conversion rates
+          },
           config: {
             display: {
               sequence: [
@@ -180,15 +193,15 @@ const usePayment = (
                 show_default_blocks: true,
               },
               hide: [
-                // {
-                //   method: 'wallet',
-                // },
-                // {
-                //   method: 'card',
-                // },
-                // {
-                //   method: 'netbanking',
-                // },
+                {
+                  method: 'wallet',
+                },
+                {
+                  method: 'card',
+                },
+                {
+                  method: 'netbanking',
+                },
               ],
             },
           },
@@ -250,57 +263,10 @@ const usePayment = (
     amount = 1,
     creatorId,
     creatorDetails,
-    bookingData
+    bookingData,
+    phoneNumber,
+    email
   ) => {
-    // await axiosInstance.post(
-    //   `${process.env.NEXT_PUBLIC_BASE_URL}/webhook/payment/razorpay`,
-    //   {
-    //     payload: {
-    //       payment: {
-    //         entity: {
-    //           order_id: 'order_PSzJeChlUvQstp',
-    //           method: 'upi',
-    //           payment: {
-    //             cf_payment_id: 5114915060586,
-    //             payment_status: 'SUCCESS',
-    //             payment_amount: 222,
-    //             payment_currency: 'INR',
-    //             payment_message: null,
-    //             payment_time: '2024-11-20T10:03:38+05:30',
-    //             bank_reference: null,
-    //             auth_id: null,
-    //             payment_method: {
-    //               netbanking: {
-    //                 channel: null,
-    //                 netbanking_bank_code: '3022',
-    //                 netbanking_bank_name: 'ICICI Bank',
-    //               },
-    //             },
-    //             payment_group: 'net_banking',
-    //           },
-    //           customer_details: {
-    //             customer_name: 'Arindam Pandasx',
-    //             customer_id: '6656ace66a7d6213c7b78ea7',
-    //             customer_email: 'panda@gmail.coms',
-    //             customer_phone: '8888888888',
-    //           },
-    //           payment_gateway_details: {
-    //             gateway_name: 'CASHFREE',
-    //             gateway_order_id: '2188135133',
-    //             gateway_payment_id: '5114915060586',
-    //             gateway_status_code: null,
-    //             gateway_order_reference_id: 'null',
-    //             gateway_settlement: 'CASHFREE',
-    //           },
-    //           payment_offers: null,
-    //         },
-    //       },
-    //     },
-    //     event: 'payment.captured',
-    //     type: 'PAYMENT_SUCCESS_WEBHOOK',
-    //   }
-    // );
-    // return;
     if (!amount || isPreview) return;
     if (purchased) {
       redirectAfterPurchased();
@@ -320,6 +286,15 @@ const usePayment = (
       const newBookingData = { ...bookingData };
       if (productType === 'tg') {
         delete newBookingData.subscription;
+      }
+
+      if (!user?.email) {
+        setEmail(email);
+        user.email = email;
+      }
+      if (!user?.phoneNumber) {
+        setPhoneNumber(phoneNumber);
+        user.phoneNumber = phoneNumber;
       }
 
       const { data } = await axiosInstance.post(
@@ -382,6 +357,12 @@ const usePayment = (
 
   useEffect(() => {
     if (user === -1) return;
+    if (user.email) {
+      setEmail(user.email);
+    }
+    if (user.phoneNumber) {
+      setPhoneNumber(user.phoneNumber);
+    }
     checkOnLoad();
   }, [user?._id]);
   return { onCreateOrder, paymentState, purchased };

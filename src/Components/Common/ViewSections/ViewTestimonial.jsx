@@ -8,7 +8,7 @@ const ViewTestimonial = ({ value }) => {
     <div className="flex w-full flex-wrap gap-4">
       {value.map((item, index) => (
         <div
-          className="w-full rounded-lg bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
+          className="w-full rounded-lg border border-gray-100 bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
           key={index}
         >
           <div className="flex items-center gap-4">

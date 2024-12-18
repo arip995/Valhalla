@@ -56,6 +56,8 @@ const ProductListing = ({
         return 'Telegram';
       case 'lc':
         return 'Locked Content';
+      case 'dp':
+        return 'Digital Product';
       case 'course':
         return 'Course';
       default:

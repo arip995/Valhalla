@@ -57,13 +57,13 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                   </div>
                   <div className="absolute -bottom-6 left-6 right-6 rounded-xl bg-white p-4 shadow-lg backdrop-blur-sm">
                     <div className="flex items-center justify-between text-sm md:text-base">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1">
                         <IconStarFilled className="h-5 w-5 text-yellow-500" />
                         <span className="font-medium text-gray-900">
                           4.9 Rating
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1">
                         <IconCertificate className="h-5 w-5 text-blue-600" />
                         <span className="font-medium text-gray-900">
                           Certificate Included

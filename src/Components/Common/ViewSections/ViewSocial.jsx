@@ -1,11 +1,17 @@
-import { socialIconsMapping } from '@/Components/Create/Course/CreateCourseStepOne/SectionDetails/Sections';
-import React from 'react';
+'use client';
+
+import { socialIconsMapping } from '@/Components/Common/SectionDetails/Sections';
+import { usePathname } from 'next/navigation';
 
 const ViewSocial = ({ value }) => {
+  const productType = usePathname().split('/')[1];
+
   if (!value?.length) return null;
 
   return (
-    <div className="mx-auto flex flex-wrap gap-2">
+    <div
+      className={`${productType === 'dp' ? '' : 'mx-auto'} flex flex-wrap gap-2`}
+    >
       {value.map((item, index) => {
         return (
           <a
