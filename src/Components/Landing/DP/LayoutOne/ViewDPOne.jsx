@@ -6,6 +6,7 @@ import ViewDPForm from './ViewDPForm';
 import { formatPrice } from '@/Utils/Common';
 import NotFoundOne from '@/Components/Common/NotFoundOne/NotFoundOne';
 import ViewOrLoginDPOne from './ViewOrLoginDPOne';
+import ViewDPOneButtonModal from './ViewDPOneButtonModal';
 
 const ViewDPOne = ({ data }) => {
   if (!data) return <NotFoundOne />;
@@ -215,12 +216,7 @@ const ViewDPOne = ({ data }) => {
                 )}
               </span>
             </div>
-            <button
-              className="w-full rounded-md py-3 text-white transition-colors"
-              style={{ backgroundColor: data.themeColor }}
-            >
-              Make Payment →
-            </button>
+            <ViewDPOneButtonModal data={data} />
           </div>
         </div>
       </div>

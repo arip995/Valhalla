@@ -39,7 +39,7 @@ const usePayment = (
     usePathname().split('/')[1] === 'dashboard';
   const redirectAfterPurchased =
     useRedirectAfterPurchased();
-  const { user } = useUser();
+  const { user, fetchUserData } = useUser();
   const searchParams = useSearchParams();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
@@ -317,6 +317,9 @@ const usePayment = (
               ),
             },
           },
+        },
+        {
+          withCredentials: true,
         }
       );
 
@@ -324,6 +327,8 @@ const usePayment = (
         toast.error('Order not created. Please try again.');
         return;
       }
+
+      fetchUserData();
 
       setPaymentState(prev => ({
         ...prev,

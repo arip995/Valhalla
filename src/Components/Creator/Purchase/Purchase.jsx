@@ -59,10 +59,11 @@ const Purchase = () => {
           verticalSpacing={{ base: 10, sm: 'xl' }}
         >
           {purchasesData.map(item => {
-            const redirectPath =
-              item.productType === 'course'
-                ? `/consume/${item.productType}/${item.productId}`
-                : `/${item.productType}/${item.productId}`;
+            const redirectPath = ['course', 'dp'].some(
+              type => type === item.productType
+            )
+              ? `/consume/${item.productType}/${item.productId}`
+              : `/${item.productType}/${item.productId}`;
             return (
               <PurchasedCard
                 key={item.ProductCard}

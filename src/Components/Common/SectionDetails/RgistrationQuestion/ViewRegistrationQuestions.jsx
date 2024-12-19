@@ -19,7 +19,7 @@ import lottieJson from '../../../../../public/lottie/tick.json';
 import LayoutLoading from '../../Loading/LayoutLoading';
 import usePayment from '../../Payment/usePayments';
 
-const RegistrationForm = ({
+const ViewRegistrationQuestions = ({
   data,
   // onSubmit = () => {},
 }) => {
@@ -329,4 +329,4 @@ const RegistrationForm = ({
   );
 };
 
-export default RegistrationForm;
+export default ViewRegistrationQuestions;
