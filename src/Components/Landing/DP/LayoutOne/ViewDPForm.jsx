@@ -15,15 +15,7 @@ const ViewDPForm = ({ data }) => {
 
       {/* Payment Form */}
       <div className="space-y-4">
-        <ViewRegistrationQuestions
-          registrationQuestions={data.registrationQuestions}
-          minimumPrice={
-            data.priceType === 'customerDecided'
-              ? data.minimumPrice
-              : ''
-          }
-          data={data}
-        />
+        <ViewRegistrationQuestions data={data} />
 
         {/* Security Badge */}
         <div className="text-center text-sm text-gray-600">

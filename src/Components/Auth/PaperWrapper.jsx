@@ -4,7 +4,7 @@ import {
   rem,
   Tooltip,
 } from '@mantine/core';
-import { IconX } from '@tabler/icons-react';
+import { IconArrowLeft } from '@tabler/icons-react';
 import { usePathname, useRouter } from 'next/navigation';
 
 const PaperWrapper = ({
@@ -31,7 +31,7 @@ const PaperWrapper = ({
               router.push(`/app/${productType}`)
             }
           >
-            <IconX
+            <IconArrowLeft
               stroke={1}
               color="black"
               style={{ width: rem(20), height: rem(20) }}

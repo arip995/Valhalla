@@ -1,6 +1,7 @@
 import { Badge } from '@mantine/core';
 import {
   IconBrandTelegram,
+  IconCash,
   IconCertificate,
   IconFileText,
   IconFileTypography,
@@ -308,6 +309,16 @@ export const ProductTypeBadgeMapping = {
       size="xs"
     >
       Course
+    </Badge>
+  ),
+  dp: (
+    <Badge
+      leftSection={<IconCash size={12} />}
+      color="yellow"
+      variant="light"
+      size="xs"
+    >
+      Digital Product
     </Badge>
   ),
 };

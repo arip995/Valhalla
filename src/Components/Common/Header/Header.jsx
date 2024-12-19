@@ -21,6 +21,7 @@ const Header = ({
 }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const productType = usePathname().split('/')[2];
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab');
   const [opened, setOpened] = useState(false);
@@ -89,6 +90,7 @@ const Header = ({
       ) : null}
       {!!opened && (
         <CreateProductModal
+          productType={productType}
           opened={opened}
           onClose={() => {
             setOpened(false);

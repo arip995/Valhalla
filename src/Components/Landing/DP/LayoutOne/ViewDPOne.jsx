@@ -6,6 +6,7 @@ import ViewDPForm from './ViewDPForm';
 import { formatPrice } from '@/Utils/Common';
 import NotFoundOne from '@/Components/Common/NotFoundOne/NotFoundOne';
 import ViewOrLoginDPOne from './ViewOrLoginDPOne';
+import ViewDPOneButtonModal from './ViewDPOneButtonModal';
 
 const ViewDPOne = ({ data }) => {
   if (!data) return <NotFoundOne />;
@@ -62,7 +63,7 @@ const ViewDPOne = ({ data }) => {
                 {/* Cover Image */}
                 <div className="aspect-video overflow-hidden rounded-md">
                   <Image
-                    src={data.coverImage.url}
+                    src={data.coverImage?.url}
                     height={600}
                     width={800}
                     className="object-cover"
@@ -201,19 +202,21 @@ const ViewDPOne = ({ data }) => {
                 Amount total
               </span>
               <span className="text-xl font-medium">
-                {formatPrice(
-                  data.hasDiscountedPrice
-                    ? data.discountedPrice
-                    : data.price
+                {data.hasDiscountedPrice ? (
+                  <>
+                    <span className="mr-2 text-gray-500 line-through">
+                      {formatPrice(data.price)}
+                    </span>
+                    <span className="text-green-600">
+                      {formatPrice(data.discountedPrice)}
+                    </span>
+                  </>
+                ) : (
+                  <span>{formatPrice(data.price)}</span>
                 )}
               </span>
             </div>
-            <button
-              className="w-full rounded-md py-3 text-white transition-colors"
-              style={{ backgroundColor: data.themeColor }}
-            >
-              Make Payment →
-            </button>
+            <ViewDPOneButtonModal data={data} />
           </div>
         </div>
       </div>
