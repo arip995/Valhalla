@@ -2,6 +2,7 @@
 
 import { checkIfPurchased } from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
+import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 
 const ViewOrLoginDPOne = ({ productId }) => {
@@ -46,9 +47,12 @@ const ViewOrLoginDPOne = ({ productId }) => {
               <div className="flex">
                 <div className="flex-1">
                   Your last purchase was successful!
-                  <button className="ml-1 text-blue-600 hover:text-blue-700">
+                  <Link
+                    href={`/consume/dp/${productId}`}
+                    className="ml-1 text-blue-600 hover:text-blue-700"
+                  >
                     View details
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

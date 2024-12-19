@@ -119,7 +119,7 @@ const ProductListing = ({
               : routeName.charAt(0).toUpperCase() +
                 routeName.slice(1)
           }
-          modal={app === 'course'}
+          modal={app === 'course' || app === 'dp'}
           path={createPath}
         />
       )}
