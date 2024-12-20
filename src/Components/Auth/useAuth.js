@@ -128,6 +128,8 @@ const useAuth = () => {
         setTimeout(() => {
           router.replace('/home');
         }, 3000);
+      } else if (!data?.data?.data?.user.isCreator) {
+        router.replace('/purchase');
       } else {
         router.replace('/onboarding');
       }
