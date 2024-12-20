@@ -18,8 +18,8 @@ const useWallet = () => {
     },
     validate: {
       withdrawAmount: value => {
-        if (!value || value <= 500)
-          return 'Amount must be greater than 500';
+        if (!value || value < 10)
+          return 'Amount must be greater than 10';
         if (value > walletDetails?.withdrawableBalance)
           return 'Amount exceeds available balance';
         return null;
