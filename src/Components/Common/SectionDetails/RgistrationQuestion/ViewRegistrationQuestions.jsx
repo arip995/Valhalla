@@ -149,7 +149,9 @@ const ViewRegistrationQuestions = ({
     onCreateOrder(
       data.priceType === 'customerDecided'
         ? values.minimumPrice
-        : data.price,
+        : data.hasDiscountedPrice
+          ? data.discountedPrice
+          : data.price,
       data.creatorId,
       data.creatorDetails,
       {
