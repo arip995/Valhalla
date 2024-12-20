@@ -18,16 +18,15 @@ import Lottie from 'react-lottie-player';
 import lottieJson from '../../../../../public/lottie/tick.json';
 import LayoutLoading from '../../Loading/LayoutLoading';
 import usePayment from '../../Payment/usePayments';
+import { useRouter } from 'next/navigation';
 
-const ViewRegistrationQuestions = ({
-  data,
-  // onSubmit = () => {},
-}) => {
+const ViewRegistrationQuestions = ({ data }) => {
+  const router = useRouter();
   const lottieRef = useRef();
   const { user } = useUser();
-  const { onCreateOrder, paymentState } = usePayment(
-    () => {}
-  );
+  const { onCreateOrder, paymentState } = usePayment(() => {
+    router.push(`/consume/dp/${data._id}`);
+  });
   const registrationQuestions = useMemo(
     () => data.registrationQuestions,
     []
