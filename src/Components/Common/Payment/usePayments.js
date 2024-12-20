@@ -64,7 +64,7 @@ const usePayment = (
         checkOnLoad();
       } else {
         toast.error(
-          'There was a problem. If your payment was deducted, it will be resolved within 24 hours.',
+          'There was a problem. If your payment was deducted, it will be resolved within 5-7 working days.',
           {
             position: 'top-center',
             duration: 10000,
