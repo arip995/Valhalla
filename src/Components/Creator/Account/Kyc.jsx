@@ -27,6 +27,15 @@ const Kyc = ({ onSuccess = () => {} }) => {
 
       <TextInput
         withAsterisk
+        label="Bank Account Number"
+        placeholder="026291800001191"
+        disabled={loading || user?.isKycDone}
+        key={kycForm.key('bankAccountNumber')}
+        {...kycForm.getInputProps('bankAccountNumber')}
+      />
+
+      <TextInput
+        withAsterisk
         label=" IFSC"
         placeholder="SBIN0000713"
         disabled={loading || user?.isKycDone}
@@ -40,14 +49,6 @@ const Kyc = ({ onSuccess = () => {} }) => {
         }}
       />
 
-      <TextInput
-        withAsterisk
-        label="Bank Account Number"
-        placeholder="026291800001191"
-        disabled={loading || user?.isKycDone}
-        key={kycForm.key('bankAccountNumber')}
-        {...kycForm.getInputProps('bankAccountNumber')}
-      />
       {!user.isKycDone ? (
         <Button
           type="submit"

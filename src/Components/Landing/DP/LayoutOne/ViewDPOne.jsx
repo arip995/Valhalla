@@ -197,7 +197,7 @@ const ViewDPOne = ({ data }) => {
           </div>
 
           <div className="fixed bottom-0 left-0 right-0 border-t bg-white p-4 shadow-lg lg:hidden">
-            <div className="mb-4 flex items-center justify-between">
+            {/* <div className="mb-4 flex items-center justify-between">
               <span className="text-gray-600">
                 Amount total
               </span>
@@ -215,7 +215,7 @@ const ViewDPOne = ({ data }) => {
                   <span>{formatPrice(data.price)}</span>
                 )}
               </span>
-            </div>
+            </div> */}
             <ViewDPOneButtonModal data={data} />
           </div>
         </div>

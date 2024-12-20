@@ -297,18 +297,27 @@ const ViewRegistrationQuestions = ({
 
           {/* Amount */}
           <div className="pt-4">
-            <div className="flex items-center justify-between">
-              <span className="text-gray-600">
-                Amount total
-              </span>
-              <span className="text-xl font-medium">
-                {formatPrice(
-                  data.hasDiscountedPrice
-                    ? data.discountedPrice
-                    : data.price
-                )}
-              </span>
-            </div>
+            {data.priceType === 'customerDecided' ? null : (
+              <div className="flex items-center justify-between">
+                <span className="text-gray-600">
+                  Amount total
+                </span>
+                <span className="text-xl font-medium">
+                  {data.hasDiscountedPrice ? (
+                    <>
+                      <span className="mr-2 text-gray-500 line-through">
+                        {formatPrice(data.price)}
+                      </span>
+                      <span className="text-green-600">
+                        {formatPrice(data.discountedPrice)}
+                      </span>
+                    </>
+                  ) : (
+                    <span>{formatPrice(data.price)}</span>
+                  )}
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Payment Button */}
