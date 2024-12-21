@@ -197,10 +197,7 @@ const useCreateLockedContent = () => {
       await axiosInstance.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/image/delete_image`,
         {
-          key: url.replace(
-            'https://nexify-try.s3.ap-south-1.amazonaws.com/',
-            ''
-          ),
+          key: url.replace(process.env.AWS_BASE_URL, ''),
         }
       );
     } catch (error) {
