@@ -4,7 +4,6 @@ import { CategoriesList } from '@/Constants/constants';
 import {
   Box,
   Button,
-  FileButton,
   LoadingOverlay,
   NumberInput,
   Select,
@@ -15,14 +14,13 @@ import {
 import {
   IconCurrencyRupee,
   IconExternalLink,
-  IconUpload,
 } from '@tabler/icons-react';
 
+import ListFileOne from '@/Components/Common/ListFiles/ListFileOne';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import Link from 'next/link';
 import '../../../styles/common/common-container.css';
 import PaperWrapper from '../../Auth/PaperWrapper';
-import ListFiles from '../../Common/ListFiles/ListFiles';
 import useCreateLockedContent from './useCreateLockedContent';
 
 const CreateLockedContent = ({ data }) => {
@@ -31,7 +29,6 @@ const CreateLockedContent = ({ data }) => {
     loading,
     onCreateOrEdit,
     handleFileChange,
-    onFileDelete,
     productId,
     editLoading,
     setIsSaveClickedAtleastOnce,
@@ -97,7 +94,21 @@ const CreateLockedContent = ({ data }) => {
                     'message'
                   )}
                 />
-                <FileButton
+                <ListFileOne
+                  type="button"
+                  maxSize={10}
+                  file={
+                    createLockedContentForm.values.files
+                  }
+                  mimeTypes={[
+                    'image/*',
+                    'application/*',
+                    'video/*',
+                    'audio/*',
+                  ]}
+                  onUpdate={handleFileChange}
+                />
+                {/* <FileButton
                   fullWidth
                   onChange={handleFileChange}
                   accept="image/*,application/*,video/mp4,audio/mp4"
@@ -111,8 +122,8 @@ const CreateLockedContent = ({ data }) => {
                       Upload files
                     </Button>
                   )}
-                </FileButton>
-                {createLockedContentForm.getValues().files
+                </FileButton> */}
+                {/* {createLockedContentForm.getValues().files
                   .length ? (
                   <ListFiles
                     files={
@@ -121,7 +132,7 @@ const CreateLockedContent = ({ data }) => {
                     }
                     onDelete={onFileDelete}
                   />
-                ) : null}
+                ) : null} */}
                 <NumberInput
                   label="Price"
                   placeholder=""

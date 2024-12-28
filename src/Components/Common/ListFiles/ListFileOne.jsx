@@ -1,11 +1,12 @@
 import { getUniqueId } from '@/Utils/Common';
 import { handleFile } from '@/Utils/HandleFiles';
-import { FileButton, Input } from '@mantine/core';
+import { Button, FileButton, Input } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import UploadButtonOne from '../Upload/UploadButtonOne';
 import useUploadVideo from '../Upload/useUploadVideo';
 import ListFiles from './ListFiles';
+import { IconUpload } from '@tabler/icons-react';
 const ListFileOne = ({
   onUpdate = () => {},
   maxSize = 5,
@@ -193,7 +194,17 @@ const ListFileOne = ({
           // disabled={link}
           onChange={onUpload}
           accept={mimeTypes}
-        />
+        >
+          {props => (
+            <Button
+              variant="outline"
+              leftSection={<IconUpload size={20} />}
+              {...props}
+            >
+              Upload files
+            </Button>
+          )}
+        </FileButton>
       )}
       {!!error && <Input.Error>{error}</Input.Error>}
 
