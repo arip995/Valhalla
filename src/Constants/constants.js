@@ -330,7 +330,7 @@ export const AccountTabOptions = [
 export const AccountCreatorTabOptions = [
   { label: 'Profile', value: 'profile' },
   { label: 'Payment', value: 'payment' },
-  { label: 'Billing', value: 'billing' },
+  // { label: 'Billing', value: 'billing' },
 ];
 
 export const PaymentTabOptions = [

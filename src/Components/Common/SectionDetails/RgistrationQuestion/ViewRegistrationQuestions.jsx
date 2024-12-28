@@ -28,7 +28,7 @@ const ViewRegistrationQuestions = ({ data }) => {
     router.push(`/consume/dp/${data._id}`);
   });
   const registrationQuestions = useMemo(
-    () => data.registrationQuestions,
+    () => data.registrationQuestions || [],
     []
   );
 

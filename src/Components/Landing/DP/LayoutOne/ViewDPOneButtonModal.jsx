@@ -13,7 +13,7 @@ const ViewDPOneButtonModal = ({ data }) => {
         style={{ backgroundColor: data.themeColor }}
         onClick={() => setOpened(true)}
       >
-        Make Payment →
+        {data?.cta || 'Make Payment'} →
       </button>
       <Modal
         opened={opened}

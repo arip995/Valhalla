@@ -108,31 +108,6 @@ const CreateLockedContent = ({ data }) => {
                   ]}
                   onUpdate={handleFileChange}
                 />
-                {/* <FileButton
-                  fullWidth
-                  onChange={handleFileChange}
-                  accept="image/*,application/*,video/mp4,audio/mp4"
-                >
-                  {props => (
-                    <Button
-                      variant="outline"
-                      leftSection={<IconUpload size={20} />}
-                      {...props}
-                    >
-                      Upload files
-                    </Button>
-                  )}
-                </FileButton> */}
-                {/* {createLockedContentForm.getValues().files
-                  .length ? (
-                  <ListFiles
-                    files={
-                      createLockedContentForm.getValues()
-                        .files
-                    }
-                    onDelete={onFileDelete}
-                  />
-                ) : null} */}
                 <NumberInput
                   label="Price"
                   placeholder=""

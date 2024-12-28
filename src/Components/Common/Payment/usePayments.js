@@ -246,6 +246,11 @@ const usePayment = (
               console.log(error);
             }
           },
+          modal: {
+            ondismiss: function () {
+              console.log('panda'); //make the payment failed here
+            },
+          },
         };
 
         const paymentObject = new window.Razorpay(options);
