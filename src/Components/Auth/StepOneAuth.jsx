@@ -89,6 +89,7 @@ const StepOneAuth = ({
 
                   <PinInput
                     autoFocus
+                    oneTimeCode
                     length={5}
                     size="md"
                     type="number"

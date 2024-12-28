@@ -250,6 +250,7 @@ const AuthModal = ({
             >
               <PinInput
                 autoFocus
+                oneTimeCode
                 size="lg"
                 length={5}
                 type="number"
