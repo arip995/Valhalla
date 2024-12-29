@@ -281,7 +281,6 @@ const AuthModal = ({
                 <Timer
                   onClick={() => {
                     sendOtp('resend');
-                    console.log('clicked');
                   }}
                   completedContent="Resend"
                 />
