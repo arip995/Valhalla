@@ -125,12 +125,11 @@ const useAuth = () => {
         setUserData(data.data.data.user);
       }
       if (data?.data?.data?.user.username) {
-        setTimeout(() => {
-          router.replace('/home');
-        }, 3000);
+        router.replace('/home');
       } else if (!data?.data?.data?.user.isCreator) {
         router.replace('/purchase');
       } else {
+        console.log('first');
         router.replace('/onboarding');
       }
     } catch (error) {
