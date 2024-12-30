@@ -133,6 +133,7 @@ const useAuth = () => {
           router.replace('/purchase');
         }, 3000);
       } else {
+        location.reload();
         setTimeout(() => {
           router.replace('/onboarding');
         }, 3000);
