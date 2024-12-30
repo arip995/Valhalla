@@ -124,14 +124,18 @@ const useAuth = () => {
         toast.success('Signed in successfully');
         setUserData(data.data.data.user);
       }
-      console.log(data?.data?.data, 'test');
       if (data?.data?.data?.user.username) {
-        router.replace('/home');
+        setTimeout(() => {
+          router.replace('/home');
+        }, 3000);
       } else if (!data?.data?.data?.user.isCreator) {
-        router.replace('/purchase');
+        setTimeout(() => {
+          router.replace('/purchase');
+        }, 3000);
       } else {
-        console.log('first');
-        router.replace('/onboarding');
+        setTimeout(() => {
+          router.replace('/onboarding');
+        }, 3000);
       }
     } catch (error) {
       setLoading(false);
