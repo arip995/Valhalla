@@ -124,6 +124,7 @@ const useAuth = () => {
         toast.success('Signed in successfully');
         setUserData(data.data.data.user);
       }
+      console.log(data?.data?.data, 'test');
       if (data?.data?.data?.user.username) {
         router.replace('/home');
       } else if (!data?.data?.data?.user.isCreator) {
