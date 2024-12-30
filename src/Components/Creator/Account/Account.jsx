@@ -2,9 +2,11 @@
 
 import { checkRestrictedChars } from '@/Utils/Regex';
 import {
+  Alert,
   Badge,
   Button,
   Collapse,
+  Group,
   Loader,
   Text,
   TextInput,
@@ -18,6 +20,7 @@ import ProfilePic from '../../Common/General/ProfilePic';
 import useAccount from './useAccount';
 import useUsername from './useUsername.js';
 import {
+  IconAlertCircle,
   IconInfoCircle,
   IconRosetteDiscountCheck,
 } from '@tabler/icons-react';
@@ -27,8 +30,11 @@ import {
   AccountCreatorTabOptions,
   AccountTabOptions,
 } from '@/Constants/constants';
+import { useState } from 'react';
+import CompleteProfileModal from '@/Components/Common/Modal/CompleteProfileModal';
 
 const Account = () => {
+  const [opened, setOpened] = useState(false);
   const {
     user,
     personInfoForm,
@@ -124,7 +130,29 @@ const Account = () => {
               </div>
             </>
           ) : tab === 'payment' ? (
-            <Kyc />
+            <>
+              {!user.isKycDone ? (
+                <Alert
+                  icon={<IconAlertCircle size={16} />}
+                  title="Kyc Missing"
+                  color="yellow"
+                >
+                  You need to verify your kyc details first.
+                  <Group mt="xs">
+                    <Button
+                      size="xs"
+                      variant="outline"
+                      color="black"
+                      onClick={() => setOpened(true)}
+                    >
+                      Verify KYC
+                    </Button>
+                  </Group>
+                </Alert>
+              ) : (
+                <Kyc />
+              )}
+            </>
           ) : (
             <>
               {user?.isCreator ? (
@@ -211,6 +239,12 @@ const Account = () => {
           )}
         </div>
       </div>
+      {!!opened && (
+        <CompleteProfileModal
+          opened={opened}
+          onClose={() => setOpened(false)}
+        />
+      )}
     </>
   );
 };
