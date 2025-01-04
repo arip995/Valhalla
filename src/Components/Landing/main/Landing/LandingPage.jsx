@@ -3,9 +3,7 @@ import FooterThree from '@/Components/Common/Footer/FooterThree';
 import LandingHeader from '@/Components/Common/Header/LandingHeader';
 import CompareTable from '../ui/Compare/CompareTable';
 import FAQs2 from '../ui/FAQs/FAQs2';
-import Features2 from '../ui/Features/Features2';
 import Hero2 from '../ui/Hero/Hero2';
-import Testimonial2 from '../ui/Testimonial/Testimonial2';
 
 const LandingPage = () => {
   return (
@@ -17,13 +15,13 @@ const LandingPage = () => {
       <Hero2 />
 
       {/* Features */}
-      <Features2 />
+      {/* <Features2 /> */}
 
       {/* Compare table */}
       <CompareTable />
 
       {/* Testimonials */}
-      <Testimonial2 />
+      {/* <Testimonial2 /> */}
 
       {/* Blog Highlights Section */}
       {/* <Blog /> */}

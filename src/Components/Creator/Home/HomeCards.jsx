@@ -10,6 +10,7 @@ const PRODUCT_TYPE_NAMES = {
   course: 'Course',
   tg: 'Telegram Group',
   lc: 'Locked  Content',
+  dp: 'Digital Product',
 };
 
 const TIME_PERIODS = [
