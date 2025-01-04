@@ -144,7 +144,7 @@ const CustomTable = ({
               <tr
                 key={item._id}
                 onClick={() => onRowClick(item)}
-                className="cursor-pointer hover:bg-gray-50 [&>td]:whitespace-nowrap [&>td]:px-4 [&>td]:py-4 [&>td]:text-sm [&>td]:text-gray-500"
+                className="cursor-pointer select-none hover:bg-gray-50 [&>td]:whitespace-nowrap [&>td]:px-4 [&>td]:py-4 [&>td]:text-sm [&>td]:text-gray-500"
               >
                 {tableHeaderItems.map((h, i) => {
                   return (
