@@ -4,6 +4,7 @@ import LandingHeader from '@/Components/Common/Header/LandingHeader';
 import CompareTable from '../ui/Compare/CompareTable';
 import FAQs2 from '../ui/FAQs/FAQs2';
 import Hero2 from '../ui/Hero/Hero2';
+import Features2 from '../ui/Features/Features2';
 
 const LandingPage = () => {
   return (
@@ -15,7 +16,7 @@ const LandingPage = () => {
       <Hero2 />
 
       {/* Features */}
-      {/* <Features2 /> */}
+      <Features2 />
 
       {/* Compare table */}
       <CompareTable />

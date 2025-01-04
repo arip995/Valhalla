@@ -46,7 +46,7 @@ const Hero2 = () => {
           </div>
 
           {/* Social Proof */}
-          <div className="mx-auto grid max-w-3xl grid-cols-2 gap-6 md:grid-cols-4">
+          {/* <div className="mx-auto grid max-w-3xl grid-cols-2 gap-6 md:grid-cols-4">
             <div className="rounded-xl border border-purple-100 bg-white/80 p-4 backdrop-blur-sm">
               <div className="mb-1 text-2xl font-bold text-purple-600">
                 10k+
@@ -79,7 +79,7 @@ const Hero2 = () => {
                 Customer Support
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Features Preview */}
