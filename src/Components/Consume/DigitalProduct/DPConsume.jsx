@@ -108,13 +108,15 @@ const DPConsume = ({ productId }) => {
             Videos
           </div>
         )}
-        {videos?.length
-          ? videos.map((item, i) => {
+        {videos?.length ? (
+          <div className="flex w-full flex-col gap-2">
+            {videos.map((item, i) => {
               return (
                 <SavedLessonContent value={item} key={i} />
               );
-            })
-          : null}
+            })}
+          </div>
+        ) : null}
       </div>
     </>
   );

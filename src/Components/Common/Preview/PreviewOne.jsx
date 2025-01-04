@@ -49,9 +49,7 @@ const PreviewOne = ({
                 href={`${process.env.NEXT_PUBLIC_HOST}/${productType}/${productId}`}
               >
                 <IconExternalLink
-                  className={`cursor-pointer text-gray-400 ${
-                    !isDeskTop ? 'text-white' : ''
-                  }`}
+                  className="cursor-pointer text-gray-400 hover:text-white"
                   size={20}
                 />
               </a>
