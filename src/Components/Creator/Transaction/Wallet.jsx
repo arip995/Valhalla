@@ -33,9 +33,9 @@ const GetStatusColor = status => {
     case 1:
       return 'blue'; // Processing
     case 2:
-      return 'green'; // Completed
+      return 'blue'; // Completed
     case 3:
-      return 'red'; // Failed
+      return 'green'; // Failed
     case 4:
       return 'red'; // Cancelled
     case 5:
@@ -52,11 +52,11 @@ const GetStatusText = status => {
     case 1:
       return 'Processing';
     case 2:
-      return 'Completed';
+      return 'Initiated';
     case 3:
-      return 'Failed';
+      return 'Completed';
     case 4:
-      return 'Cancelled by bank';
+      return 'Failed';
     case 5:
       return 'Cancelled';
     default:
@@ -71,9 +71,9 @@ const GetStatusIcon = status => {
     case 1:
       return <IconCircleDot size={20} />;
     case 2:
-      return <IconCheck size={20} />;
+      return <IconCircleDot size={20} />;
     case 3:
-      return <IconX size={20} />;
+      return <IconCheck size={20} />;
     case 4:
       return <IconX size={20} />;
     case 5:
