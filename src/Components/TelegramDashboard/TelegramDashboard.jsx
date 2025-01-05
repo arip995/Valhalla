@@ -1,6 +1,7 @@
 'use client';
 
 import '../../styles/dashboard/TelegramDashborad.css';
+import PaperWrapper from '../Auth/PaperWrapper';
 import LayoutLoading from '../Common/Loading/LayoutLoading';
 import TGEPlansAndPricingContainer from './EditPlansAndPricing/TGEPlansAndPricingContainer';
 import TelegramDashboardBasicDetails from './TelegramDashboardBasicDetails';
@@ -22,8 +23,8 @@ const TelegramDashboard = ({ productId }) => {
   }
 
   return (
-    <>
-      <div className="tg-dashboard-container">
+    <div className="tg-dashboard-container">
+      <PaperWrapper showBackButton>
         <div className="flex h-screen w-full max-w-[600px] flex-col items-center gap-4 p-3 md:p-6">
           <TelegramDashboardOpenlink data={data} />
           <div className="hide-scrollbar flex w-full flex-col items-center gap-4 overflow-y-auto">
@@ -47,8 +48,8 @@ const TelegramDashboard = ({ productId }) => {
             />
           </div>
         </div>
-      </div>
-    </>
+      </PaperWrapper>
+    </div>
   );
 };
 
