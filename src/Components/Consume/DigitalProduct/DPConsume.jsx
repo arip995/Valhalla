@@ -19,6 +19,7 @@ const DPConsume = ({ productId }) => {
   const [dpData, setDPData] = useState(false);
   const [videos, setVideos] = useState([]);
   const [files, setFiles] = useState([]);
+  const [links, setLinks] = useState([]);
 
   const redirectToBuyPage = () => {
     const host = process.env.NEXT_PUBLIC_HOST;
@@ -42,6 +43,7 @@ const DPConsume = ({ productId }) => {
       const { data } = await getMetaData(productId, 'dp');
       let files = [];
       let videos = [];
+      let links = [];
       data.files.map(item => {
         if (item.type.startsWith('video')) {
           videos.push({
@@ -50,11 +52,14 @@ const DPConsume = ({ productId }) => {
               ...item,
             },
           });
+        } else if (item.type.startsWith('link')) {
+          links.push({ ...item });
         } else {
           files.push({ ...item });
         }
       });
       setFiles(files);
+      setLinks(links);
       setVideos(videos);
       setDPData(data);
     } catch (error) {
@@ -102,6 +107,10 @@ const DPConsume = ({ productId }) => {
         {files?.length ? (
           <ListFiles files={files} showDownloadButton />
         ) : null}
+        {!!links?.length && (
+          <div className="my-2 font-semibold">Links</div>
+        )}
+        {links?.length ? <ListFiles files={links} /> : null}
 
         {!!videos?.length && (
           <div className="my-2 mt-4 font-semibold">
