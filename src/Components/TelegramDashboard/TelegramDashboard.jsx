@@ -24,7 +24,7 @@ const TelegramDashboard = ({ productId }) => {
 
   return (
     <div className="tg-dashboard-container">
-      <PaperWrapper showBackButton>
+      {/* <PaperWrapper showBackButton> */}
         <div className="flex h-screen w-full max-w-[600px] flex-col items-center gap-4 p-3 md:p-6">
           <TelegramDashboardOpenlink data={data} />
           <div className="hide-scrollbar flex w-full flex-col items-center gap-4 overflow-y-auto">
@@ -48,7 +48,7 @@ const TelegramDashboard = ({ productId }) => {
             />
           </div>
         </div>
-      </PaperWrapper>
+      {/* </PaperWrapper> */}
     </div>
   );
 };
