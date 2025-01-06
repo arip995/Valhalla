@@ -3,8 +3,7 @@
 import { ActionIcon, rem, Tooltip } from '@mantine/core';
 import { IconArrowLeft } from '@tabler/icons-react';
 import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/router';
-import React from 'react';
+import { useRouter } from 'next/navigation';
 
 const CloseButton = () => {
   const router = useRouter();
