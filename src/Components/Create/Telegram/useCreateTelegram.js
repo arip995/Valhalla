@@ -2,6 +2,7 @@ import { PeriodTypeOptions } from '@/Constants/constants';
 import axiosInstance from '@/Utils/AxiosInstance';
 import useUser from '@/Utils/Hooks/useUser';
 import { useForm } from '@mantine/form';
+import { useCounter } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -9,6 +10,10 @@ import toast from 'react-hot-toast';
 const useCreateTelegram = () => {
   const { setCurrentUser } = useUser();
   const [step, setStep] = useState(1);
+  const [retries, setRetries] = useCounter(0, {
+    min: 0,
+    max: 10,
+  });
   const [showWarning, setShowWarning] = useState(0);
   const [existingGroups, setExistingGroups] =
     useState(false);
@@ -324,9 +329,10 @@ const useCreateTelegram = () => {
   const onStepTwoSubmit = async () => {
     setStep(3);
   };
-  console.log(stepThreeForm.errors);
+
   const onStepThreeSubmit = async () => {
     setLoading(true);
+
     const payload = {
       groupName: stepTwoForm.values?.channelName,
       description: '<p></p>',
@@ -353,10 +359,16 @@ const useCreateTelegram = () => {
         `/dashboard/tg/${data.data?.data?.channelId}`
       );
     } catch (error) {
+      if (retries < 3) {
+        setRetries.increment();
+        return onStepThreeSubmit();
+      } else {
+        setRetries.reset();
+      }
       setLoading(false);
       toast.error(
         typeof error?.response?.data?.message === 'string'
-          ? error?.response?.data?.message === 'string'
+          ? error?.response?.data?.message
           : 'something went wrong try again'
       );
     }
