@@ -40,7 +40,7 @@ const TGEPlansAndPricing = ({
             >
               {plans?.length ? (
                 <div className="flex flex-col">
-                  {plans.map((obj, index) => {
+                  {plans.map((obj, index) =>
                     plans.length > 1 ? (
                       <Draggable
                         key={obj._id}
@@ -80,8 +80,8 @@ const TGEPlansAndPricing = ({
                           plansLength={plans.length}
                         />
                       </div>
-                    );
-                  })}
+                    )
+                  )}
                   {provided.placeholder}
                 </div>
               ) : null}
