@@ -41,8 +41,7 @@ const TGEPlansAndPricing = ({
               {plans?.length ? (
                 <div className="flex flex-col">
                   {plans.map((obj, index) => {
-                    console.log(index, obj._id);
-                    return plans.length > 1 ? (
+                    plans.length > 1 ? (
                       <Draggable
                         key={obj._id}
                         draggableId={obj._id}

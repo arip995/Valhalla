@@ -63,7 +63,6 @@ const useEditPlanAndPricing = data => {
         type: 'deletePlan',
         data: { planId: data._id },
       });
-      console.log(res.data);
       if (res?.data?.data?.subscriptionPlans?.length) {
         setPlans(res.data.data.subscriptionPlans);
         setOpenPlanSideBar(false);
