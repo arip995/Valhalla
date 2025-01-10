@@ -55,7 +55,6 @@ const CustomTipTapEditor = ({
       const url = await handleFile(file, undefined, 5);
       images.push(url);
       if (!url) return;
-      console.log(images);
       images = Compact(images);
       const nodes = images.map(url => ({
         type: 'image',
