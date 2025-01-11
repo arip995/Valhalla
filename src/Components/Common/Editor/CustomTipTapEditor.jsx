@@ -61,7 +61,6 @@ const CustomTipTapEditor = ({
         src: url,
       }));
       editor.chain().focus().insertContent(nodes).run();
-
       editor.chain().focus().setImage({ src: url }).run();
     },
     [editor]
