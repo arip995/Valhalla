@@ -196,9 +196,9 @@ const usePayment = (
                 {
                   method: 'wallet',
                 },
-                {
-                  method: 'card',
-                },
+                // {
+                //   method: 'card',
+                // },
                 {
                   method: 'netbanking',
                 },
