@@ -2,18 +2,14 @@ import { PeriodTypeOptions } from '@/Constants/constants';
 import axiosInstance from '@/Utils/AxiosInstance';
 import useUser from '@/Utils/Hooks/useUser';
 import { useForm } from '@mantine/form';
-import { useCounter } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useCreateTelegram = () => {
   const { setCurrentUser } = useUser();
   const [step, setStep] = useState(1);
-  const [retries, setRetries] = useCounter(0, {
-    min: 0,
-    max: 10,
-  });
+  const retries = useRef(0);
   const [showWarning, setShowWarning] = useState(0);
   const [existingGroups, setExistingGroups] =
     useState(false);
@@ -239,8 +235,8 @@ const useCreateTelegram = () => {
       );
       toast.success('Otp verified successfully');
       setCurrentUser(data.data.data);
-      setStep(2);
       await getExistingGroups(phoneNumber);
+      setStep(2);
       return data;
     } catch (error) {
       toast.error('Invalid code');
@@ -359,11 +355,11 @@ const useCreateTelegram = () => {
         `/dashboard/tg/${data.data?.data?.channelId}`
       );
     } catch (error) {
-      if (retries < 3) {
-        setRetries.increment();
+      if (retries.current < 3) {
+        retries.current += 1;
         return onStepThreeSubmit();
       } else {
-        setRetries.reset();
+        retries.current = 0;
       }
       setLoading(false);
       toast.error(
