@@ -73,6 +73,7 @@ import '@mantine/core/styles/ThemeIcon.css';
 import '@mantine/core/styles/ColorSwatch.css';
 import '@mantine/core/styles/ColorPicker.css';
 import '@mantine/core/styles/ColorInput.css';
+import '@mantine/core/styles/TypographyStylesProvider.css';
 import '@mantine/dates/styles.css';
 
 // const inter = Inter({ subsets: ["latin"] });

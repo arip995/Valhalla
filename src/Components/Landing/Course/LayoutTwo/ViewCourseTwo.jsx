@@ -5,15 +5,17 @@ import {
   calculateCourseContentHighlights,
   convertMinutesToHours,
 } from '@/Utils/Common';
-import { Accordion, Spoiler } from '@mantine/core';
+import {
+  Accordion,
+  Spoiler,
+  TypographyStylesProvider,
+} from '@mantine/core';
 import {
   IconBook,
-  IconCertificate,
   IconChevronDown,
   IconChevronUp,
   IconClock,
   IconLayoutGrid,
-  IconStarFilled,
 } from '@tabler/icons-react';
 import Image from 'next/image';
 import RenderModulesAndLessons from './ViewCourseTwoModuleAndLessons';
@@ -55,7 +57,7 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                       priority
                     />
                   </div>
-                  <div className="absolute -bottom-6 left-6 right-6 rounded-xl bg-white p-4 shadow-lg backdrop-blur-sm">
+                  {/* <div className="absolute -bottom-6 left-6 right-6 rounded-xl bg-white p-4 shadow-lg backdrop-blur-sm">
                     <div className="flex items-center justify-between text-sm md:text-base">
                       <div className="flex items-center gap-1">
                         <IconStarFilled className="h-5 w-5 text-yellow-500" />
@@ -70,7 +72,7 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                         </span>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               )}
               <div className="flex flex-col justify-center space-y-8">
@@ -199,12 +201,14 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                     </div>
                   }
                 >
-                  <div
-                    className="prose prose-lg prose-headings:font-bold prose-a:text-blue-600 max-w-none"
-                    dangerouslySetInnerHTML={{
-                      __html: data.description,
-                    }}
-                  />
+                  <TypographyStylesProvider>
+                    <div
+                      className="prose prose-lg prose-headings:font-bold prose-a:text-blue-600 max-w-none"
+                      dangerouslySetInnerHTML={{
+                        __html: data.description,
+                      }}
+                    />
+                  </TypographyStylesProvider>
                 </Spoiler>
               </div>
             </div>

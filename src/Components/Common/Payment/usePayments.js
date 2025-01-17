@@ -11,8 +11,8 @@ import {
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-const MAX_ATTEMPTS = 5;
-const POLL_INTERVAL = 5000; // 5 seconds
+const MAX_ATTEMPTS = 10;
+const POLL_INTERVAL = 2500; // 5 seconds
 
 function loadRazorpayScript(src) {
   return new Promise(resolve => {

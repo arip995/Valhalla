@@ -7,6 +7,7 @@ import { formatPrice } from '@/Utils/Common';
 import NotFoundOne from '@/Components/Common/NotFoundOne/NotFoundOne';
 import ViewOrLoginDPOne from './ViewOrLoginDPOne';
 import ViewDPOneButtonModal from './ViewDPOneButtonModal';
+import { TypographyStylesProvider } from '@mantine/core';
 
 const ViewDPOne = ({ data }) => {
   if (!data) return <NotFoundOne />;
@@ -80,12 +81,14 @@ const ViewDPOne = ({ data }) => {
                   <h2 className="mb-2 text-lg font-medium text-gray-900">
                     Description
                   </h2>
-                  <div
-                    className="prose prose-lg prose-headings:font-bold prose-a:text-blue-600 max-w-none"
-                    dangerouslySetInnerHTML={{
-                      __html: data.description,
-                    }}
-                  />
+                  <TypographyStylesProvider>
+                    <div
+                      className="prose prose-lg prose-headings:font-bold prose-a:text-blue-600 max-w-none"
+                      dangerouslySetInnerHTML={{
+                        __html: data.description,
+                      }}
+                    />
+                  </TypographyStylesProvider>
                 </div>
 
                 {/* Sections */}

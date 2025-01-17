@@ -2,7 +2,10 @@ import Disclaimer from '@/Components/Common/Footer/Disclaimer';
 import FooterTwo from '@/Components/Common/Footer/FooterTwo';
 import ViewPlans2 from '@/Components/Common/General/ViewPlans2';
 import ViewProfile from '@/Components/Common/General/ViewProfile';
-import { Spoiler } from '@mantine/core';
+import {
+  Spoiler,
+  TypographyStylesProvider,
+} from '@mantine/core';
 
 const LTDetailsContainer = ({ data }) => {
   return (
@@ -39,12 +42,18 @@ const LTDetailsContainer = ({ data }) => {
                 Description
               </div> */}
               {!!data?.description && (
-                <Spoiler>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: data.description,
-                    }}
-                  ></div>
+                <Spoiler
+                  maxHeight={150}
+                  showLabel="Show more"
+                  hideLabel="Hide"
+                >
+                  <TypographyStylesProvider>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: data.description,
+                      }}
+                    />
+                  </TypographyStylesProvider>
                 </Spoiler>
               )}
             </div>

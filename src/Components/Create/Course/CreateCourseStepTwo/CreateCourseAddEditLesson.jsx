@@ -16,6 +16,7 @@ import {
   Spoiler,
   Textarea,
   TextInput,
+  TypographyStylesProvider,
 } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import {
@@ -90,11 +91,13 @@ export const SavedLessonContent = ({ value }) => {
           showLabel="Show more"
           hideLabel="Hide"
         >
-          <div
-            dangerouslySetInnerHTML={{
-              __html: value?.textImage,
-            }}
-          />
+          <TypographyStylesProvider>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: value?.textImage,
+              }}
+            />
+          </TypographyStylesProvider>
         </Spoiler>
       );
     } else if (value.lessonType === 'video') {

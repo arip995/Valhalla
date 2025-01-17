@@ -37,13 +37,13 @@ html {
   scroll-behavior: smooth;
 }
 ul {
-  padding: 0;
-  margin: 10px;
+  /* padding: 0;
+  margin: 10px; */
   list-style: disc;
 }
 ol {
-  padding: 0;
-  margin: 10px;
+  /* padding: 0;
+  margin: 10px; */
   list-style: decimal;
 }
 h2 {

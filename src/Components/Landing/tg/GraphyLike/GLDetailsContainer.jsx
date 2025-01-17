@@ -2,6 +2,7 @@ import Disclaimer from '@/Components/Common/Footer/Disclaimer';
 import ViewProfile from '@/Components/Common/General/ViewProfile';
 import GLManagePlans from './GLManagePlans';
 import FooterTwo from '@/Components/Common/Footer/FooterTwo';
+import { TypographyStylesProvider } from '@mantine/core';
 
 const GLDetailsContainer = ({ data }) => {
   return (
@@ -34,11 +35,13 @@ const GLDetailsContainer = ({ data }) => {
               </div>
             </div>
             {!!data?.description && (
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: data.description,
-                }}
-              />
+              <TypographyStylesProvider>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: data.description,
+                  }}
+                />
+              </TypographyStylesProvider>
             )}
             <Disclaimer showTitle={false} />
             <div className="mb-16 mt-4 block md:hidden">

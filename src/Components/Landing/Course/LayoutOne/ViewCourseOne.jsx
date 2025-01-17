@@ -6,7 +6,11 @@ import {
   calculateCourseContentHighlights,
   convertMinutesToHours,
 } from '@/Utils/Common';
-import { Accordion, Spoiler } from '@mantine/core';
+import {
+  Accordion,
+  Spoiler,
+  TypographyStylesProvider,
+} from '@mantine/core';
 import {
   IconChevronDown,
   IconChevronUp,
@@ -93,11 +97,13 @@ const ViewCourseOne = ({ data, isPreview }) => {
                       </div>
                     }
                   >
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: data.description,
-                      }}
-                    />
+                    <TypographyStylesProvider>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: data.description,
+                        }}
+                      />
+                    </TypographyStylesProvider>
                   </Spoiler>
                 </>
               )}
