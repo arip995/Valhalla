@@ -52,6 +52,11 @@ export async function generateMetadata({ params }, parent) {
       sitename: 'Nexify',
       images: [
         {
+          url: 'https://nexify-prod.s3.ap-south-1.amazonaws.com/d83edf83-a5d6-4028-8d20-93bfe7c50254.jpeg',
+          width: 1200, // Example fixed width
+          height: 630,
+        },
+        {
           url: data?.coverImage?.url,
           width: 500,
           height: 500,
