@@ -6,7 +6,7 @@ export const runtime = 'edge';
 
 // Image metadata
 export const size = {
-  width: 32,
+  width: 48,
   height: 32,
 };
 export const contentType = 'image/png';
@@ -17,7 +17,9 @@ export default async function Icon({ params }) {
     (
       <img
         alt=""
-        style={{ objectFit: 'cover' }}
+        style={{
+          objectFit: 'fill',
+        }}
         src={
           data.coverImage?.url ||
           data.creatorDetails?.profilePic ||

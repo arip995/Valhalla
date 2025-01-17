@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 export async function generateMetadata({ params }, parent) {
   const { data } = await getMetaData(params.id, 'lc');
 
+  // eslint-disable-next-line no-unused-vars
   const previousImages =
     (await parent).openGraph?.images || [];
 
@@ -53,16 +54,11 @@ export async function generateMetadata({ params }, parent) {
       images: [
         {
           url: 'https://nexify-prod.s3.ap-south-1.amazonaws.com/d83edf83-a5d6-4028-8d20-93bfe7c50254.jpeg',
-          width: 500,
-          height: 500,
+          width: 1200,
+          height: 630,
         },
         // {
         //   url: data?.coverImage?.url,
-        //   width: 500,
-        //   height: 500,
-        // },
-        // {
-        //   url: data?.creatorDetails?.profilePic,
         //   width: 500,
         //   height: 500,
         // },
@@ -86,16 +82,10 @@ export async function generateMetadata({ params }, parent) {
       sitename: 'Nexify',
       images: [
         {
-          url: data?.coverImage?.url,
-          width: 500,
-          height: 500,
+          url: 'https://nexify-prod.s3.ap-south-1.amazonaws.com/d83edf83-a5d6-4028-8d20-93bfe7c50254.jpeg',
+          width: 1200,
+          height: 630,
         },
-        {
-          url: data?.creatorDetails?.profilePic,
-          width: 500,
-          height: 500,
-        },
-        ...previousImages,
       ],
     },
   };
