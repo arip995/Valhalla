@@ -53,8 +53,8 @@ export async function generateMetadata({ params }, parent) {
       images: [
         {
           url: 'https://nexify-prod.s3.ap-south-1.amazonaws.com/d83edf83-a5d6-4028-8d20-93bfe7c50254.jpeg',
-          width: 1200,
-          height: 630,
+          width: 500,
+          height: 500,
         },
         // {
         //   url: data?.coverImage?.url,
@@ -71,7 +71,7 @@ export async function generateMetadata({ params }, parent) {
         //   width: 500,
         //   height: 500,
         // },
-        ...previousImages,
+        // ...previousImages,
       ],
     },
     twitter: {
