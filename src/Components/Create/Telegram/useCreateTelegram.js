@@ -3,19 +3,20 @@ import axiosInstance from '@/Utils/AxiosInstance';
 import useUser from '@/Utils/Hooks/useUser';
 import { useForm } from '@mantine/form';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useCreateTelegram = () => {
   const { setCurrentUser } = useUser();
   const [step, setStep] = useState(1);
-  const retries = useRef(0);
   const [showWarning, setShowWarning] = useState(0);
   const [existingGroups, setExistingGroups] =
     useState(false);
   const [isSendingOldNumberOtp, setIsSendingOldNumberOtp] =
     useState(false);
   const [loading, setLoading] = useState(false);
+  const [isForbiddenError, setIsForbiddenError] =
+    useState(false);
   const { user } = useUser();
   const router = useRouter();
 
@@ -342,6 +343,7 @@ const useCreateTelegram = () => {
       groupId: stepTwoForm.values?.groupId,
       superGroup: stepTwoForm.values?.superGroup,
       genre: stepThreeForm.values?.genre,
+      isForbiddenError,
     };
     try {
       const data = await axiosInstance.post(
@@ -355,16 +357,19 @@ const useCreateTelegram = () => {
         `/dashboard/tg/${data.data?.data?.channelId}`
       );
     } catch (error) {
-      if (retries.current < 3) {
-        retries.current += 1;
-        return onStepThreeSubmit();
-      } else {
-        retries.current = 0;
-      }
       setLoading(false);
+      let errorMessage = error?.response?.data?.message;
+      if (
+        typeof errorMessage === 'string' &&
+        errorMessage.includes(
+          'FRESH_CHANGE_ADMINS_FORBIDDEN'
+        )
+      ) {
+        return setIsForbiddenError(true);
+      }
       toast.error(
-        typeof error?.response?.data?.message === 'string'
-          ? error?.response?.data?.message
+        typeof errorMessage === 'string'
+          ? errorMessage
           : 'something went wrong try again'
       );
     }
@@ -398,6 +403,7 @@ const useCreateTelegram = () => {
     onStepOneSubmit,
     onStepTwoSubmit,
     onStepThreeSubmit,
+    isForbiddenError,
     showWarning,
     loading,
     setStep,

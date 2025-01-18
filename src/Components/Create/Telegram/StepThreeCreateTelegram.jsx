@@ -1,14 +1,51 @@
 import { CategoriesList } from '@/Constants/constants';
-import { Button, Select, TextInput } from '@mantine/core';
+import {
+  Alert,
+  Button,
+  Select,
+  TextInput,
+  TypographyStylesProvider,
+} from '@mantine/core';
 import PlansAndPricing from './PlansAndPricing/PlansAndPricing';
 import React from 'react';
+import { IconAlertCircle } from '@tabler/icons-react';
 
 const StepThreeCreateTelegram = ({
   stepThreeForm,
   onStepThreeSubmit,
+  isForbiddenError,
 }) => {
   return (
     <div className="ctg-s3-container">
+      {!!isForbiddenError && (
+        <Alert
+          icon={<IconAlertCircle size={16} />}
+          title="Telegram restriction"
+          color="yellow"
+        >
+          <TypographyStylesProvider>
+            Add @NexifyClubBot bot to your channel to
+            continue.
+            <ol>
+              <li>Go to your Telegram channel.</li>
+              <li>
+                Click on your channel name at the top to
+                open Channel Info.
+              </li>
+              <li>Tap on {`'Administrators'.`}</li>
+              <li>Click {`'Add Administrator'.`}</li>
+              <li>
+                Search for {`'@NexifyClubBot'`} and select
+                it.
+              </li>
+              <li>
+                Grant the all permissions and click{' '}
+                {`'Done'`}.
+              </li>
+            </ol>
+          </TypographyStylesProvider>
+        </Alert>
+      )}
       <form
         className="ctg-s3"
         onSubmit={stepThreeForm.onSubmit(onStepThreeSubmit)}

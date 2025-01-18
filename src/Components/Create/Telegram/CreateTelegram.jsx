@@ -29,6 +29,7 @@ const CreateTelegram = ({ data }) => {
     onConnectExisting,
     existingGroups,
     showWarning,
+    isForbiddenError,
     step,
     setStep,
     user,
@@ -122,7 +123,7 @@ const CreateTelegram = ({ data }) => {
                 <StepThreeCreateTelegram
                   stepThreeForm={stepThreeForm}
                   onStepThreeSubmit={onStepThreeSubmit}
-                  loading={loading}
+                  isForbiddenError={isForbiddenError}
                 />
               )}
             </PaperWrapper>
