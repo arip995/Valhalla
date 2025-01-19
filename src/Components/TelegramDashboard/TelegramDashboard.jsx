@@ -5,6 +5,7 @@ import CloseButton from '../Common/Buttons/CloseButton';
 import LayoutLoading from '../Common/Loading/LayoutLoading';
 import TGEPlansAndPricingContainer from './EditPlansAndPricing/TGEPlansAndPricingContainer';
 import TelegramDashboardBasicDetails from './TelegramDashboardBasicDetails';
+import TelegramDashboardCoupons from './TelegramDashboardCoupons';
 import TelegramDashboardOpenlink from './TelegramDashboardOpenlink';
 import TelegramDashboardProfilepic from './TelegramDashboardProfilepic';
 import useTelegramDashboard from './useTelegramDashboard';
@@ -27,6 +28,7 @@ const TelegramDashboard = ({ productId }) => {
       <CloseButton />
       <div className="flex h-screen w-full max-w-[600px] flex-col items-center gap-4 p-3 md:p-6">
         <TelegramDashboardOpenlink data={data} />
+
         <div className="hide-scrollbar flex w-full flex-col items-center gap-4 overflow-y-auto">
           <TelegramDashboardProfilepic
             data={data}
@@ -46,6 +48,7 @@ const TelegramDashboard = ({ productId }) => {
             data={data}
             onUpdate={updateData}
           />
+          <TelegramDashboardCoupons />
         </div>
       </div>
     </div>
