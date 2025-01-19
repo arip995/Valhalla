@@ -3,11 +3,12 @@ import axiosInstance from '@/Utils/AxiosInstance';
 import useUser from '@/Utils/Hooks/useUser';
 import { useForm } from '@mantine/form';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useCreateTelegram = () => {
   const { setCurrentUser } = useUser();
+  const retries = useRef(0);
   const [step, setStep] = useState(1);
   const [showWarning, setShowWarning] = useState(0);
   const [existingGroups, setExistingGroups] =
@@ -340,7 +341,10 @@ const useCreateTelegram = () => {
       subscriptionPlans: formatPlans(
         stepThreeForm.values?.subscriptionPlans
       ),
-      groupId: stepTwoForm.values?.groupId,
+      groupId:
+        stepTwoForm.values.isOldOrNewChannel === 'new'
+          ? null
+          : stepTwoForm.values?.groupId,
       superGroup: stepTwoForm.values?.superGroup,
       genre: stepThreeForm.values?.genre,
       isForbiddenError,
@@ -357,6 +361,11 @@ const useCreateTelegram = () => {
         `/dashboard/tg/${data.data?.data?.channelId}`
       );
     } catch (error) {
+      if (retries.current < 3) {
+        retries.current += 1;
+        return onStepThreeSubmit();
+      }
+      retries.current = 0;
       setLoading(false);
       let errorMessage = error?.response?.data?.message;
       if (
