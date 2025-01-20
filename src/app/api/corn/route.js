@@ -10,7 +10,6 @@ export async function GET(req) {
       { status: 401 }
     );
   }
-  console.log('testing cron');
   await axios.post(
     'https://nexify.club/api/v1/test/console'
   );
