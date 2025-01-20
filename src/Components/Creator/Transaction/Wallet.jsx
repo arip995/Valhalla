@@ -263,7 +263,7 @@ const Wallet = () => {
                     Request Withdrawal
                   </Text>
                   <Stack grow>
-                    {!walletDetails.beneficiaryId && (
+                    {!walletDetails.beneficiaryId?.length && (
                       <Alert
                         icon={<IconAlertCircle size={16} />}
                         title="Bank Details Missing"
@@ -295,7 +295,7 @@ const Wallet = () => {
                         !!(
                           activePayoutRequest ||
                           loading ||
-                          !walletDetails.beneficiaryId ||
+                          !walletDetails.beneficiaryId?.length ||
                           !walletDetails.withdrawableBalance
                         )
                       }
@@ -312,7 +312,7 @@ const Wallet = () => {
                         !!(
                           activePayoutRequest ||
                           loading ||
-                          !walletDetails.beneficiaryId ||
+                          !walletDetails.beneficiaryId?.length ||
                           !walletDetails.withdrawableBalance
                         )
                       }
