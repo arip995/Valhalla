@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { NextResponse } from 'next/server';
 
 export async function GET(req) {
@@ -9,6 +10,9 @@ export async function GET(req) {
       { status: 401 }
     );
   }
+  await axios.post(
+    'https://nexify.club/api/v1/test/console'
+  );
 
   return NextResponse.json({ ok: true });
 }
