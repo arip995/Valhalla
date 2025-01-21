@@ -1,4 +1,5 @@
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
+import CompleteProfileModal from '@/Components/Common/Modal/CompleteProfileModal';
 import {
   Alert,
   Badge,
@@ -194,7 +195,7 @@ const Wallet = () => {
     payoutList,
     form,
     handleWithdraw,
-    // opened,
+    opened,
     setOpened,
     openedBankDetails,
     setOpenedBankDetails,
@@ -269,7 +270,7 @@ const Wallet = () => {
                     Request Withdrawal
                   </Text>
                   <Stack grow>
-                    {!user.isKycDone && (
+                    {!user?.isKycDone && (
                       <Alert
                         icon={<IconAlertCircle size={16} />}
                         title="Bank Details Missing"
@@ -288,8 +289,8 @@ const Wallet = () => {
                         </Group>
                       </Alert>
                     )}
-                    {user.isKycDone &&
-                      !user.beneficiaryDetails?.length && (
+                    {user?.isKycDone &&
+                      !user?.beneficiaryDetails?.length && (
                         <Alert
                           icon={
                             <IconAlertCircle size={16} />
@@ -314,9 +315,9 @@ const Wallet = () => {
                         </Alert>
                       )}
 
-                    {user.isKycDone &&
-                    user.beneficiaryDetails?.length &&
-                    user.multipleBankAccounts ? (
+                    {user?.isKycDone &&
+                    user?.beneficiaryDetails?.length &&
+                    user?.multipleBankAccounts ? (
                       <Button
                         size="xs"
                         variant="outline"
@@ -448,12 +449,12 @@ const Wallet = () => {
           </Stack>
         </Paper>
       </Container>
-      {/* {!!opened && (
+      {!!opened && (
         <CompleteProfileModal
           opened={opened}
           onClose={() => setOpened(false)}
         />
-      )} */}
+      )}
       <Modal
         trapFocus={false}
         opened={openedBankDetails}
