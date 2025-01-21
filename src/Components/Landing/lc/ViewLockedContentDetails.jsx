@@ -23,7 +23,7 @@ const ViewLockedContentDetails = ({ data }) => {
       navigator.vendor ||
       window.opera;
 
-    alert(navigator.navigator);
+    alert(navigator.userAgent);
 
     if (userAgent.includes('Android')) {
       // Redirect to open in the external browser
