@@ -1,15 +1,11 @@
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import CompleteProfileModal from '@/Components/Common/Modal/CompleteProfileModal';
 import {
-  Alert,
   Badge,
   Button,
   Container,
   Group,
-  Modal,
-  NumberInput,
   Paper,
-  Select,
   Stack,
   Text,
   ThemeIcon,
@@ -27,7 +23,6 @@ import {
 import classNames from 'classnames';
 import React from 'react';
 import useWallet from './useWallet';
-import AddBankAccount from '../Account/AddBankAccount';
 
 const GetStatusColor = status => {
   switch (status) {
@@ -197,10 +192,10 @@ const Wallet = () => {
     handleWithdraw,
     opened,
     setOpened,
-    openedBankDetails,
-    setOpenedBankDetails,
-    user,
-    fetchUserData,
+    // openedBankDetails,
+    // setOpenedBankDetails,
+    // user,
+    // fetchUserData,
   } = useWallet();
 
   if (loading === -1) return <LayoutLoading />;
@@ -269,7 +264,7 @@ const Wallet = () => {
                   <Text weight={500}>
                     Request Withdrawal
                   </Text>
-                  <Stack grow>
+                  {/* <Stack grow>
                     {!user?.isKycDone && (
                       <Alert
                         icon={<IconAlertCircle size={16} />}
@@ -386,7 +381,7 @@ const Wallet = () => {
                     >
                       Withdraw
                     </Button>
-                  </Stack>
+                  </Stack> */}
                   {!!activePayoutRequest && (
                     <Text size="sm" c="dimmed">
                       You have an active payout request in
@@ -455,7 +450,7 @@ const Wallet = () => {
           onClose={() => setOpened(false)}
         />
       )}
-      <Modal
+      {/* <Modal
         trapFocus={false}
         opened={openedBankDetails}
         keepMounted={false}
@@ -466,7 +461,7 @@ const Wallet = () => {
         }}
       >
         {!!openedBankDetails && <AddBankAccount />}
-      </Modal>
+      </Modal> */}
     </div>
   );
 };
