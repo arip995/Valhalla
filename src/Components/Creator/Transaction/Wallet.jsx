@@ -203,7 +203,7 @@ const Wallet = () => {
   } = useWallet();
 
   if (loading === -1) return <LayoutLoading />;
-  if (!walletDetails) return null;
+  if (!walletDetails || user == -1) return null;
 
   return (
     <div className="flex w-full justify-center">
