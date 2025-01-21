@@ -27,7 +27,6 @@ import {
 import classNames from 'classnames';
 import React from 'react';
 import useWallet from './useWallet';
-import AddBankAccount from '../Account/AddBankAccount';
 
 const GetStatusColor = status => {
   switch (status) {
@@ -464,7 +463,7 @@ const Wallet = () => {
           fetchUserData();
         }}
       >
-        {!!openedBankDetails && <AddBankAccount />}
+        {/* {!!openedBankDetails && <AddBankAccount />} */}
       </Modal>
     </div>
   );
