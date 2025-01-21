@@ -18,7 +18,9 @@ const ViewLockedContentDetails = ({ data }) => {
     useState(false);
 
   useEffect(() => {
-    window.location.href = `googlechrome://navigate?url=${window.location.href}`;
+    setTimeout(() => {
+      window.open(window.location.href);
+    }, 100);
   }, []);
 
   const onSuccess = async fetch => {
