@@ -10,7 +10,7 @@ const FaqsCard = ({ faqsList, idx }) => {
 
   const handleOpenAnswer = () => {
     const answerElH =
-      answerElRef.current.childNodes[0].offsetHeight;
+      answerElRef.current.childNodes[0]?.offsetHeight;
     setState(!state);
     setAnswerH(`${answerElH + 20}px`);
   };
