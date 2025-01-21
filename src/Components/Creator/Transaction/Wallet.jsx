@@ -8,7 +8,6 @@ import {
   Modal,
   NumberInput,
   Paper,
-  Select,
   Stack,
   Text,
   ThemeIcon,
@@ -329,7 +328,7 @@ const Wallet = () => {
                       </Button>
                     ) : null}
                     </Stack> */}
-                  <Select
+                  {/* <Select
                     label="Select Bank"
                     withCheckIcon={false}
                     placeholder="Select Bank"
@@ -343,7 +342,7 @@ const Wallet = () => {
                       }
                     )}
                     {...form.getInputProps('bankAccount')}
-                  />
+                  /> */}
                   <NumberInput
                     {...form.getInputProps(
                       'withdrawAmount'
