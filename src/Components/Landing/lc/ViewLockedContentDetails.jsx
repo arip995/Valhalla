@@ -18,17 +18,7 @@ const ViewLockedContentDetails = ({ data }) => {
     useState(false);
 
   useEffect(() => {
-    const userAgent =
-      navigator.userAgent ||
-      navigator.vendor ||
-      window.opera;
-
-    // alert(userAgent);
-
-    if (userAgent.includes('Android')) {
-      // Redirect to open in the external browser
-      window.location.href = `googlechrome://navigate?url=${window.location.href}`;
-    }
+    window.location.href = `googlechrome://navigate?url=${window.location.href}`;
   }, []);
 
   const onSuccess = async fetch => {
