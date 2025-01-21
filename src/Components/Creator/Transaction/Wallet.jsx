@@ -6,7 +6,9 @@ import {
   Container,
   Group,
   Modal,
+  NumberInput,
   Paper,
+  Select,
   Stack,
   Text,
   ThemeIcon,
@@ -196,7 +198,7 @@ const Wallet = () => {
     setOpened,
     openedBankDetails,
     setOpenedBankDetails,
-    // user,
+    user,
     fetchUserData,
   } = useWallet();
 
@@ -326,64 +328,62 @@ const Wallet = () => {
                         Add new bank
                       </Button>
                     ) : null}
-                    <Select
-                      label="Select Bank"
-                      withCheckIcon={false}
-                      placeholder="Select Bank"
-                      allowDeselect={false}
-                      data={user?.beneficiaryDetails?.map(
-                        value => {
-                          return {
-                            label: value.bankAccountNumber,
-                            value: JSON.stringify(value),
-                          };
-                        }
-                      )}
-                      {...form.getInputProps('bankAccount')}
-                    />
-                    <NumberInput
-                      {...form.getInputProps(
-                        'withdrawAmount'
-                      )}
-                      label="Enter amount"
-                      description={
-                        'Amount must range from 1000 to 499999'
+                    </Stack> */}
+                  <Select
+                    label="Select Bank"
+                    withCheckIcon={false}
+                    placeholder="Select Bank"
+                    allowDeselect={false}
+                    data={user?.beneficiaryDetails?.map(
+                      value => {
+                        return {
+                          label: value.bankAccountNumber,
+                          value: JSON.stringify(value),
+                        };
                       }
-                      allowLeadingZeros={false}
-                      allowNegative={false}
-                      decimalScale={2}
-                      placeholder="Enter amount"
-                      disabled={
-                        !!(
-                          activePayoutRequest ||
-                          loading ||
-                          !user?.beneficiaryDetails
-                            ?.length ||
-                          !walletDetails.withdrawableBalance
-                        )
-                      }
-                      type="number"
-                      hideControls
-                      min={0}
-                      icon="₹"
-                    />
-                    <Button
-                      type="submit"
-                      color="green"
-                      className="w-fit"
-                      disabled={
-                        !!(
-                          activePayoutRequest ||
-                          loading ||
-                          !user?.beneficiaryDetails
-                            ?.length ||
-                          !walletDetails.withdrawableBalance
-                        )
-                      }
-                    >
-                      Withdraw
-                    </Button>
-                  </Stack> */}
+                    )}
+                    {...form.getInputProps('bankAccount')}
+                  />
+                  <NumberInput
+                    {...form.getInputProps(
+                      'withdrawAmount'
+                    )}
+                    label="Enter amount"
+                    description={
+                      'Amount must range from 1000 to 499999'
+                    }
+                    allowLeadingZeros={false}
+                    allowNegative={false}
+                    decimalScale={2}
+                    placeholder="Enter amount"
+                    disabled={
+                      !!(
+                        activePayoutRequest ||
+                        loading ||
+                        !user?.beneficiaryDetails?.length ||
+                        !walletDetails.withdrawableBalance
+                      )
+                    }
+                    type="number"
+                    hideControls
+                    min={0}
+                    icon="₹"
+                  />
+                  <Button
+                    type="submit"
+                    color="green"
+                    className="w-fit"
+                    disabled={
+                      !!(
+                        activePayoutRequest ||
+                        loading ||
+                        !user?.beneficiaryDetails?.length ||
+                        !walletDetails.withdrawableBalance
+                      )
+                    }
+                  >
+                    Withdraw
+                  </Button>
                   {!!activePayoutRequest && (
                     <Text size="sm" c="dimmed">
                       You have an active payout request in
