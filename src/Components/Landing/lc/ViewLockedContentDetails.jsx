@@ -23,6 +23,8 @@ const ViewLockedContentDetails = ({ data }) => {
       navigator.vendor ||
       window.opera;
 
+    alert(userAgent);
+
     if (userAgent.includes('Telegram')) {
       // Redirect to open in the external browser
       window.location.href = `googlechrome://navigate?url=${window.location.href}`;
