@@ -199,7 +199,6 @@ const Wallet = () => {
     openedBankDetails,
     setOpenedBankDetails,
     user,
-    fetchUserData,
   } = useWallet();
 
   if (loading === -1) return <LayoutLoading />;
@@ -460,7 +459,6 @@ const Wallet = () => {
         title={'Add bank account'}
         onClose={() => {
           setOpenedBankDetails(false);
-          fetchUserData();
         }}
       >
         {/* {!!openedBankDetails && <AddBankAccount />} */}
