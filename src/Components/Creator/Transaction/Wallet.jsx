@@ -6,7 +6,6 @@ import {
   Button,
   Container,
   Group,
-  Modal,
   NumberInput,
   Paper,
   Select,
@@ -196,9 +195,10 @@ const Wallet = () => {
     handleWithdraw,
     opened,
     setOpened,
-    openedBankDetails,
-    setOpenedBankDetails,
+    // openedBankDetails,
+    // setOpenedBankDetails,
     user,
+    // fetchUserData,
   } = useWallet();
 
   if (loading === -1) return <LayoutLoading />;
@@ -287,7 +287,7 @@ const Wallet = () => {
                         </Group>
                       </Alert>
                     )}
-                    {user.isKycDone &&
+                    {/* {user.isKycDone &&
                       !user.beneficiaryDetails?.length && (
                         <Alert
                           icon={
@@ -311,9 +311,9 @@ const Wallet = () => {
                             </Button>
                           </Group>
                         </Alert>
-                      )}
+                      )} */}
 
-                    {user.isKycDone &&
+                    {/* {user.isKycDone &&
                     user.beneficiaryDetails?.length &&
                     user.multipleBankAccounts ? (
                       <Button
@@ -326,7 +326,7 @@ const Wallet = () => {
                       >
                         Add new bank
                       </Button>
-                    ) : null}
+                    ) : null} */}
                     <Select
                       label="Select Bank"
                       withCheckIcon={false}
@@ -453,16 +453,17 @@ const Wallet = () => {
           onClose={() => setOpened(false)}
         />
       )}
-      <Modal
+      {/* <Modal
         trapFocus={false}
         opened={openedBankDetails}
         title={'Add bank account'}
         onClose={() => {
           setOpenedBankDetails(false);
+          fetchUserData();
         }}
       >
-        {/* {!!openedBankDetails && <AddBankAccount />} */}
-      </Modal>
+        {!!openedBankDetails && <AddBankAccount />}
+      </Modal> */}
     </div>
   );
 };

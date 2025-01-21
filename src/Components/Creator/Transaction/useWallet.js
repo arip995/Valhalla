@@ -13,8 +13,6 @@ const useWallet = () => {
     useState(null);
   const [payoutList, setPayoutList] = useState(null);
   const [opened, setOpened] = useState(null);
-  const [openedBankDetails, setOpenedBankDetails] =
-    useState(null);
   const [payoutError, setPayoutError] = useState(null);
   const form = useForm({
     initialValues: {
@@ -122,8 +120,6 @@ const useWallet = () => {
     form,
     opened,
     setOpened,
-    openedBankDetails,
-    setOpenedBankDetails,
     user,
     fetchUserData,
   };
