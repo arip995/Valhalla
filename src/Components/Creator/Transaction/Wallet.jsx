@@ -5,6 +5,7 @@ import {
   Button,
   Container,
   Group,
+  Modal,
   Paper,
   Stack,
   Text,
@@ -22,6 +23,7 @@ import {
 } from '@tabler/icons-react';
 import classNames from 'classnames';
 import React from 'react';
+import AddBankAccount from '../Account/AddBankAccount';
 import useWallet from './useWallet';
 
 const GetStatusColor = status => {
@@ -192,10 +194,10 @@ const Wallet = () => {
     handleWithdraw,
     opened,
     setOpened,
-    // openedBankDetails,
-    // setOpenedBankDetails,
+    openedBankDetails,
+    setOpenedBankDetails,
     // user,
-    // fetchUserData,
+    fetchUserData,
   } = useWallet();
 
   if (loading === -1) return <LayoutLoading />;
@@ -450,7 +452,7 @@ const Wallet = () => {
           onClose={() => setOpened(false)}
         />
       )}
-      {/* <Modal
+      <Modal
         trapFocus={false}
         opened={openedBankDetails}
         keepMounted={false}
@@ -461,7 +463,7 @@ const Wallet = () => {
         }}
       >
         {!!openedBankDetails && <AddBankAccount />}
-      </Modal> */}
+      </Modal>
     </div>
   );
 };
