@@ -26,8 +26,8 @@ import {
 } from '@tabler/icons-react';
 import classNames from 'classnames';
 import React from 'react';
-import AddBankAccount from '../Account/AddBankAccount';
 import useWallet from './useWallet';
+import AddBankAccount from '../Account/AddBankAccount';
 
 const GetStatusColor = status => {
   switch (status) {
@@ -270,7 +270,7 @@ const Wallet = () => {
                     Request Withdrawal
                   </Text>
                   <Stack grow>
-                    {!user?.isKycDone && (
+                    {!user.isKycDone && (
                       <Alert
                         icon={<IconAlertCircle size={16} />}
                         title="Bank Details Missing"
@@ -289,8 +289,8 @@ const Wallet = () => {
                         </Group>
                       </Alert>
                     )}
-                    {user?.isKycDone &&
-                      !user?.beneficiaryDetails?.length && (
+                    {user.isKycDone &&
+                      !user.beneficiaryDetails?.length && (
                         <Alert
                           icon={
                             <IconAlertCircle size={16} />
@@ -315,9 +315,9 @@ const Wallet = () => {
                         </Alert>
                       )}
 
-                    {user?.isKycDone &&
-                    user?.beneficiaryDetails?.length &&
-                    user?.multipleBankAccounts ? (
+                    {user.isKycDone &&
+                    user.beneficiaryDetails?.length &&
+                    user.multipleBankAccounts ? (
                       <Button
                         size="xs"
                         variant="outline"

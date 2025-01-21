@@ -7,7 +7,7 @@ import useUser from '@/Utils/Hooks/useUser';
 
 const useWallet = () => {
   const [walletDetails, setWalletDetails] = useState(null);
-  const { user, fetchUserData } = useUser();
+  const { user, fetchUserData } = useUser(true);
   const [loading, setLoading] = useState(-1);
   const [activePayoutRequest, setActivePayoutRequest] =
     useState(null);
