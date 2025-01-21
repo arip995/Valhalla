@@ -4,7 +4,7 @@ import AuthModal from '@/Components/Auth/LandingAuth/AuthModal';
 import useUser from '@/Utils/Hooks/useUser';
 import { Button } from '@mantine/core';
 import classNames from 'classnames';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Lottie from 'react-lottie-player';
 import lottieJson from '../../../../public/lottie/tick.json';
 import LayoutLoading from '../Loading/LayoutLoading';
@@ -25,8 +25,21 @@ const BuyButton = ({
   const lottieRef = useRef();
   const { user } = useUser();
   const [opened, setOpened] = useState(false);
+  const [openAfterLogin, setOpenAfterLogin] =
+    useState(false);
   const { onCreateOrder, paymentState, purchased } =
     usePayment(onSuccess);
+
+  useEffect(() => {
+    if (user?._id && openAfterLogin?.price) {
+      onCreateOrder(
+        openAfterLogin.price,
+        openAfterLogin.creatorId,
+        openAfterLogin.creatorDetails,
+        openAfterLogin.bookingData
+      );
+    }
+  }, [user?._id]);
 
   if (paymentState.loading) {
     return (
@@ -62,6 +75,12 @@ const BuyButton = ({
         disabled={!purchased && productDetails.status == 6}
         onClick={() => {
           if (!user?._id) {
+            setOpenAfterLogin({
+              price,
+              creatorId,
+              creatorDetails,
+              bookingData,
+            });
             setOpened(true);
           } else {
             onCreateOrder(

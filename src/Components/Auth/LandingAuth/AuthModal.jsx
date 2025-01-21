@@ -116,33 +116,31 @@ const AuthModal = ({
               className="flex w-full flex-col gap-4"
               onSubmit={authForm?.onSubmit(sendOtp)}
             >
-              {isEmail ? (
-                <TextInput
-                  placeholder="Email"
-                  value={authForm?.values.email}
-                  autoComplete="email"
-                  {...authForm?.getInputProps('email')}
-                  className="w-full"
-                />
-              ) : (
-                <NumberInput
-                  hideControls
-                  clampBehavior="strict"
-                  max={9999999999}
-                  placeholder="Phone Number"
-                  autoComplete="tel"
-                  value={authForm?.values.phoneNumber}
-                  leftSection={
-                    <Text size="sm" className="font-medium">
-                      +91
-                    </Text>
-                  }
-                  {...authForm?.getInputProps(
-                    'phoneNumber'
-                  )}
-                  className="w-full"
-                />
-              )}
+              {/* {isEmail ? (
+              ) : ( */}
+              <TextInput
+                placeholder="Email"
+                value={authForm?.values.email}
+                autoComplete="email"
+                {...authForm?.getInputProps('email')}
+                className="w-full"
+              />
+              <NumberInput
+                hideControls
+                clampBehavior="strict"
+                max={9999999999}
+                placeholder="Phone Number"
+                autoComplete="tel"
+                value={authForm?.values.phoneNumber}
+                leftSection={
+                  <Text size="sm" className="font-medium">
+                    +91
+                  </Text>
+                }
+                {...authForm?.getInputProps('phoneNumber')}
+                className="w-full"
+              />
+              {/* )} */}
               {!isSignin && (
                 <TextInput
                   placeholder="Full Name"

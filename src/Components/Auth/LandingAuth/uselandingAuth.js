@@ -31,11 +31,11 @@ const uselandingAuth = (signin, onAuthComplete, opened) => {
             ? !isSignin &&
               'Name should be less than 60 characters'
             : null,
-      email: isEmail
-        ? !validateEmail(values?.email)
-          ? values.isClickedAtleastOnce && 'Invalid email'
-          : null
-        : null,
+      email:
+        !validateEmail(values?.email) &&
+        values.isClickedAtleastOnce
+          ? 'Invalid email'
+          : null,
       phoneNumber: !isEmail
         ? values?.phoneNumber?.toString()?.length != 10
           ? values.isClickedAtleastOnce &&
@@ -71,9 +71,8 @@ const uselandingAuth = (signin, onAuthComplete, opened) => {
       const { data } = await axiosInstance.post(
         `/auth/send_otp`,
         {
-          [isEmail ? 'email' : 'phoneNumber']: isEmail
-            ? authForm.values.email
-            : authForm.values.phoneNumber,
+          email: authForm.values.email,
+          phoneNumber: authForm.values.phoneNumber,
           isSignUp: !isSignin,
           isAuth: true,
         }
@@ -101,9 +100,8 @@ const uselandingAuth = (signin, onAuthComplete, opened) => {
       const data = await axiosInstance.post(
         `/auth/verify_otp`,
         {
-          [isEmail ? 'email' : 'phoneNumber']: isEmail
-            ? authForm.values.email
-            : authForm.values.phoneNumber,
+          email: authForm.values.email,
+          phoneNumber: authForm.values.phoneNumber,
           otp: otpForm.values.otp,
           firstName,
           lastName,
