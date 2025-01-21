@@ -1,11 +1,9 @@
 'use client';
 
 import ProductListing from '@/Components/Apps/ProductListing/ProductListing';
-import Header from '@/Components/Common/Header/Header';
-import { PaymentTabOptions } from '@/Constants/constants';
 import {
-  StatusPaymentColorMapping,
   StatusPaymentMapping,
+  StatusPaymentColorMapping,
 } from '@/Constants/ProductListingContants';
 import { formatDate } from '@/Utils/Common';
 import { Badge, Drawer } from '@mantine/core';
@@ -16,7 +14,6 @@ import {
   IconCoinRupee,
   IconMail,
 } from '@tabler/icons-react';
-import classNames from 'classnames';
 import {
   usePathname,
   useRouter,
@@ -24,6 +21,10 @@ import {
 } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import TransactionDetails from './TransactionDetails';
+import Header from '@/Components/Common/Header/Header';
+import { PaymentTabOptions } from '@/Constants/constants';
+import classNames from 'classnames';
+import Wallet from './Wallet';
 
 const TableHeaderItems = [
   { title: 'Date', icon: IconCalendar, value: 'date' },
@@ -120,7 +121,7 @@ const Transaction = () => {
             hidden: tab === 'transaction',
           })}
         >
-          {/* <Wallet /> */}
+          <Wallet />
         </div>
         <div
           className={classNames({

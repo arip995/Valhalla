@@ -204,7 +204,7 @@ const Wallet = () => {
   } = useWallet();
 
   if (loading === -1) return <LayoutLoading />;
-  if (!walletDetails || !user) return null;
+  if (!walletDetails) return null;
 
   return (
     <div className="flex w-full justify-center">
@@ -270,7 +270,7 @@ const Wallet = () => {
                     Request Withdrawal
                   </Text>
                   <Stack grow>
-                    {!user.isKycDone && (
+                    {!user?.isKycDone && (
                       <Alert
                         icon={<IconAlertCircle size={16} />}
                         title="Bank Details Missing"
@@ -289,8 +289,8 @@ const Wallet = () => {
                         </Group>
                       </Alert>
                     )}
-                    {user.isKycDone &&
-                      !user.beneficiaryDetails?.length && (
+                    {user?.isKycDone &&
+                      !user?.beneficiaryDetails?.length && (
                         <Alert
                           icon={
                             <IconAlertCircle size={16} />
@@ -315,9 +315,9 @@ const Wallet = () => {
                         </Alert>
                       )}
 
-                    {user.isKycDone &&
-                    user.beneficiaryDetails?.length &&
-                    user.multipleBankAccounts ? (
+                    {user?.isKycDone &&
+                    user?.beneficiaryDetails?.length &&
+                    user?.multipleBankAccounts ? (
                       <Button
                         size="xs"
                         variant="outline"
