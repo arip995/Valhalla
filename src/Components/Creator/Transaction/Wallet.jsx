@@ -458,7 +458,6 @@ const Wallet = () => {
       <Modal
         trapFocus={false}
         opened={openedBankDetails}
-        keepMounted={false}
         title={'Add bank account'}
         onClose={() => {
           setOpenedBankDetails(false);
