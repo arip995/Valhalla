@@ -1,6 +1,7 @@
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import CompleteProfileModal from '@/Components/Common/Modal/CompleteProfileModal';
 import {
+  Alert,
   Badge,
   Button,
   Container,
@@ -8,6 +9,7 @@ import {
   Modal,
   NumberInput,
   Paper,
+  Select,
   Stack,
   Text,
   ThemeIcon,
@@ -24,8 +26,8 @@ import {
 } from '@tabler/icons-react';
 import classNames from 'classnames';
 import React from 'react';
-import AddBankAccount from '../Account/AddBankAccount';
 import useWallet from './useWallet';
+import AddBankAccount from '../Account/AddBankAccount';
 
 const GetStatusColor = status => {
   switch (status) {
@@ -202,7 +204,7 @@ const Wallet = () => {
   } = useWallet();
 
   if (loading === -1) return <LayoutLoading />;
-  if (!walletDetails || user == -1) return null;
+  if (!walletDetails || !user || user == -1) return null;
 
   return (
     <div className="flex w-full justify-center">
@@ -267,8 +269,8 @@ const Wallet = () => {
                   <Text weight={500}>
                     Request Withdrawal
                   </Text>
-                  {/* <Stack grow>
-                    {!user?.isKycDone && (
+                  <Stack grow>
+                    {!user.isKycDone && (
                       <Alert
                         icon={<IconAlertCircle size={16} />}
                         title="Bank Details Missing"
@@ -287,8 +289,8 @@ const Wallet = () => {
                         </Group>
                       </Alert>
                     )}
-                    {user?.isKycDone &&
-                      !user?.beneficiaryDetails?.length && (
+                    {user.isKycDone &&
+                      !user.beneficiaryDetails?.length && (
                         <Alert
                           icon={
                             <IconAlertCircle size={16} />
@@ -312,10 +314,9 @@ const Wallet = () => {
                           </Group>
                         </Alert>
                       )}
-
-                    {user?.isKycDone &&
-                    user?.beneficiaryDetails?.length &&
-                    user?.multipleBankAccounts ? (
+                    {user.isKycDone &&
+                    user.beneficiaryDetails?.length &&
+                    user.multipleBankAccounts ? (
                       <Button
                         size="xs"
                         variant="outline"
@@ -327,62 +328,70 @@ const Wallet = () => {
                         Add new bank
                       </Button>
                     ) : null}
-                    </Stack> */}
-                  {/* <Select
-                    label="Select Bank"
-                    withCheckIcon={false}
-                    placeholder="Select Bank"
-                    allowDeselect={false}
-                    data={user?.beneficiaryDetails?.map(
-                      value => {
-                        return {
-                          label: value.bankAccountNumber,
-                          value: JSON.stringify(value),
-                        };
+                    {user?.beneficiaryDetails?.length ? (
+                      <Select
+                        label="Select Bank"
+                        withCheckIcon={false}
+                        placeholder="Select Bank"
+                        allowDeselect={false}
+                        data={user?.beneficiaryDetails?.map(
+                          value => {
+                            return {
+                              label:
+                                value.bankAccountNumber,
+                              value: JSON.stringify(value),
+                            };
+                          }
+                        )}
+                        {...form.getInputProps(
+                          'bankAccount'
+                        )}
+                      />
+                    ) : null}
+
+                    <NumberInput
+                      {...form.getInputProps(
+                        'withdrawAmount'
+                      )}
+                      label="Enter amount"
+                      description={
+                        'Amount must range from 1000 to 499999'
                       }
-                    )}
-                    {...form.getInputProps('bankAccount')}
-                  /> */}
-                  <NumberInput
-                    {...form.getInputProps(
-                      'withdrawAmount'
-                    )}
-                    label="Enter amount"
-                    description={
-                      'Amount must range from 1000 to 499999'
-                    }
-                    allowLeadingZeros={false}
-                    allowNegative={false}
-                    decimalScale={2}
-                    placeholder="Enter amount"
-                    disabled={
-                      !!(
-                        activePayoutRequest ||
-                        loading ||
-                        !user?.beneficiaryDetails?.length ||
-                        !walletDetails.withdrawableBalance
-                      )
-                    }
-                    type="number"
-                    hideControls
-                    min={0}
-                    icon="₹"
-                  />
-                  <Button
-                    type="submit"
-                    color="green"
-                    className="w-fit"
-                    disabled={
-                      !!(
-                        activePayoutRequest ||
-                        loading ||
-                        !user?.beneficiaryDetails?.length ||
-                        !walletDetails.withdrawableBalance
-                      )
-                    }
-                  >
-                    Withdraw
-                  </Button>
+                      allowLeadingZeros={false}
+                      allowNegative={false}
+                      decimalScale={2}
+                      placeholder="Enter amount"
+                      disabled={
+                        !!(
+                          activePayoutRequest ||
+                          loading ||
+                          !user?.beneficiaryDetails
+                            ?.length ||
+                          !walletDetails.withdrawableBalance
+                        )
+                      }
+                      type="number"
+                      hideControls
+                      min={0}
+                      icon="₹"
+                    />
+                    <Button
+                      type="submit"
+                      color="green"
+                      className="w-fit"
+                      disabled={
+                        !!(
+                          activePayoutRequest ||
+                          loading ||
+                          !user?.beneficiaryDetails
+                            ?.length ||
+                          !walletDetails.withdrawableBalance
+                        )
+                      }
+                    >
+                      Withdraw
+                    </Button>
+                  </Stack>
                   {!!activePayoutRequest && (
                     <Text size="sm" c="dimmed">
                       You have an active payout request in
