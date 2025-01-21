@@ -68,7 +68,6 @@ const AuthModal = ({
         backgroundOpacity: 0.55,
         blur: 3,
       }}
-      className="font-sans"
     >
       <div className="flex w-full flex-col gap-4 p-6">
         {step === 1 ? (

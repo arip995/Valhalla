@@ -1,10 +1,6 @@
 import axiosInstance from '@/Utils/AxiosInstance';
 import useUser from '@/Utils/Hooks/useUser';
-import {
-  isValidBankAccountNumber,
-  isValidIFSC,
-  isValidPan,
-} from '@/Utils/Regex';
+import { isValidPan } from '@/Utils/Regex';
 import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -16,8 +12,6 @@ const useKyc = (onSuccess = () => {}) => {
     initialValues: {
       kycDetails: undefined,
       pan: undefined,
-      ifsc: undefined,
-      bankAccountNumber: undefined,
       isCliskedSaveAtleastOnce: false,
     },
     clearInputErrorOnChange: false,
@@ -28,25 +22,12 @@ const useKyc = (onSuccess = () => {}) => {
         if (!isValidPan(values.pan)) {
           errors.pan = 'Enter a valid pan';
         }
-        if (!isValidIFSC(values.ifsc)) {
-          errors.ifsc = 'Enter a valid ifsc';
-        }
-        if (
-          !isValidBankAccountNumber(
-            values.bankAccountNumber
-          )
-        ) {
-          errors.bankAccountNumber = 'Enter a valid pan';
-        }
       }
       return errors;
     },
     transformValues: values => {
       return {
         pan: values.pan?.trim() || undefined,
-        ifsc: values.ifsc?.trim() || undefined,
-        bankAccountNumber:
-          values.bankAccountNumber?.trim() || undefined,
       };
     },
   });
@@ -75,9 +56,6 @@ const useKyc = (onSuccess = () => {}) => {
       kycForm.setValues({
         kycDetails: user.kycDetails,
         pan: user.kycDetails.panDetails.pan,
-        ifsc: user.kycDetails.bankDetails.ifsc,
-        bankAccountNumber:
-          user.kycDetails.bankDetails.accountNumber,
       });
     }
   }, [user?.kycDetails]);

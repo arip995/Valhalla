@@ -6,8 +6,10 @@ import {
   Button,
   Container,
   Group,
+  Modal,
   NumberInput,
   Paper,
+  Select,
   Stack,
   Text,
   ThemeIcon,
@@ -25,6 +27,7 @@ import {
 import classNames from 'classnames';
 import React from 'react';
 import useWallet from './useWallet';
+import AddBankAccount from '../Account/AddBankAccount';
 
 const GetStatusColor = status => {
   switch (status) {
@@ -194,10 +197,14 @@ const Wallet = () => {
     handleWithdraw,
     opened,
     setOpened,
+    openedBankDetails,
+    setOpenedBankDetails,
+    user,
+    fetchUserData,
   } = useWallet();
 
   if (loading === -1) return <LayoutLoading />;
-  if (!walletDetails) return null;
+  if (!walletDetails || !user) return null;
 
   return (
     <div className="flex w-full justify-center">
@@ -263,14 +270,13 @@ const Wallet = () => {
                     Request Withdrawal
                   </Text>
                   <Stack grow>
-                    {!walletDetails.beneficiaryId?.length && (
+                    {!user.isKycDone && (
                       <Alert
                         icon={<IconAlertCircle size={16} />}
                         title="Bank Details Missing"
                         color="yellow"
                       >
-                        You need to add your bank details
-                        first.
+                        You need to complete your KYC first.
                         <Group mt="xs">
                           <Button
                             size="xs"
@@ -283,10 +289,54 @@ const Wallet = () => {
                         </Group>
                       </Alert>
                     )}
+                    {user.isKycDone &&
+                      !user.beneficiaryDetails?.length && (
+                        <Alert
+                          icon={
+                            <IconAlertCircle size={16} />
+                          }
+                          title="Bank Details Missing"
+                          color="yellow"
+                        >
+                          You need to add your bank details
+                          first.
+                          <Group mt="xs">
+                            <Button
+                              size="xs"
+                              variant="outline"
+                              color="black"
+                              onClick={() =>
+                                setOpenedBankDetails(true)
+                              }
+                            >
+                              Add Bank Details
+                            </Button>
+                          </Group>
+                        </Alert>
+                      )}
+                    <Select
+                      label="Select Bank"
+                      withCheckIcon={false}
+                      placeholder="Select Bank"
+                      allowDeselect={false}
+                      data={user?.beneficiaryDetails?.map(
+                        value => {
+                          return {
+                            label: value.bankAccountNumber,
+                            value: JSON.stringify(value),
+                          };
+                        }
+                      )}
+                      {...form.getInputProps('bankAccount')}
+                    />
                     <NumberInput
                       {...form.getInputProps(
                         'withdrawAmount'
                       )}
+                      label="Enter amount"
+                      description={
+                        'Amount must range from 1000 to 499999'
+                      }
                       allowLeadingZeros={false}
                       allowNegative={false}
                       decimalScale={2}
@@ -295,7 +345,8 @@ const Wallet = () => {
                         !!(
                           activePayoutRequest ||
                           loading ||
-                          !walletDetails.beneficiaryId?.length ||
+                          !user?.beneficiaryDetails
+                            ?.length ||
                           !walletDetails.withdrawableBalance
                         )
                       }
@@ -312,7 +363,8 @@ const Wallet = () => {
                         !!(
                           activePayoutRequest ||
                           loading ||
-                          !walletDetails.beneficiaryId?.length ||
+                          !user?.beneficiaryDetails
+                            ?.length ||
                           !walletDetails.withdrawableBalance
                         )
                       }
@@ -388,6 +440,18 @@ const Wallet = () => {
           onClose={() => setOpened(false)}
         />
       )}
+      <Modal
+        trapFocus={false}
+        opened={openedBankDetails}
+        keepMounted={false}
+        title={'Add bank account'}
+        onClose={() => {
+          setOpenedBankDetails(false);
+          fetchUserData();
+        }}
+      >
+        {!!openedBankDetails && <AddBankAccount />}
+      </Modal>
     </div>
   );
 };

@@ -83,11 +83,11 @@ const useCreateTelegram = () => {
     },
     validateInputOnChange: true,
     validate: {
-      // title: (value, values) => {
-      //   return values?.isSaveClickedAtleastOnce && !value
-      //     ? 'Title is required'
-      //     : null;
-      // },
+      title: (value, values) => {
+        return values?.isSaveClickedAtleastOnce && !value
+          ? 'Title is required'
+          : null;
+      },
       subscriptionPlans: (value, values) => {
         if (!values?.isSaveClickedAtleastOnce) return null;
         if (value?.length) {

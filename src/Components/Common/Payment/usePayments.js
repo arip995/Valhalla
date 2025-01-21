@@ -258,7 +258,6 @@ const usePayment = (
 
         break;
       }
-
       default:
         break;
     }

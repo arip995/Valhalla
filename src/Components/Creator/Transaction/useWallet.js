@@ -3,28 +3,44 @@ import { useEffect, useState } from 'react';
 import axiosInstance from '@/Utils/AxiosInstance';
 import toast from 'react-hot-toast';
 import { useForm } from '@mantine/form';
+import useUser from '@/Utils/Hooks/useUser';
 
 const useWallet = () => {
   const [walletDetails, setWalletDetails] = useState(null);
+  const { user, fetchUserData } = useUser(true);
   const [loading, setLoading] = useState(-1);
   const [activePayoutRequest, setActivePayoutRequest] =
     useState(null);
   const [payoutList, setPayoutList] = useState(null);
   const [opened, setOpened] = useState(null);
+  const [openedBankDetails, setOpenedBankDetails] =
+    useState(null);
   const [payoutError, setPayoutError] = useState(null);
   const form = useForm({
     initialValues: {
       withdrawAmount: '',
+      bankAccount: '{}',
     },
     validate: {
       withdrawAmount: value => {
-        if (!value || value < 10)
-          return 'Amount must be greater than 10';
+        console.log(value);
+        if (!value || value < 1000 || value > 499999)
+          return 'Amount must range from 1000 to 499999';
         if (value > walletDetails?.withdrawableBalance)
           return 'Amount exceeds available balance';
         return null;
       },
+      bankAccount: value => {
+        value = JSON.parse(value || '{}');
+        if (!value?.beneficiaryId)
+          return 'Select a bank account';
+        return null;
+      },
     },
+    transformValues: values => ({
+      amount: Number(values.withdrawAmount),
+      bankAccount: JSON.parse(values.bankAccount || '{}'),
+    }),
   });
 
   const fetchWalletDetails = async () => {
@@ -42,15 +58,13 @@ const useWallet = () => {
     }
   };
 
-  const requestPayout = async amount => {
+  const requestPayout = async values => {
     setLoading(1);
     setPayoutError(null);
     try {
       const { data } = await axiosInstance.post(
         '/payment/request_payout',
-        {
-          amount: Number(amount),
-        }
+        values
       );
       await fetchWalletDetails();
       form.reset();
@@ -89,7 +103,7 @@ const useWallet = () => {
   };
 
   const handleWithdraw = async values => {
-    await requestPayout(values.withdrawAmount);
+    await requestPayout(values);
   };
 
   useEffect(() => {
@@ -108,6 +122,10 @@ const useWallet = () => {
     form,
     opened,
     setOpened,
+    openedBankDetails,
+    setOpenedBankDetails,
+    user,
+    fetchUserData,
   };
 };
 

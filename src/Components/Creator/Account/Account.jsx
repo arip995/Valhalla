@@ -32,6 +32,7 @@ import {
 } from '@/Constants/constants';
 import { useState } from 'react';
 import CompleteProfileModal from '@/Components/Common/Modal/CompleteProfileModal';
+import BankAccount from './BankAccount';
 
 const Account = () => {
   const [opened, setOpened] = useState(false);
@@ -150,7 +151,10 @@ const Account = () => {
                   </Group>
                 </Alert>
               ) : (
-                <Kyc />
+                <div className="flex w-full flex-col gap-4">
+                  <Kyc />
+                  <BankAccount />
+                </div>
               )}
             </>
           ) : (
