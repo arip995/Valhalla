@@ -1,11 +1,11 @@
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
-import CompleteProfileModal from '@/Components/Common/Modal/CompleteProfileModal';
 import {
   Alert,
   Badge,
   Button,
   Container,
   Group,
+  Modal,
   NumberInput,
   Paper,
   Select,
@@ -25,6 +25,7 @@ import {
 } from '@tabler/icons-react';
 import classNames from 'classnames';
 import React from 'react';
+import AddBankAccount from '../Account/AddBankAccount';
 import useWallet from './useWallet';
 
 const GetStatusColor = status => {
@@ -193,12 +194,12 @@ const Wallet = () => {
     payoutList,
     form,
     handleWithdraw,
-    opened,
+    // opened,
     setOpened,
-    // openedBankDetails,
-    // setOpenedBankDetails,
+    openedBankDetails,
+    setOpenedBankDetails,
     user,
-    // fetchUserData,
+    fetchUserData,
   } = useWallet();
 
   if (loading === -1) return <LayoutLoading />;
@@ -287,7 +288,7 @@ const Wallet = () => {
                         </Group>
                       </Alert>
                     )}
-                    {/* {user.isKycDone &&
+                    {user.isKycDone &&
                       !user.beneficiaryDetails?.length && (
                         <Alert
                           icon={
@@ -311,9 +312,9 @@ const Wallet = () => {
                             </Button>
                           </Group>
                         </Alert>
-                      )} */}
+                      )}
 
-                    {/* {user.isKycDone &&
+                    {user.isKycDone &&
                     user.beneficiaryDetails?.length &&
                     user.multipleBankAccounts ? (
                       <Button
@@ -326,7 +327,7 @@ const Wallet = () => {
                       >
                         Add new bank
                       </Button>
-                    ) : null} */}
+                    ) : null}
                     <Select
                       label="Select Bank"
                       withCheckIcon={false}
@@ -447,15 +448,16 @@ const Wallet = () => {
           </Stack>
         </Paper>
       </Container>
-      {!!opened && (
+      {/* {!!opened && (
         <CompleteProfileModal
           opened={opened}
           onClose={() => setOpened(false)}
         />
-      )}
-      {/* <Modal
+      )} */}
+      <Modal
         trapFocus={false}
         opened={openedBankDetails}
+        keepMounted={false}
         title={'Add bank account'}
         onClose={() => {
           setOpenedBankDetails(false);
@@ -463,7 +465,7 @@ const Wallet = () => {
         }}
       >
         {!!openedBankDetails && <AddBankAccount />}
-      </Modal> */}
+      </Modal>
     </div>
   );
 };
