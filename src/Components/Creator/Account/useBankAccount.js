@@ -8,8 +8,8 @@ import { useForm } from '@mantine/form';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
-const useBankAccount = (onSuccess = () => {}) => {
-  const { user, fetchUserData } = useUser();
+const useBankAccount = () => {
+  const { user } = useUser();
   const [loading, setLoaing] = useState(false);
 
   const bankDetailsForm = useForm({
@@ -61,8 +61,8 @@ const useBankAccount = (onSuccess = () => {}) => {
         values
       );
       toast.success('Bank Added successfully');
-      fetchUserData();
-      onSuccess();
+      // fetchUserData();
+      // onSuccess();
     } catch (error) {
       console.error('Error updating course:', error);
       toast.error(error?.response?.data?.message);
