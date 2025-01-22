@@ -190,7 +190,7 @@ const Wallet = () => {
   const {
     walletDetails,
     loading,
-    cancelPayout,
+    // cancelPayout,
     activePayoutRequest,
     payoutList,
     form,
@@ -419,7 +419,7 @@ const Wallet = () => {
                     <Text size="sm" fw={700}>
                       Amount: ₹{activePayoutRequest.amount}
                     </Text>
-                    <Button
+                    {/* <Button
                       variant="light"
                       color="red"
                       size="sm"
@@ -436,7 +436,7 @@ const Wallet = () => {
                       }
                     >
                       Cancel Request
-                    </Button>
+                    </Button> */}
                   </Group>
                 </Stack>
               </Paper>

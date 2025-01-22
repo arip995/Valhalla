@@ -24,7 +24,7 @@ const useWallet = () => {
     validate: {
       withdrawAmount: value => {
         console.log(value);
-        if (!value || value < 1000 || value > 499999)
+        if (!value || value < 100 || value > 499999)
           return 'Amount must range from 1000 to 499999';
         if (value > walletDetails?.withdrawableBalance)
           return 'Amount exceeds available balance';
