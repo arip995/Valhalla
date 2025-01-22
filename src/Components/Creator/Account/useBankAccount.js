@@ -36,7 +36,8 @@ const useBankAccount = (onSuccess = () => {}) => {
             values.bankAccountNumber
           )
         ) {
-          errors.bankAccountNumber = 'Enter a valid pan';
+          errors.bankAccountNumber =
+            'Enter a valid bank account number';
         }
       }
       return errors;
