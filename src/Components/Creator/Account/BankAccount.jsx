@@ -9,7 +9,7 @@ import { useState } from 'react';
 import AddBankAccount from './AddBankAccount';
 
 const BankAccount = ({ onSuccess = () => {} }) => {
-  const { user } = useUser();
+  const { user, fetchUserData } = useUser();
   const [opened, setOpened] = useState(false);
 
   return (
@@ -75,6 +75,7 @@ const BankAccount = ({ onSuccess = () => {} }) => {
             onSuccess={() => {
               setOpened(false);
               onSuccess();
+              fetchUserData();
             }}
           />
         )}
