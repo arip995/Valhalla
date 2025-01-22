@@ -467,10 +467,13 @@ const Wallet = () => {
         title={'Add bank account'}
         onClose={() => {
           setOpenedBankDetails(false);
-          fetchUserData();
         }}
       >
-        {!!openedBankDetails && <AddBankAccount />}
+        {!!openedBankDetails && (
+          <AddBankAccount
+            onSuccess={() => fetchUserData()}
+          />
+        )}
       </Modal>
     </div>
   );

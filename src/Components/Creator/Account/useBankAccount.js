@@ -9,7 +9,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useBankAccount = (onSuccess = () => {}) => {
-  const { user, fetchUserData } = useUser();
+  const { user } = useUser();
   const [loading, setLoaing] = useState(false);
 
   const bankDetailsForm = useForm({
@@ -61,7 +61,6 @@ const useBankAccount = (onSuccess = () => {}) => {
         values
       );
       toast.success('Bank Added successfully');
-      fetchUserData();
       onSuccess();
     } catch (error) {
       console.error('Error updating course:', error);
