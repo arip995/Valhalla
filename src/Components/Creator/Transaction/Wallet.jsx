@@ -471,7 +471,10 @@ const Wallet = () => {
       >
         {!!openedBankDetails && (
           <AddBankAccount
-            onSuccess={() => fetchUserData()}
+            onSuccess={() => {
+              fetchUserData();
+              setOpenedBankDetails(false);
+            }}
           />
         )}
       </Modal>
