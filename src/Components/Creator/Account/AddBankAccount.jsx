@@ -2,7 +2,7 @@ import React from 'react';
 import useBankAccount from './useBankAccount';
 import { Button, TextInput } from '@mantine/core';
 
-const AddBankAccount = onSuccess => {
+const AddBankAccount = ({ onSuccess }) => {
   const { loading, addBankAccount, bankDetailsForm } =
     useBankAccount(onSuccess);
   return (
