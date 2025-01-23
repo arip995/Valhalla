@@ -435,10 +435,7 @@ const Wallet = () => {
                     weight={500}
                     className="flex items-center gap-2"
                   >
-                    Active Payout Request{' '}
-                    <Text c="dimmed" size="xs">
-                      (Settlement (T+2) days)
-                    </Text>
+                    Active Payout Request
                   </Text>
                   <Group position="apart">
                     <Text size="sm" fw={700}>
