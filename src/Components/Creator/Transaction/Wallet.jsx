@@ -329,6 +329,31 @@ const Wallet = () => {
                       </Button>
                     ) : null}
                     {user?.beneficiaryDetails?.length ? (
+                      <Alert
+                        icon={<IconAlertCircle size={16} />}
+                        title="Instant Payout Processing"
+                        color="blue"
+                      >
+                        Your payout will be processed
+                        instantly, typically within 1
+                        minute. To confirm the status,
+                        simply refresh the page. Please
+                        note: In rare cases of sender
+                        account disruptions or system
+                        downtime, processing may extend to
+                        3-4 hours. For any issues or
+                        concerns, contact our dedicated
+                        support team at{' '}
+                        <a
+                          href="mailto:support@nexify.club"
+                          className="underline"
+                        >
+                          support@nexify.club
+                        </a>
+                        .
+                      </Alert>
+                    ) : null}
+                    {user?.beneficiaryDetails?.length ? (
                       <Select
                         label="Select Bank"
                         withCheckIcon={false}
