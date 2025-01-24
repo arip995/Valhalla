@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-condition */
 import ViewTelegram from '@/Components/Landing/tg/ViewTelegram';
 import ViewTelegramClient from '@/Components/Landing/tg/ViewTelegramClient';
 import { getMetaData } from '@/Utils/getMetaData';
@@ -134,7 +135,7 @@ export default async function Page({ params }) {
       throw new Error('notFound');
     }
 
-    if (isTelegram) {
+    if (true || isTelegram) {
       return (
         <html>
           <head>
