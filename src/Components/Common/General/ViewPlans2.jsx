@@ -39,35 +39,32 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
     }
   }, [user?._id]);
 
-  if (purchasedData?.inviteLink) {
-    return (
-      <div className="flex items-center justify-center p-4">
-        <a
-          href={`https://t.me/${purchasedData.inviteLink}`}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <Button
-            variant="filled"
-            color="blue"
-            size="md"
-            radius="xl"
-            fullWidth
-            leftSection={<IconBrandTelegram />}
-          >
-            Join Now
-          </Button>
-        </a>
-      </div>
-    );
-  }
-
   if (!data.subscriptionPlans?.length) return null;
   return (
     <div
       className="flex w-full flex-col gap-3"
       onClick={onPay}
     >
+      {purchasedData?.inviteLink ? (
+        <div className="flex items-center justify-center p-4">
+          <a
+            href={`https://t.me/${purchasedData.inviteLink}`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Button
+              variant="filled"
+              color="blue"
+              size="md"
+              radius="xl"
+              fullWidth
+              leftSection={<IconBrandTelegram />}
+            >
+              Join Now
+            </Button>
+          </a>
+        </div>
+      ) : null}
       {data.subscriptionPlans.map(plan => {
         return (
           <div
