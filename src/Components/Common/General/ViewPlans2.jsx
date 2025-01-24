@@ -43,20 +43,9 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
     return (
       <div className="flex items-center justify-center p-4">
         <a
-          href={`tg://resolve?domain=${purchasedData.inviteLink}`}
-          onClick={e => {
-            // Try Telegram app link first
-            window.location.href = `tg://resolve?domain=${purchasedData.inviteLink}`;
-
-            // Fallback to web link after a short delay
-            setTimeout(() => {
-              window.location.href = `https://t.me/${purchasedData.inviteLink}`;
-            }, 100);
-
-            // Prevent default link behavior
-            e.preventDefault();
-          }}
+          href={`https://t.me/${purchasedData.inviteLink}`}
           rel="noopener noreferrer"
+          target="_blank"
         >
           <Button
             variant="filled"
