@@ -45,6 +45,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
         <a
           href={`https://t.me/${purchasedData.inviteLink}`}
           rel="noopener noreferrer"
+          target="_blank"
         >
           <Button
             variant="filled"
