@@ -118,13 +118,17 @@ export async function generateMetadata({ params }, parent) {
 // }
 
 export default async function Page({ params }) {
-  console.log('agent', headers().get('user-agent'));
-  console.log('telegram', headers().get('x-telegram-web'));
-  console.log('via', headers().get('via'));
   console.log(
-    'forwarded',
-    headers().get('x-forwarded-for')
+    'access-control-expose-header',
+    headers().get('access-control-expose-headers')
   );
+  console.log('connection', headers().get('connection'));
+  console.log('from', headers().get('from'));
+  console.log('host', headers().get('host'));
+  console.log('referer', headers().get('referer'));
+  console.log('trailer', headers().get('trailer'));
+  console.log('origin', headers().get('origin'));
+  console.log('location', headers().get('location'));
 
   try {
     const { data } = await getMetaData(params.id, 'tg');
