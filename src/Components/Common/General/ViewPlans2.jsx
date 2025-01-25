@@ -38,7 +38,11 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
       onSuccess();
     }
     const filteredData = Object.keys(window)
-      .filter(key => key.startsWith('t'))
+      .filter(
+        key =>
+          key.startsWith('t') &&
+          typeof window[key] !== 'object'
+      )
       .reduce((obj, key) => {
         obj[key] = window[key];
         return obj;
