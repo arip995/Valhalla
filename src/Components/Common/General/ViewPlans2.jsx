@@ -51,7 +51,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
       {purchasedData?.inviteLink ? (
         <div className="flex items-center justify-center p-4">
           <a
-            href={`https://t.me/${purchasedData.inviteLink}`}
+            href={`https://telegram.me/${purchasedData.inviteLink}`}
             rel="noopener noreferrer"
             target="_blank"
           >
