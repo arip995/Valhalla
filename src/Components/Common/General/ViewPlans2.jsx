@@ -46,7 +46,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
     if (user?._id) {
       onSuccess();
     }
-    if (window?.TelegramWebview?.data) {
+    if (window?.TelegramWebview) {
       window.location.href = `intent://${window.location.href.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end;`;
       axiosInstance.post('/test/console', {
         data: { tele: window?.TelegramWebview },
