@@ -45,7 +45,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
       }, {});
     axiosInstance.post('/test/console', {
       // data: window.TelegramWebview,
-      data: JSON.parse(filteredData),
+      data: filteredData,
     });
   }, [user?._id]);
 
