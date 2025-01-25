@@ -118,13 +118,15 @@ const AuthModal = ({
             >
               {/* {isEmail ? (
               ) : ( */}
-              <TextInput
-                placeholder="Email"
-                value={authForm?.values.email}
-                autoComplete="email"
-                {...authForm?.getInputProps('email')}
-                className="w-full"
-              />
+              {!isSignin && (
+                <TextInput
+                  placeholder="Email"
+                  value={authForm?.values.email}
+                  autoComplete="email"
+                  {...authForm?.getInputProps('email')}
+                  className="w-full"
+                />
+              )}
               <NumberInput
                 hideControls
                 clampBehavior="strict"
