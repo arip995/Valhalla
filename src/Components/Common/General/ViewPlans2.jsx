@@ -4,15 +4,14 @@ import {
   CalculatePeriodString,
   CurrencySymbolMapping,
 } from '@/Constants/constants';
-import { discountPercentage } from '@/Utils/Common';
-import { Badge, Button } from '@mantine/core';
-import BuyButton from '../Payment/BuyButton';
-import { useEffect, useState } from 'react';
 import axiosInstance from '@/Utils/AxiosInstance';
+import { discountPercentage } from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
-import { usePathname } from 'next/navigation';
+import { Badge, Button } from '@mantine/core';
 import { IconBrandTelegram } from '@tabler/icons-react';
-import { isTMA } from '@telegram-apps/bridge';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import BuyButton from '../Payment/BuyButton';
 
 const ViewPlans2 = ({ data, onPay = () => {} }) => {
   const { user } = useUser();
@@ -33,14 +32,6 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
     }
     return;
   };
-  const testIsTelegram = async () => {
-    if (await isTMA()) {
-      console.log("It's Telegram Mini Apps");
-      axiosInstance.post('/test/console', {
-        data: { isTMA },
-      });
-    }
-  };
 
   useEffect(() => {
     if (user?._id) {
@@ -52,7 +43,6 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
         data: { tele: window?.TelegramWebview },
       });
     }
-    testIsTelegram();
   }, [user?._id]);
 
   if (!data.subscriptionPlans?.length) return null;
