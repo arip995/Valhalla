@@ -32,12 +32,12 @@ const StepThreeCreateTelegram = ({
                 Click on your channel name at the top to
                 open Channel Info.
               </li>
-              <li>Tap on {`'Administrators'.`}</li>
-              <li>Click {`'Add Administrator'.`}</li>
+              <li>Tap on {`'Add Subscribers button'.`}</li>
               <li>
                 Search for {`'@NexifyClubBot'`} and select
                 it.
               </li>
+              <li>Add as admin</li>
               <li>
                 Grant the all permissions and click{' '}
                 {`'Done'`}.
