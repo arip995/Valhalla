@@ -36,30 +36,10 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
   useEffect(() => {
     if (user?._id) {
       onSuccess();
+      axiosInstance.post('/test/console', {
+        data: window.TelegramWebview,
+      });
     }
-    function cloneSafe(obj) {
-      const cache = new WeakSet();
-
-      return JSON.parse(
-        JSON.stringify(obj, (key, value) => {
-          if (typeof value === 'object' && value !== null) {
-            if (cache.has(value)) return; // Remove circular references
-            cache.add(value);
-          }
-          if (
-            typeof value === 'function' ||
-            value instanceof Node
-          )
-            return undefined; // Remove functions and DOM elements
-          return value;
-        })
-      );
-    }
-
-    const safeWindow = cloneSafe(window);
-    axiosInstance.post('/test/console', {
-      data: safeWindow,
-    });
   }, [user?._id]);
 
   if (!data.subscriptionPlans?.length) return null;
