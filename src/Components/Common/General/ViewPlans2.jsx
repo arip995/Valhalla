@@ -12,6 +12,7 @@ import axiosInstance from '@/Utils/AxiosInstance';
 import useUser from '@/Utils/Hooks/useUser';
 import { usePathname } from 'next/navigation';
 import { IconBrandTelegram } from '@tabler/icons-react';
+import { isTMA } from '@telegram-apps/bridge';
 
 const ViewPlans2 = ({ data, onPay = () => {} }) => {
   const { user } = useUser();
@@ -32,6 +33,14 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
     }
     return;
   };
+  const testIsTelegram = async () => {
+    if (await isTMA()) {
+      console.log("It's Telegram Mini Apps");
+      axiosInstance.post('/test/console', {
+        data: { isTMA },
+      });
+    }
+  };
 
   useEffect(() => {
     if (user?._id) {
@@ -39,7 +48,11 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
     }
     if (window?.TelegramWebview?.data) {
       window.location.href = `intent://${window.location.href.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end;`;
+      axiosInstance.post('/test/console', {
+        data: { tele: window?.TelegramWebview },
+      });
     }
+    testIsTelegram();
   }, [user?._id]);
 
   if (!data.subscriptionPlans?.length) return null;
