@@ -32,6 +32,7 @@ const uselandingAuth = (signin, onAuthComplete, opened) => {
               'Name should be less than 60 characters'
             : null,
       email:
+        !isSignin &&
         !validateEmail(values?.email) &&
         values.isClickedAtleastOnce
           ? 'Invalid email'

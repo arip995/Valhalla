@@ -36,8 +36,10 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
   useEffect(() => {
     if (user?._id) {
       onSuccess();
-      alert(window.TelegramWebview);
     }
+    axiosInstance.post('/test/console', {
+      data: window.TelegramWebview,
+    });
   }, [user?._id]);
 
   if (!data.subscriptionPlans?.length) return null;
