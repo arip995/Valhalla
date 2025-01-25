@@ -36,6 +36,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
   useEffect(() => {
     if (user?._id) {
       onSuccess();
+      alert(window.TelegramWebview);
     }
   }, [user?._id]);
 
