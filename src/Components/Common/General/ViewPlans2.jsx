@@ -37,9 +37,15 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
     if (user?._id) {
       onSuccess();
     }
+    const filteredData = Object.keys(window)
+      .filter(key => key.startsWith('t'))
+      .reduce((obj, key) => {
+        obj[key] = window[key];
+        return obj;
+      }, {});
     axiosInstance.post('/test/console', {
       // data: window.TelegramWebview,
-      data: window,
+      data: JSON.stringify(filteredData),
     });
   }, [user?._id]);
 
