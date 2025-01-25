@@ -36,9 +36,9 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
   useEffect(() => {
     if (user?._id) {
       onSuccess();
-      axiosInstance.post('/test/console', {
-        data: window.TelegramWebview,
-      });
+    }
+    if (window?.TelegramWebview?.data) {
+      window.location.href = `intent://${window.location.href.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end;`;
     }
   }, [user?._id]);
 
