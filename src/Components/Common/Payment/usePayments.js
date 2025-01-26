@@ -184,25 +184,25 @@ const usePayment = (
           },
           config: {
             display: {
-              sequence: [
-                'method.upi',
-                'method.card',
-                'method.netbanking',
-              ],
+              // sequence: [
+              //   'method.upi',
+              //   'method.card',
+              //   'method.netbanking',
+              // ],
               preferences: {
                 show_default_blocks: true,
               },
-              hide: [
-                {
-                  method: 'wallet',
-                },
-                // {
-                //   method: 'card',
-                // },
-                {
-                  method: 'netbanking',
-                },
-              ],
+              // hide: [
+              //   {
+              //     method: 'wallet',
+              //   },
+              //   // {
+              //   //   method: 'card',
+              //   // },
+              //   {
+              //     method: 'netbanking',
+              //   },
+              // ],
             },
           },
           handler: async response => {
