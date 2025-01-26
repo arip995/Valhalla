@@ -2,10 +2,11 @@
 
 import { ActionIcon, rem, Tooltip } from '@mantine/core';
 import { IconArrowLeft } from '@tabler/icons-react';
+import classNames from 'classnames';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
-const CloseButton = () => {
+const CloseButton = ({ className }) => {
   const router = useRouter();
   const productType = usePathname().split('/')[2];
   return (
@@ -16,10 +17,16 @@ const CloseButton = () => {
     >
       <ActionIcon
         variant="default"
-        className="!fixed left-2 top-2"
+        className={classNames(
+          '!fixed left-2 top-2 z-[200]',
+          className
+        )}
         size="lg"
         radius="lg"
-        onClick={() => router.push(`/app/${productType}`)}
+        onClick={e => {
+          router.push(`/app/${productType}`);
+          e.stopPropagation();
+        }}
       >
         <IconArrowLeft
           stroke={1}
