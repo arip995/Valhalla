@@ -4,6 +4,7 @@ import {
   useDebouncedCallback,
   useDidUpdate,
   useIsFirstRender,
+  useMediaQuery,
 } from '@mantine/hooks';
 import { modals } from '@mantine/modals';
 import { IconAlertOctagonFilled } from '@tabler/icons-react';
@@ -22,6 +23,7 @@ const useProductListing = (
   const app = usePathname().split('/')[2];
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab');
+  const isMobile = useMediaQuery('(max-width: 36em)');
   const [data, setData] = useState(null);
   const [searchText, setSearchText] = useState('');
   const [status, setStatus] = useState(initialStatus);
@@ -205,6 +207,7 @@ const useProductListing = (
     pageNo,
     isGrid,
     setIsGrid,
+    isMobile,
   };
 };
 

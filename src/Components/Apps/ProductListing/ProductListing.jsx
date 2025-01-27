@@ -18,6 +18,7 @@ import useProductListing from './useProductListing';
 import classNames from 'classnames';
 import Filters from '@/Components/Common/Filters/Filters';
 import EmptyStateTwo from '@/Components/Common/EmptyState/EmptyStateTwo';
+import TransactionCard from '@/Components/Common/Card/TransactionCard';
 
 const ProductListing = ({
   renderTableDataCell,
@@ -30,6 +31,7 @@ const ProductListing = ({
   showHeader = true,
   showActions = true,
   menuType = 1,
+  transactionCard = false,
   onRowClick,
 }) => {
   const router = useRouter();
@@ -45,6 +47,7 @@ const ProductListing = ({
     pageNo,
     isGrid,
     setIsGrid,
+    isMobile,
   } = useProductListing(baseUrl, initialStatus);
   const onDefaultRowClick = row => {
     router.push(`/dashboard/${app}/${row._id}`);
@@ -128,11 +131,13 @@ const ProductListing = ({
           onUpdate={onUpdate}
           searchText={searchText}
           status={status}
-          isGrid={isGrid}
+          isGrid={isMobile ? true : isGrid}
           setIsGrid={setIsGrid}
           showSearch={showSearch}
           showStatus={showStatus}
-          showLayoutChange={showLayoutChange}
+          showLayoutChange={
+            isMobile ? false : showLayoutChange
+          }
           menuType={menuType}
         />
         {data.totalQueryCount === 0 ? (
@@ -157,7 +162,7 @@ const ProductListing = ({
               <>
                 <div
                   className={classNames('hidden', {
-                    '!block w-full': isGrid,
+                    '!block w-full': isMobile || isGrid,
                   })}
                 >
                   <SimpleGrid
@@ -175,17 +180,30 @@ const ProductListing = ({
                   >
                     {data.data.map(item => {
                       return (
-                        <ProductCard
-                          item={item}
-                          app={app}
-                          onUpdate={onUpdate}
-                          onItemClick={row =>
-                            router.push(
-                              `/dashboard/${app}/${row._id}`
-                            )
-                          }
-                          key={item._id}
-                        />
+                        <>
+                          {transactionCard ? (
+                            <TransactionCard
+                              item={item}
+                              onItemClick={
+                                onRowClick ||
+                                onDefaultRowClick
+                              }
+                              key={item._id}
+                            />
+                          ) : (
+                            <ProductCard
+                              item={item}
+                              app={app}
+                              onUpdate={onUpdate}
+                              onItemClick={row =>
+                                router.push(
+                                  `/dashboard/${app}/${row._id}`
+                                )
+                              }
+                              key={item._id}
+                            />
+                          )}
+                        </>
                       );
                     })}
                   </SimpleGrid>
@@ -199,7 +217,7 @@ const ProductListing = ({
                     onRowClick || onDefaultRowClick
                   }
                   className={classNames('block', {
-                    hidden: isGrid,
+                    hidden: isMobile || isGrid,
                   })}
                   app={app}
                   showActions={showActions}
