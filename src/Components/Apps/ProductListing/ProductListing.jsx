@@ -164,9 +164,10 @@ const ProductListing = ({
               <>
                 <div
                   className={classNames('hidden', {
-                    '!block w-full': isTransaction
-                      ? isMobile
-                      : isGrid,
+                    '!block w-full':
+                      isTransaction && isMobile
+                        ? true
+                        : isGrid,
                   })}
                 >
                   <SimpleGrid
@@ -221,9 +222,10 @@ const ProductListing = ({
                     onRowClick || onDefaultRowClick
                   }
                   className={classNames('block', {
-                    hidden: isTransaction
-                      ? isMobile
-                      : isGrid,
+                    hidden:
+                      isTransaction && isMobile
+                        ? true
+                        : isGrid,
                   })}
                   app={app}
                   showActions={showActions}
