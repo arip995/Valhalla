@@ -1,6 +1,5 @@
 import axiosInstance from '@/Utils/AxiosInstance';
-import { getFullName, isDevEnv } from '@/Utils/Common';
-import { checkIfPurchased } from '@/Utils/Common';
+import { checkIfPurchased, isDevEnv } from '@/Utils/Common';
 import { useRedirectAfterPurchased } from '@/Utils/Hooks/hooks';
 import useUser from '@/Utils/Hooks/useUser';
 import { load } from '@cashfreepayments/cashfree-js';
@@ -174,10 +173,10 @@ const usePayment = (
           order_id: paymentState.id,
           prefill: {
             //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
-            name: getFullName(
-              user.firstName,
-              user.lastName
-            ),
+            // name: getFullName(
+            //   user.firstName,
+            //   user.lastName
+            // ),
 
             email,
             contact: `+ 91${phoneNumber}`, //Provide the customer's phone number for better conversion rates
