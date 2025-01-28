@@ -15,23 +15,24 @@ const AfterPurchaseTelegramModal = ({
       opened={opened}
       onClose={onClose}
       keepMounted={false}
-      title={'Purchase Successful'}
+      closeOnClickOutside={false}
+      title={'Purchase Successful 🎉'}
       overlayProps={{
         backgroundOpacity: 0.8,
         blur: 8,
       }}
     >
-      <div className="flex flex-col items-center justify-center bg-gray-100 p-4">
-        <div className="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-lg">
+      <div className="m-4 flex flex-col items-center justify-center bg-gray-100">
+        <div className="🎉 w-full max-w-md rounded-lg bg-white text-center">
           <div className="mb-4 flex justify-center">
             <IconCircleCheckFilled className="h-12 w-12 text-green-500" />
           </div>
           <h1 className="mb-4 text-2xl font-bold">
-            Congratulations 🎉
+            Congratulations
           </h1>
           <p className="mb-4 text-gray-600">
-            Your Telegram subscription is successfully
-            purchased.
+            You have successfully purchased your telegram
+            subscription.
           </p>
 
           <a
@@ -50,16 +51,14 @@ const AfterPurchaseTelegramModal = ({
               Join Now
             </Button>
           </a>
-
-          <p className="my-4 text-gray-600">
-            The join link is also sent to your Email.
-          </p>
-
-          <div className="mb-4 flex items-center justify-center text-sm text-yellow-600">
+          <div className="my-4 flex items-center justify-center text-sm text-yellow-800">
             <span>
-              A Warning: This link is only for one-time use.
+              Warning: This link is only for one-time use.
             </span>
           </div>
+          <p className="text-gray-600">
+            The join link is also sent to your Email.
+          </p>
         </div>
       </div>
     </Modal>

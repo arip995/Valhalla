@@ -21,7 +21,7 @@ const TransactionCard = ({
     >
       {/* Header Section */}
       <div className="flex items-center justify-between">
-        <span className="flex items-center gap-2 text-lg font-semibold text-gray-900">
+        <span className="flex items-center gap-2 text-lg font-semibold text-gray-800">
           <IconCertificate size={24} />
           {item.status == 1
             ? item.productType === 'tg'
@@ -29,14 +29,14 @@ const TransactionCard = ({
               : 'Purchase successful'
             : 'Purchase failed'}
         </span>
-        <div className="text-xl font-bold text-gray-900">
+        <div className="text-xl font-semibold text-gray-800">
           ₹{item.amountPaid}
         </div>
       </div>
 
       {/* Date Section */}
       <div className="mt-4 flex items-center space-x-2 text-gray-600">
-        <IconCalendar size={20} className="text-gray-500" />
+        <IconCalendar size={20} />
         <span className="text-sm">
           {formatDate(item.createdAt)}
         </span>

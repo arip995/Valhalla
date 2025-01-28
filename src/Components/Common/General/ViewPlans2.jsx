@@ -28,8 +28,10 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
       );
       if (data?.ok) {
         setPurchasedData(data.data);
-
-        if (data.data.hasSeenSuccessModal) {
+        if (
+          !data.data.hasSeenSuccessModal &&
+          data.data.inviteLink
+        ) {
           setOpened(true);
         }
       }
