@@ -31,7 +31,7 @@ const ProductListing = ({
   showHeader = true,
   showActions = true,
   menuType = 1,
-  transactionCard = false,
+  isTransaction = false,
   onRowClick,
 }) => {
   const router = useRouter();
@@ -131,12 +131,14 @@ const ProductListing = ({
           onUpdate={onUpdate}
           searchText={searchText}
           status={status}
-          isGrid={isMobile ? true : isGrid}
+          isGrid={isTransaction && isMobile ? true : isGrid}
           setIsGrid={setIsGrid}
           showSearch={showSearch}
           showStatus={showStatus}
           showLayoutChange={
-            isMobile ? false : showLayoutChange
+            isTransaction && isMobile
+              ? false
+              : showLayoutChange
           }
           menuType={menuType}
         />
@@ -162,7 +164,9 @@ const ProductListing = ({
               <>
                 <div
                   className={classNames('hidden', {
-                    '!block w-full': isMobile || isGrid,
+                    '!block w-full': isTransaction
+                      ? isMobile
+                      : isGrid,
                   })}
                 >
                   <SimpleGrid
@@ -181,7 +185,7 @@ const ProductListing = ({
                     {data.data.map(item => {
                       return (
                         <>
-                          {transactionCard ? (
+                          {isTransaction ? (
                             <TransactionCard
                               item={item}
                               onItemClick={
@@ -217,7 +221,9 @@ const ProductListing = ({
                     onRowClick || onDefaultRowClick
                   }
                   className={classNames('block', {
-                    hidden: isMobile || isGrid,
+                    hidden: isTransaction
+                      ? isMobile
+                      : isGrid,
                   })}
                   app={app}
                   showActions={showActions}

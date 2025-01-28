@@ -8,15 +8,17 @@ import axiosInstance from '@/Utils/AxiosInstance';
 import { discountPercentage } from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
 import { Badge, Button } from '@mantine/core';
-import { IconBrandTelegram } from '@tabler/icons-react';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import AfterPurchaseTelegramModal from '../Card/AfterPurchaseTelegramModal';
 import BuyButton from '../Payment/BuyButton';
+import { IconBrandTelegram } from '@tabler/icons-react';
 
 const ViewPlans2 = ({ data, onPay = () => {} }) => {
-  const { user } = useUser();
   const productId = usePathname().split('/')[2];
+  const { user } = useUser();
   const [purchasedData, setPurchasedData] = useState(false);
+  const [opened, setOpened] = useState(false);
 
   const onSuccess = async () => {
     try {
@@ -26,11 +28,27 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
       );
       if (data?.ok) {
         setPurchasedData(data.data);
+
+        if (data.data.hasSeenSuccessModal) {
+          setOpened(true);
+        }
       }
     } catch (error) {
       console.log();
     }
     return;
+  };
+
+  const onClose = async () => {
+    setOpened(false);
+    try {
+      await axiosInstance.post(
+        '/purchase/update_telegram_modal',
+        { productId, userId: user._id }
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -49,7 +67,23 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
       onClick={onPay}
     >
       {purchasedData?.inviteLink ? (
-        <div className="flex items-center justify-center p-4">
+        <AfterPurchaseTelegramModal
+          opened={opened}
+          onClose={onClose}
+          inviteLink={purchasedData.inviteLink}
+        />
+      ) : null}
+      {purchasedData?.inviteLink ? (
+        <div className="flex flex-col items-center justify-center space-y-4 p-4">
+          <div className="text-center">
+            <h2 className="text-xl font-semibold text-green-600">
+              Purchase Successful!
+            </h2>
+            <p className="text-gray-700">
+              Thank you for your purchase. You can now join
+              the Telegram group to get started.
+            </p>
+          </div>
           <a
             href={`https://telegram.me/${purchasedData.inviteLink}`}
             rel="noopener noreferrer"

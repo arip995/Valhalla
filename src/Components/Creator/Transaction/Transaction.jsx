@@ -142,7 +142,7 @@ const Transaction = () => {
               setActiveTransaction(item);
               setOpened(true);
             }}
-            transactionCard
+            isTransaction
           />
         </div>
       </div>
