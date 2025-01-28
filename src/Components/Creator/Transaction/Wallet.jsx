@@ -14,6 +14,7 @@ import {
   Text,
   ThemeIcon,
   Title,
+  Tooltip,
 } from '@mantine/core';
 import {
   IconAlertCircle,
@@ -21,6 +22,7 @@ import {
   IconCheck,
   IconCircleDot,
   IconHelpCircle,
+  IconInfoCircle,
   IconWallet,
   IconX,
 } from '@tabler/icons-react';
@@ -159,17 +161,40 @@ const TransactionCard = ({
   );
 };
 
-const SummaryCard = ({ title, value, icon: Icon }) => (
+const SummaryCard = ({
+  title,
+  value,
+  label,
+  icon: Icon,
+}) => (
   <Paper withBorder p="md" radius="md">
     <Group position="apart" spacing="xs">
       <div>
-        <Text
-          size="xs"
-          color="dimmed"
-          transform="uppercase"
-        >
-          {title}
-        </Text>
+        <div className="flex items-center gap-1">
+          <Text
+            size="xs"
+            color="dimmed"
+            transform="uppercase"
+          >
+            {title}
+          </Text>
+          <Tooltip
+            multiline
+            w={220}
+            label={label}
+            events={{
+              hover: true,
+              focus: true,
+              touch: true,
+            }}
+          >
+            <IconInfoCircle
+              size={12}
+              color="gray"
+              className="cursor-pointer"
+            />
+          </Tooltip>
+        </div>
         <Text weight={700} size="xl">
           ₹{value.toLocaleString()}
         </Text>
@@ -243,16 +268,19 @@ const Wallet = () => {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <SummaryCard
                 title="Withdrawable Balance"
+                label=" The amount available for instant withdrawal to your account."
                 value={walletDetails.withdrawableBalance}
                 icon={IconWallet}
               />
               <SummaryCard
                 title="Current Balance"
+                label="Earnings from yesterday and today (till 10 PM). After 10 PM, this balance is added to your Withdrawable Balance."
                 value={walletDetails.currentBalance || 0}
                 icon={IconWallet}
               />
               <SummaryCard
                 title="Total Withdrawals"
+                label="The total of all amounts withdrawn so far."
                 value={walletDetails.totalWithdrawals}
                 icon={IconArrowUp}
               />
