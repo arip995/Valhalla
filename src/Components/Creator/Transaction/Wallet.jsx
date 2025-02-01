@@ -89,12 +89,12 @@ const GetStatusIcon = status => {
 };
 
 const TransactionCard = ({
-  description,
   amount,
-  transferId,
+  utr,
   status,
   createdAt,
   settlementTime,
+  beneficiaryDetails,
 }) => {
   return (
     <Paper
@@ -117,9 +117,17 @@ const TransactionCard = ({
             <Text weight={500} size="sm">
               Withdrawal - {GetStatusText(status)}
             </Text>
-            <Text size="xs" c="dimmed">
-              {description} • ID: {transferId}
-            </Text>
+            {!!utr && (
+              <Text size="xs" c="dimmed">
+                UTR: {utr}
+              </Text>
+            )}
+            {!!beneficiaryDetails && (
+              <Text size="xs" c="dimmed">
+                Account Number:{' '}
+                {beneficiaryDetails?.bankAccountNumber}
+              </Text>
+            )}
             <Text size="xs" c="dimmed">
               CreatedAt:-{' '}
               {new Date(createdAt).toLocaleDateString(
@@ -274,7 +282,7 @@ const Wallet = () => {
               />
               <SummaryCard
                 title="Current Balance"
-                label="Earnings from yesterday and today (till 10 PM). After 10 PM, this balance is added to your Withdrawable Balance."
+                label="Earnings from yesterday and today (till 10 PM). After 10 PM, and the balance of yesterday will be added to your Withdrawable Balance."
                 value={walletDetails.currentBalance || 0}
                 icon={IconWallet}
               />
@@ -395,6 +403,8 @@ const Wallet = () => {
                       allowNegative={false}
                       decimalScale={2}
                       placeholder="Enter amount"
+                      max={499999}
+                      clampBehavior="strict"
                       disabled={
                         !!(
                           activePayoutRequest ||
