@@ -1,8 +1,13 @@
 import axiosInstance from '@/Utils/AxiosInstance';
-import { checkIfPurchased, isDevEnv } from '@/Utils/Common';
+import {
+  checkIfPurchased,
+  convertFullNameToFirstNameLastName,
+  isDevEnv,
+} from '@/Utils/Common';
 import { useRedirectAfterPurchased } from '@/Utils/Hooks/hooks';
 import useUser from '@/Utils/Hooks/useUser';
 import { load } from '@cashfreepayments/cashfree-js';
+import axios from 'axios';
 import {
   usePathname,
   useSearchParams,
@@ -38,7 +43,7 @@ const usePayment = (
     usePathname().split('/')[1] === 'dashboard';
   const redirectAfterPurchased =
     useRedirectAfterPurchased();
-  const { user, fetchUserData } = useUser();
+  const { user, setCurrentUser, getUserId } = useUser();
   const searchParams = useSearchParams();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
@@ -86,11 +91,10 @@ const usePayment = (
         onPollFailure('Maximum polling attempts reached.');
         return;
       }
-
       try {
         const { data } = await axiosInstance.post(
           '/purchase/check',
-          { productId, userId: user._id }
+          { productId, userId: getUserId() }
         );
         if (data?.ok) {
           clearInterval(timer);
@@ -172,22 +176,16 @@ const usePayment = (
           name: 'Nexify',
           order_id: paymentState.id,
           prefill: {
-            //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
-            // name: getFullName(
-            //   user.firstName,
-            //   user.lastName
-            // ),
-
             email,
-            contact: `+ 91${phoneNumber}`, //Provide the customer's phone number for better conversion rates
+            contact: `+ 91${phoneNumber}`,
           },
           config: {
             display: {
-              // sequence: [
-              //   'method.upi',
-              //   'method.card',
-              //   'method.netbanking',
-              // ],
+              sequence: [
+                'method.upi',
+                'method.card',
+                'method.netbanking',
+              ],
               preferences: {
                 show_default_blocks: true,
               },
@@ -268,7 +266,8 @@ const usePayment = (
     creatorDetails,
     bookingData,
     phoneNumber,
-    email
+    email,
+    name
   ) => {
     if (!amount || isPreview) return;
     if (purchased) {
@@ -291,13 +290,24 @@ const usePayment = (
         delete newBookingData.subscription;
       }
 
-      if (!user?.email) {
-        setEmail(email);
-        user.email = email;
-      }
-      if (!user?.phoneNumber) {
-        setPhoneNumber(phoneNumber);
-        user.phoneNumber = phoneNumber;
+      if (!user?._id && productType === 'dp') {
+        const { firstName, lastName } =
+          convertFullNameToFirstNameLastName(name);
+        const { userData } = await axios.post(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/dp/login`,
+          {
+            phoneNumber: phoneNumber,
+            email: email,
+            firstName,
+            lastName,
+          },
+          {
+            withCredentials: true,
+          }
+        );
+        if (userData?.data) {
+          setCurrentUser(userData.data);
+        }
       }
 
       const { data } = await axiosInstance.post(
@@ -330,8 +340,6 @@ const usePayment = (
         toast.error('Order not created. Please try again.');
         return;
       }
-
-      fetchUserData();
 
       setPaymentState(prev => ({
         ...prev,

@@ -1,6 +1,6 @@
 'use client';
 
-import { formatPrice } from '@/Utils/Common';
+import { formatPrice, getFullName } from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
 import {
   Box,
@@ -13,19 +13,23 @@ import {
 } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
+import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useRef } from 'react';
 import Lottie from 'react-lottie-player';
 import lottieJson from '../../../../../public/lottie/tick.json';
 import LayoutLoading from '../../Loading/LayoutLoading';
 import usePayment from '../../Payment/usePayments';
-import { useRouter } from 'next/navigation';
 
-const ViewRegistrationQuestions = ({ data }) => {
+const ViewRegistrationQuestions = ({
+  data,
+  onSuccess = () => {},
+}) => {
   const router = useRouter();
   const lottieRef = useRef();
   const { user } = useUser();
   const { onCreateOrder, paymentState } = usePayment(() => {
     router.push(`/consume/dp/${data._id}`);
+    onSuccess();
   });
   const registrationQuestions = useMemo(
     () => data.registrationQuestions || [],
@@ -62,6 +66,11 @@ const ViewRegistrationQuestions = ({ data }) => {
           !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)
         ) {
           errors.email = 'Invalid email address';
+        }
+
+        //Validate name
+        if (!values.name) {
+          errors.name = 'Name is required';
         }
 
         // Validate phone number
@@ -159,7 +168,8 @@ const ViewRegistrationQuestions = ({ data }) => {
         priceType: data.priceType,
       },
       submissionValues.phoneNumber,
-      submissionValues.email
+      submissionValues.email,
+      submissionValues.name
     );
     // onSubmit(submissionValues);
   };
@@ -215,6 +225,7 @@ const ViewRegistrationQuestions = ({ data }) => {
       form.setValues({
         email: user.email,
         phoneNumber: user.phoneNumber,
+        name: getFullName(user.firstName, user.lastName),
       });
     }
   }, [user?._id]);
@@ -289,6 +300,20 @@ const ViewRegistrationQuestions = ({ data }) => {
             withAsterisk
             disabled={!!user?.phoneNumber}
             {...form.getInputProps('phoneNumber')}
+          />
+          <TextInput
+            label={
+              <spam className="text-sm font-normal !text-gray-700">
+                Name
+              </spam>
+            }
+            size="sm"
+            hideControls
+            maxLength={30}
+            clampBehavior="strict"
+            withAsterisk
+            disabled={!!user?.firstName}
+            {...form.getInputProps('name')}
           />
 
           {/* Registration Questions */}

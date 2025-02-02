@@ -25,7 +25,12 @@ const ViewDPOneButtonModal = ({ data }) => {
         }}
         fullScreen
       >
-        <ViewRegistrationQuestions data={data} />
+        <ViewRegistrationQuestions
+          data={data}
+          onSuccess={() => {
+            setOpened(false);
+          }}
+        />
       </Modal>
     </>
   );

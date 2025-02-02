@@ -330,3 +330,6 @@ export const formatPrice = price => {
     maximumFractionDigits: 0,
   }).format(price);
 };
+
+export const delay = ms =>
+  new Promise(resolve => setTimeout(resolve, ms));

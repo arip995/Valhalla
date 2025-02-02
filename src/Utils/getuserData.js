@@ -20,12 +20,8 @@ export const logout = () => {
     delete deleteCookieObject.secure;
     delete deleteCookieObject.sameSite;
   }
-
   Cookies.remove('accesstoken', deleteCookieObject);
   Cookies.remove('username', deleteCookieObject);
   Cookies.remove('isCreator', deleteCookieObject);
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    localStorage.removeItem(key);
-  }
+  localStorage.clear();
 };

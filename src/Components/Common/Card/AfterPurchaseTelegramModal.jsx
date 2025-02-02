@@ -57,7 +57,7 @@ const AfterPurchaseTelegramModal = ({
             </span>
           </div>
           <p className="text-gray-600">
-            The join link is also sent to your Email.
+            The joining link is also sent to your Email.
           </p>
         </div>
       </div>
