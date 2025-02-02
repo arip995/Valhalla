@@ -331,5 +331,10 @@ export const formatPrice = price => {
   }).format(price);
 };
 
+export const getUserId = () => {
+  return JSON.parse(localStorage.getItem('user') || '{}')
+    ?._id;
+};
+
 export const delay = ms =>
   new Promise(resolve => setTimeout(resolve, ms));

@@ -1,14 +1,19 @@
 import axiosInstance from '@/Utils/AxiosInstance';
-import { updateObjectStates } from '@/Utils/Common';
+import {
+  getUserId,
+  updateObjectStates,
+} from '@/Utils/Common';
 import { handleFile } from '@/Utils/HandleFiles';
 import { useForm } from '@mantine/form';
 import { useIsFirstRender } from '@mantine/hooks';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useTelegramDashboard = productId => {
   const firstRender = useIsFirstRender();
+  const router = useRouter();
   const [tgData, setTgData] = useState(null);
   const [loadingImage, setLoadingImage] = useState(false);
   const basicDetailsForm = useForm({
@@ -21,10 +26,14 @@ const useTelegramDashboard = productId => {
   });
   async function getData(id) {
     try {
-      const data = await axios.get(
+      router.prefetch('/signin');
+      const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_BASE_URL}/telegram/get_group_data/${id}?tab=dashboard`
       );
-      setTgData(data.data.data);
+      if (data.data.creatorId != getUserId()) {
+        router.push('/signin');
+      }
+      setTgData(data.data);
     } catch (error) {
       toast.error('Failed to get group data');
     }

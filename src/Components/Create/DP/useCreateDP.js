@@ -4,7 +4,7 @@ import { useForm } from '@mantine/form';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { getUniqueId } from '@/Utils/Common';
+import { getUniqueId, getUserId } from '@/Utils/Common';
 import { useMediaQuery } from '@mantine/hooks';
 import { sectionTypes } from '@/Constants/constants';
 
@@ -220,6 +220,10 @@ const useCreateDP = () => {
       }
 
       const { data: responseData } = data;
+
+      if (responseData.creatorId != getUserId()) {
+        router.push('/signin');
+      }
 
       dpForm.setValues(prevValues => ({
         ...prevValues,

@@ -2,6 +2,7 @@ import axiosInstance from '@/Utils/AxiosInstance';
 import {
   checkIfPurchased,
   convertFullNameToFirstNameLastName,
+  getUserId,
   isDevEnv,
 } from '@/Utils/Common';
 import { useRedirectAfterPurchased } from '@/Utils/Hooks/hooks';
@@ -43,7 +44,7 @@ const usePayment = (
     usePathname().split('/')[1] === 'dashboard';
   const redirectAfterPurchased =
     useRedirectAfterPurchased();
-  const { user, setCurrentUser, getUserId } = useUser();
+  const { user, setCurrentUser } = useUser();
   const searchParams = useSearchParams();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');

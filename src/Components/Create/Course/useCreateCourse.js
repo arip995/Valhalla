@@ -4,7 +4,7 @@ import { useForm } from '@mantine/form';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { getUniqueId } from '@/Utils/Common';
+import { getUniqueId, getUserId } from '@/Utils/Common';
 import { useMediaQuery } from '@mantine/hooks';
 import { sectionTypes } from '@/Constants/constants';
 
@@ -138,6 +138,7 @@ const useCreateCourse = () => {
       })),
     }));
   };
+
   const calculateSections = sections => {
     if (!Array.isArray(sections)) {
       return sectionTypes();
@@ -156,6 +157,7 @@ const useCreateCourse = () => {
         })),
     ];
   };
+
   const handleSubmit = async values => {
     try {
       courseForm.setValues({ loading: 1 });
@@ -195,6 +197,7 @@ const useCreateCourse = () => {
       });
     }
   };
+
   const fetchProduct = async () => {
     try {
       const { data } = await axiosInstance.get(
@@ -206,6 +209,9 @@ const useCreateCourse = () => {
       }
 
       const { data: responseData } = data;
+      if (responseData.creatorId != getUserId()) {
+        router.push('/signin');
+      }
 
       courseForm.setValues(prevValues => ({
         ...prevValues,

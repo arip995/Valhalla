@@ -44,11 +44,6 @@ const useUser = (fetch = false) => {
     }
   };
 
-  const getUserId = () => {
-    return JSON.parse(localStorage.getItem('user') || '{}')
-      ?._id;
-  };
-
   useEffect(() => {
     if (isBrowser) {
       setUserData();
@@ -84,7 +79,6 @@ const useUser = (fetch = false) => {
     fetchUserData,
     loadingGetUserData,
     removeUser,
-    getUserId,
   };
 };
 

@@ -1,4 +1,5 @@
 import axiosInstance from '@/Utils/AxiosInstance';
+import { getUserId } from '@/Utils/Common';
 import { useForm } from '@mantine/form';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
@@ -122,10 +123,14 @@ const useCreateLockedContent = () => {
 
   const fetchLcData = async () => {
     try {
+      router.prefetch('/signin');
       setEditLoading(true);
       const { data } = await axiosInstance.get(
         `/product/get_individual_product_data/lc/${productId}`
       );
+      if (data.data.creatorId != getUserId()) {
+        router.push('/signin');
+      }
       createLockedContentForm.setValues({
         title: data.data.title,
         message: data.data.message,
@@ -148,6 +153,7 @@ const useCreateLockedContent = () => {
   useEffect(() => {
     if (productId) {
       setIsEditing(true);
+
       fetchLcData();
     } else {
       setEditLoading(false);
