@@ -43,7 +43,7 @@ const LTDetailsContainer = ({ data }) => {
               </div> */}
               {!!data?.description && (
                 <Spoiler
-                  maxHeight={170}
+                  maxHeight={150}
                   showLabel="Show more"
                   hideLabel="Hide"
                 >
