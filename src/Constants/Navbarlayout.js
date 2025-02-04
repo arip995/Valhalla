@@ -50,6 +50,12 @@ export const SidenavData = [
 
   { apps: true },
   {
+    icon: IconBrandTelegram,
+    label: 'Telegram',
+    value: 'tg',
+    path: '/app/tg',
+  },
+  {
     icon: IconLockDollar,
     label: 'Locked Content',
     value: 'lc',
@@ -60,12 +66,6 @@ export const SidenavData = [
     label: 'Course',
     value: 'course',
     path: '/app/course',
-  },
-  {
-    icon: IconBrandTelegram,
-    label: 'Telegram',
-    value: 'tg',
-    path: '/app/tg',
   },
   {
     icon: IconCash,
