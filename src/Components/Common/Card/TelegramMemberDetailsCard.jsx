@@ -32,7 +32,7 @@ const TelegramMemberDetailsCard = ({
       radius="lg"
       shadow="md"
       withBorder
-      className="min-w-96 cursor-pointer hover:bg-gray-50"
+      className="cursor-pointer hover:bg-gray-50"
       onClick={() => onItemClick(item)}
     >
       <div className="flex w-full flex-col gap-3">
