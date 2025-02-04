@@ -24,6 +24,7 @@ const useProductListing = (
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab');
   const isMobile = useMediaQuery('(max-width: 36em)');
+  const productId = usePathname().split('/')[3];
   const [data, setData] = useState(null);
   const [searchText, setSearchText] = useState('');
   const [status, setStatus] = useState(initialStatus);
@@ -44,6 +45,7 @@ const useProductListing = (
           pageNo,
           status,
           limit,
+          productId,
         }
       );
       setData(listingData.data.data);

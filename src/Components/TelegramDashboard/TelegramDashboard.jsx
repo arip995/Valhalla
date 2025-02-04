@@ -1,13 +1,20 @@
 'use client';
 
+import { Tabs } from '@mantine/core';
 import '../../styles/dashboard/TelegramDashborad.css';
 import LayoutLoading from '../Common/Loading/LayoutLoading';
 import TGEPlansAndPricingContainer from './EditPlansAndPricing/TGEPlansAndPricingContainer';
 import TelegramDashboardBasicDetails from './TelegramDashboardBasicDetails';
-import TelegramDashboardOpenlink from './TelegramDashboardOpenlink';
+// import TelegramDashboardOpenlink from './TelegramDashboardOpenlink';
 import TelegramDashboardProfilepic from './TelegramDashboardProfilepic';
 import useTelegramDashboard from './useTelegramDashboard';
-
+import TelegramDashboardMemberDetails from './TelegramDashboardMemberDetails';
+import CloseButton from '../Common/Buttons/CloseButton';
+import TelegramDashboardOpenlink from './TelegramDashboardOpenlink';
+const TAB_OPTIONS = [
+  { label: 'Overview', value: 'overview' },
+  { label: 'Subscriber', value: 'subscriber' },
+];
 const TelegramDashboard = ({ productId }) => {
   const {
     data,
@@ -15,6 +22,9 @@ const TelegramDashboard = ({ productId }) => {
     loadingImage,
     basicDetailsForm,
     updateData,
+    tab,
+    router,
+    pathName,
   } = useTelegramDashboard(productId);
 
   if (!data) {
@@ -23,30 +33,57 @@ const TelegramDashboard = ({ productId }) => {
 
   return (
     <div className="tg-dashboard-container">
-      <div className="flex h-screen w-full max-w-[600px] flex-col items-center gap-4 p-3 md:p-6">
-        <TelegramDashboardOpenlink data={data} />
+      <div className="flex h-screen w-full max-w-[900px] flex-col items-center gap-4 p-3 md:p-6">
+        <div className="w-full">
+          <TelegramDashboardOpenlink data={data} />
+        </div>
 
-        <div className="hide-scrollbar flex w-full flex-col items-center gap-4 overflow-y-auto">
-          <TelegramDashboardProfilepic
-            data={data}
-            handleFileChange={handleFileChange}
-            loadingImage={loadingImage}
-            onUpdate={updateData}
-            basicDetailsForm={basicDetailsForm}
-          />
-          {basicDetailsForm.values.description ? (
-            <TelegramDashboardBasicDetails
+        <div className="flex w-full gap-2">
+          <CloseButton className="!relative !left-0 !top-0" />
+          <Tabs
+            radius="xs"
+            value={tab || 'profile'}
+            className="w-full bg-white"
+            onChange={val => {
+              router.push(`${pathName}?tab=${val}`);
+            }}
+          >
+            <Tabs.List grow>
+              {TAB_OPTIONS.map((item, i) => {
+                return (
+                  <Tabs.Tab value={item.value} key={i}>
+                    {item.label}
+                  </Tabs.Tab>
+                );
+              })}
+            </Tabs.List>
+          </Tabs>
+        </div>
+        {tab === 'subscriber' ? (
+          <TelegramDashboardMemberDetails />
+        ) : (
+          <div className="hide-scrollbar flex w-full flex-col items-center gap-4 overflow-y-auto">
+            <TelegramDashboardProfilepic
               data={data}
+              handleFileChange={handleFileChange}
+              loadingImage={loadingImage}
+              onUpdate={updateData}
               basicDetailsForm={basicDetailsForm}
+            />
+            {basicDetailsForm.values.description ? (
+              <TelegramDashboardBasicDetails
+                data={data}
+                basicDetailsForm={basicDetailsForm}
+                onUpdate={updateData}
+              />
+            ) : null}
+            <TGEPlansAndPricingContainer
+              data={data}
               onUpdate={updateData}
             />
-          ) : null}
-          <TGEPlansAndPricingContainer
-            data={data}
-            onUpdate={updateData}
-          />
-          {/* <TelegramDashboardCoupons /> */}
-        </div>
+            {/* <TelegramDashboardCoupons /> */}
+          </div>
+        )}
       </div>
     </div>
   );

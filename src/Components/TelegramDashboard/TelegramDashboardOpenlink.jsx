@@ -1,38 +1,63 @@
-import { Button, Paper, rem } from '@mantine/core';
-import { IconExternalLink } from '@tabler/icons-react';
+import { Button, rem } from '@mantine/core';
+import { modals } from '@mantine/modals';
+import {
+  IconExternalLink,
+  IconShare,
+} from '@tabler/icons-react';
 import Link from 'next/link';
 import React from 'react';
-import CloseButton from '../Common/Buttons/CloseButton';
+import Share from '../Common/General/Share';
 
 const TelegramDashboardOpenlink = ({ data }) => {
   return (
-    <Paper
-      shadow="md"
-      withBorder
-      className="sticky top-0 z-20 flex w-full items-center justify-evenly gap-4 p-4"
-    >
-      <CloseButton className="!relative !left-0 !top-0" />
+    <div className="flex w-full gap-2">
+      <Button
+        rightSection={<span />}
+        justify="space-between"
+        leftSection={
+          <IconShare
+            style={{ height: rem(20), width: rem(20) }}
+            stroke={1.5}
+          />
+        }
+        fullWidth
+        variant="light"
+        onClick={() => {
+          modals.open({
+            title: 'Share on Social',
+            children: (
+              <div className="pb-4 pt-8">
+                <Share
+                  url={`${process.env.NEXT_PUBLIC_HOST}/tg/${data._id}`}
+                />
+              </div>
+            ),
+          });
+        }}
+      >
+        Share
+      </Button>
       <Link
         href={`/tg/${data._id}`}
         passHref
         legacyBehavior
       >
         <Button
-          leftSection={<span />}
+          rightSection={<span />}
           justify="space-between"
-          rightSection={
+          leftSection={
             <IconExternalLink
               style={{ height: rem(20), width: rem(20) }}
               stroke={1.5}
-              color="white"
             />
           }
           fullWidth
+          variant="light"
         >
           Open Preview
         </Button>
       </Link>
-    </Paper>
+    </div>
   );
 };
 

@@ -347,7 +347,6 @@ const useCreateTelegram = () => {
           : stepTwoForm.values?.groupId,
       superGroup: stepTwoForm.values?.superGroup,
       genre: stepThreeForm.values?.genre,
-      isForbiddenError,
     };
     try {
       const data = await axiosInstance.post(

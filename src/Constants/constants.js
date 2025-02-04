@@ -398,3 +398,26 @@ export const RegistrationQuestionTypes = [
   { value: 'number', label: 'Number' },
   { value: 'date', label: 'Date Picker' },
 ];
+
+export const TelegramSubscriberStatusMapping = {
+  1: (
+    <Badge color="green" variant="light" size="sm">
+      Active
+    </Badge>
+  ),
+  2: (
+    <Badge color="green" variant="light" size="sm">
+      Expired
+    </Badge>
+  ),
+  3: (
+    <Badge color="green" variant="light" size="sm">
+      Deleted
+    </Badge>
+  ),
+  4: (
+    <Badge color="green" variant="light" size="sm">
+      Left
+    </Badge>
+  ),
+};

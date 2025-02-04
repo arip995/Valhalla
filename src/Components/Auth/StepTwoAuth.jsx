@@ -88,9 +88,9 @@ const StepTwoAuth = () => {
       setCreateLoading(true);
       const payload = {
         type: 'signup',
-        firstName,
-        lastName,
-        username,
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        username: username.trim(),
         usertype,
         category,
       };
