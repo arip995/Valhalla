@@ -120,7 +120,6 @@ const renderTableDataCell = ({ type, item }) => {
         </td>
       );
     case 'status':
-      console.log(item);
       return (
         <td className="min-w-40">
           {TelegramSubscriberStatusMapping[item.status]}
@@ -185,7 +184,6 @@ const TelegramDashboardMemberDetails = () => {
           showStatus={false}
           showHeader={false}
           showActions={false}
-          showLayoutChange={false}
           menuType={0}
           onRowClick={item => {
             setActiveSubscriber(item);

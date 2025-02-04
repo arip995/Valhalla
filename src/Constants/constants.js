@@ -406,17 +406,17 @@ export const TelegramSubscriberStatusMapping = {
     </Badge>
   ),
   2: (
-    <Badge color="green" variant="light" size="sm">
+    <Badge color="red" variant="light" size="sm">
       Expired
     </Badge>
   ),
   3: (
-    <Badge color="green" variant="light" size="sm">
+    <Badge color="red" variant="light" size="sm">
       Deleted
     </Badge>
   ),
   4: (
-    <Badge color="green" variant="light" size="sm">
+    <Badge color="red" variant="light" size="sm">
       Left
     </Badge>
   ),

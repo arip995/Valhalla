@@ -19,8 +19,10 @@ import {
 import React from 'react';
 
 const TelegramMemberDetails = ({ item }) => {
-  if (!item) return null;
   const url = `https://telegram.me/${item.inviteLink}`;
+
+  if (!item) return null;
+
   return (
     <div className="flex w-full flex-col gap-4 p-4">
       <div className="flex items-start justify-between">
@@ -68,6 +70,17 @@ const TelegramMemberDetails = ({ item }) => {
           <span>
             {formatDate(item.subscriptionExpiredAt)}
           </span>
+        </div>
+      </div>
+      <div className="flex items-start justify-between">
+        <div className="flex items-center gap-1">
+          <IconUser className="h-4 w-4" /> Telegram Name
+        </div>
+        <div className="text-sm text-gray-600">
+          {getFullName(
+            item.joineeTelegramDetails?.first_name,
+            item.joineeTelegramDetails?.last_name
+          )}
         </div>
       </div>
       <div className="flex items-start justify-between">

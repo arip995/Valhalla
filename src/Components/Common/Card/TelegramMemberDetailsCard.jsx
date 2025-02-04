@@ -22,8 +22,9 @@ const TelegramMemberDetailsCard = ({
   item,
   onItemClick = () => {},
 }) => {
-  if (!item) return null;
   const url = `https://telegram.me/${item.inviteLink}`;
+
+  if (!item) return null;
 
   return (
     <Card
@@ -31,7 +32,7 @@ const TelegramMemberDetailsCard = ({
       radius="lg"
       shadow="md"
       withBorder
-      className="cursor-pointer hover:bg-gray-50"
+      className="min-w-96 cursor-pointer hover:bg-gray-50"
       onClick={() => onItemClick(item)}
     >
       <div className="flex w-full flex-col gap-3">
@@ -60,6 +61,17 @@ const TelegramMemberDetailsCard = ({
           </div>
           <div className="text-sm text-gray-600">
             <span>+91 {item.phoneNumber}</span>
+          </div>
+        </div>
+        <div className="flex items-start justify-between">
+          <div className="flex items-center gap-1">
+            <IconUser className="h-4 w-4" /> Telegram Name
+          </div>
+          <div className="text-sm text-gray-600">
+            {getFullName(
+              item.joineeTelegramDetails?.first_name,
+              item.joineeTelegramDetails?.last_name
+            )}
           </div>
         </div>
         <div className="flex items-start justify-between">
@@ -109,7 +121,10 @@ const TelegramMemberDetailsCard = ({
                   <ActionIcon
                     color={copied ? 'teal' : 'gray'}
                     variant="subtle"
-                    onClick={copy}
+                    onClick={e => {
+                      e.stopPropagation();
+                      copy();
+                    }}
                   >
                     {copied ? (
                       <IconCheck
