@@ -300,22 +300,22 @@ export const formatDate = date => {
     year: 'numeric',
   };
 
-  // const timeOptions = {
-  //   hour: '2-digit',
-  //   minute: '2-digit',
-  //   second: '2-digit',
-  //   hour12: true,
-  // };
+  const timeOptions = {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true,
+  };
 
   const formattedDate = newDate.toLocaleDateString(
     'en-US',
     dateOptions
   );
-  // const formattedTime = newDate.toLocaleTimeString(
-  //   'en-US',
-  //   timeOptions
-  // );
-  return `${formattedDate}`;
+  const formattedTime = newDate.toLocaleTimeString(
+    'en-US',
+    timeOptions
+  );
+  return `${formattedDate} ${formattedTime}`;
 };
 
 export const capitalizeFirstLetter = string => {
