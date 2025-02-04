@@ -46,7 +46,7 @@ export function middleware(req) {
   ];
 
   const currentPath = req.nextUrl.pathname;
-
+  console.log('first', accessToken, username, isCreator);
   if (currentPath === '/') {
     return;
   }
