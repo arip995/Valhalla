@@ -209,6 +209,14 @@ const usePayment = (
               loading: true,
               paymentCompleted: true,
             }));
+            try {
+              await axiosInstance.post(
+                '/payment/update_order',
+                { ...response }
+              );
+            } catch (error) {
+              console.log(error);
+            }
             pollOrderStatus({
               sessionId: paymentState.paymentSessionId,
               onPollSuccess: async () => {
@@ -235,14 +243,6 @@ const usePayment = (
                 console.error(error);
               },
             });
-            try {
-              await axiosInstance.post(
-                '/payment/update_order',
-                { ...response }
-              );
-            } catch (error) {
-              console.log(error);
-            }
           },
           modal: {
             ondismiss: function () {

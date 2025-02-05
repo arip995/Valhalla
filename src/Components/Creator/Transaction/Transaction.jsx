@@ -25,6 +25,7 @@ import {
 import { useEffect, useState } from 'react';
 import TransactionDetails from './TransactionDetails';
 import Wallet from './Wallet';
+import TransactionCard from '@/Components/Common/Card/TransactionCard';
 
 const TableHeaderItems = [
   { title: 'Date', icon: IconCalendar, value: 'date' },
@@ -142,7 +143,8 @@ const Transaction = () => {
               setActiveTransaction(item);
               setOpened(true);
             }}
-            isTransaction
+            showOnlyGridViewInMobile
+            Component={TransactionCard}
           />
         </div>
       </div>

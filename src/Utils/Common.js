@@ -315,7 +315,7 @@ export const formatDate = date => {
     'en-US',
     timeOptions
   );
-  return `${formattedDate}, ${formattedTime}`;
+  return `${formattedDate} ${formattedTime}`;
 };
 
 export const capitalizeFirstLetter = string => {

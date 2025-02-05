@@ -7,13 +7,20 @@ import { handleFile } from '@/Utils/HandleFiles';
 import { useForm } from '@mantine/form';
 import { useIsFirstRender } from '@mantine/hooks';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useTelegramDashboard = productId => {
   const firstRender = useIsFirstRender();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const tab = searchParams.get('tab');
+  const pathName = usePathname();
   const [tgData, setTgData] = useState(null);
   const [loadingImage, setLoadingImage] = useState(false);
   const basicDetailsForm = useForm({
@@ -116,6 +123,10 @@ const useTelegramDashboard = productId => {
     });
   }, [tgData]);
 
+  useEffect(() => {
+    if (!tab) router.replace(`${pathName}?tab=overview`);
+  }, [tab]);
+
   if (firstRender) {
     getData(productId);
   }
@@ -126,6 +137,9 @@ const useTelegramDashboard = productId => {
     handleFileChange,
     basicDetailsForm,
     updateData,
+    tab,
+    router,
+    pathName,
   };
 };
 

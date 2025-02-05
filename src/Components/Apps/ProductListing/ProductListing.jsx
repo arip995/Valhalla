@@ -31,8 +31,12 @@ const ProductListing = ({
   showHeader = true,
   showActions = true,
   menuType = 1,
-  isTransaction = false,
+  showOnlyGridViewInMobile = false,
   onRowClick,
+  customEmptyStateOne,
+  customEmptyStateTwo,
+  searchPlaceholder,
+  Component,
 }) => {
   const router = useRouter();
   const routeName = usePathname().split('/')[1];
@@ -90,22 +94,30 @@ const ProductListing = ({
   if (!data?.totalCount && !loading) {
     return (
       <>
-        <EmptyStateOne
-          app={app}
-          isApp={routeName === 'app'}
-          title={
-            routeName === 'app'
-              ? null
-              : `No ${routeName} Yet`
-          }
-          description={
-            routeName === 'app'
-              ? null
-              : routeName === 'payment'
-                ? `You have no transactions yet!`
-                : 'You have not sold any products yet!'
-          }
-        />
+        {customEmptyStateOne ? (
+          <>{customEmptyStateOne}</>
+        ) : (
+          <EmptyStateOne
+            app={app}
+            isApp={routeName === 'app'}
+            title={
+              routeName === 'app'
+                ? null
+                : routeName === 'dashboard'
+                  ? 'No subscribers yet'
+                  : `No ${routeName} Yet`
+            }
+            description={
+              routeName === 'app'
+                ? null
+                : routeName === 'payment'
+                  ? `You have no transactions yet!`
+                  : routeName === 'dashboard'
+                    ? 'No one have purchased this product yet!'
+                    : 'You have not sold any products yet!'
+            }
+          />
+        )}
       </>
     );
   }
@@ -130,13 +142,18 @@ const ProductListing = ({
         <Filters
           onUpdate={onUpdate}
           searchText={searchText}
+          searchPlaceholder={searchPlaceholder}
           status={status}
-          isGrid={isTransaction && isMobile ? true : isGrid}
+          isGrid={
+            showOnlyGridViewInMobile && isMobile
+              ? true
+              : isGrid
+          }
           setIsGrid={setIsGrid}
           showSearch={showSearch}
           showStatus={showStatus}
           showLayoutChange={
-            isTransaction && isMobile
+            showOnlyGridViewInMobile && isMobile
               ? false
               : showLayoutChange
           }
@@ -151,7 +168,9 @@ const ProductListing = ({
                 ? 'No transactions yet!'
                 : routeName === 'audience'
                   ? 'No audience yet!'
-                  : null
+                  : routeName === 'dashboard'
+                    ? 'No subscribers yet!'
+                    : null
             }
             isFilter
             onClear={() => onUpdate('reset')}
@@ -165,7 +184,7 @@ const ProductListing = ({
                 <div
                   className={classNames('hidden', {
                     '!block w-full':
-                      isTransaction && isMobile
+                      showOnlyGridViewInMobile && isMobile
                         ? true
                         : isGrid,
                   })}
@@ -186,8 +205,8 @@ const ProductListing = ({
                     {data.data.map(item => {
                       return (
                         <>
-                          {isTransaction ? (
-                            <TransactionCard
+                          {showOnlyGridViewInMobile ? (
+                            <Component
                               item={item}
                               onItemClick={
                                 onRowClick ||
@@ -223,7 +242,7 @@ const ProductListing = ({
                   }
                   className={classNames('block', {
                     hidden:
-                      isTransaction && isMobile
+                      showOnlyGridViewInMobile && isMobile
                         ? true
                         : isGrid,
                   })}
