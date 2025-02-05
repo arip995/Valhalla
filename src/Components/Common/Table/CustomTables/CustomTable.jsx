@@ -162,7 +162,7 @@ const CustomTable = ({
                     <div className="flex items-center gap-2">
                       {!!showShare && (
                         <ShareButton
-                          link={`${process.env.NEXT_PUBLIC_HOST}${app}/${item._id}`}
+                          link={`${process.env.NEXT_PUBLIC_HOST}/${app}/${item._id}`}
                         />
                       )}
                       {!!showMenu && (
