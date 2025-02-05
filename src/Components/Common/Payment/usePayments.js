@@ -204,6 +204,14 @@ const usePayment = (
             },
           },
           handler: async response => {
+            try {
+              await axiosInstance.post(
+                '/payment/update_order',
+                { ...response }
+              );
+            } catch (error) {
+              console.log(error);
+            }
             setPaymentState(prev => ({
               ...prev,
               loading: true,
@@ -235,14 +243,6 @@ const usePayment = (
                 console.error(error);
               },
             });
-            try {
-              await axiosInstance.post(
-                '/payment/update_order',
-                { ...response }
-              );
-            } catch (error) {
-              console.log(error);
-            }
           },
           modal: {
             ondismiss: function () {
