@@ -1,12 +1,11 @@
 'use client';
 
 import Header from '@/Components/Common/Header/Header';
-import KycCard from '@/Components/Common/KycCard';
 import CompleteProfileModal from '@/Components/Common/Modal/CompleteProfileModal';
 import useUser from '@/Utils/Hooks/useUser';
 import { useEffect, useState } from 'react';
-import HomeCards from './HomeCards';
 import { AllProducts } from './AllProducts';
+import HomeCards from './HomeCards';
 
 const Home = () => {
   const { user, setUserData } = useUser();
@@ -25,15 +24,7 @@ const Home = () => {
       <div className="flex h-[calc(100vh-52px)] w-full flex-col md:h-screen">
         <Header title="Home" />
         <div className="flex flex-1 flex-col gap-12 overflow-y-auto p-4 md:p-8">
-          {!user.isKycDone ? (
-            <KycCard
-              onClick={() => {
-                setOpened(prev => !prev);
-              }}
-            />
-          ) : (
-            <HomeCards />
-          )}
+          <HomeCards />
           <AllProducts />
 
           {/* <HomeChart /> */}
