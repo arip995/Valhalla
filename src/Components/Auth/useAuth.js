@@ -30,19 +30,33 @@ const useAuth = () => {
       email: '',
       phoneNumber: '',
     },
-    validate: {
-      email: value =>
-        emailOrPhoneNumber === 'email'
-          ? !validateEmail(value)
-            ? isClickedAtleastOnce && 'Invalid email'
-            : null
-          : null,
-      phoneNumber: value =>
-        emailOrPhoneNumber === 'phoneNumber'
-          ? value?.toString()?.length != 10
-            ? isClickedAtleastOnce && 'Invalid phone number'
-            : null
-          : null,
+    validate: values => {
+      const errors = {};
+      if (isClickedAtleastOnce) {
+        if (pathname === 'signup') {
+          if (!validateEmail(values.email)) {
+            errors.email = 'Invalid email';
+          }
+          if (
+            values?.phoneNumber?.toString()?.length != 10
+          ) {
+            errors.phoneNumber = 'Invalid phone number';
+          }
+        } else {
+          if (emailOrPhoneNumber === 'email') {
+            if (!validateEmail(values.email)) {
+              errors.email = 'Invalid email';
+            }
+          } else {
+            if (
+              values?.phoneNumber?.toString()?.length != 10
+            ) {
+              errors.phoneNumber = 'Invalid phone number';
+            }
+          }
+        }
+      }
+      return errors;
     },
   });
 
@@ -106,12 +120,8 @@ const useAuth = () => {
       const data = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/verify_otp`,
         {
-          [emailOrPhoneNumber === 'email'
-            ? 'email'
-            : 'phoneNumber']:
-            emailOrPhoneNumber === 'email'
-              ? authForm.values.email
-              : authForm.values.phoneNumber,
+          email: authForm.values.email,
+          phoneNumber: authForm.values.phoneNumber,
           otp: otpForm.values.otp,
           refId: otpRefId,
           isSignUp: pathname === 'signup' ? true : false,

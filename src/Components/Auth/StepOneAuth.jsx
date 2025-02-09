@@ -1,7 +1,6 @@
 import Timer from '@/Components/Common/Timer.jsx';
 import {
   Button,
-  Divider,
   NumberInput,
   PinInput,
   Text,
@@ -11,8 +10,6 @@ import { upperFirst } from '@mantine/hooks';
 import {
   IconArrowRight,
   IconEdit,
-  IconMail,
-  IconPhone,
 } from '@tabler/icons-react';
 import Link from 'next/link';
 import React from 'react';
@@ -20,7 +17,7 @@ import React from 'react';
 const StepOneAuth = ({
   pathname,
   emailOrPhoneNumber,
-  toggleEmailOrPhoneNumber,
+  // toggleEmailOrPhoneNumber,
   showOtp,
   toggleShowOtp,
   setIsClickedAtleastOnce,
@@ -130,26 +127,57 @@ const StepOneAuth = ({
               onSubmit={authForm.onSubmit(handleSubmit)}
               className="space-y-6"
             >
-              {emailOrPhoneNumber === 'email' ? (
-                <TextInput
-                  label="Email address"
-                  placeholder="hello@example.com"
-                  autoComplete="email"
-                  radius="md"
-                  {...authForm.getInputProps('email')}
-                />
+              {pathname === 'signup' ? (
+                <>
+                  <NumberInput
+                    hideControls
+                    // label="Phone Number"
+                    placeholder="Phone Number"
+                    autoComplete="tel"
+                    clampBehavior="strict"
+                    max={9999999999}
+                    leftSection={<Text size="sm">+91</Text>}
+                    radius="md"
+                    {...authForm.getInputProps(
+                      'phoneNumber'
+                    )}
+                  />
+                  <TextInput
+                    // label="Email address"
+                    placeholder="Email address"
+                    autoComplete="email"
+                    radius="md"
+                    {...authForm.getInputProps('email')}
+                  />
+                </>
               ) : (
-                <NumberInput
-                  hideControls
-                  label="Phone Number"
-                  placeholder="6345325643"
-                  autoComplete="tel"
-                  clampBehavior="strict"
-                  max={9999999999}
-                  leftSection={<Text size="sm">+91</Text>}
-                  radius="md"
-                  {...authForm.getInputProps('phoneNumber')}
-                />
+                <>
+                  {emailOrPhoneNumber === 'email' ? (
+                    <TextInput
+                      label="Email address"
+                      placeholder="hello@example.com"
+                      autoComplete="email"
+                      radius="md"
+                      {...authForm.getInputProps('email')}
+                    />
+                  ) : (
+                    <NumberInput
+                      hideControls
+                      label="Phone Number"
+                      placeholder="6345325643"
+                      autoComplete="tel"
+                      clampBehavior="strict"
+                      max={9999999999}
+                      leftSection={
+                        <Text size="sm">+91</Text>
+                      }
+                      radius="md"
+                      {...authForm.getInputProps(
+                        'phoneNumber'
+                      )}
+                    />
+                  )}
+                </>
               )}
 
               <Button
@@ -171,7 +199,7 @@ const StepOneAuth = ({
 
           {!showOtp && (
             <>
-              <Divider
+              {/* <Divider
                 label="Or continue with"
                 labelPosition="center"
               />
@@ -193,7 +221,7 @@ const StepOneAuth = ({
                 {emailOrPhoneNumber === 'email'
                   ? 'Phone'
                   : 'Email'}
-              </Button>
+              </Button> */}
 
               <div className="text-center text-sm text-gray-500">
                 {pathname === 'signin'
