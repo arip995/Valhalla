@@ -1,7 +1,7 @@
 module.exports = {
-  siteUrl: 'https://yourwebsite.com',
+  siteUrl: 'https://nexify.club',
   generateRobotsTxt: true,
   changefreq: 'daily',
   priority: 1,
-  exclude: ['/privacy-policy', '/about-us'],
+  exclude: ['/privacy-policy'],
 };
