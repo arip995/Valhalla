@@ -37,7 +37,13 @@ const ViewLockedContentDetails = ({ data }) => {
 
   useEffect(() => {
     if (user?._id) {
-      onSuccess(true);
+      onSuccess();
+    }
+    if (window?.TelegramWebview) {
+      setTimeout(() => {
+        window.location.href = `intent://${window.location.href.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end;`;
+      }, 1);
+      window.close();
     }
   }, [user?._id]);
 

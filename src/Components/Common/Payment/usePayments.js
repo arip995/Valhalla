@@ -294,7 +294,7 @@ const usePayment = (
       if (!user?._id && productType === 'dp') {
         const { firstName, lastName } =
           convertFullNameToFirstNameLastName(name);
-        const { userData } = await axios.post(
+        const { data } = await axios.post(
           `${process.env.NEXT_PUBLIC_BASE_URL}/dp/login`,
           {
             phoneNumber: phoneNumber,
@@ -306,8 +306,8 @@ const usePayment = (
             withCredentials: true,
           }
         );
-        if (userData?.data) {
-          setCurrentUser(userData.data);
+        if (data?.data) {
+          setCurrentUser(data.data);
         }
       }
 

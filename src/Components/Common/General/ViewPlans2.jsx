@@ -63,6 +63,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
   }, [user?._id]);
 
   if (!data.subscriptionPlans?.length) return null;
+
   return (
     <div
       className="flex w-full flex-col gap-3"
