@@ -58,7 +58,10 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
       onSuccess();
     }
     if (window?.TelegramWebview) {
-      window.location.href = `intent://${window.location.href.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end;`;
+      setTimeout(() => {
+        window.location.href = `intent://${window.location.href.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end;`;
+      });
+      window.close();
     }
   }, [user?._id]);
 
