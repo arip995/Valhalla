@@ -26,7 +26,6 @@ const Home = () => {
         <div className="flex flex-1 flex-col gap-12 overflow-y-auto p-4 md:p-8">
           <HomeCards />
           <AllProducts />
-
           {/* <HomeChart /> */}
         </div>
       </div>

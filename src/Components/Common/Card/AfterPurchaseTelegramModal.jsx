@@ -36,7 +36,7 @@ const AfterPurchaseTelegramModal = ({
           </p>
 
           <a
-            href={`https://telegram.me/${inviteLink}`}
+            href={`https://t.me/${inviteLink}`}
             rel="noopener noreferrer"
             target="_blank"
           >
