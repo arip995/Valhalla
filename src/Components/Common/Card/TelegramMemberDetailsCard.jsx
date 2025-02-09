@@ -22,7 +22,7 @@ const TelegramMemberDetailsCard = ({
   item,
   onItemClick = () => {},
 }) => {
-  const url = `https://telegram.me/${item.inviteLink}`;
+  const url = `https://t.me/${item.inviteLink}`;
 
   if (!item) return null;
 
@@ -35,12 +35,12 @@ const TelegramMemberDetailsCard = ({
       className="cursor-pointer hover:bg-gray-50"
       onClick={() => onItemClick(item)}
     >
-      <div className="flex w-full flex-col gap-3">
+      <div className="flex w-full flex-col gap-3 text-sm">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-1">
             <IconUser className="h-4 w-4" /> Name
           </div>
-          <div className="text-sm text-gray-600">
+          <div className="ellipsis text-xs text-gray-600">
             {getFullName(
               item.userDetails.firstName,
               item.userDetails.lastName
@@ -51,7 +51,7 @@ const TelegramMemberDetailsCard = ({
           <div className="flex items-center gap-1">
             <IconMail className="h-4 w-4" /> Mail
           </div>
-          <div className="text-sm text-gray-600">
+          <div className="ellipsis text-xs text-gray-600">
             <span>{item.email}</span>
           </div>
         </div>
@@ -59,7 +59,7 @@ const TelegramMemberDetailsCard = ({
           <div className="flex items-center gap-1">
             <IconPhone className="h-4 w-4" /> Phone Number
           </div>
-          <div className="text-sm text-gray-600">
+          <div className="ellipsis text-xs text-gray-600">
             <span>+91 {item.phoneNumber}</span>
           </div>
         </div>
@@ -67,7 +67,7 @@ const TelegramMemberDetailsCard = ({
           <div className="flex items-center gap-1">
             <IconUser className="h-4 w-4" /> Telegram Name
           </div>
-          <div className="text-sm text-gray-600">
+          <div className="ellipsis text-xs text-gray-600">
             {getFullName(
               item.joineeTelegramDetails?.first_name,
               item.joineeTelegramDetails?.last_name
@@ -78,7 +78,7 @@ const TelegramMemberDetailsCard = ({
           <div className="flex items-center gap-1">
             <IconCalendar className="h-4 w-4" /> Join date
           </div>
-          <div className="text-sm text-gray-600">
+          <div className="ellipsis text-xs text-gray-600">
             <span>
               {formatDate(item.subscriptionRenewedAt)}
             </span>
@@ -88,7 +88,7 @@ const TelegramMemberDetailsCard = ({
           <div className="flex items-center gap-1">
             <IconCalendar className="h-4 w-4" /> Expiry date
           </div>
-          <div className="text-sm text-red-600">
+          <div className="ellipsis text-xs text-red-600">
             <span>
               {formatDate(item.subscriptionExpiredAt)}
             </span>
@@ -98,7 +98,7 @@ const TelegramMemberDetailsCard = ({
           <div className="flex items-center gap-1">
             <IconBrandRedux className="h-4 w-4" /> Status
           </div>
-          <div className="text-sm text-gray-600">
+          <div className="ellipsis text-xs text-gray-600">
             {TelegramSubscriberStatusMapping[item.status]}
           </div>
         </div>
@@ -106,7 +106,7 @@ const TelegramMemberDetailsCard = ({
           <div className="flex items-center gap-1">
             <IconLink className="h-4 w-4" /> Invite link
           </div>
-          <div className="flex items-center text-sm text-gray-600">
+          <div className="ellipsis flex items-center text-xs text-gray-600">
             {url}
             <CopyButton value={url} timeout={2000}>
               {({ copied, copy }) => (

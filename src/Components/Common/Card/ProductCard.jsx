@@ -34,7 +34,7 @@ const ProductCard = ({
           />
           <div className="absolute right-2 top-2 flex gap-2">
             <ShareButton
-              link={`${process.env.NEXT_PUBLIC_HOST}${app}/${item._id}`}
+              link={`${process.env.NEXT_PUBLIC_HOST}/${app}/${item._id}`}
               onlyShareButton
             />
             <ProductMenu

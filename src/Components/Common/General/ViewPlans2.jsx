@@ -87,7 +87,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
             </p>
           </div>
           <a
-            href={`https://telegram.me/${purchasedData.inviteLink}`}
+            href={`https://t.me/${purchasedData.inviteLink}`}
             rel="noopener noreferrer"
             target="_blank"
           >

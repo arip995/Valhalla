@@ -81,9 +81,9 @@ const renderTableDataCell = ({ type, item }) => {
       return (
         <td className="min-w-36">
           <div className="flex items-center text-sm text-gray-600">
-            {`https://telegram.me/${item.inviteLink}`}
+            {`https://t.me/${item.inviteLink}`}
             <CopyButton
-              value={`https://telegram.me/${item.inviteLink}`}
+              value={`https://t.me/${item.inviteLink}`}
               timeout={2000}
             >
               {({ copied, copy }) => (

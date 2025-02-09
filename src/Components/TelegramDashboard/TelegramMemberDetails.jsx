@@ -19,8 +19,7 @@ import {
 import React from 'react';
 
 const TelegramMemberDetails = ({ item }) => {
-  const url = `https://telegram.me/${item.inviteLink}`;
-
+  const url = `https://t.me/${item.inviteLink}`;
   if (!item) return null;
 
   return (
