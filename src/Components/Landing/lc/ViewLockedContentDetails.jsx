@@ -13,6 +13,7 @@ import lockImage from '../../../../public/images/locked-content/lock.png';
 const ViewLockedContentDetails = ({ data }) => {
   const { user } = useUser();
   const productId = usePathname().split('/')[2];
+  const productType = usePathname().split('/')[1];
 
   const [showLockedItems, setShowLockedItems] =
     useState(false);
@@ -22,7 +23,7 @@ const ViewLockedContentDetails = ({ data }) => {
       try {
         const { data } = await axiosInstance.post(
           '/purchase/check',
-          { productId, userId: user._id }
+          { productId, productType, userId: user._id }
         );
         if (data?.ok) {
           setShowLockedItems(true);
