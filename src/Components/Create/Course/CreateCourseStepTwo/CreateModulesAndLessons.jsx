@@ -411,6 +411,7 @@ const CreateModulesAndLessons = ({
           className="relative my-2 flex flex-col gap-5 overflow-y-auto"
         >
           <TextInput
+            maxLength={75}
             label="Enter Module title"
             {...addModuleForm.getInputProps('title')}
           />

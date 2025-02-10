@@ -276,6 +276,7 @@ const ViewRegistrationQuestions = ({
             />
           ) : null}
           <TextInput
+            maxLength={40}
             label={
               <spam className="text-sm font-normal !text-gray-700">
                 Email
@@ -301,6 +302,7 @@ const ViewRegistrationQuestions = ({
             {...form.getInputProps('phoneNumber')}
           />
           <TextInput
+            maxLength={20}
             label={
               <spam className="text-sm font-normal !text-gray-700">
                 Name
@@ -308,7 +310,6 @@ const ViewRegistrationQuestions = ({
             }
             size="sm"
             hideControls
-            maxLength={30}
             clampBehavior="strict"
             withAsterisk
             disabled={!!user?.firstName}

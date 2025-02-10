@@ -51,6 +51,7 @@ const StepThreeCreateTelegram = ({
         onSubmit={stepThreeForm.onSubmit(onStepThreeSubmit)}
       >
         <TextInput
+          maxLength={75}
           label="Title"
           placeholder="Index + Nifty"
           value={stepThreeForm.values.title}

@@ -11,6 +11,7 @@ const Kyc = ({ onSuccess = () => {} }) => {
       onSubmit={kycForm?.onSubmit(verifyKyc)}
     >
       <TextInput
+        maxLength={20}
         withAsterisk
         label="PAN Number"
         placeholder="GBIPP7730L"

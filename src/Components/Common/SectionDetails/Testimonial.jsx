@@ -80,6 +80,7 @@ const Testimonial = ({ section, onSave = () => {} }) => {
         handleAvatarChange={handleFileChange}
       />
       <TextInput
+        maxLength={40}
         label="Name"
         name="name"
         {...testimonialForm.getInputProps('name')}

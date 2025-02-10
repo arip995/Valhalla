@@ -125,6 +125,7 @@ const CompleteProfileModal = ({
         <div className="px-4 pt-4">
           {completeProfileForm.values.activeStep == 0 ? (
             <TextInput
+              maxLength={10}
               radius="sm"
               description="Username"
               placeholder="pandaop"

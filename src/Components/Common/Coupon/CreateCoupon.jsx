@@ -23,10 +23,10 @@ const PrePaymentModal = ({ data, onUpdate = () => {} }) => {
       className="flex flex-col gap-4"
     >
       <TextInput
+        maxLength={20}
         label="Coupon Code"
         placeholder="Enter coupon code"
         rightSection={`${form.values.code?.length || 0}/20`}
-        maxLength={20}
         value={form.values.code
           ?.toUpperCase()
           .replace(/[^A-Z0-9]/gi, '')}

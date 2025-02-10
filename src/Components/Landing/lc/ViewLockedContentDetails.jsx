@@ -37,7 +37,7 @@ const ViewLockedContentDetails = ({ data }) => {
 
   useEffect(() => {
     if (user?._id) {
-      onSuccess();
+      onSuccess(true);
     }
     if (window?.TelegramWebview) {
       setTimeout(() => {

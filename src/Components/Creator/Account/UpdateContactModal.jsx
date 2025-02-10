@@ -141,6 +141,7 @@ const UpdateContactModal = ({
             {editEntity === 'email' ||
             editEntity === 'supportEmail' ? (
               <TextInput
+                maxLength={40}
                 autoFocus
                 label={isEmail ? 'Email' : 'Support Email'}
                 placeholder="hello@panda.dev"

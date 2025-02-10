@@ -11,6 +11,7 @@ const AddBankAccount = ({ onSuccess }) => {
       onSubmit={bankDetailsForm?.onSubmit(addBankAccount)}
     >
       <TextInput
+        maxLength={20}
         withAsterisk
         label="Bank Account Number"
         placeholder="026291800001191"
@@ -22,6 +23,7 @@ const AddBankAccount = ({ onSuccess }) => {
       />
 
       <TextInput
+        maxLength={20}
         withAsterisk
         label="IFSC"
         placeholder="SBIN0000713"
@@ -37,6 +39,7 @@ const AddBankAccount = ({ onSuccess }) => {
       />
 
       <TextInput
+        maxLength={40}
         withAsterisk
         label="Account Holder Name"
         placeholder="Kailash Panda"

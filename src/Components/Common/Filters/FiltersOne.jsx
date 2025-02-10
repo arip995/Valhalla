@@ -60,6 +60,7 @@ const FiltersOne = ({
       </Tabs>
       <div className="flex w-full gap-3">
         <TextInput
+          maxLength={20}
           placeholder="Search title"
           value={searchValue}
           rightSectionPointerEvents="all"

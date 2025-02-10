@@ -62,6 +62,7 @@ const CreateLockedContent = ({ data }) => {
                 className="flex w-full flex-col gap-2"
               >
                 <TextInput
+                  maxLength={75}
                   label="Title"
                   placeholder=""
                   value={

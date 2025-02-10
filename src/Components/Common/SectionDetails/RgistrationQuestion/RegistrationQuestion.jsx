@@ -68,6 +68,7 @@ const RegistrationQuestion = ({
         }}
       />
       <TextInput
+        maxLength={75}
         minRows={4}
         resize="vertical"
         label="Question"

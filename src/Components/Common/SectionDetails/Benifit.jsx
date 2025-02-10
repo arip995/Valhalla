@@ -80,6 +80,7 @@ const Benifit = ({ section, onSave = () => {} }) => {
         benefits.map(item => (
           <div key={item.id} className="flex items-center">
             <TextInput
+              maxLength={40}
               placeholder="Add a Benefit"
               className="flex-grow"
               onChange={e =>
@@ -100,6 +101,7 @@ const Benifit = ({ section, onSave = () => {} }) => {
       ) : (
         <div className="flex items-center">
           <TextInput
+            maxLength={40}
             placeholder="Update Benefit"
             className="flex-grow"
             onChange={e =>

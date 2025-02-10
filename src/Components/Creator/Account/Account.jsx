@@ -178,6 +178,7 @@ const Account = () => {
                 )}
               >
                 <TextInput
+                  maxLength={20}
                   radius="sm"
                   description="First name"
                   {...personInfoForm.getInputProps(
@@ -185,6 +186,7 @@ const Account = () => {
                   )}
                 />
                 <TextInput
+                  maxLength={20}
                   radius="sm"
                   description="last name"
                   placeholder="Your name"
@@ -207,6 +209,7 @@ const Account = () => {
               {user?.isCreator ? (
                 <>
                   <TextInput
+                    maxLength={10}
                     radius="sm"
                     description="Username"
                     placeholder="pandaop"

@@ -101,6 +101,7 @@ const CreateProductModal = ({
         ) : (
           <>
             <TextInput
+              maxLength={75}
               label="Enter Product title"
               value={title}
               onChange={onTitleChange}

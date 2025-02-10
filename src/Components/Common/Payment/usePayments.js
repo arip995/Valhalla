@@ -224,6 +224,7 @@ const usePayment = (
                   setPaymentState(prev => ({
                     ...prev,
                     loading: false,
+                    purchaseSuccessful: false,
                   }));
                   callBackHandler(true);
                 }, 3500);
