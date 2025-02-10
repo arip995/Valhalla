@@ -110,6 +110,8 @@ const CreateLockedContent = ({ data }) => {
                   onUpdate={handleFileChange}
                 />
                 <NumberInput
+                  max={100000}
+                  clampBehavior="strict"
                   label="Price"
                   placeholder=""
                   hideControls
