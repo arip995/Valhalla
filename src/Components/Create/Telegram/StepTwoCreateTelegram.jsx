@@ -77,6 +77,7 @@ const StepTwoCreateTelegram = ({
           'new' ? (
             <>
               <TextInput
+                maxLength={20}
                 className="ctg-s1-input"
                 label="Channel name"
                 placeholder="Bull"

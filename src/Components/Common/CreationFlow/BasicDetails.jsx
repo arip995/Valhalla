@@ -11,6 +11,7 @@ const BasicDetails = ({ form }) => {
         Basic Details
       </div>
       <TextInput
+        maxLength={75}
         label="Page Title"
         placeholder="Enter course title"
         id={form.key('title')}
@@ -72,6 +73,7 @@ const BasicDetails = ({ form }) => {
         )}
       </div>
       <TextInput
+        maxLength={20}
         label="Button text"
         placeholder="Enter cta"
         id={form.key('cta')}

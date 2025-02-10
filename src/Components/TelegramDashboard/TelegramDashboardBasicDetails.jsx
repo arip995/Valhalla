@@ -29,6 +29,7 @@ const TelegramDashboardBasicDetails = ({
         })}
       >
         <TextInput
+          maxLength={75}
           label="Title"
           placeholder="Index + Nifty"
           {...basicDetailsForm.getInputProps('title')}

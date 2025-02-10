@@ -72,6 +72,7 @@ const About = ({ section, onSave = () => {} }) => {
         handleAvatarChange={handleFileChange}
       />
       <TextInput
+        maxLength={40}
         label="Name"
         name="name"
         {...aboutForm.getInputProps('name')}

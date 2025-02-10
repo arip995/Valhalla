@@ -120,6 +120,7 @@ const AuthModal = ({
               ) : ( */}
               {!isSignin && (
                 <TextInput
+                  maxLength={40}
                   placeholder="Email"
                   value={authForm?.values.email}
                   autoComplete="email"
@@ -145,6 +146,7 @@ const AuthModal = ({
               {/* )} */}
               {!isSignin && (
                 <TextInput
+                  maxLength={40}
                   placeholder="Full Name"
                   autoComplete="name"
                   value={authForm?.values.name}

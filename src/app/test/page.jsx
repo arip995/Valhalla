@@ -69,12 +69,14 @@ const test = () => {
       <div className="w-full max-w-2xl">
         <form onSubmit={form.onSubmit(handleSubmit)}>
           <TextInput
+            maxLength={40}
             required
             label="Channel Name"
             placeholder="Enter channel name"
             {...form.getInputProps('channelName')}
           />
           <TextInput
+            maxLength={40}
             required
             label="Admin Name"
             placeholder="Enter admin name"

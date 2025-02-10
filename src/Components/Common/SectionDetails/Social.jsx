@@ -83,6 +83,7 @@ const Social = ({ section, onSave }) => {
                     <div className="w-full flex-grow">
                       <div className="socials flex w-full items-center">
                         <TextInput
+                          maxLength={20}
                           fullWidth
                           value={
                             connectedPlatforms[platformType]

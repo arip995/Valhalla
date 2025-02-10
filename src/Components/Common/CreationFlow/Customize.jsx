@@ -47,6 +47,7 @@ const Customize = ({ form }) => {
         handleAvatarChange={handleFileChange}
       />
       <TextInput
+        maxLength={40}
         label="Name"
         name="name"
         {...form.getInputProps('name')}

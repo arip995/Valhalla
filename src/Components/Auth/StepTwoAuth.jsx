@@ -141,6 +141,7 @@ const StepTwoAuth = () => {
         <PaperWrapper className="relative">
           <Stack>
             <TextInput
+              maxLength={40}
               required
               autoFocus
               label="First Name"
@@ -153,6 +154,7 @@ const StepTwoAuth = () => {
               radius="md"
             />
             <TextInput
+              maxLength={40}
               required
               label="Last Name"
               placeholder="Jones"
@@ -164,6 +166,7 @@ const StepTwoAuth = () => {
               radius="md"
             />
             <TextInput
+              maxLength={10}
               required
               label="Username"
               placeholder="pandaop"

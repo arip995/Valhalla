@@ -132,6 +132,7 @@ const StepOneAuth = ({
             >
               {emailOrPhoneNumber === 'email' ? (
                 <TextInput
+                  maxLength={40}
                   label="Email address"
                   placeholder="hello@example.com"
                   autoComplete="email"

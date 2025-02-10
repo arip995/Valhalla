@@ -72,7 +72,7 @@ const renderTableDataCell = ({ type, item }) => {
           <div className="truncate">
             {getFullName(
               item.userDetails.firstName,
-              item.userDetails.firstName
+              item.userDetails.lastName
             )}
           </div>
         </td>

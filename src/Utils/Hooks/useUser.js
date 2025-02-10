@@ -65,7 +65,7 @@ const useUser = (fetch = false) => {
       );
       if (userRef.current?._id === storedUser?._id) return;
       setUserData();
-    }, 2000);
+    }, 1000);
 
     return () => {
       clearInterval(updatedLocalStorageInterval);

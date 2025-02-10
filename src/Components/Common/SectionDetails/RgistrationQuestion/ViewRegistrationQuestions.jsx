@@ -256,13 +256,12 @@ const ViewRegistrationQuestions = ({
       </>
     );
   }
-
   return (
     <Box>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
           {/* Mandatory Email and Phone fields */}
-          {!!data.priceType === 'customerDecided' && (
+          {data.priceType === 'customerDecided' ? (
             <NumberInput
               label={
                 <spam className="text-sm font-normal !text-gray-700">
@@ -275,8 +274,9 @@ const ViewRegistrationQuestions = ({
               withAsterisk
               {...form.getInputProps('minimumPrice')}
             />
-          )}
+          ) : null}
           <TextInput
+            maxLength={40}
             label={
               <spam className="text-sm font-normal !text-gray-700">
                 Email
@@ -302,6 +302,7 @@ const ViewRegistrationQuestions = ({
             {...form.getInputProps('phoneNumber')}
           />
           <TextInput
+            maxLength={20}
             label={
               <spam className="text-sm font-normal !text-gray-700">
                 Name
@@ -309,7 +310,6 @@ const ViewRegistrationQuestions = ({
             }
             size="sm"
             hideControls
-            maxLength={30}
             clampBehavior="strict"
             withAsterisk
             disabled={!!user?.firstName}

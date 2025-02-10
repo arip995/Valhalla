@@ -125,6 +125,7 @@ const AddUpdateContactDetails = ({
       case 'email' || 'supportEmail':
         return (
           <TextInput
+            maxLength={40}
             autoFocus
             label={capitalizeFirstLetter(type)}
             placeholder="hello@panda.dev"

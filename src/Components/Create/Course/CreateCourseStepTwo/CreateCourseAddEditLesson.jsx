@@ -152,6 +152,7 @@ const CreateCourseAddEditLesson = ({ form }) => {
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col gap-6">
       <TextInput
+        maxLength={75}
         label="Title"
         placeholder="Enter lesson title"
         withAsterisk

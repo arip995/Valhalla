@@ -112,6 +112,7 @@ const UploadVideoStream = ({ onUpload, file = [] }) => {
           events={{ hover: true, focus: true, touch: true }}
         >
           <TextInput
+            maxLength={40}
             label="Video Link"
             rightSectionWidth={60}
             disabled={
