@@ -16,6 +16,7 @@ const ListFiles = ({
   onDelete = () => {},
   showImagePreview = false,
   showDownloadButton = false,
+  showNoActionButton = false,
 }) => {
   const ListOfItems = useCallback(
     ({ item }) => {
@@ -85,35 +86,53 @@ const ListFiles = ({
                 />
               )}
               <div className="list-files-text">
-                {item.name || item.link}
+                {item.name || (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {item.link}
+                  </a>
+                )}
               </div>
             </div>
-            {showDownloadButton ? (
-              <a
-                href={item.url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <IconDownload
-                  color="gray"
-                  className="list-files-image"
-                  stroke={1}
-                />
-              </a>
+            {showNoActionButton ? (
+              <></>
             ) : (
-              <div className="list-files-text-container">
-                <div
-                  className="list-files-delete"
-                  onClick={() =>
-                    onDelete(item.url, item.id, item._id)
-                  }
-                >
-                  <IconTrash
-                    className="list-files-delete-icon"
-                    size={18}
-                  />
-                </div>
-              </div>
+              <>
+                {showDownloadButton ? (
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <IconDownload
+                      color="gray"
+                      className="list-files-image"
+                      stroke={1}
+                    />
+                  </a>
+                ) : (
+                  <div className="list-files-text-container">
+                    <div
+                      className="list-files-delete"
+                      onClick={() =>
+                        onDelete(
+                          item.url,
+                          item.id,
+                          item._id
+                        )
+                      }
+                    >
+                      <IconTrash
+                        className="list-files-delete-icon"
+                        size={18}
+                      />
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

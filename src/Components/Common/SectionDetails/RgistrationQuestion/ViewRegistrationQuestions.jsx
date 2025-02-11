@@ -1,6 +1,10 @@
 'use client';
 
-import { formatPrice, getFullName } from '@/Utils/Common';
+import {
+  convertFullNameToFirstNameLastName,
+  formatPrice,
+  getFullName,
+} from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
 import {
   Box,
@@ -69,7 +73,12 @@ const ViewRegistrationQuestions = ({
         }
 
         //Validate name
-        if (!values.name) {
+        const { firstName, lastName } =
+          convertFullNameToFirstNameLastName(values.name);
+        if (!lastName?.trim()?.length) {
+          errors.name = 'Last name is required';
+        }
+        if (!firstName?.trim()?.length) {
           errors.name = 'Name is required';
         }
 
@@ -331,7 +340,7 @@ const ViewRegistrationQuestions = ({
                 <span className="text-xl font-medium">
                   {data.hasDiscountedPrice ? (
                     <>
-                      <span className="mr-2 text-gray-500 line-through">
+                      <span className="mr-2 text-sm text-gray-500 line-through">
                         {formatPrice(data.price)}
                       </span>
                       <span className="text-green-600">
@@ -348,7 +357,7 @@ const ViewRegistrationQuestions = ({
 
           {/* Payment Button */}
           <Button
-            className={`w-full rounded-lg bg-opacity-90 py-3 text-white transition-colors hover:bg-opacity-100`}
+            className={`w-full bg-opacity-90 text-white transition-colors hover:bg-opacity-100`}
             style={{ backgroundColor: data.themeColor }}
             type="submit"
             loading={paymentState?.payinLoading}

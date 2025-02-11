@@ -110,7 +110,9 @@ const DPConsume = ({ productId }) => {
         {!!links?.length && (
           <div className="my-2 font-semibold">Links</div>
         )}
-        {links?.length ? <ListFiles files={links} /> : null}
+        {links?.length ? (
+          <ListFiles files={links} showNoActionButton />
+        ) : null}
 
         {!!videos?.length && (
           <div className="my-2 mt-4 font-semibold">
