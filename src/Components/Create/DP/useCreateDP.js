@@ -24,7 +24,7 @@ const useCreateDP = () => {
       cta: 'Make Payment',
       title: '',
       sections: sectionTypes('dp'),
-      themeColor: '#be4bdb',
+      themeColor: '#9d65ab',
     },
     validateInputOnChange: true,
     clearInputErrorOnChange: false,
