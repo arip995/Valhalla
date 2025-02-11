@@ -1,8 +1,7 @@
-import Auth from '@/Components/Auth/Auth';
-import React from 'react';
+import SigninAuth from '@/Components/Auth/SigninAuth';
 
 const page = () => {
-  return <Auth />;
+  return <SigninAuth />;
 };
 
 export default page;

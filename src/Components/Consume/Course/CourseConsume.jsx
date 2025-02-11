@@ -23,6 +23,7 @@ import toast from 'react-hot-toast';
 import CourseContentList from './CourseContentList';
 import ListFiles from '@/Components/Common/ListFiles/ListFiles';
 import { checkIfPurchased } from '@/Utils/Common';
+import { getUserData } from '@/Utils/getuserData';
 
 const CourseConsume = ({ productId }) => {
   // const searchParams = useSearchParams();
@@ -58,12 +59,12 @@ const CourseConsume = ({ productId }) => {
   const fetchProductData = async () => {
     try {
       setLoading(true);
-      if (!user?._id) {
+      if (!getUserData()?._id) {
         redirectToBuyPage();
       }
       const hasPurchased = await checkIfPurchased(
         productId,
-        user._id
+        getUserData()?._id
       );
       if (!hasPurchased) {
         redirectToBuyPage();
@@ -262,7 +263,6 @@ const CourseConsume = ({ productId }) => {
   };
 
   useEffect(() => {
-    if (user === -1) return;
     fetchProductData();
   }, [user?._id]);
 

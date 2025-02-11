@@ -12,7 +12,7 @@ import {
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-const useAuth = () => {
+const useSignin = () => {
   const { user } = useUser(true);
   const pathname = usePathname().substring(1);
   const params = useSearchParams();
@@ -206,4 +206,4 @@ const useAuth = () => {
   };
 };
 
-export default useAuth;
+export default useSignin;

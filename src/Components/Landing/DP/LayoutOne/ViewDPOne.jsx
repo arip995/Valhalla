@@ -1,13 +1,13 @@
 import ViewProfile from '@/Components/Common/General/ViewProfile';
+import NotFoundOne from '@/Components/Common/NotFoundOne/NotFoundOne';
 import ViewSections2 from '@/Components/Common/ViewSections/ViewSection2';
+import { formatPrice } from '@/Utils/Common';
+import { TypographyStylesProvider } from '@mantine/core';
 import { IconMail, IconPhone } from '@tabler/icons-react';
 import Image from 'next/image';
 import ViewDPForm from './ViewDPForm';
-import { formatPrice } from '@/Utils/Common';
-import NotFoundOne from '@/Components/Common/NotFoundOne/NotFoundOne';
-import ViewOrLoginDPOne from './ViewOrLoginDPOne';
 import ViewDPOneButtonModal from './ViewDPOneButtonModal';
-import { TypographyStylesProvider } from '@mantine/core';
+import ViewOrLoginDPOne from './ViewOrLoginDPOne';
 
 const ViewDPOne = ({ data }) => {
   if (!data) return <NotFoundOne />;
@@ -191,13 +191,18 @@ const ViewDPOne = ({ data }) => {
 
           {/* Right Column - Payment Details */}
           <div className="hidden lg:relative lg:col-span-5 lg:block">
-            <div className="lg:sticky lg:top-8">
+            <div className="lg:sticky lg:top-14">
               <ViewDPForm
                 formatPrice={formatPrice}
                 data={data}
               />
             </div>
           </div>
+
+          {/* Signin button or profile button */}
+          {/* <div className="fixed right-2 top-2">
+            <SigninOrProfileButton />
+          </div> */}
 
           <div className="fixed bottom-0 left-0 right-0 border-t bg-white p-4 shadow-lg lg:hidden">
             {/* <div className="mb-4 flex items-center justify-between">

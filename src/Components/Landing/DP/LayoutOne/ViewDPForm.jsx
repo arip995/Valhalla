@@ -18,6 +18,10 @@ const ViewDPForm = ({ data }) => {
         <ViewRegistrationQuestions data={data} />
 
         {/* Security Badge */}
+        {/* <div className="text-center text-sm text-gray-600">
+          Please ensure your email and phone number are
+          correct.
+        </div> */}
         <div className="text-center text-sm text-gray-600">
           Guaranteed safe & secure payment
         </div>
