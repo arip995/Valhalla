@@ -1,17 +1,16 @@
 'use client';
 
-import { getUserId } from '@/Utils/Common';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 import NavHeader from '../NavHeader';
 import NavLink from '../NavLink';
+import useUser from '@/Utils/Hooks/useUser';
 
 const Navbar = () => {
+  const { user } = useUser();
   const menuBtnEl = useRef();
-  const redirect = getUserId()?._id ? 'home' : 'signup';
-  const redirectTitle = getUserId()?._id
-    ? 'Dashboard'
-    : 'Signup';
+  const redirect = user?._id ? 'home' : 'signup';
+  const redirectTitle = user?._id ? 'Dashboard' : 'Signup';
   const [state, setState] = useState(false);
 
   const navigation = [

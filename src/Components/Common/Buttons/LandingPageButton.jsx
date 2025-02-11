@@ -1,13 +1,13 @@
 'use client';
-import { getUserId } from '@/Utils/Common';
+import useUser from '@/Utils/Hooks/useUser';
 import { IconChevronRight } from '@tabler/icons-react';
 import Link from 'next/link';
+import React from 'react';
 
 const LandingPageButton = ({ type, ...props }) => {
-  const redirect = getUserId()?._id ? 'home' : 'signup';
-  const redirectTitle = getUserId()?._id
-    ? 'Dashboard'
-    : 'Signup';
+  const { user } = useUser();
+  const redirect = user?._id ? 'home' : 'signup';
+  const redirectTitle = user?._id ? 'Dashboard' : 'Signup';
 
   return (
     <Link href={`/${redirect}`} {...props}>

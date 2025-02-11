@@ -9,7 +9,6 @@ import {
 } from '@mantine/core';
 import { IconArrowLeft } from '@tabler/icons-react';
 import React from 'react';
-
 import '../../../styles/common/common-container.css';
 import '../../../styles/create/Telegram.css';
 import PaperWrapper from '../../Auth/PaperWrapper';
