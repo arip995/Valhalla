@@ -3,7 +3,6 @@ import NotFoundOne from '@/Components/Common/NotFoundOne/NotFoundOne';
 import ViewSections2 from '@/Components/Common/ViewSections/ViewSection2';
 import { formatPrice } from '@/Utils/Common';
 import { TypographyStylesProvider } from '@mantine/core';
-import { IconMail, IconPhone } from '@tabler/icons-react';
 import Image from 'next/image';
 import ViewDPForm from './ViewDPForm';
 import ViewDPOneButtonModal from './ViewDPOneButtonModal';
@@ -108,7 +107,7 @@ const ViewDPOne = ({ data }) => {
                 </div> */}
 
                 {/* Contact Info */}
-                <div className="border-t pt-4">
+                {/* <div className="border-t pt-4">
                   <h2 className="mb-2 text-lg font-medium text-gray-800">
                     Contact {data.creatorDetails.name}
                   </h2>
@@ -129,7 +128,7 @@ const ViewDPOne = ({ data }) => {
                       </span>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Terms and Conditions */}
                 <div className="rounded-lg bg-gray-50 p-2">
