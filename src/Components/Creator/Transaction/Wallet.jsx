@@ -18,6 +18,7 @@ import {
 } from '@mantine/core';
 import {
   IconAlertCircle,
+  IconArrowUp,
   IconCheck,
   IconCircleDot,
   IconHelpCircle,
@@ -306,12 +307,12 @@ const Wallet = () => {
                   icon={IconWallet}
                 />
               ) : null}
-              {/* <SummaryCard
+              <SummaryCard
                 title="Total Withdrawals"
                 label="The total of all amounts withdrawn so far."
                 value={walletDetails.totalWithdrawals}
                 icon={IconArrowUp}
-              /> */}
+              />
             </div>
 
             {/* Withdrawal Form */}
