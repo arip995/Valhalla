@@ -397,6 +397,9 @@ const Wallet = () => {
                         withCheckIcon={false}
                         placeholder="Select Bank"
                         allowDeselect={false}
+                        disabled={
+                          walletDetails.payoutOnHold
+                        }
                         data={user?.beneficiaryDetails?.map(
                           value => {
                             return {
@@ -432,7 +435,8 @@ const Wallet = () => {
                           loading ||
                           !user?.beneficiaryDetails
                             ?.length ||
-                          !walletDetails.withdrawableBalance
+                          !walletDetails.withdrawableBalance ||
+                          walletDetails.payoutOnHold
                         )
                       }
                       type="number"
@@ -450,7 +454,8 @@ const Wallet = () => {
                           loading ||
                           !user?.beneficiaryDetails
                             ?.length ||
-                          !walletDetails.withdrawableBalance
+                          !walletDetails.withdrawableBalance ||
+                          walletDetails.payoutOnHold
                         )
                       }
                     >

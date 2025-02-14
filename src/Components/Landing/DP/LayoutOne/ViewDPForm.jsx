@@ -11,10 +11,6 @@ const ViewDPForm = ({ data }) => {
     <div className="space-y-6 rounded-none border border-gray-100 bg-white p-6 shadow-lg">
       <h2 className="text-xl font-medium text-gray-800">
         Payment Details
-        <div className="text-xs text-gray-600 underline">
-          Please ensure your email and phone number are
-          correct.
-        </div>
       </h2>
 
       {/* Payment Form */}
