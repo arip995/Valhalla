@@ -329,6 +329,10 @@ const ViewRegistrationQuestions = ({
           {registrationQuestions.map(question =>
             renderField(question)
           )}
+          <div className="text-xs text-gray-600">
+            Please ensure your email and phone number are
+            correct.
+          </div>
 
           {/* Amount */}
           <div className="pt-4">
