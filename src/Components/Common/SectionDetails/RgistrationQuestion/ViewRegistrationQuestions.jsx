@@ -73,11 +73,12 @@ const ViewRegistrationQuestions = ({
         }
 
         //Validate name
+        // eslint-disable-next-line no-unused-vars
         const { firstName, lastName } =
           convertFullNameToFirstNameLastName(values.name);
-        if (!lastName?.trim()?.length) {
-          errors.name = 'Last name is required';
-        }
+        // if (!lastName?.trim()?.length) {
+        //   errors.name = 'Last name is required';
+        // }
         if (!firstName?.trim()?.length) {
           errors.name = 'Name is required';
         }
