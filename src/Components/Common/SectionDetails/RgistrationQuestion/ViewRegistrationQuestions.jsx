@@ -73,11 +73,12 @@ const ViewRegistrationQuestions = ({
         }
 
         //Validate name
+        // eslint-disable-next-line no-unused-vars
         const { firstName, lastName } =
           convertFullNameToFirstNameLastName(values.name);
-        if (!lastName?.trim()?.length) {
-          errors.name = 'Last name is required';
-        }
+        // if (!lastName?.trim()?.length) {
+        //   errors.name = 'Last name is required';
+        // }
         if (!firstName?.trim()?.length) {
           errors.name = 'Name is required';
         }
@@ -329,6 +330,10 @@ const ViewRegistrationQuestions = ({
           {registrationQuestions.map(question =>
             renderField(question)
           )}
+          <div className="text-xs text-gray-600">
+            Please ensure your email and phone number are
+            correct.
+          </div>
 
           {/* Amount */}
           <div className="pt-4">
