@@ -50,9 +50,22 @@ const ViewLockedContentDetails = ({ data }) => {
 
   return (
     <>
+      {showLockedItems ? (
+        <>
+          <div className="text-center">
+            <h2 className="text-xl font-semibold text-green-600">
+              Purchase Successful!
+            </h2>
+            <p className="text-gray-700">
+              Thank you for your purchase. Your locked
+              content is unlocked now!!!
+            </p>
+          </div>
+        </>
+      ) : null}
       <div className="vlc-view-product-container">
         {showLockedItems ? (
-          <div className="vlc-view-product-unlocked-state h-full overflow-y-auto rounded-md border border-gray-200 p-2 shadow-lg">
+          <div className="vlc-view-product-unlocked-state h-full overflow-y-auto rounded-md border-2 border-gray-200 p-2 shadow-lg">
             {data.message ? (
               <div className="mb-2">{data.message}</div>
             ) : null}
@@ -81,20 +94,18 @@ const ViewLockedContentDetails = ({ data }) => {
           </div>
         )}
       </div>
-      {showLockedItems ? null : (
-        <BuyButton
-          animate={data.status === 1 ? true : false}
-          disabled={data.status !== 1}
-          price={data?.price}
-          creatorId={data.creatorId}
-          productDetails={data}
-          onSuccess={onSuccess}
-        >
-          {data.status === 1
-            ? `${`Unlock for ₹${data?.price}`}`
-            : StatusErrorTextMapping[data.status]}{' '}
-        </BuyButton>
-      )}
+      <BuyButton
+        animate={data.status === 1 ? true : false}
+        disabled={data.status !== 1}
+        price={data?.price}
+        creatorId={data.creatorId}
+        productDetails={data}
+        onSuccess={onSuccess}
+      >
+        {data.status === 1
+          ? `${`Unlock for ₹${data?.price}`}`
+          : StatusErrorTextMapping[data.status]}{' '}
+      </BuyButton>
       {/* <ViewLockedContentBuyButton data={data} /> */}
     </>
   );
