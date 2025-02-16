@@ -94,18 +94,20 @@ const ViewLockedContentDetails = ({ data }) => {
           </div>
         )}
       </div>
-      <BuyButton
-        animate={data.status === 1 ? true : false}
-        disabled={data.status !== 1}
-        price={data?.price}
-        creatorId={data.creatorId}
-        productDetails={data}
-        onSuccess={onSuccess}
-      >
-        {data.status === 1
-          ? `${`Unlock for ₹${data?.price}`}`
-          : StatusErrorTextMapping[data.status]}{' '}
-      </BuyButton>
+      {showLockedItems ? null : (
+        <BuyButton
+          animate={data.status === 1 ? true : false}
+          disabled={data.status !== 1}
+          price={data?.price}
+          creatorId={data.creatorId}
+          productDetails={data}
+          onSuccess={onSuccess}
+        >
+          {data.status === 1
+            ? `${`Unlock for ₹${data?.price}`}`
+            : StatusErrorTextMapping[data.status]}{' '}
+        </BuyButton>
+      )}
       {/* <ViewLockedContentBuyButton data={data} /> */}
     </>
   );
