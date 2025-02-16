@@ -29,8 +29,6 @@ const TelegramMemberDetailsCard = ({
   return (
     <Card
       padding="md"
-      radius="lg"
-      shadow="md"
       withBorder
       className="cursor-pointer hover:bg-gray-50"
       onClick={() => onItemClick(item)}
