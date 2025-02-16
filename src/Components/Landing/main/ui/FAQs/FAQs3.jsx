@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     question:
-      'which mobile number will be added to telegram?',
+      'Which mobile number will be added to telegram?',
     answer:
       'You will "Join Now" button arfter the payment, make sure you have logged in to proper telegram account before join. selected account will be telgram account.',
   },
