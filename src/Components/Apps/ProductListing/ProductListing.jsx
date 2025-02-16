@@ -189,48 +189,32 @@ const ProductListing = ({
                         : isGrid,
                   })}
                 >
-                  <SimpleGrid
-                    className="w-full"
-                    cols={{
-                      base: 1,
-                      xs: 2,
-                      sm: 2,
-                      md: 3,
-                      lg: 4,
-                      xl: 6,
-                    }}
-                    spacing={{ base: 10, sm: 'xl' }}
-                    verticalSpacing={{ base: 10, sm: 'xl' }}
-                  >
-                    {data.data.map(item => {
-                      return (
-                        <>
-                          {showOnlyGridViewInMobile ? (
-                            <Component
-                              item={item}
-                              onItemClick={
-                                onRowClick ||
-                                onDefaultRowClick
-                              }
-                              key={item._id}
-                            />
-                          ) : (
-                            <ProductCard
-                              item={item}
-                              app={app}
-                              onUpdate={onUpdate}
-                              onItemClick={row =>
-                                router.push(
-                                  `/dashboard/${app}/${row._id}`
-                                )
-                              }
-                              key={item._id}
-                            />
-                          )}
-                        </>
-                      );
-                    })}
-                  </SimpleGrid>
+                  <div className="grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-4">
+                    {data.data.map(item => (
+                      <div key={item._id}>
+                        {showOnlyGridViewInMobile ? (
+                          <Component
+                            item={item}
+                            onItemClick={
+                              onRowClick ||
+                              onDefaultRowClick
+                            }
+                          />
+                        ) : (
+                          <ProductCard
+                            item={item}
+                            app={app}
+                            onUpdate={onUpdate}
+                            onItemClick={row =>
+                              router.push(
+                                `/dashboard/${app}/${row._id}`
+                              )
+                            }
+                          />
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
                 <CustomTable
                   tableBodyItems={data.data || []}
