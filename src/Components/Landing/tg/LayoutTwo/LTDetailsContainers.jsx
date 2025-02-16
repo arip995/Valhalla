@@ -6,6 +6,7 @@ import {
   Spoiler,
   TypographyStylesProvider,
 } from '@mantine/core';
+import FAQs3 from '../../main/ui/FAQs/FAQs3';
 
 const LTDetailsContainer = ({ data }) => {
   return (
@@ -60,6 +61,7 @@ const LTDetailsContainer = ({ data }) => {
             <ViewPlans2 data={data} />
           </div>
           <Disclaimer showTitle={false} />
+          <FAQs3 />
         </div>
       </div>
       {/* <div className="mx-auto my-6 w-full max-w-lg"></div> */}
