@@ -2,11 +2,6 @@ import ViewTelegram from '@/Components/Landing/tg/ViewTelegram';
 import ViewTelegramClient from '@/Components/Landing/tg/ViewTelegramClient';
 import { getMetaData } from '@/Utils/getMetaData';
 import { notFound } from 'next/navigation';
-import DOMPurify from 'isomorphic-dompurify';
-
-export function sanitizeHtml(html) {
-  return DOMPurify.sanitize(html);
-}
 
 export async function generateMetadata({ params }, parent) {
   const { data } = await getMetaData(params.id, 'tg');
@@ -15,10 +10,6 @@ export async function generateMetadata({ params }, parent) {
     (await parent).openGraph?.images || [];
 
   const pageUrl = `https://${process.env.NEXT_PUBLIC_HOST}/tg/${params.id}`;
-  const sanitizedDescription = data?.description
-    ? sanitizeHtml(data.description).slice(0, 200) +
-      (data.description.length > 200 ? '...' : '')
-    : 'Monetize your content';
 
   return {
     title:
@@ -52,7 +43,8 @@ export async function generateMetadata({ params }, parent) {
       title:
         data?.title ||
         'Nexify: all-in-one platform for your digital products and services',
-      description: sanitizedDescription,
+      // description:
+      //   data?.description || 'Monetize your content',
       domain: process.env.NEXT_PUBLIC_HOST,
       type: 'website',
       url: pageUrl,
@@ -76,7 +68,8 @@ export async function generateMetadata({ params }, parent) {
       title:
         data?.title ||
         'Nexify: all-in-one platform for your digital products and services',
-      description: sanitizedDescription,
+      // description:
+      // data?.description || 'Monetize your content',
       type: 'website',
       url: pageUrl,
       author: data?.creatorDetails?.username || '',
