@@ -2,7 +2,11 @@ import ViewTelegram from '@/Components/Landing/tg/ViewTelegram';
 import ViewTelegramClient from '@/Components/Landing/tg/ViewTelegramClient';
 import { getMetaData } from '@/Utils/getMetaData';
 import { notFound } from 'next/navigation';
-import { sanitizeHtml } from '@/lib/utils';
+import DOMPurify from 'isomorphic-dompurify';
+
+export function sanitizeHtml(html) {
+  return DOMPurify.sanitize(html);
+}
 
 export async function generateMetadata({ params }, parent) {
   const { data } = await getMetaData(params.id, 'tg');
