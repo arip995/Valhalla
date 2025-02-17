@@ -79,7 +79,9 @@ export const getFullName = (
   firstName = '',
   lastName = ''
 ) => {
-  return `${firstName} ${lastName}`;
+  return `${String(firstName).trim()} ${String(
+    lastName
+  ).trim()}`.trim();
 };
 
 export const onDrag = (
