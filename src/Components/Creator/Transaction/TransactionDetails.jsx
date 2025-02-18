@@ -77,7 +77,7 @@ const TransactionDetails = ({ data = {} }) => {
             ),
           },
           {
-            label: 'Amount Paid',
+            label: status != 1 ? 'Amount' : 'Amount Paid',
             value: `₹${amountPaid || '0'}`,
             icon: (
               <IconReceipt className="h-4 w-4 text-gray-500" />
@@ -85,7 +85,10 @@ const TransactionDetails = ({ data = {} }) => {
           },
           {
             label: 'Payout Amount',
-            value: `₹${payoutAmount || '0'}`,
+            value:
+              status != 1
+                ? '-- -- --'
+                : `₹${payoutAmount || '0'}`,
             icon: (
               <IconBuilding className="h-4 w-4 text-gray-500" />
             ),
@@ -93,44 +96,52 @@ const TransactionDetails = ({ data = {} }) => {
           {
             label: 'Platform Fee',
             value: (
-              <Tooltip
-                label={
-                  <div>
-                    Platform fee amount: ₹
-                    {platformFeeDetails.platformFeeAmount}
-                    <br />
-                    Platform fee gst: ₹
-                    {
-                      platformFeeDetails.platformFeeGSTAmount
+              <>
+                {status != 1 ? (
+                  '-- -- --'
+                ) : (
+                  <Tooltip
+                    label={
+                      <div>
+                        Platform fee amount: ₹
+                        {
+                          platformFeeDetails.platformFeeAmount
+                        }
+                        <br />
+                        Platform fee gst: ₹
+                        {
+                          platformFeeDetails.platformFeeGSTAmount
+                        }
+                        <br />
+                        Platform fee percentage:
+                        {
+                          platformFeeDetails.platformFeePercentage
+                        }
+                        %
+                        <br />
+                        Platform fee gst:
+                        {
+                          platformFeeDetails.platformFeeGSTPercentage
+                        }
+                        %
+                      </div>
                     }
-                    <br />
-                    Platform fee percentage:
-                    {
-                      platformFeeDetails.platformFeePercentage
-                    }
-                    %
-                    <br />
-                    Platform fee gst:
-                    {
-                      platformFeeDetails.platformFeeGSTPercentage
-                    }
-                    %
-                  </div>
-                }
-                events={{
-                  hover: true,
-                  focus: true,
-                  touch: true,
-                }}
-              >
-                <div className="flex items-center gap-2">
-                  <IconInfoCircle className="h-4 w-4 text-gray-500" />
-                  ₹
-                  {
-                    platformFeeDetails.finalPlatformFeeAmount
-                  }
-                </div>
-              </Tooltip>
+                    events={{
+                      hover: true,
+                      focus: true,
+                      touch: true,
+                    }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <IconInfoCircle className="h-4 w-4 text-gray-500" />
+                      ₹
+                      {
+                        platformFeeDetails.finalPlatformFeeAmount
+                      }
+                    </div>
+                  </Tooltip>
+                )}
+              </>
             ),
             icon: (
               <IconReceipt className="h-4 w-4 text-gray-500" />
@@ -140,7 +151,7 @@ const TransactionDetails = ({ data = {} }) => {
             label: 'Payment Method',
             value:
               PAYMENT_METHOD_MAPPING[paymentMethod] ||
-              '---',
+              '-- -- --',
             icon: (
               <IconCreditCard className="h-4 w-4 text-gray-500" />
             ),

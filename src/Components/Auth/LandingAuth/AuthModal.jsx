@@ -118,7 +118,7 @@ const AuthModal = ({
             >
               {/* {isEmail ? (
               ) : ( */}
-              {!isSignin && (
+              {/* {!isSignin && (
                 <TextInput
                   maxLength={40}
                   placeholder="Email"
@@ -127,7 +127,7 @@ const AuthModal = ({
                   {...authForm?.getInputProps('email')}
                   className="w-full"
                 />
-              )}
+              )} */}
               <NumberInput
                 hideControls
                 clampBehavior="strict"

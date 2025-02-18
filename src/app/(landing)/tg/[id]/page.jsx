@@ -43,8 +43,8 @@ export async function generateMetadata({ params }, parent) {
       title:
         data?.title ||
         'Nexify: all-in-one platform for your digital products and services',
-      description:
-        data?.description || 'Monetize your content',
+      // description:
+      //   data?.description || 'Monetize your content',
       domain: process.env.NEXT_PUBLIC_HOST,
       type: 'website',
       url: pageUrl,
@@ -68,8 +68,8 @@ export async function generateMetadata({ params }, parent) {
       title:
         data?.title ||
         'Nexify: all-in-one platform for your digital products and services',
-      description:
-        data?.description || 'Monetize your content',
+      // description:
+      // data?.description || 'Monetize your content',
       type: 'website',
       url: pageUrl,
       author: data?.creatorDetails?.username || '',

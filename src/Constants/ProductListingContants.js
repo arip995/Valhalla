@@ -36,7 +36,7 @@ export const StatusErrorTextMapping = {
 
 export const StatusPaymentMapping = {
   1: 'Success',
-  2: 'Failed',
+  2: 'Cancelled',
   3: 'Dropped',
   0: 'Pending',
 };
