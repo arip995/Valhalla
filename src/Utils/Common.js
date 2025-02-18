@@ -294,7 +294,7 @@ export const checkIfPurchased = async (
   }
 };
 
-export const formatDate = date => {
+export const formatDate = (date, time = true) => {
   if (!date) return null;
   const newDate = new Date(date);
   const dateOptions = {
@@ -318,6 +318,9 @@ export const formatDate = date => {
     'en-US',
     timeOptions
   );
+  if (!time) {
+    return `${formattedDate}`;
+  }
   return `${formattedDate} ${formattedTime}`;
 };
 
@@ -341,3 +344,12 @@ export const getUserId = () => {
 
 export const delay = ms =>
   new Promise(resolve => setTimeout(resolve, ms));
+
+export const daysToMonthAndWeeks = days => {
+  if (!days) return '1 Day';
+  if (days < 7) return `${days} Days`;
+  if (days < 30) return `${days / 7} Weeks`;
+  if (days < 365) return `${days / 30} Months`;
+  if (days < 35600) return `${days / 365} Years`;
+  if (days == 36500) return `Lifetime`;
+};

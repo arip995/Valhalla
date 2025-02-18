@@ -29,7 +29,7 @@ const TelegramMemberDetailsCard = ({
   return (
     <Card
       padding="md"
-      radius="lg"
+      radius="md"
       shadow="md"
       withBorder
       className="cursor-pointer hover:bg-gray-50"
