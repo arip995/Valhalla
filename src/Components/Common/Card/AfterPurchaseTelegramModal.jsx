@@ -39,6 +39,7 @@ const AfterPurchaseTelegramModal = ({
             href={`https://t.me/${inviteLink}`}
             rel="noopener noreferrer"
             target="_blank"
+            onClick={onClose}
           >
             <Button
               variant="filled"
