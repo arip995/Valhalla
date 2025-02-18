@@ -401,22 +401,22 @@ export const RegistrationQuestionTypes = [
 
 export const TelegramSubscriberStatusMapping = {
   1: (
-    <Badge color="green" variant="light" size="sm">
+    <Badge color="green" variant="light" size="md">
       Active
     </Badge>
   ),
   2: (
-    <Badge color="red" variant="light" size="sm">
+    <Badge color="red" variant="light" size="md">
       Expired
     </Badge>
   ),
   3: (
-    <Badge color="red" variant="light" size="sm">
+    <Badge color="red" variant="light" size="md">
       Deleted
     </Badge>
   ),
   4: (
-    <Badge color="red" variant="light" size="sm">
+    <Badge color="red" variant="light" size="md">
       Left
     </Badge>
   ),

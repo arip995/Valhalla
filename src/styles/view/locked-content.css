@@ -31,7 +31,7 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    border-radius: 10px;
+    border-radius: 6px;
     /* background-image: url('../../../public/images/common/creationflowbackground.jpg'); */
     background-size: 180% 180%;
     animation: gradient-animation 21s ease infinite;
