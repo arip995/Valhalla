@@ -4,6 +4,13 @@ import ProductListing from '@/Components/Apps/ProductListing/ProductListing';
 import { TelegramSubscriberStatusMapping } from '@/Constants/constants';
 import { formatDate, getFullName } from '@/Utils/Common';
 import {
+  ActionIcon,
+  CopyButton,
+  Drawer,
+  rem,
+  Tooltip,
+} from '@mantine/core';
+import {
   IconBrandRedux,
   IconCalendar,
   IconCheck,
@@ -19,14 +26,7 @@ import {
   useSearchParams,
 } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import TelegramMemberDetailsCard from '../Common/Card/TelegramMemberDetailsCard';
-import {
-  ActionIcon,
-  CopyButton,
-  Drawer,
-  rem,
-  Tooltip,
-} from '@mantine/core';
+import TelegramMemberDetailsCard2 from '../Common/Card/TelegramMemberDetailsCard2';
 import TelegramMemberDetails from './TelegramMemberDetails';
 
 const TableHeaderItems = [
@@ -197,7 +197,7 @@ const TelegramDashboardMemberDetails = () => {
               No subscribers found
             </h2>
           }
-          Component={TelegramMemberDetailsCard}
+          Component={TelegramMemberDetailsCard2}
         />
       </div>
       <Drawer
