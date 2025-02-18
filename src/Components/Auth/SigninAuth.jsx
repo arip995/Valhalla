@@ -3,7 +3,6 @@
 import Timer from '@/Components/Common/Timer.jsx';
 import {
   Button,
-  Divider,
   NumberInput,
   PinInput,
   Text,
@@ -13,8 +12,6 @@ import { upperFirst } from '@mantine/hooks';
 import {
   IconArrowRight,
   IconEdit,
-  IconMail,
-  IconPhone,
 } from '@tabler/icons-react';
 import Link from 'next/link';
 import React from 'react';
@@ -24,7 +21,7 @@ const SigninAuth = () => {
   const {
     pathname,
     emailOrPhoneNumber,
-    toggleEmailOrPhoneNumber,
+    // toggleEmailOrPhoneNumber,
     showOtp,
     toggleShowOtp,
     setIsClickedAtleastOnce,
@@ -40,7 +37,7 @@ const SigninAuth = () => {
         <div className="w-full max-w-md">
           <div className="rounded-2xl bg-white p-8 shadow-xl">
             {/* Logo Section */}
-            <div className="m4-8 flex justify-center">
+            <div className="mb-4 flex justify-center">
               <div className="flex items-center gap-2">
                 <img
                   className="h-10 w-auto"
@@ -189,7 +186,7 @@ const SigninAuth = () => {
 
               {!showOtp && (
                 <>
-                  <Divider
+                  {/* <Divider
                     label="Or continue with"
                     labelPosition="center"
                   />
@@ -211,7 +208,7 @@ const SigninAuth = () => {
                     {emailOrPhoneNumber === 'email'
                       ? 'Phone'
                       : 'Email'}
-                  </Button>
+                  </Button> */}
 
                   <div className="text-center text-sm text-gray-500">
                     {pathname === 'signin'
