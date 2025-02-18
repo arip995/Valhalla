@@ -28,7 +28,7 @@ const TelegramMemberDetailsCard2 = ({
     >
       <div className="flex w-full flex-col gap-3 text-sm">
         <div className="flex items-start justify-between">
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 text-base font-semibold">
             <IconUser className="h-4 w-4" />{' '}
             {getFullName(
               item.userDetails.firstName,
