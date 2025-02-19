@@ -302,7 +302,7 @@ const Wallet = () => {
                 title="Payouts stopped until Tuesday"
                 color="yellow"
               >
-                Due to some requests from Razorpay regarding
+                Due to requests from Razorpay regarding
                 account settlements, we could not process
                 your payouts until Tuesday. Rest assured,
                 you will be able to withdraw from Wednesday.
