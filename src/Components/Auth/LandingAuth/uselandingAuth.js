@@ -6,7 +6,12 @@ import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-const uselandingAuth = (signin, onAuthComplete, opened) => {
+const uselandingAuth = (
+  signin,
+  onAuthComplete,
+  opened,
+  isEmailRequired
+) => {
   const [isSignin, setIsSignin] = useState(signin);
   const { setCurrentUser } = useUser();
   const [step, setStep] = useState(1);
@@ -21,29 +26,34 @@ const uselandingAuth = (signin, onAuthComplete, opened) => {
       isClickedAtleastOnce: false,
     },
     validateInputOnChange: true,
-    validate: values => ({
-      name:
-        values.isClickedAtleastOnce &&
-        !isSignin &&
-        !values.name
-          ? 'Name is required'
-          : values.name.length > 60
-            ? !isSignin &&
-              'Name should be less than 60 characters'
-            : null,
-      email:
-        !isSignin &&
-        !validateEmail(values?.email) &&
-        values.isClickedAtleastOnce
-          ? 'Invalid email'
-          : null,
-      phoneNumber: !isEmail
-        ? values?.phoneNumber?.toString()?.length != 10
-          ? values.isClickedAtleastOnce &&
-            'Invalid phone number'
-          : null
-        : null,
-    }),
+    validate: values => {
+      const errors = {};
+      if (values.isClickedAtleastOnce) {
+        if (isSignin) {
+          if (
+            values.phoneNumber?.toString()?.length != 10
+          ) {
+            errors.phoneNumber = 'Invalid phone number';
+          }
+        } else {
+          if (
+            isEmailRequired &&
+            !validateEmail(values.email)
+          ) {
+            errors.email = 'Invalid email';
+          }
+          if (
+            values.phoneNumber?.toString()?.length != 10
+          ) {
+            errors.phoneNumber = 'Invalid phone number';
+          }
+          if (!values.name?.trim()?.length) {
+            errors.name = 'Name is required';
+          }
+        }
+      }
+      return errors;
+    },
   });
   const otpForm = useForm({
     initialValue: { otp: '', isClickedAtleastOnce: false },

@@ -28,7 +28,7 @@ const ContactInfo = () => {
     otp,
     setOtp,
     onVerifyOtp,
-    isCreator,
+    // isCreator,
     loading,
   } = useContactSupportDetails();
 
@@ -67,7 +67,7 @@ const ContactInfo = () => {
           />
         }
       />
-      {isCreator ? (
+      {/* {isCreator ? (
         <>
           <TextInput
             radius="sm"
@@ -103,7 +103,7 @@ const ContactInfo = () => {
             }
           />
         </>
-      ) : null}
+      ) : null} */}
       <UpdateContactModal
         initiaContactData={initiaContactData}
         phoneNumber={phoneNumber}

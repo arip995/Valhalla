@@ -5,6 +5,7 @@ import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import { SavedLessonContent } from '@/Components/Create/Course/CreateCourseStepTwo/CreateCourseAddEditLesson';
 import { checkIfPurchased } from '@/Utils/Common';
 import { getMetaData } from '@/Utils/getMetaData';
+import { getUserData } from '@/Utils/getuserData';
 import useUser from '@/Utils/Hooks/useUser';
 import { ActionIcon, rem } from '@mantine/core';
 import { IconArrowLeft } from '@tabler/icons-react';
@@ -30,12 +31,12 @@ const DPConsume = ({ productId }) => {
   const fetchProductData = async () => {
     try {
       setLoading(true);
-      if (!user?._id) {
+      if (!getUserData()?._id) {
         redirectToBuyPage();
       }
       const hasPurchased = await checkIfPurchased(
         productId,
-        user._id
+        getUserData()?._id
       );
       if (!hasPurchased) {
         redirectToBuyPage();
@@ -71,14 +72,13 @@ const DPConsume = ({ productId }) => {
   };
 
   useEffect(() => {
-    if (user === -1) return;
     fetchProductData();
   }, [user?._id]);
 
   if (loading) {
     return <LayoutLoading />;
   }
-  //   console.log(productId, dpData);
+
   if (!productId || !user?._id || !dpData) return null;
 
   return (
@@ -110,7 +110,9 @@ const DPConsume = ({ productId }) => {
         {!!links?.length && (
           <div className="my-2 font-semibold">Links</div>
         )}
-        {links?.length ? <ListFiles files={links} /> : null}
+        {links?.length ? (
+          <ListFiles files={links} showNoActionButton />
+        ) : null}
 
         {!!videos?.length && (
           <div className="my-2 mt-4 font-semibold">

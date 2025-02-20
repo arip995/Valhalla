@@ -184,7 +184,7 @@ const TelegramDashboardMemberDetails = () => {
           showStatus={false}
           showHeader={false}
           showActions={false}
-          showLayoutChange={false}
+          showLayoutChange={true}
           menuType={0}
           onRowClick={item => {
             setActiveSubscriber(item);

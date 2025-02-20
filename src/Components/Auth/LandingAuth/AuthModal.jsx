@@ -24,6 +24,7 @@ const AuthModal = ({
   onClose = () => {},
   onAuthComplete = () => {},
   signin = false,
+  isEmailRequired = true,
 }) => {
   const {
     isSignin,
@@ -37,7 +38,12 @@ const AuthModal = ({
     sendOtp,
     verifyOtp,
     loading,
-  } = uselandingAuth(signin, onAuthComplete, opened);
+  } = uselandingAuth(
+    signin,
+    onAuthComplete,
+    opened,
+    isEmailRequired
+  );
 
   return (
     <Modal
@@ -77,48 +83,11 @@ const AuthModal = ({
                 ? 'Log in and continue'
                 : 'Create an account'}
             </h2>
-            {/* <GoogleButton onClick={googleOauth} />
-            <Button
-              variant="default"
-              justify="space-between"
-              fullWidth
-              rightSection={<span />}
-              leftSection={
-                isEmail ? (
-                  <IconPhone
-                    style={{
-                      width: rem(20),
-                      height: rem(20),
-                    }}
-                    stroke={1.5}
-                  />
-                ) : (
-                  <IconMail
-                    style={{
-                      width: rem(20),
-                      height: rem(20),
-                    }}
-                    stroke={1.5}
-                  />
-                )
-              }
-              onClick={() => setIsEmail(prev => !prev)}
-              className="transition-all duration-300 hover:bg-gray-100"
-            >
-              {isEmail ? 'Phone Number' : 'Email'}
-            </Button> */}
-            {/* <Divider
-              label="or"
-              labelPosition="center"
-              className="my-4"
-            /> */}
             <form
               className="flex w-full flex-col gap-4"
               onSubmit={authForm?.onSubmit(sendOtp)}
             >
-              {/* {isEmail ? (
-              ) : ( */}
-              {!isSignin && (
+              {isEmailRequired ? (
                 <TextInput
                   maxLength={40}
                   placeholder="Email"
@@ -127,7 +96,7 @@ const AuthModal = ({
                   {...authForm?.getInputProps('email')}
                   className="w-full"
                 />
-              )}
+              ) : null}
               <NumberInput
                 hideControls
                 clampBehavior="strict"

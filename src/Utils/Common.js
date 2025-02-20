@@ -62,12 +62,15 @@ export const googleOauth = query => {
 
 export const convertFullNameToFirstNameLastName =
   fullName => {
+    if (!fullName || !fullName?.trim()) {
+      return { firstName: '', lastName: '' };
+    }
     const words = fullName.split(' ');
-    if (words.length === 1) {
+    if (words?.length === 1) {
       return { firstName: fullName, lastName: '' };
     } else {
-      const firstName = words[0];
-      const lastName = words.slice(1).join(' ');
+      const firstName = words[0]?.trim();
+      const lastName = words.slice(1).join(' ')?.trim();
       return { firstName, lastName };
     }
   };
@@ -76,7 +79,9 @@ export const getFullName = (
   firstName = '',
   lastName = ''
 ) => {
-  return `${firstName} ${lastName}`;
+  return `${String(firstName).trim()} ${String(
+    lastName
+  ).trim()}`.trim();
 };
 
 export const onDrag = (

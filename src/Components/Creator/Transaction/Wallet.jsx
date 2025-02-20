@@ -29,8 +29,8 @@ import {
 } from '@tabler/icons-react';
 import classNames from 'classnames';
 import React from 'react';
-import useWallet from './useWallet';
 import AddBankAccount from '../Account/AddBankAccount';
+import useWallet from './useWallet';
 
 const GetStatusColor = status => {
   switch (status) {
@@ -278,15 +278,36 @@ const Wallet = () => {
               <SummaryCard
                 title="Withdrawable Balance"
                 label=" The amount available for instant withdrawal to your account."
-                value={walletDetails.withdrawableBalance}
+                value={
+                  walletDetails.withdrawableBalance || 0 > 0
+                    ? walletDetails.withdrawableBalance
+                    : 0
+                }
                 icon={IconWallet}
               />
               <SummaryCard
                 title="Current Balance"
                 label="Earnings from yesterday and today (till 10 PM). After 10 PM, and the balance of yesterday will be added to your Withdrawable Balance."
-                value={walletDetails.currentBalance || 0}
+                value={
+                  walletDetails.currentBalance || 0 > 0
+                    ? walletDetails.currentBalance
+                    : 0
+                }
                 icon={IconWallet}
               />
+              {walletDetails.refererCurrentBalance ? (
+                <SummaryCard
+                  title="Referer Current Balance"
+                  label="Earnings that you earned in this week through refrals. This will settle every week"
+                  value={
+                    walletDetails.refererCurrentBalance ||
+                    0 > 0
+                      ? walletDetails.refererCurrentBalance
+                      : 0
+                  }
+                  icon={IconWallet}
+                />
+              ) : null}
               <SummaryCard
                 title="Total Withdrawals"
                 label="The total of all amounts withdrawn so far."
@@ -390,6 +411,9 @@ const Wallet = () => {
                         withCheckIcon={false}
                         placeholder="Select Bank"
                         allowDeselect={false}
+                        disabled={
+                          walletDetails.payoutOnHold
+                        }
                         data={user?.beneficiaryDetails?.map(
                           value => {
                             return {
@@ -425,7 +449,8 @@ const Wallet = () => {
                           loading ||
                           !user?.beneficiaryDetails
                             ?.length ||
-                          !walletDetails.withdrawableBalance
+                          !walletDetails.withdrawableBalance ||
+                          walletDetails.payoutOnHold
                         )
                       }
                       type="number"
@@ -443,7 +468,8 @@ const Wallet = () => {
                           loading ||
                           !user?.beneficiaryDetails
                             ?.length ||
-                          !walletDetails.withdrawableBalance
+                          !walletDetails.withdrawableBalance ||
+                          walletDetails.payoutOnHold
                         )
                       }
                     >
@@ -523,14 +549,16 @@ const Wallet = () => {
             )}
 
             {/* Transactions */}
-            <Stack spacing="md">
-              <Text weight={500}>Recent Withdrawls</Text>
-              {payoutList?.map((item, i) => {
-                return (
-                  <TransactionCard key={i} {...item} />
-                );
-              })}
-            </Stack>
+            {payoutList?.length ? (
+              <Stack spacing="md">
+                <Text weight={500}>Recent Withdrawls</Text>
+                {payoutList?.map((item, i) => {
+                  return (
+                    <TransactionCard key={i} {...item} />
+                  );
+                })}
+              </Stack>
+            ) : null}
           </Stack>
         </Paper>
       </Container>
