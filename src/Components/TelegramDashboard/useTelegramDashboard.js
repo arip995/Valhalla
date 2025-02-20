@@ -92,6 +92,15 @@ const useTelegramDashboard = productId => {
             setTgData
           );
           break;
+        case 'emailRequired':
+          updateObjectStates(
+            {
+              name: 'isEmailRequired',
+              value: value,
+            },
+            setTgData
+          );
+          break;
         default:
           break;
       }

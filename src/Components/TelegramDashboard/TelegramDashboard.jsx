@@ -1,6 +1,6 @@
 'use client';
 
-import { Tabs } from '@mantine/core';
+import { Paper, Tabs, Text } from '@mantine/core';
 import '../../styles/dashboard/TelegramDashborad.css';
 import LayoutLoading from '../Common/Loading/LayoutLoading';
 import TGEPlansAndPricingContainer from './EditPlansAndPricing/TGEPlansAndPricingContainer';
@@ -11,6 +11,7 @@ import useTelegramDashboard from './useTelegramDashboard';
 import TelegramDashboardMemberDetails from './TelegramDashboardMemberDetails';
 import CloseButton from '../Common/Buttons/CloseButton';
 import TelegramDashboardOpenlink from './TelegramDashboardOpenlink';
+import StatusBlock from '../Common/StatusBlock';
 const TAB_OPTIONS = [
   { label: 'Overview', value: 'overview' },
   { label: 'Subscriber', value: 'subscriber' },
@@ -81,6 +82,22 @@ const TelegramDashboard = ({ productId }) => {
               data={data}
               onUpdate={updateData}
             />
+            <Paper withBorder className="w-full p-4">
+              <Text size="md" className="mb-2" fw={600}>
+                Settings
+              </Text>
+              <StatusBlock
+                label="Make email mandatory"
+                value={
+                  data.isEmailRequired === false
+                    ? false
+                    : true
+                }
+                onChange={value => {
+                  updateData('emailRequired', value);
+                }}
+              />
+            </Paper>
             {/* <TelegramDashboardCoupons /> */}
           </div>
         )}
