@@ -130,7 +130,9 @@ const ProductHeader = ({ data }) => {
           onAuthComplete={() => {
             setOpened(false);
           }}
-          isEmailRequired={data.isEmailRequired}
+          isEmailRequired={
+            data.isEmailRequired === false ? false : true
+          }
         />
       )}
     </>
