@@ -22,6 +22,7 @@ const BuyButton = ({
   onSuccess = () => {},
   ...props
 }) => {
+  console.log(productDetails);
   const lottieRef = useRef();
   const { user } = useUser();
   const [opened, setOpened] = useState(false);
@@ -111,6 +112,7 @@ const BuyButton = ({
           onAuthComplete={() => {
             setOpened(false);
           }}
+          isEmailRequired={productDetails.isEmailRequired}
         />
       )}
     </>
