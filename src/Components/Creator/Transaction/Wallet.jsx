@@ -304,10 +304,10 @@ const Wallet = () => {
               >
                 Due to requests from Razorpay regarding
                 account settlements, we could not process
-                your payouts until Tuesday. Rest assured,
-                you will be able to withdraw from Wednesday.
-                If you have any concerns, feel free to reach
-                out to us at{' '}
+                your payouts until Sunday. Rest assured, you
+                will be able to withdraw from Monday. If you
+                have any concerns, feel free to reach out to
+                us at{' '}
                 <a
                   href="mailto:support@nexify.club"
                   className="underline"
