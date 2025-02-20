@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import CompleteProfileModal from '@/Components/Common/Modal/CompleteProfileModal';
 import {
@@ -316,15 +317,28 @@ const Wallet = () => {
             </div>
 
             {/* Withdrawal Form */}
-            <Paper
-              withBorder
-              p="md"
-              radius="md"
-              className={classNames({
-                hidden: activePayoutRequest,
-              })}
-            >
-              <form
+            <Paper withBorder p="md" radius="md">
+              <Alert
+                icon={<IconAlertCircle size={16} />}
+                title="Payouts stopped until Tuesday"
+                color="yellow"
+              >
+                Due to requests from Razorpay regarding
+                account settlements, we could not process
+                your payouts until Sunday. Rest assured, you
+                will be able to withdraw from Monday. If you
+                have any concerns, feel free to reach out to
+                us at{' '}
+                <a
+                  href="mailto:support@nexify.club"
+                  className="underline"
+                >
+                  support@nexify.club
+                </a>
+                .
+              </Alert>
+
+              {/* <form
                 onSubmit={form.onSubmit(handleWithdraw)}
               >
                 <Stack spacing="md">
@@ -494,7 +508,7 @@ const Wallet = () => {
                     </Text>
                   )}
                 </Stack>
-              </form>
+              </form> */}
             </Paper>
 
             {/* Active Payout Request */}
