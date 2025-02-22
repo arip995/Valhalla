@@ -17,7 +17,10 @@ import {
 } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
-import { useRouter } from 'next/navigation';
+import {
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 import { useEffect, useMemo, useRef } from 'react';
 import Lottie from 'react-lottie-player';
 import lottieJson from '../../../../../public/lottie/tick.json';
@@ -31,6 +34,8 @@ const ViewRegistrationQuestions = ({
   const router = useRouter();
   const lottieRef = useRef();
   const { user } = useUser();
+  const searchParams = useSearchParams();
+  const hash = searchParams.get('hash');
   const { onCreateOrder, paymentState } = usePayment(() => {
     router.push(`/consume/dp/${data._id}`);
     onSuccess();
@@ -176,6 +181,7 @@ const ViewRegistrationQuestions = ({
         registrationQuestions:
           transformedRegisTrationQuestions,
         priceType: data.priceType,
+        hash,
       },
       submissionValues.phoneNumber,
       submissionValues.email,
@@ -294,7 +300,7 @@ const ViewRegistrationQuestions = ({
             }
             size="sm"
             withAsterisk
-            disabled={!!user?.email}
+            // disabled={!!user?.email}
             {...form.getInputProps('email')}
           />
           <NumberInput
@@ -308,7 +314,7 @@ const ViewRegistrationQuestions = ({
             max={9999999999}
             clampBehavior="strict"
             withAsterisk
-            disabled={!!user?.phoneNumber}
+            // disabled={!!user?.phoneNumber}
             {...form.getInputProps('phoneNumber')}
           />
           <TextInput
@@ -322,7 +328,7 @@ const ViewRegistrationQuestions = ({
             hideControls
             clampBehavior="strict"
             withAsterisk
-            disabled={!!user?.firstName}
+            // disabled={!!user?.firstName}
             {...form.getInputProps('name')}
           />
 
