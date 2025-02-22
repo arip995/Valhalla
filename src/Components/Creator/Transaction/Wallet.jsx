@@ -318,7 +318,7 @@ const Wallet = () => {
 
             {/* Withdrawal Form */}
             <Paper withBorder p="md" radius="md">
-              <Alert
+              {/* <Alert
                 icon={<IconAlertCircle size={16} />}
                 title="Payouts stopped until Tuesday"
                 color="yellow"
@@ -336,9 +336,9 @@ const Wallet = () => {
                   support@nexify.club
                 </a>
                 .
-              </Alert>
+              </Alert> */}
 
-              {/* <form
+              <form
                 onSubmit={form.onSubmit(handleWithdraw)}
               >
                 <Stack spacing="md">
@@ -508,7 +508,7 @@ const Wallet = () => {
                     </Text>
                   )}
                 </Stack>
-              </form> */}
+              </form>
             </Paper>
 
             {/* Active Payout Request */}
