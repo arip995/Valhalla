@@ -346,7 +346,7 @@ const ViewRegistrationQuestions = ({
             clampBehavior="strict"
             withAsterisk
             disabled={
-              (!!user?.firstName && user?.isCreato) || name
+              (!!user?.firstName && user?.isCreator) || name
             }
             {...form.getInputProps('name')}
           />
