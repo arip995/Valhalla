@@ -300,7 +300,7 @@ const ViewRegistrationQuestions = ({
             }
             size="sm"
             withAsterisk
-            // disabled={!!user?.email}
+            disabled={!!user?.email && user?.isCreator}
             {...form.getInputProps('email')}
           />
           <NumberInput
@@ -314,7 +314,9 @@ const ViewRegistrationQuestions = ({
             max={9999999999}
             clampBehavior="strict"
             withAsterisk
-            // disabled={!!user?.phoneNumber}
+            disabled={
+              !!user?.phoneNumber && user?.isCreator
+            }
             {...form.getInputProps('phoneNumber')}
           />
           <TextInput
@@ -328,7 +330,7 @@ const ViewRegistrationQuestions = ({
             hideControls
             clampBehavior="strict"
             withAsterisk
-            // disabled={!!user?.firstName}
+            disabled={!!user?.firstName && user?.isCreator}
             {...form.getInputProps('name')}
           />
 
