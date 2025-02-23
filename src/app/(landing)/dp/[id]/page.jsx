@@ -2,6 +2,7 @@ import ViewDP from '@/Components/Landing/DP/ViewDP';
 import ViewDPClient from '@/Components/Landing/DP/ViewDPClient';
 import { getMetaData } from '@/Utils/getMetaData';
 import { notFound } from 'next/navigation';
+import TrackingScripts from '@/Components/Common/Scripts/TrackingScripts';
 
 export async function generateMetadata({ params }, parent) {
   const { data } = await getMetaData(params.id, 'dp');
@@ -108,7 +109,24 @@ export default async function Page({ params }) {
       throw new Error('notFound');
     }
 
-    return <ViewDP data={data} productId={params.id} />;
+    return (
+      <>
+        <TrackingScripts
+          facebookPixelId={
+            data.isMetaTrackingEnabled
+              ? data.metaPixelId
+              : null
+          }
+          googleMeasurementId={
+            data.isGoogleAnalyticsTrackingEnabled
+              ? data.googleAnalyticsId
+              : null
+          }
+        />
+        <ViewDP data={data} productId={params.id} />
+        <ViewDP data={data} productId={params.id} />
+      </>
+    );
   } catch (error) {
     if (error.message === 'notFound') {
       notFound();
