@@ -292,7 +292,7 @@ const usePayment = (
         delete newBookingData.subscription;
       }
 
-      if (productType === 'dp') {
+      if (productType === 'dp' && !user?.isCreator) {
         const { firstName, lastName } =
           convertFullNameToFirstNameLastName(name);
         const { data } = await axios.post(
