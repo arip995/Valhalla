@@ -36,6 +36,10 @@ const ViewRegistrationQuestions = ({
   const { user } = useUser();
   const searchParams = useSearchParams();
   const hash = searchParams.get('hash');
+  const phone = searchParams.get('phone');
+  const email = searchParams.get('email');
+  const name = searchParams.get('name');
+
   const { onCreateOrder, paymentState } = usePayment(() => {
     router.push(`/consume/dp/${data._id}`);
     onSuccess();
@@ -237,6 +241,14 @@ const ViewRegistrationQuestions = ({
   };
 
   useEffect(() => {
+    if (phone || email || name) {
+      form.setValues({
+        phoneNumber: phone,
+        email: email,
+        name: name,
+      });
+      return;
+    }
     if (user?._id) {
       form.setValues({
         email: user.email,
@@ -244,7 +256,7 @@ const ViewRegistrationQuestions = ({
         name: getFullName(user.firstName, user.lastName),
       });
     }
-  }, [user?._id]);
+  }, [user?._id, phone, email, name]);
 
   if (paymentState.loading) {
     return (
@@ -300,7 +312,9 @@ const ViewRegistrationQuestions = ({
             }
             size="sm"
             withAsterisk
-            disabled={!!user?.email && user?.isCreator}
+            disabled={
+              (!!user?.email && user?.isCreator) || email
+            }
             {...form.getInputProps('email')}
           />
           <NumberInput
@@ -315,7 +329,8 @@ const ViewRegistrationQuestions = ({
             clampBehavior="strict"
             withAsterisk
             disabled={
-              !!user?.phoneNumber && user?.isCreator
+              (!!user?.phoneNumber && user?.isCreator) ||
+              phone
             }
             {...form.getInputProps('phoneNumber')}
           />
@@ -330,7 +345,9 @@ const ViewRegistrationQuestions = ({
             hideControls
             clampBehavior="strict"
             withAsterisk
-            disabled={!!user?.firstName && user?.isCreator}
+            disabled={
+              (!!user?.firstName && user?.isCreato) || name
+            }
             {...form.getInputProps('name')}
           />
 
