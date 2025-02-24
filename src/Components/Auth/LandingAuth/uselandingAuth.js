@@ -1,11 +1,17 @@
 import axiosInstance from '@/Utils/AxiosInstance';
 import { convertFullNameToFirstNameLastName } from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
+import { validateEmail } from '@/Utils/Regex';
 import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-const uselandingAuth = (signin, onAuthComplete, opened) => {
+const uselandingAuth = (
+  signin,
+  onAuthComplete,
+  opened,
+  isEmailRequired
+) => {
   const [isSignin, setIsSignin] = useState(signin);
   const { setCurrentUser } = useUser();
   const [step, setStep] = useState(1);
@@ -22,9 +28,6 @@ const uselandingAuth = (signin, onAuthComplete, opened) => {
     validateInputOnChange: true,
     validate: values => {
       const errors = {};
-      // eslint-disable-next-line no-unused-vars
-      const { firstName, lastName } =
-        convertFullNameToFirstNameLastName(values.name);
       if (values.isClickedAtleastOnce) {
         if (isSignin) {
           if (
@@ -33,23 +36,22 @@ const uselandingAuth = (signin, onAuthComplete, opened) => {
             errors.phoneNumber = 'Invalid phone number';
           }
         } else {
-          // if (!validateEmail(values.email)) {
-          //   errors.email = 'Invalid email';
-          // }
+          if (
+            isEmailRequired &&
+            !validateEmail(values.email)
+          ) {
+            errors.email = 'Invalid email';
+          }
           if (
             values.phoneNumber?.toString()?.length != 10
           ) {
             errors.phoneNumber = 'Invalid phone number';
           }
-          // if (!lastName?.trim()?.length) {
-          //   errors.name = 'Last name is required';
-          // }
-          if (!firstName?.trim()?.length) {
+          if (!values.name?.trim()?.length) {
             errors.name = 'Name is required';
           }
         }
       }
-      console.log(errors);
       return errors;
     },
   });

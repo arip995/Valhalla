@@ -28,7 +28,7 @@ const TransactionCard = ({
             ? item.productType === 'tg'
               ? 'Purchased subscription'
               : 'Purchase successful'
-            : 'Purchase failed'}
+            : 'Purchase cancelled'}
         </span>
         <div className="text-base font-semibold text-gray-800">
           ₹{item.amountPaid}

@@ -22,7 +22,7 @@ const TGEPlansAndPricingContainer = ({
   return (
     <Paper withBorder className="w-full p-4">
       <Text size="md" className="mb-2" fw={600}>
-        Pland and Pricing
+        Plans and Pricing
       </Text>
       <TGEPlansAndPricing
         plans={plans}

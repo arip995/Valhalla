@@ -17,7 +17,10 @@ import {
 } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
-import { useRouter } from 'next/navigation';
+import {
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 import { useEffect, useMemo, useRef } from 'react';
 import Lottie from 'react-lottie-player';
 import lottieJson from '../../../../../public/lottie/tick.json';
@@ -31,6 +34,12 @@ const ViewRegistrationQuestions = ({
   const router = useRouter();
   const lottieRef = useRef();
   const { user } = useUser();
+  const searchParams = useSearchParams();
+  const hash = searchParams.get('hash');
+  const phone = searchParams.get('phone');
+  const email = searchParams.get('email');
+  const name = searchParams.get('name');
+
   const { onCreateOrder, paymentState } = usePayment(() => {
     router.push(`/consume/dp/${data._id}`);
     onSuccess();
@@ -176,6 +185,7 @@ const ViewRegistrationQuestions = ({
         registrationQuestions:
           transformedRegisTrationQuestions,
         priceType: data.priceType,
+        hash,
       },
       submissionValues.phoneNumber,
       submissionValues.email,
@@ -231,6 +241,14 @@ const ViewRegistrationQuestions = ({
   };
 
   useEffect(() => {
+    if (phone || email || name) {
+      form.setValues({
+        phoneNumber: phone,
+        email: email,
+        name: name,
+      });
+      return;
+    }
     if (user?._id) {
       form.setValues({
         email: user.email,
@@ -238,7 +256,7 @@ const ViewRegistrationQuestions = ({
         name: getFullName(user.firstName, user.lastName),
       });
     }
-  }, [user?._id]);
+  }, [user?._id, phone, email, name]);
 
   if (paymentState.loading) {
     return (
@@ -294,7 +312,9 @@ const ViewRegistrationQuestions = ({
             }
             size="sm"
             withAsterisk
-            disabled={!!user?.email}
+            disabled={
+              (!!user?.email && user?.isCreator) || email
+            }
             {...form.getInputProps('email')}
           />
           <NumberInput
@@ -308,7 +328,10 @@ const ViewRegistrationQuestions = ({
             max={9999999999}
             clampBehavior="strict"
             withAsterisk
-            disabled={!!user?.phoneNumber}
+            disabled={
+              (!!user?.phoneNumber && user?.isCreator) ||
+              phone
+            }
             {...form.getInputProps('phoneNumber')}
           />
           <TextInput
@@ -322,7 +345,9 @@ const ViewRegistrationQuestions = ({
             hideControls
             clampBehavior="strict"
             withAsterisk
-            disabled={!!user?.firstName}
+            disabled={
+              (!!user?.firstName && user?.isCreator) || name
+            }
             {...form.getInputProps('name')}
           />
 
