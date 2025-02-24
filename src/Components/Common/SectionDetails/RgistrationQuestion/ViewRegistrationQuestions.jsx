@@ -18,6 +18,7 @@ import {
 import { DateInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import {
+  usePathname,
   useRouter,
   useSearchParams,
 } from 'next/navigation';
@@ -26,6 +27,7 @@ import Lottie from 'react-lottie-player';
 import lottieJson from '../../../../../public/lottie/tick.json';
 import LayoutLoading from '../../Loading/LayoutLoading';
 import usePayment from '../../Payment/usePayments';
+import axios from 'axios';
 
 const ViewRegistrationQuestions = ({
   data,
@@ -33,12 +35,13 @@ const ViewRegistrationQuestions = ({
 }) => {
   const router = useRouter();
   const lottieRef = useRef();
-  const { user } = useUser();
+  const { user, setCurrentUser } = useUser();
   const searchParams = useSearchParams();
   const hash = searchParams.get('hash');
   const phone = searchParams.get('phone');
   const email = searchParams.get('email');
   const name = searchParams.get('name');
+  const productType = usePathname().split('/')[1];
 
   const { onCreateOrder, paymentState } = usePayment(() => {
     router.push(`/consume/dp/${data._id}`);
@@ -155,8 +158,8 @@ const ViewRegistrationQuestions = ({
     },
   });
 
-  const handleSubmit = values => {
-    const { ...submissionValues } = values;
+  const handleSubmit = async values => {
+    const submissionValues = { ...values };
     let transformedRegisTrationQuestions = [];
     if (data.registrationQuestions?.length) {
       data.registrationQuestions.map(item => {
@@ -173,6 +176,25 @@ const ViewRegistrationQuestions = ({
       });
     }
 
+    if (productType === 'dp' && !user?.isCreator) {
+      const { firstName, lastName } =
+        convertFullNameToFirstNameLastName(name);
+      const { data } = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/dp/login`,
+        {
+          phoneNumber: submissionValues.phoneNumber,
+          email: submissionValues.email,
+          firstName,
+          lastName,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      if (data?.data) {
+        setCurrentUser(data.data);
+      }
+    }
     onCreateOrder(
       data.priceType === 'customerDecided'
         ? values.minimumPrice
@@ -241,19 +263,19 @@ const ViewRegistrationQuestions = ({
   };
 
   useEffect(() => {
-    if (phone || email || name) {
-      form.setValues({
-        phoneNumber: phone,
-        email: email,
-        name: name,
-      });
-      return;
-    }
     if (user?._id) {
       form.setValues({
         email: user.email,
         phoneNumber: user.phoneNumber,
         name: getFullName(user.firstName, user.lastName),
+      });
+      return;
+    }
+    if (phone || email || name) {
+      form.setValues({
+        phoneNumber: phone,
+        email: email,
+        name: name,
       });
     }
   }, [user?._id, phone, email, name]);
