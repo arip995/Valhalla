@@ -1,4 +1,5 @@
 import axiosInstance from '@/Utils/AxiosInstance';
+import toast from 'react-hot-toast';
 
 export const pollOrderStatus = (
   productId,
@@ -18,11 +19,15 @@ export const pollOrderStatus = (
       }));
       onSuccess();
     }, 3500);
+
     setPaymentState(prev => ({
       ...prev,
       paymentDone: true,
       purchaseSuccessful: true,
     }));
+    toast.success('Payment made successfully', {
+      position: 'top-center',
+    });
   };
 
   const onPollFailure = error => {
@@ -31,6 +36,12 @@ export const pollOrderStatus = (
       loading: false,
       paymentDone: false,
     }));
+    toast.error(
+      'Payment failed, amount will be refunded within 5-7 working days if applicable hours',
+      {
+        position: 'top-center',
+      }
+    );
     onFailure();
     console.error(error);
   };

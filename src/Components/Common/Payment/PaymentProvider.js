@@ -11,7 +11,7 @@ export const handleCashfreePayment = async (
   callBackHandler
 ) => {
   const cf = await load({
-    mode: isDevEnv() ? 'sandbox' : 'sandbox',
+    mode: isDevEnv() ? 'sandbox' : 'production',
   });
   const checkoutOptions = {
     paymentSessionId: paymentState.payment_session_id,
