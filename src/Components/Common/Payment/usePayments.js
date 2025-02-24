@@ -402,7 +402,7 @@ import { pollOrderStatus } from './PollOrderStatus';
 const usePayment = (
   onSuccess = () => {},
   onFailure = () => {},
-  paymentProvider = 'rp'
+  paymentProvider = 'cf'
 ) => {
   const { user } = useUser();
   const searchParams = useSearchParams();
