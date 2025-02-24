@@ -17,7 +17,6 @@ export const handleCashfreePayment = async (
     paymentSessionId: paymentState.payment_session_id,
     redirectTarget: '_modal',
   };
-  console.log('checkoutOptions', checkoutOptions);
   cf.checkout(checkoutOptions).then(result => {
     if (result.error) {
       callBackHandler(false);
