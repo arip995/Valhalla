@@ -319,7 +319,25 @@ const Wallet = () => {
 
             {/* Withdrawal Form */}
             <Paper withBorder p="md" radius="md">
-              {/* <Al  */}
+              {/* <Alert
+                  icon={<IconAlertCircle size={16} />}
+                  title="Payouts stopped until Tuesday"
+                  color="yellow"
+                >
+                  Due to requests from Razorpay regarding
+                  account settlements, we could not process
+                  your payouts until Sunday. Rest assured,
+                  you will be able to withdraw from Monday.
+                  If you have any concerns, feel free to
+                  reach out to us at{' '}
+                  <a
+                    href="mailto:support@nexify.club"
+                    className="underline"
+                  >
+                    support@nexify.club
+                  </a>
+                  .
+                </Alert> */}
 
               <form
                 onSubmit={form.onSubmit(handleWithdraw)}
