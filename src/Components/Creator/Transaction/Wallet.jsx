@@ -319,40 +319,37 @@ const Wallet = () => {
 
             {/* Withdrawal Form */}
             <Paper withBorder p="md" radius="md">
-              {getUserId() ===
-              '67af274a9faf480f10ade097' ? null : (
-                <Alert
-                  icon={<IconAlertCircle size={16} />}
-                  title="Payouts stopped until Tuesday"
-                  color="yellow"
-                >
-                  Due to requests from Razorpay regarding
-                  account settlements, we could not process
-                  your payouts until Sunday. Rest assured,
-                  you will be able to withdraw from Monday.
-                  If you have any concerns, feel free to
-                  reach out to us at{' '}
-                  <a
-                    href="mailto:support@nexify.club"
-                    className="underline"
-                  >
-                    support@nexify.club
-                  </a>
-                  .
-                </Alert>
-              )}
+              {/* <Al  */}
 
-              {getUserId() ===
-              '67af274a9faf480f10ade097' ? (
-                <form
-                  onSubmit={form.onSubmit(handleWithdraw)}
-                >
-                  <Stack spacing="md">
-                    <Text weight={500}>
-                      Request Withdrawal
-                    </Text>
-                    <Stack grow>
-                      {!user.isKycDone && (
+              <form
+                onSubmit={form.onSubmit(handleWithdraw)}
+              >
+                <Stack spacing="md">
+                  <Text weight={500}>
+                    Request Withdrawal
+                  </Text>
+                  <Stack grow>
+                    {!user.isKycDone && (
+                      <Alert
+                        icon={<IconAlertCircle size={16} />}
+                        title="Bank Details Missing"
+                        color="yellow"
+                      >
+                        You need to complete your KYC first.
+                        <Group mt="xs">
+                          <Button
+                            size="xs"
+                            variant="outline"
+                            color="black"
+                            onClick={() => setOpened(true)}
+                          >
+                            Verify KYC
+                          </Button>
+                        </Group>
+                      </Alert>
+                    )}
+                    {user.isKycDone &&
+                      !user.beneficiaryDetails?.length && (
                         <Alert
                           icon={
                             <IconAlertCircle size={16} />
@@ -360,7 +357,7 @@ const Wallet = () => {
                           title="Bank Details Missing"
                           color="yellow"
                         >
-                          You need to complete your KYC
+                          You need to add your bank details
                           first.
                           <Group mt="xs">
                             <Button
@@ -368,163 +365,133 @@ const Wallet = () => {
                               variant="outline"
                               color="black"
                               onClick={() =>
-                                setOpened(true)
+                                setOpenedBankDetails(true)
                               }
                             >
-                              Verify KYC
+                              Add Bank Details
                             </Button>
                           </Group>
                         </Alert>
                       )}
-                      {user.isKycDone &&
-                        !user.beneficiaryDetails
-                          ?.length && (
-                          <Alert
-                            icon={
-                              <IconAlertCircle size={16} />
-                            }
-                            title="Bank Details Missing"
-                            color="yellow"
-                          >
-                            You need to add your bank
-                            details first.
-                            <Group mt="xs">
-                              <Button
-                                size="xs"
-                                variant="outline"
-                                color="black"
-                                onClick={() =>
-                                  setOpenedBankDetails(true)
-                                }
-                              >
-                                Add Bank Details
-                              </Button>
-                            </Group>
-                          </Alert>
-                        )}
-                      {user.isKycDone &&
-                      user.beneficiaryDetails?.length &&
-                      user.multipleBankAccounts ? (
-                        <Button
-                          size="xs"
-                          variant="outline"
-                          color="black"
-                          onClick={() =>
-                            setOpenedBankDetails(true)
-                          }
-                        >
-                          Add new bank
-                        </Button>
-                      ) : null}
-
-                      {user?.beneficiaryDetails?.length ? (
-                        <Select
-                          label="Select Bank"
-                          withCheckIcon={false}
-                          placeholder="Select Bank"
-                          allowDeselect={false}
-                          disabled={
-                            walletDetails.payoutOnHold
-                          }
-                          data={user?.beneficiaryDetails?.map(
-                            value => {
-                              return {
-                                label:
-                                  value.bankAccountNumber,
-                                value:
-                                  JSON.stringify(value),
-                              };
-                            }
-                          )}
-                          {...form.getInputProps(
-                            'bankAccount'
-                          )}
-                        />
-                      ) : null}
-
-                      <NumberInput
-                        {...form.getInputProps(
-                          'withdrawAmount'
-                        )}
-                        label="Enter amount"
-                        description={
-                          'Amount must range from 1000 to 499999'
-                        }
-                        allowLeadingZeros={false}
-                        allowNegative={false}
-                        decimalScale={2}
-                        placeholder="Enter amount"
-                        max={499999}
-                        clampBehavior="strict"
-                        disabled={
-                          !!(
-                            activePayoutRequest ||
-                            loading ||
-                            !user?.beneficiaryDetails
-                              ?.length ||
-                            !walletDetails.withdrawableBalance ||
-                            walletDetails.payoutOnHold
-                          )
-                        }
-                        type="number"
-                        hideControls
-                        min={0}
-                        icon="₹"
-                      />
+                    {user.isKycDone &&
+                    user.beneficiaryDetails?.length &&
+                    user.multipleBankAccounts ? (
                       <Button
-                        type="submit"
-                        color="green"
-                        className="w-fit"
-                        disabled={
-                          !!(
-                            activePayoutRequest ||
-                            loading ||
-                            !user?.beneficiaryDetails
-                              ?.length ||
-                            !walletDetails.withdrawableBalance ||
-                            walletDetails.payoutOnHold
-                          )
+                        size="xs"
+                        variant="outline"
+                        color="black"
+                        onClick={() =>
+                          setOpenedBankDetails(true)
                         }
                       >
-                        Withdraw
+                        Add new bank
                       </Button>
-                      {user?.beneficiaryDetails?.length ? (
-                        <Alert
-                          icon={
-                            <IconAlertCircle size={16} />
+                    ) : null}
+
+                    {user?.beneficiaryDetails?.length ? (
+                      <Select
+                        label="Select Bank"
+                        withCheckIcon={false}
+                        placeholder="Select Bank"
+                        allowDeselect={false}
+                        disabled={
+                          walletDetails.payoutOnHold
+                        }
+                        data={user?.beneficiaryDetails?.map(
+                          value => {
+                            return {
+                              label:
+                                value.bankAccountNumber,
+                              value: JSON.stringify(value),
+                            };
                           }
-                          title="Instant Payout Processing"
-                          color="blue"
+                        )}
+                        {...form.getInputProps(
+                          'bankAccount'
+                        )}
+                      />
+                    ) : null}
+
+                    <NumberInput
+                      {...form.getInputProps(
+                        'withdrawAmount'
+                      )}
+                      label="Enter amount"
+                      description={
+                        'Amount must range from 1000 to 499999'
+                      }
+                      allowLeadingZeros={false}
+                      allowNegative={false}
+                      decimalScale={2}
+                      placeholder="Enter amount"
+                      max={499999}
+                      clampBehavior="strict"
+                      disabled={
+                        !!(
+                          activePayoutRequest ||
+                          loading ||
+                          !user?.beneficiaryDetails
+                            ?.length ||
+                          !walletDetails.withdrawableBalance ||
+                          walletDetails.payoutOnHold
+                        )
+                      }
+                      type="number"
+                      hideControls
+                      min={0}
+                      icon="₹"
+                    />
+                    <Button
+                      type="submit"
+                      color="green"
+                      className="w-fit"
+                      disabled={
+                        !!(
+                          activePayoutRequest ||
+                          loading ||
+                          !user?.beneficiaryDetails
+                            ?.length ||
+                          !walletDetails.withdrawableBalance ||
+                          walletDetails.payoutOnHold
+                        )
+                      }
+                    >
+                      Withdraw
+                    </Button>
+                    {user?.beneficiaryDetails?.length ? (
+                      <Alert
+                        icon={<IconAlertCircle size={16} />}
+                        title="Instant Payout Processing"
+                        color="blue"
+                      >
+                        Your payout will be processed
+                        instantly, typically within 1
+                        minute. To confirm the status,
+                        simply refresh the page. Please
+                        note: In rare cases of sender
+                        account disruptions or system
+                        downtime, processing may extend to
+                        3-4 hours. For any issues or
+                        concerns, contact our dedicated
+                        support team at{' '}
+                        <a
+                          href="mailto:support@nexify.club"
+                          className="underline"
                         >
-                          Your payout will be processed
-                          instantly, typically within 1
-                          minute. To confirm the status,
-                          simply refresh the page. Please
-                          note: In rare cases of sender
-                          account disruptions or system
-                          downtime, processing may extend to
-                          3-4 hours. For any issues or
-                          concerns, contact our dedicated
-                          support team at{' '}
-                          <a
-                            href="mailto:support@nexify.club"
-                            className="underline"
-                          >
-                            support@nexify.club
-                          </a>
-                          .
-                        </Alert>
-                      ) : null}
-                    </Stack>
-                    {!!activePayoutRequest && (
-                      <Text size="sm" c="dimmed">
-                        You have an active payout request in
-                        process
-                      </Text>
-                    )}
+                          support@nexify.club
+                        </a>
+                        .
+                      </Alert>
+                    ) : null}
                   </Stack>
-                </form>
-              ) : null}
+                  {!!activePayoutRequest && (
+                    <Text size="sm" c="dimmed">
+                      You have an active payout request in
+                      process
+                    </Text>
+                  )}
+                </Stack>
+              </form>
             </Paper>
 
             {/* Active Payout Request */}
