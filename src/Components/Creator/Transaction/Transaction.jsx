@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use client';
 
 import ProductListing from '@/Components/Apps/ProductListing/ProductListing';
@@ -148,7 +149,7 @@ const Transaction = () => {
           />
         </div>
       </div>
-      <Drawer
+      {/* <Drawer
         trapFocus={false}
         lockScroll={false}
         opened={opened}
@@ -157,7 +158,7 @@ const Transaction = () => {
         title="Transaction Details"
       >
         <TransactionDetails data={activeTransaction} />
-      </Drawer>
+      </Drawer> */}
     </>
   );
 };
