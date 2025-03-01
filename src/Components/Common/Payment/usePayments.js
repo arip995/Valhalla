@@ -497,7 +497,9 @@ const usePayment = (
       }
     } catch (error) {
       console.error(error);
-      toast.error('Error creating order');
+      toast.error(
+        'Error creating order, Please logout and login again'
+      );
     } finally {
       setPaymentState(prev => ({
         ...prev,
