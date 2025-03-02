@@ -123,8 +123,151 @@ export const handlePaytmPayment = async (
   }
 };
 
+export const handleEazzbuzzPayment = async (
+  paymentState,
+  email,
+  phoneNumber,
+  callBackHandler
+) => {
+  try {
+    const script = document.createElement('script');
+    script.src = `https://checkout.easebuzz.in/v1/checkout.js`;
+    script.async = true;
+    script.onload = () => {
+      const config = {
+        access_key: process.env.EASEBUZZ_ACCESS_KEY,
+        pay_mode: isDevEnv() ? 'test' : 'prod',
+        txnid: paymentState.id,
+        amount: paymentState.amount,
+        email: email,
+        phone: phoneNumber,
+        name: 'Customer',
+        surl: window.location.origin + '/payment/success',
+        furl: window.location.origin + '/payment/failure',
+      };
+
+      if (window.Easebuzz && window.Easebuzz.checkout) {
+        window.Easebuzz.checkout(config)
+          .then(function (response) {
+            if (response.status === 'success') {
+              callBackHandler(true);
+            } else {
+              callBackHandler(false);
+            }
+          })
+          .catch(function (error) {
+            console.error('Easebuzz payment error:', error);
+            callBackHandler(false);
+          });
+      }
+    };
+    document.body.appendChild(script);
+  } catch (error) {
+    console.error('Easebuzz payment error:', error);
+    callBackHandler(false);
+  }
+};
+
+export const handlePayuPayment = async (
+  paymentState,
+  email,
+  phoneNumber,
+  callBackHandler
+) => {
+  try {
+    const script = document.createElement('script');
+    script.src = `https://secure.payu.in/js/payu.js`;
+    script.async = true;
+    script.onload = () => {
+      const config = {
+        key: process.env.PAYU_MERCHANT_KEY,
+        txnid: paymentState.id,
+        amount: paymentState.amount,
+        productinfo: 'Product Info',
+        firstname: 'Customer',
+        email: email,
+        phone: phoneNumber,
+        surl: window.location.origin + '/payment/success',
+        furl: window.location.origin + '/payment/failure',
+        env: isDevEnv() ? 'test' : 'prod',
+      };
+
+      if (window.PayU) {
+        window.PayU.setup(config);
+        window.PayU.onSuccess(function () {
+          callBackHandler(true);
+        });
+        window.PayU.onFailure(function (error) {
+          console.error('PayU payment error:', error);
+          callBackHandler(false);
+        });
+        window.PayU.startPayment();
+      }
+    };
+    document.body.appendChild(script);
+  } catch (error) {
+    console.error('PayU payment error:', error);
+    callBackHandler(false);
+  }
+};
+
+export const handlePhonpePayment = async (
+  paymentState,
+  email,
+  phoneNumber,
+  callBackHandler
+) => {
+  try {
+    const script = document.createElement('script');
+    script.src = `https://checkout.phonepe.com/sdk/bundle.js`;
+    script.async = true;
+    script.onload = () => {
+      const config = {
+        merchantId: process.env.PHONEPE_MERCHANT_ID,
+        merchantTransactionId: paymentState.id,
+        amount: paymentState.amount * 100, // PhonePe expects amount in paise
+        merchantUserId: email,
+        mobileNumber: phoneNumber,
+        environment: isDevEnv() ? 'SANDBOX' : 'PRODUCTION',
+        callbackUrl:
+          window.location.origin + '/payment/callback',
+        redirectUrl:
+          window.location.origin + '/payment/redirect',
+        paymentInstrument: {
+          type: 'PAY_PAGE',
+        },
+      };
+
+      if (window.PhonePe && window.PhonePe.PaymentSDK) {
+        window.PhonePe.PaymentSDK.init(config)
+          .then(function () {
+            return window.PhonePe.PaymentSDK.startTransaction();
+          })
+          .then(function (response) {
+            if (response.status === 'SUCCESS') {
+              callBackHandler(true);
+            } else {
+              callBackHandler(false);
+            }
+          })
+          .catch(function (error) {
+            console.error('PhonePe payment error:', error);
+            callBackHandler(false);
+          });
+      }
+    };
+    document.body.appendChild(script);
+  } catch (error) {
+    console.error('PhonePe payment error:', error);
+    callBackHandler(false);
+  }
+};
+
 export const paymentHandlers = {
   cf: handleCashfreePayment,
   rp: handleRazorpayPayment,
-  paytm: handlePaytmPayment,
+  pt: handlePaytmPayment,
+  pp: handlePhonpePayment,
+  eb: handleEazzbuzzPayment,
+  pu: handlePayuPayment,
 };
