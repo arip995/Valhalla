@@ -108,18 +108,18 @@ const TransactionDetails = ({ data = {} }) => {
                           platformFeeDetails.platformFeeAmount
                         }
                         <br />
-                        Platform fee gst: ₹
-                        {
-                          platformFeeDetails.platformFeeGSTAmount
-                        }
-                        <br />
-                        Platform fee percentage:
+                        Platform fee %: ₹
                         {
                           platformFeeDetails.platformFeePercentage
                         }
+                        <br />
+                        Platform fee GST:
+                        {
+                          platformFeeDetails.platformFeeGSTAmount
+                        }
                         %
                         <br />
-                        Platform fee gst:
+                        Platform fee GST %:
                         {
                           platformFeeDetails.platformFeeGSTPercentage
                         }
