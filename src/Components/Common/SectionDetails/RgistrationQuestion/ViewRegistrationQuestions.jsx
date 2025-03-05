@@ -37,7 +37,6 @@ const ViewRegistrationQuestions = ({
   const lottieRef = useRef();
   const { user, setCurrentUser } = useUser();
   const searchParams = useSearchParams();
-  const hash = searchParams.get('hash');
   const phone = searchParams.get('phone');
   const email = searchParams.get('email');
   const name = searchParams.get('name');
@@ -207,7 +206,6 @@ const ViewRegistrationQuestions = ({
         registrationQuestions:
           transformedRegisTrationQuestions,
         priceType: data.priceType,
-        hash,
       },
       submissionValues.phoneNumber,
       submissionValues.email,
