@@ -32,7 +32,7 @@ const ProductMenu = ({
       <Menu shadow="md" radius="md" position="bottom-end">
         <Menu.Target>
           <span
-            className="flex cursor-pointer items-center rounded-full border border-gray-300 bg-white p-1.5"
+            className="flex cursor-pointer items-center rounded-full border border-gray-300 bg-white p-3"
             onClick={e => e.stopPropagation()}
           >
             <IconDotsVertical color="black" size={12} />
