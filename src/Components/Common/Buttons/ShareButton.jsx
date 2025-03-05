@@ -34,7 +34,7 @@ const ShareButton = ({
             'hover:bg-gray-100': !disabled,
           },
           {
-            '!rounded-full !p-3': onlyShareButton,
+            '!rounded-full !p-2': onlyShareButton,
           }
         )}
         onClick={() => {
