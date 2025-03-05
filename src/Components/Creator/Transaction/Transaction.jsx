@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 'use client';
 
 import ProductListing from '@/Components/Apps/ProductListing/ProductListing';
@@ -9,7 +8,7 @@ import {
   StatusPaymentMapping,
 } from '@/Constants/ProductListingContants';
 import { formatDate } from '@/Utils/Common';
-import { Badge, Drawer } from '@mantine/core';
+import { Alert, Badge, Drawer } from '@mantine/core';
 import {
   IconBrandProducthunt,
   IconBrandRedux,
@@ -130,6 +129,18 @@ const Transaction = () => {
             hidden: tab === 'wallet',
           })}
         >
+          <Alert
+            color="yellow"
+            title="Important Notice"
+            className="mx-4 my-2"
+            radius="md"
+          >
+            Due to recent changes in our data storage
+            system, transaction records displayed here will
+            only show entries from today onwards. Previous
+            transaction data has been processed, so there is
+            no need to worry.
+          </Alert>
           <ProductListing
             renderTableDataCell={renderTableDataCell}
             TableHeaderItems={TableHeaderItems}
@@ -149,7 +160,7 @@ const Transaction = () => {
           />
         </div>
       </div>
-      {/* <Drawer
+      <Drawer
         trapFocus={false}
         lockScroll={false}
         opened={opened}
@@ -158,7 +169,7 @@ const Transaction = () => {
         title="Transaction Details"
       >
         <TransactionDetails data={activeTransaction} />
-      </Drawer> */}
+      </Drawer>
     </>
   );
 };

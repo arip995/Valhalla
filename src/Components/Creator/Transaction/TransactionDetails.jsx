@@ -135,9 +135,9 @@ const TransactionDetails = ({ data = {} }) => {
                     <div className="flex items-center gap-2">
                       <IconInfoCircle className="h-4 w-4 text-gray-500" />
                       ₹
-                      {
-                        platformFeeDetails.finalPlatformFeeAmount
-                      }
+                      {platformFeeDetails.platformFeeAmount +
+                        platformFeeDetails.platformFeeGSTAmount ??
+                        0}
                     </div>
                   </Tooltip>
                 )}
