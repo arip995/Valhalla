@@ -104,24 +104,24 @@ const TransactionDetails = ({ data = {} }) => {
                     label={
                       <div>
                         Platform fee amount (₹) :{' '}
-                        {
-                          platformFeeDetails.platformFeeAmount
-                        }
+                        {platformFeeDetails.platformFeeAmount.toFixed(
+                          2
+                        )}
                         <br />
                         Platform fee (%) :{' '}
-                        {
-                          platformFeeDetails.platformFeePercentage
-                        }
+                        {platformFeeDetails.platformFeePercentage.toFixed(
+                          2
+                        )}
                         <br />
                         Platform fee GST (₹) :{' '}
-                        {
-                          platformFeeDetails.platformFeeGSTAmount
-                        }
+                        {platformFeeDetails.platformFeeGSTAmount.toFixed(
+                          2
+                        )}
                         <br />
                         Platform fee GST (%) :{' '}
-                        {
-                          platformFeeDetails.platformFeeGSTPercentage
-                        }
+                        {platformFeeDetails.platformFeeGSTPercentage.toFixed(
+                          2
+                        )}
                       </div>
                     }
                     events={{
