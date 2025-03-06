@@ -103,27 +103,25 @@ const TransactionDetails = ({ data = {} }) => {
                   <Tooltip
                     label={
                       <div>
-                        Platform fee amount: ₹
-                        {
-                          platformFeeDetails.platformFeeAmount
-                        }
+                        Platform fee amount (₹) :{' '}
+                        {platformFeeDetails.platformFeeAmount.toFixed(
+                          2
+                        )}
                         <br />
-                        Platform fee %: ₹
-                        {
-                          platformFeeDetails.platformFeePercentage
-                        }
+                        Platform fee (%) :{' '}
+                        {platformFeeDetails.platformFeePercentage.toFixed(
+                          2
+                        )}
                         <br />
-                        Platform fee GST:
-                        {
-                          platformFeeDetails.platformFeeGSTAmount
-                        }
-                        %
+                        Platform fee GST (₹) :{' '}
+                        {platformFeeDetails.platformFeeGSTAmount.toFixed(
+                          2
+                        )}
                         <br />
-                        Platform fee GST %:
-                        {
-                          platformFeeDetails.platformFeeGSTPercentage
-                        }
-                        %
+                        Platform fee GST (%) :{' '}
+                        {platformFeeDetails.platformFeeGSTPercentage.toFixed(
+                          2
+                        )}
                       </div>
                     }
                     events={{

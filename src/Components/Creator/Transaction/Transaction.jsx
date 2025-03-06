@@ -8,7 +8,7 @@ import {
   StatusPaymentMapping,
 } from '@/Constants/ProductListingContants';
 import { formatDate } from '@/Utils/Common';
-import { Alert, Badge, Drawer } from '@mantine/core';
+import { Badge, Drawer } from '@mantine/core';
 import {
   IconBrandProducthunt,
   IconBrandRedux,
@@ -129,7 +129,7 @@ const Transaction = () => {
             hidden: tab === 'wallet',
           })}
         >
-          <Alert
+          {/* <Alert
             color="yellow"
             title="Important Notice"
             className="mx-4 my-2"
@@ -140,7 +140,7 @@ const Transaction = () => {
             only show entries from today onwards. Previous
             transaction data has been processed, so there is
             no need to worry.
-          </Alert>
+          </Alert> */}
           <ProductListing
             renderTableDataCell={renderTableDataCell}
             TableHeaderItems={TableHeaderItems}
