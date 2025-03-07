@@ -87,7 +87,7 @@ const AuthModal = ({
               className="flex w-full flex-col gap-4"
               onSubmit={authForm?.onSubmit(sendOtp)}
             >
-              {isEmailRequired ? (
+              {isEmailRequired && !isSignin ? (
                 <TextInput
                   maxLength={40}
                   placeholder="Email"

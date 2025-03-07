@@ -342,6 +342,7 @@ export const PAYMENT_METHOD_MAPPING = {
   nb: 'Net Banking',
   upi: 'UPI',
   cc: 'Credit Card',
+  dc: 'Debit Card',
   wallet: 'Wallet',
   cce: 'Credit Card EMI',
   dce: 'Debit Card EMI',

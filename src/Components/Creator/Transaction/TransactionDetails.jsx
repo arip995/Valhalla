@@ -103,27 +103,25 @@ const TransactionDetails = ({ data = {} }) => {
                   <Tooltip
                     label={
                       <div>
-                        Platform fee amount: ₹
-                        {
-                          platformFeeDetails.platformFeeAmount
-                        }
+                        Platform fee amount (₹) :{' '}
+                        {platformFeeDetails.platformFeeAmount.toFixed(
+                          2
+                        )}
                         <br />
-                        Platform fee gst: ₹
-                        {
-                          platformFeeDetails.platformFeeGSTAmount
-                        }
+                        Platform fee (%) :{' '}
+                        {platformFeeDetails.platformFeePercentage.toFixed(
+                          2
+                        )}
                         <br />
-                        Platform fee percentage:
-                        {
-                          platformFeeDetails.platformFeePercentage
-                        }
-                        %
+                        Platform fee GST (₹) :{' '}
+                        {platformFeeDetails.platformFeeGSTAmount.toFixed(
+                          2
+                        )}
                         <br />
-                        Platform fee gst:
-                        {
-                          platformFeeDetails.platformFeeGSTPercentage
-                        }
-                        %
+                        Platform fee GST (%) :{' '}
+                        {platformFeeDetails.platformFeeGSTPercentage.toFixed(
+                          2
+                        )}
                       </div>
                     }
                     events={{
@@ -135,9 +133,9 @@ const TransactionDetails = ({ data = {} }) => {
                     <div className="flex items-center gap-2">
                       <IconInfoCircle className="h-4 w-4 text-gray-500" />
                       ₹
-                      {
-                        platformFeeDetails.finalPlatformFeeAmount
-                      }
+                      {platformFeeDetails.platformFeeAmount +
+                        platformFeeDetails.platformFeeGSTAmount ??
+                        0}
                     </div>
                   </Tooltip>
                 )}

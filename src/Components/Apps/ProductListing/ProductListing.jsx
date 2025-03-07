@@ -31,12 +31,12 @@ const ProductListing = ({
   showHeader = true,
   showActions = true,
   menuType = 1,
-  showOnlyGridViewInMobile = false,
+  showOnlyGridViewInMobile = true,
   onRowClick,
   customEmptyStateOne,
   customEmptyStateTwo,
   searchPlaceholder,
-  Component,
+  Component = ProductCard,
 }) => {
   const router = useRouter();
   const routeName = usePathname().split('/')[1];
@@ -184,7 +184,9 @@ const ProductListing = ({
                 <div
                   className={classNames('hidden', {
                     '!block w-full':
-                      showOnlyGridViewInMobile && isMobile
+                      showOnlyGridViewInMobile &&
+                      isMobile &&
+                      routeName !== 'audience'
                         ? true
                         : isGrid,
                   })}
@@ -192,26 +194,14 @@ const ProductListing = ({
                   <div className="grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-4">
                     {data.data.map(item => (
                       <div key={item._id}>
-                        {showOnlyGridViewInMobile ? (
-                          <Component
-                            item={item}
-                            onItemClick={
-                              onRowClick ||
-                              onDefaultRowClick
-                            }
-                          />
-                        ) : (
-                          <ProductCard
-                            item={item}
-                            app={app}
-                            onUpdate={onUpdate}
-                            onItemClick={row =>
-                              router.push(
-                                `/dashboard/${app}/${row._id}`
-                              )
-                            }
-                          />
-                        )}
+                        <Component
+                          onItemClick={
+                            onRowClick || onDefaultRowClick
+                          }
+                          item={item}
+                          app={app}
+                          onUpdate={onUpdate}
+                        />
                       </div>
                     ))}
                   </div>
@@ -226,7 +216,9 @@ const ProductListing = ({
                   }
                   className={classNames('block', {
                     hidden:
-                      showOnlyGridViewInMobile && isMobile
+                      showOnlyGridViewInMobile &&
+                      isMobile &&
+                      routeName !== 'audience'
                         ? true
                         : isGrid,
                   })}

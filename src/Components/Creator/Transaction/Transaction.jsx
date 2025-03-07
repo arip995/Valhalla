@@ -7,7 +7,7 @@ import {
   StatusPaymentColorMapping,
   StatusPaymentMapping,
 } from '@/Constants/ProductListingContants';
-import { formatDate } from '@/Utils/Common';
+import { formatDate, getUserId } from '@/Utils/Common';
 import { Badge, Drawer } from '@mantine/core';
 import {
   IconBrandProducthunt,
@@ -129,6 +129,18 @@ const Transaction = () => {
             hidden: tab === 'wallet',
           })}
         >
+          {/* <Alert
+            color="yellow"
+            title="Important Notice"
+            className="mx-4 my-2"
+            radius="md"
+          >
+            Due to recent changes in our data storage
+            system, transaction records displayed here will
+            only show entries from today onwards. Previous
+            transaction data has been processed, so there is
+            no need to worry.
+          </Alert> */}
           <ProductListing
             renderTableDataCell={renderTableDataCell}
             TableHeaderItems={TableHeaderItems}
@@ -148,16 +160,18 @@ const Transaction = () => {
           />
         </div>
       </div>
-      <Drawer
-        trapFocus={false}
-        lockScroll={false}
-        opened={opened}
-        onClose={() => setOpened(false)}
-        position="right"
-        title="Transaction Details"
-      >
-        <TransactionDetails data={activeTransaction} />
-      </Drawer>
+      {getUserId() !== '67c87d932d02f0d24d5fa0b1' && (
+        <Drawer
+          trapFocus={false}
+          lockScroll={false}
+          opened={opened}
+          onClose={() => setOpened(false)}
+          position="right"
+          title="Transaction Details"
+        >
+          <TransactionDetails data={activeTransaction} />
+        </Drawer>
+      )}
     </>
   );
 };
