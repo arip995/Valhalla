@@ -2,7 +2,11 @@
 
 import ProductListing from '@/Components/Apps/ProductListing/ProductListing';
 import { TelegramSubscriberStatusMapping } from '@/Constants/constants';
-import { formatDate, getFullName } from '@/Utils/Common';
+import {
+  formatDate,
+  getFullName,
+  getUserId,
+} from '@/Utils/Common';
 import {
   ActionIcon,
   CopyButton,
@@ -28,6 +32,7 @@ import {
 import { useEffect, useState } from 'react';
 import TelegramMemberDetailsCard2 from '../Common/Card/TelegramMemberDetailsCard2';
 import TelegramMemberDetails from './TelegramMemberDetails';
+import TelegramMemberDetailsCard from '../Common/Card/TelegramMemberDetailsCard';
 
 const TableHeaderItems = [
   { title: 'Name', icon: IconUser, value: 'name' },
@@ -197,7 +202,11 @@ const TelegramDashboardMemberDetails = () => {
               No subscribers found
             </h2>
           }
-          Component={TelegramMemberDetailsCard2}
+          Component={
+            getUserId() === '67af274a9faf480f10ade097'
+              ? TelegramMemberDetailsCard2
+              : TelegramMemberDetailsCard
+          }
         />
       </div>
       <Drawer
