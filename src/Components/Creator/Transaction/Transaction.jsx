@@ -7,7 +7,7 @@ import {
   StatusPaymentColorMapping,
   StatusPaymentMapping,
 } from '@/Constants/ProductListingContants';
-import { formatDate } from '@/Utils/Common';
+import { formatDate, getUserId } from '@/Utils/Common';
 import { Badge, Drawer } from '@mantine/core';
 import {
   IconBrandProducthunt,
@@ -160,16 +160,18 @@ const Transaction = () => {
           />
         </div>
       </div>
-      <Drawer
-        trapFocus={false}
-        lockScroll={false}
-        opened={opened}
-        onClose={() => setOpened(false)}
-        position="right"
-        title="Transaction Details"
-      >
-        <TransactionDetails data={activeTransaction} />
-      </Drawer>
+      {getUserId() !== '67c87d932d02f0d24d5fa0b1' && (
+        <Drawer
+          trapFocus={false}
+          lockScroll={false}
+          opened={opened}
+          onClose={() => setOpened(false)}
+          position="right"
+          title="Transaction Details"
+        >
+          <TransactionDetails data={activeTransaction} />
+        </Drawer>
+      )}
     </>
   );
 };
