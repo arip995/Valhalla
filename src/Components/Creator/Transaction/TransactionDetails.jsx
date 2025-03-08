@@ -145,6 +145,18 @@ const TransactionDetails = ({ data = {} }) => {
             ),
           },
           {
+            label: 'Affiliate fee',
+            value: (
+              <>
+                {platformFeeDetails.affiliateFee ??
+                  '-- -- --'}
+              </>
+            ),
+            icon: (
+              <IconReceipt className="h-4 w-4 text-gray-500" />
+            ),
+          },
+          {
             label: 'Payment Method',
             value:
               PAYMENT_METHOD_MAPPING[paymentMethod] ||
