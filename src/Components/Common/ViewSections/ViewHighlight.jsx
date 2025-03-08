@@ -91,7 +91,7 @@ const ViewHighlight = ({ value }) => {
             Multi-device
           </p>
           <p className="text-sm text-red-600">
-            Mobile and TV access
+            Mobile and Computer access
           </p>
         </div>
       </div>
