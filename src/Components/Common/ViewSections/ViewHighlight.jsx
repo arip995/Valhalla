@@ -1,13 +1,11 @@
-import React from 'react';
+import { convertMinutesToHours } from '@/Utils/Common';
 import {
-  IconCertificate,
   IconDeviceMobile,
   IconDownload,
   IconFileText,
   IconInfinity,
   IconVideo,
 } from '@tabler/icons-react';
-import { convertMinutesToHours } from '@/Utils/Common';
 
 const ViewHighlight = ({ value }) => {
   if (!value) return null;
@@ -98,7 +96,7 @@ const ViewHighlight = ({ value }) => {
         </div>
       </div>
 
-      <div className="group flex items-center gap-4 rounded-xl bg-indigo-50/50 p-4 transition-all hover:bg-indigo-50">
+      {/* <div className="group flex items-center gap-4 rounded-xl bg-indigo-50/50 p-4 transition-all hover:bg-indigo-50">
         <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-100 text-indigo-600 transition-all group-hover:scale-110">
           <IconCertificate className="h-6 w-6" />
         </div>
@@ -110,7 +108,7 @@ const ViewHighlight = ({ value }) => {
             Upon completion
           </p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
