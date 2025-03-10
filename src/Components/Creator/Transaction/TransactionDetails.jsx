@@ -26,7 +26,9 @@ const TransactionDetails = ({ data = {} }) => {
     paymentMethod = '',
     orderId = '',
     createdAt = null,
+    paymentDetails,
   } = data;
+  console.log(paymentDetails);
 
   const sections = useMemo(
     () => [
@@ -90,6 +92,15 @@ const TransactionDetails = ({ data = {} }) => {
                 : `₹${payoutAmount || '0'}`,
             icon: (
               <IconBuilding className="h-4 w-4 text-gray-500" />
+            ),
+          },
+          {
+            label: 'UTR No.',
+            value:
+              paymentDetails?.payment?.bank_reference ??
+              '-- -- --',
+            icon: (
+              <IconReceipt className="h-4 w-4 text-gray-500" />
             ),
           },
           {
