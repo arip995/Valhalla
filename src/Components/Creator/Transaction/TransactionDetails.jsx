@@ -142,7 +142,8 @@ const TransactionDetails = ({ data = {} }) => {
                   // >
                   <div className="flex items-center gap-2">
                     {/* <IconInfoCircle className="h-4 w-4 text-gray-500" /> */}
-                    ₹{amountPaid - payoutAmount}
+                    ₹
+                    {(amountPaid - payoutAmount).toFixed(2)}
                   </div>
                   // </Tooltip>
                 )}
