@@ -1,5 +1,9 @@
 import { paymentHandlers } from '@/Components/Common/Payment/PaymentProvider';
 import axiosInstance from '@/Utils/AxiosInstance';
+import {
+  checkIfPurchased,
+  getUserId,
+} from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
 import {
   usePathname,
@@ -26,6 +30,9 @@ const usePayment = (
     paymentDone: false,
     loading: false,
   });
+  const isPreview =
+    usePathname().split('/')[1] === 'dashboard';
+  const [purchased, setPurchased] = useState(false);
 
   const callBackHandler = isSuccessful => {
     if (isSuccessful) {
@@ -118,6 +125,13 @@ const usePayment = (
     }
   };
 
+  const checkOnLoad = async () => {
+    if (isPreview || productType !== 'course') return;
+    setPurchased(
+      await checkIfPurchased(productId, getUserId())
+    );
+  };
+
   useEffect(() => {
     if (
       paymentState.payment_session_id ||
@@ -127,7 +141,11 @@ const usePayment = (
     }
   }, [paymentState.payment_session_id, paymentState.id]);
 
-  return { onCreateOrder, paymentState };
+  useEffect(() => {
+    checkOnLoad();
+  }, []);
+
+  return { onCreateOrder, paymentState, purchased };
 };
 
 export default usePayment;

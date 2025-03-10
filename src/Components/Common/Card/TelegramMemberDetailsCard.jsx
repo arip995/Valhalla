@@ -63,7 +63,7 @@ const TelegramMemberDetailsCard = ({
             <span>+91 {item.phoneNumber}</span>
           </div>
         </div>
-        <div className="flex items-start justify-between">
+        {/* <div className="flex items-start justify-between">
           <div className="flex items-center gap-1">
             <IconUser className="h-4 w-4" /> Telegram Name
           </div>
@@ -73,7 +73,7 @@ const TelegramMemberDetailsCard = ({
               item.joineeTelegramDetails?.last_name
             )}
           </div>
-        </div>
+        </div> */}
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-1">
             <IconCalendar className="h-4 w-4" /> Join date

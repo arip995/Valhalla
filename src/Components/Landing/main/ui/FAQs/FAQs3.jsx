@@ -12,7 +12,7 @@ const faqs = [
   {
     question: `I have made the payment but ${`it's`} not reflecting?`,
     answer:
-      'Please contact the customer support team with payment & Group details on support@nexify.club',
+      'Please contact the customer support team with payment & contact details on support@nexify.club',
   },
   {
     question:

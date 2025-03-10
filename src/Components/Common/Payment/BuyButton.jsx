@@ -9,10 +9,11 @@ import Lottie from 'react-lottie-player';
 import lottieJson from '../../../../public/lottie/tick.json';
 import LayoutLoading from '../Loading/LayoutLoading';
 import usePayment from './usePayments';
+import Link from 'next/link';
 
 const BuyButton = ({
   className,
-  children,
+  children = <></>,
   price,
   animate = true,
   creatorId,
@@ -70,40 +71,61 @@ const BuyButton = ({
 
   return (
     <>
-      <Button
-        loading={paymentState?.payinLoading}
-        disabled={!purchased && productDetails.status == 6}
-        onClick={() => {
-          if (!user?._id) {
-            setOpenAfterLogin({
-              price,
-              creatorId,
-              creatorDetails,
-              bookingData,
-            });
-            setOpened(true);
-          } else {
-            onCreateOrder(
-              price,
-              creatorId,
-              creatorDetails,
-              bookingData
-            );
+      {purchased ? (
+        <Link
+          className="w-full"
+          href={`/consume/course/${productDetails._id}`}
+        >
+          <Button
+            fullWidth
+            {...props}
+            className={classNames(
+              `${animate ? 'animate-shimmer bg-[linear-gradient(110deg,#7950f2,45%,#ffffff50,55%,#7950f2)] bg-[length:200%_100%]' : ''} `,
+              className
+            )}
+          >
+            {purchased ? 'Start Learning' : children}
+          </Button>
+        </Link>
+      ) : (
+        <Button
+          loading={paymentState?.payinLoading}
+          disabled={
+            !purchased && productDetails.status == 6
           }
-        }}
-        className={classNames(
-          `${animate ? 'animate-shimmer bg-[linear-gradient(110deg,#7950f2,45%,#ffffff50,55%,#7950f2)] bg-[length:200%_100%]' : ''} `,
-          className
-        )}
-        fullWidth
-        {...props}
-      >
-        {purchased
-          ? 'Start Learning'
-          : productDetails.status == 6
-            ? 'Sale Ended'
-            : children}
-      </Button>
+          onClick={() => {
+            if (!user?._id) {
+              setOpenAfterLogin({
+                price,
+                creatorId,
+                creatorDetails,
+                bookingData,
+              });
+              setOpened(true);
+            } else {
+              onCreateOrder(
+                price,
+                creatorId,
+                creatorDetails,
+                bookingData
+              );
+            }
+          }}
+          className={classNames(
+            `${animate ? 'animate-shimmer bg-[linear-gradient(110deg,#7950f2,45%,#ffffff50,55%,#7950f2)] bg-[length:200%_100%]' : ''} `,
+            className
+          )}
+          fullWidth
+          {...props}
+        >
+          {purchased
+            ? 'Start Learning'
+            : productDetails.status == 6
+              ? 'Sale Ended'
+              : children}
+        </Button>
+      )}
+
       {!!opened && (
         <AuthModal
           opened={opened}

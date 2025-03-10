@@ -1,15 +1,14 @@
 import { PAYMENT_METHOD_MAPPING } from '@/Constants/constants';
 import {
-  StatusPaymentMapping,
   StatusPaymentColorMapping,
+  StatusPaymentMapping,
 } from '@/Constants/ProductListingContants';
 import { formatDate } from '@/Utils/Common';
-import { Badge, Tooltip } from '@mantine/core';
+import { Badge } from '@mantine/core';
 import {
   IconBuilding,
   IconCalendar,
   IconCreditCard,
-  IconInfoCircle,
   IconMail,
   IconPhone,
   IconReceipt,
@@ -100,45 +99,54 @@ const TransactionDetails = ({ data = {} }) => {
                 {status != 1 ? (
                   '-- -- --'
                 ) : (
-                  <Tooltip
-                    label={
-                      <div>
-                        Platform fee amount (₹) :{' '}
-                        {platformFeeDetails.platformFeeAmount.toFixed(
-                          2
-                        )}
-                        <br />
-                        Platform fee (%) :{' '}
-                        {platformFeeDetails.platformFeePercentage.toFixed(
-                          2
-                        )}
-                        <br />
-                        Platform fee GST (₹) :{' '}
-                        {platformFeeDetails.platformFeeGSTAmount.toFixed(
-                          2
-                        )}
-                        <br />
-                        Platform fee GST (%) :{' '}
-                        {platformFeeDetails.platformFeeGSTPercentage.toFixed(
-                          2
-                        )}
-                      </div>
-                    }
-                    events={{
-                      hover: true,
-                      focus: true,
-                      touch: true,
-                    }}
-                  >
-                    <div className="flex items-center gap-2">
-                      <IconInfoCircle className="h-4 w-4 text-gray-500" />
-                      ₹
-                      {platformFeeDetails.platformFeeAmount +
-                        platformFeeDetails.platformFeeGSTAmount ??
-                        0}
-                    </div>
-                  </Tooltip>
+                  // <Tooltip
+                  //   label={
+                  //     <div>
+                  //       Platform fee amount (₹) :{' '}
+                  //       {platformFeeDetails.platformFeeAmount.toFixed(
+                  //         2
+                  //       )}
+                  //       <br />
+                  //       Platform fee (%) :{' '}
+                  //       {platformFeeDetails.platformFeePercentage.toFixed(
+                  //         2
+                  //       )}
+                  //       <br />
+                  //       Platform fee GST (₹) :{' '}
+                  //       {platformFeeDetails.platformFeeGSTAmount.toFixed(
+                  //         2
+                  //       )}
+                  //       <br />
+                  //       Platform fee GST (%) :{' '}
+                  //       {platformFeeDetails.platformFeeGSTPercentage.toFixed(
+                  //         2
+                  //       )}
+                  //     </div>
+                  //   }
+                  //   events={{
+                  //     hover: true,
+                  //     focus: true,
+                  //     touch: true,
+                  //   }}
+                  // >
+                  <div className="flex items-center gap-2">
+                    {/* <IconInfoCircle className="h-4 w-4 text-gray-500" /> */}
+                    ₹{amountPaid - payoutAmount}
+                  </div>
+                  // </Tooltip>
                 )}
+              </>
+            ),
+            icon: (
+              <IconReceipt className="h-4 w-4 text-gray-500" />
+            ),
+          },
+          {
+            label: 'Affiliate fee',
+            value: (
+              <>
+                {platformFeeDetails.affiliateFee ??
+                  '-- -- --'}
               </>
             ),
             icon: (
