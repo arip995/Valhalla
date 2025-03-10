@@ -156,8 +156,9 @@ const TransactionDetails = ({ data = {} }) => {
             label: 'Affiliate fee',
             value: (
               <>
-                {platformFeeDetails.affiliateFee ??
-                  '-- -- --'}
+                {platformFeeDetails.affiliateFee
+                  ? platformFeeDetails.affiliateFee
+                  : '-- -- --'}
               </>
             ),
             icon: (
