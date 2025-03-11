@@ -86,7 +86,7 @@ const CompareTable = () => {
             you currently use.
           </p>
 
-          <div className="overflow-hidden rounded-lg shadow-lg">
+          {/* <div className="overflow-hidden rounded-lg shadow-lg">
             <table className="min-w-full bg-white">
               <thead className="bg-gradient-to-r from-purple-600 to-pink-600 text-white">
                 <tr>
@@ -125,7 +125,7 @@ const CompareTable = () => {
                 })}
               </tbody>
             </table>
-          </div>
+          </div> */}
 
           <div className="mt-8 text-center">
             <p className="text-lg font-semibold text-gray-700">
