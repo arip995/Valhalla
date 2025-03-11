@@ -76,9 +76,6 @@ const packages = [
     name: 'Basic',
     price: '999',
     features: [
-      'Course Builder',
-      'Digital Products',
-      'Payment Gateway Integration',
       'Basic Analytics',
       'Email Support',
       'Mobile App Access',
@@ -89,8 +86,6 @@ const packages = [
     price: '1999',
     features: [
       'Everything in Basic',
-      'Host Events & Webinars',
-      'Community Features',
       'Advanced Analytics',
       'Priority Support',
       'Custom Domain',
@@ -102,11 +97,8 @@ const packages = [
     price: '4999',
     features: [
       'Everything in Professional',
-      'White Label Solution',
-      'API Access',
       'Dedicated Account Manager',
       'Custom Integration',
-      'SLA Support',
       'Unlimited Storage',
     ],
   },
