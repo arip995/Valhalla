@@ -103,8 +103,7 @@ const Hero2 = () => {
                     Global Reach
                   </h3>
                   <p className="text-sm text-gray-600">
-                    Sell your products to customers
-                    worldwide with multi-currency support
+                    Customers from 50+ countries
                   </p>
                 </div>
               </div>
