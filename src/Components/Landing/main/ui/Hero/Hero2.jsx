@@ -26,7 +26,7 @@ const Hero2 = () => {
 
           <h1 className="mb-6 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-4xl font-extrabold leading-tight text-transparent sm:text-5xl md:text-6xl">
             The all-in-one platform for your marketing and
-            analytics
+            website
           </h1>
 
           {/* <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-700 sm:text-xl">
