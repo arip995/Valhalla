@@ -2,34 +2,58 @@ import {
   IconBook,
   IconBrandTelegram,
   IconCreditCard,
-  IconVideo,
 } from '@tabler/icons-react';
-import React from 'react';
+// const features = [
+//   {
+//     icon: <IconBook className="h-5 w-5" />,
+//     title: 'Courses',
+//     description:
+//       'Create, sell, and manage online courses with our intuitive platform. Perfect for educators and experts.',
+//   },
+//   {
+//     icon: <IconBrandTelegram className="h-5 w-5" />,
+//     title: 'Telegram Community',
+//     description:
+//       'Build and monetize your Telegram community with advanced management tools and analytics.',
+//   },
+//   {
+//     icon: <IconCreditCard className="h-5 w-5" />,
+//     title: 'Payment Pages',
+//     description:
+//       'Accept payments globally with secure, customizable checkout pages for all your digital products.',
+//   },
+//   {
+//     icon: <IconVideo className="h-5 w-5" />,
+//     title: 'Webinar/Events',
+//     description:
+//       'Host engaging webinars and virtual events with built-in monetization and attendance tracking.',
+//   },
+// ];
 const features = [
   {
     icon: <IconBook className="h-5 w-5" />,
-    title: 'Courses',
+    title: 'Track sales',
     description:
-      'Create, sell, and manage online courses with our intuitive platform. Perfect for educators and experts.',
+      'Monitor your sales performance in real-time with detailed analytics and insights to optimize your revenue streams.',
   },
   {
     icon: <IconBrandTelegram className="h-5 w-5" />,
-    title: 'Telegram Community',
+    title: 'Track audience',
     description:
-      'Build and monetize your Telegram community with advanced management tools and analytics.',
+      'Understand your audience better with comprehensive demographic data and engagement metrics to tailor your content.',
   },
   {
     icon: <IconCreditCard className="h-5 w-5" />,
-    title: 'Payment Pages',
+    title: 'Track analytics',
     description:
-      'Accept payments globally with secure, customizable checkout pages for all your digital products.',
+      'Get powerful analytics tools to measure traffic, conversions, and user behavior to make data-driven decisions.',
   },
-  {
-    icon: <IconVideo className="h-5 w-5" />,
-    title: 'Webinar/Events',
-    description:
-      'Host engaging webinars and virtual events with built-in monetization and attendance tracking.',
-  },
+  // {
+  //   icon: <IconVideo className="h-5 w-5" />,
+  //   title: 'Track ',
+  //   description:
+  //     'Host engaging webinars and virtual events with built-in monetization and attendance tracking.',
+  // },
 ];
 
 const Features2 = () => {
@@ -40,18 +64,18 @@ const Features2 = () => {
     >
       <div className="mb-12 text-center">
         <h2 className="mb-3 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-2xl font-bold text-transparent sm:text-3xl">
-          Unleash the power of monetization solutions
+          Unleash the power of tracking solutions
         </h2>
-        <p className="mx-auto max-w-xl text-sm text-gray-600 sm:text-base">
+        {/* <p className="mx-auto max-w-xl text-sm text-gray-600 sm:text-base">
           Turn your content into cash with our seamless,
           integrated solution. Whether {`you're`} creating
           courses or managing webinars, our platform
           provides everything you need to monetize your work
           efficiently.
-        </p>
+        </p> */}
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
         {features.map((feature, index) => (
           <div
             key={index}

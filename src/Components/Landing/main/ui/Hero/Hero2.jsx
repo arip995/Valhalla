@@ -29,12 +29,19 @@ const Hero2 = () => {
             products and services
           </h1>
 
-          <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-700 sm:text-xl">
+          {/* <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-700 sm:text-xl">
             Consolidate all your digital products, coaching,
             subscriptions, courses, and email marketing into
             one powerful link-in-bio store. Start monetizing
             your content today!
-          </p>
+          </p> */}
+
+          {/* <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-700 sm:text-xl">
+            Start building your website and marketing
+            presence today. Create a powerful link-in-bio
+            website to showcase your digital products and
+            services. Launch your online website now!
+          </p> */}
 
           {/* CTA Buttons */}
           <div className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
