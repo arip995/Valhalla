@@ -68,6 +68,7 @@ const usePayment = (
     creatorDetails,
     bookingData
   ) => {
+    if (isPreview) return;
     setPaymentState(prev => ({
       ...prev,
       payinLoading: true,
