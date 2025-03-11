@@ -7,6 +7,7 @@ import {
   TypographyStylesProvider,
 } from '@mantine/core';
 import FAQs3 from '../../main/ui/FAQs/FAQs3';
+import Disclaimer from '@/Components/Common/Footer/Disclaimer';
 
 const LTDetailsContainer = ({ data }) => {
   return (
@@ -60,7 +61,7 @@ const LTDetailsContainer = ({ data }) => {
             </div>
             <ViewPlans2 data={data} />
           </div>
-          {/* <Disclaimer showTitle={false} /> */}
+          <Disclaimer showTitle={false} />
           <DisclaimerSebi showTitle={false} />
           <FAQs3 />
         </div>
