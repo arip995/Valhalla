@@ -1,4 +1,4 @@
-import Disclaimer from '@/Components/Common/Footer/Disclaimer';
+import DisclaimerSebi from '@/Components/Common/Footer/DisclaimerSebi';
 import FooterTwo from '@/Components/Common/Footer/FooterTwo';
 import ViewPlans2 from '@/Components/Common/General/ViewPlans2';
 import ViewProfile from '@/Components/Common/General/ViewProfile';
@@ -60,7 +60,8 @@ const LTDetailsContainer = ({ data }) => {
             </div>
             <ViewPlans2 data={data} />
           </div>
-          <Disclaimer showTitle={false} />
+          {/* <Disclaimer showTitle={false} /> */}
+          <DisclaimerSebi showTitle={false} />
           <FAQs3 />
         </div>
       </div>
