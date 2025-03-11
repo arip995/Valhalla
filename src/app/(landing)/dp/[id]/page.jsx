@@ -124,7 +124,6 @@ export default async function Page({ params }) {
           }
         />
         <ViewDP data={data} productId={params.id} />
-        <ViewDP data={data} productId={params.id} />
       </>
     );
   } catch (error) {
