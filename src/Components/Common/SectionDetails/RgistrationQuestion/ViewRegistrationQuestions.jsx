@@ -174,10 +174,11 @@ const ViewRegistrationQuestions = ({
         }
       });
     }
-
     if (productType === 'dp' && !user?.isCreator) {
       const { firstName, lastName } =
-        convertFullNameToFirstNameLastName(name);
+        convertFullNameToFirstNameLastName(
+          name || submissionValues.name
+        );
       const { data } = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/dp/login`,
         {
