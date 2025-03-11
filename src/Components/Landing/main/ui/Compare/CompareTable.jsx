@@ -2,17 +2,13 @@
 import {
   IconBook,
   IconBrandWebflow,
-  IconCalendar,
   IconCash,
   IconChartPie,
   IconCreditCard,
-  IconLocation,
-  IconMail,
   IconPalette,
   IconTicket,
   IconUser,
 } from '@tabler/icons-react';
-import Link from 'next/link';
 
 const features = [
   {
@@ -160,11 +156,11 @@ const CompareTable = () => {
                     )
                   )}
                 </ul>
-                <Link href={'/signup'}>
-                  <div className="w-full rounded-lg bg-gradient-to-r from-purple-600 to-pink-500 px-4 py-2 text-center text-white transition-all hover:from-pink-500 hover:to-purple-600">
-                    Buy Now
-                  </div>
-                </Link>
+                {/* <Link href={'/signup'}> */}
+                <div className="w-full rounded-lg bg-gradient-to-r from-purple-600 to-pink-500 px-4 py-2 text-center text-white transition-all hover:from-pink-500 hover:to-purple-600">
+                  Buy Now
+                </div>
+                {/* </Link> */}
               </div>
             ))}
           </div>
