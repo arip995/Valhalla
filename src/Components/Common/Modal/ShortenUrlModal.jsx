@@ -1,31 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Modal, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { validateLink } from '@/Constants/constants';
+import {
+  isAlphanumeric,
+  validateLink,
+} from '@/Constants/constants';
+import axiosInstance from '@/Utils/AxiosInstance';
+import toast from 'react-hot-toast';
 
 export default function ShortenUrlModal({
   opened,
   onClose = () => {},
 }) {
+  const [loading, setLoading] = useState(false);
   const urlForm = useForm({
     initialValues: {
       url: '',
-      customizeUrl: '',
+      customId: '',
     },
     validate: values => {
       const errors = {};
       if (!validateLink(values.url)) {
-        console.log(values.url);
         errors.url = 'Please enter a valid URL';
+      }
+      if (
+        values.customId &&
+        !isAlphanumeric(values.customId)
+      ) {
+        errors.customId =
+          'Custom string can only contain alphabets and numbers';
       }
       return errors;
     },
   });
 
-  const onSubmit = async e => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleSubmit = async values => {
     urlForm.validate();
+    try {
+      setLoading(true);
+      const { data } = await axiosInstance.post(
+        '/shorturl/create',
+        values
+      );
+      console.log(data);
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -38,7 +61,7 @@ export default function ShortenUrlModal({
       }}
     >
       <form
-        onSubmit={onSubmit}
+        onSubmit={urlForm.onSubmit(handleSubmit)}
         className="my-2 flex flex-col gap-5"
       >
         <TextInput
@@ -46,10 +69,12 @@ export default function ShortenUrlModal({
           {...urlForm.getInputProps('url')}
         />
         <TextInput
-          label="Enter URL Name (Optional)"
-          {...urlForm.getInputProps('customizeUrl')}
+          label="Enter Custom Name (Optional)"
+          {...urlForm.getInputProps('customId')}
         />
-        <Button type="submit">Shorten URL </Button>
+        <Button type="submit" loading={loading}>
+          Shorten URL{' '}
+        </Button>
       </form>
     </Modal>
   );
