@@ -59,6 +59,9 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
   }, [purchasedData?.inviteLink]);
 
   useEffect(() => {
+    if (user?._id) {
+      onSuccess();
+    }
     if (window?.TelegramWebview) {
       setTimeout(() => {
         window.location.href = `intent://${window.location.href.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end;`;
