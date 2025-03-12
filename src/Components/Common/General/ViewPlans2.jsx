@@ -7,12 +7,11 @@ import {
 import axiosInstance from '@/Utils/AxiosInstance';
 import { discountPercentage } from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
-import { Badge, Button } from '@mantine/core';
+import { Badge } from '@mantine/core';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import AfterPurchaseTelegramModal from '../Card/AfterPurchaseTelegramModal';
 import BuyButton from '../Payment/BuyButton';
-import { IconBrandTelegram } from '@tabler/icons-react';
 
 const ViewPlans2 = ({ data, onPay = () => {} }) => {
   const productId = usePathname().split('/')[2];
@@ -34,6 +33,9 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
         ) {
           setOpened(true);
         }
+      } else {
+        setPurchasedData(false);
+        setOpened(false);
       }
     } catch (error) {
       console.log();
@@ -43,15 +45,18 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
 
   const onClose = async () => {
     setOpened(false);
-    try {
-      await axiosInstance.post(
-        '/purchase/update_telegram_modal',
-        { productId, userId: user._id }
-      );
-    } catch (error) {
-      console.log(error);
-    }
   };
+
+  useEffect(() => {
+    let interval;
+    if (purchasedData?.inviteLink) {
+      interval = setInterval(() => {
+        onSuccess();
+      }, 10000);
+    } else {
+      clearInterval(interval);
+    }
+  }, [purchasedData?.inviteLink]);
 
   useEffect(() => {
     if (user?._id) {
@@ -79,7 +84,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
           inviteLink={purchasedData.inviteLink}
         />
       ) : null}
-      {purchasedData?.inviteLink ? (
+      {/* {purchasedData?.inviteLink ? (
         <div className="flex flex-col items-center justify-center space-y-4 p-4">
           <div className="text-center">
             <h2 className="text-xl font-semibold text-green-600">
@@ -107,7 +112,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
             </Button>
           </a>
         </div>
-      ) : null}
+      ) : null} */}
       {data.subscriptionPlans.map(plan => {
         return (
           <div
