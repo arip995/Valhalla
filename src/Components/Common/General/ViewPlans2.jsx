@@ -34,6 +34,8 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
         ) {
           setOpened(true);
         }
+      } else {
+        setPurchasedData(false);
       }
     } catch (error) {
       console.log();
@@ -55,7 +57,9 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
 
   useEffect(() => {
     if (user?._id) {
-      onSuccess();
+      setInterval(() => {
+        onSuccess();
+      }, 10000);
     }
     if (window?.TelegramWebview) {
       setTimeout(() => {
