@@ -44,11 +44,13 @@ const ViewRegistrationQuestions = ({
 
   const { onCreateOrder, paymentState } = usePayment(() => {
     if (data.redirectUrl) {
-      const newWindow = document.createElement('a');
-      newWindow.href = data.redirectUrl;
-      newWindow.target = '_blank';
-      newWindow.rel = 'noopener noreferrer';
-      newWindow.click();
+      const link = document.createElement('a');
+      link.href = data.redirectUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer'; // Same security benefits
+      document.body.appendChild(link);
+      link.click(); // Programmatically trigger, still needs user context
+      document.body.removeChild(link);
     }
     router.push(`/consume/dp/${data._id}`);
     onSuccess();
