@@ -26,7 +26,6 @@ export const validateEmail = email => {
 };
 
 export const validatePhoneNumber = phoneNumber => {
-  console.log(phoneNumber);
   if (!phoneNumber || phoneNumber.toString()?.length !== 10)
     return false;
 

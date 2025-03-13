@@ -11,13 +11,13 @@ export const pollOrderStatus = (
   let attemptCount = 0;
   const MAX_ATTEMPTS = 10;
   const POLL_INTERVAL = 2500;
-  const onPollSuccess = async data => {
+  const onPollSuccess = async () => {
     setTimeout(() => {
       setPaymentState(prev => ({
         ...prev,
         loading: false,
       }));
-      onSuccess(data);
+      onSuccess();
     }, 3500);
 
     setPaymentState(prev => ({
@@ -59,7 +59,7 @@ export const pollOrderStatus = (
       );
       if (data?.ok) {
         clearInterval(timer);
-        onPollSuccess(data?.data);
+        onPollSuccess();
       } else {
         attemptCount += 1;
       }
