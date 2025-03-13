@@ -42,10 +42,16 @@ const ViewRegistrationQuestions = ({
   const name = searchParams.get('name');
   const productType = usePathname().split('/')[1];
 
-  const { onCreateOrder, paymentState } = usePayment(() => {
-    router.push(`/consume/dp/${data._id}`);
-    onSuccess();
-  });
+  const { onCreateOrder, paymentState } = usePayment(
+    newData => {
+      console.log(newData);
+      if (data.redirectUrl) {
+        window.open(data.redirectUrl, '_blank');
+      }
+      router.push(`/consume/dp/${data._id}`);
+      onSuccess();
+    }
+  );
   const registrationQuestions = useMemo(
     () => data.registrationQuestions || [],
     []
