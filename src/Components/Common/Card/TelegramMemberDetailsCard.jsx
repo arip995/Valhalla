@@ -24,7 +24,6 @@ const TelegramMemberDetailsCard = ({
   onItemClick = () => {},
 }) => {
   const url = `https://t.me/${item.inviteLink}`;
-  console.log(item);
 
   if (!item) return null;
 
