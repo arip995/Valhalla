@@ -11,6 +11,7 @@ import {
   IconBrandRedux,
   IconCalendar,
   IconCheck,
+  IconCoinRupee,
   IconCopy,
   IconLink,
   IconMail,
@@ -23,6 +24,7 @@ const TelegramMemberDetailsCard = ({
   onItemClick = () => {},
 }) => {
   const url = `https://t.me/${item.inviteLink}`;
+  console.log(item);
 
   if (!item) return null;
 
@@ -61,6 +63,16 @@ const TelegramMemberDetailsCard = ({
           </div>
           <div className="ellipsis text-xs text-gray-600">
             <span>+91 {item.phoneNumber}</span>
+          </div>
+        </div>
+        <div className="flex items-start justify-between">
+          <div className="flex items-center gap-1">
+            <IconCoinRupee className="h-4 w-4" /> Amount
+          </div>
+          <div className="ellipsis text-xs text-gray-600">
+            <span>
+              ₹ {item.subscriptions?.[0]?.amountPaid}
+            </span>
           </div>
         </div>
         {/* <div className="flex items-start justify-between">
