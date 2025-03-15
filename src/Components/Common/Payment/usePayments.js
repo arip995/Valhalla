@@ -16,7 +16,10 @@ import { pollOrderStatus } from './PollOrderStatus';
 const usePayment = (
   onSuccess = () => {},
   onFailure = () => {},
-  paymentProvider = 'cf'
+  paymentProvider = getUserId() ===
+  '67d14f4a21ff0f489e7bdceb'
+    ? 'pp'
+    : 'cf'
 ) => {
   const { user } = useUser();
   const searchParams = useSearchParams();
@@ -25,8 +28,6 @@ const usePayment = (
   const productId = pathnameParts[2];
   const [paymentState, setPaymentState] = useState({
     payinLoading: false,
-    payment_session_id: null,
-    orderId: null,
     paymentDone: false,
     loading: false,
   });
@@ -105,7 +106,6 @@ const usePayment = (
         }
       );
       if (data.ok) {
-        console.log(data.data);
         setPaymentState(prev => ({
           ...prev,
           ...data.data,
@@ -136,11 +136,16 @@ const usePayment = (
   useEffect(() => {
     if (
       paymentState.payment_session_id ||
-      paymentState.id
+      paymentState.id ||
+      paymentState.checkoutPageUrl
     ) {
       openPaymentModal();
     }
-  }, [paymentState.payment_session_id, paymentState.id]);
+  }, [
+    paymentState.payment_session_id,
+    paymentState.id,
+    paymentState.checkoutPageUrl,
+  ]);
 
   useEffect(() => {
     checkOnLoad();

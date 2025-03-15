@@ -1,8 +1,8 @@
 // utils/paymentProviders.js
-import { load } from '@cashfreepayments/cashfree-js';
-import { loadRazorpayScript } from './LoadPaymentScript';
-import { isDevEnv } from '@/Utils/Common';
 import axiosInstance from '@/Utils/AxiosInstance';
+import { isDevEnv } from '@/Utils/Common';
+import { load } from '@cashfreepayments/cashfree-js';
+import { loadPaymentScript } from './LoadPaymentScript';
 
 export const handleCashfreePayment = async (
   paymentState,
@@ -32,9 +32,7 @@ export const handleRazorpayPayment = async (
   phoneNumber,
   callBackHandler
 ) => {
-  const res = await loadRazorpayScript(
-    'https://checkout.razorpay.com/v1/checkout.js'
-  );
+  const res = await loadPaymentScript('rp');
   if (!res) {
     alert('Razorpay failed to load!');
     return;
@@ -218,45 +216,26 @@ export const handlePhonpePayment = async (
   callBackHandler
 ) => {
   try {
-    const script = document.createElement('script');
-    script.src = `https://checkout.phonepe.com/sdk/bundle.js`;
-    script.async = true;
-    script.onload = () => {
-      const config = {
-        merchantId: process.env.PHONEPE_MERCHANT_ID,
-        merchantTransactionId: paymentState.id,
-        amount: paymentState.amount * 100, // PhonePe expects amount in paise
-        merchantUserId: email,
-        mobileNumber: phoneNumber,
-        environment: isDevEnv() ? 'SANDBOX' : 'PRODUCTION',
-        callbackUrl:
-          window.location.origin + '/payment/callback',
-        redirectUrl:
-          window.location.origin + '/payment/redirect',
-        paymentInstrument: {
-          type: 'PAY_PAGE',
-        },
-      };
-
-      if (window.PhonePe && window.PhonePe.PaymentSDK) {
-        window.PhonePe.PaymentSDK.init(config)
-          .then(function () {
-            return window.PhonePe.PaymentSDK.startTransaction();
-          })
-          .then(function (response) {
-            if (response.status === 'SUCCESS') {
-              callBackHandler(true);
-            } else {
-              callBackHandler(false);
-            }
-          })
-          .catch(function (error) {
-            console.error('PhonePe payment error:', error);
-            callBackHandler(false);
+    await loadPaymentScript('pp');
+    window.PhonePeCheckout.transact({
+      tokenUrl: paymentState.checkoutPageUrl,
+      closeFrame: () => {
+        console.log('message');
+        callBackHandler(false);
+      },
+      callback: response => {
+        console.log(response);
+        if (response === 'USER_CANCEL') {
+          callBackHandler(false);
+          window.PhonePeCheckout.closePage({
+            token: paymentState.checkoutPageUrl,
           });
-      }
-    };
-    document.body.appendChild(script);
+        } else if (response === 'CONCLUDED') {
+          callBackHandler(true);
+        }
+      },
+      type: 'IFRAME',
+    });
   } catch (error) {
     console.error('PhonePe payment error:', error);
     callBackHandler(false);
