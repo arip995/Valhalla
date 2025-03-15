@@ -32,9 +32,9 @@ const Hero = () => (
                 digital products and services
               </span>
             </div>
-            <p className="mx-auto max-w-xl text-gray-300">
+            {/* <p className="mx-auto max-w-xl text-gray-300">
               {`Consolidate all your digital products, coaching, subscriptions, courses, and email marketing into one link-in-bio store`}
-            </p>
+            </p> */}
             <div className="flex justify-center text-sm font-medium">
               <NavLink
                 href="/signup"

@@ -14,7 +14,7 @@ const PRODUCT_TYPE_NAMES = {
 };
 
 const TIME_PERIODS = [
-  { value: 'day', label: 'Last 24 hours' },
+  { value: 'day', label: 'This day' },
   { value: 'week', label: 'Last 7 days' },
   { value: 'month', label: 'Last 30 days' },
   { value: 'year', label: 'This Year' },
@@ -28,7 +28,7 @@ const HomeAnalytics = () => {
     productTypeDetails: [],
   });
   const [selectedPeriod, setSelectedPeriod] =
-    useState('week');
+    useState('day');
   const [loading, setLoading] = useState(true);
 
   const fetchAnalytics = useCallback(async type => {

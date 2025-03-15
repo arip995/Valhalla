@@ -18,6 +18,7 @@ const Header = ({
   modal = false,
   tabOptions = [],
   className,
+  Component = CreateProductModal,
 }) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -88,8 +89,9 @@ const Header = ({
           </Tabs.List>
         </Tabs>
       ) : null}
+
       {!!opened && (
-        <CreateProductModal
+        <Component
           productType={productType}
           opened={opened}
           onClose={() => {

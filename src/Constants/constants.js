@@ -393,6 +393,10 @@ export const validateLink = link => {
   return regex.test(link);
 };
 
+export const isAlphanumeric = str => {
+  return /^[a-zA-Z0-9]+$/.test(str);
+};
+
 export const RegistrationQuestionTypes = [
   { value: 'text', label: 'Text' },
   { value: 'largeText', label: 'Large Text' },

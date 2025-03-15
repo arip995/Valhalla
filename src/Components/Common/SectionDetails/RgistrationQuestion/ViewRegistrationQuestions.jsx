@@ -43,6 +43,15 @@ const ViewRegistrationQuestions = ({
   const productType = usePathname().split('/')[1];
 
   const { onCreateOrder, paymentState } = usePayment(() => {
+    if (data.redirectUrl) {
+      const link = document.createElement('a');
+      link.href = data.redirectUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer'; // Same security benefits
+      document.body.appendChild(link);
+      link.click(); // Programmatically trigger, still needs user context
+      document.body.removeChild(link);
+    }
     router.push(`/consume/dp/${data._id}`);
     onSuccess();
   });
@@ -174,10 +183,11 @@ const ViewRegistrationQuestions = ({
         }
       });
     }
-
     if (productType === 'dp' && !user?.isCreator) {
       const { firstName, lastName } =
-        convertFullNameToFirstNameLastName(name);
+        convertFullNameToFirstNameLastName(
+          name || submissionValues.name
+        );
       const { data } = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/dp/login`,
         {

@@ -4,6 +4,7 @@ import {
   IconCash,
   IconLockDollar,
   IconSchool,
+  IconLink,
   IconBrandDiscord,
   IconBrandWhatsapp,
   IconBrandMeta,
@@ -49,6 +50,12 @@ export const SidenavData = [
   },
 
   { apps: true },
+  {
+    icon: IconLink,
+    label: 'Short Url',
+    value: 'url',
+    path: '/app/shorturl',
+  },
   {
     icon: IconBrandTelegram,
     label: 'Telegram',

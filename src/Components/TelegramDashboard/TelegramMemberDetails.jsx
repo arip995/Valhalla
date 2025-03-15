@@ -71,7 +71,7 @@ const TelegramMemberDetails = ({ item }) => {
           </span>
         </div>
       </div>
-      <div className="flex items-start justify-between">
+      {/* <div className="flex items-start justify-between">
         <div className="flex items-center gap-1">
           <IconUser className="h-4 w-4" /> Telegram Name
         </div>
@@ -81,7 +81,7 @@ const TelegramMemberDetails = ({ item }) => {
             item.joineeTelegramDetails?.last_name
           )}
         </div>
-      </div>
+      </div> */}
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-1">
           <IconBrandRedux className="h-4 w-4" /> Status

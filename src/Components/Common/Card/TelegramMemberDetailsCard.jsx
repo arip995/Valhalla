@@ -11,6 +11,7 @@ import {
   IconBrandRedux,
   IconCalendar,
   IconCheck,
+  IconCoinRupee,
   IconCopy,
   IconLink,
   IconMail,
@@ -63,6 +64,24 @@ const TelegramMemberDetailsCard = ({
             <span>+91 {item.phoneNumber}</span>
           </div>
         </div>
+        <div className="flex items-start justify-between">
+          <div className="flex items-center gap-1">
+            <IconCoinRupee className="h-4 w-4" /> Amount
+          </div>
+          <div className="ellipsis text-xs text-gray-600">
+            <span>
+              ₹ {item.subscriptions?.[0]?.amountPaid}
+            </span>
+          </div>
+        </div>
+        <div className="flex items-start justify-between">
+          <div className="flex items-center gap-1">
+            <IconBrandRedux className="h-4 w-4" /> Status
+          </div>
+          <div className="ellipsis text-xs text-gray-600">
+            {TelegramSubscriberStatusMapping[item.status]}
+          </div>
+        </div>
         {/* <div className="flex items-start justify-between">
           <div className="flex items-center gap-1">
             <IconUser className="h-4 w-4" /> Telegram Name
@@ -92,14 +111,6 @@ const TelegramMemberDetailsCard = ({
             <span>
               {formatDate(item.subscriptionExpiredAt)}
             </span>
-          </div>
-        </div>
-        <div className="flex items-start justify-between">
-          <div className="flex items-center gap-1">
-            <IconBrandRedux className="h-4 w-4" /> Status
-          </div>
-          <div className="ellipsis text-xs text-gray-600">
-            {TelegramSubscriberStatusMapping[item.status]}
           </div>
         </div>
         <div className="flex flex-col items-start">

@@ -1,4 +1,6 @@
 import LimitQuantity from '@/Components/Common/CreationFlow/LimitQuantity';
+import RedirectionLink from '@/Components/Common/CreationFlow/RedirectionLink';
+import SupportDetails from '@/Components/Common/CreationFlow/SupportDetails';
 import ListFileOne from '@/Components/Common/ListFiles/ListFileOne';
 import RenderRgistrationQuestion from '@/Components/Common/SectionDetails/RgistrationQuestion/RenderRgistrationQuestion';
 import { Divider } from '@mantine/core';
@@ -29,6 +31,10 @@ const CreateDPStepTwo = ({ form }) => {
       />
       <Divider my="md" size="lg" />
       <RenderRgistrationQuestion form={form} />
+      <Divider my="md" size="lg" />
+      <RedirectionLink form={form} />
+      <Divider my="md" size="lg" />
+      <SupportDetails form={form} />
       <Divider my="md" size="lg" />
       <LimitQuantity form={form} />
     </div>

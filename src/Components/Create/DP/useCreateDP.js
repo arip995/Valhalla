@@ -1,12 +1,19 @@
 import axiosInstance from '@/Utils/AxiosInstance';
-import { validateEditorContent } from '@/Utils/Regex';
+import {
+  validateEditorContent,
+  validateEmail,
+  validatePhoneNumber,
+} from '@/Utils/Regex';
 import { useForm } from '@mantine/form';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { getUniqueId, getUserId } from '@/Utils/Common';
 import { useMediaQuery } from '@mantine/hooks';
-import { sectionTypes } from '@/Constants/constants';
+import {
+  sectionTypes,
+  validateLink,
+} from '@/Constants/constants';
 
 const useCreateDP = () => {
   const router = useRouter();
@@ -53,6 +60,27 @@ const useCreateDP = () => {
         ) {
           errors.quantity = 'Quantity is required';
         }
+        if (values.redirectUrl) {
+          if (!validateLink(values.redirectUrl)) {
+            errors.redirectUrl =
+              'Redirection link should be a valid URL';
+          }
+        }
+
+        if (values.supportPhoneNumber) {
+          if (
+            !validatePhoneNumber(values.supportPhoneNumber)
+          ) {
+            errors.supportPhoneNumber =
+              'Invalid phone number';
+          }
+        }
+
+        if (values.supportEmail) {
+          if (!validateEmail(values.supportEmail)) {
+            errors.supportEmail = 'Invalid email';
+          }
+        }
       }
 
       if (values.isSaveClickedAtleastOnce) {
@@ -78,9 +106,11 @@ const useCreateDP = () => {
         if (!values.cta) {
           errors.cta = 'CTA is required';
         }
+
         if (!values.coverImage?.url) {
           errors.coverImage = 'Cover image is required';
         }
+
         if (values.priceType === 'customerDecided') {
           if (!values.minimumPrice) {
             errors.minimumPrice = 'Price is required';
@@ -93,6 +123,28 @@ const useCreateDP = () => {
             errors.price = 'Price is required';
           } else if (values.price < 1) {
             errors.price = 'Price should be greater than 0';
+          }
+        }
+
+        if (values.redirectUrl) {
+          if (!validateLink(values.redirectUrl)) {
+            errors.redirectUrl =
+              'Redirection link should be a valid URL';
+          }
+        }
+
+        if (values.supportPhoneNumber) {
+          if (
+            !validatePhoneNumber(values.supportPhoneNumber)
+          ) {
+            errors.supportPhoneNumber =
+              'Invalid phone number';
+          }
+        }
+
+        if (values.supportEmail) {
+          if (!validateEmail(values.supportEmail)) {
+            errors.supportEmail = 'Invalid email';
           }
         }
       }

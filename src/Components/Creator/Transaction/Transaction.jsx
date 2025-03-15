@@ -160,7 +160,7 @@ const Transaction = () => {
           />
         </div>
       </div>
-      {getUserId() !== '67c87d932d02f0d24d5fa0b1' && (
+      {getUserId() !== '67ce5ba7d07ed2875edf151a' && (
         <Drawer
           trapFocus={false}
           lockScroll={false}

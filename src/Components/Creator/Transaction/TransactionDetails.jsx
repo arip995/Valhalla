@@ -26,7 +26,9 @@ const TransactionDetails = ({ data = {} }) => {
     paymentMethod = '',
     orderId = '',
     createdAt = null,
+    paymentDetails,
   } = data;
+  console.log(paymentDetails);
 
   const sections = useMemo(
     () => [
@@ -93,6 +95,15 @@ const TransactionDetails = ({ data = {} }) => {
             ),
           },
           {
+            label: 'UTR No.',
+            value:
+              paymentDetails?.payment?.bank_reference ??
+              '-- -- --',
+            icon: (
+              <IconReceipt className="h-4 w-4 text-gray-500" />
+            ),
+          },
+          {
             label: 'Platform Fee',
             value: (
               <>
@@ -131,7 +142,8 @@ const TransactionDetails = ({ data = {} }) => {
                   // >
                   <div className="flex items-center gap-2">
                     {/* <IconInfoCircle className="h-4 w-4 text-gray-500" /> */}
-                    ₹{amountPaid - payoutAmount}
+                    ₹
+                    {(amountPaid - payoutAmount).toFixed(2)}
                   </div>
                   // </Tooltip>
                 )}
@@ -145,8 +157,9 @@ const TransactionDetails = ({ data = {} }) => {
             label: 'Affiliate fee',
             value: (
               <>
-                {platformFeeDetails.affiliateFee ??
-                  '-- -- --'}
+                {platformFeeDetails.affiliateFee
+                  ? platformFeeDetails.affiliateFee
+                  : '-- -- --'}
               </>
             ),
             icon: (
