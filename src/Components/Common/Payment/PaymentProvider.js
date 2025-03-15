@@ -227,9 +227,6 @@ export const handlePhonpePayment = async (
         console.log(response);
         if (response === 'USER_CANCEL') {
           callBackHandler(false);
-          window.PhonePeCheckout.closePage({
-            token: paymentState.checkoutPageUrl,
-          });
         } else if (response === 'CONCLUDED') {
           callBackHandler(true);
         }
