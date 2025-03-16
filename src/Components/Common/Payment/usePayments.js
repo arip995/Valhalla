@@ -3,6 +3,7 @@ import axiosInstance from '@/Utils/AxiosInstance';
 import {
   checkIfPurchased,
   getUserId,
+  isDevEnv,
 } from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
 import {
@@ -16,10 +17,7 @@ import { pollOrderStatus } from './PollOrderStatus';
 const usePayment = (
   onSuccess = () => {},
   onFailure = () => {},
-  paymentProvider = getUserId() ===
-  '67d14f4a21ff0f489e7bdceb'
-    ? 'pp'
-    : 'cf'
+  paymentProvider = isDevEnv() ? 'cf' : 'pp'
 ) => {
   const { user } = useUser();
   const searchParams = useSearchParams();
