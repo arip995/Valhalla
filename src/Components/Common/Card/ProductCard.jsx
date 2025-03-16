@@ -58,13 +58,13 @@ const ProductCard = ({
           <div className="flex justify-between text-sm font-semibold text-gray-600">
             <span>Price</span>
             <span className="font-normal text-gray-500">
-              ₹{item.price}
+              ₹{item.price?.toFixed(2) || 0}
             </span>
           </div>
           <div className="flex justify-between text-sm font-semibold text-gray-600">
             <span>Revenue</span>
             <span className="font-normal text-gray-500">
-              ₹{item.totalRevenue}
+              ₹{item.totalRevenue?.toFixed(2) || 0}
             </span>
           </div>
           <div className="flex justify-between text-sm font-semibold text-gray-600">

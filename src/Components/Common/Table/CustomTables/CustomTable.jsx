@@ -82,7 +82,11 @@ const renderTableDataCell = ({ type, item }) => {
         </td>
       );
     case 'price':
-      return <td className="min-w-36">₹{item.price}</td>;
+      return (
+        <td className="min-w-36">
+          ₹{item.price?.toFixed(2) || 0}
+        </td>
+      );
     case 'revenue':
       return (
         <td className="min-w-36">
