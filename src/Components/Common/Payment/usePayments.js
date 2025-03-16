@@ -33,6 +33,7 @@ const usePayment = (
     paymentDone: false,
     loading: false,
   });
+  // const [coupon, setCoupon] = useState(null);
   const isPreview =
     usePathname().split('/')[1] === 'dashboard';
   const [purchased, setPurchased] = useState(false);
@@ -69,7 +70,9 @@ const usePayment = (
     amount = 1,
     creatorId,
     creatorDetails,
-    bookingData
+    bookingData,
+    isCouponApplied,
+    couponDetails
   ) => {
     if (isPreview) return;
     setPaymentState(prev => ({
@@ -96,6 +99,8 @@ const usePayment = (
           paymentProvider,
           amount,
           subscription,
+          isCouponApplied,
+          couponDetails,
           bookingData: {
             ...newBookingData,
             query: {
@@ -153,7 +158,11 @@ const usePayment = (
     checkOnLoad();
   }, []);
 
-  return { onCreateOrder, paymentState, purchased };
+  return {
+    onCreateOrder,
+    paymentState,
+    purchased,
+  };
 };
 
 export default usePayment;

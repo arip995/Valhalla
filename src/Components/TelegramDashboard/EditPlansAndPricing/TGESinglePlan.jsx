@@ -5,7 +5,7 @@ import {
 } from '@tabler/icons-react';
 import React from 'react';
 
-const durationMapping = {
+export const durationMapping = {
   daily: 'Day',
   weekly: 'Week',
   monthly: 'Month',

@@ -35,8 +35,8 @@ const useCreateCoupon = (data, edit, onUpdate) => {
       discountType: value =>
         value ? null : 'Discount type is required',
       discountValue: (value, values) =>
-        values.discountType == 1 && value > 99
-          ? 'Discount value must be less than 100'
+        values.discountType == 1 && value > 95
+          ? 'Discount value must be less than 95'
           : !value
             ? 'Discount value must be greater than 0'
             : null,
