@@ -355,3 +355,8 @@ export const daysToMonthAndWeeks = days => {
   if (days < 35600) return `${days / 365} Years`;
   if (days == 36500) return `Lifetime`;
 };
+
+export const removeHtmlTags = str => {
+  if (!str) return '';
+  return str.replace(/<\/?[^>]+(>|$)/g, '');
+};

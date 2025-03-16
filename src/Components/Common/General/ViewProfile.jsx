@@ -76,8 +76,8 @@ const ViewProfile = ({
                   <Image
                     className="h-[80px] w-[80px] overflow-hidden rounded-full object-cover"
                     src={profilePic}
-                    width={80}
-                    height={80}
+                    width={50}
+                    height={50}
                     quality={100}
                     priority
                   />
@@ -85,8 +85,8 @@ const ViewProfile = ({
                   <img
                     className="h-[80px] w-[80px] overflow-hidden rounded-full object-cover"
                     src={profilePic}
-                    width={80}
-                    height={80}
+                    width={50}
+                    height={50}
                   />
                 )}
               </>

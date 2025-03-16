@@ -4,6 +4,7 @@ import AuthModal from '@/Components/Auth/LandingAuth/AuthModal';
 import { checkIfPurchased } from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 
 const ViewOrLoginDPOne = ({ productId }) => {
@@ -12,6 +13,8 @@ const ViewOrLoginDPOne = ({ productId }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [purchased, setPurchased] = useState(-1);
   const [opened, setOpened] = useState(false);
+  const isPreview =
+    usePathname().split('/')[1] === 'dashboard';
   const check = async () => {
     setPurchased(
       await checkIfPurchased(productId, user._id)
@@ -49,7 +52,7 @@ const ViewOrLoginDPOne = ({ productId }) => {
         </div>
       ) : (
         <>
-          {purchased && purchased !== -1 ? (
+          {purchased && purchased !== -1 && !isPreview ? (
             <div className="border-l-4 border-green-400 bg-green-50 px-4 py-1 text-sm">
               <div className="flex">
                 <div className="flex-1">

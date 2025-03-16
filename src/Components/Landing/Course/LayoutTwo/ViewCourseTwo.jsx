@@ -1,4 +1,5 @@
 import BuyButtonClient from '@/Components/Common/Buttons/BuyButtonClient';
+import Disclaimer from '@/Components/Common/Footer/Disclaimer';
 import ProductHeader from '@/Components/Common/Header/Productheader';
 import ViewSections from '@/Components/Common/ViewSections/ViewSections';
 import {
@@ -246,6 +247,9 @@ const ViewCourseTwo = ({ data, isPreview }) => {
             sections={data?.sections}
             content={data?.content}
           />
+        </div>
+        <div className="mt-4 flex w-full flex-col gap-4 md:gap-8">
+          <Disclaimer showTitle={false} />
         </div>
       </div>
 
