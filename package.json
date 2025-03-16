@@ -53,6 +53,7 @@
     "tus-js-client": "^1.6.0"
   },
   "devDependencies": {
+    "@types/node": "22.13.10",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.2",
     "postcss": "^8.4.38",

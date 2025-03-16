@@ -48,14 +48,13 @@ export const SidenavData = [
     value: 'audience',
     path: '/audience',
   },
-
-  { apps: true },
   {
     icon: IconLink,
     label: 'Short Url',
     value: 'url',
-    path: '/app/shorturl',
+    path: '/links',
   },
+  { apps: true },
   {
     icon: IconBrandTelegram,
     label: 'Telegram',

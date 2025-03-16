@@ -6,7 +6,6 @@ import {
   validateLink,
 } from '@/Constants/constants';
 import axiosInstance from '@/Utils/AxiosInstance';
-import useUser from '@/Utils/Hooks/useUser';
 import toast from 'react-hot-toast';
 
 export default function ShortenUrlModal({
@@ -14,7 +13,6 @@ export default function ShortenUrlModal({
   onClose = () => {},
 }) {
   const [loading, setLoading] = useState(false);
-  const { user } = useUser();
   const urlForm = useForm({
     initialValues: {
       url: '',
@@ -37,22 +35,15 @@ export default function ShortenUrlModal({
   });
 
   const handleSubmit = async values => {
-    console.log(values);
     urlForm.validate();
     try {
       setLoading(true);
-      const { data } = await axiosInstance.post(
-        '/shorturl/create',
-        {
-          url: values.url,
-          customId: values.customId,
-          userId: user._id,
-        }
-      );
-      console.log(data);
+      await axiosInstance.post('/shorturl/create', {
+        url: values.url,
+        customId: values.customId,
+      });
     } catch (error) {
       toast.error(error.response.data.message);
-      console.log(error);
     } finally {
       setLoading(false);
     }
