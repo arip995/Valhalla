@@ -176,6 +176,7 @@ const BuyButton = ({
           title={productDetails.title}
           isCourse={productDetails.isCourse}
           course={productDetails.course}
+          closeOnClickOutside={false}
           onPurchase={(
             price,
             isCouponApplied,
