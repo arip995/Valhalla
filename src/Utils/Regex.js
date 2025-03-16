@@ -26,10 +26,10 @@ export const validateEmail = email => {
 };
 
 export const validatePhoneNumber = phoneNumber => {
-  if (!phoneNumber || !phoneNumber.length === 10)
+  if (!phoneNumber || phoneNumber.toString()?.length !== 10)
     return false;
 
-  return false;
+  return true;
 };
 
 export const checkRestrictedChars = val => {

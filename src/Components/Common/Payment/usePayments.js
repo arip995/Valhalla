@@ -1,5 +1,9 @@
 import { paymentHandlers } from '@/Components/Common/Payment/PaymentProvider';
 import axiosInstance from '@/Utils/AxiosInstance';
+import {
+  checkIfPurchased,
+  getUserId,
+} from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
 import {
   usePathname,
@@ -12,7 +16,10 @@ import { pollOrderStatus } from './PollOrderStatus';
 const usePayment = (
   onSuccess = () => {},
   onFailure = () => {},
-  paymentProvider = 'cf'
+  paymentProvider = getUserId() ===
+  '67d14f4a21ff0f489e7bdceb'
+    ? 'pp'
+    : 'cf'
 ) => {
   const { user } = useUser();
   const searchParams = useSearchParams();
@@ -21,11 +28,12 @@ const usePayment = (
   const productId = pathnameParts[2];
   const [paymentState, setPaymentState] = useState({
     payinLoading: false,
-    payment_session_id: null,
-    orderId: null,
     paymentDone: false,
     loading: false,
   });
+  const isPreview =
+    usePathname().split('/')[1] === 'dashboard';
+  const [purchased, setPurchased] = useState(false);
 
   const callBackHandler = isSuccessful => {
     if (isSuccessful) {
@@ -61,6 +69,7 @@ const usePayment = (
     creatorDetails,
     bookingData
   ) => {
+    if (isPreview) return;
     setPaymentState(prev => ({
       ...prev,
       payinLoading: true,
@@ -97,7 +106,6 @@ const usePayment = (
         }
       );
       if (data.ok) {
-        console.log(data.data);
         setPaymentState(prev => ({
           ...prev,
           ...data.data,
@@ -118,16 +126,32 @@ const usePayment = (
     }
   };
 
+  const checkOnLoad = async () => {
+    if (isPreview || productType !== 'course') return;
+    setPurchased(
+      await checkIfPurchased(productId, getUserId())
+    );
+  };
+
   useEffect(() => {
     if (
       paymentState.payment_session_id ||
-      paymentState.id
+      paymentState.id ||
+      paymentState.checkoutPageUrl
     ) {
       openPaymentModal();
     }
-  }, [paymentState.payment_session_id, paymentState.id]);
+  }, [
+    paymentState.payment_session_id,
+    paymentState.id,
+    paymentState.checkoutPageUrl,
+  ]);
 
-  return { onCreateOrder, paymentState };
+  useEffect(() => {
+    checkOnLoad();
+  }, []);
+
+  return { onCreateOrder, paymentState, purchased };
 };
 
 export default usePayment;
