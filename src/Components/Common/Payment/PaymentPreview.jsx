@@ -188,7 +188,8 @@ const PaymentPreview = ({
                       onClick={onCouponRemove}
                       radius="xl"
                       size="xs"
-                      className="bg-gradient-to-r from-red-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                      variant="transparent"
+                      color="red"
                       loading={loading}
                     >
                       Remove
@@ -198,7 +199,7 @@ const PaymentPreview = ({
                       onClick={onCouponApply}
                       radius="xl"
                       size="xs"
-                      className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                      variant="transparent"
                       loading={loading}
                     >
                       Apply
@@ -263,7 +264,7 @@ const PaymentPreview = ({
                 Final Amount
               </Text>
               <Text
-                size={isMobile ? 'md' : 'lg'}
+                size={isMobile ? 'sm' : 'md'}
                 fw={700}
                 c={
                   couponDetails?.discountedPrice
@@ -296,7 +297,7 @@ const PaymentPreview = ({
                   </Text>
                 </div>
                 <Text
-                  size={isMobile ? 'md' : 'lg'}
+                  size={isMobile ? 'sm' : 'md'}
                   fw={700}
                   c="green.6"
                 >
