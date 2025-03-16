@@ -51,9 +51,9 @@ const ViewCourseTwo = ({ data, isPreview }) => {
                   <div className="aspect-video overflow-hidden rounded-2xl shadow-2xl">
                     <Image
                       src={data.coverImage.url}
-                      height={600}
-                      width={800}
-                      className="object-cover transition duration-700 hover:scale-105"
+                      height={300}
+                      width={400}
+                      className="h-full w-full object-cover transition duration-700 hover:scale-105"
                       alt={data.title}
                       priority
                     />
