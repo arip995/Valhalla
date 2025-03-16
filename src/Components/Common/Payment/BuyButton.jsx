@@ -39,7 +39,7 @@ const BuyButton = ({
     try {
       const response = await axiosInstance.post(
         `/coupon/list`,
-        { productId: productDetails._id }
+        { productId: productDetails._id, isPurchase: true }
       );
       setCoupons(response?.data?.data);
     } catch (error) {
@@ -170,34 +170,36 @@ const BuyButton = ({
           }
         />
       )}
-
-      <PaymentPreview
-        price={price}
-        title={productDetails.title}
-        isCourse={productDetails.isCourse}
-        course={productDetails.course}
-        onPurchase={(
-          price,
-          isCouponApplied,
-          couponDetails
-        ) => {
-          setIsModalOpen(false);
-          onCreateOrder(
+      {!!isModalOpen && (
+        <PaymentPreview
+          price={price}
+          title={productDetails.title}
+          isCourse={productDetails.isCourse}
+          course={productDetails.course}
+          closeOnClickOutside={false}
+          onPurchase={(
             price,
-            creatorId,
-            creatorDetails,
-            bookingData,
             isCouponApplied,
             couponDetails
-          );
-        }}
-        opened={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        email={user?.email}
-        phoneNumber={user?.phoneNumber}
-        productDetails={productDetails}
-        subscription={bookingData.subscription}
-      />
+          ) => {
+            setIsModalOpen(false);
+            onCreateOrder(
+              price,
+              creatorId,
+              creatorDetails,
+              bookingData,
+              isCouponApplied,
+              couponDetails
+            );
+          }}
+          opened={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          email={user?.email}
+          phoneNumber={user?.phoneNumber}
+          productDetails={productDetails}
+          subscription={bookingData.subscription}
+        />
+      )}
     </>
   );
 };
