@@ -64,9 +64,9 @@ const ViewDPOne = ({ data }) => {
                 <div className="aspect-video overflow-hidden rounded-md">
                   <Image
                     src={data.coverImage?.url}
-                    height={600}
-                    width={800}
-                    className="object-cover"
+                    height={300}
+                    width={400}
+                    className="h-full w-full object-cover"
                     alt={data.title}
                     priority
                   />
