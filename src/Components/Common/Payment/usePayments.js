@@ -18,7 +18,7 @@ const usePayment = (
   onSuccess = () => {},
   onFailure = () => {},
   paymentProvider = isDevEnv()
-    ? 'pp'
+    ? 'cf'
     : getUserId() === '67d14f4a21ff0f489e7bdceb'
       ? 'pp'
       : 'cf'
