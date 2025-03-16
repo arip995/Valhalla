@@ -2,9 +2,9 @@ export const getProductData = async (path, tag) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}${path}`,
     {
+      cache: 'force-cache',
       next: {
         tags: [tag ? tag : path.split('/')[1]],
-        revalidate: 360000000,
       },
     }
   );
