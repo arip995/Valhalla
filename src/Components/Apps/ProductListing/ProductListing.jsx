@@ -191,7 +191,11 @@ const ProductListing = ({
                     '!block w-full':
                       showOnlyGridViewInMobile &&
                       isMobile &&
-                      routeName !== 'audience'
+                      ![
+                        'audience',
+                        'link',
+                        'coupon',
+                      ].includes(routeName)
                         ? true
                         : isGrid,
                   })}
@@ -223,7 +227,11 @@ const ProductListing = ({
                     hidden:
                       showOnlyGridViewInMobile &&
                       isMobile &&
-                      routeName !== 'audience'
+                      ![
+                        'audience',
+                        'link',
+                        'coupon',
+                      ].includes(routeName)
                         ? true
                         : isGrid,
                   })}
