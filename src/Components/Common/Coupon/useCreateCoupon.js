@@ -110,6 +110,19 @@ const useCreateCoupon = (
     }
   };
 
+  const onDelete = async () => {
+    console.log(data);
+    try {
+      await axiosInstance.post('/coupon/delete', {
+        couponId: data._id,
+      });
+      onUpdate();
+      onClose();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const fetchAllProducts = async () => {
     try {
       form.setFieldValue('loading', true);
@@ -133,6 +146,7 @@ const useCreateCoupon = (
     form,
     handleSubmit,
     fetchAllProducts,
+    onDelete,
     products,
   };
 };

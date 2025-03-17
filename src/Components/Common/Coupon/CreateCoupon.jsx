@@ -19,12 +19,8 @@ const CreateCouponModal = ({
   opened,
 }) => {
   const isEdit = !!Object.keys(data || {}).length;
-  const { form, handleSubmit, products } = useCreateCoupon(
-    data,
-    isEdit,
-    onUpdate,
-    onClose
-  );
+  const { form, handleSubmit, products, onDelete } =
+    useCreateCoupon(data, isEdit, onUpdate, onClose);
 
   return (
     <Modal
@@ -143,6 +139,15 @@ const CreateCouponModal = ({
           </Fieldset>
           <Group position="right" mt="md">
             <Button type="submit">Submit</Button>
+            {isEdit && (
+              <Button
+                variant="outline"
+                color="red"
+                onClick={onDelete}
+              >
+                Delete
+              </Button>
+            )}
           </Group>
         </form>
       )}

@@ -4,8 +4,9 @@ import ProductListing from '@/Components/Apps/ProductListing/ProductListing';
 import CustomCopyButton from '@/Components/Common/Buttons/CustomCopyButton';
 import CreateCouponModal from '@/Components/Common/Coupon/CreateCoupon';
 import Header from '@/Components/Common/Header/Header';
+import axiosInstance from '@/Utils/AxiosInstance';
 import { delay } from '@/Utils/Common';
-import { Text } from '@mantine/core';
+import { Switch, Text } from '@mantine/core';
 import {
   IconBrandProducthunt,
   IconCode,
@@ -13,7 +14,8 @@ import {
   IconDiscountCheck,
   IconUser,
 } from '@tabler/icons-react';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const TableHeaderItems = [
   { title: 'Code', icon: IconCode, value: 'code' },
@@ -29,50 +31,8 @@ const TableHeaderItems = [
     icon: IconCurrencyRupee,
     value: 'revenue',
   },
+  { title: 'Status', icon: IconUser, value: 'status' },
 ];
-
-const renderTableDataCell = ({ type, item }) => {
-  if (!item) return null;
-  switch (type) {
-    case 'code':
-      return (
-        <td className="flex max-w-72 items-center gap-2">
-          <div className="truncate font-semibold text-gray-800">
-            {item.code || '---'}
-          </div>
-          <CustomCopyButton value={item.code} />
-        </td>
-      );
-    case 'type':
-      return (
-        <td className="min-w-36">
-          <Text className="font-medium text-gray-700">
-            {item.discountType === 1
-              ? `${item.discountValue}% OFF`
-              : `₹${item.discountValue} OFF`}
-          </Text>
-        </td>
-      );
-    case 'product':
-      return (
-        <td className="flex max-w-72 items-center gap-2">
-          <div className="truncate">
-            {item.product?.title || '---'}
-          </div>
-        </td>
-      );
-    case 'used':
-      return (
-        <td className="min-w-36">{item.usedCount || 0}</td>
-      );
-    case 'revenue':
-      return (
-        <td className="min-w-36">{item.revenue || `₹0`}</td>
-      );
-    default:
-      return null;
-  }
-};
 
 const Coupon = () => {
   const [opened, setOpened] = useState(false);
@@ -87,10 +47,93 @@ const Coupon = () => {
     setReset(prev => !prev);
   };
 
+  const onChangeStatus = async (_id, status) => {
+    try {
+      await axiosInstance.post(`/coupon/update`, {
+        _id,
+        status: status ? 1 : 0,
+        updateType: 'status',
+      });
+      toast.success('Coupon updated successfully');
+    } catch (error) {
+      console.error('Error fetching coupons:', error);
+    }
+  };
+
+  const renderTableDataCell = useCallback(
+    ({ type, item }) => {
+      if (!item) return null;
+      switch (type) {
+        case 'code':
+          return (
+            <td className="flex max-w-72 items-center gap-2">
+              <div className="truncate font-semibold text-gray-800">
+                {item.code || '---'}
+              </div>
+              <CustomCopyButton value={item.code} />
+            </td>
+          );
+        case 'type':
+          return (
+            <td className="min-w-36">
+              <Text className="font-medium text-gray-700">
+                {item.discountType === 1
+                  ? `${item.discountValue}% OFF`
+                  : `₹${item.discountValue} OFF`}
+              </Text>
+            </td>
+          );
+        case 'product':
+          return (
+            <td className="flex max-w-72 items-center gap-2">
+              <div className="truncate">
+                {item.product?.title || '---'}
+              </div>
+            </td>
+          );
+        case 'used':
+          return (
+            <td className="min-w-36">
+              {item.usedCount || 0}
+            </td>
+          );
+        case 'revenue':
+          return (
+            <td className="min-w-36">
+              {item.revenue || `₹0`}
+            </td>
+          );
+        case 'status':
+          return (
+            <td
+              className="z-[900] min-w-36"
+              onClick={e => e.stopPropagation()}
+            >
+              <Switch
+                checked={item.status == 1}
+                color="green"
+                size="sm"
+                onChange={async event => {
+                  await onChangeStatus(
+                    item._id,
+                    event.currentTarget.checked
+                  );
+                  handleUpdate();
+                }}
+              />
+            </td>
+          );
+        default:
+          return null;
+      }
+    },
+    [onChangeStatus]
+  );
+
   return (
     <>
       <Header
-        title="Coupon"
+        title="Coupons"
         modal={true}
         Component={CreateCouponModal}
         onClose={handleUpdate}
@@ -101,7 +144,7 @@ const Coupon = () => {
           renderTableDataCell={renderTableDataCell}
           TableHeaderItems={TableHeaderItems}
           baseUrl="/coupon/list_all"
-          initialStatus={[1, 2]}
+          initialStatus={[0, 1]}
           showSearch={false}
           showStatus={false}
           showLayoutChange={false}
