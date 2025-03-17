@@ -15,6 +15,7 @@ import {
   IconShoppingBag,
   IconUser,
   IconLayoutDashboard,
+  IconDiscountCheck,
 } from '@tabler/icons-react';
 
 export const SidenavData = [
@@ -53,6 +54,12 @@ export const SidenavData = [
     label: 'Short Url',
     value: 'url',
     path: '/links',
+  },
+  {
+    icon: IconDiscountCheck,
+    label: 'Coupon',
+    value: 'coupon',
+    path: '/coupon',
   },
   { apps: true },
   {

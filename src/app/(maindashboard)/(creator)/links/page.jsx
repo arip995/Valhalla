@@ -22,7 +22,6 @@ const TableHeaderItems = [
 ];
 
 const renderTableDataCell = ({ type, item }) => {
-  console.log(item);
   if (!item) return null;
   switch (type) {
     case 'url':

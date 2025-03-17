@@ -198,7 +198,6 @@ const CouponCard = ({
             <Button
               variant="subtle"
               size="xs"
-              compact
               leftSection={<IconEdit size={14} />}
               onClick={() => onEdit(coupon)}
             >
@@ -207,7 +206,6 @@ const CouponCard = ({
             <Button
               variant="subtle"
               size="xs"
-              compact
               leftSection={<IconShare size={14} />}
               onClick={() => {
                 modals.open({

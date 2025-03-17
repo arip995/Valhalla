@@ -8,7 +8,7 @@ const RedirectionLink = ({ form }) => {
       </div>
 
       <TextInput
-        maxLength={40}
+        maxLength={100}
         autoFocus
         label="Redirection link"
         placeholder="https://www.google.com"

@@ -137,7 +137,8 @@ const ProductListing = ({
           modal={
             app === 'course' ||
             app === 'dp' ||
-            app === 'url'
+            app === 'url' ||
+            app === 'coupon'
           }
           path={createPath}
         />
