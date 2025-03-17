@@ -49,12 +49,12 @@ export const SidenavData = [
     value: 'audience',
     path: '/audience',
   },
-  {
-    icon: IconLink,
-    label: 'Short Url',
-    value: 'url',
-    path: '/links',
-  },
+  // {
+  //   icon: IconLink,
+  //   label: 'Short Url',
+  //   value: 'url',
+  //   path: '/links',
+  // },
   {
     icon: IconDiscountCheck,
     label: 'Coupon',
