@@ -17,7 +17,7 @@ import { pollOrderStatus } from './PollOrderStatus';
 const usePayment = (
   onSuccess = () => {},
   onFailure = () => {},
-  paymentProvider = isDevEnv() ? 'cf' : 'pp'
+  paymentProvider = isDevEnv() ? 'cf' : 'cf'
 ) => {
   const { user } = useUser();
   const searchParams = useSearchParams();

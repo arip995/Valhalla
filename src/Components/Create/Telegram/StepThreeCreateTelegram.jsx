@@ -66,7 +66,7 @@ const StepThreeCreateTelegram = ({
         />
         <PlansAndPricing stepThreeForm={stepThreeForm} />
         <Button
-          className="sticky bottom-5 z-40"
+          className="sticky bottom-5 z-40 mt-6"
           type="submit"
           onClick={() =>
             stepThreeForm.setValues({

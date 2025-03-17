@@ -15,6 +15,7 @@ import {
   IconShoppingBag,
   IconUser,
   IconLayoutDashboard,
+  IconDiscountCheck,
 } from '@tabler/icons-react';
 
 export const SidenavData = [
@@ -48,14 +49,19 @@ export const SidenavData = [
     value: 'audience',
     path: '/audience',
   },
-
-  { apps: true },
+  // {
+  //   icon: IconLink,
+  //   label: 'Short Url',
+  //   value: 'url',
+  //   path: '/links',
+  // },
   {
-    icon: IconLink,
-    label: 'Short Url',
-    value: 'url',
-    path: '/app/shorturl',
+    icon: IconDiscountCheck,
+    label: 'Coupon',
+    value: 'coupon',
+    path: '/coupon',
   },
+  { apps: true },
   {
     icon: IconBrandTelegram,
     label: 'Telegram',

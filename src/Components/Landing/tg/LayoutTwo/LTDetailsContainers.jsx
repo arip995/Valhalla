@@ -60,7 +60,7 @@ const LTDetailsContainer = ({ data }) => {
             </div>
             <ViewPlans2 data={data} />
           </div>
-          <Disclaimer showTitle={false} isSebi />
+          <Disclaimer showTitle={false} />
           <FAQs3 />
         </div>
       </div>

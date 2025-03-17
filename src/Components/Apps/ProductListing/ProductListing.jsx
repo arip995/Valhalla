@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 'use client';
-
 import {
   Pagination,
   Select,
@@ -135,7 +134,12 @@ const ProductListing = ({
               : routeName.charAt(0).toUpperCase() +
                 routeName.slice(1)
           }
-          modal={app === 'course' || app === 'dp'}
+          modal={
+            app === 'course' ||
+            app === 'dp' ||
+            app === 'url' ||
+            app === 'coupon'
+          }
           path={createPath}
         />
       )}

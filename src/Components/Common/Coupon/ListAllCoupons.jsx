@@ -1,6 +1,6 @@
-import { Button, Modal, Text } from '@mantine/core';
+import { Button, Text } from '@mantine/core';
 import CouponCard from './CouponCard';
-import PrePaymentModal from './CreateCoupon';
+import CreateCouponModal from './CreateCoupon';
 import useListAndEditCoupon from './useListAndEditCoupon';
 const ListAllCoupons = () => {
   const {
@@ -40,22 +40,17 @@ const ListAllCoupons = () => {
             />
           ))}
       </div>
-      <Modal
-        keepMounted={false}
+      <CreateCouponModal
         opened={opened}
         onClose={() => {
           setOpened(false);
         }}
-        title="Create or Update Coupon"
-      >
-        <PrePaymentModal
-          onUpdate={() => {
-            setOpened(false);
-            fetchCoupons();
-          }}
-          data={editData}
-        />
-      </Modal>
+        onUpdate={() => {
+          setOpened(false);
+          fetchCoupons();
+        }}
+        data={editData}
+      />
     </>
   );
 };

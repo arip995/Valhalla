@@ -80,6 +80,7 @@ const ViewProfile = ({
                     height={50}
                     quality={100}
                     priority
+                    alt={name}
                   />
                 ) : (
                   <img
@@ -87,6 +88,7 @@ const ViewProfile = ({
                     src={profilePic}
                     width={50}
                     height={50}
+                    alt={name}
                   />
                 )}
               </>

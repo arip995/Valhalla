@@ -1,13 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import {
-  ActionIcon,
-  CopyButton,
-  Divider,
-  TextInput,
-  Tooltip,
-  rem,
-} from '@mantine/core';
-import { IconCheck, IconCopy } from '@tabler/icons-react';
+import { Divider, TextInput } from '@mantine/core';
 import FacebookIcon from '../../../../public/icons/facebook.svg';
 import InstagramIcon from '../../../../public/icons/instagram.svg';
 import LinkedinIcon from '../../../../public/icons/linkedin.svg';
@@ -18,6 +10,7 @@ import SkypeIcon from '../../../../public/icons/skype.svg';
 import TelegramIcon from '../../../../public/icons/telegram.svg';
 import TwitterIcon from '../../../../public/icons/twitter.svg';
 import WhatsappIcon from '../../../../public/icons/whatsapp.svg';
+import CustomCopyButton from '../Buttons/CustomCopyButton';
 
 const Share = ({
   url = 'https://example.com',
@@ -189,36 +182,7 @@ const Share = ({
                 pointer: 'default',
               },
             }}
-            rightSection={
-              <CopyButton value={url} timeout={2000}>
-                {({ copied, copy }) => (
-                  <Tooltip
-                    label={copied ? 'Copied' : 'Copy'}
-                    events={{
-                      hover: true,
-                      focus: true,
-                      touch: true,
-                    }}
-                  >
-                    <ActionIcon
-                      color={copied ? 'teal' : 'gray'}
-                      variant="subtle"
-                      onClick={copy}
-                    >
-                      {copied ? (
-                        <IconCheck
-                          style={{ width: rem(16) }}
-                        />
-                      ) : (
-                        <IconCopy
-                          style={{ width: rem(16) }}
-                        />
-                      )}
-                    </ActionIcon>
-                  </Tooltip>
-                )}
-              </CopyButton>
-            }
+            rightSection={<CustomCopyButton value={url} />}
           />
         </>
       ) : null}
