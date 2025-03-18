@@ -24,6 +24,7 @@ const ViewTestimonial = ({ value }) => {
               <Rating
                 value={item.rating}
                 className="text-sm"
+                readOnly
               />
             </div>
           </div>
