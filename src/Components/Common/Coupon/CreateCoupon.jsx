@@ -85,6 +85,7 @@ const CreateCouponModal = ({
             <Select
               label="Select a product"
               placeholder="select product"
+              searchable
               disabled={isEdit}
               data={products.map(product => ({
                 label: product.title,
