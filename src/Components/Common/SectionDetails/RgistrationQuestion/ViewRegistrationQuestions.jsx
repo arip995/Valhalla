@@ -44,21 +44,10 @@ const ViewRegistrationQuestions = ({
 
   const { onCreateOrder, paymentState } = usePayment(() => {
     if (data.redirectUrl) {
-      const button = document.createElement('button');
-      button.textContent = 'Go to Link';
-      document.body.appendChild(button);
-      button.addEventListener('click', () => {
-        const link = document.createElement('a');
-        link.href = data.redirectUrl; // e.g., "https://example.com"
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      });
-      button.click(); // This simulates a user clicking the button
+      router.push(data.redirectUrl);
+    } else {
+      router.push(`/consume/dp/${data._id}`);
     }
-    router.push(`/consume/dp/${data._id}`);
     onSuccess();
   });
   const registrationQuestions = useMemo(
