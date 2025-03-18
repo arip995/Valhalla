@@ -85,6 +85,7 @@ const CreateCouponModal = ({
             <Select
               label="Select a product"
               placeholder="select product"
+              searchable
               disabled={isEdit}
               data={products.map(product => ({
                 label: product.title,
@@ -126,16 +127,18 @@ const CreateCouponModal = ({
             />
           )}
           <Fieldset legend="Coupon Validity">
-            <DatePickerInput
-              label="Valid From"
-              placeholder="Pick start date"
-              {...form.getInputProps('validFrom')}
-            />
-            <DatePickerInput
-              label="Valid Until"
-              placeholder="Pick end date"
-              {...form.getInputProps('validUntil')}
-            />
+            <div className="flex w-full flex-col gap-2">
+              <DatePickerInput
+                label="Valid From"
+                placeholder="Pick start date"
+                {...form.getInputProps('validFrom')}
+              />
+              <DatePickerInput
+                label="Valid Until"
+                placeholder="Pick end date"
+                {...form.getInputProps('validUntil')}
+              />
+            </div>
           </Fieldset>
           <Group position="right" mt="md">
             <Button type="submit">Submit</Button>

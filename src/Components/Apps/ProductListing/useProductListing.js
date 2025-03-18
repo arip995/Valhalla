@@ -17,7 +17,8 @@ import toast from 'react-hot-toast';
 
 const useProductListing = (
   baseUrl = '/product/get_listing_data',
-  initialStatus = [0, 1, 3, 4, 5, 6]
+  initialStatus = [0, 1, 3, 4, 5, 6],
+  setChildFunc = () => {}
 ) => {
   const isFirstRender = useIsFirstRender();
   const app = usePathname().split('/')[2];
@@ -194,6 +195,9 @@ const useProductListing = (
   }, [searchText, status, pageNo, limit]);
 
   if (isFirstRender) {
+    if (setChildFunc) {
+      setChildFunc(() => setListingData);
+    }
     setListingData();
   }
 

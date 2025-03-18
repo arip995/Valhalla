@@ -37,19 +37,18 @@ const useCreateDP = () => {
     clearInputErrorOnChange: false,
     validate: values => {
       const errors = {};
+      const { isSaveClickedAtleastOnce, stepsCompleted } =
+        values;
+      if (!isSaveClickedAtleastOnce) {
+        return errors;
+      }
 
-      if (
-        values.isSaveClickedAtleastOnce &&
-        values.stepsCompleted == 2
-      ) {
+      if (isSaveClickedAtleastOnce && stepsCompleted == 2) {
         if (!values.name) {
           errors.name = 'Name is required';
         }
       }
-      if (
-        values.isSaveClickedAtleastOnce &&
-        values.stepsCompleted == 1
-      ) {
+      if (isSaveClickedAtleastOnce && stepsCompleted == 1) {
         //Check if added digital product or not
         if (!values.files?.length) {
           errors.files = 'Digital files are required';
@@ -83,7 +82,7 @@ const useCreateDP = () => {
         }
       }
 
-      if (values.isSaveClickedAtleastOnce) {
+      if (isSaveClickedAtleastOnce) {
         const descriptionError = validateEditorContent(
           values.description
         );
