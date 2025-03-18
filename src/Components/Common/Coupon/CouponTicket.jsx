@@ -11,26 +11,21 @@ import {
   Text,
 } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
+import { modals } from '@mantine/modals';
 import {
   IconBrush,
   IconDownload,
   IconMoon,
+  IconShare,
   IconSun,
   IconTicket,
 } from '@tabler/icons-react';
 
-import dynamic from 'next/dynamic';
-
-const html2canvas = dynamic(() => import('html2canvas'), {
-  ssr: false,
-});
-const QRCodeSVG = dynamic(
-  () => import('qrcode.react').then(mod => mod.QRCodeSVG),
-  {
-    ssr: false,
-  }
-);
+// Direct imports instead of dynamic imports
+import html2canvas from 'html2canvas';
+import { QRCodeSVG } from 'qrcode.react';
 import { useEffect, useRef, useState } from 'react';
+import Share from '../General/Share';
 
 // Predefined gradient backgrounds
 const gradients = [
@@ -165,53 +160,119 @@ const CouponTicket = ({ coupon, opened, onClose }) => {
     }
   };
 
+  const handleShare = () => {
+    modals.open({
+      title: 'Share on Social',
+      children: (
+        <div className="pb-4 pt-8">
+          <Share url={productUrl} />
+        </div>
+      ),
+    });
+  };
+
+  // Alternative download approach using DOM elements
+  const downloadAsImage = () => {
+    const element = fullContainerRef.current;
+    if (!element) return;
+
+    // Hide UI elements for screenshot
+    prepareForDownload();
+
+    // Convert the ticket to an image using html2canvas
+    html2canvas(element, {
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: null,
+      scale: 2,
+      logging: true,
+    })
+      .then(canvas => {
+        // Double-check if canvas is valid
+        if (!canvas) {
+          throw new Error('Canvas creation failed');
+        }
+
+        try {
+          // Try to convert to data URL
+          const dataUrl = canvas.toDataURL('image/png');
+
+          // Create a download link
+          const link = document.createElement('a');
+          link.href = dataUrl;
+          link.download = `${coupon.code}-coupon-ticket.png`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+
+          showNotification({
+            title: 'Success',
+            message:
+              'Coupon ticket downloaded successfully',
+            color: 'green',
+          });
+        } catch (e) {
+          console.error('toDataURL error:', e);
+          // Alternative approach using blob
+          try {
+            canvas.toBlob(blob => {
+              if (!blob)
+                throw new Error('Blob creation failed');
+
+              const url = URL.createObjectURL(blob);
+              const link = document.createElement('a');
+              link.href = url;
+              link.download = `${coupon.code}-coupon-ticket.png`;
+              document.body.appendChild(link);
+              link.click();
+              URL.revokeObjectURL(url);
+              document.body.removeChild(link);
+
+              showNotification({
+                title: 'Success',
+                message:
+                  'Coupon ticket downloaded successfully',
+                color: 'green',
+              });
+            }, 'image/png');
+          } catch (blobError) {
+            console.error('Blob error:', blobError);
+            throw blobError;
+          }
+        }
+      })
+      .catch(error => {
+        console.error('Download error:', error);
+        showNotification({
+          title: 'Error',
+          message:
+            'Failed to download coupon ticket: ' +
+            error.message,
+          color: 'red',
+        });
+      })
+      .finally(() => {
+        resetAfterDownload();
+        setDownloading(false);
+      });
+  };
+
   const handleDownload = async () => {
     setDownloading(true);
     try {
-      // Ensure the full container element exists
-      const fullContainer = fullContainerRef.current;
-      if (!fullContainer) {
-        throw new Error('Container element not found');
-      }
-
-      await prepareForDownload();
-
-      // Use html2canvas to capture the full container element as an image (including background gradient)
-      const canvas = await html2canvas(fullContainer, {
-        backgroundColor: null,
-        useCORS: true,
-        scale: 3, // Higher scale for better quality
-        logging: false,
-        allowTaint: true,
-      });
-
-      // Create a download link and trigger download
-      const image = canvas.toDataURL('image/png');
-      const link = document.createElement('a');
-      link.download = `${coupon.code}-coupon-ticket.png`;
-      link.href = image;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-
-      showNotification({
-        title: 'Success',
-        message: 'Coupon ticket downloaded successfully',
-        color: 'green',
-      });
+      downloadAsImage();
     } catch (error) {
       console.error(
-        'Error generating ticket image:',
+        'Error starting download process:',
         error
       );
-      showNotification({
-        title: 'Error',
-        message: 'Failed to download coupon ticket',
-        color: 'red',
-      });
-    } finally {
       resetAfterDownload();
       setDownloading(false);
+      showNotification({
+        title: 'Error',
+        message: 'Failed to start download process',
+        color: 'red',
+      });
     }
   };
 
@@ -508,6 +569,15 @@ const CouponTicket = ({ coupon, opened, onClose }) => {
             compact
           >
             Download
+          </Button>
+          <Button
+            onClick={handleShare}
+            leftSection={<IconShare size={14} />}
+            variant="subtle"
+            size="xs"
+            compact
+          >
+            Share
           </Button>
         </Group>
       </div>

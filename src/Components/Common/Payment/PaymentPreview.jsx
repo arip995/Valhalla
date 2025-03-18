@@ -12,7 +12,6 @@ import {
   IconLock,
   IconMail,
   IconPhone,
-  IconTag,
 } from '@tabler/icons-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -285,10 +284,6 @@ const PaymentPreview = ({
             {!!couponDetails?.discountedPrice && (
               <div className="mb-2 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <IconTag
-                    size={isMobile ? 16 : 18}
-                    className="text-green-500"
-                  />
                   <Text
                     size={isMobile ? 'sm' : 'md'}
                     c="green.6"
