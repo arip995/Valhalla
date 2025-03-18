@@ -14,8 +14,8 @@ import useCreateCoupon from './useCreateCoupon';
 
 const CreateCouponModal = ({
   data,
-  onUpdate = () => {},
   onClose = () => {},
+  onUpdate = () => {},
   opened,
 }) => {
   const isEdit = !!Object.keys(data || {}).length;
