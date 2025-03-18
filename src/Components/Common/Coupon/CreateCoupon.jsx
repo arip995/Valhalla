@@ -9,8 +9,8 @@ import {
   Select,
   TextInput,
 } from '@mantine/core';
-import { DatePickerInput } from '@mantine/dates';
 import useCreateCoupon from './useCreateCoupon';
+import { DatePickerInput } from '@mantine/dates';
 
 const CreateCouponModal = ({
   data,
