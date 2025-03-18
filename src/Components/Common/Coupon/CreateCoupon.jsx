@@ -141,7 +141,9 @@ const CreateCouponModal = ({
             </div>
           </Fieldset>
           <Group position="right" mt="md">
-            <Button type="submit">Submit</Button>
+            <Button type="submit">
+              {isEdit ? 'Update' : 'Create'}
+            </Button>
             {isEdit && (
               <Button
                 variant="outline"
