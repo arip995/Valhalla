@@ -45,6 +45,7 @@ const ViewRegistrationQuestions = ({
   const email = searchParams.get('email');
   const name = searchParams.get('name');
   const productType = usePathname().split('/')[1];
+
   const { onCreateOrder, paymentState } = usePayment(() => {
     if (data.redirectUrl) {
       const button = document.createElement('button');
