@@ -141,91 +141,94 @@
 
 // export default CouponCard;
 
-import React from 'react';
 import {
-  Card,
-  Text,
-  Switch,
   Button,
+  Card,
   Group,
+  Switch,
+  Text,
 } from '@mantine/core';
 import { IconEdit, IconShare } from '@tabler/icons-react';
-import { modals } from '@mantine/modals';
-import Share from '../General/Share';
+import { useState } from 'react';
+import CouponTicket from './CouponTicket';
+import CustomCopyButton from '../Buttons/CustomCopyButton';
 
 const CouponCard = ({
   coupon,
   onChangeStatus = () => {},
   onEdit = () => {},
 }) => {
+  const [opened, setOpened] = useState(false);
   if (!coupon || !coupon?.code) return null;
-
   return (
-    <Card className="border-2 border-gray-100 p-2">
-      <div className="flex flex-col space-y-2">
-        {/* Header with discount and switch */}
-        <div className="flex items-center justify-between">
-          <Text className="text-lg font-bold">
-            {coupon.code}
-          </Text>
-          <Switch
-            checked={coupon.status == 1}
-            size="sm"
-            onChange={event =>
-              onChangeStatus(
-                coupon._id,
-                event.currentTarget.checked
-              )
-            }
-          />
-        </div>
+    <>
+      <Card className="border-2 border-gray-100 p-2">
+        <div className="flex flex-col space-y-2">
+          {/* Header with discount and switch */}
+          <div className="flex items-center justify-between">
+            <div className="flex gap-2">
+              <Text className="text-lg font-bold">
+                {coupon.code}
+              </Text>
+              <CustomCopyButton value={coupon.code} />
+            </div>
+            <Switch
+              checked={coupon.status == 1}
+              size="sm"
+              onChange={event =>
+                onChangeStatus(
+                  coupon._id,
+                  event.currentTarget.checked
+                )
+              }
+            />
+          </div>
 
-        {/* Coupon code */}
-        <div className="flex items-center justify-between">
-          <Text className="font-medium text-gray-700">
-            {coupon.discountType === 1
-              ? `${coupon.discountValue}% OFF`
-              : `₹${coupon.discountValue} OFF`}
-          </Text>
-          <Text size="sm" className="text-gray-500">
-            Times Used: {coupon.usedCount || 0}
-          </Text>
-        </div>
+          {/* Coupon code */}
+          <div className="flex items-center justify-between">
+            <Text className="font-medium text-gray-700">
+              {coupon.discountType === 1
+                ? `${coupon.discountValue}% OFF`
+                : `₹${coupon.discountValue} OFF`}
+            </Text>
+            <Text size="sm" className="text-gray-500">
+              Times Used: {coupon.usedCount || 0}
+            </Text>
+          </div>
 
-        {/* Actions */}
-        <div className="flex justify-end">
-          <Group spacing="xs">
-            <Button
-              variant="subtle"
-              size="xs"
-              leftSection={<IconEdit size={14} />}
-              onClick={() => onEdit(coupon)}
-            >
-              Edit
-            </Button>
-            <Button
-              variant="subtle"
-              size="xs"
-              leftSection={<IconShare size={14} />}
-              onClick={() => {
-                modals.open({
-                  title: 'Share on Social',
-                  children: (
-                    <div className="pb-4 pt-8">
-                      <Share
-                        url={`${process.env.NEXT_PUBLIC_HOST}/${coupon.productType || 'tg'}/${coupon.productId}`}
-                      />
-                    </div>
-                  ),
-                });
-              }}
-            >
-              Share
-            </Button>
-          </Group>
+          {/* Actions */}
+          <div className="flex justify-end">
+            <Group spacing="xs">
+              <Button
+                variant="subtle"
+                size="xs"
+                leftSection={<IconEdit size={14} />}
+                onClick={() => onEdit(coupon)}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="subtle"
+                size="xs"
+                leftSection={<IconShare size={14} />}
+                onClick={() => {
+                  setOpened(true);
+                }}
+              >
+                Share
+              </Button>
+            </Group>
+          </div>
         </div>
-      </div>
-    </Card>
+      </Card>
+      <CouponTicket
+        coupon={coupon}
+        opened={opened}
+        onClose={() => {
+          setOpened(false);
+        }}
+      />
+    </>
   );
 };
 

@@ -40,17 +40,19 @@ const ListAllCoupons = () => {
             />
           ))}
       </div>
-      <CreateCouponModal
-        opened={opened}
-        onClose={() => {
-          setOpened(false);
-        }}
-        onUpdate={() => {
-          setOpened(false);
-          fetchCoupons();
-        }}
-        data={editData}
-      />
+      {opened && (
+        <CreateCouponModal
+          opened={opened}
+          onClose={() => {
+            setOpened(false);
+          }}
+          onUpdate={() => {
+            setOpened(false);
+            fetchCoupons();
+          }}
+          data={editData}
+        />
+      )}
     </>
   );
 };
