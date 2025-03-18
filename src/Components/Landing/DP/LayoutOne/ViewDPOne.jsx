@@ -3,6 +3,7 @@ import NotFoundOne from '@/Components/Common/NotFoundOne/NotFoundOne';
 import ViewSections2 from '@/Components/Common/ViewSections/ViewSection2';
 import { formatPrice } from '@/Utils/Common';
 import { TypographyStylesProvider } from '@mantine/core';
+import { IconMail, IconPhone } from '@tabler/icons-react';
 import Image from 'next/image';
 import ViewDPForm from './ViewDPForm';
 import ViewDPOneButtonModal from './ViewDPOneButtonModal';
@@ -107,28 +108,27 @@ const ViewDPOne = ({ data }) => {
                 </div> */}
 
                 {/* Contact Info */}
-                {/* <div className="border-t pt-4">
+                <div className="border-t pt-4">
                   <h2 className="mb-2 text-lg font-medium text-gray-800">
-                    Contact {data.creatorDetails.name}
+                    Contact
                   </h2>
                   <div className="space-y-2">
-                    <div className="flex items-center space-x-2 text-gray-600">
-                      <IconMail size={16} />
-                      <span>
-                        {data.creatorDetails.supportEmail ||
-                          data.creatorDetails.email}
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-2 text-gray-600">
-                      <IconPhone size={16} />
-                      <span>
-                        {data.creatorDetails
-                          .supportPhoneNumber ||
-                          data.creatorDetails.phoneNumber}
-                      </span>
-                    </div>
+                    {data.supportEmail ? (
+                      <div className="flex items-center space-x-2 text-gray-600">
+                        <IconMail size={16} />
+                        <span>{data.supportEmail}</span>
+                      </div>
+                    ) : null}
+                    {data.supportPhoneNumber ? (
+                      <div className="flex items-center space-x-2 text-gray-600">
+                        <IconPhone size={16} />
+                        <span>
+                          {data.supportPhoneNumber}
+                        </span>
+                      </div>
+                    ) : null}
                   </div>
-                </div> */}
+                </div>
 
                 {/* Terms and Conditions */}
                 <div className="rounded-lg bg-gray-50 p-2">
