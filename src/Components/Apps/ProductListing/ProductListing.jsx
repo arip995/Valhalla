@@ -37,6 +37,7 @@ const ProductListing = ({
   customEmptyStateTwo,
   searchPlaceholder,
   Component = ProductCard,
+  setChildFunc,
 }) => {
   const router = useRouter();
   const routeName = usePathname().split('/')[1];
@@ -52,7 +53,11 @@ const ProductListing = ({
     isGrid,
     setIsGrid,
     isMobile,
-  } = useProductListing(baseUrl, initialStatus);
+  } = useProductListing(
+    baseUrl,
+    initialStatus,
+    setChildFunc
+  );
   const onDefaultRowClick = row => {
     router.push(`/dashboard/${app}/${row._id}`);
   };

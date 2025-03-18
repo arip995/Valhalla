@@ -5,7 +5,6 @@ import CustomCopyButton from '@/Components/Common/Buttons/CustomCopyButton';
 import CreateCouponModal from '@/Components/Common/Coupon/CreateCoupon';
 import Header from '@/Components/Common/Header/Header';
 import axiosInstance from '@/Utils/AxiosInstance';
-import { delay } from '@/Utils/Common';
 import { Switch, Text } from '@mantine/core';
 import {
   IconBrandProducthunt,
@@ -36,15 +35,13 @@ const TableHeaderItems = [
 
 const Coupon = () => {
   const [opened, setOpened] = useState(false);
-  const [reset, setReset] = useState(true);
   const [couponDetails, setCouponDetails] = useState(null);
+  const [childFunc, setChildFunc] = useState(null);
 
-  const handleUpdate = async () => {
-    setCouponDetails(null);
-    setOpened(false);
-    setReset(false);
-    await delay(1);
-    setReset(prev => !prev);
+  const handleUpdate = () => {
+    if (childFunc) {
+      childFunc();
+    }
   };
 
   const onChangeStatus = async (_id, status) => {
@@ -138,24 +135,23 @@ const Coupon = () => {
         Component={CreateCouponModal}
         onClose={handleUpdate}
       />
-      {reset && (
-        <ProductListing
-          showHeader={false}
-          renderTableDataCell={renderTableDataCell}
-          TableHeaderItems={TableHeaderItems}
-          baseUrl="/coupon/list_all"
-          initialStatus={[0, 1]}
-          showSearch={false}
-          showStatus={false}
-          showLayoutChange={false}
-          showActions={false}
-          menuType={0}
-          onRowClick={item => {
-            setCouponDetails(item);
-            setOpened(true);
-          }}
-        />
-      )}
+      <ProductListing
+        showHeader={false}
+        renderTableDataCell={renderTableDataCell}
+        TableHeaderItems={TableHeaderItems}
+        baseUrl="/coupon/list_all"
+        initialStatus={[0, 1]}
+        showSearch={false}
+        showStatus={false}
+        showLayoutChange={false}
+        showActions={false}
+        menuType={0}
+        setChildFunc={setChildFunc}
+        onRowClick={item => {
+          setCouponDetails(item);
+          setOpened(true);
+        }}
+      />
       {!!opened && (
         <CreateCouponModal
           opened={opened}
