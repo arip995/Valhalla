@@ -98,7 +98,7 @@ const useCreateDP = () => {
             'Title should be less than 100 characters';
         }
 
-        if (!values.files?.length) {
+        if (!values.files?.length && stepsCompleted) {
           errors.files = 'Digital files are required';
         }
 
