@@ -4,7 +4,6 @@ import {
   createTheme,
 } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { ModalsProvider } from '@mantine/modals';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
@@ -133,7 +132,6 @@ export default function RootLayout({ children }) {
         <MantineProvider theme={theme}>
           <Notifications position="top-right" />
           <ModalsProvider>{children}</ModalsProvider>
-          <SpeedInsights />
         </MantineProvider>
         <Toaster />
       </body>
