@@ -11,12 +11,10 @@ import {
   Text,
 } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
-import { modals } from '@mantine/modals';
 import {
   IconBrush,
   IconDownload,
   IconMoon,
-  IconShare,
   IconSun,
   IconTicket,
 } from '@tabler/icons-react';
@@ -25,7 +23,6 @@ import {
 import html2canvas from 'html2canvas';
 import { QRCodeSVG } from 'qrcode.react';
 import { useEffect, useRef, useState } from 'react';
-import Share from '../General/Share';
 
 // Predefined gradient backgrounds
 const gradients = [
@@ -158,17 +155,6 @@ const CouponTicket = ({ coupon, opened, onClose }) => {
       colorPickerRef.current.style.visibility = 'visible';
       colorPickerRef.current.style.opacity = '1';
     }
-  };
-
-  const handleShare = () => {
-    modals.open({
-      title: 'Share on Social',
-      children: (
-        <div className="pb-4 pt-8">
-          <Share url={productUrl} />
-        </div>
-      ),
-    });
   };
 
   // Alternative download approach using DOM elements
@@ -569,15 +555,6 @@ const CouponTicket = ({ coupon, opened, onClose }) => {
             compact
           >
             Download
-          </Button>
-          <Button
-            onClick={handleShare}
-            leftSection={<IconShare size={14} />}
-            variant="subtle"
-            size="xs"
-            compact
-          >
-            Share
           </Button>
         </Group>
       </div>

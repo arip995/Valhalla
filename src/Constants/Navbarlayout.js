@@ -55,12 +55,12 @@ export const SidenavData = [
   //   value: 'url',
   //   path: '/links',
   // },
-  {
-    icon: IconDiscountCheck,
-    label: 'Coupon',
-    value: 'coupon',
-    path: '/coupon',
-  },
+  // {
+  //   icon: IconDiscountCheck,
+  //   label: 'Coupon',
+  //   value: 'coupon',
+  //   path: '/coupon',
+  // },
   { apps: true },
   {
     icon: IconBrandTelegram,
