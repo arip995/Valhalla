@@ -1,4 +1,13 @@
-import ProductListing from '@/Components/Apps/ProductListing/ProductListing';
+'use client';
+
+import dynamic from 'next/dynamic';
+const ProductListing = dynamic(
+  () =>
+    import(
+      '@/Components/Apps/ProductListing/ProductListing'
+    ),
+  { ssr: false }
+);
 
 const Page = () => {
   return <ProductListing />;

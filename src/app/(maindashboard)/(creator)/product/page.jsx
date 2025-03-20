@@ -1,8 +1,13 @@
-import Product from '@/Components/Creator/Product/Product';
-import React from 'react';
+'use client';
+
+import dynamic from 'next/dynamic';
+const ProductPage = dynamic(
+  () => import('@/Components/Creator/Product/Product'),
+  { ssr: false }
+);
 
 const page = () => {
-  return <Product />;
+  return <ProductPage />;
 };
 
 export default page;

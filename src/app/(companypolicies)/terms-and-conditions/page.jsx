@@ -1,11 +1,16 @@
-import Footer from '@/Components/Landing/main/ui/Footer';
-import React from 'react';
+'use client';
+
+import dynamic from 'next/dynamic';
+const Footer = dynamic(
+  () => import('@/Components/Landing/main/ui/Footer'),
+  { ssr: false }
+);
 
 const page = () => {
   return (
-    <div className="flex flex-col items-center gap-4 mr-4 ml-4 mb-4">
-      <div className="h-36 w-screen bg-violet-600 "></div>
-      <div className="p-8 md:p-16 flex flex-col gap-4 max-w-[750px]">
+    <div className="mb-4 ml-4 mr-4 flex flex-col items-center gap-4">
+      <div className="h-36 w-screen bg-violet-600"></div>
+      <div className="flex max-w-[750px] flex-col gap-4 p-8 md:p-16">
         <div className="text-2xl font-bold">
           Cancellation & Refund Policy
         </div>
@@ -76,7 +81,7 @@ const page = () => {
           <br />
           You agree not to:
           <br />
-          <ul className="list-disc flex flex-col gap-2">
+          <ul className="flex list-disc flex-col gap-2">
             <li>
               Use our services for any fraudulent or
               unlawful purpose.
@@ -111,7 +116,7 @@ const page = () => {
           <br />
           You agree not to upload or share content that is:
           <br />
-          <ul className="list-disc flex flex-col gap-2">
+          <ul className="flex list-disc flex-col gap-2">
             <li>Illegal, harmful, or offensive.</li>
             <li>Infringing on any third-party rights.</li>
             <li>False, misleading, or deceptive.</li>
@@ -197,7 +202,7 @@ const page = () => {
         <div className="text-2xl font-bold">
           12. Contact Us
         </div>
-        <ul className="list-disc flex flex-col gap-2">
+        <ul className="flex list-disc flex-col gap-2">
           <li>
             <span className="font-bold">Email:</span>
             support@nexify.club

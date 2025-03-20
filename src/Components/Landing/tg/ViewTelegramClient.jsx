@@ -1,13 +1,13 @@
 'use client';
 
 import FooterTwo from '@/Components/Common/Footer/FooterTwo';
+import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
+import { getClientSideProductData } from '@/Utils/getMetaData';
+import NotFound from '@/app/not-found';
+import { useEffect, useState } from 'react';
 import ProductHeader from '../../Common/Header/Productheader';
 import GLDetailsContainer from './GraphyLike/GLDetailsContainer';
 import LTDetailsContainer from './LayoutTwo/LTDetailsContainers';
-import { useEffect, useState } from 'react';
-import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
-import { getMetaData } from '@/Utils/getMetaData';
-import NotFound from '@/app/not-found';
 
 const ViewTelegramClient = ({ productId }) => {
   const [data, setData] = useState(null);
@@ -15,7 +15,10 @@ const ViewTelegramClient = ({ productId }) => {
 
   const fetchProduct = async () => {
     try {
-      const { data } = await getMetaData(productId, 'tg');
+      const { data } = await getClientSideProductData(
+        productId,
+        'tg'
+      );
       setData(data);
     } catch (error) {
       console.log(error);

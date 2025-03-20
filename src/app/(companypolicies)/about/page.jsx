@@ -1,11 +1,16 @@
-import Footer from '@/Components/Landing/main/ui/Footer';
-import React from 'react';
+'use client';
+
+import dynamic from 'next/dynamic';
+const Footer = dynamic(
+  () => import('@/Components/Landing/main/ui/Footer'),
+  { ssr: false }
+);
 
 const Page = () => {
   return (
-    <div className="flex flex-col items-center gap-4 mr-4 ml-4 mb-4 ">
+    <div className="mb-4 ml-4 mr-4 flex flex-col items-center gap-4">
       <div className="h-36 w-screen bg-violet-600"></div>
-      <div className="p-8 md:p-16 flex flex-col gap-4 max-w-[750px]">
+      <div className="flex max-w-[750px] flex-col gap-4 p-8 md:p-16">
         <div className="text-xl font-semibold">
           About Us
         </div>
@@ -33,7 +38,7 @@ const Page = () => {
         <div className="text-xl font-semibold">
           What We Offer
         </div>
-        <ul className="list-disc flex flex-col gap-2">
+        <ul className="flex list-disc flex-col gap-2">
           <li>
             Course Creation and Management: Develop and
             manage engaging courses with our user-friendly

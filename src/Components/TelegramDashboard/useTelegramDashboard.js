@@ -5,7 +5,6 @@ import {
 } from '@/Utils/Common';
 import { handleFile } from '@/Utils/HandleFiles';
 import { useForm } from '@mantine/form';
-import { useIsFirstRender } from '@mantine/hooks';
 import axios from 'axios';
 import {
   usePathname,
@@ -15,12 +14,12 @@ import {
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-const useTelegramDashboard = productId => {
-  const firstRender = useIsFirstRender();
+const useTelegramDashboard = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab');
   const pathName = usePathname();
+  const productId = usePathname().split('/')[3];
   const [tgData, setTgData] = useState(null);
   const [loadingImage, setLoadingImage] = useState(false);
   const basicDetailsForm = useForm({
@@ -31,6 +30,7 @@ const useTelegramDashboard = productId => {
         !value && 'Description is required',
     },
   });
+
   async function getData(id) {
     try {
       router.prefetch('/signin');
@@ -136,9 +136,11 @@ const useTelegramDashboard = productId => {
     if (!tab) router.replace(`${pathName}?tab=overview`);
   }, [tab]);
 
-  if (firstRender) {
-    getData(productId);
-  }
+  useEffect(() => {
+    if (productId) {
+      getData(productId);
+    }
+  }, [productId]);
 
   return {
     data: tgData,

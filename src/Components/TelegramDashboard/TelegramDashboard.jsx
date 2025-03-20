@@ -3,20 +3,65 @@
 import { Paper, Tabs, Text } from '@mantine/core';
 import '../../styles/dashboard/TelegramDashborad.css';
 import LayoutLoading from '../Common/Loading/LayoutLoading';
-import TGEPlansAndPricingContainer from './EditPlansAndPricing/TGEPlansAndPricingContainer';
-import TelegramDashboardBasicDetails from './TelegramDashboardBasicDetails';
-// import TelegramDashboardOpenlink from './TelegramDashboardOpenlink';
-import TelegramDashboardProfilepic from './TelegramDashboardProfilepic';
+import dynamic from 'next/dynamic';
 import useTelegramDashboard from './useTelegramDashboard';
-import TelegramDashboardMemberDetails from './TelegramDashboardMemberDetails';
 import CloseButton from '../Common/Buttons/CloseButton';
-import TelegramDashboardOpenlink from './TelegramDashboardOpenlink';
 import StatusBlock from '../Common/StatusBlock';
-import TelegramDashboardCoupons from './TelegramDashboardCoupons';
+
+// Dynamically import heavy components
+const TGEPlansAndPricingContainer = dynamic(
+  () =>
+    import(
+      './EditPlansAndPricing/TGEPlansAndPricingContainer'
+    ),
+  {
+    loading: () => <LayoutLoading />,
+    ssr: false,
+  }
+);
+
+const TelegramDashboardBasicDetails = dynamic(
+  () => import('./TelegramDashboardBasicDetails'),
+  {
+    ssr: false,
+  }
+);
+
+const TelegramDashboardProfilepic = dynamic(
+  () => import('./TelegramDashboardProfilepic'),
+  {
+    ssr: false,
+  }
+);
+
+const TelegramDashboardMemberDetails = dynamic(
+  () => import('./TelegramDashboardMemberDetails'),
+  {
+    loading: () => <LayoutLoading />,
+    ssr: false,
+  }
+);
+
+const TelegramDashboardOpenlink = dynamic(
+  () => import('./TelegramDashboardOpenlink'),
+  {
+    ssr: false,
+  }
+);
+
+const TelegramDashboardCoupons = dynamic(
+  () => import('./TelegramDashboardCoupons'),
+  {
+    loading: () => <LayoutLoading />,
+    ssr: false,
+  }
+);
+
 const TAB_OPTIONS = [
   { label: 'Overview', value: 'overview' },
   { label: 'Subscriber', value: 'subscriber' },
 ];
+
 const TelegramDashboard = ({ productId }) => {
   const {
     data,

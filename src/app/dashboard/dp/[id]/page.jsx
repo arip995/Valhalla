@@ -1,5 +1,10 @@
-import CreateDP from '@/Components/Create/DP/CreateDP';
-import React from 'react';
+'use client';
+
+import dynamic from 'next/dynamic';
+const CreateDP = dynamic(
+  () => import('@/Components/Create/DP/CreateDP'),
+  { ssr: false }
+);
 
 const page = () => {
   return <CreateDP />;

@@ -1,5 +1,10 @@
-import Footer from '@/Components/Landing/main/ui/Footer';
-import React from 'react';
+'use client';
+
+import dynamic from 'next/dynamic';
+const Footer = dynamic(
+  () => import('@/Components/Landing/main/ui/Footer'),
+  { ssr: false }
+);
 
 const Page = () => {
   return (
