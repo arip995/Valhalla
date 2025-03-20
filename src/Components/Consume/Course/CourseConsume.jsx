@@ -3,7 +3,6 @@ import ProductHeader from '@/Components/Common/Header/Productheader';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import { SavedLessonContent } from '@/Components/Create/Course/CreateCourseStepTwo/CreateCourseAddEditLesson';
 import axiosInstance from '@/Utils/AxiosInstance';
-import { getMetaData } from '@/Utils/getMetaData';
 import useUser from '@/Utils/Hooks/useUser';
 import {
   Checkbox,
@@ -24,6 +23,7 @@ import CourseContentList from './CourseContentList';
 import ListFiles from '@/Components/Common/ListFiles/ListFiles';
 import { checkIfPurchased } from '@/Utils/Common';
 import { getUserData } from '@/Utils/getuserData';
+import { getClientSideProductData } from '@/Utils/getMetaData';
 
 const CourseConsume = ({ productId }) => {
   // const searchParams = useSearchParams();
@@ -69,7 +69,7 @@ const CourseConsume = ({ productId }) => {
       if (!hasPurchased) {
         redirectToBuyPage();
       }
-      const { data } = await getMetaData(
+      const { data } = await getClientSideProductData(
         productId,
         'course'
       );

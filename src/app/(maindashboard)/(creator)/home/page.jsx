@@ -1,7 +1,13 @@
-import Home from '@/Components/Creator/Home/Home';
+'use client';
 
-const Page = async () => {
-  return <Home />;
+import dynamic from 'next/dynamic';
+const HomePage = dynamic(
+  () => import('@/Components/Creator/Home/Home'),
+  { ssr: false }
+);
+
+const Page = () => {
+  return <HomePage />;
 };
 
 export default Page;

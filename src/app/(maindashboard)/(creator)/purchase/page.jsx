@@ -1,7 +1,13 @@
-import Purchase from '@/Components/Creator/Purchase/Purchase';
+'use client';
+
+import dynamic from 'next/dynamic';
+const PurchasePage = dynamic(
+  () => import('@/Components/Creator/Purchase/Purchase'),
+  { ssr: false }
+);
 
 const page = () => {
-  return <Purchase />;
+  return <PurchasePage />;
 };
 
 export default page;

@@ -4,7 +4,7 @@ import ListFiles from '@/Components/Common/ListFiles/ListFiles';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import { SavedLessonContent } from '@/Components/Create/Course/CreateCourseStepTwo/CreateCourseAddEditLesson';
 import { checkIfPurchased } from '@/Utils/Common';
-import { getMetaData } from '@/Utils/getMetaData';
+import { getClientSideProductData } from '@/Utils/getMetaData';
 import { getUserData } from '@/Utils/getuserData';
 import useUser from '@/Utils/Hooks/useUser';
 import { ActionIcon, rem } from '@mantine/core';
@@ -41,7 +41,10 @@ const DPConsume = ({ productId }) => {
       if (!hasPurchased) {
         redirectToBuyPage();
       }
-      const { data } = await getMetaData(productId, 'dp');
+      const { data } = await getClientSideProductData(
+        productId,
+        'dp'
+      );
       let files = [];
       let videos = [];
       let links = [];

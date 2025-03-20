@@ -1,8 +1,16 @@
-import TelegramDashboard from '@/Components/TelegramDashboard/TelegramDashboard';
+'use client';
 
-const page = async props => {
-  const params = await props.params;
-  return <TelegramDashboard productId={params.id} />;
+import dynamic from 'next/dynamic';
+const TelegramDashboard = dynamic(
+  () =>
+    import(
+      '@/Components/TelegramDashboard/TelegramDashboard'
+    ),
+  { ssr: false }
+);
+
+const page = () => {
+  return <TelegramDashboard />;
 };
 
 export default page;

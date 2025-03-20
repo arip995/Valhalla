@@ -1,12 +1,10 @@
 'use client';
 
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
-import { getMetaData } from '@/Utils/getMetaData';
+import { getClientSideProductData } from '@/Utils/getMetaData';
 import NotFound from '@/app/not-found';
 import { useEffect, useState } from 'react';
 import '../../../styles/view/locked-content.css';
-// eslint-disable-next-line no-unused-vars
-import ViewCourseOne from './LayoutOne/ViewCourseOne';
 import ViewCourseTwo from './LayoutTwo/ViewCourseTwo';
 
 const ViewCourseClient = ({ productId }) => {
@@ -15,7 +13,7 @@ const ViewCourseClient = ({ productId }) => {
 
   const fetchProduct = async () => {
     try {
-      const { data } = await getMetaData(
+      const { data } = await getClientSideProductData(
         productId,
         'course'
       );

@@ -1,6 +1,14 @@
-import CourseConsume from '@/Components/Consume/Course/CourseConsume';
+'use client';
 
-export default async function Page(props) {
-  const params = await props.params;
-  return <CourseConsume productId={params.id} />;
+import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
+const CourseConsume = dynamic(
+  () => import('@/Components/Consume/Course/CourseConsume'),
+  { ssr: false }
+);
+
+export default function Page() {
+  const productId = usePathname().split('/')[3];
+
+  return <CourseConsume productId={productId} />;
 }

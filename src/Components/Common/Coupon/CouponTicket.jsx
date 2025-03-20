@@ -20,8 +20,16 @@ import {
 } from '@tabler/icons-react';
 
 // Direct imports instead of dynamic imports
-import html2canvas from 'html2canvas';
-import { QRCodeSVG } from 'qrcode.react';
+import dynamic from 'next/dynamic';
+
+// Lazy load components with SSR disabled
+const html2canvas = dynamic(() => import('html2canvas'), {
+  ssr: false,
+});
+const QRCodeSVG = dynamic(
+  () => import('qrcode.react').then(mod => mod.QRCodeSVG),
+  { ssr: false }
+);
 import { useEffect, useRef, useState } from 'react';
 
 // Predefined gradient backgrounds

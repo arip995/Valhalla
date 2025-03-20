@@ -1,7 +1,13 @@
-import Coupon from '@/Components/Creator/Coupon/Coupon';
+'use client';
+
+import dynamic from 'next/dynamic';
+const CouponPage = dynamic(
+  () => import('@/Components/Creator/Coupon/Coupon'),
+  { ssr: false }
+);
 
 const page = () => {
-  return <Coupon />;
+  return <CouponPage />;
 };
 
 export default page;

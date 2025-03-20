@@ -1,14 +1,11 @@
-import CreateTelegram from '@/Components/Create/Telegram/CreateTelegram';
-import React from 'react';
+'use client';
 
-export const generateMetadata = async props => {
-  const params = await props.params;
-  return {
-    title: params,
-    description: 'All in one creator monetization company',
-  };
-};
-// export const metadata = {};
+import dynamic from 'next/dynamic';
+const CreateTelegram = dynamic(
+  () =>
+    import('@/Components/Create/Telegram/CreateTelegram'),
+  { ssr: false }
+);
 
 const page = () => {
   return <CreateTelegram />;

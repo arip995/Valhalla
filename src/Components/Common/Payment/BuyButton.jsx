@@ -5,13 +5,20 @@ import useUser from '@/Utils/Hooks/useUser';
 import { Button } from '@mantine/core';
 import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
-import Lottie from 'react-lottie-player';
+import dynamic from 'next/dynamic';
 import lottieJson from '../../../../public/lottie/tick.json';
 import LayoutLoading from '../Loading/LayoutLoading';
 import usePayment from './usePayments';
 import Link from 'next/link';
 import PaymentPreview from './PaymentPreview';
 import axiosInstance from '@/Utils/AxiosInstance';
+
+const Lottie = dynamic(
+  () => import('react-lottie-player'),
+  {
+    ssr: false, // Ensures Lottie loads only on the client
+  }
+);
 
 const BuyButton = ({
   className,
