@@ -43,12 +43,13 @@ const useCreateDP = () => {
         return errors;
       }
 
-      if (isSaveClickedAtleastOnce && stepsCompleted == 2) {
+      if (stepsCompleted == 2) {
         if (!values.name) {
           errors.name = 'Name is required';
         }
       }
-      if (isSaveClickedAtleastOnce && stepsCompleted == 1) {
+
+      if (stepsCompleted == 1) {
         //Check if added digital product or not
         if (!values.files?.length) {
           errors.files = 'Digital files are required';
@@ -66,89 +67,97 @@ const useCreateDP = () => {
           }
         }
 
-        if (values.supportPhoneNumber) {
-          if (
-            !validatePhoneNumber(values.supportPhoneNumber)
-          ) {
-            errors.supportPhoneNumber =
-              'Invalid phone number';
-          }
+        if (
+          !validatePhoneNumber(values.supportPhoneNumber)
+        ) {
+          errors.supportPhoneNumber =
+            'Invalid phone number';
         }
 
-        if (values.supportEmail) {
-          if (!validateEmail(values.supportEmail)) {
-            errors.supportEmail = 'Invalid email';
-          }
+        if (!validateEmail(values.supportEmail)) {
+          errors.supportEmail = 'Invalid email';
         }
       }
 
-      if (isSaveClickedAtleastOnce) {
-        const descriptionError = validateEditorContent(
-          values.description
-        );
+      const descriptionError = validateEditorContent(
+        values.description
+      );
 
-        if (descriptionError) {
-          errors.description = descriptionError;
+      if (descriptionError) {
+        errors.description = descriptionError;
+      }
+
+      if (!values.title) {
+        errors.title = 'Title is required';
+      } else if (values.title.length > 100) {
+        errors.title =
+          'Title should be less than 100 characters';
+      }
+
+      if (!values.files?.length && stepsCompleted) {
+        errors.files = 'Digital files are required';
+      }
+
+      if (
+        !validatePhoneNumber(values.supportPhoneNumber) &&
+        stepsCompleted
+      ) {
+        errors.supportPhoneNumber = 'Invalid phone number';
+      }
+
+      if (
+        !validateEmail(values.supportEmail) &&
+        stepsCompleted
+      ) {
+        errors.supportEmail = 'Invalid email';
+      }
+
+      if (!values.category) {
+        errors.category = 'Category is required';
+      }
+
+      if (!values.cta) {
+        errors.cta = 'CTA is required';
+      }
+
+      if (!values.coverImage?.url) {
+        errors.coverImage = 'Cover image is required';
+      }
+
+      if (values.priceType === 'customerDecided') {
+        if (!values.minimumPrice) {
+          errors.minimumPrice = 'Price is required';
+        } else if (values.minimumPrice < 1) {
+          errors.minimumPrice =
+            'Price should be greater than 0';
         }
-
-        if (!values.title) {
-          errors.title = 'Title is required';
-        } else if (values.title.length > 100) {
-          errors.title =
-            'Title should be less than 100 characters';
+      } else {
+        if (!values.price) {
+          errors.price = 'Price is required';
+        } else if (values.price < 1) {
+          errors.price = 'Price should be greater than 0';
         }
+      }
 
-        if (!values.files?.length && stepsCompleted) {
-          errors.files = 'Digital files are required';
+      if (values.redirectUrl) {
+        if (!validateLink(values.redirectUrl)) {
+          errors.redirectUrl =
+            'Redirection link should be a valid URL';
         }
+      }
 
-        if (!values.category) {
-          errors.category = 'Category is required';
+      if (values.supportPhoneNumber) {
+        if (
+          !validatePhoneNumber(values.supportPhoneNumber)
+        ) {
+          errors.supportPhoneNumber =
+            'Invalid phone number';
         }
+      }
 
-        if (!values.cta) {
-          errors.cta = 'CTA is required';
-        }
-
-        if (!values.coverImage?.url) {
-          errors.coverImage = 'Cover image is required';
-        }
-
-        if (values.priceType === 'customerDecided') {
-          if (!values.minimumPrice) {
-            errors.minimumPrice = 'Price is required';
-          } else if (values.minimumPrice < 1) {
-            errors.minimumPrice =
-              'Price should be greater than 0';
-          }
-        } else {
-          if (!values.price) {
-            errors.price = 'Price is required';
-          } else if (values.price < 1) {
-            errors.price = 'Price should be greater than 0';
-          }
-        }
-
-        if (values.redirectUrl) {
-          if (!validateLink(values.redirectUrl)) {
-            errors.redirectUrl =
-              'Redirection link should be a valid URL';
-          }
-        }
-
-        if (values.supportPhoneNumber) {
-          if (
-            !validatePhoneNumber(values.supportPhoneNumber)
-          ) {
-            errors.supportPhoneNumber =
-              'Invalid phone number';
-          }
-        }
-
-        if (values.supportEmail) {
-          if (!validateEmail(values.supportEmail)) {
-            errors.supportEmail = 'Invalid email';
-          }
+      if (values.supportEmail) {
+        if (!validateEmail(values.supportEmail)) {
+          errors.supportEmail = 'Invalid email';
         }
       }
 

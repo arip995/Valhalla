@@ -52,7 +52,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
     if (purchasedData?.inviteLink) {
       interval = setInterval(() => {
         onSuccess();
-      }, 10000);
+      }, 5000);
     } else {
       clearInterval(interval);
     }
