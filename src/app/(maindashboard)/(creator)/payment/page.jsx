@@ -1,7 +1,14 @@
-import Transaction from '@/Components/Creator/Transaction/Transaction';
+'use client';
+
+import dynamic from 'next/dynamic';
+const TransactionPage = dynamic(
+  () =>
+    import('@/Components/Creator/Transaction/Transaction'),
+  { ssr: false }
+);
 
 const Page = () => {
-  return <Transaction />;
+  return <TransactionPage />;
 };
 
 export default Page;

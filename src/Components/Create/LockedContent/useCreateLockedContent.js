@@ -1,5 +1,6 @@
 import axiosInstance from '@/Utils/AxiosInstance';
 import { getUserId } from '@/Utils/Common';
+import { getClientSideProductData } from '@/Utils/getMetaData';
 import { useForm } from '@mantine/form';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
@@ -125,8 +126,9 @@ const useCreateLockedContent = () => {
     try {
       router.prefetch('/signin');
       setEditLoading(true);
-      const { data } = await axiosInstance.get(
-        `/product/get_individual_product_data/lc/${productId}`
+      const { data } = await getClientSideProductData(
+        productId,
+        'lc'
       );
       if (data.data.creatorId != getUserId()) {
         router.push('/signin');

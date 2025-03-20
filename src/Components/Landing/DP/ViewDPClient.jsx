@@ -1,11 +1,10 @@
 'use client';
 
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
-import { getMetaData } from '@/Utils/getMetaData';
+import { getClientSideProductData } from '@/Utils/getMetaData';
 import NotFound from '@/app/not-found';
 import { useEffect, useState } from 'react';
 import '../../../styles/view/locked-content.css';
-// eslint-disable-next-line no-unused-vars
 import ViewDPOne from './LayoutOne/ViewDPOne';
 
 const ViewDPClient = ({ productId }) => {
@@ -14,7 +13,10 @@ const ViewDPClient = ({ productId }) => {
 
   const fetchProduct = async () => {
     try {
-      const { data } = await getMetaData(productId, 'dp');
+      const { data } = await getClientSideProductData(
+        productId,
+        'dp'
+      );
       setData(data);
     } catch (error) {
       console.log(error);

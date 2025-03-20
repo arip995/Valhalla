@@ -1,12 +1,12 @@
 'use client';
 
+import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
+import { getClientSideProductData } from '@/Utils/getMetaData';
+import NotFound from '@/app/not-found';
 import { useEffect, useState } from 'react';
 import '../../../styles/view/locked-content.css';
 import ProductHeader from '../../Common/Header/Productheader';
 import ViewLockedContentContainer from './ViewLockedContentContainer';
-import { getMetaData } from '@/Utils/getMetaData';
-import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
-import NotFound from '@/app/not-found';
 
 const ViewLockedContentClient = ({ productId }) => {
   const [data, setData] = useState(null);
@@ -14,7 +14,10 @@ const ViewLockedContentClient = ({ productId }) => {
 
   const fetchProduct = async () => {
     try {
-      const { data } = await getMetaData(productId, 'lc');
+      const { data } = await getClientSideProductData(
+        productId,
+        'lc'
+      );
       setData(data);
     } catch (error) {
       console.log(error);

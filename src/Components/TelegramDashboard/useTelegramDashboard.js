@@ -31,6 +31,7 @@ const useTelegramDashboard = productId => {
         !value && 'Description is required',
     },
   });
+
   async function getData(id) {
     try {
       router.prefetch('/signin');

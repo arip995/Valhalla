@@ -1,7 +1,13 @@
-import Account from '@/Components/Creator/Account/Account';
+'use client';
+
+import dynamic from 'next/dynamic';
+const AccountPage = dynamic(
+  () => import('@/Components/Creator/Account/Account'),
+  { ssr: false }
+);
 
 const Page = ({ data }) => {
-  return <Account {...data} />;
+  return <AccountPage {...data} />;
 };
 
 export default Page;
