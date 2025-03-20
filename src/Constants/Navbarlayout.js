@@ -64,7 +64,7 @@ export const SidenavData = [
   { apps: true },
   {
     icon: IconBrandTelegram,
-    label: 'Telegram',
+    label: 'Community',
     value: 'tg',
     path: '/app/tg',
   },
