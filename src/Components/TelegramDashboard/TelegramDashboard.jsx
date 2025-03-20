@@ -12,6 +12,7 @@ import TelegramDashboardMemberDetails from './TelegramDashboardMemberDetails';
 import CloseButton from '../Common/Buttons/CloseButton';
 import TelegramDashboardOpenlink from './TelegramDashboardOpenlink';
 import StatusBlock from '../Common/StatusBlock';
+import TelegramDashboardCoupons from './TelegramDashboardCoupons';
 const TAB_OPTIONS = [
   { label: 'Overview', value: 'overview' },
   { label: 'Subscriber', value: 'subscriber' },
@@ -98,7 +99,7 @@ const TelegramDashboard = ({ productId }) => {
                 }}
               />
             </Paper>
-            {/* <TelegramDashboardCoupons /> */}
+            <TelegramDashboardCoupons />
           </div>
         )}
       </div>

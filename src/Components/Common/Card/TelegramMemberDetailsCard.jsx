@@ -1,23 +1,16 @@
 import { TelegramSubscriberStatusMapping } from '@/Constants/constants';
 import { formatDate, getFullName } from '@/Utils/Common';
-import {
-  ActionIcon,
-  Card,
-  CopyButton,
-  rem,
-  Tooltip,
-} from '@mantine/core';
+import { Card } from '@mantine/core';
 import {
   IconBrandRedux,
   IconCalendar,
-  IconCheck,
   IconCoinRupee,
-  IconCopy,
   IconLink,
   IconMail,
   IconPhone,
   IconUser,
 } from '@tabler/icons-react';
+import CustomCopyButton from '../Buttons/CustomCopyButton';
 
 const TelegramMemberDetailsCard = ({
   item,
@@ -119,37 +112,7 @@ const TelegramMemberDetailsCard = ({
           </div>
           <div className="ellipsis flex items-center text-xs text-gray-600">
             {url}
-            <CopyButton value={url} timeout={2000}>
-              {({ copied, copy }) => (
-                <Tooltip
-                  label={copied ? 'Copied' : 'Copy'}
-                  events={{
-                    hover: true,
-                    focus: true,
-                    touch: true,
-                  }}
-                >
-                  <ActionIcon
-                    color={copied ? 'teal' : 'gray'}
-                    variant="subtle"
-                    onClick={e => {
-                      e.stopPropagation();
-                      copy();
-                    }}
-                  >
-                    {copied ? (
-                      <IconCheck
-                        style={{ width: rem(16) }}
-                      />
-                    ) : (
-                      <IconCopy
-                        style={{ width: rem(16) }}
-                      />
-                    )}
-                  </ActionIcon>
-                </Tooltip>
-              )}
-            </CopyButton>
+            <CustomCopyButton value={url} />
           </div>
         </div>
       </div>

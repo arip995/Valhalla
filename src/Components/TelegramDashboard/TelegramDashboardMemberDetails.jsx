@@ -7,18 +7,10 @@ import {
   getFullName,
   getUserId,
 } from '@/Utils/Common';
-import {
-  ActionIcon,
-  CopyButton,
-  Drawer,
-  rem,
-  Tooltip,
-} from '@mantine/core';
+import { Drawer } from '@mantine/core';
 import {
   IconBrandRedux,
   IconCalendar,
-  IconCheck,
-  IconCopy,
   IconLink,
   IconMail,
   IconPhone,
@@ -30,9 +22,10 @@ import {
   useSearchParams,
 } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import CustomCopyButton from '../Common/Buttons/CustomCopyButton';
+import TelegramMemberDetailsCard from '../Common/Card/TelegramMemberDetailsCard';
 import TelegramMemberDetailsCard2 from '../Common/Card/TelegramMemberDetailsCard2';
 import TelegramMemberDetails from './TelegramMemberDetails';
-import TelegramMemberDetailsCard from '../Common/Card/TelegramMemberDetailsCard';
 
 const TableHeaderItems = [
   { title: 'Name', icon: IconUser, value: 'name' },
@@ -87,40 +80,9 @@ const renderTableDataCell = ({ type, item }) => {
         <td className="min-w-36">
           <div className="flex items-center text-sm text-gray-600">
             {`https://t.me/${item.inviteLink}`}
-            <CopyButton
+            <CustomCopyButton
               value={`https://t.me/${item.inviteLink}`}
-              timeout={2000}
-            >
-              {({ copied, copy }) => (
-                <Tooltip
-                  label={copied ? 'Copied' : 'Copy'}
-                  events={{
-                    hover: true,
-                    focus: true,
-                    touch: true,
-                  }}
-                >
-                  <ActionIcon
-                    color={copied ? 'teal' : 'gray'}
-                    variant="subtle"
-                    onClick={e => {
-                      copy();
-                      e.stopPropagation();
-                    }}
-                  >
-                    {copied ? (
-                      <IconCheck
-                        style={{ width: rem(16) }}
-                      />
-                    ) : (
-                      <IconCopy
-                        style={{ width: rem(16) }}
-                      />
-                    )}
-                  </ActionIcon>
-                </Tooltip>
-              )}
-            </CopyButton>
+            />
           </div>
         </td>
       );

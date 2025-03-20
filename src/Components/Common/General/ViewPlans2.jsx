@@ -52,7 +52,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
     if (purchasedData?.inviteLink) {
       interval = setInterval(() => {
         onSuccess();
-      }, 10000);
+      }, 5000);
     } else {
       clearInterval(interval);
     }
@@ -150,7 +150,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
             </div>
 
             <BuyButton
-              className="mt-2 w-fit"
+              className="mt-2 !w-fit"
               color="teal"
               animate={false}
               creatorId={data.creatorId}

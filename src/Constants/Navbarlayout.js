@@ -4,6 +4,7 @@ import {
   IconCash,
   IconLockDollar,
   IconSchool,
+  IconLink,
   IconBrandDiscord,
   IconBrandWhatsapp,
   IconBrandMeta,
@@ -14,6 +15,7 @@ import {
   IconShoppingBag,
   IconUser,
   IconLayoutDashboard,
+  IconDiscountCheck,
 } from '@tabler/icons-react';
 
 export const SidenavData = [
@@ -47,11 +49,22 @@ export const SidenavData = [
     value: 'audience',
     path: '/audience',
   },
-
+  // {
+  //   icon: IconLink,
+  //   label: 'Short Url',
+  //   value: 'url',
+  //   path: '/links',
+  // },
+  // {
+  //   icon: IconDiscountCheck,
+  //   label: 'Coupon',
+  //   value: 'coupon',
+  //   path: '/coupon',
+  // },
   { apps: true },
   {
     icon: IconBrandTelegram,
-    label: 'Telegram',
+    label: 'Community',
     value: 'tg',
     path: '/app/tg',
   },

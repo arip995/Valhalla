@@ -17,17 +17,21 @@ import {
 } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
+import axios from 'axios';
+import dynamic from 'next/dynamic';
 import {
   usePathname,
   useRouter,
   useSearchParams,
 } from 'next/navigation';
 import { useEffect, useMemo, useRef } from 'react';
-import Lottie from 'react-lottie-player';
 import lottieJson from '../../../../../public/lottie/tick.json';
 import LayoutLoading from '../../Loading/LayoutLoading';
 import usePayment from '../../Payment/usePayments';
-import axios from 'axios';
+const Lottie = dynamic(
+  () => import('react-lottie-player'),
+  { ssr: false }
+);
 
 const ViewRegistrationQuestions = ({
   data,
@@ -211,10 +215,7 @@ const ViewRegistrationQuestions = ({
         registrationQuestions:
           transformedRegisTrationQuestions,
         priceType: data.priceType,
-      },
-      submissionValues.phoneNumber,
-      submissionValues.email,
-      submissionValues.name
+      }
     );
     // onSubmit(submissionValues);
   };
@@ -309,6 +310,7 @@ const ViewRegistrationQuestions = ({
       </>
     );
   }
+
   return (
     <Box>
       <form onSubmit={form.onSubmit(handleSubmit)}>

@@ -1,11 +1,17 @@
 import axiosInstance from '@/Utils/AxiosInstance';
 import { useForm } from '@mantine/form';
-import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-const useCreateCoupon = (data, edit, onUpdate) => {
-  const productId = usePathname().split('/')[3];
-  const productType = usePathname().split('/')[2];
+const useCreateCoupon = (
+  data,
+  edit,
+  onUpdate = () => {},
+  onClose = () => {}
+) => {
+  // const productId = usePathname().split('/')[3];
+  // const productType = usePathname().split('/')[2];
+  const [products, setProducts] = useState([]);
   if (data?.discountType) {
     data.discountType = data.discountType.toString();
     if (data.validFrom) {
@@ -15,6 +21,7 @@ const useCreateCoupon = (data, edit, onUpdate) => {
       data.validUntil = new Date(data.validUntil);
     }
   }
+
   data = data || {
     code: '',
     discountType: '',
@@ -35,8 +42,8 @@ const useCreateCoupon = (data, edit, onUpdate) => {
       discountType: value =>
         value ? null : 'Discount type is required',
       discountValue: (value, values) =>
-        values.discountType == 1 && value > 99
-          ? 'Discount value must be less than 100'
+        values.discountType == 1 && value > 95
+          ? 'Discount value must be less than 95'
           : !value
             ? 'Discount value must be greater than 0'
             : null,
@@ -47,6 +54,13 @@ const useCreateCoupon = (data, edit, onUpdate) => {
           ? 'Valid until date must be after valid from date'
           : null;
       },
+      productId: (value, values) => {
+        if (edit) return null;
+        if (!values.productId) return 'Product is required';
+        if (!products.find(p => p._id == value))
+          return 'Product is not valid';
+        return null;
+      },
       usageLimit: (value, values) =>
         values.isLimited && (value <= 0 || !value)
           ? 'Value must be greater than 0'
@@ -56,22 +70,34 @@ const useCreateCoupon = (data, edit, onUpdate) => {
             ? `Value must be greater than ${data.usageLimit}`
             : null,
     },
+    transformValues: values => {
+      let data = { ...values };
+      delete data.loading;
+      let productId = data.productId;
+      const product = products.find(
+        p => p._id == productId
+      );
+      return {
+        ...data,
+        product,
+      };
+    },
   });
 
-  console.log(form.errors);
   const handleSubmit = async values => {
     const payload = {
-      productId,
-      productType,
       ...values,
     };
     try {
+      form.setFieldValue('loading', true);
       if (edit) {
         await axiosInstance.post('/coupon/update', payload);
       } else {
         await axiosInstance.post('/coupon/create', payload);
       }
+      console.log('update');
       onUpdate();
+      onClose();
     } catch (error) {
       toast.error(
         typeof error?.response?.data?.message == 'string'
@@ -79,12 +105,49 @@ const useCreateCoupon = (data, edit, onUpdate) => {
           : 'Something went wrong, please try again'
       );
       console.log(error);
+    } finally {
+      form.setFieldValue('loading', false);
     }
   };
+
+  const onDelete = async () => {
+    console.log(data);
+    try {
+      await axiosInstance.post('/coupon/delete', {
+        couponId: data._id,
+      });
+      onUpdate();
+      onClose();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchAllProducts = async () => {
+    try {
+      form.setFieldValue('loading', true);
+      const { data } = await axiosInstance.get(
+        '/product/get_all_products'
+      );
+      setProducts(data.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      form.setFieldValue('loading', false);
+    }
+  };
+
+  useEffect(() => {
+    if (edit) return;
+    fetchAllProducts();
+  }, []);
 
   return {
     form,
     handleSubmit,
+    fetchAllProducts,
+    onDelete,
+    products,
   };
 };
 

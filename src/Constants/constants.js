@@ -1,5 +1,7 @@
+import Share from '@/Components/Common/General/Share';
 import { removeHtmlTags } from '@/Utils/Common';
 import { Badge } from '@mantine/core';
+import { modals } from '@mantine/modals';
 import {
   IconBrandTelegram,
   IconCash,
@@ -393,6 +395,10 @@ export const validateLink = link => {
   return regex.test(link);
 };
 
+export const isAlphanumeric = str => {
+  return /^[a-zA-Z0-9]+$/.test(str);
+};
+
 export const RegistrationQuestionTypes = [
   { value: 'text', label: 'Text' },
   { value: 'largeText', label: 'Large Text' },
@@ -510,4 +516,15 @@ export const returnMetaForLandingPages = (
       ],
     },
   };
+};
+
+export const handleShare = productUrl => {
+  modals.open({
+    title: 'Share on Social',
+    children: (
+      <div className="pb-4 pt-8">
+        <Share url={productUrl} />
+      </div>
+    ),
+  });
 };

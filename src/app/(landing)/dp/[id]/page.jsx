@@ -5,7 +5,8 @@ import { notFound } from 'next/navigation';
 import TrackingScripts from '@/Components/Common/Scripts/TrackingScripts';
 import { returnMetaForLandingPages } from '@/Constants/constants';
 
-export async function generateMetadata({ params }, parent) {
+export async function generateMetadata(props, parent) {
+  const params = await props.params;
   const { data } = await getMetaData(params.id, 'dp');
 
   const previousImages =
@@ -22,7 +23,8 @@ export async function generateMetadata({ params }, parent) {
   return metaData;
 }
 
-export default async function Page({ params }) {
+export default async function Page(props) {
+  const params = await props.params;
   try {
     const { data } = await getMetaData(params.id, 'dp');
 

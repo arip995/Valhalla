@@ -10,6 +10,8 @@ import lottieJson from '../../../../public/lottie/tick.json';
 import LayoutLoading from '../Loading/LayoutLoading';
 import usePayment from './usePayments';
 import Link from 'next/link';
+import PaymentPreview from './PaymentPreview';
+import axiosInstance from '@/Utils/AxiosInstance';
 
 const BuyButton = ({
   className,
@@ -26,19 +28,43 @@ const BuyButton = ({
   const lottieRef = useRef();
   const { user } = useUser();
   const [opened, setOpened] = useState(false);
+  const [coupons, setCoupons] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [openAfterLogin, setOpenAfterLogin] =
     useState(false);
   const { onCreateOrder, paymentState, purchased } =
     usePayment(onSuccess);
 
+  const fetchCoupons = async () => {
+    try {
+      const response = await axiosInstance.post(
+        `/coupon/list`,
+        { productId: productDetails._id, isPurchase: true }
+      );
+      setCoupons(response?.data?.data);
+    } catch (error) {
+      console.error('Error fetching coupons:', error);
+    }
+  };
+
   useEffect(() => {
     if (user?._id && openAfterLogin?.price) {
-      onCreateOrder(
-        openAfterLogin.price,
-        openAfterLogin.creatorId,
-        openAfterLogin.creatorDetails,
-        openAfterLogin.bookingData
-      );
+      if (coupons.length > 0) {
+        setIsModalOpen(true);
+      } else {
+        onCreateOrder(
+          openAfterLogin.price,
+          openAfterLogin.creatorId,
+          openAfterLogin.creatorDetails,
+          openAfterLogin.bookingData
+        );
+      }
+    }
+  }, [user?._id]);
+
+  useEffect(() => {
+    if (user?._id) {
+      fetchCoupons();
     }
   }, [user?._id]);
 
@@ -103,12 +129,16 @@ const BuyButton = ({
               });
               setOpened(true);
             } else {
-              onCreateOrder(
-                price,
-                creatorId,
-                creatorDetails,
-                bookingData
-              );
+              if (coupons.length > 0) {
+                setIsModalOpen(true);
+              } else {
+                onCreateOrder(
+                  price,
+                  creatorId,
+                  creatorDetails,
+                  bookingData
+                );
+              }
             }
           }}
           className={classNames(
@@ -138,6 +168,36 @@ const BuyButton = ({
               ? false
               : true
           }
+        />
+      )}
+      {!!isModalOpen && (
+        <PaymentPreview
+          price={price}
+          title={productDetails.title}
+          isCourse={productDetails.isCourse}
+          course={productDetails.course}
+          closeOnClickOutside={false}
+          onPurchase={(
+            price,
+            isCouponApplied,
+            couponDetails
+          ) => {
+            setIsModalOpen(false);
+            onCreateOrder(
+              price,
+              creatorId,
+              creatorDetails,
+              bookingData,
+              isCouponApplied,
+              couponDetails
+            );
+          }}
+          opened={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          email={user?.email}
+          phoneNumber={user?.phoneNumber}
+          productDetails={productDetails}
+          subscription={bookingData.subscription}
         />
       )}
     </>

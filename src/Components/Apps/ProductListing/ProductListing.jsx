@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 'use client';
-
 import {
   Pagination,
   Select,
@@ -38,6 +37,7 @@ const ProductListing = ({
   customEmptyStateTwo,
   searchPlaceholder,
   Component = ProductCard,
+  setChildFunc,
 }) => {
   const router = useRouter();
   const routeName = usePathname().split('/')[1];
@@ -53,7 +53,11 @@ const ProductListing = ({
     isGrid,
     setIsGrid,
     isMobile,
-  } = useProductListing(baseUrl, initialStatus);
+  } = useProductListing(
+    baseUrl,
+    initialStatus,
+    setChildFunc
+  );
   const onDefaultRowClick = row => {
     router.push(`/dashboard/${app}/${row._id}`);
   };
@@ -135,7 +139,12 @@ const ProductListing = ({
               : routeName.charAt(0).toUpperCase() +
                 routeName.slice(1)
           }
-          modal={app === 'course' || app === 'dp'}
+          modal={
+            app === 'course' ||
+            app === 'dp' ||
+            app === 'url' ||
+            app === 'coupon'
+          }
           path={createPath}
         />
       )}
@@ -187,7 +196,11 @@ const ProductListing = ({
                     '!block w-full':
                       showOnlyGridViewInMobile &&
                       isMobile &&
-                      routeName !== 'audience'
+                      ![
+                        'audience',
+                        'link',
+                        'coupon',
+                      ].includes(routeName)
                         ? true
                         : isGrid,
                   })}
@@ -219,7 +232,11 @@ const ProductListing = ({
                     hidden:
                       showOnlyGridViewInMobile &&
                       isMobile &&
-                      routeName !== 'audience'
+                      ![
+                        'audience',
+                        'link',
+                        'coupon',
+                      ].includes(routeName)
                         ? true
                         : isGrid,
                   })}
