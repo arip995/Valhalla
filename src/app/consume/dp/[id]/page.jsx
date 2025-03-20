@@ -1,9 +1,16 @@
-import DPConsume from '@/Components/Consume/DigitalProduct/DPConsume';
-import React from 'react';
+'use client';
 
-const page = async props => {
-  const params = await props.params;
-  return <DPConsume productId={params.id} />;
+import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
+const DPConsume = dynamic(
+  () =>
+    import('@/Components/Consume/DigitalProduct/DPConsume'),
+  { ssr: false }
+);
+
+const page = () => {
+  const productId = usePathname().split('/')[3];
+  return <DPConsume productId={productId} />;
 };
 
 export default page;

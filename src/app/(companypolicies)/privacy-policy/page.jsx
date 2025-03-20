@@ -1,12 +1,17 @@
-import Footer from '@/Components/Landing/main/ui/Footer';
-import React from 'react';
+'use client';
+
+import dynamic from 'next/dynamic';
+const Footer = dynamic(
+  () => import('@/Components/Landing/main/ui/Footer'),
+  { ssr: false }
+);
 
 const page = () => {
   return (
-    <div className="flex flex-col items-center gap-4 mr-4 ml-4 mb-4">
+    <div className="mb-4 ml-4 mr-4 flex flex-col items-center gap-4">
       <div className="h-36 w-screen bg-violet-600"></div>
 
-      <div className="p-8 md:p-16 flex flex-col gap-4 max-w-[750px]">
+      <div className="flex max-w-[750px] flex-col gap-4 p-8 md:p-16">
         <div className="text-2xl font-bold">
           Privacy Policy
         </div>
@@ -30,7 +35,7 @@ const page = () => {
           Personal Information:
         </div>
         <div className="">
-          <ul className="list-disc flex flex-col gap-2">
+          <ul className="flex list-disc flex-col gap-2">
             <li>
               {`We collect personal information that you
               provide to us, such as your name, email
@@ -46,7 +51,7 @@ const page = () => {
           Usage Data:
         </div>
         <div className="">
-          <ul className="list-disc flex flex-col gap-2">
+          <ul className="flex list-disc flex-col gap-2">
             <li>
               {` We automatically collect certain information
               about your device and how you interact with
@@ -79,7 +84,7 @@ const page = () => {
           We use the information we collect in the following
           ways:
         </div>
-        <ul className="list-disc flex flex-col gap-2">
+        <ul className="flex list-disc flex-col gap-2">
           <li>
             <span className="font-bold">
               To Provide and Maintain Our Services:{' '}
@@ -128,7 +133,7 @@ const page = () => {
         <div className="">
           We may share your information with:
         </div>
-        <ul className="list-disc flex flex-col gap-2">
+        <ul className="flex list-disc flex-col gap-2">
           <li>
             <span className="font-bold">
               Service Providers:{' '}
@@ -182,7 +187,7 @@ const page = () => {
           rights regarding your personal information,
           including:
         </div>
-        <ul className="list-disc flex flex-col gap-2">
+        <ul className="flex list-disc flex-col gap-2">
           <li>
             The right to access, update, or delete the
             personal information we hold about you.
@@ -212,7 +217,7 @@ const page = () => {
           this Privacy Policy periodically for any changes.`}
         </div>
         <div className="text-xl font-bold">Contact Us</div>
-        <ul className="list-disc flex flex-col gap-2">
+        <ul className="flex list-disc flex-col gap-2">
           <li>
             <span className="font-bold">Email:</span>
             support@nexify.club

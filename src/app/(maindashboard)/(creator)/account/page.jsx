@@ -6,8 +6,8 @@ const AccountPage = dynamic(
   { ssr: false }
 );
 
-const Page = ({ data }) => {
-  return <AccountPage {...data} />;
+const Page = () => {
+  return <AccountPage />;
 };
 
 export default Page;

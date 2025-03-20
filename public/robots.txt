@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://nexify.club
+
+# Sitemaps
+Sitemap: https://nexify.club/sitemap.xml
