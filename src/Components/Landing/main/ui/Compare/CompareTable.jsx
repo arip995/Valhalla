@@ -70,7 +70,7 @@ const features = [
 const packages = [
   {
     name: 'Basic',
-    price: '999',
+    price: '599',
     features: [
       'Basic Analytics',
       'Email Support',
@@ -79,7 +79,7 @@ const packages = [
   },
   {
     name: 'Professional',
-    price: '1999',
+    price: '999',
     features: [
       'Everything in Basic',
       'Advanced Analytics',
@@ -90,7 +90,7 @@ const packages = [
   },
   {
     name: 'Enterprise',
-    price: '4999',
+    price: '3500',
     features: [
       'Everything in Professional',
       'Dedicated Account Manager',
