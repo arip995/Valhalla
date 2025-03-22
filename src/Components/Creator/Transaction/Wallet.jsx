@@ -338,8 +338,23 @@ const Wallet = () => {
                   </a>
                   .
                 </Alert> */}
+              <Alert
+                icon={<IconAlertCircle size={16} />}
+                title="Payouts stopped until Tuesday"
+                color="yellow"
+              >
+                Payouts and settlements will not be
+                processed on weekends.
+                {/* <a
+                  href="mailto:support@nexify.club"
+                  className="underline"
+                >
+                  support@nexify.club
+                </a> */}
+                .
+              </Alert>
 
-              <form
+              {/* <form
                 onSubmit={form.onSubmit(handleWithdraw)}
               >
                 <Stack spacing="md">
@@ -509,7 +524,7 @@ const Wallet = () => {
                     </Text>
                   )}
                 </Stack>
-              </form>
+              </form> */}
             </Paper>
 
             {/* Active Payout Request */}
