@@ -97,7 +97,7 @@ const useCreateDP = () => {
       if (!values.files?.length && stepsCompleted) {
         errors.files = 'Digital files are required';
       }
-
+      console.log(stepsCompleted);
       if (
         !validatePhoneNumber(values.supportPhoneNumber) &&
         stepsCompleted
@@ -146,20 +146,20 @@ const useCreateDP = () => {
         }
       }
 
-      if (values.supportPhoneNumber) {
-        if (
-          !validatePhoneNumber(values.supportPhoneNumber)
-        ) {
-          errors.supportPhoneNumber =
-            'Invalid phone number';
-        }
-      }
+      // if (values.supportPhoneNumber) {
+      //   if (
+      //     !validatePhoneNumber(values.supportPhoneNumber)
+      //   ) {
+      //     errors.supportPhoneNumber =
+      //       'Invalid phone number';
+      //   }
+      // }
 
-      if (values.supportEmail) {
-        if (!validateEmail(values.supportEmail)) {
-          errors.supportEmail = 'Invalid email';
-        }
-      }
+      // if (values.supportEmail) {
+      //   if (!validateEmail(values.supportEmail)) {
+      //     errors.supportEmail = 'Invalid email';
+      //   }
+      // }
 
       if (values.hasDiscountedPrice) {
         if (!values.discountedPrice) {
