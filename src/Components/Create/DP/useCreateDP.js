@@ -97,20 +97,19 @@ const useCreateDP = () => {
       if (!values.files?.length && stepsCompleted) {
         errors.files = 'Digital files are required';
       }
-      console.log(stepsCompleted);
-      if (
-        !validatePhoneNumber(values.supportPhoneNumber) &&
-        stepsCompleted
-      ) {
-        errors.supportPhoneNumber = 'Invalid phone number';
-      }
+      // if (
+      //   !validatePhoneNumber(values.supportPhoneNumber) &&
+      //   stepsCompleted
+      // ) {
+      //   errors.supportPhoneNumber = 'Invalid phone number';
+      // }
 
-      if (
-        !validateEmail(values.supportEmail) &&
-        stepsCompleted
-      ) {
-        errors.supportEmail = 'Invalid email';
-      }
+      // if (
+      //   !validateEmail(values.supportEmail) &&
+      //   stepsCompleted
+      // ) {
+      //   errors.supportEmail = 'Invalid email';
+      // }
 
       if (!values.category) {
         errors.category = 'Category is required';
