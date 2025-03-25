@@ -8,7 +8,6 @@ import {
   useDebouncedCallback,
   useToggle,
 } from '@mantine/hooks';
-import axios from 'axios';
 import {
   usePathname,
   useRouter,
@@ -129,8 +128,8 @@ const useSignup = () => {
   const sendOtp = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/send_otp`,
+      const { data } = await axiosInstance.post(
+        `/auth/send_otp`,
         {
           email: authForm.values.email,
           phoneNumber: authForm.values.phoneNumber,
@@ -159,8 +158,8 @@ const useSignup = () => {
         convertFullNameToFirstNameLastName(
           authForm.values.name
         );
-      const data = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/verify_otp`,
+      const data = await axiosInstance.post(
+        `/auth/verify_otp`,
         {
           email: authForm.values.email,
           phoneNumber: authForm.values.phoneNumber,
@@ -172,9 +171,6 @@ const useSignup = () => {
           otp: otpForm.values.otp,
           refId: otpRefId,
           isSignUp: true,
-        },
-        {
-          withCredentials: true,
         }
       );
       if (data?.data?.data?.user) {

@@ -2,7 +2,6 @@ import axiosInstance from '@/Utils/AxiosInstance';
 import useUser from '@/Utils/Hooks/useUser';
 import { validateEmail } from '@/Utils/Regex';
 import { useDisclosure } from '@mantine/hooks';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -88,12 +87,11 @@ const useContactSupportDetails = () => {
     }
 
     try {
-      const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/send_otp`,
+      const { data } = await axiosInstance.post(
+        `/auth/send_otp`,
         payload
       );
       setOtpRefId(data?.data?._id);
-
       toast.success('Otp sent successfully');
       setIsOtpScreen(true);
     } catch (error) {
