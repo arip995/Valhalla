@@ -1,9 +1,9 @@
+import axiosInstance from '@/Utils/AxiosInstance';
 import { setUserData } from '@/Utils/getuserData';
 import useUser from '@/Utils/Hooks/useUser';
 import { validateEmail } from '@/Utils/Regex';
 import { useForm } from '@mantine/form';
 import { useToggle } from '@mantine/hooks';
-import axios from 'axios';
 import {
   usePathname,
   useRouter,
@@ -74,8 +74,8 @@ const useSignin = () => {
   const sendOtp = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/send_otp`,
+      const { data } = await axiosInstance.post(
+        `/auth/send_otp`,
         {
           [emailOrPhoneNumber === 'email'
             ? 'email'
@@ -103,8 +103,8 @@ const useSignin = () => {
   const verifyOtp = async () => {
     try {
       setLoading(true);
-      const data = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/verify_otp`,
+      const data = await axiosInstance.post(
+        `/auth/verify_otp`,
         {
           [emailOrPhoneNumber === 'email'
             ? 'email'
@@ -115,9 +115,6 @@ const useSignin = () => {
           otp: otpForm.values.otp,
           refId: otpRefId,
           isSignUp: pathname === 'signup' ? true : false,
-        },
-        {
-          withCredentials: true,
         }
       );
       if (data?.data?.data?.user) {
