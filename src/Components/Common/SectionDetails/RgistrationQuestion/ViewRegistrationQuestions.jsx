@@ -1,5 +1,6 @@
 'use client';
 
+import axiosInstance from '@/Utils/AxiosInstance';
 import {
   convertFullNameToFirstNameLastName,
   formatPrice,
@@ -17,7 +18,6 @@ import {
 } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
-import axios from 'axios';
 import dynamic from 'next/dynamic';
 import {
   usePathname,
@@ -187,16 +187,13 @@ const ViewRegistrationQuestions = ({
         convertFullNameToFirstNameLastName(
           name || submissionValues.name
         );
-      const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/dp/login`,
+      const { data } = await axiosInstance.post(
+        `/dp/login`,
         {
           phoneNumber: submissionValues.phoneNumber,
           email: submissionValues.email,
           firstName,
           lastName,
-        },
-        {
-          withCredentials: true,
         }
       );
       if (data?.data) {

@@ -339,7 +339,14 @@ const Wallet = () => {
                   .
                 </Alert> */}
 
-              <form
+              <Alert
+                icon={<IconAlertCircle size={16} />}
+                title="Payouts and settlements will not be
+                processed on weekends"
+                color="yellow"
+              />
+
+              {/* <form
                 onSubmit={form.onSubmit(handleWithdraw)}
               >
                 <Stack spacing="md">
@@ -509,7 +516,7 @@ const Wallet = () => {
                     </Text>
                   )}
                 </Stack>
-              </form>
+              </form> */}
             </Paper>
 
             {/* Active Payout Request */}

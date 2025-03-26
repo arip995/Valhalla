@@ -25,23 +25,16 @@ const Hero2 = () => {
           </div>
 
           <h1 className="mb-6 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-4xl font-extrabold leading-tight text-transparent sm:text-5xl md:text-6xl">
-            The all-in-one platform for your marketing and
-            website
+            The all-in-one platform for your digital
+            products and services
           </h1>
 
-          {/* <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-700 sm:text-xl">
+          <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-700 sm:text-xl">
             Consolidate all your digital products, coaching,
             subscriptions, courses, and email marketing into
             one powerful link-in-bio store. Start monetizing
             your content today!
-          </p> */}
-
-          {/* <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-700 sm:text-xl">
-            Start building your website and marketing
-            presence today. Create a powerful link-in-bio
-            website to showcase your digital products and
-            services. Launch your online website now!
-          </p> */}
+          </p>
 
           {/* CTA Buttons */}
           <div className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -103,7 +96,8 @@ const Hero2 = () => {
                     Global Reach
                   </h3>
                   <p className="text-sm text-gray-600">
-                    Customers from 50+ countries
+                    Sell your products to customers
+                    worldwide with multi-currency support
                   </p>
                 </div>
               </div>

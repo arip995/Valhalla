@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import NavbarLayout from '@/Components/NavbarLayout/NavbarLayout';
 import '@mantine/charts/styles.css';
 import React from 'react';

@@ -26,7 +26,7 @@ const Kyc = ({ onSuccess = () => {} }) => {
         }}
       />
 
-      {/* <TextInput
+      <TextInput
         withAsterisk
         label="Bank Account Number"
         placeholder="026291800001191"
@@ -49,20 +49,6 @@ const Kyc = ({ onSuccess = () => {} }) => {
           kycForm.validate();
         }}
       />
-      <TextInput
-        withAsterisk
-        label="Account Holder Name"
-        placeholder="Kailash Panda"
-        disabled={loading || user?.isKycDone}
-        key={kycForm.key('ifsc')}
-        {...kycForm.getInputProps('ifsc')}
-        onChange={event => {
-          kycForm.setValues({
-            ifsc: event.currentTarget.value?.toLocaleUpperCase(),
-          });
-          kycForm.validate();
-        }}
-      /> */}
 
       {!user.isKycDone ? (
         <Button

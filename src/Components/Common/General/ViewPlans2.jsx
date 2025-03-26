@@ -9,7 +9,7 @@ import { discountPercentage } from '@/Utils/Common';
 import useUser from '@/Utils/Hooks/useUser';
 import { Badge } from '@mantine/core';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import AfterPurchaseTelegramModal from '../Card/AfterPurchaseTelegramModal';
 import BuyButton from '../Payment/BuyButton';
 
@@ -18,6 +18,7 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
   const { user } = useUser();
   const [purchasedData, setPurchasedData] = useState(false);
   const [opened, setOpened] = useState(false);
+  const intervalRef = useRef(null);
 
   const onSuccess = async () => {
     try {
@@ -47,15 +48,29 @@ const ViewPlans2 = ({ data, onPay = () => {} }) => {
     setOpened(false);
   };
 
-  useEffect(() => {
-    let interval;
-    if (purchasedData?.inviteLink) {
-      interval = setInterval(() => {
+  const setupInterval = inviteLink => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+
+    if (inviteLink) {
+      intervalRef.current = setInterval(() => {
         onSuccess();
       }, 5000);
-    } else {
-      clearInterval(interval);
     }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    setupInterval(purchasedData?.inviteLink);
   }, [purchasedData?.inviteLink]);
 
   useEffect(() => {

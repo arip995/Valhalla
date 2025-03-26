@@ -9,26 +9,26 @@ const faqs = [
     answer:
       'Sign up for a free account, complete your profile, and start adding your digital products. Our setup wizard will guide you through the process.',
   },
-  // {
-  //   question: 'What content can I monetize?',
-  //   answer:
-  //     'You can monetize courses, communities, webinars, digital downloads, coaching sessions, and more. Our platform supports various content formats.',
-  // },
-  // {
-  //   question: 'How do I receive payments?',
-  //   answer:
-  //     'We offer secure payment processing with instant payouts to your connected bank account. Support for multiple payment methods included.',
-  // },
-  // {
-  //   question: 'Can I offer discounts?',
-  //   answer:
-  //     'Yes! Create custom discount codes, run time-limited promotions, and offer special pricing for your products.',
-  // },
-  // {
-  //   question: 'How do I track earnings?',
-  //   answer:
-  //     'Access detailed analytics and revenue reports through your dashboard. Track sales, subscriptions, and customer metrics in real-time.',
-  // },
+  {
+    question: 'What content can I monetize?',
+    answer:
+      'You can monetize courses, communities, webinars, digital downloads, coaching sessions, and more. Our platform supports various content formats.',
+  },
+  {
+    question: 'How do I receive payments?',
+    answer:
+      'We offer secure payment processing with instant payouts to your connected bank account. Support for multiple payment methods included.',
+  },
+  {
+    question: 'Can I offer discounts?',
+    answer:
+      'Yes! Create custom discount codes, run time-limited promotions, and offer special pricing for your products.',
+  },
+  {
+    question: 'How do I track earnings?',
+    answer:
+      'Access detailed analytics and revenue reports through your dashboard. Track sales, subscriptions, and customer metrics in real-time.',
+  },
   {
     question: 'Is chat support available 24/7?',
     answer:

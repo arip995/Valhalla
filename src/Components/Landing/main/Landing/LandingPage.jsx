@@ -1,10 +1,11 @@
 import ContactUs2 from '@/Components/Common/ContactUs/ContactUs2';
 import FooterThree from '@/Components/Common/Footer/FooterThree';
 import LandingHeader from '@/Components/Common/Header/LandingHeader';
+import CompareTable from '../ui/Compare/CompareTable';
 import FAQs2 from '../ui/FAQs/FAQs2';
 import Features2 from '../ui/Features/Features2';
 import Hero2 from '../ui/Hero/Hero2';
-import CompareTable from '../ui/Compare/CompareTable';
+import Testimonial2 from '../ui/Testimonial/Testimonial2';
 
 const LandingPage = () => {
   return (
@@ -22,7 +23,7 @@ const LandingPage = () => {
       <CompareTable />
 
       {/* Testimonials */}
-      {/* <Testimonial2 /> */}
+      <Testimonial2 />
 
       {/* Blog Highlights Section */}
       {/* <Blog /> */}
