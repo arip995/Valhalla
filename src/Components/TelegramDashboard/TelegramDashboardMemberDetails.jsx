@@ -2,11 +2,7 @@
 
 import ProductListing from '@/Components/Apps/ProductListing/ProductListing';
 import { TelegramSubscriberStatusMapping } from '@/Constants/constants';
-import {
-  formatDate,
-  getFullName,
-  getUserId,
-} from '@/Utils/Common';
+import { formatDate, getFullName } from '@/Utils/Common';
 import { Drawer } from '@mantine/core';
 import {
   IconBrandRedux,
@@ -23,7 +19,6 @@ import {
 } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import CustomCopyButton from '../Common/Buttons/CustomCopyButton';
-import TelegramMemberDetailsCard from '../Common/Card/TelegramMemberDetailsCard';
 import TelegramMemberDetailsCard2 from '../Common/Card/TelegramMemberDetailsCard2';
 import TelegramMemberDetails from './TelegramMemberDetails';
 
@@ -165,9 +160,10 @@ const TelegramDashboardMemberDetails = () => {
             </h2>
           }
           Component={
-            getUserId() === '67af274a9faf480f10ade097'
-              ? TelegramMemberDetailsCard2
-              : TelegramMemberDetailsCard
+            TelegramMemberDetailsCard2
+            // getUserId() === '67af274a9faf480f10ade097'
+            //   ? TelegramMemberDetailsCard2
+            //   : TelegramMemberDetailsCard
           }
         />
       </div>

@@ -1,13 +1,14 @@
 'use client';
 
 import ProductListing from '@/Components/Apps/ProductListing/ProductListing';
+import TransactionCard from '@/Components/Common/Card/TransactionCard';
 import Header from '@/Components/Common/Header/Header';
 import { PaymentTabOptions } from '@/Constants/constants';
 import {
   StatusPaymentColorMapping,
   StatusPaymentMapping,
 } from '@/Constants/ProductListingContants';
-import { formatDate, getUserId } from '@/Utils/Common';
+import { formatDate } from '@/Utils/Common';
 import { Badge, Drawer } from '@mantine/core';
 import {
   IconBrandProducthunt,
@@ -25,7 +26,6 @@ import {
 import { useEffect, useState } from 'react';
 import TransactionDetails from './TransactionDetails';
 import Wallet from './Wallet';
-import TransactionCard from '@/Components/Common/Card/TransactionCard';
 
 const TableHeaderItems = [
   { title: 'Date', icon: IconCalendar, value: 'date' },
@@ -160,18 +160,16 @@ const Transaction = () => {
           />
         </div>
       </div>
-      {getUserId() !== '67ce5ba7d07ed2875edf151a' && (
-        <Drawer
-          trapFocus={false}
-          lockScroll={false}
-          opened={opened}
-          onClose={() => setOpened(false)}
-          position="right"
-          title="Transaction Details"
-        >
-          <TransactionDetails data={activeTransaction} />
-        </Drawer>
-      )}
+      <Drawer
+        trapFocus={false}
+        lockScroll={false}
+        opened={opened}
+        onClose={() => setOpened(false)}
+        position="right"
+        title="Transaction Details"
+      >
+        <TransactionDetails data={activeTransaction} />
+      </Drawer>
     </>
   );
 };
