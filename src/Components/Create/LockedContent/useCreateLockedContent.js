@@ -123,6 +123,7 @@ const useCreateLockedContent = () => {
   };
 
   const fetchLcData = async () => {
+    console.log('message');
     try {
       router.prefetch('/signin');
       setEditLoading(true);
@@ -130,16 +131,17 @@ const useCreateLockedContent = () => {
         productId,
         'lc'
       );
-      if (data.data.creatorId != getUserId()) {
-        router.push('/signin');
+      if (data.creatorId != getUserId()) {
+        return router.push('/signin');
       }
+
       createLockedContentForm.setValues({
-        title: data.data.title,
-        message: data.data.message,
-        category: data.data.category,
-        files: data.data.files,
-        price: data.data.price,
-        data: data.data,
+        title: data.title,
+        message: data.message,
+        category: data.category,
+        files: data.files,
+        price: data.price,
+        data: data,
       });
     } catch (error) {
       toast.error(
