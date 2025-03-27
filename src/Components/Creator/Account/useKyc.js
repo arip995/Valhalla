@@ -1,6 +1,10 @@
 import axiosInstance from '@/Utils/AxiosInstance';
 import useUser from '@/Utils/Hooks/useUser';
-import { isValidPan } from '@/Utils/Regex';
+import {
+  isValidBankAccountNumber,
+  isValidIFSC,
+  isValidPan,
+} from '@/Utils/Regex';
 import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -18,16 +22,29 @@ const useKyc = (onSuccess = () => {}) => {
     validateInputOnChange: true,
     validate: values => {
       const errors = {};
-      if (values.isCliskedSaveAtleastOnce) {
-        if (!isValidPan(values.pan)) {
-          errors.pan = 'Enter a valid pan';
-        }
+      if (!values.isCliskedSaveAtleastOnce) {
+        return errors;
+      }
+      if (!isValidPan(values.pan)) {
+        errors.pan = 'Enter a valid pan';
+      }
+      if (!isValidIFSC(values.ifsc)) {
+        errors.ifsc = 'Enter a valid ifsc';
+      }
+      if (
+        !isValidBankAccountNumber(values.bankAccountNumber)
+      ) {
+        errors.bankAccountNumber =
+          'Enter a valid bank account number';
       }
       return errors;
     },
     transformValues: values => {
       return {
         pan: values.pan?.trim() || undefined,
+        ifsc: values.ifsc?.trim() || undefined,
+        bankAccountNumber:
+          values.bankAccountNumber?.trim() || undefined,
       };
     },
   });
@@ -36,7 +53,7 @@ const useKyc = (onSuccess = () => {}) => {
     try {
       setLoaing(true);
       const { data } = await axiosInstance.post(
-        '/verify/kyc',
+        '/verify/new_kyc',
         values
       );
       const { data: responseData, message } = data;

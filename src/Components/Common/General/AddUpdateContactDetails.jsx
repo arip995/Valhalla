@@ -12,7 +12,6 @@ import {
   TextInput,
 } from '@mantine/core';
 import { IconEdit } from '@tabler/icons-react';
-import axios from 'axios';
 import { useCallback, useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -81,8 +80,8 @@ const AddUpdateContactDetails = ({
     }
 
     try {
-      const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/send_otp`,
+      const { data } = await axiosInstance.post(
+        `/auth/send_otp`,
         payload
       );
       setOtpRefId(data?.data?._id);
