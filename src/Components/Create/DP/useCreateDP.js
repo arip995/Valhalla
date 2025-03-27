@@ -97,19 +97,23 @@ const useCreateDP = () => {
       if (!values.files?.length && stepsCompleted) {
         errors.files = 'Digital files are required';
       }
-      // if (
-      //   !validatePhoneNumber(values.supportPhoneNumber) &&
-      //   stepsCompleted
-      // ) {
-      //   errors.supportPhoneNumber = 'Invalid phone number';
-      // }
 
-      // if (
-      //   !validateEmail(values.supportEmail) &&
-      //   stepsCompleted
-      // ) {
-      //   errors.supportEmail = 'Invalid email';
-      // }
+      if (tab === 'content') {
+        if (
+          !validatePhoneNumber(values.supportPhoneNumber) &&
+          stepsCompleted
+        ) {
+          errors.supportPhoneNumber =
+            'Invalid phone number';
+        }
+
+        if (
+          !validateEmail(values.supportEmail) &&
+          stepsCompleted
+        ) {
+          errors.supportEmail = 'Invalid email';
+        }
+      }
 
       if (!values.category) {
         errors.category = 'Category is required';
@@ -144,21 +148,6 @@ const useCreateDP = () => {
             'Redirection link should be a valid URL';
         }
       }
-
-      // if (values.supportPhoneNumber) {
-      //   if (
-      //     !validatePhoneNumber(values.supportPhoneNumber)
-      //   ) {
-      //     errors.supportPhoneNumber =
-      //       'Invalid phone number';
-      //   }
-      // }
-
-      // if (values.supportEmail) {
-      //   if (!validateEmail(values.supportEmail)) {
-      //     errors.supportEmail = 'Invalid email';
-      //   }
-      // }
 
       if (values.hasDiscountedPrice) {
         if (!values.discountedPrice) {
