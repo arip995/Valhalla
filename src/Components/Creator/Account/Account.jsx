@@ -24,7 +24,7 @@ import {
   IconInfoCircle,
   IconRosetteDiscountCheck,
 } from '@tabler/icons-react';
-import Kyc from './Kyc';
+import Kyc from '../Kyc/Kyc';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import {
   AccountCreatorTabOptions,

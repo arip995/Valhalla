@@ -202,20 +202,20 @@ const Wallet = () => {
                           </Group>
                         </Alert>
                       )}
-                    {/* {user.isKycDone &&
-                      user.beneficiaryDetails?.length &&
-                      user.multipleBankAccounts ? (
-                        <Button
-                          size="xs"
-                          variant="outline"
-                          color="black"
-                          onClick={() =>
-                            setOpenedBankDetails(true)
-                          }
-                        >
-                          Add new bank
-                        </Button>
-                      ) : null} */}
+                    {user.isKycDone &&
+                    user.beneficiaryDetails?.length &&
+                    user.multipleBankAccounts ? (
+                      <Button
+                        size="xs"
+                        variant="outline"
+                        color="black"
+                        onClick={() =>
+                          setOpenedBankDetails(true)
+                        }
+                      >
+                        Add new bank
+                      </Button>
+                    ) : null}
 
                     {user?.beneficiaryDetails?.length ? (
                       <Select
@@ -287,7 +287,7 @@ const Wallet = () => {
                     >
                       Withdraw
                     </Button>
-                    {user?.beneficiaryDetails?.length ? (
+                    {/* {user?.beneficiaryDetails?.length ? (
                       <Alert
                         icon={<IconAlertCircle size={16} />}
                         title="Instant Payout Processing"
@@ -311,7 +311,7 @@ const Wallet = () => {
                         </a>
                         .
                       </Alert>
-                    ) : null}
+                    ) : null} */}
                   </Stack>
                   {!!activePayoutRequest && (
                     <Text size="sm" c="dimmed">

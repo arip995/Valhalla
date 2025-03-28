@@ -1,4 +1,4 @@
-import Kyc from '@/Components/Creator/Account/Kyc';
+import Kyc from '@/Components/Creator/Kyc/Kyc';
 import useUsername from '@/Components/Creator/Account/useUsername';
 import useUser from '@/Utils/Hooks/useUser';
 import { checkRestrictedChars } from '@/Utils/Regex';
