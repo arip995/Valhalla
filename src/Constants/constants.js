@@ -13,6 +13,11 @@ import {
   IconMusic,
   IconPhoto,
   IconVideo,
+  IconAlertCircle,
+  IconCircleDot,
+  IconCheck,
+  IconX,
+  IconHelpCircle,
 } from '@tabler/icons-react';
 
 export const Categories = [
@@ -527,4 +532,62 @@ export const handleShare = productUrl => {
       </div>
     ),
   });
+};
+
+// Wallet Transaction Status Utilities
+export const GetWalletStatusColor = status => {
+  switch (status) {
+    case 0:
+      return 'yellow'; // Pending
+    case 1:
+      return 'blue'; // Processing
+    case 2:
+      return 'blue'; // Completed
+    case 3:
+      return 'green'; // Failed
+    case 4:
+      return 'red'; // Cancelled
+    case 5:
+      return 'red'; // Cancelled
+    default:
+      return 'gray';
+  }
+};
+
+export const GetWalletStatusText = status => {
+  switch (status) {
+    case 0:
+      return 'Pending';
+    case 1:
+      return 'Processing';
+    case 2:
+      return 'Initiated';
+    case 3:
+      return 'Completed';
+    case 4:
+      return 'Failed';
+    case 5:
+      return 'Cancelled';
+    default:
+      return 'Unknown';
+  }
+};
+
+export const GetWalletStatusIcon = status => {
+  switch (status) {
+    case 0:
+      return <IconAlertCircle size={20} />;
+    case 1:
+      return <IconCircleDot size={20} />;
+    case 2:
+      return <IconCircleDot size={20} />;
+    case 3:
+      return <IconCheck size={20} />;
+    case 4:
+      return <IconX size={20} />;
+    case 5:
+      return <IconX size={20} />;
+    default:
+      return <IconHelpCircle size={20} />;
+  }
 };

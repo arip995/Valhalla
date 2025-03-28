@@ -13,211 +13,18 @@ import {
   Select,
   Stack,
   Text,
-  ThemeIcon,
   Title,
-  Tooltip,
 } from '@mantine/core';
 import {
   IconAlertCircle,
   IconArrowUp,
-  IconCheck,
-  IconCircleDot,
-  IconHelpCircle,
-  IconInfoCircle,
   IconWallet,
-  IconX,
 } from '@tabler/icons-react';
 import React from 'react';
 import AddBankAccount from '../Account/AddBankAccount';
 import useWallet from './useWallet';
-
-const GetStatusColor = status => {
-  switch (status) {
-    case 0:
-      return 'yellow'; // Pending
-    case 1:
-      return 'blue'; // Processing
-    case 2:
-      return 'blue'; // Completed
-    case 3:
-      return 'green'; // Failed
-    case 4:
-      return 'red'; // Cancelled
-    case 5:
-      return 'red'; // Cancelled
-    default:
-      return 'gray';
-  }
-};
-
-const GetStatusText = status => {
-  switch (status) {
-    case 0:
-      return 'Pending';
-    case 1:
-      return 'Processing';
-    case 2:
-      return 'Initiated';
-    case 3:
-      return 'Completed';
-    case 4:
-      return 'Failed';
-    case 5:
-      return 'Cancelled';
-    default:
-      return 'Unknown';
-  }
-};
-
-const GetStatusIcon = status => {
-  switch (status) {
-    case 0:
-      return <IconAlertCircle size={20} />;
-    case 1:
-      return <IconCircleDot size={20} />;
-    case 2:
-      return <IconCircleDot size={20} />;
-    case 3:
-      return <IconCheck size={20} />;
-    case 4:
-      return <IconX size={20} />;
-    case 5:
-      return <IconX size={20} />;
-    default:
-      return <IconHelpCircle size={20} />;
-  }
-};
-
-const TransactionCard = ({
-  amount,
-  utr,
-  status,
-  createdAt,
-  settlementTime,
-  beneficiaryDetails,
-}) => {
-  return (
-    <Paper
-      withBorder
-      p="md"
-      radius="md"
-      className="transition-all hover:bg-gray-50"
-    >
-      <Group justify="space-between" spacing="xl">
-        <Group spacing="lg">
-          <ThemeIcon
-            size="xl"
-            radius="xl"
-            color={GetStatusColor(status)}
-            variant="light"
-          >
-            {GetStatusIcon(status)}
-          </ThemeIcon>
-          <div className="flex flex-col gap-1">
-            <Text weight={500} size="sm">
-              Withdrawal - {GetStatusText(status)}
-            </Text>
-            {!!utr && (
-              <Text size="xs" c="dimmed">
-                UTR: {utr}
-              </Text>
-            )}
-            {!!beneficiaryDetails && (
-              <Text size="xs" c="dimmed">
-                Account Number:{' '}
-                {beneficiaryDetails?.bankAccountNumber}
-              </Text>
-            )}
-            <Text size="xs" c="dimmed">
-              CreatedAt:-{' '}
-              {new Date(createdAt).toLocaleDateString(
-                'en-IN',
-                {
-                  day: 'numeric',
-                  month: 'short',
-                  year: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                }
-              )}
-            </Text>
-            {!!settlementTime && (
-              <Text size="xs" c="dimmed">
-                SettledAt:-{' '}
-                {new Date(
-                  settlementTime
-                ).toLocaleDateString('en-IN', {
-                  day: 'numeric',
-                  month: 'short',
-                  year: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
-              </Text>
-            )}
-          </div>
-        </Group>
-        <Text
-          weight={500}
-          c={GetStatusColor(status)}
-          size="sm"
-        >
-          ₹{Math.abs(amount).toLocaleString()}
-        </Text>
-      </Group>
-    </Paper>
-  );
-};
-
-const SummaryCard = ({
-  title,
-  value,
-  label,
-  icon: Icon,
-}) => (
-  <Paper withBorder p="md" radius="md">
-    <Group position="apart" spacing="xs">
-      <div>
-        <div className="flex items-center gap-1">
-          <Text
-            size="xs"
-            color="dimmed"
-            transform="uppercase"
-          >
-            {title}
-          </Text>
-          <Tooltip
-            multiline
-            w={220}
-            label={label}
-            events={{
-              hover: true,
-              focus: true,
-              touch: true,
-            }}
-          >
-            <IconInfoCircle
-              size={12}
-              color="gray"
-              className="cursor-pointer"
-            />
-          </Tooltip>
-        </div>
-        <Text weight={700} size="xl">
-          ₹{value.toLocaleString()}
-        </Text>
-      </div>
-      <ThemeIcon
-        size="lg"
-        radius="md"
-        variant="light"
-        color="blue"
-      >
-        <Icon size={20} />
-      </ThemeIcon>
-    </Group>
-  </Paper>
-);
+import WalletTransactionCard from './WalletTransactionCard';
+import WalletSummaryCard from './WalletSummaryCard';
 
 const Wallet = () => {
   const {
@@ -274,7 +81,7 @@ const Wallet = () => {
 
             {/* Summary Cards */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <SummaryCard
+              <WalletSummaryCard
                 title="Withdrawable Balance"
                 label=" The amount available for instant withdrawal to your account."
                 value={
@@ -284,7 +91,7 @@ const Wallet = () => {
                 }
                 icon={IconWallet}
               />
-              <SummaryCard
+              <WalletSummaryCard
                 title="Current Balance"
                 label="Earnings from yesterday and today (till 10 PM). After 10 PM, and the balance of yesterday will be added to your Withdrawable Balance."
                 value={
@@ -295,7 +102,7 @@ const Wallet = () => {
                 icon={IconWallet}
               />
               {walletDetails.refererCurrentBalance ? (
-                <SummaryCard
+                <WalletSummaryCard
                   title="Referer Current Balance"
                   label="Earnings that you earned in this week through refrals. This will settle every week"
                   value={
@@ -307,7 +114,7 @@ const Wallet = () => {
                   icon={IconWallet}
                 />
               ) : null}
-              <SummaryCard
+              <WalletSummaryCard
                 title="Total Withdrawals"
                 label="The total of all amounts withdrawn so far."
                 value={walletDetails.totalWithdrawals}
@@ -559,7 +366,10 @@ const Wallet = () => {
                 <Text weight={500}>Recent Withdrawls</Text>
                 {payoutList?.map((item, i) => {
                   return (
-                    <TransactionCard key={i} {...item} />
+                    <WalletTransactionCard
+                      key={i}
+                      {...item}
+                    />
                   );
                 })}
               </Stack>
