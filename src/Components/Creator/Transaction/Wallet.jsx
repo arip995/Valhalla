@@ -203,10 +203,9 @@ const Wallet = () => {
                           </Group>
                         </Alert>
                       )}
-                    {user.isKycDone &&
+                    {/* {user.isKycDone &&
                     user.beneficiaryDetails?.length &&
-                    user.multipleBankAccounts &&
-                    user.phoneNumber === '7828788012' ? (
+                    user.multipleBankAccounts ? (
                       <Button
                         size="xs"
                         variant="outline"
@@ -217,7 +216,7 @@ const Wallet = () => {
                       >
                         Add new bank
                       </Button>
-                    ) : null}
+                    ) : null} */}
 
                     {user?.beneficiaryDetails?.length ? (
                       <Select
