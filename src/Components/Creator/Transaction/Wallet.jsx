@@ -25,6 +25,7 @@ import AddBankAccount from '../Account/AddBankAccount';
 import useWallet from './useWallet';
 import WalletTransactionCard from './WalletTransactionCard';
 import WalletSummaryCard from './WalletSummaryCard';
+import { getUserId } from '@/Utils/Common';
 
 const Wallet = () => {
   const {
@@ -204,7 +205,8 @@ const Wallet = () => {
                       )}
                     {user.isKycDone &&
                     user.beneficiaryDetails?.length &&
-                    user.multipleBankAccounts ? (
+                    user.multipleBankAccounts &&
+                    user.phoneNumber === '7828788012' ? (
                       <Button
                         size="xs"
                         variant="outline"
