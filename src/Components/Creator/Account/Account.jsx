@@ -153,7 +153,7 @@ const Account = () => {
               ) : (
                 <div className="flex w-full flex-col gap-4">
                   <Kyc />
-                  <BankAccount />
+                  {user?.vendorId ? null : <BankAccount />}
                 </div>
               )}
             </>

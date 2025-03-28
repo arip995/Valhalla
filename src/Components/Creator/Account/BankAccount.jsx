@@ -1,5 +1,5 @@
 import useUser from '@/Utils/Hooks/useUser';
-import { Button, Modal, Text } from '@mantine/core';
+import { Modal, Text } from '@mantine/core';
 import {
   IconBuilding,
   IconCreditCard,
@@ -52,14 +52,14 @@ const BankAccount = ({ onSuccess = () => {} }) => {
             );
           })
         : null}
-      <Button
+      {/* <Button
         type="submit"
         onClick={() => {
           setOpened(true);
         }}
       >
         Add bank account
-      </Button>
+      </Button> */}
 
       <Modal
         trapFocus={false}
