@@ -119,6 +119,7 @@ const ListFileOne = ({
           (_, index) => index !== loadingIndex
         );
       });
+      console.log(error?.response?.data?.message);
       toast.error(
         typeof error === 'string' ? error : 'Network error'
       );
