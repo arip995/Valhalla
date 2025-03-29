@@ -15,7 +15,6 @@ import {
   IconChevronDown,
   IconChevronUp,
 } from '@tabler/icons-react';
-import Image from 'next/image';
 import RenderModulesAndLessons from './ViewCourseOneModuleAndLessons';
 
 const ViewCourseOne = ({ data, isPreview }) => {
@@ -43,13 +42,13 @@ const ViewCourseOne = ({ data, isPreview }) => {
             {data?.title}
           </h2>
           {!!data.coverImage?.url && (
-            <Image
+            <img
               src={data.coverImage?.url}
               height={600}
               width={800}
               className="aspect-video md:w-full"
               alt=""
-              priority
+              // priority
             />
           )}
           <BuyButtonClient

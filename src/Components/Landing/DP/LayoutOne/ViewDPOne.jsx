@@ -4,7 +4,6 @@ import ViewSections2 from '@/Components/Common/ViewSections/ViewSection2';
 import { formatPrice } from '@/Utils/Common';
 import { TypographyStylesProvider } from '@mantine/core';
 import { IconMail, IconPhone } from '@tabler/icons-react';
-import Image from 'next/image';
 import ViewDPForm from './ViewDPForm';
 import ViewDPOneButtonModal from './ViewDPOneButtonModal';
 import ViewOrLoginDPOne from './ViewOrLoginDPOne';
@@ -63,13 +62,13 @@ const ViewDPOne = ({ data }) => {
 
                 {/* Cover Image */}
                 <div className="aspect-video overflow-hidden rounded-md">
-                  <Image
+                  <img
                     src={data.coverImage?.url}
                     height={600}
                     width={800}
                     className="h-full w-full object-cover"
                     alt={data.title}
-                    priority
+                    // priority
                   />
                 </div>
 

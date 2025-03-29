@@ -18,7 +18,6 @@ import {
   IconClock,
   IconLayoutGrid,
 } from '@tabler/icons-react';
-import Image from 'next/image';
 import RenderModulesAndLessons from './ViewCourseTwoModuleAndLessons';
 
 const ViewCourseTwo = ({ data, isPreview }) => {
@@ -49,13 +48,13 @@ const ViewCourseTwo = ({ data, isPreview }) => {
               {data?.coverImage?.url && (
                 <div className="relative">
                   <div className="aspect-video overflow-hidden rounded-2xl shadow-2xl">
-                    <Image
+                    <img
                       src={data.coverImage.url}
                       height={600}
                       width={800}
                       className="h-full w-full object-cover transition duration-700 hover:scale-105"
                       alt={data.title}
-                      priority
+                      // priority
                     />
                   </div>
                   {/* <div className="absolute -bottom-6 left-6 right-6 rounded-xl bg-white p-4 shadow-lg backdrop-blur-sm">

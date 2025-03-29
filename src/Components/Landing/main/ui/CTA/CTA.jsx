@@ -1,10 +1,9 @@
 'use client';
 
-import GradientWrapper from '../../GradientWrapper';
-import Image from 'next/image';
-import NavLink from '../NavLink';
 import BgPattern from '../../../../../../public/images/main/bg-pattern.webp';
+import GradientWrapper from '../../GradientWrapper';
 import LayoutEffect from '../../LayoutEffect';
+import NavLink from '../NavLink';
 
 const CTA = () => (
   <section>
@@ -51,12 +50,13 @@ const CTA = () => (
             </div>
           </div>
         </LayoutEffect>
-        <Image
+        <img
           width={1274}
           height={456}
           src={BgPattern.src}
           className="pointer-events-none absolute inset-0 m-auto h-full w-full object-cover"
           alt="Background pattern"
+          // priority
         />
       </div>
     </GradientWrapper>

@@ -60,11 +60,11 @@ const Hero = () => (
             className="mt-16 sm:mt-28"
             wrapperClassName="max-w-3xl h-[250px] top-12 inset-0 sm:h-[300px] lg:h-[650px]"
           >
-            <Image
+            <img
               height={691}
               width={1200}
               src={HeroImg.src}
-              quality={100}
+              // quality={100}
               className="rounded-2xl shadow-lg"
               alt="Nexify"
             />

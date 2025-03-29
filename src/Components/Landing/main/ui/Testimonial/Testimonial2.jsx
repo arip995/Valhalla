@@ -1,11 +1,9 @@
-import React from 'react';
 import user1 from '../../../../../../public/images/main/user1.webp';
 import user2 from '../../../../../../public/images/main/user2.webp';
 import user3 from '../../../../../../public/images/main/user3.webp';
 import user4 from '../../../../../../public/images/main/user4.webp';
 import user5 from '../../../../../../public/images/main/user5.webp';
 import user6 from '../../../../../../public/images/main/user6.webp';
-import Image from 'next/image';
 
 const testimonials = [
   {
@@ -71,13 +69,13 @@ const Testimonial2 = () => {
             key={index}
             className="rounded-xl border border-gray-100 bg-white/80 p-6 shadow-md backdrop-blur-sm"
           >
-            <Image
+            <img
               src={testimonial.image}
               alt={testimonial.name}
               width={80}
               height={80}
-              quality={100}
-              priority
+              // quality={100}
+              // priority
               className="h-14 w-14 rounded-full object-cover"
             />
 

@@ -1,14 +1,13 @@
-import Image from 'next/image';
 import MailImage from '../../../../../../public/images/main/mailgo.png';
 
 const Brand = ({ ...props }) => (
-  <Image
+  <img
     src={MailImage.src}
     alt="Nexify logo"
     {...props}
     width={110}
     height={50}
-    priority
+    // priority
   />
 );
 export default Brand;

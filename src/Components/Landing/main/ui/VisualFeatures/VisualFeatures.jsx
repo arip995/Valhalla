@@ -1,10 +1,9 @@
 /* eslint-disable no-unreachable */
 'use client';
 
-import SectionWrapper from '../../SectionWrapper';
 import Feature1 from '../../../../../../public/images/main/Feature-1.svg';
 import Feature2 from '../../../../../../public/images/main/Feature-2.svg';
-import Image from 'next/image';
+import SectionWrapper from '../../SectionWrapper';
 
 const VisualFeatures = () => {
   const features = [
@@ -54,7 +53,7 @@ const VisualFeatures = () => {
                   </p>
                 </div>
                 <div className="pl-8">
-                  <Image
+                  <img
                     src={item.img}
                     className="ml-auto w-full"
                     alt={item.title}

@@ -1,16 +1,15 @@
 /* eslint-disable no-unreachable */
 'use client';
 
-import SectionWrapper from '../../SectionWrapper';
-import GradientWrapper from '../../GradientWrapper';
 import user1 from '../../../../../../public/images/main/user1.webp';
 import user2 from '../../../../../../public/images/main/user2.webp';
 import user3 from '../../../../../../public/images/main/user3.webp';
 import user4 from '../../../../../../public/images/main/user4.webp';
 import user5 from '../../../../../../public/images/main/user5.webp';
 import user6 from '../../../../../../public/images/main/user6.webp';
-import Image from 'next/image';
+import GradientWrapper from '../../GradientWrapper';
 import LayoutEffect from '../../LayoutEffect';
+import SectionWrapper from '../../SectionWrapper';
 
 const Testimonial = () => {
   const testimonials = [
@@ -100,7 +99,7 @@ const Testimonial = () => {
                       </p>
                     </blockquote>
                     <div className="flex items-center gap-x-4">
-                      <Image
+                      <img
                         src={item.avatar}
                         alt={item.name}
                         className="h-14 w-14 rounded-full object-cover"
