@@ -201,7 +201,7 @@ const Wallet = () => {
                               </Group>
                             </Alert>
                           )}
-                          {user.isKycDone &&
+                          {/* {user.isKycDone &&
                             !user.beneficiaryDetails &&
                             !user.vendorId && (
                               <Alert
@@ -230,7 +230,7 @@ const Wallet = () => {
                                   </Button>
                                 </Group>
                               </Alert>
-                            )}
+                            )} */}
                           {/* {user.isKycDone &&
                     user.beneficiaryDetails?.length &&
                     user.multipleBankAccounts ? (
