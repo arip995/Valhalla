@@ -121,7 +121,9 @@ const ListFileOne = ({
       });
       console.log(error?.response?.data?.message);
       toast.error(
-        typeof error === 'string' ? error : 'Network error'
+        typeof error?.response?.data?.message === 'string'
+          ? error?.response?.data?.message
+          : 'Network error'
       );
     }
   };
