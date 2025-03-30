@@ -147,7 +147,6 @@ const Wallet = () => {
 
               {(() => {
                 const now = new Date();
-                const day = now.getDay(); // 0 is Sunday, 6 is Saturday
                 const indianTime = new Date(
                   now.toLocaleString('en-US', {
                     timeZone: 'Asia/Kolkata',
@@ -155,7 +154,7 @@ const Wallet = () => {
                 );
                 const indianDay = indianTime.getDay();
 
-                if (indianDay === 0 || indianDay === 6) {
+                if ([0, 6].includes(indianDay)) {
                   return (
                     <Alert
                       icon={<IconAlertCircle size={16} />}
