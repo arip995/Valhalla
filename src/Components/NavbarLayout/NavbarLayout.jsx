@@ -32,8 +32,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import Logo from '../../app/icon.png';
 import classes from '../../styles/Navbar/NavbarMinimal.module.css';
-import NavbarLink from './NavbarLink';
 import CompleteProfileModal from '../Common/Modal/CompleteProfileModal';
+import NavbarLink from './NavbarLink';
 
 const SettingsMenu = ({ showLabel, setOpened, router }) => (
   <Menu shadow="md" width={190} trigger="hover">
