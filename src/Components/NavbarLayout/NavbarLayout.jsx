@@ -35,6 +35,171 @@ import classes from '../../styles/Navbar/NavbarMinimal.module.css';
 import NavbarLink from './NavbarLink';
 import CompleteProfileModal from '../Common/Modal/CompleteProfileModal';
 
+const SettingsMenu = ({ showLabel, setOpened, router }) => (
+  <Menu shadow="md" width={190} trigger="hover">
+    <Menu.Target>
+      <NavLink
+        variant="subtle"
+        style={{ borderRadius: '6px' }}
+        fullWidth
+        label={
+          showLabel ? (
+            <div className="flex items-center gap-2">
+              <IconSettings
+                style={{
+                  width: rem(17),
+                  height: rem(17),
+                }}
+                stroke={1.5}
+              />
+              Settings
+            </div>
+          ) : (
+            <div className="flex flex-col items-center text-[10px]">
+              <IconSettings
+                style={{
+                  width: rem(20),
+                  height: rem(20),
+                }}
+                stroke={1.5}
+              />
+              Settings
+            </div>
+          )
+        }
+        justify="space-between"
+        rightSection={
+          showLabel && (
+            <IconChevronUp
+              style={{
+                width: rem(17),
+                height: rem(17),
+              }}
+              stroke={1.5}
+            />
+          )
+        }
+      />
+    </Menu.Target>
+    <Menu.Dropdown>
+      <Link
+        href={'/account'}
+        onClick={() => setOpened(false)}
+      >
+        <Menu.Item
+          leftSection={
+            <IconUser
+              style={{
+                width: rem(17),
+                height: rem(17),
+              }}
+              stroke={1.5}
+            />
+          }
+        >
+          Account
+        </Menu.Item>
+      </Link>
+      <Menu.Item
+        color="red"
+        leftSection={
+          <IconLogout
+            style={{
+              width: rem(17),
+              height: rem(17),
+            }}
+            stroke={1.5}
+          />
+        }
+        onClick={() => handleLogout(router)}
+      >
+        Logout
+      </Menu.Item>
+    </Menu.Dropdown>
+  </Menu>
+);
+
+const LogoSection = ({
+  showLabel,
+  setShowLabel,
+  setOpened,
+}) => (
+  <AppShell.Section
+    withHeader={false}
+    py={12}
+    px={16}
+    className={classes.company}
+  >
+    {showLabel ? (
+      <div className="flex w-full items-center justify-between gap-2">
+        <Link
+          href="/home"
+          prefetch={false}
+          className="flex select-none items-center gap-1"
+        >
+          <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-xl font-bold text-transparent">
+            Nexify
+          </span>
+        </Link>
+        <ActionIcon
+          variant="subtle"
+          color="rgba(199, 199, 199, 1)"
+          size="lg"
+          onClick={() => setShowLabel(prev => !prev)}
+        >
+          <IconMenu2 stroke={1} color="black" />
+        </ActionIcon>
+      </div>
+    ) : (
+      <div className="flex w-full flex-col items-center gap-4">
+        <ActionIcon
+          variant="subtle"
+          color="rgba(199, 199, 199, 1)"
+          size="lg"
+          onClick={() => setShowLabel(prev => !prev)}
+        >
+          <IconMenu2 stroke={1} color="black" />
+        </ActionIcon>
+        <Link href="/home" prefetch={false}>
+          <img
+            height={28}
+            width={28}
+            src={Logo.src}
+            alt="Nexify Logo"
+            onClick={() => setOpened(false)}
+          />
+        </Link>
+      </div>
+    )}
+  </AppShell.Section>
+);
+
+const handleLogout = router => {
+  modals.openConfirmModal({
+    title: 'Sign Out',
+    overlayProps: {
+      blur: 20,
+    },
+    children: (
+      <div className="pb-4 pt-8">
+        <Text size="md" fw={500}>
+          Do you really want to signout?
+        </Text>
+      </div>
+    ),
+    labels: {
+      confirm: 'Yes, Sign out',
+      cancel: 'Cancel',
+    },
+    confirmProps: { color: 'red' },
+    onCancel: () => {},
+    onConfirm: () => {
+      logout();
+      router.push('/signin');
+    },
+  });
+};
+
 export function NavbarLayout({ children }) {
   const router = useRouter();
   const pathName = usePathname();
@@ -48,10 +213,12 @@ export function NavbarLayout({ children }) {
   ] = useState(false);
   const [showLabel, setShowLabel] = useState(false);
 
+  // Generate navigation links based on user role
   const Links = useMemo(() => {
     const mapData = user?.isCreator
       ? SidenavData
       : [SidenavData[2]];
+
     return mapData.map(link => {
       const { icon: Icon, label, path } = link;
       return (
@@ -63,20 +230,15 @@ export function NavbarLayout({ children }) {
           key={link.label}
           path={path}
           active={link.path === pathName}
-          onClick={() => {
-            setOpened(false);
-          }}
+          onClick={() => setOpened(false)}
         />
       );
     });
   }, [user?._id, pathName, showLabel]);
 
+  // Set label visibility based on screen size
   useEffect(() => {
-    if (isMobile) {
-      setShowLabel(true);
-    } else {
-      setShowLabel(false);
-    }
+    setShowLabel(isMobile);
   }, [isMobile]);
 
   return (
@@ -92,14 +254,13 @@ export function NavbarLayout({ children }) {
         }}
         transitionDuration={500}
       >
+        {/* Header - Mobile only */}
         <AppShell.Header className={classes.header}>
           <Group h="100%" px="xs">
             <Burger
               color="white"
               opened={opened}
-              onClick={() => {
-                setOpened(prev => !prev);
-              }}
+              onClick={() => setOpened(prev => !prev)}
               size="md"
             />
             <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-xl font-bold text-transparent">
@@ -107,72 +268,19 @@ export function NavbarLayout({ children }) {
             </span>
           </Group>
         </AppShell.Header>
+
+        {/* Navbar */}
         <AppShell.Navbar
-          style={{
-            transition: 'width 0.3s',
-          }}
+          style={{ transition: 'width 0.3s' }}
         >
-          <AppShell.Section
-            withHeader={false}
-            py={12}
-            px={16}
-            className={classes.company}
-          >
-            {showLabel ? (
-              <div className="flex w-full items-center justify-between gap-2">
-                <Link
-                  href="/home"
-                  prefetch={false}
-                  className="flex select-none items-center gap-1"
-                >
-                  {/* <img
-                    height={28}
-                    width={28}
-                    src={Logo.src}
-                    onClick={() => {
-                      setOpened(false);
-                    }}
-                  /> */}
-                  <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-xl font-bold text-transparent">
-                    Nexify
-                  </span>
-                </Link>
-                <ActionIcon
-                  variant="subtle"
-                  color="rgba(199, 199, 199, 1)"
-                  size={'lg'}
-                  onClick={() =>
-                    setShowLabel(prev => !prev)
-                  }
-                >
-                  <IconMenu2 stroke={1} color="black" />
-                </ActionIcon>
-              </div>
-            ) : (
-              <div className="flex w-full flex-col items-center gap-4">
-                <ActionIcon
-                  variant="subtle"
-                  color="rgba(199, 199, 199, 1)"
-                  size={'lg'}
-                  onClick={() => {
-                    setShowLabel(prev => !prev);
-                  }}
-                >
-                  <IconMenu2 stroke={1} color="black" />
-                </ActionIcon>
-                <Link href="/home" prefetch={false}>
-                  <img
-                    height={28}
-                    width={28}
-                    src={Logo.src}
-                    onClick={() => {
-                      setOpened(false);
-                    }}
-                  />
-                </Link>
-              </div>
-            )}
-          </AppShell.Section>
+          {/* Logo Section */}
+          <LogoSection
+            showLabel={showLabel}
+            setShowLabel={setShowLabel}
+            setOpened={setOpened}
+          />
+
+          {/* Navigation Links */}
           <AppShell.Section
             grow
             p={8}
@@ -182,7 +290,9 @@ export function NavbarLayout({ children }) {
               {!!isBrowser && Links}
             </div>
           </AppShell.Section>
-          {!!showLabel && !user.isCreator && (
+
+          {/* Become Creator Section - Only shown for non-creators when labels are visible */}
+          {showLabel && !user.isCreator && (
             <AppShell.Section className={classes.footer}>
               <div className="flex w-full flex-col gap-3 border border-gray-200 p-2 font-semibold">
                 Become a creator
@@ -199,119 +309,25 @@ export function NavbarLayout({ children }) {
               </div>
             </AppShell.Section>
           )}
+
+          {/* Settings Menu Section */}
           <AppShell.Section className={classes.footer}>
-            <Menu shadow="md" width={190} trigger="hover">
-              <Menu.Target>
-                <NavLink
-                  variant="subtle"
-                  style={{ borderRadius: '6px' }}
-                  fullWidth
-                  label={
-                    showLabel ? (
-                      <div className="flex items-center gap-2">
-                        <IconSettings
-                          style={{
-                            width: rem(17),
-                            height: rem(17),
-                          }}
-                          stroke={1.5}
-                        />
-                        Settings
-                      </div>
-                    ) : (
-                      <div className="flex flex-col items-center text-[10px]">
-                        <IconSettings
-                          style={{
-                            width: rem(20),
-                            height: rem(20),
-                          }}
-                          stroke={1.5}
-                        />
-                        Settings
-                      </div>
-                    )
-                  }
-                  justify="space-between"
-                  rightSection={
-                    showLabel && (
-                      <IconChevronUp
-                        style={{
-                          width: rem(17),
-                          height: rem(17),
-                        }}
-                        stroke={1.5}
-                      />
-                    )
-                  }
-                ></NavLink>
-              </Menu.Target>
-              <Menu.Dropdown>
-                <Link
-                  href={'/account'}
-                  onClick={() => setOpened(false)}
-                >
-                  <Menu.Item
-                    leftSection={
-                      <IconUser
-                        style={{
-                          width: rem(17),
-                          height: rem(17),
-                        }}
-                        stroke={1.5}
-                      />
-                    }
-                  >
-                    Account
-                  </Menu.Item>
-                </Link>
-                <Menu.Item
-                  color="red"
-                  leftSection={
-                    <IconLogout
-                      style={{
-                        width: rem(17),
-                        height: rem(17),
-                      }}
-                      stroke={1.5}
-                    />
-                  }
-                  onClick={() => {
-                    modals.openConfirmModal({
-                      title: 'Sign Out',
-                      overlayProps: {
-                        blur: 20,
-                      },
-                      children: (
-                        <div className="pb-4 pt-8">
-                          <Text size="md" fw={500}>
-                            Do you really want to signout?
-                          </Text>
-                        </div>
-                      ),
-                      labels: {
-                        confirm: 'Yes, Sign out',
-                        cancel: 'Cancel',
-                      },
-                      confirmProps: { color: 'red' },
-                      onCancel: () => {},
-                      onConfirm: () => {
-                        logout();
-                        router.push('/signin');
-                      },
-                    });
-                  }}
-                >
-                  Logout
-                </Menu.Item>
-              </Menu.Dropdown>
-            </Menu>
+            <SettingsMenu
+              showLabel={showLabel}
+              setOpened={setOpened}
+              router={router}
+            />
           </AppShell.Section>
         </AppShell.Navbar>
+
+        {/* Main Content */}
         <AppShell.Main className={classes.appshellMain}>
           {children}
         </AppShell.Main>
       </AppShell>
-      {!!openedBecomeCretorModal && (
+
+      {/* Modals */}
+      {openedBecomeCretorModal && (
         <CompleteProfileModal
           opened={openedBecomeCretorModal}
           onClose={() => setOpenedBecomeCretorModal(false)}
