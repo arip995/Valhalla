@@ -154,11 +154,12 @@ const Wallet = () => {
                 );
                 const indianDay = indianTime.getDay();
 
-                if ([0, 6].includes(indianDay)) {
+                if ([0, 6, 1, 2].includes(indianDay)) {
                   return (
                     <Alert
                       icon={<IconAlertCircle size={16} />}
-                      title="Payouts and settlements will not be processed on weekends"
+                      // title="Payouts and settlements will not be processed on weekends"
+                      title="Payouts and settlements will not be processed on national holidays and April 1st"
                       color="yellow"
                     />
                   );
