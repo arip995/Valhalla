@@ -1,6 +1,5 @@
 import toast from 'react-hot-toast';
 import axiosInstance from './AxiosInstance';
-import axios from 'axios';
 
 export const convertFileToBase64 = file => {
   return new Promise((resolve, reject) => {
@@ -77,16 +76,20 @@ export const handleFile = async (
     //url of the image
     let url = data.data.data.url;
 
-    //upload it in s3 with proper CORS headers
-    await axios.put(data.data.data.signedUrl, file, {
+    // Upload to S3 with proper CORS handling for Safari
+    const formData = new FormData();
+    formData.append('file', file);
+
+    await fetch(data.data.data.signedUrl, {
+      method: 'PUT',
+      body: file,
       headers: {
         'Content-Type': file.type,
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods':
-          'PUT, GET, POST, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
+        // Safari requires explicit CORS headers
+        Origin: window.location.origin,
       },
-      withCredentials: false,
+      mode: 'cors',
+      credentials: 'omit', // Don't send cookies with the request
     });
 
     // Return uploaded file URL
@@ -94,10 +97,6 @@ export const handleFile = async (
   } catch (error) {
     // Handle errors
     console.error('Error handling file:', error);
-    toast.error(
-      error.message ||
-        'Error uploading file. Please try again.'
-    );
-    return null;
+    toast.error(error.message);
   }
 };
