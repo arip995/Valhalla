@@ -137,7 +137,7 @@ const Wallet = () => {
                 );
                 const indianDay = indianTime.getDay();
 
-                if ([0, 6, 1, 2].includes(indianDay)) {
+                if ([0, 6].includes(indianDay)) {
                   return <WalletAleart />;
                 } else {
                   return (
