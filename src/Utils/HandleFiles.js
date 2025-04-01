@@ -1,5 +1,6 @@
 import toast from 'react-hot-toast';
 import axiosInstance from './AxiosInstance';
+import axios from 'axios';
 
 export const convertFileToBase64 = file => {
   return new Promise((resolve, reject) => {
@@ -76,20 +77,11 @@ export const handleFile = async (
     //url of the image
     let url = data.data.data.url;
 
-    // Upload to S3 with proper CORS handling for Safari
-    const formData = new FormData();
-    formData.append('file', file);
-
-    await fetch(data.data.data.signedUrl, {
-      method: 'PUT',
-      body: file,
+    //upload it in s3
+    await axios.put(data.data.data.signedUrl, file, {
       headers: {
         'Content-Type': file.type,
-        // Safari requires explicit CORS headers
-        Origin: window.location.origin,
       },
-      mode: 'cors',
-      credentials: 'omit', // Don't send cookies with the request
     });
 
     // Return uploaded file URL
