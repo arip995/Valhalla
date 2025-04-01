@@ -77,11 +77,16 @@ export const handleFile = async (
     //url of the image
     let url = data.data.data.url;
 
-    //upload it in s3
+    //upload it in s3 with proper CORS headers
     await axios.put(data.data.data.signedUrl, file, {
       headers: {
         'Content-Type': file.type,
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods':
+          'PUT, GET, POST, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
       },
+      withCredentials: false,
     });
 
     // Return uploaded file URL
@@ -89,6 +94,10 @@ export const handleFile = async (
   } catch (error) {
     // Handle errors
     console.error('Error handling file:', error);
-    toast.error(error.message);
+    toast.error(
+      error.message ||
+        'Error uploading file. Please try again.'
+    );
+    return null;
   }
 };
