@@ -11,6 +11,7 @@ import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import '@mantine/carousel/styles.css';
 import '@mantine/dates/styles.css';
+import { UserProvider } from '@/Utils/Hooks/useUser';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({
@@ -68,7 +69,9 @@ export default function RootLayout({ children }) {
         <ColorSchemeScript forceColorScheme="light" />
         <MantineProvider theme={theme}>
           <Notifications position="top-right" />
-          <ModalsProvider>{children}</ModalsProvider>
+          <UserProvider>
+            <ModalsProvider>{children}</ModalsProvider>
+          </UserProvider>
         </MantineProvider>
         <Toaster />
       </body>

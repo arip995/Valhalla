@@ -43,6 +43,13 @@ const ViewRegistrationQuestions = ({
   const searchParams = useSearchParams();
   const phone = searchParams.get('phone');
   const email = searchParams.get('email');
+  const amount =
+    searchParams.get('amount') > 100000 ||
+    searchParams.get('amount') < 1 ||
+    !searchParams.get('amount') ||
+    searchParams.get('amount') < data.minimumPrice
+      ? 0
+      : searchParams.get('amount');
   const name = searchParams.get('name');
   const productType = usePathname().split('/')[1];
 
@@ -62,7 +69,7 @@ const ViewRegistrationQuestions = ({
   const form = useForm({
     initialValues: {
       isFormTouched: false,
-      minimumPrice: data.minimumPrice,
+      minimumPrice: amount || data.minimumPrice,
     },
     validateInputOnChange: true,
     validate: values => {
@@ -321,6 +328,7 @@ const ViewRegistrationQuestions = ({
                 </spam>
               }
               description={`Min amount ₹${data.minimumPrice}`}
+              disabled={!!amount}
               size="sm"
               hideControls
               withAsterisk
