@@ -137,10 +137,7 @@ const Wallet = () => {
                 );
                 const indianDay = indianTime.getDay();
 
-                // if ([0, 6, 1, 2].includes(indianDay)) {
-                if (
-                  user?._id !== '678b835c2f9003646204f155'
-                ) {
+                if ([0, 6, 1, 2].includes(indianDay)) {
                   return <WalletAleart />;
                 } else {
                   return (
