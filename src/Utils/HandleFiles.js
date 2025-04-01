@@ -30,12 +30,10 @@ export const handleFile = async (
   file,
   mimeTypes = ['image/'],
   maxFileSize = 1,
-  // eslint-disable-next-line no-unused-vars
-  quality = 50,
   validateOnly = false
 ) => {
   try {
-    // Validate file type
+    // Validate file type and size
     if (
       !mimeTypes.some(mime =>
         file.type.startsWith(mime.slice(0, -1))
@@ -45,8 +43,6 @@ export const handleFile = async (
         `Only ${mimeTypes.map(item => item.slice(0, -1)).join(', ')} are allowed`
       );
     }
-
-    // Validate file size
     if (file.size > maxFileSize * 1024 * 1024) {
       throw new Error(`File size exceeds ${maxFileSize}MB`);
     }
@@ -56,39 +52,43 @@ export const handleFile = async (
       file.type === 'image/svg+xml'
         ? 'image/svg'
         : file.type;
-    let payload = {
-      type,
-      // quality,
-    };
+    const payload = { type };
 
-    // const fileData = await convertFileToBase64(file);
-    // payload = {
-    //   ...payload,
-    //   ...fileData,
-    // };
-
-    // Upload file
+    // Get signed URL
     const data = await axiosInstance.post(
       `${process.env.NEXT_PUBLIC_BASE_URL}/image/save_image`,
-      {
-        file: { ...payload },
-      }
+      { file: payload }
     );
-    //url of the image
-    let url = data.data.data.url;
+    const url = data.data.data.url;
+    const signedUrl = data.data.data.signedUrl;
 
-    //upload it in s3
-    await axios.put(data.data.data.signedUrl, file, {
-      headers: {
-        'Content-Type': file.type,
-      },
-    });
+    // Upload to S3 with retry on 403
+    try {
+      await axios.put(signedUrl, file, {
+        headers: { 'Content-Type': file.type },
+      });
+    } catch (error) {
+      if (error.response?.status === 403) {
+        console.warn('Retrying due to 403 error...');
+        const retryData = await axiosInstance.post(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/image/save_image`,
+          { file: payload }
+        );
+        await axios.put(
+          retryData.data.data.signedUrl,
+          file,
+          {
+            headers: { 'Content-Type': file.type },
+          }
+        );
+        return retryData.data.data.url;
+      }
+      throw error;
+    }
 
-    // Return uploaded file URL
     return url;
   } catch (error) {
-    // Handle errors
     console.error('Error handling file:', error);
-    toast.error(error.message);
+    toast.error(error.message || 'Upload failed');
   }
 };
