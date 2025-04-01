@@ -26,6 +26,7 @@ import useWallet from './useWallet';
 import WalletTransactionCard from './WalletTransactionCard';
 import WalletSummaryCard from './WalletSummaryCard';
 import { getUserId } from '@/Utils/Common';
+import WalletAleart from './WalletAleart';
 
 const Wallet = () => {
   const {
@@ -125,25 +126,7 @@ const Wallet = () => {
 
             {/* Withdrawal Form */}
             <Paper withBorder p="md" radius="md">
-              {/* <Alert
-                  icon={<IconAlertCircle size={16} />}
-                  title="Payouts stopped until Tuesday"
-                  color="yellow"
-                >
-                  Due to requests from Razorpay regarding
-                  account settlements, we could not process
-                  your payouts until Sunday. Rest assured,
-                  you will be able to withdraw from Monday.
-                  If you have any concerns, feel free to
-                  reach out to us at{' '}
-                  <a
-                    href="mailto:support@nexify.club"
-                    className="underline"
-                  >
-                    support@nexify.club
-                  </a>
-                  .
-                </Alert> */}
+              {/*  */}
 
               {(() => {
                 const now = new Date();
@@ -158,14 +141,7 @@ const Wallet = () => {
                 if (
                   user?._id === '678b835c2f9003646204f155'
                 ) {
-                  return (
-                    <Alert
-                      icon={<IconAlertCircle size={16} />}
-                      // title="Payouts and settlements will not be processed on weekends"
-                      title="Payouts and settlements will not be processed on national holidays and April 1st"
-                      color="yellow"
-                    />
-                  );
+                  return <WalletAleart />;
                 } else {
                   return (
                     <form
