@@ -29,11 +29,11 @@ const TableHeaderItems = [
     value: 'status',
   },
   { title: 'Price', icon: IconReceipt2, value: 'price' },
-  {
-    title: 'Revenue',
-    icon: IconPresentation,
-    value: 'revenue',
-  },
+  // {
+  //   title: 'Revenue',
+  //   icon: IconPresentation,
+  //   value: 'revenue',
+  // },
   {
     title: 'Sales',
     icon: IconReportAnalytics,
@@ -87,12 +87,12 @@ const renderTableDataCell = ({ type, item }) => {
           ₹{item.price?.toFixed(2) || 0}
         </td>
       );
-    case 'revenue':
-      return (
-        <td className="min-w-36">
-          ₹{(Number(item?.totalRevenue) || 0).toFixed(2)}
-        </td>
-      );
+    // case 'revenue':
+    //   return (
+    //     <td className="min-w-36">
+    //       ₹{(Number(item?.totalRevenue) || 0).toFixed(2)}
+    //     </td>
+    //   );
     case 'sales':
       return (
         <td className="min-w-36">{item.totalSalesCount}</td>
