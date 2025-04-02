@@ -83,9 +83,7 @@ const Wallet = () => {
 
             {/* Summary Cards */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {user.vendorId &&
-              user.vendorId !==
-                '67e4cdbadedc313b8eaed267' ? (
+              {user.vendorId ? (
                 <WalletSummaryCard
                   title="Unsettled Balance"
                   label="The amount that is pending to be settled."
