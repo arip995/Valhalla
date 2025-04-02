@@ -141,144 +141,148 @@ const Wallet = () => {
             </div>
 
             {/* Withdrawal Form */}
-            <Paper withBorder p="md" radius="md">
-              {/*  */}
+            {user.vendorId ? null : (
+              <Paper withBorder p="md" radius="md">
+                {/*  */}
 
-              {(() => {
-                const now = new Date();
-                const indianTime = new Date(
-                  now.toLocaleString('en-US', {
-                    timeZone: 'Asia/Kolkata',
-                  })
-                );
-                const indianDay = indianTime.getDay();
-
-                if ([0, 6].includes(indianDay)) {
-                  return <WalletAleart />;
-                } else {
-                  return (
-                    <form
-                      onSubmit={form.onSubmit(
-                        handleWithdraw
-                      )}
-                    >
-                      <Stack spacing="md">
-                        <Text weight={500}>
-                          Request Withdrawal
-                        </Text>
-                        <Stack grow>
-                          {!user.isKycDone && (
-                            <Alert
-                              icon={
-                                <IconAlertCircle
-                                  size={16}
-                                />
-                              }
-                              title="Bank Details Missing"
-                              color="yellow"
-                            >
-                              You need to complete your KYC
-                              first.
-                              <Group mt="xs">
-                                <Button
-                                  size="xs"
-                                  variant="outline"
-                                  color="black"
-                                  onClick={() =>
-                                    setOpened(true)
-                                  }
-                                >
-                                  Verify KYC
-                                </Button>
-                              </Group>
-                            </Alert>
-                          )}
-
-                          {user?.beneficiaryDetails
-                            ?.length ? (
-                            <Select
-                              label="Select Bank"
-                              withCheckIcon={false}
-                              placeholder="Select Bank"
-                              allowDeselect={false}
-                              disabled={
-                                walletDetails.payoutOnHold
-                              }
-                              data={user?.beneficiaryDetails?.map(
-                                value => {
-                                  return {
-                                    label:
-                                      value.bankAccountNumber,
-                                    value:
-                                      JSON.stringify(value),
-                                  };
-                                }
-                              )}
-                              {...form.getInputProps(
-                                'bankAccount'
-                              )}
-                            />
-                          ) : null}
-
-                          <NumberInput
-                            {...form.getInputProps(
-                              'withdrawAmount'
-                            )}
-                            label="Enter amount"
-                            description={
-                              'Amount must range from 1000 to 499999'
-                            }
-                            allowLeadingZeros={false}
-                            allowNegative={false}
-                            decimalScale={2}
-                            placeholder="Enter amount"
-                            max={499999}
-                            clampBehavior="strict"
-                            disabled={
-                              !!(
-                                activePayoutRequest ||
-                                loading ||
-                                !user?.beneficiaryDetails
-                                  ?.length ||
-                                !walletDetails.withdrawableBalance ||
-                                walletDetails.payoutOnHold
-                              )
-                            }
-                            type="number"
-                            hideControls
-                            min={0}
-                            icon="₹"
-                          />
-                          <Button
-                            type="submit"
-                            color="green"
-                            className="w-fit"
-                            disabled={
-                              !!(
-                                activePayoutRequest ||
-                                loading ||
-                                !user?.beneficiaryDetails
-                                  ?.length ||
-                                !walletDetails.withdrawableBalance ||
-                                walletDetails.payoutOnHold
-                              )
-                            }
-                          >
-                            Withdraw
-                          </Button>
-                        </Stack>
-                        {!!activePayoutRequest && (
-                          <Text size="sm" c="dimmed">
-                            You have an active payout
-                            request in process
-                          </Text>
-                        )}
-                      </Stack>
-                    </form>
+                {(() => {
+                  const now = new Date();
+                  const indianTime = new Date(
+                    now.toLocaleString('en-US', {
+                      timeZone: 'Asia/Kolkata',
+                    })
                   );
-                }
-              })()}
-            </Paper>
+                  const indianDay = indianTime.getDay();
+
+                  if ([0, 6].includes(indianDay)) {
+                    return <WalletAleart />;
+                  } else {
+                    return (
+                      <form
+                        onSubmit={form.onSubmit(
+                          handleWithdraw
+                        )}
+                      >
+                        <Stack spacing="md">
+                          <Text weight={500}>
+                            Request Withdrawal
+                          </Text>
+                          <Stack grow>
+                            {!user.isKycDone && (
+                              <Alert
+                                icon={
+                                  <IconAlertCircle
+                                    size={16}
+                                  />
+                                }
+                                title="Bank Details Missing"
+                                color="yellow"
+                              >
+                                You need to complete your
+                                KYC first.
+                                <Group mt="xs">
+                                  <Button
+                                    size="xs"
+                                    variant="outline"
+                                    color="black"
+                                    onClick={() =>
+                                      setOpened(true)
+                                    }
+                                  >
+                                    Verify KYC
+                                  </Button>
+                                </Group>
+                              </Alert>
+                            )}
+
+                            {user?.beneficiaryDetails
+                              ?.length ? (
+                              <Select
+                                label="Select Bank"
+                                withCheckIcon={false}
+                                placeholder="Select Bank"
+                                allowDeselect={false}
+                                disabled={
+                                  walletDetails.payoutOnHold
+                                }
+                                data={user?.beneficiaryDetails?.map(
+                                  value => {
+                                    return {
+                                      label:
+                                        value.bankAccountNumber,
+                                      value:
+                                        JSON.stringify(
+                                          value
+                                        ),
+                                    };
+                                  }
+                                )}
+                                {...form.getInputProps(
+                                  'bankAccount'
+                                )}
+                              />
+                            ) : null}
+
+                            <NumberInput
+                              {...form.getInputProps(
+                                'withdrawAmount'
+                              )}
+                              label="Enter amount"
+                              description={
+                                'Amount must range from 1000 to 499999'
+                              }
+                              allowLeadingZeros={false}
+                              allowNegative={false}
+                              decimalScale={2}
+                              placeholder="Enter amount"
+                              max={499999}
+                              clampBehavior="strict"
+                              disabled={
+                                !!(
+                                  activePayoutRequest ||
+                                  loading ||
+                                  !user?.beneficiaryDetails
+                                    ?.length ||
+                                  !walletDetails.withdrawableBalance ||
+                                  walletDetails.payoutOnHold
+                                )
+                              }
+                              type="number"
+                              hideControls
+                              min={0}
+                              icon="₹"
+                            />
+                            <Button
+                              type="submit"
+                              color="green"
+                              className="w-fit"
+                              disabled={
+                                !!(
+                                  activePayoutRequest ||
+                                  loading ||
+                                  !user?.beneficiaryDetails
+                                    ?.length ||
+                                  !walletDetails.withdrawableBalance ||
+                                  walletDetails.payoutOnHold
+                                )
+                              }
+                            >
+                              Withdraw
+                            </Button>
+                          </Stack>
+                          {!!activePayoutRequest && (
+                            <Text size="sm" c="dimmed">
+                              You have an active payout
+                              request in process
+                            </Text>
+                          )}
+                        </Stack>
+                      </form>
+                    );
+                  }
+                })()}
+              </Paper>
+            )}
 
             {/* Transactions */}
             {payoutList?.length ? (
