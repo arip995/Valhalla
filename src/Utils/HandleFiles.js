@@ -81,8 +81,6 @@ export const handleFile = async (
     await axios.put(data.data.data.signedUrl, file, {
       headers: {
         'Content-Type': file.type,
-        'Access-Control-Allow-Origin': '*',
-        'x-amz-acl': 'public-read',
       },
       withCredentials: false,
     });
