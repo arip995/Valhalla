@@ -83,45 +83,61 @@ const Wallet = () => {
 
             {/* Summary Cards */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <WalletSummaryCard
-                title="Withdrawable Balance"
-                label=" The amount available for instant withdrawal to your account."
-                value={
-                  walletDetails.withdrawableBalance || 0 > 0
-                    ? walletDetails.withdrawableBalance
-                    : 0
-                }
-                icon={IconWallet}
-              />
-              <WalletSummaryCard
-                title="Current Balance"
-                label="Earnings from yesterday and today (till 10 PM). After 10 PM, and the balance of yesterday will be added to your Withdrawable Balance."
-                value={
-                  walletDetails.currentBalance || 0 > 0
-                    ? walletDetails.currentBalance
-                    : 0
-                }
-                icon={IconWallet}
-              />
-              {walletDetails.refererCurrentBalance ? (
+              {user.vendorId ? (
                 <WalletSummaryCard
-                  title="Referer Current Balance"
-                  label="Earnings that you earned in this week through refrals. This will settle every week"
+                  title="Unsettled Balance"
+                  label="The amount that is pending to be settled."
                   value={
-                    walletDetails.refererCurrentBalance ||
-                    0 > 0
-                      ? walletDetails.refererCurrentBalance
+                    walletDetails.vendorBalance || 0 > 0
+                      ? walletDetails.vendorBalance
                       : 0
                   }
                   icon={IconWallet}
                 />
-              ) : null}
-              <WalletSummaryCard
-                title="Total Withdrawals"
-                label="The total of all amounts withdrawn so far."
-                value={walletDetails.totalWithdrawals}
-                icon={IconArrowUp}
-              />
+              ) : (
+                <>
+                  <WalletSummaryCard
+                    title="Withdrawable Balance"
+                    label=" The amount available for instant withdrawal to your account."
+                    value={
+                      walletDetails.withdrawableBalance ||
+                      0 > 0
+                        ? walletDetails.withdrawableBalance
+                        : 0
+                    }
+                    icon={IconWallet}
+                  />
+                  <WalletSummaryCard
+                    title="Current Balance"
+                    label="Earnings from yesterday and today (till 10 PM). After 10 PM, and the balance of yesterday will be added to your Withdrawable Balance."
+                    value={
+                      walletDetails.currentBalance || 0 > 0
+                        ? walletDetails.currentBalance
+                        : 0
+                    }
+                    icon={IconWallet}
+                  />
+                  {walletDetails.refererCurrentBalance ? (
+                    <WalletSummaryCard
+                      title="Referer Current Balance"
+                      label="Earnings that you earned in this week through refrals. This will settle every week"
+                      value={
+                        walletDetails.refererCurrentBalance ||
+                        0 > 0
+                          ? walletDetails.refererCurrentBalance
+                          : 0
+                      }
+                      icon={IconWallet}
+                    />
+                  ) : null}
+                  <WalletSummaryCard
+                    title="Total Withdrawals"
+                    label="The total of all amounts withdrawn so far."
+                    value={walletDetails.totalWithdrawals}
+                    icon={IconArrowUp}
+                  />
+                </>
+              )}
             </div>
 
             {/* Withdrawal Form */}
@@ -177,50 +193,6 @@ const Wallet = () => {
                               </Group>
                             </Alert>
                           )}
-                          {/* {user.isKycDone &&
-                            !user.beneficiaryDetails &&
-                            !user.vendorId && (
-                              <Alert
-                                icon={
-                                  <IconAlertCircle
-                                    size={16}
-                                  />
-                                }
-                                title="Bank Details Missing"
-                                color="yellow"
-                              >
-                                You need to add your bank
-                                details first.
-                                <Group mt="xs">
-                                  <Button
-                                    size="xs"
-                                    variant="outline"
-                                    color="black"
-                                    onClick={() =>
-                                      setOpenedBankDetails(
-                                        true
-                                      )
-                                    }
-                                  >
-                                    Add Bank Details
-                                  </Button>
-                                </Group>
-                              </Alert>
-                            )} */}
-                          {/* {user.isKycDone &&
-                    user.beneficiaryDetails?.length &&
-                    user.multipleBankAccounts ? (
-                      <Button
-                        size="xs"
-                        variant="outline"
-                        color="black"
-                        onClick={() =>
-                          setOpenedBankDetails(true)
-                        }
-                      >
-                        Add new bank
-                      </Button>
-                    ) : null} */}
 
                           {user?.beneficiaryDetails
                             ?.length ? (
@@ -294,31 +266,6 @@ const Wallet = () => {
                           >
                             Withdraw
                           </Button>
-                          {/* {user?.beneficiaryDetails?.length ? (
-                      <Alert
-                        icon={<IconAlertCircle size={16} />}
-                        title="Instant Payout Processing"
-                        color="blue"
-                      >
-                        Your payout will be processed
-                        instantly, typically within 1
-                        minute. To confirm the status,
-                        simply refresh the page. Please
-                        note: In rare cases of sender
-                        account disruptions or system
-                        downtime, processing may extend to
-                        3-4 hours. For any issues or
-                        concerns, contact our dedicated
-                        support team at{' '}
-                        <a
-                          href="mailto:support@nexify.club"
-                          className="underline"
-                        >
-                          support@nexify.club
-                        </a>
-                        .
-                      </Alert>
-                    ) : null} */}
                         </Stack>
                         {!!activePayoutRequest && (
                           <Text size="sm" c="dimmed">
