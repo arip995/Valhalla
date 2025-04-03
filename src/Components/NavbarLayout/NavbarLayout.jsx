@@ -213,11 +213,21 @@ export function NavbarLayout({ children }) {
   ] = useState(false);
   const [showLabel, setShowLabel] = useState(false);
 
-  // Generate navigation links based on user role
   const Links = useMemo(() => {
-    const mapData = user?.isCreator
-      ? SidenavData
-      : [SidenavData[2]];
+    const isReferrer =
+      user?.referrerInviteCodeDetails?.userId === user?._id;
+
+    let mapData = [];
+
+    if (isReferrer) {
+      mapData = SidenavData;
+    } else if (user?.isCreator) {
+      mapData = SidenavData.filter(
+        item => item.value !== 'admin'
+      );
+    } else {
+      mapData = [SidenavData[2]];
+    }
 
     return mapData.map(link => {
       const { icon: Icon, label, path } = link;
@@ -236,7 +246,6 @@ export function NavbarLayout({ children }) {
     });
   }, [user?._id, pathName, showLabel]);
 
-  // Set label visibility based on screen size
   useEffect(() => {
     setShowLabel(isMobile);
   }, [isMobile]);

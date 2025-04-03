@@ -1,21 +1,14 @@
 /* eslint-disable no-unused-vars */
 import {
+  IconAccessible,
   IconBrandTelegram,
   IconCash,
-  IconLockDollar,
-  IconSchool,
-  IconLink,
-  IconBrandDiscord,
-  IconBrandWhatsapp,
-  IconBrandMeta,
-  IconCalendarEvent,
-  IconArchive,
   IconCreditCardPay,
   IconHome2,
+  IconLockDollar,
+  IconSchool,
   IconShoppingBag,
   IconUser,
-  IconLayoutDashboard,
-  IconDiscountCheck,
 } from '@tabler/icons-react';
 
 export const SidenavData = [
@@ -44,11 +37,17 @@ export const SidenavData = [
     path: '/purchase',
   },
   {
-    icon: IconUser,
-    label: 'Audience',
-    value: 'audience',
-    path: '/audience',
+    icon: IconAccessible,
+    label: 'Admin',
+    value: 'admin',
+    path: '/admin',
   },
+  // {
+  //   icon: IconUser,
+  //   label: 'Audience',
+  //   value: 'audience',
+  //   path: '/audience',
+  // },
   // {
   //   icon: IconLink,
   //   label: 'Short Url',
