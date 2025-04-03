@@ -72,6 +72,7 @@ const Admin = () => {
     <>
       <ProductListing
         renderTableDataCell={renderTableDataCell}
+        showOnlyGridViewInMobile={false}
         TableHeaderItems={TableHeaderItems}
         baseUrl="/admin/get_creator_data"
         initialStatus={[1, 2, 3]}
