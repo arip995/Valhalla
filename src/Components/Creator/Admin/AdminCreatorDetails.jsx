@@ -4,7 +4,7 @@ import EmptyStateOne from '@/Components/Common/EmptyState/EmptyStateOne';
 import LayoutLoading from '@/Components/Common/Loading/LayoutLoading';
 import CustomTable from '@/Components/Common/Table/CustomTables/CustomTable';
 import axiosInstance from '@/Utils/AxiosInstance';
-import { formatDate } from '@/Utils/Common';
+import { formatDate, getFullName } from '@/Utils/Common';
 import {
   IconBrandProducthunt,
   IconCalendar,
@@ -110,7 +110,10 @@ const AdminCreatorDetails = ({ data }) => {
           <div>
             <p className="text-sm text-gray-500">Name</p>
             <p className="font-medium">
-              {data.name || '---'}
+              {getFullName(
+                data?.firstName,
+                data?.lastName
+              ) || '---'}
             </p>
           </div>
           <div>
@@ -133,26 +136,29 @@ const AdminCreatorDetails = ({ data }) => {
               {data.username || '---'}
             </p>
           </div>
-          {/* {data.wallet && (
+          <div>
+            <p className="text-sm text-gray-500">
+              Total Earnings
+            </p>
+            <p className="font-medium">
+              ₹
+              {!isNaN(data.wallet?.totalEarnings)
+                ? (data.wallet.totalEarnings || 0).toFixed(
+                    2
+                  )
+                : 0}
+            </p>
+          </div>
+          {data.platformFee && (
             <div>
               <p className="text-sm text-gray-500">
-                Wallet Balance
+                Platform Fees
               </p>
               <p className="font-medium">
-                ₹{data.wallet.balance || 0}
+                {data.platformFee || '---'}
               </p>
             </div>
           )}
-          {data.referrerUsedCodeDetails && (
-            <div>
-              <p className="text-sm text-gray-500">
-                Referral Code
-              </p>
-              <p className="font-medium">
-                {data.referrerUsedCodeDetails.code || '---'}
-              </p>
-            </div>
-          )} */}
         </div>
       </div>
 

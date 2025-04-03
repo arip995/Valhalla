@@ -82,20 +82,7 @@ const Admin = () => {
         menuType={0}
         searchPlaceholder="Search by name, email, or referral code"
         onRowClick={item => {
-          const creatorData = {
-            _id: item._id,
-            name: getFullName(
-              item.firstName,
-              item.lastName
-            ),
-            email: item.email,
-            phoneNumber: item.phoneNumber,
-            username: item.username,
-            referrerUsedCodeDetails:
-              item.referrerUsedCodeDetails,
-            wallet: item.wallet,
-          };
-          setActiveCreator(creatorData);
+          setActiveCreator(item);
           setOpened(true);
         }}
       />
