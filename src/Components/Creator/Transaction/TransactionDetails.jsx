@@ -32,7 +32,7 @@ const generateInvoicePDF = async data => {
     userDetails = {},
     status = 'PENDING',
     amountPaid = '0',
-    payoutAmount = '0',
+    // payoutAmount = '0',
     orderId = '',
     createdAt = null,
     product,
@@ -100,12 +100,8 @@ const generateInvoicePDF = async data => {
 
   if (status === 1) {
     // Only if transaction is completed
-    doc.text('Platform Fee:', 130, finalY + 20);
-    doc.text(
-      `Rs. ${(amountPaid - payoutAmount).toFixed(2)}`,
-      180,
-      finalY + 20
-    );
+    doc.text('Discount:', 130, finalY + 20);
+    doc.text(`Rs. 0.00`, 180, finalY + 20);
   }
 
   doc.setLineWidth(0.5);
