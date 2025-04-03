@@ -42,12 +42,12 @@ export const SidenavData = [
     value: 'admin',
     path: '/admin',
   },
-  // {
-  //   icon: IconUser,
-  //   label: 'Audience',
-  //   value: 'audience',
-  //   path: '/audience',
-  // },
+  {
+    icon: IconUser,
+    label: 'Audience',
+    value: 'audience',
+    path: '/audience',
+  },
   // {
   //   icon: IconLink,
   //   label: 'Short Url',
