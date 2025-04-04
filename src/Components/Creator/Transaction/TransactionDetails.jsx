@@ -42,7 +42,7 @@ const generateInvoicePDF = async data => {
   const productTitle = product?.title || 'Product Purchase';
 
   const formattedDate = createdAt
-    ? formatDate(createdAt)
+    ? formatDate(createdAt, false)
     : new Date().toLocaleDateString();
   const invoiceNumber = orderId || `INV-${Date.now()}`;
 
