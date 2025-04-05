@@ -51,6 +51,18 @@ const useWallet = () => {
       setWalletDetails(data.data);
       setActivePayoutRequest(data.data.payoutDetails);
       setPayoutList(data.data.payoutList);
+      try {
+        const { data: reconData } =
+          await axiosInstance.post(
+            '/payment/get_vendor_recon',
+            {
+              vendorId: user?.vendorId,
+            }
+          );
+        console.log(reconData);
+      } catch (error) {
+        console.log(error);
+      }
     } catch (error) {
       console.log(error);
     } finally {
