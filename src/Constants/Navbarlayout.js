@@ -37,16 +37,16 @@ export const SidenavData = [
     path: '/purchase',
   },
   {
-    icon: IconAccessible,
-    label: 'Admin',
-    value: 'admin',
-    path: '/admin',
-  },
-  {
     icon: IconUser,
     label: 'Audience',
     value: 'audience',
     path: '/audience',
+  },
+  {
+    icon: IconAccessible,
+    label: 'Admin',
+    value: 'admin',
+    path: '/admin',
   },
   // {
   //   icon: IconLink,
