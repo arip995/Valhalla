@@ -214,12 +214,11 @@ export function NavbarLayout({ children }) {
   const [showLabel, setShowLabel] = useState(false);
 
   const Links = useMemo(() => {
-    const isReferrer =
-      user?.referrerInviteCodeDetails?.userId === user?._id;
+    const isAdmin = user?.isAdmin;
 
     let mapData = [];
 
-    if (isReferrer) {
+    if (isAdmin) {
       mapData = SidenavData;
     } else if (user?.isCreator) {
       mapData = SidenavData.filter(
