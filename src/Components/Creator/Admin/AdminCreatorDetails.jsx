@@ -167,14 +167,6 @@ const AdminCreatorDetails = ({ data }) => {
           </div>
           <div>
             <p className="text-sm text-gray-500">
-              Referral Code
-            </p>
-            <p className="font-medium">
-              {data.referrerUsedCodeDetails?.code || '---'}
-            </p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">
               KYC Status
             </p>
             <p className="font-medium">
