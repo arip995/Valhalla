@@ -80,7 +80,8 @@ const renderTableDataCell = ({ type, item }) => {
     case 'totalEarnings':
       return (
         <td className="min-w-36">
-          {item?.wallet?.totalEarnings || '---'}
+          {(item?.wallet?.totalEarnings || 0).toFixed(2) ||
+            '---'}
         </td>
       );
     default:
