@@ -4,7 +4,9 @@ import ProductListing from '@/Components/Apps/ProductListing/ProductListing';
 import { formatDate, getFullName } from '@/Utils/Common';
 import { Drawer } from '@mantine/core';
 import {
+  IconBrandRedux,
   IconCalendar,
+  IconCoinRupee,
   IconMail,
   IconPhone,
   IconUser,
@@ -13,7 +15,22 @@ import { useState } from 'react';
 import AdminCreatorDetails from './AdminCreatorDetails';
 
 const TableHeaderItems = [
+  {
+    title: 'Created on',
+    icon: IconCalendar,
+    value: 'createdOn',
+  },
   { title: 'Name', icon: IconUser, value: 'name' },
+  {
+    title: 'Platform Fee',
+    icon: IconBrandRedux,
+    value: 'platformFee',
+  },
+  {
+    title: 'Total Earnings',
+    icon: IconCoinRupee,
+    value: 'totalEarnings',
+  },
   {
     title: 'Email',
     icon: IconMail,
@@ -23,11 +40,6 @@ const TableHeaderItems = [
     title: 'Phone Number',
     icon: IconPhone,
     value: 'phoneNumber',
-  },
-  {
-    title: 'Created on',
-    icon: IconCalendar,
-    value: 'createdOn',
   },
 ];
 
@@ -57,6 +69,18 @@ const renderTableDataCell = ({ type, item }) => {
       return (
         <td className="min-w-36">
           {formatDate(item.createdAt)}
+        </td>
+      );
+    case 'platformFee':
+      return (
+        <td className="min-w-36">
+          {item.platformFee || '---'}
+        </td>
+      );
+    case 'totalEarnings':
+      return (
+        <td className="min-w-36">
+          {item?.wallet?.totalEarnings || '---'}
         </td>
       );
     default:
