@@ -149,16 +149,46 @@ const AdminCreatorDetails = ({ data }) => {
                 : 0}
             </p>
           </div>
-          {data.platformFee && (
-            <div>
-              <p className="text-sm text-gray-500">
-                Platform Fees
-              </p>
-              <p className="font-medium">
-                {data.platformFee || '---'}
-              </p>
-            </div>
-          )}
+          <div>
+            <p className="text-sm text-gray-500">
+              Platform Fees
+            </p>
+            <p className="font-medium">
+              {data.platformFee || '---'}
+            </p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-500">
+              Referral Code
+            </p>
+            <p className="font-medium">
+              {data.referrerUsedCodeDetails?.code || '---'}
+            </p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-500">
+              Referral Code
+            </p>
+            <p className="font-medium">
+              {data.referrerUsedCodeDetails?.code || '---'}
+            </p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-500">
+              KYC Status
+            </p>
+            <p className="font-medium">
+              {data.isKycDone ? 'Verified' : 'Not Verified'}
+            </p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-500">
+              Vendor ID
+            </p>
+            <p className="font-medium">
+              {data.vendorId || '---'}
+            </p>
+          </div>
         </div>
       </div>
 
