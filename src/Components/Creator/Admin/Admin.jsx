@@ -22,12 +22,12 @@ const TableHeaderItems = [
   },
   { title: 'Name', icon: IconUser, value: 'name' },
   {
-    title: 'Platform Fee',
+    title: 'Fee %',
     icon: IconBrandRedux,
     value: 'platformFee',
   },
   {
-    title: 'Total Earnings',
+    title: 'Earnings',
     icon: IconCoinRupee,
     value: 'totalEarnings',
   },
