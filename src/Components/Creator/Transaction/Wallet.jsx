@@ -285,7 +285,7 @@ const Wallet = () => {
             )}
 
             {/* Transactions */}
-            {payoutList?.length ? (
+            {payoutList?.length && !user?.vendorId ? (
               <Stack spacing="md">
                 <Text weight={500}>Recent Withdrawls</Text>
                 {payoutList?.map((item, i) => {
