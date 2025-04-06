@@ -194,6 +194,21 @@ const Wallet = () => {
                                 </Group>
                               </Alert>
                             )}
+                            {user.isKycDone &&
+                            user.beneficiaryDetails
+                              ?.length &&
+                            user.multipleBankAccounts ? (
+                              <Button
+                                size="xs"
+                                variant="outline"
+                                color="black"
+                                onClick={() =>
+                                  setOpenedBankDetails(true)
+                                }
+                              >
+                                Add new bank
+                              </Button>
+                            ) : null}
 
                             {user?.beneficiaryDetails
                               ?.length ? (
