@@ -139,7 +139,37 @@ const Wallet = () => {
                 </>
               )}
             </div>
-
+            {!user.isKycDone && (
+              <Alert
+                icon={<IconAlertCircle size={16} />}
+                title="Bank Details Missing"
+                color="yellow"
+              >
+                You need to complete your KYC first.
+                <Group mt="xs">
+                  <Button
+                    size="xs"
+                    variant="outline"
+                    color="black"
+                    onClick={() => setOpened(true)}
+                  >
+                    Verify KYC
+                  </Button>
+                </Group>
+              </Alert>
+            )}
+            {user.isKycDone &&
+            user.beneficiaryDetails?.length &&
+            user.multipleBankAccounts ? (
+              <Button
+                size="xs"
+                variant="outline"
+                color="black"
+                onClick={() => setOpenedBankDetails(true)}
+              >
+                Add new bank
+              </Button>
+            ) : null}
             {/* Withdrawal Form */}
             {user.vendorId ? null : (
               <Paper withBorder p="md" radius="md">
@@ -168,48 +198,6 @@ const Wallet = () => {
                             Request Withdrawal
                           </Text>
                           <Stack grow>
-                            {!user.isKycDone && (
-                              <Alert
-                                icon={
-                                  <IconAlertCircle
-                                    size={16}
-                                  />
-                                }
-                                title="Bank Details Missing"
-                                color="yellow"
-                              >
-                                You need to complete your
-                                KYC first.
-                                <Group mt="xs">
-                                  <Button
-                                    size="xs"
-                                    variant="outline"
-                                    color="black"
-                                    onClick={() =>
-                                      setOpened(true)
-                                    }
-                                  >
-                                    Verify KYC
-                                  </Button>
-                                </Group>
-                              </Alert>
-                            )}
-                            {user.isKycDone &&
-                            user.beneficiaryDetails
-                              ?.length &&
-                            user.multipleBankAccounts ? (
-                              <Button
-                                size="xs"
-                                variant="outline"
-                                color="black"
-                                onClick={() =>
-                                  setOpenedBankDetails(true)
-                                }
-                              >
-                                Add new bank
-                              </Button>
-                            ) : null}
-
                             {user?.beneficiaryDetails
                               ?.length ? (
                               <Select
