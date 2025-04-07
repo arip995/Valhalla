@@ -113,7 +113,7 @@ const generateInvoicePDF = async data => {
   }
 
   doc.setLineWidth(0.5);
-  doc.line(130, finalY + 25, 190, finalY + 25);
+  doc.line(130, finalY + 25, 200, finalY + 25);
 
   doc.setFontSize(12);
   doc.text('Total Amount:', 130, finalY + 35);
