@@ -27,6 +27,7 @@ const ProductListing = ({
   initialStatus = [0, 1, 3, 4, 5, 6],
   showSearch = true,
   showStatus = true,
+  showDateFilter = false,
   showLayoutChange = true,
   showHeader = true,
   showActions = true,
@@ -53,6 +54,7 @@ const ProductListing = ({
     isGrid,
     setIsGrid,
     isMobile,
+    dateRange,
   } = useProductListing(
     baseUrl,
     initialStatus,
@@ -168,6 +170,8 @@ const ProductListing = ({
               : showLayoutChange
           }
           menuType={menuType}
+          showDateFilter={showDateFilter}
+          dateRange={dateRange}
         />
         {data.totalQueryCount === 0 ? (
           <EmptyStateOne

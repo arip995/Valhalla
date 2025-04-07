@@ -27,6 +27,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import classes from '../../../styles/creator/ProductListing/MenuDropdown.module.css';
 import LayoutChangeButton from '../Buttons/LayoutChangeButton';
 import Tab from '../Tabs/Tab';
+import DateRangeFilter from './DateRangeFilter';
 
 const Filters = ({
   searchText = '',
@@ -38,8 +39,10 @@ const Filters = ({
   showSearch = true,
   showStatus = true,
   showLayoutChange = true,
+  showDateFilter = false,
   showTab,
   menuType, //undefined for transaction and 1 for PL
+  dateRange = null,
 }) => {
   const [opened, setOpened] = useState(false);
   const [selected, setSelected] = useState(status);
@@ -115,6 +118,10 @@ const Filters = ({
     }
   }, [searchText, status]);
 
+  const handleDateRangeUpdate = dateRange => {
+    handleUpdate('dateRange', dateRange);
+  };
+
   return (
     <div className="flex w-full flex-wrap items-end justify-end gap-2 md:flex-row md:flex-nowrap">
       {!!showTab && <Tab />}
@@ -169,6 +176,13 @@ const Filters = ({
         />
       )}
 
+      {!!showDateFilter && (
+        <DateRangeFilter
+          dateRange={dateRange}
+          onUpdateDateRange={handleDateRangeUpdate}
+        />
+      )}
+
       {!!showStatus && (
         <Menu
           onOpen={() => setOpened(true)}
@@ -184,7 +198,7 @@ const Filters = ({
               )}
               data-expanded={opened || undefined}
             >
-              <Avatar.Group>
+              <Avatar.Group className="ml-2">
                 {selected.map(item => (
                   <Avatar
                     key={item}
@@ -202,7 +216,7 @@ const Filters = ({
               </Badge>
               <IconChevronDown
                 size="1rem"
-                className={classes.icon}
+                className={`${classes.icon} mr-2`}
                 stroke={1}
               />
             </UnstyledButton>

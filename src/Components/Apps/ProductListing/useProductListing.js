@@ -33,6 +33,7 @@ const useProductListing = (
   const [pageNo, setPageNo] = useState(1);
   const [limit, setLimit] = useState(10);
   const [isGrid, setIsGrid] = useState(false);
+  const [dateRange, setDateRange] = useState(null);
 
   const setListingData = async (showLoading = true) => {
     if (!isFirstRender && showLoading) setLoading(1);
@@ -47,6 +48,7 @@ const useProductListing = (
           status,
           limit,
           productId,
+          dateRange,
         }
       );
       setData(listingData.data.data);
@@ -97,6 +99,10 @@ const useProductListing = (
           setPageNo(1);
           setStatus(updateData);
           break;
+        case 'dateRange':
+          setPageNo(1);
+          setDateRange(updateData);
+          break;
         case 'tab':
           setPageNo(1);
           setStatus(prev => {
@@ -115,6 +121,7 @@ const useProductListing = (
         case 'reset':
           setSearchText('');
           setStatus(initialStatus);
+          setDateRange(null);
           break;
         case 'edit':
           if (updateData === 2) {
@@ -192,7 +199,7 @@ const useProductListing = (
 
   useDidUpdate(() => {
     setListingData();
-  }, [searchText, status, pageNo, limit]);
+  }, [searchText, status, pageNo, limit, dateRange]);
 
   if (isFirstRender) {
     if (setChildFunc) {
@@ -214,6 +221,7 @@ const useProductListing = (
     isGrid,
     setIsGrid,
     isMobile,
+    dateRange,
   };
 };
 

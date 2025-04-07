@@ -12,7 +12,7 @@ import {
   IconCalendar,
   IconChevronDown,
 } from '@tabler/icons-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classes from '../../../styles/creator/ProductListing/MenuDropdown.module.css';
 
 const DateRangeFilter = ({
@@ -20,18 +20,22 @@ const DateRangeFilter = ({
   onUpdateDateRange,
 }) => {
   const [opened, { open, close }] = useDisclosure(false);
-  const [value, setValue] = useState(
-    dateRange
-      ? [
-          dateRange.startDate
-            ? new Date(dateRange.startDate)
-            : null,
-          dateRange.endDate
-            ? new Date(dateRange.endDate)
-            : null,
-        ]
-      : [null, null]
-  );
+  const [value, setValue] = useState([null, null]);
+
+  useEffect(() => {
+    if (dateRange) {
+      setValue([
+        dateRange.startDate
+          ? new Date(dateRange.startDate)
+          : null,
+        dateRange.endDate
+          ? new Date(dateRange.endDate)
+          : null,
+      ]);
+    } else {
+      setValue([null, null]);
+    }
+  }, [dateRange]);
 
   const handleApply = () => {
     if (value[0] && value[1]) {
@@ -49,6 +53,26 @@ const DateRangeFilter = ({
     close();
   };
 
+  const formatDate = date => {
+    if (!date) return '';
+    return new Date(date).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  };
+
+  const getButtonText = () => {
+    if (
+      dateRange &&
+      dateRange.startDate &&
+      dateRange.endDate
+    ) {
+      return `${formatDate(dateRange.startDate)} - ${formatDate(dateRange.endDate)}`;
+    }
+    return 'Select Date Range';
+  };
+
   return (
     <Popover
       opened={opened}
@@ -58,21 +82,25 @@ const DateRangeFilter = ({
     >
       <Popover.Target>
         <UnstyledButton
-          className={`flex h-full min-h-10 min-w-max items-center justify-between px-2 md:w-48 ${classes.control}`}
+          className={`flex h-full min-h-10 min-w-max items-center justify-between gap-2 md:w-48 ${classes.control}`}
           data-expanded={opened || undefined}
-          onClick={open}
+          onClick={() => {
+            if (opened) {
+              handleClear();
+            } else {
+              open();
+            }
+          }}
         >
           <Group gap="xs">
-            <IconCalendar size={16} />
-            <Text size="sm" fw={500}>
-              {dateRange
-                ? 'Date Range'
-                : 'Select Date Range'}
+            <IconCalendar size={16} className="ml-2" />
+            <Text size="sm" fw={500} className="truncate">
+              {getButtonText()}
             </Text>
           </Group>
           <IconChevronDown
             size="1rem"
-            className={classes.icon}
+            className={`${classes.icon} mr-2`}
             stroke={1}
           />
         </UnstyledButton>
