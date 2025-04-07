@@ -35,11 +35,12 @@ const generateInvoicePDF = async data => {
     // payoutAmount = '0',
     orderId = '',
     createdAt = null,
-    product,
+    productDetails,
   } = data;
 
   // Get product title, defaulting to a generic name if not available
-  const productTitle = product?.title || 'Product Purchase';
+  const productTitle =
+    productDetails?.title || 'Product Purchase';
 
   const formattedDate = createdAt
     ? formatDate(createdAt, false)
@@ -76,9 +77,16 @@ const generateInvoicePDF = async data => {
   );
   doc.text(`Order ID: ${orderId || '---'}`, 20, 120);
 
+  // Add product link
+  const productLink =
+    data?.productType && data?.productId
+      ? `nexify.club/${data.productType}/${data.productId}`
+      : '---';
+  doc.text(`Product Link: ${productLink}`, 20, 130);
+
   // Add product table
   autoTable(doc, {
-    startY: 140,
+    startY: 150,
     head: [
       ['Description', 'Quantity', 'Unit Price', 'Total'],
     ],

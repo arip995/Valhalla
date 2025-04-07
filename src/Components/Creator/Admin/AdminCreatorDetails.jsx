@@ -184,7 +184,7 @@ const AdminCreatorDetails = ({ data }) => {
         </div>
       </div>
 
-      <div className="rounded-md bg-white p-4 shadow-sm">
+      <div className="rounded-md bg-white shadow-sm">
         <h2 className="text-lg font-semibold">
           Last 30 Transactions
         </h2>
