@@ -122,10 +122,12 @@ const usePayment = (
         'Error creating order, Please logout and login again'
       );
     } finally {
-      setPaymentState(prev => ({
-        ...prev,
-        payinLoading: false,
-      }));
+      setTimeout(() => {
+        setPaymentState(prev => ({
+          ...prev,
+          payinLoading: false,
+        }));
+      }, 2000);
     }
   };
 
