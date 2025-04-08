@@ -3,6 +3,7 @@ const nextConfig = {
   devIndicators: {
     position: 'bottom-right',
   },
+  compress: true,
   images: {
     remotePatterns: [
       {
