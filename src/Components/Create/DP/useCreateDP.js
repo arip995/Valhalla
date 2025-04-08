@@ -116,27 +116,27 @@ const useCreateDP = () => {
       }
 
       if (!values.category) {
-        errors.category = 'Category is required';
+        errors.category = 'Required';
       }
 
       if (!values.cta) {
-        errors.cta = 'CTA is required';
+        errors.cta = 'Required';
       }
 
       if (!values.coverImage?.url) {
-        errors.coverImage = 'Cover image is required';
+        errors.coverImage = 'Required';
       }
 
       if (values.priceType === 'customerDecided') {
         if (!values.minimumPrice) {
-          errors.minimumPrice = 'Price is required';
+          errors.minimumPrice = 'Required';
         } else if (values.minimumPrice < 1) {
           errors.minimumPrice =
             'Price should be greater than 0';
         }
       } else {
         if (!values.price) {
-          errors.price = 'Price is required';
+          errors.price = 'Required';
         } else if (values.price < 1) {
           errors.price = 'Price should be greater than 0';
         }
@@ -151,8 +151,7 @@ const useCreateDP = () => {
 
       if (values.hasDiscountedPrice) {
         if (!values.discountedPrice) {
-          errors.discountedPrice =
-            'Discounted Price is required';
+          errors.discountedPrice = 'Required';
         } else if (values.discountedPrice >= values.price) {
           errors.discountedPrice =
             'Discounted Price should be less than price';
