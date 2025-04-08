@@ -158,9 +158,7 @@ const Wallet = () => {
                 </Group>
               </Alert>
             )}
-            {user.isKycDone &&
-            user.beneficiaryDetails?.length &&
-            user.multipleBankAccounts ? (
+            {user.isKycDone && user.multipleBankAccounts ? (
               <Button
                 size="xs"
                 variant="outline"
