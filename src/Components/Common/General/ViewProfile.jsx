@@ -1,4 +1,5 @@
 import { Avatar } from '@mantine/core';
+import Image from 'next/image';
 
 const ViewProfile = ({
   profilePic,
@@ -19,13 +20,13 @@ const ViewProfile = ({
             {profilePic ? (
               <div className="relative mb-4 h-24 w-24 overflow-hidden rounded-2xl border-4 border-white shadow-lg">
                 {inViewPage ? (
-                  <img
+                  <Image
                     className="h-full w-full object-cover transition duration-300 hover:scale-110"
                     src={profilePic}
                     width={88}
                     height={88}
-                    // quality={100}
-                    // priority
+                    quality={100}
+                    priority
                     alt={name}
                   />
                 ) : (
@@ -72,13 +73,13 @@ const ViewProfile = ({
             {profilePic ? (
               <>
                 {inViewPage ? (
-                  <img
+                  <Image
                     className="h-[80px] w-[80px] overflow-hidden rounded-full object-cover"
                     src={profilePic}
                     width={50}
                     height={50}
-                    // quality={100}
-                    // priority
+                    quality={100}
+                    priority
                     alt={name}
                   />
                 ) : (

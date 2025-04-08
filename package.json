@@ -22,7 +22,7 @@
     "@mantine/modals": "^7.17.2",
     "@mantine/notifications": "^7.17.2",
     "@mantine/tiptap": "^7.17.2",
-    "@tabler/icons-react": "^3.2.0",
+    "@tabler/icons-react": "^3.31.0",
     "@tiptap/extension-highlight": "^2.5.5",
     "@tiptap/extension-image": "^2.6.6",
     "@tiptap/extension-link": "^2.5.5",
