@@ -124,16 +124,16 @@ const ViewLockedContentDetails = ({ data }) => {
               <img
                 src={lockImage.src}
                 alt=""
-                className="vlc-view-product-locked-state-image mb-4 h-24 w-24 animate-[bounce_2s_ease-in-out_infinite] animate-[glow_3s_ease-in-out_infinite] transition-all duration-300 hover:scale-110"
+                className="vlc-view-product-locked-state-image mb-4 !h-20 !w-20 animate-[bounce_2s_ease-in-out_infinite] transition-all duration-300 hover:scale-110"
               />
               <div className="shadow-text relative z-10 flex flex-col items-center justify-center gap-3 text-center font-bold">
                 <div className="text-xl text-white drop-shadow-lg">
                   Content is locked
                 </div>
-                <div className="rounded-full border border-white/20 bg-white/20 px-2 py-1 text-base text-white shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-white/30">
+                <div className="rounded-full border border-white/20 bg-white/20 px-1.5 py-0.5 text-sm text-white shadow-lg backdrop-blur-sm transition-all hover:bg-white/30">
                   {data.files.length
                     ? `${data.files.length + 1} items`
-                    : `1 item`}{' '}
+                    : `1 item`}
                 </div>
               </div>
             </div>
