@@ -130,7 +130,7 @@ const ViewLockedContentDetails = ({ data }) => {
                 <div className="text-xl text-white drop-shadow-lg">
                   Content is locked
                 </div>
-                <div className="rounded-full border border-white/20 bg-white/20 px-1.5 py-0.5 text-sm text-white shadow-lg backdrop-blur-sm transition-all hover:bg-white/30">
+                <div className="rounded-full border border-white/20 bg-white/20 px-2.5 py-0.5 text-sm text-white shadow-lg backdrop-blur-sm transition-all hover:bg-white/30">
                   {data.files.length
                     ? `${data.files.length + 1} items`
                     : `1 item`}
