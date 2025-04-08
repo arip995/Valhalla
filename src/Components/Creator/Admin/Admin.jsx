@@ -37,7 +37,7 @@ const TableHeaderItems = [
     value: 'email',
   },
   {
-    title: 'Phone Number',
+    title: 'Phone',
     icon: IconPhone,
     value: 'phoneNumber',
   },

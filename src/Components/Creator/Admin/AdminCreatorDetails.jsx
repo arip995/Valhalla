@@ -54,7 +54,7 @@ const AdminCreatorDetails = ({ data }) => {
       icon: IconCoinRupee,
       value: 'amount',
     },
-    { title: 'Customer', icon: IconMail, value: 'email' },
+    { title: 'Mail', icon: IconMail, value: 'email' },
   ];
 
   const renderTableDataCell = ({ type, item }) => {
@@ -179,6 +179,14 @@ const AdminCreatorDetails = ({ data }) => {
             </p>
             <p className="font-medium">
               {data.vendorId || '---'}
+            </p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-500">
+              Beneficiaries
+            </p>
+            <p className="font-medium">
+              {data.beneficiaryDetails?.length || '---'}
             </p>
           </div>
         </div>
