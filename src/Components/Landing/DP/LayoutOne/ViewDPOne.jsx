@@ -113,13 +113,13 @@ const ViewDPOne = ({ data }) => {
                   </h2>
                   <div className="space-y-2">
                     {data.supportEmail ? (
-                      <div className="flex items-center space-x-2 text-gray-600">
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
                         <IconMail size={16} />
                         <span>{data.supportEmail}</span>
                       </div>
                     ) : null}
                     {data.supportPhoneNumber ? (
-                      <div className="flex items-center space-x-2 text-gray-600">
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
                         <IconPhone size={16} />
                         <span>
                           {data.supportPhoneNumber}
