@@ -440,6 +440,19 @@ export const returnMetaForLandingPages = (
   pageUrl,
   previousImages
 ) => {
+  const lcImage =
+    data?.productType === 'lc'
+      ? {
+          url: 'https://nexify-uat.s3.ap-south-1.amazonaws.com/df0d64d1-aafb-4245-9ab3-66b23e0fa302.jpeg',
+          width: 500,
+          height: 500,
+        }
+      : {
+          url: data?.coverImage?.url,
+          width: 500,
+          height: 500,
+        };
+
   return {
     title:
       data?.title ||
@@ -482,11 +495,7 @@ export const returnMetaForLandingPages = (
       author: data?.creatorDetails?.username || '',
       sitename: 'Nexify',
       images: [
-        {
-          url: data?.coverImage?.url,
-          width: 500,
-          height: 500,
-        },
+        lcImage,
         {
           url: data?.creatorDetails?.profilePic,
           width: 500,
@@ -495,6 +504,7 @@ export const returnMetaForLandingPages = (
         ...previousImages,
       ],
     },
+
     twitter: {
       title:
         data?.title ||
@@ -507,11 +517,7 @@ export const returnMetaForLandingPages = (
       author: data?.creatorDetails?.username || '',
       sitename: 'Nexify',
       images: [
-        {
-          url: data?.coverImage?.url,
-          width: 500,
-          height: 500,
-        },
+        lcImage,
         {
           url: data?.creatorDetails?.profilePic,
           width: 500,

@@ -1,3 +1,5 @@
+'use client';
+
 import Timer from '@/Components/Common/Timer';
 import {
   ActionIcon,
@@ -18,6 +20,7 @@ import {
 } from '@tabler/icons-react';
 import React from 'react';
 import uselandingAuth from './uselandingAuth';
+import { getUserId } from '@/Utils/Common';
 
 const AuthModal = ({
   opened,
@@ -38,11 +41,16 @@ const AuthModal = ({
     sendOtp,
     verifyOtp,
     loading,
+    isNameRequired = getUserId() ===
+    '67f5001c7042ec5061a9ed19'
+      ? false
+      : true,
   } = uselandingAuth(
     signin,
     onAuthComplete,
     opened,
-    isEmailRequired
+    isEmailRequired,
+    isNameRequired
   );
 
   return (
@@ -113,7 +121,7 @@ const AuthModal = ({
                 className="w-full"
               />
               {/* )} */}
-              {!isSignin && (
+              {!isSignin && isNameRequired && (
                 <TextInput
                   maxLength={40}
                   placeholder="Full Name"

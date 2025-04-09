@@ -10,7 +10,8 @@ const uselandingAuth = (
   signin,
   onAuthComplete,
   opened,
-  isEmailRequired
+  isEmailRequired,
+  isNameRequired
 ) => {
   const [isSignin, setIsSignin] = useState(signin);
   const { setCurrentUser } = useUser();
@@ -47,7 +48,10 @@ const uselandingAuth = (
           ) {
             errors.phoneNumber = 'Invalid phone number';
           }
-          if (!values.name?.trim()?.length) {
+          if (
+            isNameRequired &&
+            !values.name?.trim()?.length
+          ) {
             errors.name = 'Name is required';
           }
         }
