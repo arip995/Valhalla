@@ -444,13 +444,13 @@ export const returnMetaForLandingPages = (
     data?.productType === 'lc'
       ? {
           url: 'https://nexify-prod.s3.ap-south-1.amazonaws.com/e14ad803-d93f-439e-88e2-c0f35d7030a2.jpeg',
-          width: 400,
-          height: 500,
+          width: 1600,
+          height: 900,
         }
       : {
           url: data?.coverImage?.url,
-          width: 500,
-          height: 500,
+          width: 1600,
+          height: 900,
         };
 
   return {
