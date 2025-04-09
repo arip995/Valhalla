@@ -170,11 +170,11 @@ const BuyButton = ({
           onAuthComplete={() => {
             setOpened(false);
           }}
-          isEmailRequired={
-            productDetails.isEmailRequired === false
-              ? false
-              : true
-          }
+          // isEmailRequired={
+          //   productDetails.isEmailRequired === false
+          //     ? false
+          //     : true
+          // }
         />
       )}
       {!!isModalOpen && (

@@ -24,7 +24,7 @@ const AuthModal = ({
   onClose = () => {},
   onAuthComplete = () => {},
   signin = false,
-  isEmailRequired = true,
+  isEmailRequired = false,
 }) => {
   const {
     isSignin,
