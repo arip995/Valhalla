@@ -438,12 +438,13 @@ export const TelegramSubscriberStatusMapping = {
 export const returnMetaForLandingPages = (
   data,
   pageUrl,
-  previousImages
+  previousImages,
+  type
 ) => {
   const lcImage =
-    data?.productType === 'lc'
+    type === 'lc'
       ? {
-          url: 'https://nexify-uat.s3.ap-south-1.amazonaws.com/df0d64d1-aafb-4245-9ab3-66b23e0fa302.jpeg',
+          url: 'https://nexify-prod.s3.ap-south-1.amazonaws.com/e14ad803-d93f-439e-88e2-c0f35d7030a2.jpeg',
           width: 500,
           height: 500,
         }
