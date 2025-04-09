@@ -498,8 +498,8 @@ export const returnMetaForLandingPages = (
         lcImage,
         {
           url: data?.creatorDetails?.profilePic,
-          width: 500,
-          height: 500,
+          width: 1600,
+          height: 900,
         },
         ...previousImages,
       ],
@@ -520,8 +520,8 @@ export const returnMetaForLandingPages = (
         lcImage,
         {
           url: data?.creatorDetails?.profilePic,
-          width: 500,
-          height: 500,
+          width: 1600,
+          height: 900,
         },
         ...previousImages,
       ],
