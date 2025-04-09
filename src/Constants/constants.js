@@ -483,12 +483,12 @@ export const returnMetaForLandingPages = (
       },
     },
     openGraph: {
-      title:
-        data?.title ||
-        'Nexify: all-in-one platform for your digital products and services',
-      description:
-        removeHtmlTags(data?.description) ||
-        'Monetize your content',
+      // title:
+      //   data?.title ||
+      //   'Nexify: all-in-one platform for your digital products and services',
+      // description:
+      //   removeHtmlTags(data?.description) ||
+      //   'Monetize your content',
       domain: process.env.NEXT_PUBLIC_HOST,
       type: 'website',
       url: pageUrl,
@@ -506,12 +506,12 @@ export const returnMetaForLandingPages = (
     },
 
     twitter: {
-      title:
-        data?.title ||
-        'Nexify: all-in-one platform for your digital products and services',
-      description:
-        removeHtmlTags(data?.description) ||
-        'Monetize your content',
+      // title:
+      //   data?.title ||
+      //   'Nexify: all-in-one platform for your digital products and services',
+      // description:
+      //   removeHtmlTags(data?.description) ||
+      //   'Monetize your content',
       type: 'website',
       url: pageUrl,
       author: data?.creatorDetails?.username || '',
