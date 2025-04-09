@@ -28,6 +28,10 @@ const AuthModal = ({
   onAuthComplete = () => {},
   signin = false,
   isEmailRequired = false,
+  isNameRequired = getUserId() ===
+  '67f5001c7042ec5061a9ed19'
+    ? false
+    : true,
 }) => {
   const {
     isSignin,
@@ -41,10 +45,6 @@ const AuthModal = ({
     sendOtp,
     verifyOtp,
     loading,
-    isNameRequired = getUserId() ===
-    '67f5001c7042ec5061a9ed19'
-      ? false
-      : true,
   } = uselandingAuth(
     signin,
     onAuthComplete,
