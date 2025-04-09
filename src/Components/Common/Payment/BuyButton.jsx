@@ -1,17 +1,17 @@
 'use client';
 
 import AuthModal from '@/Components/Auth/LandingAuth/AuthModal';
+import axiosInstance from '@/Utils/AxiosInstance';
 import useUser from '@/Utils/Hooks/useUser';
 import { Button } from '@mantine/core';
 import classNames from 'classnames';
-import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 import lottieJson from '../../../../public/lottie/tick.json';
 import LayoutLoading from '../Loading/LayoutLoading';
-import usePayment from './usePayments';
-import Link from 'next/link';
 import PaymentPreview from './PaymentPreview';
-import axiosInstance from '@/Utils/AxiosInstance';
+import usePayment from './usePayments';
 
 const Lottie = dynamic(
   () => import('react-lottie-player'),
@@ -170,6 +170,11 @@ const BuyButton = ({
           onAuthComplete={() => {
             setOpened(false);
           }}
+          isNameRequired={
+            creatorId === '67f5001c7042ec5061a9ed19'
+              ? false
+              : true
+          }
           // isEmailRequired={
           //   productDetails.isEmailRequired === false
           //     ? false
