@@ -1,21 +1,20 @@
-import React from 'react';
+import { Button, TextInput } from '@mantine/core';
 import useBankAccount from './useBankAccount';
-import { Button, TextInput, Text } from '@mantine/core';
 
 const AddBankAccount = ({ onSuccess }) => {
-  const { loading, addBankAccount, bankDetailsForm, user } =
+  const { loading, addBankAccount, bankDetailsForm } =
     useBankAccount(onSuccess);
 
-  if (user?.beneficiaryDetails?.length >= 5) {
-    return (
-      <div className="flex h-full w-full items-center justify-center">
-        <Text>
-          You have reached the maximum limit of 5 bank
-          accounts
-        </Text>
-      </div>
-    );
-  }
+  // if (user?.beneficiaryDetails?.length >= 5) {
+  //   return (
+  //     <div className="flex h-full w-full items-center justify-center">
+  //       <Text>
+  //         You have reached the maximum limit of 5 bank
+  //         accounts
+  //       </Text>
+  //     </div>
+  //   );
+  // }
 
   return (
     <form
