@@ -1,3 +1,5 @@
+'use client';
+
 import Kyc from '@/Components/Creator/Kyc/Kyc';
 import useUsername from '@/Components/Creator/Account/useUsername';
 import useUser from '@/Utils/Hooks/useUser';
@@ -16,6 +18,7 @@ import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import AddUpdateContactDetails from '../General/AddUpdateContactDetails';
 import { AllProducts } from '@/Components/Creator/Home/AllProducts';
+import KycOld from '@/Components/Creator/Kyc/KycOld';
 
 const CompleteProfileModal = ({
   opened,
@@ -153,16 +156,34 @@ const CompleteProfileModal = ({
               />
             </div>
           ) : completeProfileForm.values.activeStep == 2 ? (
-            <Kyc
-              onSuccess={() => {
-                setTimeout(() => {
-                  toast.success(
-                    'Congrajulations, profile completed successfully'
-                  );
-                  nextStep();
-                }, 2000);
-              }}
-            />
+            <>
+              {user?.phoneNumber === '7557846513' ? (
+                <KycOld
+                  onSuccess={() => {
+                    setTimeout(() => {
+                      toast.success(
+                        'Congrajulations, profile completed successfully'
+                      );
+                      nextStep();
+                    }, 2000);
+                  }}
+                />
+              ) : (
+                <Kyc
+                  onSuccess={() => {
+                    nextStep();
+                    setTimeout(() => {
+                      toast.success(
+                        'Congratulations, profile completed successfully'
+                      );
+                    }, 2000);
+                    setTimeout(() => {
+                      window.location.reload();
+                    }, 4000);
+                  }}
+                />
+              )}
+            </>
           ) : completeProfileForm.values.activeStep == 3 ? (
             <>
               <div className="mb-4 flex w-full items-center gap-3">
