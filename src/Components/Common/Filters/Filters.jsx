@@ -128,7 +128,7 @@ const Filters = ({
 
       {!!showSearch && (
         <TextInput
-          maxLength={20}
+          maxLength={40}
           placeholder={searchPlaceholder}
           value={searchValue}
           className="w-full md:w-max md:min-w-80"

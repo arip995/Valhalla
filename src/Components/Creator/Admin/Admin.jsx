@@ -101,12 +101,12 @@ const Admin = () => {
         TableHeaderItems={TableHeaderItems}
         baseUrl="/admin/get_creator_data"
         initialStatus={[1, 2, 3]}
-        showSearch={false}
+        showSearch={true}
+        searchPlaceholder="Search email, or phone number"
         showStatus={false}
         showLayoutChange={false}
         showActions={false}
         menuType={0}
-        searchPlaceholder="Search by name, email, or referral code"
         onRowClick={item => {
           setActiveCreator(item);
           setOpened(true);
