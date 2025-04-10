@@ -41,7 +41,7 @@ const SettingsMenu = ({ showLabel, setOpened, router }) => (
       <NavLink
         variant="subtle"
         style={{ borderRadius: '6px' }}
-        fullWidth
+        // fullWidth
         label={
           showLabel ? (
             <div className="flex items-center gap-2">
@@ -125,7 +125,7 @@ const LogoSection = ({
   setOpened,
 }) => (
   <AppShell.Section
-    withHeader={false}
+    // withHeader={false}
     py={12}
     px={16}
     className={classes.company}
