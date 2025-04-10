@@ -146,7 +146,8 @@ const Transaction = () => {
             TableHeaderItems={TableHeaderItems}
             baseUrl="/transaction/list"
             initialStatus={[1, 2]}
-            showSearch={false}
+            showSearch={true}
+            searchPlaceholder="Search by email, or phone  or orderId"
             showStatus={true}
             showHeader={false}
             showActions={false}

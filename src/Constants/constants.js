@@ -20,6 +20,13 @@ import {
   IconHelpCircle,
 } from '@tabler/icons-react';
 
+export const PRODUCT_TYPE_NAMES = {
+  course: 'Course',
+  tg: 'Telegram Group',
+  lc: 'Locked  Content',
+  dp: 'Digital Product',
+};
+
 export const Categories = [
   {
     value: 'Finance',

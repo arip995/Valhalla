@@ -1,3 +1,4 @@
+import { PRODUCT_TYPE_NAMES } from '@/Constants/constants';
 import axiosInstance from '@/Utils/AxiosInstance';
 import { Loader, Select } from '@mantine/core';
 import {
@@ -5,13 +6,6 @@ import {
   IconShoppingBag,
 } from '@tabler/icons-react';
 import { useCallback, useEffect, useState } from 'react';
-
-const PRODUCT_TYPE_NAMES = {
-  course: 'Course',
-  tg: 'Telegram Group',
-  lc: 'Locked  Content',
-  dp: 'Digital Product',
-};
 
 const TIME_PERIODS = [
   { value: 'day', label: 'This day' },
