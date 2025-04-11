@@ -53,7 +53,7 @@ const AddBankAccount = ({ onSuccess }) => {
         maxLength={40}
         withAsterisk
         label="Account Holder Name"
-        placeholder="Kailash Panda"
+        placeholder="Kailash nexify"
         disabled={loading}
         key={bankDetailsForm.key('bankAccountHolderName')}
         {...bankDetailsForm.getInputProps(

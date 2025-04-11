@@ -115,18 +115,22 @@ const Transaction = () => {
       <div className="flex h-[calc(100vh-52px)] w-full flex-col md:h-screen">
         <Header
           title={'Transactions'}
-          tabOptions={PaymentTabOptions}
+          tabOptions={[
+            ...PaymentTabOptions,
+            // { label: 'Disputes', value: 'disputes' },
+          ]}
         />
         <div
           className={classNames({
-            hidden: tab === 'transaction',
+            hidden:
+              tab === 'transaction' || tab === 'disputes',
           })}
         >
           <Wallet />
         </div>
         <div
           className={classNames({
-            hidden: tab === 'wallet',
+            hidden: tab === 'wallet' || tab === 'disputes',
           })}
         >
           {/* <Alert
@@ -160,6 +164,19 @@ const Transaction = () => {
             Component={TransactionCard}
           />
         </div>
+        <div
+          className={classNames({
+            hidden:
+              tab === 'wallet' || tab === 'transaction',
+          })}
+        >
+          {/* <Disputes
+            onDisputeClick={dispute => {
+              setActiveDispute(dispute);
+              setDisputeDrawerOpened(true);
+            }}
+          /> */}
+        </div>
       </div>
       <Drawer
         trapFocus={false}
@@ -171,6 +188,18 @@ const Transaction = () => {
       >
         <TransactionDetails data={activeTransaction} />
       </Drawer>
+      {/* <Drawer
+        trapFocus={false}
+        lockScroll={false}
+        opened={disputeDrawerOpened}
+        onClose={() => setDisputeDrawerOpened(false)}
+        position="right"
+        title="Dispute Details"
+      >
+        {activeDispute && (
+          <DisputeDetails data={activeDispute} />
+        )}
+      </Drawer> */}
     </>
   );
 };

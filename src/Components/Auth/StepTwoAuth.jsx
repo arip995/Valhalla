@@ -169,7 +169,7 @@ const StepTwoAuth = () => {
               maxLength={10}
               required
               label="Username"
-              placeholder="pandaop"
+              placeholder="nexifyop"
               value={username}
               onChange={e => {
                 if (!checkRestrictedChars(e.target.value))

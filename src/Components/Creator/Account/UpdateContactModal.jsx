@@ -144,7 +144,7 @@ const UpdateContactModal = ({
                 maxLength={40}
                 autoFocus
                 label={isEmail ? 'Email' : 'Support Email'}
-                placeholder="hello@panda.dev"
+                placeholder="hello@gmail.dev"
                 value={isEmail ? email : supportEmail}
                 radius="sm"
                 autoComplete="email"

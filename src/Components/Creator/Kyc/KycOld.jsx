@@ -51,7 +51,7 @@ const KycOld = ({ onSuccess = () => {} }) => {
       <TextInput
         withAsterisk
         label="Account Holder Name"
-        placeholder="Kailash Panda"
+        placeholder="Kailash nexify"
         disabled={loading || user?.isKycDone}
         key={kycForm.key('ifsc')}
         {...kycForm.getInputProps('ifsc')}

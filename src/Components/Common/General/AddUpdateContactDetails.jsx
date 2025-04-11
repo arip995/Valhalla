@@ -127,7 +127,7 @@ const AddUpdateContactDetails = ({
             maxLength={40}
             autoFocus
             label={capitalizeFirstLetter(type)}
-            placeholder="hello@panda.dev"
+            placeholder="hello@gmail.dev"
             value={contactValue}
             radius="sm"
             autoComplete="email"

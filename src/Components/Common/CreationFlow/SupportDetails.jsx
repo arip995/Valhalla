@@ -23,7 +23,7 @@ const SupportDetails = ({ form }) => {
         maxLength={40}
         autoFocus
         label="Support Email"
-        placeholder="hello@panda.dev"
+        placeholder="hello@gmail.dev"
         radius="sm"
         autoComplete="email"
         {...form.getInputProps('supportEmail')}

@@ -212,7 +212,7 @@ const Account = () => {
                     maxLength={10}
                     radius="sm"
                     description="Username"
-                    placeholder="pandaop"
+                    placeholder="nexifyop"
                     value={username}
                     onChange={e => {
                       if (
