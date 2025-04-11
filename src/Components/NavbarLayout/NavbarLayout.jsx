@@ -265,65 +265,66 @@ export function NavbarLayout({ children }) {
       >
         {/* Header - Mobile only */}
         <AppShell.Header className={classes.header}>
-          <Group h="100%" px="xs">
-            <Burger
-              color="white"
-              opened={opened}
-              onClick={() => setOpened(prev => !prev)}
-              size="md"
-            />
-            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-xl font-bold text-transparent">
-              Nexify
-            </span>
-          </Group>
-          <div className="flex items-center justify-end pr-4">
-            <Popover
-              width={200}
-              position="bottom-end"
-              shadow="md"
-            >
-              <Popover.Target>
-                <Button
-                  variant="subtle"
-                  size="sm"
-                  color="white"
-                >
-                  Support
-                </Button>
-              </Popover.Target>
-              <Popover.Dropdown>
-                <div className="flex flex-col gap-2">
-                  <Text
-                    size="sm"
-                    fw={500}
-                    className="text-white"
-                  >
-                    Need help?
-                  </Text>
-                  <Text size="xs" c="dimmed">
-                    Contact our support team for assistance
-                  </Text>
+          <Group h="100%" px="xs" justify="space-between">
+            <div className="flex items-center">
+              <Burger
+                color="white"
+                opened={opened}
+                onClick={() => setOpened(prev => !prev)}
+                size="md"
+              />
+              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-xl font-bold text-transparent">
+                Nexify
+              </span>
+            </div>
+            <div className="flex items-center">
+              <Popover
+                width={200}
+                position="bottom-end"
+                shadow="md"
+              >
+                <Popover.Target>
                   <Button
-                    variant="light"
-                    size="xs"
-                    component="a"
-                    href="mailto:support@nexify.com"
+                    variant="subtle"
+                    size="sm"
+                    color="white"
                   >
-                    Email Support
+                    Support
                   </Button>
-                  {/* <Button
-                    variant="light"
-                    size="xs"
-                    component="a"
-                    href="/faq"
-                    onClick={() => setOpened(false)}
-                  >
-                    FAQ
-                  </Button> */}
-                </div>
-              </Popover.Dropdown>
-            </Popover>
-          </div>
+                </Popover.Target>
+                <Popover.Dropdown>
+                  <div>
+                    <Text size="sm" fw={500}>
+                      Need help?
+                    </Text>
+                    <Text size="xs" c="dimmed">
+                      Contact our support team for
+                      assistance
+                    </Text>
+                    <Button
+                      variant="light"
+                      size="xs"
+                      component="a"
+                      href="mailto:support@nexify.com"
+                      className="mt-2"
+                      fullWidth
+                    >
+                      Email Support
+                    </Button>
+                    {/* <Button
+                      variant="subtle"
+                      size="xs"
+                      component="a"
+                      href="/faq"
+                      onClick={() => setOpened(false)}
+                    >
+                      FAQ
+                    </Button> */}
+                  </div>
+                </Popover.Dropdown>
+              </Popover>
+            </div>
+          </Group>
         </AppShell.Header>
 
         {/* Navbar */}
