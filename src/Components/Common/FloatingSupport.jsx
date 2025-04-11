@@ -12,7 +12,12 @@ const FloatingSupport = () => {
     // Show only on specific ID routes like tg/id, lc/id, course/id, dp/id
     // Hide on all other routes
     const isSpecificIdRoute =
-      /\/(tg|lc|course|dp)\/[^/]+$/.test(pathname);
+      /^\/(tg|course|dp)\/[^/]+$/.test(pathname) ||
+      (/^\/lc\/[^/]+$/.test(pathname) &&
+        !(
+          /^\/dashboard\/.*$/.test(pathname) ||
+          /^\/create\/.*$/.test(pathname)
+        ));
 
     setVisible(!isSpecificIdRoute);
   }, [pathname]);
