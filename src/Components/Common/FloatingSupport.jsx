@@ -3,9 +3,10 @@
 import { Button, Popover, Text } from '@mantine/core';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-
+import { useUser } from '@/app/context/UserContext';
 const FloatingSupport = () => {
   const pathname = usePathname();
+  const { user } = useUser();
   const [visible, setVisible] = useState(false);
   const [opened, setOpened] = useState(false);
   useEffect(() => {
@@ -23,6 +24,8 @@ const FloatingSupport = () => {
   }, [pathname]);
 
   if (!visible) return null;
+
+  if (!user?.isCreator) return null;
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
