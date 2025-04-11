@@ -12,6 +12,7 @@ import '@mantine/notifications/styles.css';
 import '@mantine/carousel/styles.css';
 import '@mantine/dates/styles.css';
 import { UserProvider } from '@/Utils/Hooks/useUser';
+import FloatingSupport from '@/Components/Common/FloatingSupport';
 
 // const inter = Inter({ subsets: ["latin"] });
 const theme = createTheme({
@@ -72,6 +73,7 @@ export default function RootLayout({ children }) {
           <UserProvider>
             <ModalsProvider>{children}</ModalsProvider>
           </UserProvider>
+          <FloatingSupport />
         </MantineProvider>
         <Toaster />
       </body>
