@@ -13,6 +13,7 @@ import {
   Group,
   Menu,
   NavLink,
+  Popover,
   ScrollArea,
   Text,
   rem,
@@ -275,6 +276,54 @@ export function NavbarLayout({ children }) {
               Nexify
             </span>
           </Group>
+          <div className="flex items-center justify-end pr-4">
+            <Popover
+              width={200}
+              position="bottom-end"
+              shadow="md"
+            >
+              <Popover.Target>
+                <Button
+                  variant="subtle"
+                  size="sm"
+                  color="white"
+                >
+                  Support
+                </Button>
+              </Popover.Target>
+              <Popover.Dropdown>
+                <div className="flex flex-col gap-2">
+                  <Text
+                    size="sm"
+                    fw={500}
+                    className="text-white"
+                  >
+                    Need help?
+                  </Text>
+                  <Text size="xs" c="dimmed">
+                    Contact our support team for assistance
+                  </Text>
+                  <Button
+                    variant="light"
+                    size="xs"
+                    component="a"
+                    href="mailto:support@nexify.com"
+                  >
+                    Email Support
+                  </Button>
+                  {/* <Button
+                    variant="light"
+                    size="xs"
+                    component="a"
+                    href="/faq"
+                    onClick={() => setOpened(false)}
+                  >
+                    FAQ
+                  </Button> */}
+                </div>
+              </Popover.Dropdown>
+            </Popover>
+          </div>
         </AppShell.Header>
 
         {/* Navbar */}

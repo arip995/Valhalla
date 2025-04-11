@@ -84,6 +84,9 @@
   @media (min-width: em(48em)) {
     display: none;
   }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .appshellMain {
