@@ -1,9 +1,10 @@
 'use client';
 
+import useUser from '@/Utils/Hooks/useUser';
 import { Button, Popover, Text } from '@mantine/core';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useUser } from '@/app/context/UserContext';
+
 const FloatingSupport = () => {
   const pathname = usePathname();
   const { user } = useUser();

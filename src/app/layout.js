@@ -72,8 +72,8 @@ export default function RootLayout({ children }) {
           <Notifications position="top-right" />
           <UserProvider>
             <ModalsProvider>{children}</ModalsProvider>
+            <FloatingSupport />
           </UserProvider>
-          <FloatingSupport />
         </MantineProvider>
         <Toaster />
       </body>
