@@ -130,12 +130,12 @@ const Wallet = () => {
                       icon={IconWallet}
                     />
                   ) : null}
-                  <WalletSummaryCard
+                  {/* <WalletSummaryCard
                     title="Total Withdrawals"
                     label="The total of all amounts withdrawn so far."
                     value={walletDetails.totalWithdrawals}
                     icon={IconArrowUp}
-                  />
+                  /> */}
                 </>
               )}
             </div>
