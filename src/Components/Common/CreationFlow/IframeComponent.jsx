@@ -114,8 +114,8 @@
 //     });
 
 //     // const mantineStyles = [
-//     //   'https://unpkg.com/@mantine/carousel@7.17.2/styles.layer.css',
-//     //   'https://unpkg.com/@mantine/core@7.17.2/styles.css',
+//     //   'https://unpkg.com/@mantine/carousel@7.17.4/styles.layer.css',
+//     //   'https://unpkg.com/@mantine/core@7.17.4/styles.css',
 //     // ];
 //     // mantineStyles.forEach(styleUrl => {
 //     //   const link = iframeDocument.createElement('link');
