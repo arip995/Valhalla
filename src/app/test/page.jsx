@@ -1,5 +1,7 @@
 'use client';
 
+import axiosInstance from '@/Utils/AxiosInstance';
+import useUser from '@/Utils/Hooks/useUser';
 import { Button } from '@mantine/core';
 // import Member from '@/Components/Test/Member';
 // import axiosInstance from '@/Utils/AxiosInstance';
@@ -48,16 +50,25 @@ import { Button } from '@mantine/core';
 
 // export default page;
 
-import React from 'react';
-
-const handleClick = async () => {
-  console.log('clicked');
+const handleClick = async user => {
+  axiosInstance
+    .post('/vendor/adjust_balance', {
+      amount: 10,
+      userId: user?._id,
+      remarks: 'Test',
+    })
+    .then(res => {
+      console.log(res);
+    });
 };
 
 const page = () => {
+  const { user } = useUser();
   return (
     <div className="flex h-screen flex-col items-center justify-center">
-      <Button onClick={handleClick}>Click me</Button>
+      <Button onClick={() => handleClick(user)}>
+        Click me
+      </Button>
     </div>
   );
 };
