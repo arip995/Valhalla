@@ -138,7 +138,7 @@ const ViewDPOne = ({ data }) => {
                     You agree to share information entered
                     on this page with{' '}
                     {data.creatorDetails.name} (owner of
-                    this page) and Cosmofeed, adhering to
+                    this page) and Nexify, adhering to
                     applicable laws.
                   </p>
                 </div>
